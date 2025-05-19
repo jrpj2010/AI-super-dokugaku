@@ -65,7 +65,8 @@ figma-test.zip
 # *.svg # 必要に応じてコメント解除
 
 # Cursor AI specific (assuming temporary/cache)
-.cursor/
+.cursor/*
+!.cursor/rules/
 .roo/
 .specstory/
 .cursorindexingignore # This file itself might be useful to keep track of
