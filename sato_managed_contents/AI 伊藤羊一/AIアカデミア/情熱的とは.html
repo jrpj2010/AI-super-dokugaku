@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>私の情熱 | 科学的解説サイト</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preline UI -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- AOS - Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    :root {
+      --main-color: #862040;
+      /* ワインレッド */
+      --sub-color-1: #220000;
+      /* 黒/茶系黒 */
+      --sub-color-2: #DBDBDB;
+      /* グレー */
+      --accent-color-1: #FFFFFF;
+      /* 白 */
+      --accent-color-2: #C9A333;
+      /* 金 */
+
+      /* 以前のカラー定義はコメントアウトまたは削除 */
+      /* --primary-color: #550000; */
+      /* --secondary-color: #A0522D; */
+      /* --dark-color: #36454F; */
+      /* --light-color: #FDF5E6; */
+      /* --accent-color: #B8860B; */
+      /* --text-on-dark-bg: #F5F5F5; */
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      scroll-behavior: smooth;
+      background-color: var(--accent-color-1);
+      /* 基本背景は白 */
+      color: var(--sub-color-1);
+      /* 基本テキストは黒/茶系黒 */
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--main-color);
+      /* 見出しはメインカラー */
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--main-color), var(--accent-color-2));
+      /* ワインレッドから金へ */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-gradient {
+      /* グラデーションイメージ参考: ワインレッド→黒→グレー→白→金 */
+      background: linear-gradient(135deg,
+          var(--main-color) 0%,
+          var(--sub-color-1) 25%,
+          var(--sub-color-2) 50%,
+          var(--accent-color-1) 75%,
+          var(--accent-color-2) 100%);
+      background-size: cover;
+    }
+
+    .hero-gradient-overlay {
+      background: linear-gradient(135deg,
+          rgba(134, 32, 64, 0.85) 0%,
+          /* main-color with alpha */
+          rgba(34, 0, 0, 0.75) 25%,
+          /* sub-color-1 with alpha */
+          rgba(219, 219, 219, 0.3) 50%,
+          /* sub-color-2 with alpha,控えめに */
+          rgba(255, 255, 255, 0.4) 75%,
+          /* accent-color-1 with alpha */
+          rgba(201, 163, 51, 0.6) 100%
+          /* accent-color-2 with alpha */
+        ), url('https://images.unsplash.com/photo-1536300007881-7e482242baa5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+      background-size: cover;
+    }
+
+
+    .section-divider {
+      height: 5px;
+      width: 100px;
+      background: linear-gradient(90deg, var(--main-color), var(--accent-color-2));
+      /* ワインレッドから金へ */
+      border-radius: 5px;
+      margin: 1rem auto 2rem;
+    }
+
+    .passion-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .passion-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .evidence-tag {
+      background-color: var(--accent-color-2);
+      /* 金色 */
+      color: var(--sub-color-1);
+      /* タグ内テキストは黒/茶系黒 */
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-active {
+      color: var(--main-color);
+      /* アクティブなナビゲーションリンク */
+      border-bottom: 2px solid var(--main-color);
+    }
+
+    .brain-region {
+      cursor: pointer;
+      transition: fill 0.3s ease;
+    }
+
+    .brain-region:hover {
+      fill: var(--main-color);
+    }
+
+    /* Custom Animations */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--sub-color-1);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--main-color);
+    }
+
+    /* Citation Tooltip */
+    .citation {
+      position: relative;
+      color: var(--main-color);
+      /* 引用リンク色 */
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .citation-content {
+      visibility: hidden;
+      position: absolute;
+      background-color: white;
+      color: var(--sub-color-1);
+      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
+      width: 300px;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    .citation:hover .citation-content {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <header class="fixed w-full bg-[var(--accent-color-1)] shadow-md z-50" data-hs-scrollspy="#scrollspy">
+    <nav class="container mx-auto flex justify-between items-center px-4 py-4">
+      <div class="flex items-center space-x-2">
+        <span class="text-3xl font-bold gradient-text">情熱</span>
+        <span class="text-sm" style="color: var(--sub-color-1);">PASSION</span>
+      </div>
+      <ul class="flex space-x-6">
+        <li><a href="#intro" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">はじめに</a></li>
+        <li><a href="#my-passion" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">私の情熱</a></li>
+        <li><a href="#science" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">科学</a></li>
+        <li><a href="#psychology" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">心理学</a></li>
+        <li><a href="#philosophy" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">哲学</a></li>
+        <li><a href="#practice" class="hover:text-[var(--main-color)] transition duration-300 font-medium"
+            style="color: var(--sub-color-1);">実践</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="intro"
+    class="hero-gradient-overlay min-h-screen flex items-center justify-center text-[var(--accent-color-1)] p-4">
+    <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+      <h1 class="text-6xl md:text-7xl font-black mb-6" style="color: var(--accent-color-1);">情熱という<br>存在の本質</h1>
+      <div class="section-divider mx-auto"></div>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10">
+        心が高鳴り、他のものが一切目に入らなくなるほど、<br>ある一つのことに夢中になる状態。<br>
+        それは単なる感情ではなく、<br>私たちの脳と心を変える強力な推進力です。
+      </p>
+      <a href="#my-passion"
+        class="bg-[var(--accent-color-2)] text-[var(--sub-color-1)] font-bold py-3 px-8 rounded-full hover:bg-opacity-80 transition duration-300 inline-flex items-center">
+        <span>探求を始める</span>
+        <i class="fas fa-arrow-down ml-2"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- My Passion Section -->
+  <section id="my-passion" class="py-24 px-4 bg-[var(--accent-color-1)]">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6" data-aos="fade-up">私の情熱とは</h2>
+      <div class="section-divider"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
+        <div class="flex flex-col justify-center" data-aos="fade-right">
+          <div class="evidence-tag">自己認識</div>
+          <h3 class="text-3xl font-bold mb-6">情熱が引き出す私の力</h3>
+          <p class="text-lg text-[var(--sub-color-1)] mb-6">
+            「情熱的」とは、心が高鳴り、他のものが一切目に入らなくなるほど、ある一つのことに夢中になる状態を指します。私はまさにそのような状態にあるとき、自分のパワーを最大限に発揮できると感じています。
+          </p>
+          <p class="text-lg text-[var(--sub-color-1)] mb-6">
+            情熱の源には、必ず「達成したい目的」があります。そして私は、その目的に心から向き合うと、他のことが見えなくなるほど集中します。
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-[var(--sub-color-1)]">
+            <li>全力で物事に取り組むことができる</li>
+            <li>目的達成に向けて完全にコミットできる</li>
+            <li>自分の持てるすべてのエネルギーを注ぐことができる</li>
+          </ul>
+        </div>
+
+        <div class="passion-card bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-left">
+          <div class="evidence-tag">実際の経験</div>
+          <h3 class="text-2xl font-bold mb-4">具体的な行動の例</h3>
+          <p class="text-[var(--sub-color-1)] mb-6">
+            例えば、「どうしても会いたい人がいる」と思ったとき。たとえ夜中であろうと、場所が四国や九州のような遠方であろうと、私は「どうすれば会いに行けるか」を真剣に考え、実際に行動します。手段を選ばず、思いのままに動いてしまう――それほど、情熱が私を突き動かすのです。
+          </p>
+
+          <div class="mt-6">
+            <h4 class="text-xl font-bold mb-3">情熱の心理学的特性</h4>
+            <div class="bg-[var(--sub-color-2)] rounded-lg p-4">
+              <p class="text-[var(--sub-color-1)]">
+                私のような情熱的な行動パターンは、心理学では「調和的情熱」と「強迫的情熱」の二元モデルで説明されます。
+                <span class="citation">
+                  [出典]
+                  <span class="citation-content">
+                    Vallerand, R. J., et al. (2003). Les passions de l'âme: On obsessive and harmonious passion. Journal
+                    of Personality and Social Psychology, 85, 756-767.
+                  </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Science of Passion Section -->
+  <section id="science" class="py-24 px-4 bg-[var(--sub-color-2)]">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6" data-aos="fade-up">情熱の科学</h2>
+      <div class="section-divider"></div>
+      <p class="text-xl text-center max-w-3xl mx-auto mb-16 text-[var(--sub-color-1)]" data-aos="fade-up"
+        data-aos-delay="200">
+        情熱は単なる感情ではありません。それは脳の神経回路を変え、生化学的プロセスを活性化させる強力な現象です。
+      </p>
+
+      <!-- Brain and Neuroscience -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-right">
+          <div class="evidence-tag">神経科学的知見</div>
+          <h3 class="text-2xl font-bold mb-4">情熱の脳内メカニズム</h3>
+
+          <div class="mb-6">
+            <h4 class="text-xl font-semibold mb-3" style="color:var(--main-color);">報酬系の活性化</h4>
+            <p class="text-[var(--sub-color-1)]">
+              情熱を感じて没頭しているとき、脳の「報酬系」と呼ばれる領域が強く活性化します。報酬系の中核はドーパミン神経が集中する中脳辺縁系、特に腹側被蓋野（VTA）から側坐核への神経回路です。
+              <span class="citation">
+                [詳細]
+                <span class="citation-content">
+                  この経路は快感や高揚、やる気を直接的に生み出す回路で、情熱的な活動に取り組むとき特に活発に働きます。情熱の神経科学的基盤に関する研究は、近年急速に発展しています。
+                </span>
+              </span>
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-xl font-semibold mb-3" style="color:var(--main-color);">ドーパミンの役割</h4>
+            <p class="text-[var(--sub-color-1)]">
+              ドーパミンは「やる気物質」とも呼ばれる神経伝達物質で、情熱の発生や持続における中心的役割を持ちます。情熱を感じる場面では予期する報酬や将来の成功を想像することでドーパミンが分泌され、「もっとやりたい」という欲求を強化します。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-semibold mb-3" style="color:var(--main-color);">前頭前野の統制</h4>
+            <p class="text-[var(--sub-color-1)]">
+              前頭前野は報酬系からの「やりたい」という衝動を、現実的な行動計画に変換する役割を持ちます。この脳領域のバランスが調和的情熱と強迫的情熱の違いを生み出す要因の一つです。
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center" data-aos="fade-left">
+          <div class="relative w-full max-w-md">
+            <div class="rounded-xl overflow-hidden shadow-xl">
+              <div class="relative pt-[56.25%]">
+                <div
+                  class="absolute inset-0 bg-[var(--accent-color-1)] flex items-center justify-center text-[var(--sub-color-1)] p-6">
+                  <div>
+                    <h3 class="text-xl font-bold mb-4 text-center" style="color:var(--main-color);">情熱の神経科学</h3>
+                    <canvas id="brainActivityChart" width="400" height="300"></canvas>
+                    <p class="text-sm mt-4 text-center" style="color:var(--sub-color-1);">グラフ: 情熱的活動時と通常活動時の脳部位活性化の比較
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <h4 class="text-xl font-bold mb-3">神経可塑性と情熱</h4>
+              <p class="text-[var(--sub-color-1)]">
+                長期的な情熱は、神経可塑性を通じて脳の構造を変化させます。情熱を持って取り組むことで脳は最適化され、その分野のスキルが強化されていきます。
+                <span class="citation">
+                  [研究知見]
+                  <span class="citation-content">
+                    情熱的に取り組む活動に関連する脳領域は、練習と経験を通じて物理的に発達することが神経画像研究で示されています。これは「使えば強化される」という脳の基本原理に基づいています。
+                  </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Psychology of Passion Section -->
+  <section id="psychology" class="py-24 px-4 bg-[var(--accent-color-1)]">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6" data-aos="fade-up">情熱の心理学</h2>
+      <div class="section-divider"></div>
+      <p class="text-xl text-center max-w-3xl mx-auto mb-16 text-[var(--sub-color-1)]" data-aos="fade-up"
+        data-aos-delay="200">
+        情熱の二元モデルは、なぜ同じ情熱が人によって異なる結果をもたらすのかを理解する鍵です。
+      </p>
+
+      <!-- Dualistic Model of Passion -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div class="passion-card bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-up">
+          <div class="evidence-tag">心理学的モデル</div>
+          <h3 class="text-2xl font-bold mb-4">調和的情熱<span class="text-sm ml-2 text-[var(--sub-color-1)]">(Harmonious
+              Passion)</span>
+          </h3>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold mb-2">特徴</h4>
+            <ul class="list-disc pl-6 space-y-2 text-[var(--sub-color-1)]">
+              <li>活動が自律的にアイデンティティに内在化</li>
+              <li>人生の他の側面との調和が取れている</li>
+              <li>活動を自分でコントロールできる</li>
+              <li>活動への取り組みが柔軟</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-2">心理的効果</h4>
+            <ul class="list-disc pl-6 space-y-2 text-[var(--sub-color-1)]">
+              <li>ポジティブ感情とフロー体験の増加</li>
+              <li>心理的ウェルビーイングの向上</li>
+              <li>持続的で健全なモチベーション</li>
+              <li>創造性と柔軟な思考の促進</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="passion-card bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-up"
+          data-aos-delay="200">
+          <div class="evidence-tag">心理学的モデル</div>
+          <h3 class="text-2xl font-bold mb-4">強迫的情熱<span class="text-sm ml-2 text-[var(--sub-color-1)]">(Obsessive
+              Passion)</span>
+          </h3>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold mb-2">特徴</h4>
+            <ul class="list-disc pl-6 space-y-2 text-[var(--sub-color-1)]">
+              <li>外部・内部のプレッシャーで内在化</li>
+              <li>人生の他の側面との葛藤</li>
+              <li>活動への従事を制御しにくい</li>
+              <li>活動への取り組みが硬直的</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-2">心理的影響</h4>
+            <ul class="list-disc pl-6 space-y-2 text-[var(--sub-color-1)]">
+              <li>葛藤やネガティブ感情の増加リスク</li>
+              <li>燃え尽き症候群へのリスク</li>
+              <li>強い情熱が持続困難に</li>
+              <li>固執と柔軟性の欠如</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passion Development Process -->
+      <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8 mb-16" data-aos="fade-up">
+        <div class="evidence-tag">発達心理学</div>
+        <h3 class="text-2xl font-bold mb-4">情熱が発達するプロセス</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-[var(--sub-color-2)] rounded-lg p-6">
+            <div class="text-4xl text-[var(--main-color)] font-bold mb-4">01</div>
+            <h4 class="text-xl font-bold mb-3">興味の形成</h4>
+            <p class="text-[var(--sub-color-1)]">
+              どんな大きな情熱も、小さな好奇心や興味から始まります。この段階では様々な経験を通じて「やってみたい」と思える対象を見つけることが重要です。
+            </p>
+          </div>
+
+          <div class="bg-[var(--sub-color-2)] rounded-lg p-6">
+            <div class="text-4xl text-[var(--main-color)] font-bold mb-4">02</div>
+            <h4 class="text-xl font-bold mb-3">興味の発展</h4>
+            <p class="text-[var(--sub-color-1)]">
+              「これは楽しい、もっとやってみたい」と感じた対象に対して、スキルや経験を深める段階。この時期に受ける環境からの支援や、所属するコミュニティの影響が重要です。
+            </p>
+          </div>
+
+          <div class="bg-[var(--sub-color-2)] rounded-lg p-6">
+            <div class="text-4xl text-[var(--main-color)] font-bold mb-4">03</div>
+            <h4 class="text-xl font-bold mb-3">目的化</h4>
+            <p class="text-[var(--sub-color-1)]">
+              対象への取り組みが、単なる個人的興味を超えて社会的意義を持つと感じる段階。この段階でロールモデルの存在が大きく影響します。真の大志や天命と呼べる情熱が生まれます。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passion Factors -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div data-aos="fade-right">
+          <div class="evidence-tag">研究知見</div>
+          <h3 class="text-2xl font-bold mb-4">情熱が生まれる3つの条件</h3>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6 mb-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">1. 時間と労力を費やすこと</h4>
+            <p class="text-[var(--sub-color-1)]">
+              研究では、活動に費やした「努力の時間」に比例して情熱が生まれることが示されています。これは「情熱は持つものではなく生まれるもの」という視点を裏付けています。
+              <span class="citation">
+                [研究]
+                <span class="citation-content">
+                  情熱の発生メカニズムに関する縦断研究では、活動への時間投資が情熱の発展を予測する主要因子であることが確認されています。
+                </span>
+              </span>
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6 mb-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">2. 自分で選択できる環境</h4>
+            <p class="text-[var(--sub-color-1)]">
+              自律的に選択できる環境が、調和的情熱の発生には不可欠です。強制や外圧による取り組みは強迫的情熱につながりやすいことが研究で示されています。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">3. 物事が前進している感覚</h4>
+            <p class="text-[var(--sub-color-1)]">
+              努力が成果に結びついていると実感できることが情熱を育みます。停滞感は情熱を減退させる主要因です。
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center" data-aos="fade-left">
+          <div class="w-full max-w-md">
+            <canvas id="passionFactorsChart"></canvas>
+            <div class="mt-8 bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+              <h4 class="text-xl font-bold mb-3">あなたの情熱タイプは？</h4>
+              <p class="text-[var(--sub-color-1)] mb-4">
+                自分の情熱が調和的か強迫的かを知ることは、健全な情熱を育むための重要なステップです。以下の質問を考えてみましょう：
+              </p>
+              <ul class="list-disc pl-6 space-y-2 text-[var(--sub-color-1)]">
+                <li>あなたの活動は自由意志で選んでいますか？</li>
+                <li>その活動は生活の他の側面とバランスが取れていますか？</li>
+                <li>その活動をやめるか続けるかを自分でコントロールできますか？</li>
+                <li>その活動があなたのアイデンティティの一部になっていますか？</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy of Passion Section -->
+  <section id="philosophy" class="py-24 px-4 bg-[var(--sub-color-2)]">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6" data-aos="fade-up">情熱の哲学</h2>
+      <div class="section-divider"></div>
+      <p class="text-xl text-center max-w-3xl mx-auto mb-16 text-[var(--sub-color-1)]" data-aos="fade-up"
+        data-aos-delay="200">
+        情熱という概念は古来より哲学者たちの思索の対象でした。特にスピノザの情熱論は現代の心理学にも影響を与えています。
+      </p>
+
+      <!-- Spinoza's Philosophy -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-right">
+          <div class="evidence-tag">哲学的視点</div>
+          <h3 class="text-2xl font-bold mb-4">スピノザの情熱論</h3>
+
+          <div class="mb-6">
+            <h4 class="text-xl font-semibold mb-3" style="color:var(--main-color);">受動と能動の区別</h4>
+            <p class="text-[var(--sub-color-1)]">
+              17世紀の哲学者スピノザは『エチカ』において、人間の情熱（パッシオン）を「受動」と「能動」に分類しました。受動とは外部の力によって生じる感情であり、能動とは自己の本性から生じる感情です。
+              <span class="citation">
+                [哲学的知見]
+                <span class="citation-content">
+                  スピノザの『エチカ』第3部「感情の本性と起源について」では、人間の感情を詳細に分類し、受動から能動への移行が人間の自由への道筋であると論じています。
+                </span>
+              </span>
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-semibold mb-3" style="color:var(--main-color);">受動的喜びと能動的喜び</h4>
+            <p class="text-[var(--sub-color-1)]">
+              スピノザによれば、受動的喜びは外部の対象に依存し、その対象がなくなれば消失します。一方、能動的喜びは自己自身の本質から生じるもので、より持続的で安定しています。この区別は現代の調和的情熱と強迫的情熱の概念に通じるものがあります。
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center" data-aos="fade-left">
+          <blockquote
+            class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8 italic text-lg text-[var(--sub-color-1)] relative">
+            <div class="text-5xl text-[var(--main-color)] opacity-25 absolute top-4 left-4">"</div>
+            人間が受動という状態にあるときには、悲しみも喜びも生じうる。しかし、人間が能動という状態にある限りでは、もはや悲しみはありえず、喜びの感情とそれに相応しい欲望があるだけである。
+            <footer class="mt-6 text-right text-gray-500 not-italic">
+              —スピノザ『エチカ』
+            </footer>
+          </blockquote>
+
+          <div class="mt-8 bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <h4 class="text-xl font-bold mb-3">情熱と自由</h4>
+            <p class="text-[var(--sub-color-1)]">
+              スピノザの哲学では、「自由」とは能動的になることであり、自己の本質に従って行動することを意味します。人間は受動から能動へと移行することで、真の自由と幸福に至ると考えられています。この考え方は現代心理学における調和的情熱の概念と多くの共通点を持ちます。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historical Perspectives -->
+      <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8" data-aos="fade-up">
+        <div class="evidence-tag">歴史的洞察</div>
+        <h3 class="text-2xl font-bold mb-4">情熱をめぐる歴史的視点</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div>
+            <h4 class="text-xl font-semibold mb-3">古代ギリシャ</h4>
+            <p class="text-[var(--sub-color-1)]">
+              アリストテレスは情熱（パトス）を人間の基本的な側面とみなし、適切に方向づけられた情熱は美徳につながると考えました。ストア派は情熱を理性の支配下に置くべきとした一方、情熱の価値も認識していました。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-semibold mb-3">ロマン主義</h4>
+            <p class="text-[var(--sub-color-1)]">
+              18〜19世紀のロマン主義運動は情熱を創造性と個人の真正さの源泉として賞賛しました。ゲーテやルソーのような思想家は、情熱を抑圧するよりも適切に表現し方向づけることを提唱しました。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-semibold mb-3">現代思想</h4>
+            <p class="text-[var(--sub-color-1)]">
+              現代の実存主義哲学や肯定的心理学では、情熱は人生に意味を与え、充実感をもたらす重要な要素として再評価されています。調和的情熱は自己実現と心理的幸福の基盤となる概念として注目されています。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Application Section -->
+  <section id="practice" class="py-24 px-4 bg-[var(--accent-color-1)]">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6" data-aos="fade-up">情熱を実践する</h2>
+      <div class="section-divider"></div>
+      <p class="text-xl text-center max-w-3xl mx-auto mb-16 text-[var(--sub-color-1)]" data-aos="fade-up"
+        data-aos-delay="200">
+        情熱を見つけ、育て、調和的に発展させるための実践的なステップを探ります。
+      </p>
+
+      <!-- Finding Your Passion -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <div data-aos="fade-right">
+          <div class="evidence-tag">実践ガイド</div>
+          <h3 class="text-2xl font-bold mb-4">情熱の見つけ方</h3>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6 mb-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">1. 多様な経験を積む</h4>
+            <p class="text-[var(--sub-color-1)]">
+              多くの活動に触れることで、思いがけない情熱の種を見つけることができます。新しい経験に対して開かれた姿勢を持ちましょう。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6 mb-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">2. 自分の価値観を探る</h4>
+            <p class="text-[var(--sub-color-1)]">
+              何に意義を感じるか、何に時間とエネルギーを使いたいと思うかを深く考えましょう。自分の核となる価値観と一致する活動に情熱が生まれやすいです。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6 mb-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">3. 小さな興味を大切にする</h4>
+            <p class="text-[var(--sub-color-1)]">
+              大きな情熱は小さな好奇心から始まります。わずかな興味も見逃さず、それを深めてみる姿勢が重要です。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <h4 class="text-xl font-semibold mb-2" style="color:var(--main-color);">4. 行動を優先する</h4>
+            <p class="text-[var(--sub-color-1)]">
+              「やってみる」ことが情熱の発見の第一歩です。理想の情熱が見つかるのを待つのではなく、まず行動することで情熱が育まれていきます。
+              <span class="citation">
+                [研究知見]
+                <span class="citation-content">
+                  行動が先で情熱は後から生まれるという考え方は、多くの動機づけ研究で支持されています。初めは興味がなくても、時間をかけて取り組むことで情熱が育まれることが示されています。
+                </span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center" data-aos="fade-left">
+          <div class="w-full max-w-lg">
+            <!-- ここは元々グループ写真があった場所ですが、一旦削除します -->
+            <!-- <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1267107/414652_101285.jpg" alt="落合絵美様" class="rounded-xl shadow-lg w-full h-auto mb-8 object-cover" style="max-height: 500px;"> -->
+
+            <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8">
+              <h4 class="text-xl font-bold mb-3">情熱を育む環境をつくる</h4>
+              <p class="text-[var(--sub-color-1)] mb-4">
+                あなたの情熱を育み、調和的情熱へと発展させるための環境づくりは重要です。
+              </p>
+              <ul class="list-disc pl-6 space-y-3 text-[var(--sub-color-1)]">
+                <li>同じ情熱を持つ仲間とのコミュニティに参加する</li>
+                <li>自律性を尊重する環境を選ぶ</li>
+                <li>成長と進歩を実感できる小さな目標を設定する</li>
+                <li>情熱と生活の他の側面とのバランスを意識する</li>
+                <li>ロールモデルを見つけ、その経験から学ぶ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Harmonious vs Obsessive Passion Practices -->
+      <div class="mb-20" data-aos="fade-up">
+        <div class="evidence-tag">実践フレームワーク</div>
+        <h3 class="text-2xl font-bold mb-6">調和的情熱を育むために</h3>
+
+        <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="border-l-4 border-[var(--main-color)] pl-6">
+              <h4 class="text-xl font-bold text-[var(--main-color)] mb-3">調和的情熱を育む習慣</h4>
+              <ul class="space-y-3 text-[var(--sub-color-1)]">
+                <li><span class="font-semibold">自律性の尊重:</span> 自分の意志で取り組む時間と休む時間を決める</li>
+                <li><span class="font-semibold">バランスの意識:</span> 情熱と他の生活領域の調和を図る</li>
+                <li><span class="font-semibold">成長マインドセット:</span> 失敗を学びの機会と捉える姿勢</li>
+                <li><span class="font-semibold">柔軟な目標設定:</span> 状況に応じて目標を調整する</li>
+                <li><span class="font-semibold">内発的価値の重視:</span> 外的報酬より活動自体の喜びを大切にする</li>
+                <li><span class="font-semibold">マインドフルネス:</span> 活動中の感情や思考に意識的に気づく</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-red-500 pl-6">
+              <h4 class="text-xl font-bold text-red-700 mb-3">強迫的情熱のサイン</h4>
+              <ul class="space-y-3 text-[var(--sub-color-1)]">
+                <li><span class="font-semibold">制御感の喪失:</span> 活動をやめられないと感じる</li>
+                <li><span class="font-semibold">罪悪感:</span> 活動に取り組まないと不安や罪悪感を覚える</li>
+                <li><span class="font-semibold">アイデンティティの固執:</span> 自分の価値を活動の成果だけで測る</li>
+                <li><span class="font-semibold">関係の犠牲:</span> 人間関係や健康が犠牲になる</li>
+                <li><span class="font-semibold">結果への執着:</span> プロセスより結果だけに集中する</li>
+                <li><span class="font-semibold">柔軟性の欠如:</span> 計画変更に対する過度の抵抗</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-8 p-4 bg-[var(--sub-color-2)] rounded-lg">
+            <h5 class="font-bold text-[var(--sub-color-1)] mb-2">バランスを取るための自己チェック質問</h5>
+            <p class="text-[var(--sub-color-1)]">
+              定期的に自分の情熱と関わり方を振り返ることで、強迫的情熱に陥るのを防ぎ、調和的情熱を育むことができます。「この活動は私に喜びをもたらしているか？」「私の人生の他の側面とバランスが取れているか？」など、定期的に自問することが大切です。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Development through Passion -->
+      <div data-aos="fade-up">
+        <div class="evidence-tag">人生への応用</div>
+        <h3 class="text-2xl font-bold mb-6">私の情熱を人生に活かす</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <div
+              class="h-12 w-12 bg-[var(--main-color)] rounded-full flex items-center justify-center text-[var(--accent-color-1)] mb-4">
+              <i class="fas fa-heart text-xl"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-3">自己実現の推進力</h4>
+            <p class="text-[var(--sub-color-1)]">
+              情熱は自己実現への原動力です。それは単なる楽しい活動以上のもので、自分の潜在能力を最大限に発揮する道筋をつくります。情熱的に取り組むことで、自分の可能性の限界に挑戦し、成長することができます。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <div
+              class="h-12 w-12 bg-[var(--main-color)] rounded-full flex items-center justify-center text-[var(--accent-color-1)] mb-4">
+              <i class="fas fa-users text-xl"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-3">つながりの形成</h4>
+            <p class="text-[var(--sub-color-1)]">
+              共通の情熱は人々を結びつけます。同じ熱意を持つ人との出会いは、深い友情や協力関係を生み出し、コミュニティの形成につながります。情熱を共有することで、孤独感が減り、所属感と連帯感が高まります。
+            </p>
+          </div>
+
+          <div class="bg-[var(--accent-color-1)] rounded-xl shadow-lg p-6">
+            <div
+              class="h-12 w-12 bg-[var(--main-color)] rounded-full flex items-center justify-center text-[var(--accent-color-1)] mb-4">
+              <i class="fas fa-lightbulb text-xl"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-3">創造と革新</h4>
+            <p class="text-[var(--sub-color-1)]">
+              情熱は創造性と革新の源です。何かに深く没頭することで、新しい視点や解決策が生まれます。情熱があれば、困難に立ち向かう粘り強さと、既存の枠を超える勇気が生まれ、イノベーションにつながります。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section
+    class="py-24 px-4 bg-gradient-to-r from-[var(--main-color)] to-[var(--sub-color-1)] text-[var(--accent-color-1)]">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6" data-aos="fade-up" style="color: var(--accent-color-1);">
+        あなたの情熱を見つける旅に出よう</h2>
+      <p class="text-xl max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">
+        情熱は持って生まれるものではなく、育てるものです。あなただけの情熱を見つけ、調和的に育て、人生を豊かにする実践を始めましょう。
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <a href="#my-passion"
+          class="bg-[var(--accent-color-2)] text-[var(--sub-color-1)] hover:bg-opacity-90 transition duration-300 font-bold py-3 px-8 rounded-full"
+          data-aos="fade-up" data-aos-delay="300">
+          私の情熱を探る
+        </a>
+        <a href="#psychology"
+          class="bg-transparent border-2 border-[var(--accent-color-1)] hover:bg-[var(--accent-color-1)] hover:text-[var(--main-color)] transition duration-300 font-bold py-3 px-8 rounded-full"
+          data-aos="fade-up" data-aos-delay="400">
+          科学的根拠を知る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[var(--sub-color-1)] text-[var(--accent-color-1)] py-16 px-4">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12" style="color: var(--accent-color-2);">提供</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-12">
+
+        <div class="bg-[var(--accent-color-1)] p-8 rounded-lg shadow-xl text-[var(--sub-color-1)]">
+          <h3 class="text-2xl font-bold mb-6" style="color: var(--main-color);">株式会社Kiss and Cry</h3>
+          <div class="mb-4">
+            <p class="font-semibold text-lg" style="color: var(--sub-color-1);">落合 絵美</p>
+            <p class="text-sm" style="color: var(--sub-color-1);">あなたの想いを世界に伝えるメッセンジャー</p>
+          </div>
+
+          <img
+            src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1267107/414652_101285.jpg"
+            alt="落合 絵美様 プロフィール写真" class="w-48 h-48 rounded-full mx-auto mb-6 shadow-md object-cover">
+          <p class="text-xs text-center mb-6" style="color: var(--sub-color-1);">写真提供元: <a
+              href="https://note.com/blueworldemi" target="_blank" rel="noopener noreferrer"
+              class="underline hover:text-[var(--main-color)]"
+              style="color:var(--main-color);">note.com/blueworldemi</a></p>
+
+          <div class="text-sm space-y-2 mb-6" style="color: var(--sub-color-1);">
+            <p>武蔵野大学アントレプレナーシップ研究所 客員研究員</p>
+            <p>スタートアップスタジオ Musashino Valley プロジェクトマネージャー</p>
+            <p>一般社団法人EMC GLOBAL 理事</p>
+            <p>特定非営利活動法人きっかけ食堂　理事</p>
+            <p>PRコンサルタント / ライター</p>
+          </div>
+          <p class="text-xs leading-relaxed" style="color: var(--sub-color-1);">
+            1982年埼玉県生まれ。早稲田大学第二文学部・表現芸術系専修卒。子どもの頃から文章を書くことを好み、19歳から出版社に勤務。大学卒業後、高額商材の販売員を経て出版社に復帰。在職中に「せっかく良いコンテンツを作っても、PRがわからなければ犬死だ」と痛感し、情報発信を学ぶためにPR会社に転職。広報業務のコンサルティングのほか、書籍プロデュースなども手掛け、2018年より独立。
+            2020年に株式会社Kiss and
+            Cryを創業。PR業務を通じて出会った伊藤羊一氏と武蔵野大学アントレプレナーシップ学部（武蔵野EMC）に感銘を受け、現在はEMCの運営や伊藤羊一氏のアシスタント業務のほか、アントレプレナーシップ普及に務める。
+          </p>
+        </div>
+
+        <div class="bg-[var(--accent-color-1)] p-8 rounded-lg shadow-xl text-[var(--sub-color-1)]">
+          <h4 class="text-xl font-bold mb-6" style="color: var(--main-color);">会社概要</h4>
+          <ul class="space-y-3 text-sm" style="color: var(--sub-color-1);">
+            <li><strong>創業：</strong>2018年1月1日</li>
+            <li><strong>設立：</strong>2019年11月12日</li>
+            <li class="pt-2"><strong>所在地：</strong><br>〒104-0061<br>東京都中央区銀座一丁目22番11号<br>銀座大竹ビジデンス2階</li>
+            <li class="pt-2"><strong>サイト：</strong><br><a href="https://www.kissandcry.me/" target="_blank"
+                rel="noopener noreferrer" class="hover:text-[var(--main-color)] underline"
+                style="color:var(--main-color);">https://www.kissandcry.me/</a></li>
+            <li class="pt-2"><strong>e-mail：</strong><br><a href="mailto:ochiai@kissandcry.me"
+                class="hover:text-[var(--main-color)] underline"
+                style="color:var(--main-color);">ochiai@kissandcry.me</a></li>
+            <li><strong>電話番号：</strong><br>090-9821-1919</li>
+            <li class="pt-2"><strong>代表取締役：</strong><br>落合 絵美</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-700 pt-8 text-center text-gray-500">
+        <p class="mb-2">Copyright&copy; Kiss and Cry.</p>
+        <p class="text-xs">
+          〒104-0061 東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階<br>
+          <a href="mailto:ochiai@kissandcry.me" class="hover:text-[var(--accent-color-2)]"
+            style="color:var(--accent-color-1);">ochiai@kissandcry.me</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Initialize AOS (Animation on Scroll)
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+      });
+
+      // Brain Activity Chart
+      const brainCtx = document.getElementById('brainActivityChart').getContext('2d');
+      new Chart(brainCtx, {
+        type: 'radar',
+        data: {
+          labels: ['報酬系', 'ドーパミン放出', '前頭前野', '海馬', '扁桃体', '側坐核'],
+          datasets: [
+            {
+              label: '情熱的活動時',
+              data: [95, 90, 80, 75, 65, 85],
+              backgroundColor: 'rgba(134, 32, 64, 0.3)',  /* main-color with alpha */
+              borderColor: 'var(--main-color)',
+              pointBackgroundColor: 'var(--main-color)',
+              pointBorderColor: 'var(--accent-color-1)'
+            },
+            {
+              label: '通常活動時',
+              data: [50, 45, 60, 55, 50, 40],
+              backgroundColor: 'rgba(219, 219, 219, 0.5)',  /* sub-color-2 with alpha */
+              borderColor: 'var(--sub-color-2)',
+              pointBackgroundColor: 'var(--sub-color-2)',
+              pointBorderColor: 'var(--accent-color-1)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 100,
+              angleLines: { color: 'rgba(34, 0, 0, 0.2)' }, /* sub-color-1 with alpha for lines on light bg */
+              grid: { color: 'rgba(34, 0, 0, 0.2)' }, /* sub-color-1 with alpha for grid on light bg */
+              pointLabels: { color: 'var(--sub-color-1)', font: { size: 10 } },
+              ticks: {
+                display: false,
+                backdropColor: 'transparent'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'var(--sub-color-1)' /* sub-color-1 for legend on light bg */
+              }
+            }
+          }
+        }
+      });
+
+      // Passion Factors Chart
+      const factorsCtx = document.getElementById('passionFactorsChart').getContext('2d');
+      new Chart(factorsCtx, {
+        type: 'bar',
+        data: {
+          labels: ['調和的情熱', '強迫的情熱'],
+          datasets: [
+            {
+              label: 'ウェルビーイング',
+              data: [85, 45],
+              backgroundColor: 'rgba(201, 163, 51, 0.7)' /* accent-color-2 with alpha */
+            },
+            {
+              label: 'パフォーマンス',
+              data: [80, 75],
+              backgroundColor: 'rgba(134, 32, 64, 0.7)'  /* main-color with alpha */
+            },
+            {
+              label: 'ストレスレベル',
+              data: [30, 80],
+              backgroundColor: 'rgba(34, 0, 0, 0.6)'        /* sub-color-1 with alpha */
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              stacked: false,
+              ticks: { color: 'var(--sub-color-1)' },
+              grid: { color: 'rgba(34,0,0,0.1)' }
+            },
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { color: 'var(--sub-color-1)' },
+              grid: { color: 'rgba(34,0,0,0.1)' }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                color: 'var(--sub-color-1)'
+              }
+            },
+            title: {
+              display: true,
+              text: '情熱タイプと心理的要因の関係',
+              color: 'var(--sub-color-1)'
+            }
+          }
+        }
+      });
+
+      // Navigation Scrollspy
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav ul li a');
+
+      window.addEventListener('scroll', function () {
+        let current = '';
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('nav-active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('nav-active');
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Preline UI JS -->
+  <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
+</body>
+
+</html>

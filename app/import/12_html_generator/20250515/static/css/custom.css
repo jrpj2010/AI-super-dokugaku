@@ -1,0 +1,89 @@
+/* カスタムCSSスタイル */
+
+/* ダークモード切り替え時にちらつきを防止 */
+html.dark {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+  
+  /* iframeスタイル */
+  iframe {
+    background-color: white;
+  }
+  
+  html.dark iframe {
+    background-color: #1f2937;
+  }
+  
+  /* コードエディタースタイル */
+  #code-editor {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    line-height: 1.5;
+    tab-size: 2;
+    white-space: pre-wrap;
+    resize: none;
+  }
+  
+  /* トースト通知のアニメーション */
+  [x-cloak] {
+    display: none !important;
+  }
+  
+  .toast-enter-active,
+  .toast-leave-active {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .toast-enter-from,
+  .toast-leave-to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  /* モバイル対応 */
+  @media (max-width: 640px) {
+    .toolbar {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .toolbar button {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+    
+    .material-icons {
+      font-size: 14px;
+    }
+  }
+  
+  /* アクセシビリティ対応 */
+  :focus {
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+  }
+  
+  .dark :focus {
+    outline-color: #818cf8;
+  }
+  
+  button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+  }
+  
+  .dark button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.5);
+  }
+  
+  /* visually-hidden クラス（スクリーンリーダー対応） */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }

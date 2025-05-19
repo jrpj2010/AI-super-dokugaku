@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トークスクリプト分析：思考3DXYZメソッドによるコミュニケーション解析</title>
+  <style>
+    /* 基本スタイル (省略されている部分は前回と同様) */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f9;
+      color: #333;
+      display: flex;
+    }
+
+    .sidebar {
+      /* (前回と同様) */
+      width: 300px;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      border-right: 1px solid #34495e;
+      z-index: 1000;
+    }
+
+    .sidebar h2,
+    .sidebar h3,
+    .sidebar ul,
+    .sidebar ul li a,
+    .xyz-legend-section,
+    .xyz-legend-section h4,
+    .legend-item,
+    .legend-item .tag,
+    .legend-item .tag-name,
+    .tooltip {
+      /* (前回と同様のスタイル) */
+    }
+
+    .sidebar h2 {
+      font-size: 1.6em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #4a6fa5;
+      padding-bottom: 10px;
+    }
+
+    .sidebar h3 {
+      font-size: 1.2em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #bdc3c7;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li a {
+      display: block;
+      color: #ecf0f1;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      transition: background-color 0.3s ease;
+      font-size: 0.95em;
+    }
+
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background-color: #34495e;
+      color: #ffffff;
+    }
+
+    .xyz-legend-section {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #34495e;
+      border-radius: 6px;
+    }
+
+    .xyz-legend-section h4 {
+      font-size: 1.1em;
+      color: #f1c40f;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .legend-item .tag {
+      flex-shrink: 0;
+      margin-right: 8px;
+      cursor: help;
+    }
+
+    .legend-item .tag-name {
+      font-size: 0.9em;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 12px;
+      position: absolute;
+      z-index: 1001;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -75px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      width: 150px;
+      font-size: 0.85em;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .legend-item:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+
+    .main-content-area {
+      flex-grow: 1;
+      padding-left: 300px;
+      overflow-y: auto;
+    }
+
+    header,
+    footer {
+      /* (前回と同様) */
+    }
+
+    header {
+      background-color: #34495e;
+      color: #ecf0f1;
+      padding: 1.5em 2em;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+
+    header p {
+      font-size: 1em;
+      margin-top: 0.5em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 2em;
+    }
+
+    /* LINE風会話表示スタイル */
+    .conversation-block,
+    .message-container,
+    .message-container.police-message,
+    .message-container.sato-message,
+    .speaker-icon,
+    .police-icon,
+    .sato-icon,
+    .utterance-bubble,
+    .police-message .utterance-bubble,
+    .sato-message .utterance-bubble,
+    .analysis-container,
+    .police-message .analysis-container,
+    .sato-message .analysis-container {
+      /* (前回と同様のスタイル) */
+    }
+
+    .conversation-block {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5em;
+    }
+
+    .message-container {
+      display: flex;
+      margin-bottom: 0.5em;
+    }
+
+    .message-container.police-message {
+      justify-content: flex-start;
+    }
+
+    .message-container.sato-message {
+      justify-content: flex-end;
+    }
+
+    .speaker-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin-right: 10px;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
+
+    .police-icon {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .sato-icon {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .utterance-bubble {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 15px;
+      font-size: 1em;
+    }
+
+    .police-message .utterance-bubble {
+      background-color: #e9ecef;
+      color: #333;
+      border-bottom-left-radius: 3px;
+    }
+
+    .sato-message .utterance-bubble {
+      background-color: #c8e6c9;
+      color: #333;
+      border-bottom-right-radius: 3px;
+    }
+
+    .analysis-container {
+      padding: 0.5em 1em;
+      margin-top: 0px;
+    }
+
+    .police-message .analysis-container {
+      margin-right: auto;
+      margin-left: 50px;
+    }
+
+    .sato-message .analysis-container {
+      margin-left: auto;
+      margin-right: 50px;
+    }
+
+
+    .analysis {
+      background-color: #ffffff;
+      padding: 1em;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      font-size: 0.9em;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .analysis-title {
+      font-weight: bold;
+      color: #34495e;
+      margin-bottom: 0.7em;
+      display: block;
+    }
+
+    /* 佐藤氏側の分析ブロックを2カラムに */
+    .sato-analysis-content {
+      display: flex;
+      gap: 20px;
+      /* カラム間の隙間 */
+    }
+
+    .sato-analysis-content .left-column {
+      flex: 1;
+      /* 左カラムの幅 */
+    }
+
+    .sato-analysis-content .right-column {
+      flex: 1.5;
+      /* 右カラムの幅を少し広めに */
+      border-left: 1px solid #eee;
+      padding-left: 20px;
+    }
+
+    .feedback-title {
+      font-weight: bold;
+      font-size: 1.1em;
+      /* 少し大きく */
+      color: #2c3e50;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .feedback-section {
+      margin-bottom: 15px;
+    }
+
+    .feedback-section h5 {
+      font-size: 0.95em;
+      color: #3498db;
+      /* X,Y,Z軸のテーマカラー */
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .feedback-section p {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+
+    .feedback-section .good {
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    .feedback-section .better {
+      color: #e67e22;
+      font-weight: bold;
+    }
+
+    .feedback-section .consider {
+      color: #f39c12;
+    }
+
+
+    /* XYZ軸ビジュアライズ用スタイル (前回と同様) */
+    .xyz-visualization,
+    .axis-group,
+    .axis-label,
+    .viz-tag-container,
+    .viz-tag,
+    .viz-tag.active,
+    .viz-tag.x-gutaika.active,
+    .viz-tag.x-chushoka.active,
+    .viz-tag.x-kouzouka.active,
+    .viz-tag.y-kako.active,
+    .viz-tag.y-gendai.active,
+    .viz-tag.y-mirai.active,
+    .viz-tag.z-shokyu.active,
+    .viz-tag.z-chukyu.active,
+    .viz-tag.z-jokyu.active {
+      /* (前回と同様のスタイル) */
+    }
+
+    .xyz-visualization {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+
+    .axis-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .axis-label {
+      font-weight: bold;
+      font-size: 0.9em;
+      color: #555;
+      width: 40px;
+    }
+
+    .viz-tag-container {
+      display: flex;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .viz-tag {
+      padding: 5px 10px;
+      font-size: 0.8em;
+      color: #777;
+      background-color: #f0f0f0;
+      border-right: 1px solid #ddd;
+      transition: background-color 0.3s, color 0.3s;
+      white-space: nowrap;
+    }
+
+    .viz-tag:last-child {
+      border-right: none;
+    }
+
+    .viz-tag.active {
+      color: white;
+      font-weight: bold;
+    }
+
+    .viz-tag.x-gutaika.active {
+      background-color: #e74c3c;
+    }
+
+    .viz-tag.x-chushoka.active {
+      background-color: #3498db;
+    }
+
+    .viz-tag.x-kouzouka.active {
+      background-color: #1abc9c;
+    }
+
+    .viz-tag.y-kako.active {
+      background-color: #95a5a6;
+    }
+
+    .viz-tag.y-gendai.active {
+      background-color: #f1c40f;
+    }
+
+    .viz-tag.y-mirai.active {
+      background-color: #8e44ad;
+    }
+
+    .viz-tag.z-shokyu.active {
+      background-color: #2ecc71;
+    }
+
+    .viz-tag.z-chukyu.active {
+      background-color: #e67e22;
+    }
+
+    .viz-tag.z-jokyu.active {
+      background-color: #d35400;
+    }
+
+
+    .tag,
+    .comment,
+    hr,
+    footer,
+    footer p {
+      /* (前回と同様のスタイル) */
+    }
+
+    .tag {
+      display: inline-block;
+      color: #fff;
+      padding: 0.4em 0.8em;
+      border-radius: 15px;
+      margin-right: 0.5em;
+      margin-bottom: 0.5em;
+      font-size: 0.85em;
+      border: 1px solid transparent;
+    }
+
+    .tag.x-gutaika {
+      background-color: #e74c3c;
+    }
+
+    .tag.x-chushoka {
+      background-color: #3498db;
+    }
+
+    .tag.x-kouzouka {
+      background-color: #1abc9c;
+    }
+
+    .tag.y-kako {
+      background-color: #95a5a6;
+    }
+
+    .tag.y-gendai {
+      background-color: #f1c40f;
+    }
+
+    .tag.y-mirai {
+      background-color: #8e44ad;
+    }
+
+    .tag.z-shokyu {
+      background-color: #2ecc71;
+    }
+
+    .tag.z-chukyu {
+      background-color: #e67e22;
+    }
+
+    .tag.z-jokyu {
+      background-color: #d35400;
+    }
+
+    .comment {
+      margin-top: 0.8em;
+      padding-left: 0.5em;
+      font-style: italic;
+      color: #566573;
+      font-size: 0.9em;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
+      margin: 1.5em 0;
+    }
+
+    footer {
+      background-color: #34495e;
+      color: #ecf0f1;
+      padding: 1em 2em;
+      font-size: 0.9em;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0.3em 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <!-- サイドバーの内容は前回と同様 -->
+    <h2>トーク分析ナビ</h2>
+    <h3>会話の流れ</h3>
+    <ul>
+      <li><a href="#block1" class="active">1. 警察の懸念提示</a></li>
+      <li><a href="#block2">2. 佐藤氏: 技術的可能性</a></li>
+      <li><a href="#block3">3. 佐藤氏: 実現の難易度</a></li>
+      <li><a href="#block4">4. 佐藤氏: 倫理とアングラ技術</a></li>
+      <li><a href="#block5">5. 佐藤氏: AI駆動開発の衝撃</a></li>
+      <li><a href="#block6">6. 佐藤氏: 具体的な悪用シナリオ</a></li>
+      <li><a href="#block7">7. 佐藤氏: フィルター無きAIの問題</a></li>
+      <li><a href="#block8">8. 警察の今後の依頼</a></li>
+    </ul>
+
+    <div class="xyz-legend-section">
+      <h3>XYZタグ凡例 (ホバーで解説)</h3>
+      <h4>X軸 (思考の型)</h4>
+      <div class="legend-item">
+        <span class="tag x-gutaika">X:超具体化</span><span class="tag-name">超具体化</span>
+        <span class="tooltip">具体的な事例、現場や実務の話、詳細な説明を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag x-chushoka">X:超抽象化</span><span class="tag-name">超抽象化</span>
+        <span class="tooltip">本質、概念、全体像、大局的な視点からの話を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag x-kouzouka">X:超構造化</span><span class="tag-name">超構造化</span>
+        <span class="tooltip">仕組み、体系、フレームワーク、整理された論理的な話を指します。</span>
+      </div>
+
+      <h4>Y軸 (時間軸)</h4>
+      <div class="legend-item">
+        <span class="tag y-kako">Y:過去</span><span class="tag-name">過去</span>
+        <span class="tooltip">経緯、歴史、以前の出来事や経験に関する話を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag y-gendai">Y:現代</span><span class="tag-name">現代</span>
+        <span class="tooltip">現状、現在の状況、今まさに起きていることに関する話を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag y-mirai">Y:未来</span><span class="tag-name">未来</span>
+        <span class="tooltip">展望、予測、これから起こりうること、将来の話を指します。</span>
+      </div>
+
+      <h4>Z軸 (知識レベル)</h4>
+      <div class="legend-item">
+        <span class="tag z-shokyu">Z:初級</span><span class="tag-name">初級</span>
+        <span class="tooltip">基礎的、入門的、誰にでも分かりやすいレベルの内容を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag z-chukyu">Z:中級</span><span class="tag-name">中級</span>
+        <span class="tooltip">応用的、発展的、ある程度の知識を要するレベルの内容を指します。</span>
+      </div>
+      <div class="legend-item">
+        <span class="tag z-jokyu">Z:上級</span><span class="tag-name">上級</span>
+        <span class="tooltip">専門的、高度、深い知識や洞察を要するレベルの内容を指します。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content-area">
+    <header>
+      <h1>警視庁 vs 佐藤氏：AIフェイク技術に関するトーク分析</h1>
+      <p>思考3DXYZメソッドによるコミュニケーション解析</p>
+    </header>
+
+    <main>
+      <!-- 会話ブロック1 (警察) -->
+      <div class="conversation-block" id="block1">
+        <div class="message-container police-message">
+          <div class="speaker-icon police-icon">警</div>
+          <div class="utterance-bubble">
+            「最近、闇バイトなどでテレビ電話を使った本人確認があり、その際にAIで顔を偽装できるのではないかと懸念しています。技術的にどこまで可能なのか教えていただけますか？」</div>
+        </div>
+        <div class="analysis-container police-message">
+          <div class="analysis">
+            <span class="analysis-title">思考分析 (警察側)</span>
+            <div class="xyz-visualization">
+              <div class="axis-group"><span class="axis-label">X軸:</span>
+                <div class="viz-tag-container"><span class="viz-tag x-gutaika active">超具体化</span><span
+                    class="viz-tag x-chushoka">超抽象化</span><span class="viz-tag x-kouzouka">超構造化</span></div>
+              </div>
+              <div class="axis-group"><span class="axis-label">Y軸:</span>
+                <div class="viz-tag-container"><span class="viz-tag y-kako">過去</span><span
+                    class="viz-tag y-gendai active">現代</span><span class="viz-tag y-mirai">未来</span></div>
+              </div>
+              <div class="axis-group"><span class="axis-label">Z軸:</span>
+                <div class="viz-tag-container"><span class="viz-tag z-shokyu active">初級</span><span
+                    class="viz-tag z-chukyu">中級</span><span class="viz-tag z-jokyu">上級</span></div>
+              </div>
+            </div>
+            <p class="comment">解説：現場で起きている具体的な事象を提示し、基礎的な実現可能性を問うています。</p>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 会話ブロック2 (佐藤氏) -->
+      <div class="conversation-block" id="block2">
+        <div class="message-container sato-message">
+          <div class="utterance-bubble">
+            「技術論で言えば、可能です。例えばiPhone同士のFacetime通話や、シグナル・テレグラムのような秘匿性の高いアプリの映像に、AIで生成したフェイクの顔を差し込むことは、一定の技術力があれば実現できます。」
+          </div>
+          <div class="speaker-icon sato-icon">佐</div>
+        </div>
+        <div class="analysis-container sato-message">
+          <div class="analysis">
+            <span class="analysis-title">思考分析 (佐藤氏側)</span>
+            <div class="sato-analysis-content">
+              <div class="left-column">
+                <div class="xyz-visualization">
+                  <div class="axis-group"><span class="axis-label">X軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag x-gutaika">超具体化</span><span
+                        class="viz-tag x-chushoka">超抽象化</span><span class="viz-tag x-kouzouka active">超構造化</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Y軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag y-kako">過去</span><span
+                        class="viz-tag y-gendai active">現代</span><span class="viz-tag y-mirai">未来</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Z軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag z-shokyu">初級</span><span
+                        class="viz-tag z-chukyu active">中級</span><span class="viz-tag z-jokyu">上級</span></div>
+                  </div>
+                </div>
+                <p class="comment">解説：技術的な「可能/不可能」を明確にし、具体的なアプリ名を挙げつつ構造的に説明。</p>
+              </div>
+              <div class="right-column">
+                <h4 class="feedback-title">コミュニケーション評価</h4>
+                <div class="feedback-section">
+                  <h5>X軸: 超構造化</h5>
+                  <p><span class="good">GOOD:</span>
+                    警察側の具体的な質問に対し、まず技術的な全体像（可能であること、どのような経路で可能か）を構造的に示したのは非常に分かりやすい導入でした。</p>
+                  <p><span class="consider">CONSIDER:</span>
+                    この段階で、さらに一歩踏み込んだ「どれくらいの精度で？」や「対策は？」といった具体的な点にも軽く触れると、相手の安心感や次の質問への誘導がスムーズになったかもしれません。</p>
+                </div>
+                <div class="feedback-section">
+                  <h5>Y軸: 現代</h5>
+                  <p><span class="good">GOOD:</span> 「今、できるのか」という警察側の問いに合致しており、適切な時間軸です。</p>
+                </div>
+                <div class="feedback-section">
+                  <h5>Z軸: 中級</h5>
+                  <p><span class="good">OK:</span>
+                    相手は初級レベルと推測されますが、技術の可能性を伝える上では中級レベルの情報提示は妥当です。ただし、専門用語の解説は都度必要になるでしょう。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 会話ブロック3 (佐藤氏) -->
+      <div class="conversation-block" id="block3">
+        <div class="message-container sato-message">
+          <div class="utterance-bubble">
+            「ただし、日本の一般的なAI活用レベルはまだ高くありません。高度なフェイクを実現するには相応の技術リテラシーが必要です。顔のフェイク精度は高いものが作れますが、声まで自然に被せるのはまだ難しい部分もあります。もっとも、犯人グループに天才的な技術者がいれば話は別ですが。」
+          </div>
+          <div class="speaker-icon sato-icon">佐</div>
+        </div>
+        <div class="analysis-container sato-message">
+          <div class="analysis">
+            <span class="analysis-title">思考分析 (佐藤氏側)</span>
+            <div class="sato-analysis-content">
+              <div class="left-column">
+                <div class="xyz-visualization">
+                  <div class="axis-group"><span class="axis-label">X軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag x-gutaika">超具体化</span><span
+                        class="viz-tag x-chushoka active">超抽象化</span><span class="viz-tag x-kouzouka">超構造化</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Y軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag y-kako">過去</span><span
+                        class="viz-tag y-gendai active">現代</span><span class="viz-tag y-mirai">未来</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Z軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag z-shokyu">初級</span><span
+                        class="viz-tag z-chukyu">中級</span><span class="viz-tag z-jokyu active">上級</span></div>
+                  </div>
+                </div>
+                <p class="comment">解説：実現の難易度や社会的な普及度合いといった抽象度の高い視点と専門知識に基づく解説。</p>
+              </div>
+              <div class="right-column">
+                <h4 class="feedback-title">コミュニケーション評価</h4>
+                <div class="feedback-section">
+                  <h5>X軸: 超抽象化</h5>
+                  <p><span class="good">GOOD:</span>
+                    「可能」という回答だけでは不安が残るため、「日本のAI活用レベル」や「技術リテラシー」といった大局的な視点（超抽象化）で補足したのは、状況の全体感を伝える上で有効です。</p>
+                  <p><span class="consider">CONSIDER:</span>
+                    警察側は具体的な脅威に関心があるため、抽象的な話が続くと少し戸惑うかもしれません。適宜、具体的な事例に戻るバランスが重要です。</p>
+                </div>
+                <div class="feedback-section">
+                  <h5>Z軸: 上級</h5>
+                  <p><span class="better">OK/CONSIDER:</span>
+                    「顔と声の技術的成熟度の違い」は専門的な（上級）情報ですが、脅威のリアルさを伝えるためには必要でした。ただし、警察側が「そこまで詳しい話は…」と感じていないか、反応を見ながら調整する意識も大切です。例えば、「つまり、顔はリアルに作れても、声でバレる可能性はまだあるということです」のように初級レベルに翻訳する一言を添えるのも手です。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 以降の佐藤氏の発言ブロックも同様に、.sato-analysis-content と .left-column, .right-column を作成し、
+                 フィードバック内容を記述してください。
+                 警察側の発言ブロックは従来の形式のままでOKです。 -->
+
+
+      <!-- 会話ブロック4 (佐藤氏) -->
+      <div class="conversation-block" id="block4">
+        <div class="message-container sato-message">
+          <div class="utterance-bubble">
+            「私たちは企業教育の一環でAI技術を扱っており、犯罪を助長するようなソリューションは提供しません。しかし、世の中にはアンダーグラウンドなツール、特に中国製のものが多く存在し、それらを使えば悪用は容易に想像できます。YouTubeなどで検索すれば、スレスレな使い方が紹介されていることもあります。」
+          </div>
+          <div class="speaker-icon sato-icon">佐</div>
+        </div>
+        <div class="analysis-container sato-message">
+          <div class="analysis">
+            <span class="analysis-title">思考分析 (佐藤氏側)</span>
+            <div class="sato-analysis-content">
+              <div class="left-column">
+                <div class="xyz-visualization">
+                  <div class="axis-group"><span class="axis-label">X軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag x-gutaika active">超具体化</span><span
+                        class="viz-tag x-chushoka">超抽象化</span><span class="viz-tag x-kouzouka">超構造化</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Y軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag y-kako">過去</span><span
+                        class="viz-tag y-gendai active">現代</span><span class="viz-tag y-mirai">未来</span></div>
+                  </div>
+                  <div class="axis-group"><span class="axis-label">Z軸:</span>
+                    <div class="viz-tag-container"><span class="viz-tag z-shokyu">初級</span><span
+                        class="viz-tag z-chukyu active">中級</span><span class="viz-tag z-jokyu">上級</span></div>
+                  </div>
+                </div>
+                <p class="comment">解説：自身の立場と、具体的なアングラ技術の存在に言及。</p>
+              </div>
+              <div class="right-column">
+                <h4 class="feedback-title">コミュニケーション評価</h4>
+                <div class="feedback-section">
+                  <h5>X軸: 超具体化</h5>
+                  <p><span class="good">GOOD:</span>
+                    「中国製ツール」「YouTube」といった具体的なキーワードを出すことで、抽象的だった脅威にリアリティが増し、警察側も問題の深刻さを理解しやすくなりました。</p>
+                </div>
+                <div class="feedback-section">
+                  <h5>Y軸: 現代</h5>
+                  <p><span class="good">GOOD:</span> これらのツールや情報が「今」手に入るという事実は、警察にとって喫緊の課題であることを示唆しています。</p>
+                </div>
+                <div class="feedback-section">
+                  <h5>Z軸: 中級</h5>
+                  <p><span class="good">OK:</span> ツール名や情報源の存在を伝えるのは、専門家でなくても理解できる中級レベルの情報であり適切です。</p>
+                  <p><span class="consider">CONSIDER:</span>
+                    「では、それらのツールをどう特定し、対策するのか？」という次の具体的な疑問を警察側が抱くことを見越し、少し踏み込んだ情報提供の準備もしておくと、より proactive な対応と言えるでしょう。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+
+      <!-- (残りのブロックも同様に修正) -->
+
+    </main>
+
+    <footer>
+      <p>&copy; 2024 トークスクリプト分析レポート. All rights reserved.</p>
+      <p>分析フレームワーク：思考3DXYZメソッド</p>
+    </footer>
+  </div>
+
+  <script>
+    // (前回と同様のスクロールスパイJavaScript)
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.conversation-block');
+      const navLinks = document.querySelectorAll('.sidebar ul li a');
+      function changeNav() {
+        let index = sections.length;
+        while (--index && window.scrollY + 150 < sections[index].offsetTop) { }
+        navLinks.forEach((link) => link.classList.remove('active'));
+        if (navLinks[index]) {
+          navLinks[index].classList.add('active');
+        }
+      }
+      if (sections.length > 0 && navLinks.length > 0) {
+        changeNav();
+        window.addEventListener('scroll', changeNav);
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{
+    "name": "my‑flask‑app",
+    "private": true,
+    "devDependencies": {
+      "tailwindcss": "^3.4.4",
+      "postcss": "^8.4.35",
+      "autoprefixer": "^10.4.19"
+    },
+    "scripts": {
+      "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/tailwind.css --minify",
+      "watch:css": "tailwindcss -i ./static/css/input.css -o ./static/css/tailwind.css --watch"
+    }
+  }
+  

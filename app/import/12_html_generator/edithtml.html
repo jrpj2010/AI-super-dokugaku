@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>改良版HTML/CSS/JSエディター</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    body { 
+      font-family: sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .toolbar {
+      background: #f3f3f3;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .toolbar button {
+      padding: 6px 12px;
+      border: none;
+      background: #4a4aff;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .toolbar button:hover { opacity: 0.85; }
+    .toolbar button.green { background-color: #28a745; }
+    .toolbar button.orange { background-color: #fd7e14; }
+    .toolbar button.red { background-color: #dc3545; }
+    .separator {
+      width: 1px;
+      background: #ddd;
+      height: 24px;
+      margin: 0 4px;
+    }
+    #uploadInput { display: none; }
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .format-toolbar {
+      display: flex;
+      gap: 4px;
+      padding: 6px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .format-toolbar button {
+      padding: 4px 8px;
+      background: #e8e8e8;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .format-toolbar button:hover {
+      background: #d8d8d8;
+    }
+    .format-toolbar .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .format-toolbar .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 4px;
+    }
+    .format-toolbar .dropdown-content button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 0;
+    }
+    .format-toolbar .dropdown-content button:hover {
+      background: #f1f1f1;
+    }
+    .format-toolbar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .editor-container {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      position: relative;
+    }
+    .editor-panel {
+      display: flex;
+      flex-direction: column;
+      width: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      border-right: 1px solid #ddd;
+      min-height: 0;
+    }
+    .editor-panel.visible {
+      width: 50%;
+    }
+    .preview-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .tab-nav {
+      display: flex;
+      background: #f0f0f0;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-right: 1px solid #ddd;
+    }
+    .tab-btn.active {
+      background: white;
+      border-bottom: 2px solid #4a4aff;
+    }
+    .tab-content {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .tab-content.active {
+      display: flex;
+    }
+    .code-editor {
+      flex: 1;
+      font-family: monospace;
+      resize: none;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow: auto;
+    }
+    #visual-editor {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    #editor-frame {
+      flex: 1;
+      border: none;
+    }
+    #debug {
+      font-family: monospace;
+      font-size: 12px;
+      padding: 8px;
+      background: #f0f0f0;
+      color: #333;
+      max-height: 150px;
+      overflow: auto;
+      border-top: 1px solid #ddd;
+      display: none;
+    }
+    .popup-dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 100;
+      width: 400px;
+      display: none;
+    }
+    .popup-dialog h3 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .popup-dialog input, .popup-dialog select, .popup-dialog textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .popup-dialog textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    .popup-dialog .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .popup-dialog button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .popup-dialog button.primary {
+      background: #4a4aff;
+      color: white;
+    }
+    .popup-dialog button.cancel {
+      background: #f3f3f3;
+      color: #333;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 99;
+      display: none;
+    }
+    .status-bar {
+      padding: 4px 8px;
+      background: #f8f8f8;
+      border-top: 1px solid #ddd;
+      font-size: 12px;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #eaeaea;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-icon:hover {
+      background: #d8d8d8;
+    }
+    .preview-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+    }
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #555;
+    }
+    .status-indicator .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .status-indicator .status-dot.active {
+      background-color: #28a745;
+    }
+    .status-indicator .status-dot.inactive {
+      background-color: #dc3545;
+    }
+    .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #4a4aff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .floating-button:hover {
+      transform: scale(1.1);
+      background: #3838cc;
+    }
+    .floating-button .bi {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- メインツールバー -->
+  <div class="toolbar">
+    <button id="uploadBtn"><i class="bi bi-upload"></i> HTMLアップロード</button>
+    <button id="saveBtn"><i class="bi bi-save"></i> 保存</button>
+    <button id="downloadBtn"><i class="bi bi-download"></i> ダウンロード</button>
+    <div class="separator"></div>
+    <button id="refreshPreviewBtn" class="green"><i class="bi bi-arrow-clockwise"></i> プレビュー更新</button>
+    <div class="separator"></div>
+    <button id="toggleJsBtn"><i class="bi bi-filetype-js"></i> JavaScript: 有効</button>
+    <button id="toggleDebugBtn"><i class="bi bi-bug"></i> デバッグ表示</button>
+  </div>
+
+  <!-- フォーマットツールバー -->
+  <div class="format-toolbar">
+    <div class="dropdown">
+      <button><i class="bi bi-type"></i> 見出し</button>
+      <div class="dropdown-content">
+        <button data-command="formatBlock" data-value="h1">見出し 1</button>
+        <button data-command="formatBlock" data-value="h2">見出し 2</button>
+        <button data-command="formatBlock" data-value="h3">見出し 3</button>
+        <button data-command="formatBlock" data-value="p">段落</button>
+      </div>
+    </div>
+    <button data-command="bold"><i class="bi bi-type-bold"></i> 太字</button>
+    <button data-command="italic"><i class="bi bi-type-italic"></i> 斜体</button>
+    <button data-command="underline"><i class="bi bi-type-underline"></i> 下線</button>
+    <div class="separator"></div>
+    <button data-command="insertUnorderedList"><i class="bi bi-list-ul"></i> 箇条書き</button>
+    <button data-command="insertOrderedList"><i class="bi bi-list-ol"></i> 番号付きリスト</button>
+    <div class="separator"></div>
+    <button id="insertImageBtn"><i class="bi bi-image"></i> 画像</button>
+    <button id="insertLinkBtn"><i class="bi bi-link-45deg"></i> リンク</button>
+    <button id="insertTableBtn"><i class="bi bi-table"></i> テーブル</button>
+    <div class="separator"></div>
+    <button data-command="removeFormat"><i class="bi bi-trash"></i> 書式削除</button>
+  </div>
+
+  <!-- メインコンテナ -->
+  <div class="main-container">
+    <!-- エディターコンテナ -->
+    <div class="editor-container">
+      <!-- コードエディターパネル (初期状態では非表示) -->
+      <div class="editor-panel" id="code-panel">
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="html">HTML</button>
+          <button class="tab-btn" data-tab="css">CSS</button>
+          <button class="tab-btn" data-tab="js">JavaScript</button>
+        </div>
+        <div id="html-tab" class="tab-content active">
+          <textarea id="html-editor" class="code-editor" spellcheck="false" placeholder="HTMLコードを編集..."></textarea>
+        </div>
+        <div id="css-tab" class="tab-content">
+          <textarea id="css-editor" class="code-editor" spellcheck="false" placeholder="CSSを編集..."></textarea>
+        </div>
+        <div id="js-tab" class="tab-content">
+          <textarea id="js-editor" class="code-editor" spellcheck="false" placeholder="JavaScriptを編集..."></textarea>
+        </div>
+      </div>
+
+      <!-- ビジュアルエディターパネル (iframeを使用) -->
+      <div class="preview-panel">
+        <div class="preview-toolbar">
+          <div class="status-indicator">
+            <div class="status-dot active" id="js-status-dot"></div>
+            <span id="js-status-text">JavaScript: 有効</span>
+          </div>
+          <button id="openFullPreviewBtn"><i class="bi bi-arrows-fullscreen"></i> 全画面プレビュー</button>
+        </div>
+        <div id="visual-editor">
+          <!-- Fixed: Removed sandbox attribute to resolve security warning -->
+          <iframe id="editor-frame"></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ステータスバー -->
+    <div class="status-bar">
+      <div id="edit-mode-status">編集モード: アクティブ</div>
+      <div class="status-indicator">
+        <span id="cdn-status"><i class="bi bi-cloud-check"></i> CDN: 読み込み中...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- コードエディター表示ボタン (フローティング) -->
+  <div class="floating-button" id="toggleCodePanelBtn">
+    <i class="bi bi-code-slash"></i>
+  </div>
+
+  <!-- デバッグパネル -->
+  <div id="debug"></div>
+
+  <!-- ポップアップダイアログ - 画像挿入 -->
+  <div id="imageDialog" class="popup-dialog">
+    <h3>画像の挿入</h3>
+    <input type="text" id="imageUrl" placeholder="画像URL" value="https://via.placeholder.com/300x200">
+    <input type="text" id="imageAlt" placeholder="代替テキスト">
+    <div class="buttons">
+      <button class="cancel" id="cancelImageBtn">キャンセル</button>
+      <button class="primary" id="confirmImageBtn">挿入</button>
+    </div>
+  </div>
+
+  <!-- ポップアップダイアログ - リンク挿入 -->
+  <div id="linkDialog" class="popup-dialog">
+    <h3>リンクの挿入</h3>
+    <input type="text" id="linkUrl" placeholder="URL" value="https://">
+    <input type="text" id="linkText" placeholder="リンクテキスト">
+    <select id="linkTarget">
+      <option value="_self">同じウィンドウ</option>
+      <option value="_blank">新しいウィンドウ</option>
+    </select>
+    <div class="buttons">
+      <button class="cancel" id="cancelLinkBtn">キャンセル</button>
+      <button class="primary" id="confirmLinkBtn">挿入</button>
+    </div>
+  </div>
+
+  <!-- ポップアップダイアログ - テーブル挿入 -->
+  <div id="tableDialog" class="popup-dialog">
+    <h3>テーブルの挿入</h3>
+    <div style="display: flex; gap: 8px;">
+      <input type="number" id="tableRows" placeholder="行数" value="3" min="1" max="10">
+      <input type="number" id="tableCols" placeholder="列数" value="3" min="1" max="10">
+    </div>
+    <div class="buttons">
+      <button class="cancel" id="cancelTableBtn">キャンセル</button>
+      <button class="primary" id="confirmTableBtn">挿入</button>
+    </div>
+  </div>
+
+  <!-- CSS/JSカスタマイズダイアログ -->
+  <div id="externalResourceDialog" class="popup-dialog">
+    <h3>外部リソースの追加</h3>
+    <p>CDNからCSSやJavaScriptライブラリを追加します</p>
+    <input type="text" id="cdnUrl" placeholder="CSS/JSのURL (例: https://cdn.jsdelivr.net/npm/animate.css)" value="">
+    <select id="resourceType">
+      <option value="css">CSS</option>
+      <option value="js">JavaScript</option>
+    </select>
+    <div class="buttons">
+      <button class="cancel" id="cancelResourceBtn">キャンセル</button>
+      <button class="primary" id="confirmResourceBtn">追加</button>
+    </div>
+  </div>
+
+  <!-- オーバーレイ -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- 非表示ファイルアップロードフィールド -->
+  <input type="file" id="uploadInput" accept=".html,.htm">
+
+  <script>
+    // ページ読み込み時にローカルストレージをクリア
+    window.addEventListener('load', function() {
+      localStorage.clear();
+      console.log('ローカルストレージをクリアしました');
+    });
+
+    // デバッグログ機能
+    const debugEl = document.getElementById('debug');
+    function log(msg, obj) {
+      const time = new Date().toLocaleTimeString();
+      let text = `${time}: ${msg}`;
+      if (obj) {
+        if (typeof obj === 'object') {
+          try {
+            text += ' ' + JSON.stringify(obj);
+          } catch (e) {
+            text += ' [オブジェクトを文字列化できません]';
+          }
+        } else {
+          text += ' ' + obj;
+        }
+      }
+      debugEl.innerHTML += `<div>${text}</div>`;
+      debugEl.scrollTop = debugEl.scrollHeight;
+      console.log(msg, obj || '');
+    }
+
+    // 要素の参照
+    const htmlEditor = document.getElementById('html-editor');
+    const cssEditor = document.getElementById('css-editor');
+    const jsEditor = document.getElementById('js-editor');
+    const editorFrame = document.getElementById('editor-frame');
+    const codePanel = document.getElementById('code-panel');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadInput = document.getElementById('uploadInput');
+    const toggleCodePanelBtn = document.getElementById('toggleCodePanelBtn');
+    const toggleJsBtn = document.getElementById('toggleJsBtn');
+    const jsStatusDot = document.getElementById('js-status-dot');
+    const jsStatusText = document.getElementById('js-status-text');
+    const refreshPreviewBtn = document.getElementById('refreshPreviewBtn');
+    const cdnStatus = document.getElementById('cdn-status');
+    
+    // ダイアログ要素
+    const imageDialog = document.getElementById('imageDialog');
+    const linkDialog = document.getElementById('linkDialog');
+    const tableDialog = document.getElementById('tableDialog');
+    const externalResourceDialog = document.getElementById('externalResourceDialog');
+    const overlay = document.getElementById('overlay');
+
+    // エディターの現在の状態
+    let jsEnabled = true;
+    let isCodePanelVisible = false;
+    let isUpdatingFromVisual = false;
+    let isUpdatingFromCode = false;
+    let currentSelectionRange = null;
+    let editorInitialized = false;
+    
+    // 外部リソース管理
+    let externalCssResources = [
+      'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+    ];
+    let externalJsResources = [];
+    
+    // 特殊ライブラリの初期化コード
+    const libraryInitScripts = {
+      'mermaid': `
+        document.addEventListener('DOMContentLoaded', function() {
+          if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+              startOnLoad: true,
+              theme: 'default'
+            });
+          }
+        });
+      `,
+      'highlight.js': `
+        document.addEventListener('DOMContentLoaded', function() {
+          if (typeof hljs !== 'undefined') {
+            document.querySelectorAll('pre code').forEach((el) => {
+              hljs.highlightElement(el);
+            });
+          }
+        });
+      `,
+      'mathjax': `
+        document.addEventListener('DOMContentLoaded', function() {
+          if (typeof MathJax !== 'undefined') {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          }
+        });
+      `,
+      'chart.js': `
+        document.addEventListener('DOMContentLoaded', function() {
+          if (typeof Chart !== 'undefined') {
+            // Chart.js は自動的に初期化されます
+          }
+        });
+      `
+    };
+
+    // タブ切り替え
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // アクティブなタブボタンを切り替え
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // アクティブなタブコンテンツを切り替え
+        const tabId = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+      });
+    });
+
+    // コードパネルの表示/非表示を切り替える
+    function toggleCodePanel() {
+      isCodePanelVisible = !isCodePanelVisible;
+      
+      if (isCodePanelVisible) {
+        codePanel.classList.add('visible');
+        toggleCodePanelBtn.innerHTML = '<i class="bi bi-code-slash"></i>';
+        toggleCodePanelBtn.style.backgroundColor = '#28a745';
+        
+        // ビジュアルエディターの内容をHTMLエディターに同期
+        updateCodeFromVisual();
+      } else {
+        codePanel.classList.remove('visible');
+        toggleCodePanelBtn.innerHTML = '<i class="bi bi-code-slash"></i>';
+        toggleCodePanelBtn.style.backgroundColor = '#4a4aff';
+        
+        // HTMLエディターの内容をビジュアルエディターに同期
+        updateVisualFromCode();
+      }
+    }
+
+    // コードパネル表示/非表示ボタン
+    toggleCodePanelBtn.addEventListener('click', toggleCodePanel);
+
+    // JavaScriptの有効/無効を切り替える
+    function toggleJavaScript() {
+      jsEnabled = !jsEnabled;
+      
+      if (jsEnabled) {
+        toggleJsBtn.innerHTML = '<i class="bi bi-filetype-js"></i> JavaScript: 有効';
+        jsStatusDot.classList.remove('inactive');
+        jsStatusDot.classList.add('active');
+        jsStatusText.textContent = 'JavaScript: 有効';
+      } else {
+        toggleJsBtn.innerHTML = '<i class="bi bi-filetype-js"></i> JavaScript: 無効';
+        jsStatusDot.classList.remove('active');
+        jsStatusDot.classList.add('inactive');
+        jsStatusText.textContent = 'JavaScript: 無効';
+      }
+      
+      // プレビューを更新
+      updateVisualFromCode();
+    }
+
+    // JavaScript切替ボタン
+    toggleJsBtn.addEventListener('click', toggleJavaScript);
+
+    // CDNのステータスを更新
+    function updateCdnStatus(status, message) {
+      if (status === 'loading') {
+        cdnStatus.innerHTML = '<i class="bi bi-cloud-arrow-down"></i> CDN: 読み込み中...';
+        cdnStatus.style.color = '#fd7e14';
+      } else if (status === 'success') {
+        cdnStatus.innerHTML = '<i class="bi bi-cloud-check"></i> CDN: 読み込み完了';
+        cdnStatus.style.color = '#28a745';
+      } else if (status === 'error') {
+        cdnStatus.innerHTML = `<i class="bi bi-cloud-slash"></i> CDN: エラー - ${message}`;
+        cdnStatus.style.color = '#dc3545';
+      }
+    }
+
+    // iframeの初期化
+    function initializeEditorFrame() {
+      try {
+        updateCdnStatus('loading');
+        
+        // iframeのドキュメントを取得
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        
+        // 基本的なHTML構造を設定
+        frameDoc.open();
+        frameDoc.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>HTML Editor Preview</title>
+            <style id="editor-styles"></style>
+            <div id="external-css-container"></div>
+          </head>
+          <body>
+            <div id="editor-content" contenteditable="true" style="min-height: 100vh; padding: 20px;">
+              <h1>見出しをここに入力</h1>
+              <p>こちらに本文を入力してください。このエディターでは、テキストを直接編集できます。</p>
+              <p>書式ツールバーのボタンを使って、<strong>太字</strong>、<em>斜体</em>、<u>下線</u>などの装飾も可能です。</p>
+            </div>
+            <div id="script-container"></div>
+            <div id="external-js-container"></div>
+          </body>
+          </html>
+        `);
+        frameDoc.close();
+        
+        // CDNリソースをロード
+        loadExternalResources(frameDoc);
+        
+        // 編集可能領域への参照
+        const frameEditor = frameDoc.getElementById('editor-content');
+        
+        // 編集イベントのリスナーを設定
+        frameEditor.addEventListener('input', () => {
+          if (isCodePanelVisible) {
+            updateCodeFromVisual();
+          }
+        });
+        
+        // 選択範囲を保存するための機能
+        frameEditor.addEventListener('mouseup', saveSelection);
+        frameEditor.addEventListener('keyup', saveSelection);
+        
+        // フォーカスイベントを監視
+        frameEditor.addEventListener('focus', () => {
+          document.getElementById('edit-mode-status').textContent = '編集モード: アクティブ';
+        });
+        
+        frameEditor.addEventListener('blur', () => {
+          document.getElementById('edit-mode-status').textContent = '編集モード: 非アクティブ';
+        });
+        
+        log('エディターフレームを初期化しました');
+        enableLinkNavigation(frameDoc);
+        editorInitialized = true;
+      } catch (err) {
+        log('エディターフレーム初期化エラー:', err.message);
+        updateCdnStatus('error', err.message);
+      }
+    }
+
+    // 特定のライブラリを検出する
+    function detectLibrary(url) {
+      const lowerUrl = url.toLowerCase();
+      if (lowerUrl.includes('mermaid')) return 'mermaid';
+      if (lowerUrl.includes('highlight.js') || lowerUrl.includes('highlightjs')) return 'highlight.js';
+      if (lowerUrl.includes('mathjax')) return 'mathjax';
+      if (lowerUrl.includes('chart.js') || lowerUrl.includes('chartjs')) return 'chart.js';
+      return null;
+    }
+
+    /**
+     * プレビュー iframe 内の <a> クリックを有効化する。
+     *  - #アンカー → 対象要素へスムーズスクロール
+     *  - 外部リンク → target 属性優先で window.open()
+     */
+    function enableLinkNavigation(frameDoc) {
+        // 二重登録を避けるフラグ
+        if (frameDoc.__linkNavActive) return;
+        frameDoc.__linkNavActive = true;
+
+        frameDoc.addEventListener('click', function (e) {
+            const link = e.target.closest('a');
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            // ── 1. アンカーリンク (#id) ─────────────────
+            if (href.startsWith('#')) {
+            const id = href.slice(1);
+            const target = frameDoc.getElementById(id);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+            e.preventDefault();
+            return;
+            }
+
+            // ── 2. 外部リンク (http / https / mailto …) ─────────
+            const targetAttr = link.getAttribute('target') || '_blank';
+            window.open(href, targetAttr);
+            e.preventDefault();
+        });
+    }
+
+
+    // ライブラリ初期化スクリプトを追加
+    function addLibraryInitScript(library) {
+      if (libraryInitScripts[library]) {
+        // 既存のJSに初期化コードを追加
+        const currentJs = jsEditor.value;
+        if (!currentJs.includes(libraryInitScripts[library])) {
+          jsEditor.value = currentJs + '\n\n// ' + library + ' 初期化コード\n' + libraryInitScripts[library];
+          log(`${library}の初期化コードを追加しました`);
+        }
+      }
+    }
+
+    // 外部リソースをロードする
+    function loadExternalResources(frameDoc) {
+      try {
+        updateCdnStatus('loading');
+        
+        // 既存のリソースをクリア
+        const cssContainer = frameDoc.getElementById('external-css-container');
+        const jsContainer = frameDoc.getElementById('external-js-container');
+        cssContainer.innerHTML = '';
+        jsContainer.innerHTML = '';
+        
+        // 読み込み完了をカウント
+        let loadedCount = 0;
+        let totalResources = externalCssResources.length + externalJsResources.length;
+        
+        // リソースの読み込み完了時の処理
+        function resourceLoaded(success, url, error) {
+          loadedCount++;
+          
+          if (!success) {
+            log(`リソース読み込みエラー: ${url}`, error);
+          } else {
+            log(`リソース読み込み成功: ${url}`);
+            
+            // ライブラリが検出されたら特別な処理
+            const library = detectLibrary(url);
+            if (library) {
+              log(`特殊ライブラリを検出: ${library}`);
+              
+              // ライブラリ固有の初期化コード
+              if (library === 'mermaid') {
+                // マーメード図を初期化するスクリプトを追加
+                const initScript = frameDoc.createElement('script');
+                initScript.textContent = `
+                  document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof mermaid !== 'undefined') {
+                      mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'default'
+                      });
+                    }
+                  });
+                `;
+                jsContainer.appendChild(initScript);
+              }
+            }
+          }
+          
+          // すべてのリソースが読み込まれたか確認
+          if (loadedCount >= totalResources) {
+            updateCdnStatus('success');
+            // Mermaid があれば再レンダリング
+            const win = frameDoc.defaultView;
+
+            // Mermaid があれば図を再レンダリング
+            if (win.mermaid && typeof win.mermaid.run === 'function') {
+            try { win.mermaid.run(); } catch (e) { console.error(e); }
+            }
+
+            // アップロード HTML が window.onload 内で
+            // Chart.js の描画をしている場合に備えて手動呼び出し
+            if (typeof win.onload === 'function') {
+            try { win.onload(); } catch (e) { console.error(e); }
+            }
+          }
+        }
+        
+        // CSSリソースをロード
+        externalCssResources.forEach(url => {
+          const link = frameDoc.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = url;
+          
+          // 読み込み完了イベント
+          link.onload = () => resourceLoaded(true, url);
+          link.onerror = (err) => resourceLoaded(false, url, err);
+          
+          cssContainer.appendChild(link);
+        });
+        
+        // JavaScriptリソースをロード
+        externalJsResources.forEach(url => {
+          const script = frameDoc.createElement('script');
+          script.src = url;
+          
+          // 読み込み完了イベント
+          script.onload = () => resourceLoaded(true, url);
+          script.onerror = (err) => resourceLoaded(false, url, err);
+          
+          jsContainer.appendChild(script);
+        });
+        
+        // リソースがない場合
+        if (totalResources === 0) {
+          updateCdnStatus('success');
+        }
+      } catch (err) {
+        log('リソースロードエラー:', err.message);
+        updateCdnStatus('error', err.message);
+      }
+    }
+
+    // 外部リソースを追加するダイアログを表示
+    document.getElementById('cdn-status').addEventListener('click', () => {
+      showDialog(externalResourceDialog);
+    });
+
+    // 外部リソース追加ダイアログ - 確定ボタン
+    document.getElementById('confirmResourceBtn').addEventListener('click', () => {
+      const url = document.getElementById('cdnUrl').value.trim();
+      const type = document.getElementById('resourceType').value;
+      
+      if (url) {
+        if (type === 'css') {
+          if (!externalCssResources.includes(url)) {
+            externalCssResources.push(url);
+            log(`CSS リソースを追加: ${url}`);
+          }
+        } else if (type === 'js') {
+          if (!externalJsResources.includes(url)) {
+            externalJsResources.push(url);
+            log(`JavaScript リソースを追加: ${url}`);
+            
+            // 特殊ライブラリの検出と初期化コード追加
+            const library = detectLibrary(url);
+            if (library) {
+              addLibraryInitScript(library);
+            }
+          }
+        }
+        
+        // フレームがあれば更新
+        if (editorInitialized) {
+          const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+          loadExternalResources(frameDoc);
+          updateVisualFromCode();
+        }
+      }
+      
+      hideDialog(externalResourceDialog);
+    });
+
+    // 外部リソース追加ダイアログ - キャンセルボタン
+    document.getElementById('cancelResourceBtn').addEventListener('click', () => {
+      hideDialog(externalResourceDialog);
+    });
+
+    // 選択範囲を保存
+    function saveSelection() {
+      const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+      const frameWin = editorFrame.contentWindow;
+      
+      if (frameWin.getSelection && frameWin.getSelection().getRangeAt && frameWin.getSelection().rangeCount) {
+        currentSelectionRange = frameWin.getSelection().getRangeAt(0);
+      }
+    }
+
+    // 選択範囲を復元
+    function restoreSelection() {
+      if (!currentSelectionRange) return;
+      
+      const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+      const frameWin = editorFrame.contentWindow;
+      
+      if (frameWin.getSelection) {
+        const selection = frameWin.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(currentSelectionRange);
+      }
+    }
+
+    // ビジュアルエディターの内容をHTMLエディターに同期
+    function updateCodeFromVisual() {
+      if (isUpdatingFromCode || !editorInitialized) return; // 無限ループ防止
+      
+      isUpdatingFromVisual = true;
+      
+      try {
+        // iframeからエディター要素を取得
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        const frameEditor = frameDoc.getElementById('editor-content');
+        
+        // ビジュアルエディターのHTMLをHTMLエディターに設定
+        htmlEditor.value = frameEditor.innerHTML;
+        
+        log('ビジュアルエディターからHTMLエディターに同期');
+      } catch (err) {
+        log('同期エラー:', err.message);
+      } finally {
+        isUpdatingFromVisual = false;
+      }
+    }
+
+    // HTMLエディターの内容をビジュアルエディターに同期
+    function updateVisualFromCode() {
+      if (isUpdatingFromVisual || !editorInitialized) return; // 無限ループ防止
+      
+      isUpdatingFromCode = true;
+      
+      try {
+        // iframeからエディター要素を取得
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        const frameEditor = frameDoc.getElementById('editor-content');
+        
+        // HTMLエディターの内容をビジュアルエディターに設定
+        frameEditor.innerHTML = htmlEditor.value;
+        enableLinkNavigation(frameDoc);
+        
+        // カスタムスタイルの適用
+        applyCustomStyles(frameDoc);
+        
+        // カスタムスクリプトの適用
+        if (jsEnabled) {
+          applyCustomScripts(frameDoc);
+        } else {
+          // JavaScriptが無効の場合はスクリプトを削除
+          removeCustomScripts(frameDoc);
+        }
+        
+        const win = frameDoc.defaultView;
+
+        if (win.mermaid && typeof win.mermaid.run === 'function') {
+        try { win.mermaid.run(); } catch (e) { console.error(e); }
+        }
+
+        if (typeof win.onload === 'function') {
+        try { win.onload(); } catch (e) { console.error(e); }
+        }
+
+
+        log('HTMLエディターからビジュアルエディターに同期');
+      } catch (err) {
+        log('同期エラー:', err.message);
+      } finally {
+        isUpdatingFromCode = false;
+      }
+      if (frameDoc.defaultView.mermaid) {
+        frameDoc.defaultView.mermaid.run();
+      }
+    }
+
+    // カスタムスタイルを適用
+    function applyCustomStyles(frameDoc) {
+      try {
+        // スタイル要素を取得
+        const styleElement = frameDoc.getElementById('editor-styles');
+        
+        // CSSを設定
+        styleElement.textContent = cssEditor.value;
+      } catch (err) {
+        log('スタイル適用エラー:', err.message);
+      }
+    }
+
+    // カスタムスクリプトを適用
+    function applyCustomScripts(frameDoc) {
+      try {
+        // スクリプトコンテナを取得
+        const scriptContainer = frameDoc.getElementById('script-container');
+        
+        // 以前のスクリプトをクリア
+        scriptContainer.innerHTML = '';
+        
+        // 新しいスクリプト要素を作成
+        const scriptEl = frameDoc.createElement('script');
+        
+        // HTMLエスケープを解除してJavaScriptコードを設定
+        scriptEl.textContent = jsEditor.value;
+        
+        // スクリプトコンテナに追加
+        scriptContainer.appendChild(scriptEl);
+      } catch (err) {
+        log('スクリプト適用エラー:', err.message);
+      }
+    }
+
+    // カスタムスクリプトを削除
+    function removeCustomScripts(frameDoc) {
+      try {
+        // スクリプトコンテナを取得してクリア
+        const scriptContainer = frameDoc.getElementById('script-container');
+        scriptContainer.innerHTML = '';
+      } catch (err) {
+        log('スクリプト削除エラー:', err.message);
+      }
+    }
+
+    // フォーマットコマンドを実行
+    function executeFormatCommand(command, value = null) {
+      try {
+        // iframeのdocumentを取得
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        
+        // 選択範囲を復元
+        restoreSelection();
+        
+        // コマンドを実行
+        frameDoc.execCommand(command, false, value);
+        
+        // ビジュアルエディターの内容をHTMLエディターに同期
+        if (isCodePanelVisible) {
+          updateCodeFromVisual();
+        }
+      } catch (err) {
+        log('フォーマットコマンドエラー:', err.message);
+      }
+    }
+
+    // フォーマットコマンドボタン
+    document.querySelectorAll('[data-command]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 実行するコマンドと値を取得
+        const command = btn.getAttribute('data-command');
+        const value = btn.getAttribute('data-value') || null;
+        
+        // コマンド実行
+        executeFormatCommand(command, value);
+        
+        // エディターフレームにフォーカスを戻す
+        editorFrame.contentWindow.focus();
+        const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+        frameEditor.focus();
+      });
+    });
+
+    // ポップアップダイアログを表示
+    function showDialog(dialog) {
+      overlay.style.display = 'block';
+      dialog.style.display = 'block';
+    }
+
+    // ポップアップダイアログを非表示
+    function hideDialog(dialog) {
+      overlay.style.display = 'none';
+      dialog.style.display = 'none';
+    }
+
+    // テーブルを作成する関数
+    function createTable(rows, cols) {
+      let tableHtml = '<table class="table table-bordered"><thead><tr>';
+      
+      // ヘッダー行
+      for (let i = 0; i < cols; i++) {
+        tableHtml += `<th>見出し ${i+1}</th>`;
+      }
+      tableHtml += '</tr></thead><tbody>';
+      
+      // データ行
+      for (let i = 0; i < rows-1; i++) {
+        tableHtml += '<tr>';
+        for (let j = 0; j < cols; j++) {
+          tableHtml += `<td>セル ${i+1}-${j+1}</td>`;
+        }
+        tableHtml += '</tr>';
+      }
+      
+      tableHtml += '</tbody></table>';
+      return tableHtml;
+    }
+
+    // 画像挿入ボタン
+    document.getElementById('insertImageBtn').addEventListener('click', () => {
+      showDialog(imageDialog);
+      document.getElementById('imageUrl').focus();
+    });
+
+    // 画像挿入ダイアログ - 確定ボタン
+    document.getElementById('confirmImageBtn').addEventListener('click', () => {
+      const url = document.getElementById('imageUrl').value;
+      const alt = document.getElementById('imageAlt').value;
+      
+      if (url) {
+        executeFormatCommand('insertHTML', `<img src="${url}" alt="${alt}" class="img-fluid">`);
+      }
+      
+      hideDialog(imageDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // 画像挿入ダイアログ - キャンセルボタン
+    document.getElementById('cancelImageBtn').addEventListener('click', () => {
+      hideDialog(imageDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // リンク挿入ボタン
+    document.getElementById('insertLinkBtn').addEventListener('click', () => {
+      // エディターフレームから選択範囲を取得
+      const frameWin = editorFrame.contentWindow;
+      const selection = frameWin.getSelection();
+      
+      if (selection && selection.toString()) {
+        document.getElementById('linkText').value = selection.toString();
+      } else {
+        document.getElementById('linkText').value = '';
+      }
+      
+      showDialog(linkDialog);
+      document.getElementById('linkUrl').focus();
+    });
+
+    // リンク挿入ダイアログ - 確定ボタン
+    document.getElementById('confirmLinkBtn').addEventListener('click', () => {
+      const url = document.getElementById('linkUrl').value;
+      const text = document.getElementById('linkText').value || url;
+      const target = document.getElementById('linkTarget').value;
+      
+      if (url) {
+        executeFormatCommand('insertHTML', `<a href="${url}" target="${target}">${text}</a>`);
+      }
+      
+      hideDialog(linkDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // リンク挿入ダイアログ - キャンセルボタン
+    document.getElementById('cancelLinkBtn').addEventListener('click', () => {
+      hideDialog(linkDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // テーブル挿入ボタン
+    document.getElementById('insertTableBtn').addEventListener('click', () => {
+      showDialog(tableDialog);
+      document.getElementById('tableRows').focus();
+    });
+
+    // テーブル挿入ダイアログ - 確定ボタン
+    document.getElementById('confirmTableBtn').addEventListener('click', () => {
+      const rows = parseInt(document.getElementById('tableRows').value) || 3;
+      const cols = parseInt(document.getElementById('tableCols').value) || 3;
+      
+      if (rows > 0 && cols > 0) {
+        const tableHtml = createTable(rows, cols);
+        executeFormatCommand('insertHTML', tableHtml);
+      }
+      
+      hideDialog(tableDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // テーブル挿入ダイアログ - キャンセルボタン
+    document.getElementById('cancelTableBtn').addEventListener('click', () => {
+      hideDialog(tableDialog);
+      
+      // エディターフレームにフォーカスを戻す
+      editorFrame.contentWindow.focus();
+      const frameEditor = editorFrame.contentDocument.getElementById('editor-content');
+      frameEditor.focus();
+    });
+
+    // 全画面プレビューボタン
+    document.getElementById('openFullPreviewBtn').addEventListener('click', () => {
+      try {
+        // 現在のHTML、CSS、JavaScriptを取得
+        const html = htmlEditor.value;
+        const css = cssEditor.value;
+        const js = jsEnabled ? jsEditor.value : '';
+        
+        // 完全なHTMLドキュメントを生成
+        let fullHtml = '<!DOCTYPE html>\n<html lang="ja">\n<head>\n';
+        fullHtml += '<meta charset="UTF-8">\n';
+        fullHtml += '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+        fullHtml += '<title>プレビュー</title>\n';
+        
+        // 外部CSSの追加
+        externalCssResources.forEach(url => {
+          fullHtml += `<link rel="stylesheet" href="${url}">\n`;
+        });
+        
+        // CSSの追加
+        if (css) {
+          fullHtml += `<style>\n${css}\n</style>\n`;
+        }
+        
+        fullHtml += '</head>\n<body>\n';
+        
+        // HTML本体の追加
+        fullHtml += html;
+        
+        // 外部JavaScriptの追加
+        externalJsResources.forEach(url => {
+          fullHtml += `<script src="${url}"><\/script>\n`;
+        });
+        
+        // JavaScriptの追加 - Fix: Properly escape script tag
+        if (js && jsEnabled) {
+          fullHtml += `\n<script>\n${js}\n<\/script>\n`;
+        }
+        
+        fullHtml += '\n</body>\n</html>';
+        
+        // 新しいウィンドウでプレビュー
+        const previewWindow = window.open('', '_blank');
+        previewWindow.document.write(fullHtml);
+        previewWindow.document.close();
+        
+        log('全画面プレビューを開きました');
+      } catch (err) {
+        log('全画面プレビューエラー:', err.message);
+      }
+    });
+
+    // プレビュー更新ボタン
+    refreshPreviewBtn.addEventListener('click', () => {
+      if (editorInitialized) {
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        loadExternalResources(frameDoc);
+      }
+      updateVisualFromCode();
+      log('プレビューを更新しました');
+    });
+
+    // 画像パスを修正する関数
+    function fixImagePaths(html) {
+      // 相対パスの画像をプレースホルダーに置き換え
+      return html.replace(/src=["'](?!http|https|data|\/\/)(\.?\/?[^"']*?)["']/gi, 
+        'src="https://via.placeholder.com/300x200"');
+    }
+
+    // 正規表現を使ってCDNスクリプトURLを検索
+    function extractCdnUrls(htmlString) {
+      const cssUrls = [];
+      const jsUrls = [];
+      
+      // linkタグからCSS URLを抽出
+      const cssRegex = /<link[^>]*?rel=["']stylesheet["'][^>]*?href=["'](https?:\/\/[^"']+)["'][^>]*?>/gi;
+      let cssMatch;
+      while ((cssMatch = cssRegex.exec(htmlString)) !== null) {
+        if (cssMatch[1] && !externalCssResources.includes(cssMatch[1])) {
+          cssUrls.push(cssMatch[1]);
+        }
+      }
+      
+      // alternative link format
+      const cssRegex2 = /<link[^>]*?href=["'](https?:\/\/[^"']+)["'][^>]*?rel=["']stylesheet["'][^>]*?>/gi;
+      while ((cssMatch = cssRegex2.exec(htmlString)) !== null) {
+        if (cssMatch[1] && !externalCssResources.includes(cssMatch[1])) {
+          cssUrls.push(cssMatch[1]);
+        }
+      }
+      
+      // scriptタグからJS URLを抽出
+      const jsRegex = /<script[^>]*?src=["'](https?:\/\/[^"']+)["'][^>]*?>/gi;
+      let jsMatch;
+      while ((jsMatch = jsRegex.exec(htmlString)) !== null) {
+        if (jsMatch[1] && !externalJsResources.includes(jsMatch[1])) {
+          jsUrls.push(jsMatch[1]);
+        }
+      }
+      
+      return { cssUrls, jsUrls };
+    }
+
+    // HTMLファイルを解析してエディターに読み込む関数
+    function parseAndLoadHtml(htmlString) {
+      try {
+        // 正規表現でCDN URLを抽出
+        const { cssUrls, jsUrls } = extractCdnUrls(htmlString);
+        
+        // 検出されたCDNリソースを追加
+        cssUrls.forEach(url => {
+          if (!externalCssResources.includes(url)) {
+            externalCssResources.push(url);
+            log(`外部CSS検出: ${url}`);
+          }
+        });
+        
+        jsUrls.forEach(url => {
+          if (!externalJsResources.includes(url)) {
+            externalJsResources.push(url);
+            log(`外部JS検出: ${url}`);
+            
+            // 特殊ライブラリの検出と初期化コード追加
+            const library = detectLibrary(url);
+            if (library) {
+              log(`特殊ライブラリを検出: ${library}`);
+              addLibraryInitScript(library);
+            }
+          }
+        });
+        
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        
+        // エラーチェック
+        const parseError = doc.querySelector('parsererror');
+        if (parseError) {
+          log('HTMLパースエラー:', parseError.textContent);
+          return;
+        }
+        
+        // HTML本文の取得
+        let html = '';
+        if (doc.body) {
+          html = doc.body.innerHTML || '';
+          log(`bodyタグからHTML取得: ${html.length}バイト`);
+        } else {
+          const match = htmlString.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+          html = match ? match[1] : htmlString;
+          log(`正規表現でHTML抽出: ${html.length}バイト`);
+        }
+        
+        // CSS抽出
+        let css = '';
+        const styles = doc.querySelectorAll('style');
+        styles.forEach((style, i) => {
+          const styleContent = style.textContent;
+          css += styleContent + '\n';
+          log(`スタイル ${i+1}: ${styleContent.length}バイト`);
+        });
+        log(`CSS抽出: ${css.length}バイト`);
+        
+        // JavaScript抽出
+        let js = '';
+        const scripts = doc.querySelectorAll('script:not([src])');
+        scripts.forEach((script, i) => {
+          const scriptContent = script.textContent;
+          js += scriptContent + '\n';
+          log(`スクリプト ${i+1}: ${scriptContent.length}バイト`);
+        });
+        log(`JavaScript抽出: ${js.length}バイト`);
+        
+        // DOMParserを使って外部リソースを検出
+        const linkElements = doc.querySelectorAll('link[rel="stylesheet"]');
+        linkElements.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('http') && !externalCssResources.includes(href)) {
+            externalCssResources.push(href);
+            log(`外部CSS検出 (DOM): ${href}`);
+          }
+        });
+        
+        const scriptElements = doc.querySelectorAll('script[src]');
+        scriptElements.forEach(script => {
+          const src = script.getAttribute('src');
+          if (src && src.startsWith('http') && !externalJsResources.includes(src)) {
+            externalJsResources.push(src);
+            log(`外部JS検出 (DOM): ${src}`);
+            
+            // 特殊ライブラリの検出と初期化コード追加
+            const library = detectLibrary(src);
+            if (library) {
+              log(`特殊ライブラリを検出 (DOM): ${library}`);
+              addLibraryInitScript(library);
+            }
+          }
+        });
+        
+        // マーメード記法の検出
+        if (html.includes('class="mermaid"') || html.includes("class='mermaid'")) {
+          log('マーメード記法を検出');
+          
+          // マーメードライブラリが含まれていない場合は追加
+          const mermaidUrl = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+          if (!externalJsResources.includes(mermaidUrl)) {
+            externalJsResources.push(mermaidUrl);
+            log(`マーメードライブラリを自動追加: ${mermaidUrl}`);
+            
+            // 初期化コードを追加
+            addLibraryInitScript('mermaid');
+          }
+        }
+        
+        // 画像パスの修正
+        html = fixImagePaths(html);
+        
+        // エディターに設定
+        htmlEditor.value = html;
+        cssEditor.value = css;
+        jsEditor.value = js;
+        
+        // CDNリソースを再ロード
+        if (editorInitialized) {
+          const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+          loadExternalResources(frameDoc);
+        }
+        
+        // ビジュアルエディターに適用
+        updateVisualFromCode();
+        
+        log('HTMLの読み込みとビジュアルエディターへの適用完了');
+        
+      } catch (err) {
+        log('HTML解析エラー:', err.message);
+      }
+    }
+
+    // ファイルアップロード処理
+    uploadBtn.addEventListener('click', () => uploadInput.click());
+    
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      log(`ファイル選択: ${file.name} (${file.size}バイト)`);
+      
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const fileContent = evt.target.result;
+          log(`ファイル読み込み完了: ${fileContent.length}バイト`);
+          
+          // HTMLの解析と読み込み
+          parseAndLoadHtml(fileContent);
+          
+        //   // コードパネルを表示
+        //   if (!isCodePanelVisible) {
+        //     toggleCodePanel();
+        //   }
+          
+        } catch (err) {
+          log('ファイル処理エラー:', err.message);
+        }
+      };
+      
+      reader.onerror = (err) => {
+        log('ファイル読み込みエラー:', err);
+      };
+      
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    // デバッグ表示切替ボタン
+    document.getElementById('toggleDebugBtn').addEventListener('click', () => {
+      debugEl.style.display = debugEl.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // 保存ボタン - 修正: コードパネルの表示状態に関わらず常にビジュアルエディターの内容をHTMLエディターに同期
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      try {
+        // ビジュアルエディターの内容を常にHTMLエディターに同期（修正点）
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        const frameEditor = frameDoc.getElementById('editor-content');
+        htmlEditor.value = frameEditor.innerHTML;
+        
+        // ローカルストレージに保存
+        localStorage.setItem('savedHtml', htmlEditor.value);
+        localStorage.setItem('savedCss', cssEditor.value);
+        localStorage.setItem('savedJs', jsEditor.value);
+        localStorage.setItem('savedCssResources', JSON.stringify(externalCssResources));
+        localStorage.setItem('savedJsResources', JSON.stringify(externalJsResources));
+        
+        log('ローカルストレージに保存しました');
+        alert('ローカルストレージに保存しました。');
+      } catch (err) {
+        log('保存エラー:', err.message);
+        alert('保存に失敗しました: ' + err.message);
+      }
+    });
+
+    // ダウンロードボタン
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      try {
+        // ビジュアルエディターの内容を常にHTMLエディターに同期（修正点）
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        const frameEditor = frameDoc.getElementById('editor-content');
+        htmlEditor.value = frameEditor.innerHTML;
+        
+        const html = htmlEditor.value;
+        const css = cssEditor.value;
+        const js = jsEditor.value;
+        
+        // 完全なHTMLドキュメントを生成
+        let fullHtml = '<!DOCTYPE html>\n<html lang="ja">\n<head>\n';
+        fullHtml += '<meta charset="UTF-8">\n';
+        fullHtml += '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+        fullHtml += '<title>Exported HTML</title>\n';
+        
+        // 外部CSSの追加
+        externalCssResources.forEach(url => {
+          fullHtml += `<link rel="stylesheet" href="${url}">\n`;
+        });
+        
+        // CSSの追加
+        if (css) {
+          fullHtml += `<style>\n${css}\n</style>\n`;
+        }
+        
+        fullHtml += '</head>\n<body>\n';
+        
+        // HTML本体の追加
+        fullHtml += html;
+        
+        // 外部JavaScriptの追加
+        externalJsResources.forEach(url => {
+          fullHtml += `<script src="${url}"><\/script>\n`;
+        });
+        
+        // JavaScriptの追加 - Fix: Properly escape script tag
+        if (js) {
+          fullHtml += `\n<script>\n${js}\n<\/script>\n`;
+        }
+        
+        fullHtml += '\n</body>\n</html>';
+        
+        // Blobを作成してダウンロード
+        const blob = new Blob([fullHtml], {type: 'text/html'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'export.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        log('HTMLファイルをダウンロードしました');
+      } catch (err) {
+        log('ダウンロードエラー:', err.message);
+        alert('ダウンロードに失敗しました: ' + err.message);
+      }
+    });
+
+    // プレビュー編集時に常にHTMLエディターに反映する機能を追加
+    editorFrame.addEventListener('load', () => {
+      if (editorInitialized) {
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        const frameEditor = frameDoc.getElementById('editor-content');
+        
+        // プレビュー画面での編集をリアルタイムでHTMLエディターに反映
+        frameEditor.addEventListener('input', () => {
+          // コードパネルの表示状態に関わらず同期する（修正点）
+          updateCodeFromVisual();
+        });
+      }
+    });
+
+    // 初期化時にローカルストレージからデータを読み込む試み
+    try {
+      const storedHtml = localStorage.getItem('savedHtml');
+      const storedCss = localStorage.getItem('savedCss');
+      const storedJs = localStorage.getItem('savedJs');
+      const storedCssResources = localStorage.getItem('savedCssResources');
+      const storedJsResources = localStorage.getItem('savedJsResources');
+      
+      // エディターフレームの初期化
+      initializeEditorFrame();
+      
+      if (storedHtml) {
+        htmlEditor.value = storedHtml;
+        log('ローカルストレージからHTMLを読み込みました');
+      }
+      
+      if (storedCss) {
+        cssEditor.value = storedCss;
+        log('ローカルストレージからCSSを読み込みました');
+      }
+      
+      if (storedJs) {
+        jsEditor.value = storedJs;
+        log('ローカルストレージからJavaScriptを読み込みました');
+      }
+      
+      if (storedCssResources) {
+        try {
+          const cssResources = JSON.parse(storedCssResources);
+          if (Array.isArray(cssResources)) {
+            externalCssResources = cssResources;
+            log('ローカルストレージからCSS外部リソースを読み込みました');
+          }
+        } catch (e) {
+          log('CSS外部リソース解析エラー:', e.message);
+        }
+      }
+      
+      if (storedJsResources) {
+        try {
+          const jsResources = JSON.parse(storedJsResources);
+          if (Array.isArray(jsResources)) {
+            externalJsResources = jsResources;
+            log('ローカルストレージからJS外部リソースを読み込みました');
+          }
+        } catch (e) {
+          log('JS外部リソース解析エラー:', e.message);
+        }
+      }
+      
+      // ストレージからデータを読み込んだ後にプレビューを更新
+      if (storedHtml || storedCss || storedJs || storedCssResources || storedJsResources) {
+        setTimeout(() => {
+          if (editorInitialized) {
+            const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+            loadExternalResources(frameDoc);
+          }
+          updateVisualFromCode();
+        }, 500);
+      }
+      
+    } catch (err) {
+      log('ローカルストレージ読み込みエラー:', err.message);
+    }
+
+    // メインエディターフレームのロードイベント
+    editorFrame.addEventListener('load', () => {
+      if (!editorInitialized) {
+        initializeEditorFrame();
+      }
+    });
+
+    // editorFrameを初期化する
+    if (!editorInitialized) {
+      initializeEditorFrame();
+    }
+
+    // イベントリスナー - HTMLエディターの変更
+    htmlEditor.addEventListener('input', () => {
+      if (!isUpdatingFromVisual) {
+        updateVisualFromCode();
+      }
+    });
+
+    // イベントリスナー - CSSエディターの変更
+    cssEditor.addEventListener('input', () => {
+      if (!isUpdatingFromVisual) {
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        applyCustomStyles(frameDoc);
+      }
+    });
+
+    // イベントリスナー - JavaScriptエディターの変更
+    jsEditor.addEventListener('input', () => {
+      if (!isUpdatingFromVisual && jsEnabled) {
+        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+        applyCustomScripts(frameDoc);
+      }
+    });
+
+    // 初期化完了
+    log('エディター初期化完了');
+  </script>
+</body>
+</html>

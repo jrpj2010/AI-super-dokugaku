@@ -1,0 +1,24 @@
+# 開発環境ファイル
+node_modules
+.next
+.git
+.github
+.vscode
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ビルド成果物
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 分析結果/PDFファイル (ボリュームとしてマウントするため)
+saved-analysis
+pdf-exports
+
+# その他
+.DS_Store
+Thumbs.db

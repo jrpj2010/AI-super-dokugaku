@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
+    # ボリュームマウントを使用して、ビルドなしで開発する場合は以下をコメント解除
+    # volumes:
+    #   - ./:/app
+    #   - /app/node_modules
+    #   - /app/.next

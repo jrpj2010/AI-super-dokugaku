@@ -1,0 +1,26 @@
+# Cloud Build設定ファイル
+steps:
+  # Docker イメージをビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gpt-image-generator-repo/gpt-image-generator:${COMMIT_SHA}', '.']
+  
+  # イメージを Artifact Registry にプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gpt-image-generator-repo/gpt-image-generator:${COMMIT_SHA}']
+  
+  # latest タグも付ける
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['tag', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gpt-image-generator-repo/gpt-image-generator:${COMMIT_SHA}', 'asia-northeast1-docker.
+
+.dev/${PROJECT_ID}/gpt-image-generator-repo/gpt-image-generator:latest']
+  
+  # latest タグもプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gpt-image-generator-repo/gpt-image-generator:latest']
+
+# タイムアウト設定
+timeout: '1200s'
+
+# ビルドログの保存先
+options:
+  logging: CLOUD_LOGGING_ONLY
