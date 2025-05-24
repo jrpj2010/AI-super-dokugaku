@@ -1,5 +1,12 @@
 name: Claude Code Action 実験
 
+# 権限設定を追加
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  actions: read
+
 on:
   issue_comment:
     types: [created]
@@ -21,6 +28,7 @@ jobs:
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           trigger_phrase: "@claude"
           timeout_minutes: 10
           allowed_tools: "Edit,Replace"
