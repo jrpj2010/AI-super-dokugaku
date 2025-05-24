@@ -4,6 +4,8 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  id-token: write        # ← 追加
+  actions: read          # ← 追加
 
 on:
   issue_comment:
