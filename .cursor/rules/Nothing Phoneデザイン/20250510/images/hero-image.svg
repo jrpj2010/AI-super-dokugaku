@@ -1,0 +1,97 @@
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Grid Pattern -->
+  <defs>
+    <pattern id="grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="1" fill="white" fill-opacity="0.2"/>
+    </pattern>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Background with Grid Pattern -->
+  <rect width="600" height="600" fill="transparent"/>
+  <rect width="600" height="600" fill="url(#grid-pattern)" opacity="0.2"/>
+  
+  <!-- 3D Cube Representation of TANREN Method -->
+  <g transform="translate(300, 300)">
+    <!-- Front Face -->
+    <polygon points="-120,-120 120,-120 120,120 -120,120" 
+             fill="transparent" stroke="white" stroke-width="2" opacity="0.8"
+             transform="translate(20, 20)"/>
+    
+    <!-- Top Face -->
+    <polygon points="-120,-120 120,-120 70,-170 -170,-170" 
+             fill="transparent" stroke="white" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Right Face -->
+    <polygon points="120,-120 120,120 70,70 70,-170" 
+             fill="transparent" stroke="white" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Labels for 3D Axes -->
+    <!-- X-Axis: Thinking Depth -->
+    <line x1="-150" y1="150" x2="100" y2="150" stroke="white" stroke-width="2" opacity="0.8"/>
+    <text x="-25" y="180" font-family="'Noto Sans JP', sans-serif" font-size="14" fill="white" text-anchor="middle">思考の深さ</text>
+    
+    <!-- Y-Axis: Time -->
+    <line x1="-150" y1="150" x2="-210" y2="40" stroke="white" stroke-width="2" opacity="0.8"/>
+    <text x="-210" y="20" font-family="'Noto Sans JP', sans-serif" font-size="14" fill="white" text-anchor="middle">時間軸</text>
+    
+    <!-- Z-Axis: Level -->
+    <line x1="-150" y1="150" x2="-150" y2="-50" stroke="white" stroke-width="2" opacity="0.8"/>
+    <text x="-195" y="50" font-family="'Noto Sans JP', sans-serif" font-size="14" fill="white" text-anchor="middle">レベル認識</text>
+    
+    <!-- TANREN Core Concept -->
+    <circle cx="0" cy="0" r="50" fill="transparent" stroke="white" stroke-width="3" opacity="0.9"/>
+    <text x="0" y="5" font-family="'Noto Sans JP', sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">TANREN</text>
+    <text x="0" y="25" font-family="'Noto Sans JP', sans-serif" font-size="12" fill="white" text-anchor="middle">3Dメソッド</text>
+    
+    <!-- Connection Lines -->
+    <g opacity="0.6">
+      <!-- Thinking Dimension Points -->
+      <circle cx="100" cy="0" r="8" fill="white" opacity="0.8"/>
+      <text x="100" y="-15" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="middle">抽象化</text>
+      <line x1="50" y1="0" x2="90" y2="0" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <circle cx="-50" cy="80" r="8" fill="white" opacity="0.8"/>
+      <text x="-50" y="95" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="middle">具体化</text>
+      <line x1="-30" y1="40" x2="-47" y2="72" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <circle cx="-80" cy="-60" r="8" fill="white" opacity="0.8"/>
+      <text x="-80" y="-75" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="middle">構造化</text>
+      <line x1="-40" y1="-30" x2="-75" y2="-53" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <!-- Time Dimension Points -->
+      <circle cx="70" cy="70" r="8" fill="white" opacity="0.8"/>
+      <text x="90" y="75" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="middle">未来</text>
+      <line x1="35" y1="35" x2="65" y2="65" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <circle cx="-70" cy="-70" r="8" fill="white" opacity="0.8"/>
+      <text x="-90" y="-60" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="middle">過去</text>
+      <line x1="-35" y1="-35" x2="-65" y2="-65" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <!-- Level Dimension Points -->
+      <circle cx="0" cy="-100" r="8" fill="white" opacity="0.8"/>
+      <text x="25" y="-100" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="start">上級</text>
+      <line x1="0" y1="-50" x2="0" y2="-90" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      <circle cx="0" cy="100" r="8" fill="white" opacity="0.8"/>
+      <text x="25" y="100" font-family="'Noto Sans JP', sans-serif" font-size="10" fill="white" text-anchor="start">初級</text>
+      <line x1="0" y1="50" x2="0" y2="90" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+    </g>
+  </g>
+  
+  <!-- Glowing Elements for Emphasis -->
+  <g filter="url(#glow)" opacity="0.7">
+    <circle cx="300" cy="300" r="5" fill="white"/>
+    <circle cx="350" cy="250" r="3" fill="white"/>
+    <circle cx="250" cy="350" r="3" fill="white"/>
+    <circle cx="400" cy="300" r="2" fill="white"/>
+    <circle cx="300" cy="400" r="2" fill="white"/>
+    <circle cx="200" cy="300" r="2" fill="white"/>
+    <circle cx="300" cy="200" r="2" fill="white"/>
+  </g>
+</svg> 
