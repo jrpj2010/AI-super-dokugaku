@@ -42,14 +42,21 @@ def count_characters(file_path):
     }
 
 def main():
-    chapter_file = Path("chapter_01.md")
+    import sys
+    if len(sys.argv) > 1:
+        chapter_file = Path(sys.argv[1])
+        title = "指定ファイル"
+    else:
+        chapter_file = Path("chapter_01.md")
+        title = "第1章「空からの来訪者」"
+    
     if not chapter_file.exists():
-        print("❌ chapter_01.mdが見つかりません")
+        print(f"❌ {chapter_file}が見つかりません")
         return
     
     stats = count_characters(chapter_file)
     
-    print("📊 第1章「空からの来訪者」統計")
+    print(f"📊 {title}統計")
     print("=" * 40)
     print(f"📏 総文字数: {stats['total_chars']:,}文字")
     print(f"💬 セリフ文字数: {stats['dialogue_chars']:,}文字")
