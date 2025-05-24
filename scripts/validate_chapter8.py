@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-第1章の品質検証スクリプト
+第8章の品質検証スクリプト
 """
 
 import sys
@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 
 # novel_systemモジュールを追加
-sys.path.append(str(Path(__file__).parent / "novel_system"))
+sys.path.append(str(Path(__file__).parent.parent / "novel_system"))
 
 def main():
     try:
@@ -16,13 +16,13 @@ def main():
         from plot_manager import PlotManager
         from validator import Validator
         
-        print("🔍 第1章「空からの来訪者」品質検証開始")
+        print("🔍 第8章「新たなる調和」品質検証開始")
         print("=" * 50)
         
-        # chapter_01.mdファイルを読み込み
-        chapter_file = Path("chapter_01.md")
+        # chapter_08.mdファイルを読み込み
+        chapter_file = Path(__file__).parent.parent / "chapter_08.md"
         if not chapter_file.exists():
-            print("❌ chapter_01.mdファイルが見つかりません")
+            print("❌ chapter_08.mdファイルが見つかりません")
             return False
         
         with open(chapter_file, 'r', encoding='utf-8') as f:
@@ -31,13 +31,13 @@ def main():
         print(f"📄 ファイル読み込み完了: {len(chapter_content):,}文字")
         
         # プロット管理と検証システムを初期化
-        plot_manager = PlotManager(".")
+        plot_manager = PlotManager(str(Path(__file__).parent.parent))
         validator = Validator(plot_manager)
         
         print("🚀 品質検証実行中...")
         
         # 品質検証実行
-        quality_report = validator.validate_chapter(chapter_content, 1)
+        quality_report = validator.validate_chapter(chapter_content, 8)
         
         # 結果表示
         print("\n" + "=" * 50)
@@ -60,7 +60,7 @@ def main():
         detailed_report = validator.generate_detailed_report(quality_report)
         
         # レポートファイル保存
-        report_filename = f"quality_report_chapter01.md"
+        report_filename = Path(__file__).parent.parent / "quality_report_chapter08.md"
         with open(report_filename, 'w', encoding='utf-8') as f:
             f.write(detailed_report)
         

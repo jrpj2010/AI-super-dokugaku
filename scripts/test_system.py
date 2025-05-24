@@ -7,7 +7,7 @@ import sys
 import os
 
 # novel_systemディレクトリをパスに追加
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'novel_system'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'novel_system'))
 
 try:
     print("=== ライトノベル自動生成システム 動作テスト ===")
@@ -31,7 +31,7 @@ try:
     print("\n2. システム初期化テスト...")
     
     # カレントディレクトリをプロジェクトルートに変更
-    project_root = os.path.dirname(__file__)
+    project_root = os.path.dirname(os.path.dirname(__file__))
     os.chdir(project_root)
     
     pm = PlotManager(".")
