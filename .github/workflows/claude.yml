@@ -1,6 +1,6 @@
-name: Claude Assistant (TANREN最適化版)
+name: Claude Code Action 実験
 
-# PRコメント、Issue、レビューで @claude を呼び出すとClaude が応答
+# @claude でClaudeが応答するワークフロー
 on:
   issue_comment:
     types: [created]
@@ -17,50 +17,33 @@ jobs:
   claude-response:
     runs-on: ubuntu-latest
 
-    # 書き込み権限のあるユーザーのみ実行可能（セキュリティ）
+    # ボット以外のユーザーのみ実行
     if: github.event.sender.type != 'Bot'
 
     steps:
       - uses: anthropics/claude-code-action@beta
         with:
-          # AnthropicのAPIキー（GitHubシークレットから取得）
+          # GitHubシークレットからAPIキー取得
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
-          # Claudeのトリガーフレーズ（日本語でも @claude でもOK）
+          # @claude でトリガー
           trigger_phrase: "@claude"
 
-          # 実行タイムアウト（最大30分）
-          timeout_minutes: 30
+          # 実行タイムアウト
+          timeout_minutes: 10
 
-          # 使用可能ツール（TANREN開発に特化）
-          allowed_tools: "Bash(npm install),Bash(npm run test),Bash(npm run build),Bash(pnpm install),Bash(pnpm test),Bash(docker compose up -d),Edit,Replace"
+          # 基本ツールのみ許可
+          allowed_tools: "Edit,Replace"
 
-          # 使用禁止ツール（セキュリティ対策）
-          disallowed_tools: "TaskOutput,KillTask"
-
-          # TANREN向けカスタム指示
+          # TANREN実験用カスタム指示
           custom_instructions: |
-            あなたはTANREN株式会社のプロジェクト（vibe-coding）専用のアシスタントです。
+            あなたはTANREN株式会社のClaude Code Action実験プロジェクト専用アシスタントです。
 
-            技術スタック:
-            - Next.js + React + TypeScript
-            - Tailwind CSS + shadcn/ui
-            - Docker + Cloud Run
-            - Supabase（オプション）
+            このプロジェクトは軽量なテスト環境です。以下の方針で応答してください：
 
-            開発方針:
-            - 美観 > 性能 > 開発速度
-            - 日本語での応答・説明
-            - モノレポ構造（apps/, packages/）
-            - Conventional Commits
+            - 日本語で分かりやすく説明
+            - 実験的な機能のテストサポート
+            - コード改善提案
+            - 簡潔で実用的なソリューション提供
 
-            UI/UX要件:
-            - shadcn/ui + lucide-react使用
-            - 2XL radius、グリッド設計
-            - Core Web Vitals 75パーセンタイル以上
-
-            コミットメッセージ例:
-            - feat(app/image-generator): 画像アップロードUIを追加
-            - fix(backend/api): 認証タイムアウトを修正
-
-            必ず日本語で応答し、佐藤様のワークフローに最適化したソリューションを提案してください。
+            佐藤様の開発効率向上のため、親切で具体的なアドバイスを心がけてください。
