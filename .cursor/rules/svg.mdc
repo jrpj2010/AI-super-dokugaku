@@ -1,0 +1,220 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- このプロンプトは@jrpj2010が最適化をしたプロンプトです。 -->
+<SlideGenerationInstructions>
+  <Metadata>
+    <Title>明治・昭和モダンテイスト 3カラムスライドテンプレート</Title>
+    <PromptOptimizer>@jrpj2010</PromptOptimizer>
+    <Description>一流デザイナーが作成したような、スクロールなしで16:9画面に収まる日本語明治・昭和モダンテイストSVGスライドを生成するための包括的指示書。</Description>
+  </Metadata>
+
+  <Purpose>
+    <Text>以下の内容を、一流デザイナーが作成したような、スクロールなしで16:9画面に収まる日本語明治・昭和モダンテイストSVGスライドに変換します。情報の優先順位付けと視覚的表現に重点を置き、キーポイントを素早く把握できるようにします。加えて、欄外には[プレゼン用のトークスクリプト]と[インフォグラフィック向けのハイソでおしゃれなインフォグラフィックな挿絵を、画像系生成AI用プロンプト]も同時に書いてもらう指示もついています。</Text>
+  </Purpose>
+
+  <LayoutSpecifications>
+    <Title>レイアウト仕様</Title>
+    <Item>3カラムのグリッドレイアウト（合計3つのカード）</Item>
+    <Item>16:9ディスプレイに最適化（スクロールなしになるようにコンテンツボリュームを調整）</Item>
+    <Item>マージン(余白)最小化と情報密度最大化を同時に実現するように推論過程を多くする。</Item>
+    <Item>ヘッダーとフッターをコンパクトに設計</Item>
+  </LayoutSpecifications>
+
+  <DesignSpecifications>
+    <Title>デザイン仕様</Title>
+    <ColorScheme>
+      <Title>カラースキーム</Title>
+      <CSS><![CDATA[
+        - 限定的なカラーパレットを採用：
+          - 主要色：黒（#2c2c2c）と生成色（#f4f1ea）
+          - アクセントカラー：朱色（#b3322b）、藍色（#1a5b66）、紫色（#653a5e）
+        - 各カラムに異なるアクセントカラーを配置し、統一感の中に変化を付与
+      ]]></CSS>
+    </ColorScheme>
+    <Typography>
+      <Title>タイポグラフィ</Title>
+      <Item>タイトルには「Noto Serif JP」の明朝体を使用し、伝統的な印象</Item>
+      <Item>本文は「Noto Sans JP」で可読性を確保</Item>
+      <Item>文字間隔（letter-spacing）を広めに取り、昭和期のタイポグラフィを表現</Item>
+      <Item>階層的なフォントサイズ（タイトル24px→本文11px）</Item>
+      <Item>視認性重視のコントラスト調整</Item>
+    </Typography>
+    <VisualElements>
+      <Title>視覚要素</Title>
+      <Item>Unicode絵文字/アイコンを見出しに活用</Item>
+      <Item>コンパクトなプロセスフロー図</Item>
+      <Item>簡易チャート・グラフ（全体に対して15%未満のスペース）</Item>
+      <Item>日本の伝統的な「線と点」のデザイン：タイトル下の線と丸のアクセント</Item>
+      <Item>四角形ベースの構成で昭和モダンの幾何学的な美しさを表現</Item>
+      <Item>余白（間）の取り方を和風デザイン的に調整</Item>
+      <Item>ハイライト効果（下線、マーカー、囲み）</Item>
+    </VisualElements>
+  </DesignSpecifications>
+
+  <DataVisualizationElements>
+    <Title>データビジュアライゼーション要素</Title>
+    <Item>必ず1カラムにつき2つ以上のビジュアル要素を含める</Item>
+    <Item>棒グラフ/折れ線グラフは明確な軸ラベルと数値を表示</Item>
+    <Item>表形式データは交互に色を変えて視認性を確保</Item>
+    <Item>プロセスフロー図は必ず方向を示す矢印と説明テキストを含める</Item>
+    <Item>比較データは必ずBefore/After、現状/目標などの対比で表示</Item>
+  </DataVisualizationElements>
+
+  <InformationStructureGuidelines>
+    <Title>情報構造ガイドライン</Title>
+    <Hierarchy>
+      <Title>情報階層表現</Title>
+      <Item>各セクションには必ず「見出し→概要→詳細→実践/結論」の流れを作る</Item>
+      <Item>データは「数値→単位→比較→意味」の順で説明</Item>
+      <Item>主張は「結論→根拠→事例→展開」の構造で表現</Item>
+      <Item>各カラムの情報量バランスを均等に保つ（文字数±10%以内）</Item>
+    </Hierarchy>
+    <ColumnStructure>
+      <Title>3セクションの典型的な構成</Title>
+      <Column id="1" name="左カラム">
+        <Theme>{カラム1_テーマ}</Theme>
+        <SubTheme>{カラム1_サブテーマ}</SubTheme>
+        <Section title="本質">
+          <Heading>{カラム1_本質タイトル}</Heading>
+          <Description>{カラム1_本質説明}</Description>
+        </Section>
+        <ToolInfo>
+          <Name>{カラム1_ツール名}</Name>
+          <Feature>{カラム1_ツール特徴}</Feature>
+        </ToolInfo>
+        <Section title="特徴">
+          <Heading>{カラム1_特徴タイトル}</Heading>
+        </Section>
+        <Practice>
+          <Heading>{カラム1_実践見出し}</Heading>
+          <Points>
+            <Point>{カラム1_実践ポイント}</Point>
+            <Point>{カラム1_実践ポイント}</Point>
+          </Points>
+        </Practice>
+      </Column>
+      <Column id="2" name="中央カラム">
+        <Theme>{カラム2_テーマ}</Theme>
+        <SubTheme>{カラム2_サブテーマ}</SubTheme>
+        <Section title="本質">
+          <Heading>{カラム2_本質タイトル}</Heading>
+          <Description>{カラム2_本質説明}</Description>
+        </Section>
+        <ToolInfo id="1">
+          <Name>{カラム2_ツール名1}</Name>
+          <Feature>{カラム2_ツール特徴1}</Feature>
+        </ToolInfo>
+        <ToolInfo id="2">
+          <Name>{カラム2_ツール名2}</Name>
+          <Feature>{カラム2_ツール特徴2}</Feature>
+        </ToolInfo>
+        <Section title="特徴">
+          <Heading>{カラム2_特徴タイトル}</Heading>
+        </Section>
+        <Practice>
+          <Heading>{カラム2_実践見出し}</Heading>
+          <Points>
+            <Point>{カラム2_実践ポイント}</Point>
+            <Point>{カラム2_実践ポイント}</Point>
+          </Points>
+        </Practice>
+      </Column>
+      <Column id="3" name="右カラム">
+        <Theme>{カラム3_テーマ}</Theme>
+        <SubTheme>{カラム3_サブテーマ}</SubTheme>
+        <Section title="本質">
+          <Heading>{カラム3_本質タイトル}</Heading>
+          <Description>{カラム3_本質説明}</Description>
+        </Section>
+        <ToolInfo>
+          <Name>{カラム3_ツール名}</Name>
+          <Feature>{カラム3_ツール特徴}</Feature>
+        </ToolInfo>
+        <Section title="特徴">
+          <Heading>{カラム3_特徴タイトル}</Heading>
+        </Section>
+        <Practice>
+          <Heading>{カラム3_実践見出し}</Heading>
+          <Points>
+            <Point>{カラム3_実践ポイント}</Point>
+          </Points>
+        </Practice>
+      </Column>
+    </ColumnStructure>
+    <VisualEmphasisTechniques>
+      <Title>視覚的強調テクニック</Title>
+      <Item>重要数値は本文より30%以上大きいフォントで表示</Item>
+      <Item>対比表現は必ず視覚的分離（線・色・枠）で区別</Item>
+      <Item>実践ポイントは必ず枠囲みと異なる背景色で強調</Item>
+      <Item>プロセスステップは番号またはアイコンで順序を明示</Item>
+      <Item>決定事項・結論部分は太字と色の両方で強調</Item>
+      <Item>重要な数字(値)は大きく、単位は小さく表示</Item>
+      <Item>キーフレーズはハイライト（ハイライトする場合のフォントカラーはキャンバスと同系色は使わない事）</Item>
+      <Item>カテゴリータグで分類</Item>
+      <Item>色による情報の関連付け</Item>
+      <Item>日本の伝統的な「線と点」のデザイン：タイトル下の線と丸のアクセント</Item>
+      <Item>四角形ベースの構成で昭和モダンの幾何学的な美しさを表現</Item>
+      <Item>余白（間）の取り方を和風デザイン的に調整</Item>
+    </VisualEmphasisTechniques>
+  </InformationStructureGuidelines>
+
+  <ProcessingSteps>
+    <Title>処理手順</Title>
+    <Step>元テキストから重要ポイントを抽出し、3カラムに分類</Step>
+    <Step>各ポイントを3-5単語の表現に圧縮</Step>
+    <Step>図解可能な要素を特定し、適切な視覚表現に変換</Step>
+    <Step>SVGで実装し、16:9ディスプレイで確認</Step>
+  </ProcessingSteps>
+
+  <ImplementationHints>
+    <Title>実装のヒント</Title>
+    <Item>フォントサイズを小さくしても視認性を確保（最小12px）</Item>
+    <Item>視覚要素に必ず代替テキストを用意</Item>
+    <Item>コントラスト比4.5:1以上を維持</Item>
+    <Item>モバイル対応（デスクトップ最適化優先だがレスポンシブ）</Item>
+  </ImplementationHints>
+
+  <AncillaryOutputs>
+    <Title>プレゼン・インフォグラフィック生成指示</Title>
+    <TalkScriptGeneration>
+      <Title>プレゼン用トークスクリプト</Title>
+      <Item>最大3マスに適合した、トークスクリプトを提供する</Item>
+      <Item>アーティファクトの外にマークダウンで記述する</Item>
+      <Item>1分間300文字を最適な文字数として定義</Item>
+      <Item>日本のテレビアナウンサーのような口調と、ビジネス会話で表現</Item>
+    </TalkScriptGeneration>
+    <ImagePromptGeneration>
+      <Title>インフォグラフィックな挿絵用の画像生成AI向けのプロンプト</Title>
+      <Item>最大3マスに適した、インフォグラフィック向けの挿絵を画像生成AIで書く想定をする</Item>
+      <Item>プロンプトルールとして[カンマ区切り,一文化 , 英語]とする</Item>
+      <Item>情景やスタイルを定義し、雰囲気をそこなわないテイストのプロンプトを提供する事</Item>
+      <Item>最大3個のプロンプトをコードブロックで提供してください</Item>
+    </ImagePromptGeneration>
+  </AncillaryOutputs>
+
+  <ContentInputPlaceholder>
+    <Text>変換するコンテンツ:</Text>
+    <Instruction>Userから次の対話で回収したら、それに最適化してコンテンツを生成してください。</Instruction>
+  </ContentInputPlaceholder>
+
+  <ExecutionInstructions>
+    <Title>システム実行指示</Title>
+    <Instruction>理解したらUserから与えられるInput情報を処理して実行してください。</Instruction>
+    <FileGeneration>
+      <OverallFolder>昭和明治スライド</OverallFolder>
+      <SlideSpecificFolderNaming>{日付_生成時間}</SlideSpecificFolderNaming>
+      <FileNamingConvention>連番でsvgを連続生成</FileNamingConvention>
+      <Note>スライドは1枚ずつSVGとして生成されます。</Note>
+    </FileGeneration>
+    <ConfirmationRequest>
+      <Question>これを理解できますか？</Question>
+      <Language>日本語で</Language>
+      <NextAction>理解できたらユーザーのInput情報に従って処理してください。</NextAction>
+    </ConfirmationRequest>
+  </ExecutionInstructions>
+
+</SlideGenerationInstructions>
