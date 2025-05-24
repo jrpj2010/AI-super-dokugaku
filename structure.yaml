@@ -1,0 +1,340 @@
+# AI執筆システム「ラピュタII」メソッド再現設定ファイル
+# このファイルを他のリポジトリのルートに配置して実行することで
+# 完全にこの執筆メソッドを再現できます
+
+project:
+  name: "AI自動執筆プロジェクト"
+  description: "Claude Code + GitHub Actionsによる長編小説自動生成システム"
+  target_genre: "ライトノベル・ファンタジー"
+  target_length: 150000
+  estimated_duration: "14日間"
+  management_effort: "5時間（モバイル操作のみ）"
+
+# ディレクトリ構造定義
+directory_structure:
+  novel_system:
+    description: "AI執筆エンジンのコアシステム"
+    files:
+      - "auto_generate.py"      # 統合ワークフロー管理
+      - "chapter_generator.py"  # 章生成エンジン
+      - "plot_manager.py"       # プロット・キャラクター管理
+      - "validator.py"          # 品質検証システム
+      - "__init__.py"
+      - "requirements.txt"
+
+  scripts:
+    description: "実行用スクリプト群"
+    files:
+      - "generate_chapter1.py"
+      - "generate_chapter2.py"
+      - "generate_chapter3.py"
+      - "generate_chapter4.py"
+      - "generate_chapter5.py"
+      - "generate_chapter6.py"
+      - "generate_chapter7.py"
+      - "generate_chapter8.py"
+      - "validate_chapter.py"
+      - "count_chars.py"
+      - "test_system.py"
+
+  docs:
+    description: "プロジェクトドキュメント"
+    files:
+      - "README.md"
+      - "要件定義.md"
+      - "技術定義.md"
+      - "Todo工程定義.md"
+
+  content:
+    description: "生成される小説コンテンツ"
+    files:
+      - "plot.md"
+      - "chapter_01.md"
+      - "chapter_02.md"
+      - "chapter_03.md"
+      - "chapter_04.md"
+      - "chapter_05.md"
+      - "chapter_06.md"
+      - "chapter_07.md"
+      - "chapter_08.md"
+      - "climax.md"
+      - "ending_01.md"
+      - "ending_02.md"
+      - "ending_03.md"
+
+  characters:
+    description: "キャラクター設定ファイル"
+    files:
+      - "主人公.md"
+      - "サブキャラクター1.md"
+      - "サブキャラクター2.md"
+      - "サブキャラクター3.md"
+      - "敵役.md"
+
+# AIシステム設定
+ai_system:
+  core_modules:
+    plot_manager:
+      description: "プロット・キャラクター管理システム"
+      features:
+        - "キャラクター情報管理"
+        - "章別プロット管理"
+        - "世界観設定管理"
+        - "一貫性チェック機能"
+
+    chapter_generator:
+      description: "章自動生成エンジン"
+      features:
+        - "ライトノベル文体生成"
+        - "セリフ・描写バランス調整"
+        - "文字数自動制御"
+        - "キャラクター一貫性保持"
+      config:
+        target_chars: 20000
+        dialogue_ratio: 0.45
+        sections_per_chapter: 4
+        style: "light_novel"
+
+    validator:
+      description: "品質検証システム"
+      features:
+        - "文字数チェック"
+        - "セリフ比率検証"
+        - "構造検証"
+        - "一貫性検証"
+        - "自動採点機能"
+      quality_standards:
+        min_characters: 20000
+        dialogue_ratio_min: 0.30
+        dialogue_ratio_max: 0.60
+        quality_threshold: 0.8
+
+    auto_generate:
+      description: "統合ワークフロー管理"
+      features:
+        - "章単位自動生成"
+        - "品質検証自動実行"
+        - "レポート自動生成"
+        - "エラー自動回復"
+
+# GitHub Actions設定
+github_actions:
+  workflow_file: ".github/workflows/ai-writing.yml"
+  triggers:
+    - "issues"
+    - "issue_comment"
+  conditions:
+    - "contains(github.event.issue.body, '@claude')"
+  
+  execution_steps:
+    - name: "Checkout Repository"
+      action: "actions/checkout@v3"
+    
+    - name: "Setup Python"
+      action: "actions/setup-python@v4"
+      with:
+        python-version: "3.8"
+    
+    - name: "Install Dependencies"
+      run: "pip install -r novel_system/requirements.txt"
+    
+    - name: "Execute Claude Code"
+      action: "anthropic/claude-code-action@v1"
+      with:
+        issue-number: "${{ github.event.issue.number }}"
+        allowed-tools: "Bash,Read,Write,Edit,MultiEdit,Glob,Grep"
+
+# モバイル管理設定
+mobile_management:
+  platform: "GitHub Mobile"
+  
+  daily_routine:
+    morning:
+      duration: "5分"
+      tasks:
+        - "前日実行結果確認"
+        - "エラー・異常確認"
+        - "今日の実行指示作成"
+    
+    evening:
+      duration: "10分"
+      tasks:
+        - "当日生成結果確認"
+        - "品質レポート確認"
+        - "翌日計画調整"
+
+  notification_setup:
+    triggers:
+      - "章生成完了"
+      - "品質検証失敗"
+      - "エラー発生"
+      - "プロジェクト完了"
+
+# 品質管理設定
+quality_management:
+  automatic_validation:
+    character_count:
+      minimum: 20000
+      target: 22000
+      
+    dialogue_ratio:
+      minimum: 0.30
+      target: 0.45
+      maximum: 0.60
+      
+    structure:
+      sections_per_chapter: 4
+      paragraphs_per_section: 8
+      
+    consistency:
+      character_consistency: true
+      plot_consistency: true
+      
+  quality_scoring:
+    overall_threshold: 0.8
+    component_weights:
+      character_count: 0.20
+      dialogue_ratio: 0.15
+      structure: 0.15
+      character_consistency: 0.20
+      plot_consistency: 0.15
+      writing_quality: 0.15
+
+# 実行フロー定義
+execution_flow:
+  phase1_setup:
+    duration: "2日"
+    tasks:
+      - "リポジトリ初期化"
+      - "AIシステム構築"
+      - "GitHub Actions設定"
+      - "テスト実行"
+
+  phase2_planning:
+    duration: "1日"
+    tasks:
+      - "キャラクター設定詳細化"
+      - "プロット設計"
+      - "品質基準設定"
+
+  phase3_writing:
+    duration: "8日"
+    tasks:
+      - "第1-4章自動生成"
+      - "第5-8章自動生成"
+      - "クライマックス生成"
+      - "エンディング生成"
+
+  phase4_quality:
+    duration: "2日"
+    tasks:
+      - "全体品質検証"
+      - "最終調整"
+      - "ドキュメント整備"
+
+  phase5_completion:
+    duration: "1日"
+    tasks:
+      - "最終確認"
+      - "メソッド文書化"
+      - "プロジェクト完了"
+
+# 使用方法
+usage_instructions:
+  setup:
+    1: "このstructure.yamlファイルを新しいリポジトリのルートに配置"
+    2: "docs/フォルダにREADME.md、要件定義.md、技術定義.md、Todo工程定義.mdを配置"
+    3: "novel_system/フォルダを作成し、Pythonモジュールを配置"
+    4: "scripts/フォルダを作成し、実行スクリプトを配置"
+    5: "GitHub Actions設定ファイルを配置"
+
+  execution:
+    1: "GitHub Issueを作成し、@claudeメンション"
+    2: "実行したいタスクを明確に指示"
+    3: "自動実行完了まで待機"
+    4: "モバイル通知で結果確認"
+    5: "必要に応じて追加指示"
+
+  management:
+    1: "GitHub Mobileアプリを主要管理ツールとして使用"
+    2: "朝夕の確認ルーチンを実行"
+    3: "異常時は即座に対応指示"
+    4: "週次で全体進捗を確認"
+
+# 成功指標
+success_metrics:
+  primary:
+    - "150,000文字以上の長編小説完成"
+    - "品質スコア0.8以上全章達成"
+    - "スマートフォンのみでの管理実現"
+    - "GitHub Actions完全自動化"
+
+  secondary:
+    - "従来比90%の時間短縮"
+    - "品質の安定化・向上"
+    - "完全リモート管理実現"
+    - "再現可能なメソッド確立"
+
+# カスタマイズポイント
+customization:
+  genre_adaptation:
+    - "キャラクター設定をジャンルに応じて調整"
+    - "プロット構造を作品タイプに合わせて変更"
+    - "文体パターンを目標読者層に最適化"
+
+  scale_adjustment:
+    - "目標文字数を調整（短編・中編・長編）"
+    - "章数を作品規模に応じて変更"
+    - "品質基準を要求レベルに合わせて設定"
+
+  team_adaptation:
+    - "複数人での役割分担設定"
+    - "承認フローの追加"
+    - "コラボレーション機能の活用"
+
+# トラブルシューティング
+troubleshooting:
+  common_issues:
+    quality_failure:
+      description: "品質基準未達成"
+      solution: "設定パラメータ調整、再生成実行"
+      
+    generation_error:
+      description: "章生成エラー"
+      solution: "入力データ確認、システム再起動"
+      
+    mobile_notification:
+      description: "モバイル通知不良"
+      solution: "GitHub通知設定確認、アプリ更新"
+
+  support_resources:
+    - "GitHub Issues での質問・報告"
+    - "ドキュメント詳細確認"
+    - "システムテスト再実行"
+
+# 更新・メンテナンス
+maintenance:
+  regular_updates:
+    - "AIモデル更新対応"
+    - "GitHub Actions API変更対応"
+    - "品質基準見直し"
+    - "新機能追加"
+
+  version_management:
+    current_version: "1.0.0"
+    compatibility: "Claude Code API v1, GitHub Actions v3"
+    last_updated: "2024-12-01"
+
+# ライセンス・利用条件
+license:
+  type: "MIT License"
+  usage: "商用・非商用問わず自由利用可能"
+  attribution: "クレジット表記推奨"
+  support: "コミュニティベース"
+
+# 連絡先・サポート
+contact:
+  issues: "GitHub Issues"
+  discussions: "GitHub Discussions"
+  documentation: "docs/README.md"
+  examples: "実装例参照"
