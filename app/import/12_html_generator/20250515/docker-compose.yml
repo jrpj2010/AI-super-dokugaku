@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+      # volumes:
+      # カレントディレクトリ全体をコンテナの/appにマウント
+      # - .:/app
+    env_file:
+      - .env # ANTHROPIC_API_KEY などの環境変数をこのファイルから読み込みます
+    environment:
+      - FLASK_ENV=development # Flaskを開発モードで実行
+      # FLASK_DEBUG=1 は FLASK_ENV=development で自動的に有効になることが多いですが、明示しておきます。
+      - FLASK_DEBUG=1

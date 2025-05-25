@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Claude 4が変える営業の未来 - タイトル</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.1/dist/gsap.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0c0b2b 0%, #3023ae 50%, #c86dd7 100%);
+    }
+
+    .ai-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(97, 218, 251, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(97, 218, 251, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(50px, 50px);
+      }
+    }
+
+    .ai-circle {
+      position: absolute;
+      border: 2px solid rgba(97, 218, 251, 0.3);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .ai-circle:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 100px;
+      right: 200px;
+      animation-delay: 0s;
+    }
+
+    .ai-circle:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: 150px;
+      left: 150px;
+      animation-delay: 1s;
+    }
+
+    .ai-circle:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 300px;
+      left: 300px;
+      animation-delay: 2s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+      }
+    }
+
+    .main-title {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(45deg, #ffffff, #61dafb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(97, 218, 251, 0.5);
+    }
+
+    .subtitle {
+      font-size: 36px;
+      font-weight: 700;
+      color: #e5e7eb;
+      margin-top: 30px;
+      line-height: 1.3;
+    }
+
+    .presenter-info {
+      position: absolute;
+      bottom: 80px;
+      left: 120px;
+      color: #d1d5db;
+      font-size: 24px;
+    }
+
+    .date-info {
+      position: absolute;
+      bottom: 80px;
+      right: 120px;
+      color: #61dafb;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .ai-icon {
+      position: absolute;
+      top: 80px;
+      right: 120px;
+      font-size: 120px;
+      color: rgba(97, 218, 251, 0.4);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .shock-badge {
+      position: absolute;
+      top: 50px;
+      left: 120px;
+      background: linear-gradient(45deg, #ff6b6b, #feca57);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 28px;
+      font-weight: 900;
+      transform: rotate(-5deg);
+      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="ai-grid"></div>
+    <div class="ai-circle"></div>
+    <div class="ai-circle"></div>
+    <div class="ai-circle"></div>
+
+    <div class="shock-badge">
+      <i class="fas fa-bolt mr-2"></i>衝撃
+    </div>
+
+    <div class="ai-icon">
+      <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="flex flex-col justify-center items-center h-full px-32">
+      <h1 class="main-title text-center mb-8">
+        Claude 4が変える<br>
+        営業の未来
+      </h1>
+      <p class="subtitle text-center max-w-6xl">
+        世界最高峰AIが見せた「7時間連続稼働」の真実と<br>
+        2026年の予言
+      </p>
+    </div>
+
+    <div class="presenter-info">
+      <i class="fas fa-user-tie mr-3"></i>
+      TANREN株式会社 AI秘書 桜木美佳
+    </div>
+
+    <div class="date-info">
+      <i class="fas fa-calendar mr-3"></i>
+      2025-01-19
+    </div>
+  </div>
+
+  <script>
+    // GSAP アニメーション
+    gsap.timeline()
+      .from(".shock-badge", { duration: 1, scale: 0, rotation: -45, ease: "back.out(1.7)" })
+      .from(".main-title", { duration: 1.5, y: 100, opacity: 0, ease: "power3.out" }, "-=0.5")
+      .from(".subtitle", { duration: 1.2, y: 50, opacity: 0, ease: "power2.out" }, "-=0.8")
+      .from(".presenter-info", { duration: 1, x: -100, opacity: 0, ease: "power2.out" }, "-=0.5")
+      .from(".date-info", { duration: 1, x: 100, opacity: 0, ease: "power2.out" }, "-=0.8")
+      .from(".ai-icon", { duration: 2, scale: 0, rotation: 360, ease: "elastic.out(1, 0.3)" }, "-=1");
+  </script>
+</body>
+
+</html>

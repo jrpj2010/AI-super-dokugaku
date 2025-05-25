@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude 3.7 Sonnet HTML Generator</title>
+    <title>{% block title %}Claude 3.7 Sonnet HTML Generator{% endblock %}</title>
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (self‑hosted build) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
@@ -13,46 +19,109 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-    
+
+    <!-- Preline UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline@2.3.0/dist/preline.min.css">
+
     <!-- Alpine.js - 追加 -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
-    
+
     {% block head %}{% endblock %}
 </head>
-<body class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-    <header class="bg-white dark:bg-gray-800 shadow" id="main-header">
-        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                Flask + Claude 3.7 Sonnet HTML Generator
-            </h1>
+
+<body class="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans"
+    style="font-family: 'Inter', sans-serif;">
+    <header class="glassmorphism sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{{ url_for('index') }}"
+                        class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors flex items-center">
+                        <span class="material-icons mr-2">code</span>
+                        HTML Generator
+                    </a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="{{ url_for('manual') if request.endpoint != 'manual' else '#' }}"
+                        class="flex items-center px-4 py-2 rounded-full apple-btn transition-all hover:text-indigo-600 {% if request.endpoint == 'manual' %} bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400{% endif %}">
+                        <span class="material-icons mr-1 text-base align-middle">description</span>
+                        マニュアル
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8" id="main-content">
+    <main class="container mx-auto py-8 px-4 sm:px-6 lg:px-8" id="main-content">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-white dark:bg-gray-800 shadow mt-8 py-4" id="main-footer">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-            <p>Claude 生成物の利用はユーザー責任となります。</p>
+    <footer class="glassmorphism border-t border-slate-200 dark:border-slate-700 mt-12 py-6" id="main-footer">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500 dark:text-slate-400">
+            <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+            <p class="mt-1">Claude 生成物の利用はユーザー責任となります。</p>
         </div>
     </footer>
 
     <style>
-    /* 全画面表示時のスタイル上書き */
-    body:has(.fullscreen-mode) #main-content {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    body:has(.fullscreen-mode) #main-header,
-    body:has(.fullscreen-mode) #main-footer {
-        display: none !important;
-    }
+        /* 全画面表示時のスタイル上書き */
+        body:has(.fullscreen-mode) #main-content {
+            max-width: 100% !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        body:has(.fullscreen-mode) #main-header,
+        body:has(.fullscreen-mode) #main-footer {
+            display: none !important;
+        }
     </style>
 
+    <script>
+        // スクロール検出用
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.getElementById('main-header');
+
+            // スクロールイベントリスナー
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 10) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // ページ遷移アニメーション
+            const linkElements = document.querySelectorAll('a:not([target="_blank"])');
+            linkElements.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // 現在のページと同じリンクやページ内リンクは除外
+                    if (this.getAttribute('href') === '#' ||
+                        this.getAttribute('href').startsWith('#') ||
+                        this.getAttribute('href') === window.location.pathname) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    const targetHref = this.getAttribute('href');
+
+                    // フェードアウトアニメーション
+                    document.body.classList.add('page-transition');
+
+                    // アニメーション完了後に遷移
+                    setTimeout(() => {
+                        window.location.href = targetHref;
+                    }, 300);
+                });
+            });
+        });
+    </script>
+
     {% block scripts %}{% endblock %}
+
+    <!-- Preline UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/preline@2.3.0/dist/preline.min.js"></script>
 </body>
+
 </html>

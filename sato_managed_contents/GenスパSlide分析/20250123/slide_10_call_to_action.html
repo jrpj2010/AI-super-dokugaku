@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今すぐ始めよう！AI営業革命への第一歩</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .main-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      animation: slideInDown 1s ease-out;
+    }
+
+    .main-subtitle {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    .urgency-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .action-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #92400e;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 16px rgba(251, 191, 36, 0.3);
+    }
+
+    .step-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fbbf24;
+    }
+
+    .step-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-action {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .step-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+
+    .contact-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .contact-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fbbf24;
+    }
+
+    .contact-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      color: #fbbf24;
+      margin-bottom: 1rem;
+    }
+
+    .contact-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #fbbf24;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+
+    .cta-button.secondary {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+    }
+
+    .cta-button.secondary:hover {
+      box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
+    }
+
+    .final-message {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .final-quote {
+      font-size: 1.8rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .final-attribution {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fbbf24;
+    }
+
+    .tanren-logo {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .logo-text {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-tagline {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-card {
+      animation: slideInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .step-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .step-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .step-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .action-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-pattern"></div>
+
+  <div class="main-content">
+    <div class="hero-section">
+      <h1 class="main-title">今すぐ始めよう！</h1>
+      <p class="main-subtitle">AI営業革命への第一歩</p>
+      <div class="urgency-badge">⚡ 行動開始のラストチャンス ⚡</div>
+    </div>
+
+    <div class="action-steps">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title">無料相談を申し込む</h3>
+        <p class="step-description">
+          あなたの営業課題を分析し、Claude 4活用の最適な戦略を30分の無料相談でご提案します。
+        </p>
+        <a href="#contact" class="step-action">無料相談を予約</a>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title">実践ガイドを入手</h3>
+        <p class="step-description">
+          「5つの極意」完全マニュアルとテンプレート集を無料でダウンロード。明日から使えます。
+        </p>
+        <a href="#download" class="step-action">ガイドをダウンロード</a>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title">チーム研修を検討</h3>
+        <p class="step-description">
+          営業チーム全体のAI活用力を底上げ。ROI 400%を実現する本格的な変革プログラムです。
+        </p>
+        <a href="#training" class="step-action">研修プログラム詳細</a>
+      </div>
+    </div>
+
+    <div class="contact-section" id="contact">
+      <h2 class="contact-title">お気軽にお問い合わせください</h2>
+      <p class="contact-subtitle">AI営業革命のエキスパートが、あなたの成功をサポートします</p>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-globe contact-icon"></i>
+          <div class="contact-label">公式サイト</div>
+          <div class="contact-value">https://tanren.co.jp</div>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-envelope contact-icon"></i>
+          <div class="contact-label">お問い合わせ</div>
+          <div class="contact-value">info@tanren.co.jp</div>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-phone contact-icon"></i>
+          <div class="contact-label">電話相談</div>
+          <div class="contact-value">03-XXXX-XXXX</div>
+        </div>
+
+        <div class="contact-item">
+          <i class="fab fa-twitter contact-icon"></i>
+          <div class="contact-label">SNS</div>
+          <div class="contact-value">@tanren_official</div>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+        <a href="#" class="cta-button">
+          <i class="fas fa-calendar-alt"></i>
+          今すぐ無料相談を予約
+        </a>
+        <a href="#" class="cta-button secondary">
+          <i class="fas fa-download"></i>
+          実践ガイドを無料ダウンロード
+        </a>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <p class="final-quote">
+        "野心的であれ。あなたが不可能だと思うより大きなものを構築してください"
+      </p>
+      <p class="final-attribution">— Dario Amodei, Anthropic CEO</p>
+    </div>
+
+    <div class="tanren-logo">
+      <div class="logo-text">TANREN株式会社</div>
+      <div class="logo-tagline">AI時代の新しい学びと成長を創造する</div>
+    </div>
+  </div>
+
+  <script>
+    // スムーススクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // パララックス効果
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const pattern = document.querySelector('.background-pattern');
+      pattern.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    // アニメーション強化
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.step-card, .contact-section').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>

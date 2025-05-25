@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>営業革命の実践 - 2026年予言と今後のアクション</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a40 30%, #2d2d5f 70%, #4a4a8c 100%);
+    }
+
+    .ai-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(97, 218, 251, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(97, 218, 251, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: gridMove 35s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(30px, 30px);
+      }
+    }
+
+    .slide-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: white;
+      text-align: center;
+      margin-bottom: 16px;
+      background: linear-gradient(45deg, #ffffff, #61dafb, #feca57);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .prophecy-card {
+      background: linear-gradient(135deg, #ff6b6b, #feca57, #ff9ff3);
+      border-radius: 25px;
+      padding: 12px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .prophecy-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(30deg);
+      }
+
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(30deg);
+      }
+    }
+
+    .prophecy-year {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 4px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .prophecy-text {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 8px;
+      margin-bottom: 6px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      background: rgba(97, 218, 251, 0.15);
+      box-shadow: 0 15px 30px rgba(97, 218, 251, 0.3);
+    }
+
+    .step-number {
+      background: linear-gradient(45deg, #61dafb, #3023ae);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-description {
+      color: #d1d5db;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .impact-metric {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 12px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .impact-metric:hover {
+      transform: scale(1.05);
+      background: rgba(97, 218, 251, 0.15);
+    }
+
+    .metric-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: #61dafb;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ceo-quote {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 20px;
+      padding: 12px;
+      color: white;
+      font-style: italic;
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .ceo-quote::before {
+      content: '"';
+      font-size: 60px;
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      opacity: 0.3;
+    }
+
+    .ceo-quote-text {
+      font-size: 14px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .ceo-name {
+      text-align: right;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .section-title {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-icon {
+      color: #61dafb;
+      font-size: 36px;
+      margin-right: 20px;
+    }
+
+    .action-button {
+      background: linear-gradient(45deg, #61dafb, #3023ae);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(97, 218, 251, 0.4);
+    }
+
+    .action-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .action-button:hover::before {
+      left: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="ai-grid"></div>
+
+    <div class="p-6">
+      <h1 class="slide-title">
+        営業革命の実践<br>
+        2026年予言と今後のアクション
+      </h1>
+
+      <div class="grid grid-cols-12 gap-4 h-3/5">
+        <!-- 左カラム: 2026年予言と実践ステップ -->
+        <div class="col-span-7">
+          <div class="prophecy-card">
+            <div class="prophecy-year">2026年</div>
+            <div class="prophecy-text">
+              1人で10億ドル企業の誕生<br>
+              ― ダリオ・アマダイCEO予言 ―
+            </div>
+          </div>
+
+          <h2 class="section-title">
+            <i class="fas fa-rocket section-icon"></i>
+            TANREN式「AI営業革命」3ステップ
+          </h2>
+
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-title">営業プロセスの可視化</div>
+            <div class="step-description">
+              日次タスクの棚卸し（所要時間付き）→ 繰り返しパターンの特定 → AI化可能性スコアリング
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-title">「Quick Win」から始める</div>
+            <div class="step-description">
+              メール返信・議事録作成・提案書の効率化から開始。Claude 4活用テンプレートで即効果
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-title">チーム展開で組織力向上</div>
+            <div class="step-description">
+              週次AI活用共有会 → 月次効果測定 → 四半期ごとの進化サイクル構築
+            </div>
+          </div>
+
+          <div class="ceo-quote">
+            <div class="ceo-quote-text">
+              野心的であれ（Be ambitious）。あなたが不可能だと思うより大きなものを構築してください。
+            </div>
+            <div class="ceo-name">― ダリオ・アマダイ（Anthropic CEO）</div>
+          </div>
+        </div>
+
+        <!-- 右カラム: 数値目標とアクション -->
+        <div class="col-span-5">
+          <h2 class="section-title">
+            <i class="fas fa-chart-line section-icon"></i>
+            経営層を動かす「3つの数字」
+          </h2>
+
+          <div class="grid grid-cols-1 gap-2 mb-4">
+            <div class="impact-metric">
+              <div class="metric-value">10時間</div>
+              <div class="metric-label">週あたり時間創出効果</div>
+            </div>
+
+            <div class="impact-metric">
+              <div class="metric-value">30%</div>
+              <div class="metric-label">訪問件数増加率</div>
+            </div>
+
+            <div class="impact-metric">
+              <div class="metric-value">400%</div>
+              <div class="metric-label">年間ROI達成目標</div>
+            </div>
+          </div>
+
+          <div
+            class="chart-container bg-white bg-opacity-10 rounded-xl p-3 backdrop-blur-md border border-cyan-300 border-opacity-30">
+            <h3 class="text-white text-lg font-bold mb-2 text-center">AI活用による生産性向上</h3>
+            <canvas id="productivityChart" width="300" height="160"></canvas>
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="action-button">
+              <i class="fas fa-play mr-3"></i>
+              今すぐAI営業革命を開始
+            </button>
+          </div>
+
+          <div class="mt-2 text-center">
+            <p class="text-cyan-300 text-base font-semibold">
+              <i class="fas fa-clock mr-2"></i>
+              準備はできていますか？🚀
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Chart.js で生産性向上チャートを作成
+    const ctx = document.getElementById('productivityChart').getContext('2d');
+    const productivityChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['提案書作成', 'メール対応', '市場調査', '顧客分析', '報告書作成', '会議準備'],
+        datasets: [{
+          label: 'AI活用後',
+          data: [90, 95, 85, 88, 92, 87],
+          borderColor: '#61dafb',
+          backgroundColor: 'rgba(97, 218, 251, 0.2)',
+          pointBackgroundColor: '#61dafb',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#61dafb',
+          borderWidth: 3
+        }, {
+          label: 'AI活用前',
+          data: [45, 50, 40, 42, 48, 43],
+          borderColor: '#ff6b6b',
+          backgroundColor: 'rgba(255, 107, 107, 0.1)',
+          pointBackgroundColor: '#ff6b6b',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#ff6b6b',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white',
+              font: {
+                size: 14
+              }
+            }
+          }
+        },
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              color: 'white',
+              backdropColor: 'transparent'
+            },
+            grid: {
+              color: 'rgba(97, 218, 251, 0.3)'
+            },
+            pointLabels: {
+              color: 'white',
+              font: {
+                size: 12
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // GSAP アニメーション
+    gsap.timeline()
+      .from(".slide-title", { duration: 1.2, y: -50, opacity: 0, ease: "power3.out" })
+      .from(".prophecy-card", { duration: 1.5, scale: 0.8, opacity: 0, ease: "elastic.out(1, 0.5)" }, "-=0.5")
+      .from(".section-title", { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power2.out" }, "-=0.8")
+      .from(".step-card", { duration: 0.8, x: -50, opacity: 0, stagger: 0.2, ease: "power2.out" }, "-=0.5")
+      .from(".impact-metric", { duration: 0.8, y: 30, opacity: 0, stagger: 0.15, ease: "power2.out" }, "-=0.8")
+      .from(".chart-container", { duration: 1.2, scale: 0.9, opacity: 0, ease: "back.out(1.2)" }, "-=0.5")
+      .from(".ceo-quote", { duration: 1, x: -30, opacity: 0, ease: "power2.out" }, "-=0.3")
+      .from(".action-button", { duration: 1.5, scale: 0, rotation: 180, ease: "elastic.out(1, 0.3)" }, "-=0.2");
+
+    // アクションボタンのクリックイベント
+    document.querySelector('.action-button').addEventListener('click', function () {
+      gsap.to(this, { duration: 0.1, scale: 0.95, yoyo: true, repeat: 1 });
+    });
+  </script>
+</body>
+
+</html>

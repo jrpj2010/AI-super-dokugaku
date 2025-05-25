@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>営業部門必見！Claude 4活用の「5つの極意」</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .method-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .method-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    }
+
+    .method-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+    }
+
+    .method-number {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: #1e40af;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .method-icon {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 1rem;
+    }
+
+    .method-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .example-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .example-label {
+      display: inline-block;
+      background: #dc2626;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .example-label.good {
+      background: #10b981;
+    }
+
+    .example-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #374151;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .example-box.good {
+      background: #f0fdf4;
+      border-color: #10b981;
+    }
+
+    .example-box.bad {
+      background: #fef2f2;
+      border-color: #dc2626;
+    }
+
+    .key-benefit {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .summary-section {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .summary-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .methods-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-title {
+        font-size: 2rem;
+      }
+
+      .summary-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">営業部門必見！Claude 4活用の「5つの極意」</h1>
+    <p class="slide-subtitle">公式プロンプトエンジニアリングガイドから導いた実践術</p>
+  </div>
+
+  <div class="main-content">
+    <div class="methods-grid">
+      <!-- 極意1 -->
+      <div class="method-card">
+        <div class="method-number">1</div>
+        <i class="fas fa-bullseye method-icon"></i>
+        <h3 class="method-title">「明示的な指示」で精度を最大化</h3>
+
+        <div class="example-section">
+          <span class="example-label">❌ 悪い例</span>
+          <div class="example-box bad">
+            顧客への提案書を作成してください
+          </div>
+        </div>
+
+        <div class="example-section">
+          <span class="example-label good">✅ 良い例</span>
+          <div class="example-box good">
+            製造業向けDXソリューションの提案書を作成してください。
+            以下の要素を必ず含めてください：
+            - 導入後のROI試算（3年間）
+            - 競合他社との差別化ポイント（表形式）
+            - 段階的な導入スケジュール（ガントチャート）
+            - 成功事例3社（同業種から選定）
+          </div>
+        </div>
+
+        <div class="key-benefit">
+          提案品質が40%向上、作成時間を50%短縮
+        </div>
+      </div>
+
+      <!-- 極意2 -->
+      <div class="method-card">
+        <div class="method-number">2</div>
+        <i class="fas fa-lightbulb method-icon"></i>
+        <h3 class="method-title">「背景と動機」を説明して理解度向上</h3>
+
+        <div class="example-section">
+          <span class="example-label good">✅ 活用例</span>
+          <div class="example-box good">
+            この提案書は、来週火曜日の役員会議で使用します。
+            決裁者は技術に詳しくないCFOなので、
+            財務的メリットを中心に、専門用語を避けて作成してください。
+            昨年度の売上が10%減少している背景があるため、
+            コスト削減よりも売上向上にフォーカスしてください。
+          </div>
+        </div>
+
+        <div class="key-benefit">
+          顧客ニーズとの一致率が65%向上
+        </div>
+      </div>
+
+      <!-- 極意3 -->
+      <div class="method-card">
+        <div class="method-number">3</div>
+        <i class="fas fa-code method-icon"></i>
+        <h3 class="method-title">「XMLタグ」で出力を完璧に制御</h3>
+
+        <div class="example-section">
+          <span class="example-label good">✅ 活用例</span>
+          <div class="example-box good">
+            &lt;proposal_structure&gt;
+            &lt;executive_summary&gt;3つの重要ポイントを箇条書き&lt;/executive_summary&gt;
+            &lt;roi_calculation&gt;表形式で3年間の投資回収を表示&lt;/roi_calculation&gt;
+            &lt;implementation_plan&gt;フェーズごとに分けて記載&lt;/implementation_plan&gt;
+            &lt;success_stories&gt;業界・規模が類似した3社の事例&lt;/success_stories&gt;
+            &lt;/proposal_structure&gt;
+          </div>
+        </div>
+
+        <div class="key-benefit">
+          レビュー回数を70%削減、完成度大幅向上
+        </div>
+      </div>
+
+      <!-- 極意4 -->
+      <div class="method-card">
+        <div class="method-number">4</div>
+        <i class="fas fa-rocket method-icon"></i>
+        <h3 class="method-title">「並列処理」で効率を10倍に</h3>
+
+        <div class="example-section">
+          <span class="example-label good">✅ 実践例</span>
+          <div class="example-box good">
+            以下のタスクを同時に実行してください：
+            1. 競合分析レポート作成
+            2. 市場調査データ整理
+            3. 顧客ニーズ分析
+            4. 提案書ドラフト作成
+            5. プレゼン資料構成案
+          </div>
+        </div>
+
+        <div class="key-benefit">
+          作業時間を90%短縮、複数タスク同時完了
+        </div>
+      </div>
+
+      <!-- 極意5 -->
+      <div class="method-card">
+        <div class="method-number">5</div>
+        <i class="fas fa-brain method-icon"></i>
+        <h3 class="method-title">「思考機能」で戦略的提案を生成</h3>
+
+        <div class="example-section">
+          <span class="example-label good">✅ 活用例</span>
+          <div class="example-box good">
+            営業戦略を立案する際は、以下のステップで思考してください：
+            1. 顧客の現状と課題を分析
+            2. 競合他社の提案内容を推測
+            3. 自社の強みを最大限活かす方法を検討
+            4. リスクと対策を事前に準備
+            5. 次回アクションを明確化
+
+            各ステップで発見した洞察を記録し、
+            最終的な提案に反映させてください。
+          </div>
+        </div>
+
+        <div class="key-benefit">
+          成約率が35%向上、戦略的思考力強化
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <h2 class="summary-title">5つの極意を実践した企業の実績</h2>
+      <div class="summary-stats">
+        <div class="stat-item">
+          <span class="stat-number">10倍</span>
+          <div class="stat-label">効率向上</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">70%</span>
+          <div class="stat-label">時間削減</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">35%</span>
+          <div class="stat-label">成約率向上</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">400%</span>
+          <div class="stat-label">年間ROI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

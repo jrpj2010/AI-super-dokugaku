@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#f4f1ea"/>
+
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="90" fill="#2c2c2c"/>
+  <text x="60" y="55" font-family="Noto Serif JP" font-size="32" fill="#f4f1ea" font-weight="bold">🛠️ Claude Code | GitHub エコシステム革命</text>
+  <text x="1580" y="55" font-family="Noto Sans JP" font-size="18" fill="#653a5e">マルチスレッド開発時代</text>
+
+  <!-- グリッドレイアウト - 3カラム -->
+  <!-- 左カラム: Claude Code基盤 -->
+  <g transform="translate(60, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#b3322b" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#b3322b" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">💻 Claude Code 基盤技術</text>
+
+    <!-- 一般提供開始 -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">🚀 一般提供開始 (GA)</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#b3322b" stroke-width="2"/>
+
+    <rect x="30" y="120" width="520" height="100" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+    <text x="40" y="145" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">ボトムアップ社内実験 → 垂直普及の成功モデル</text>
+
+    <!-- 社内普及データ -->
+    <g transform="translate(40, 155)">
+      <text x="0" y="15" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">社内ローンチ後</text>
+      <text x="0" y="30" font-family="Noto Sans JP" font-size="24" fill="#b3322b" font-weight="bold">2日</text>
+      <text x="60" y="30" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">で利用状況チャート垂直上昇</text>
+
+      <text x="250" y="15" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">現在の利用率</text>
+      <text x="250" y="30" font-family="Noto Sans JP" font-size="24" fill="#b3322b" font-weight="bold">90%+</text>
+      <text x="310" y="30" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">のAnthropicエンジニア</text>
+
+      <text x="0" y="55" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">日常コーディング〜大規模マイグレーション全領域対応</text>
+    </g>
+
+    <!-- IDE統合 -->
+    <text x="30" y="250" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🔗 IDE統合</text>
+    <line x1="30" y1="255" x2="550" y2="255" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="270" width="520" height="140" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+
+    <!-- VS Code & JetBrains -->
+    <g transform="translate(40, 285)">
+      <rect x="0" y="0" width="240" height="40" fill="#007ACC" rx="5"/>
+      <text x="90" y="25" font-family="Noto Sans JP" font-size="16" fill="white" font-weight="bold">VS Code</text>
+
+      <rect x="260" y="0" width="240" height="40" fill="#000000" rx="5"/>
+      <text x="350" y="25" font-family="Noto Sans JP" font-size="16" fill="white" font-weight="bold">JetBrains</text>
+
+      <!-- 機能説明 -->
+      <text x="0" y="65" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">リアルタイム差分表示</text>
+      <text x="0" y="80" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• エディタ内インライン変更表示</text>
+      <text x="0" y="95" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 周辺コードコンテキスト確認</text>
+      <text x="0" y="110" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 自動受け入れモード対応</text>
+    </g>
+
+    <!-- SDK & 拡張性 -->
+    <text x="30" y="430" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">⚙️ Claude Code SDK</text>
+    <line x1="30" y1="435" x2="550" y2="435" stroke="#1a5b66" stroke-width="2"/>
+
+    <rect x="30" y="450" width="520" height="120" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+    <text x="40" y="475" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">コアエージェント上での カスタムアプリケーション構築</text>
+
+    <g transform="translate(40, 485)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">無限の可能性:</text>
+      <text x="0" y="35" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 並行Claude Code実行</text>
+      <text x="0" y="50" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 不安定テスト修正自動化</text>
+      <text x="0" y="65" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• テストカバレッジ増強</text>
+      <text x="250" y="35" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• オンコールトリアージ</text>
+      <text x="250" y="50" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• カスタムワークフロー</text>
+      <text x="250" y="65" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• GitHub Actions統合</text>
+    </g>
+
+    <!-- 抽象化レベルの進化 -->
+    <text x="30" y="590" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">📈 抽象化レベル進化</text>
+    <line x1="30" y1="595" x2="550" y2="595" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="610" width="520" height="150" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+
+    <!-- 進化の階段 -->
+    <g transform="translate(40, 625)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">コンピューティング史における位置づけ</text>
+
+      <!-- ステップ表示 -->
+      <rect x="0" y="35" width="80" height="20" fill="#2c2c2c" rx="3"/>
+      <text x="15" y="48" font-family="Noto Sans JP" font-size="9" fill="white">機械語</text>
+
+      <path d="M85 45 L95 45" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="100" y="35" width="80" height="20" fill="#653a5e" rx="3"/>
+      <text x="120" y="48" font-family="Noto Sans JP" font-size="9" fill="white">アセンブリ</text>
+
+      <path d="M185 45 L195 45" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="200" y="35" width="80" height="20" fill="#1a5b66" rx="3"/>
+      <text x="215" y="48" font-family="Noto Sans JP" font-size="9" fill="white">高級言語</text>
+
+      <path d="M285 45 L295 45" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="300" y="35" width="120" height="20" fill="#b3322b" rx="3"/>
+      <text x="340" y="48" font-family="Noto Sans JP" font-size="9" fill="white">エージェント的AI</text>
+
+      <text x="0" y="75" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">開発者の変化:</text>
+      <text x="0" y="90" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">特定機能要求 → フィーチャー全体記述</text>
+      <text x="0" y="105" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">ソフトウェア構築方法の根本変革</text>
+      <text x="0" y="120" font-family="Noto Sans JP" font-size="10" fill="#b3322b" font-weight="bold">AIを導き、共創するパートナーシップへ</text>
+    </g>
+
+    <!-- マルチエージェント管理 -->
+    <text x="30" y="780" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">👥 マルチエージェント管理</text>
+    <line x1="30" y1="785" x2="550" y2="785" stroke="#b3322b" stroke-width="2"/>
+
+    <rect x="30" y="800" width="520" height="40" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+    <text x="40" y="825" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">エンジニア → 複数自律エージェントのマネージャーへの役割転換</text>
+  </g>
+
+  <!-- 中央カラム: GitHub統合 -->
+  <g transform="translate(670, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#1a5b66" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#1a5b66" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">🐙 GitHub統合エコシステム</text>
+
+    <!-- GitHub Copilot統合 -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">🤝 GitHub Copilot統合</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#1a5b66" stroke-width="2"/>
+
+    <rect x="30" y="120" width="520" height="140" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+
+    <!-- リアルタイムリリース -->
+    <g transform="translate(40, 135)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">⚡ リアルタイムリリース達成</text>
+      <text x="0" y="40" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">Dario発表と同時トリガー実行</text>
+      <text x="0" y="55" font-family="Noto Sans JP" font-size="10" fill="#1a5b66" font-weight="bold">"シームレスな出荷 - 言うのは簡単、実行は困難"</text>
+
+      <!-- プラットフォーム -->
+      <text x="0" y="80" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">対応プラットフォーム:</text>
+      <text x="0" y="95" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• VS Code • GitHub.com • モバイルアプリ</text>
+      <text x="0" y="110" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• Claude Sonnet 4 & Opus 4 同時サポート</text>
+    </g>
+
+    <!-- エージェントモード -->
+    <text x="30" y="280" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🤖 エージェントモード</text>
+    <line x1="30" y1="285" x2="550" y2="285" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="300" width="520" height="100" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+    <text x="40" y="325" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">自律的ペアプログラマー</text>
+
+    <g transform="translate(40, 340)">
+      <text x="0" y="15" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 自然言語コマンドベース</text>
+      <text x="0" y="30" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 複数ステップコーディングタスク実行</text>
+      <text x="0" y="45" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 複雑コードベース理解支援</text>
+      <text x="250" y="15" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 迅速な本番移行</text>
+      <text x="250" y="30" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 生産性向上実証済み</text>
+      <text x="250" y="45" font-family="Noto Sans JP" font-size="10" fill="#653a5e" font-weight="bold">• 信頼環境内作業継続</text>
+    </g>
+
+    <!-- Claude Code in GitHub Actions -->
+    <text x="30" y="420" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">⚙️ GitHub Actions統合</text>
+    <line x1="30" y1="425" x2="550" y2="425" stroke="#b3322b" stroke-width="2"/>
+
+    <rect x="30" y="440" width="520" height="200" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+
+    <!-- @Claude タグ機能 -->
+    <g transform="translate(40, 455)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">@Claude タグ機能</text>
+
+      <!-- PR/Issue フロー -->
+      <rect x="0" y="35" width="100" height="25" fill="#2c2c2c" rx="3"/>
+      <text x="15" y="50" font-family="Noto Sans JP" font-size="9" fill="white">PR/Issue</text>
+
+      <path d="M105 47 L115 47" stroke="#b3322b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="120" y="35" width="100" height="25" fill="#b3322b" rx="3"/>
+      <text x="145" y="50" font-family="Noto Sans JP" font-size="9" fill="white">@Claude</text>
+
+      <path d="M225 47 L235 47" stroke="#b3322b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="240" y="35" width="100" height="25" fill="#1a5b66" rx="3"/>
+      <text x="265" y="50" font-family="Noto Sans JP" font-size="9" fill="white">Action実行</text>
+
+      <path d="M345 47 L355 47" stroke="#b3322b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="360" y="35" width="100" height="25" fill="#653a5e" rx="3"/>
+      <text x="385" y="50" font-family="Noto Sans JP" font-size="9" fill="white">自動実装</text>
+
+      <!-- 具体的機能 -->
+      <text x="0" y="85" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">自動実行機能:</text>
+      <text x="0" y="100" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• レビュアーフィードバック対応</text>
+      <text x="0" y="115" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• CIエラー修正</text>
+      <text x="0" y="130" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• テストカバレッジ実装</text>
+
+      <text x="250" y="100" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• コード修正</text>
+      <text x="250" y="115" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 新機能追加</text>
+      <text x="250" y="130" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• ドキュメント更新</text>
+
+      <!-- 利便性 -->
+      <rect x="0" y="145" width="460" height="30" fill="#1a5b66" rx="5"/>
+      <text x="10" y="165" font-family="Noto Sans JP" font-size="11" fill="white">コンテキスト切り替え不要・外出先からのオンデマンド実行</text>
+    </g>
+
+    <!-- マルチスレッド開発 -->
+    <text x="30" y="660" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🧵 マルチスレッド開発時代</text>
+    <line x1="30" y1="665" x2="550" y2="665" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="680" width="520" height="100" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+
+    <g transform="translate(40, 695)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">「未来はマルチスレッド」 - Mario Rodriguez</text>
+      <text x="0" y="40" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">現在のエディタ = 待合室</text>
+      <text x="0" y="55" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">→ より速いが、依然として順次処理的制約</text>
+      <text x="0" y="75" font-family="Noto Sans JP" font-size="11" fill="#653a5e" font-weight="bold">GitHub Actionsによる真の並列実行環境実現</text>
+    </g>
+
+    <!-- プロンプトキャッシュ効果 -->
+    <text x="30" y="800" font-family="Noto Serif JP" font-size="16" fill="#2c2c2c" font-weight="bold">⚡ コスト効率化</text>
+    <line x1="30" y1="805" x2="550" y2="805" stroke="#1a5b66" stroke-width="1"/>
+
+    <rect x="30" y="810" width="520" height="30" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="3"/>
+    <text x="40" y="830" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">プロンプトキャッシュサポートによるコスト効率的エクスペリエンス構築</text>
+  </g>
+
+  <!-- 右カラム: 実装事例・実証実績 -->
+  <g transform="translate(1280, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#653a5e" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#653a5e" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">🎯 実装事例・実証実績</text>
+
+    <!-- Excalidraw実装事例 -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">💡 Excalidraw実装事例</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="120" width="520" height="200" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+
+    <!-- 実装詳細 -->
+    <g transform="translate(40, 135)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">テーブルコンポーネント完全実装</text>
+
+      <!-- 統計データ -->
+      <rect x="0" y="35" width="150" height="40" fill="#653a5e" rx="5"/>
+      <text x="10" y="50" font-family="Noto Sans JP" font-size="10" fill="white">実装時間</text>
+      <text x="10" y="65" font-family="Noto Sans JP" font-size="16" fill="white" font-weight="bold">90分</text>
+
+      <rect x="170" y="35" width="150" height="40" fill="#b3322b" rx="5"/>
+      <text x="180" y="50" font-family="Noto Sans JP" font-size="10" fill="white">従来予想時間</text>
+      <text x="180" y="65" font-family="Noto Sans JP" font-size="16" fill="white" font-weight="bold">数日</text>
+
+      <rect x="340" y="35" width="140" height="40" fill="#1a5b66" rx="5"/>
+      <text x="350" y="50" font-family="Noto Sans JP" font-size="10" fill="white">生成コード行数</text>
+      <text x="350" y="65" font-family="Noto Sans JP" font-size="16" fill="white" font-weight="bold">数百行</text>
+
+      <!-- 機能詳細 -->
+      <text x="0" y="95" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">実装された機能:</text>
+      <text x="0" y="110" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• カスタムディメンション対応</text>
+      <text x="0" y="125" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• ドラッグによるサイズ変更</text>
+      <text x="0" y="140" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• Excalidraw全スタイリングオプション統合</text>
+
+      <text x="250" y="110" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 境界線パターン・色変更</text>
+      <text x="250" y="125" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• セルテキスト入力</text>
+      <text x="250" y="140" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 既存UI完全統合</text>
+
+      <!-- プロセス -->
+      <text x="0" y="165" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">自動化されたプロセス:</text>
+      <text x="0" y="180" font-family="Noto Sans JP" font-size="10" fill="#653a5e" font-weight="bold">テスト作成 → リント・テスト実行 → PR作成 → ドキュメント更新</text>
+    </g>
+
+    <!-- 開発効率革命 -->
+    <text x="30" y="340" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">⚡ 開発効率革命</text>
+    <line x1="30" y1="345" x2="550" y2="345" stroke="#b3322b" stroke-width="2"/>
+
+    <rect x="30" y="360" width="520" height="140" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+
+    <!-- オンボーディング時間短縮 -->
+    <g transform="translate(40, 375)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">技術オンボーディング時間革命</text>
+
+      <!-- Before/After -->
+      <rect x="0" y="35" width="200" height="60" fill="#ffebee" stroke="#f44336" stroke-width="1" rx="5"/>
+      <text x="10" y="55" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">従来</text>
+      <text x="10" y="70" font-family="Noto Sans JP" font-size="20" fill="#f44336" font-weight="bold">2-3週間</text>
+      <text x="10" y="85" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">エンジニア習熟期間</text>
+
+      <path d="M205 65 L215 65" stroke="#b3322b" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+      <rect x="220" y="35" width="200" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="5"/>
+      <text x="230" y="55" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">Claude Code</text>
+      <text x="230" y="70" font-family="Noto Sans JP" font-size="20" fill="#4caf50" font-weight="bold">2-3日</text>
+      <text x="230" y="85" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">迅速な理解達成</text>
+
+      <text x="0" y="115" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">大規模モノリス・複雑コードベースの理解において特に威力発揮</text>
+    </g>
+
+    <!-- 実世界インパクト -->
+    <text x="30" y="520" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🌍 実世界インパクト</text>
+    <line x1="30" y1="525" x2="550" y2="525" stroke="#1a5b66" stroke-width="2"/>
+
+    <rect x="30" y="540" width="520" height="160" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+
+    <!-- Instagram時代との比較 -->
+    <g transform="translate(40, 555)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">Instagram創業時代との比較 - Mike Krieger</text>
+
+      <rect x="0" y="30" width="220" height="80" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+      <text x="10" y="50" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">Instagram創業時 (2010年代)</text>
+      <text x="10" y="65" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• チーム：2-6エンジニア</text>
+      <text x="10" y="80" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 2モバイルプラットフォーム対応</text>
+      <text x="10" y="95" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• プロトタイプ：数週間</text>
+
+      <rect x="250" y="30" width="220" height="80" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+      <text x="260" y="50" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">Claude Code時代 (2025年)</text>
+      <text x="260" y="65" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 同等チームサイズ</text>
+      <text x="260" y="80" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 全プラットフォーム対応</text>
+      <text x="260" y="95" font-family="Noto Sans JP" font-size="10" fill="#1a5b66" font-weight="bold">• プロトタイプ：数日</text>
+
+      <text x="0" y="130" font-family="Noto Sans JP" font-size="11" fill="#653a5e" font-weight="bold">10-20倍の開発速度向上が現実的に達成可能</text>
+    </g>
+
+    <!-- 未来展望 -->
+    <text x="30" y="720" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🔮 未来展望</text>
+    <line x1="30" y1="725" x2="550" y2="725" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="740" width="520" height="100" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+
+    <g transform="translate(40, 755)">
+      <text x="0" y="20" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">AIネイティブ SDLC (Software Development Lifecycle)</text>
+
+      <text x="0" y="40" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 内部ループ（コーディング）× 外部ループ（CI/CD）</text>
+      <text x="0" y="55" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• エージェント的レイヤーによる全プロセス強化</text>
+      <text x="0" y="70" font-family="Noto Sans JP" font-size="10" fill="#653a5e" font-weight="bold">• 人間中心・積極的協力者としてのCopilot進化</text>
+    </g>
+  </g>
+
+  <!-- フッター -->
+  <rect x="0" y="1010" width="1920" height="70" fill="#2c2c2c"/>
+  <text x="60" y="1045" font-family="Noto Sans JP" font-size="16" fill="#f4f1ea">Claude Code & GitHub | マルチスレッド開発時代の到来</text>
+  <text x="1650" y="1045" font-family="Noto Sans JP" font-size="16" fill="#653a5e">3/4</text>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#653a5e"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>まとめ：営業の未来は、もう始まっている</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffbe0b 0%, #4daa57 50%, #1e6091 100%);
+      color: #ffffff;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    .insight-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .insight-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px) !important;
+    }
+
+    .insight-icon {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .ai-grid {
+      position: absolute;
+      left: -150px;
+      bottom: -150px;
+      width: 600px;
+      height: 600px;
+      opacity: 0.05;
+      transform: rotate(15deg);
+      z-index: 0;
+    }
+
+    .ai-grid:before,
+    .ai-grid:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .decision-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .decision-box:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .decision-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-right: 20px;
+    }
+
+    .highlight-text {
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      letter-spacing: -1px;
+    }
+
+    .glass-divider {
+      height: 1px;
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0) 100%);
+      margin: 20px 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide flex items-center justify-center">
+    <div class="ai-grid"></div>
+
+    <!-- Abstract shapes in background -->
+    <svg class="floating-element" style="right: 100px; top: 100px; width: 200px; height: 200px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+      <circle cx="50" cy="50" r="20" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+    </svg>
+
+    <svg class="floating-element" style="left: 150px; bottom: 80px; width: 300px; height: 300px;" viewBox="0 0 100 100">
+      <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.3"></polygon>
+      <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></polygon>
+    </svg>
+
+    <div class="content-wrapper px-16 py-10 w-full">
+      <h1 class="title text-4xl mb-6">
+        まとめ：<span class="text-yellow-200">営業の未来は、もう始まっている</span>
+      </h1>
+
+      <div class="grid grid-cols-3 gap-8 mb-10">
+        <!-- Insight 1 -->
+        <div class="relative">
+          <div class="insight-card p-6" id="insight1">
+            <div class="insight-icon" style="background: #4daa57;">
+              <i class="fas fa-clock text-white"></i>
+            </div>
+            <div class="pt-5">
+              <h3 class="font-bold text-xl mb-3 text-yellow-200">
+                楽天の7時間が証明したこと
+              </h3>
+
+              <p class="text-sm mb-4">
+                単なる技術デモではない<br>
+                <span class="text-yellow-200 font-bold">「人間の限界を超えた持続的パフォーマンス」</span>の証明
+              </p>
+
+              <div class="bg-black bg-opacity-20 p-3 rounded-lg">
+                <ul class="text-sm space-y-2">
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    7時間連続作業
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    パフォーマンス低下なし
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    人間の介入ゼロ
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight 2 -->
+        <div class="relative">
+          <div class="insight-card p-6" id="insight2">
+            <div class="insight-icon" style="background: #1e6091;">
+              <i class="fas fa-code-branch text-white"></i>
+            </div>
+            <div class="pt-5">
+              <h3 class="font-bold text-xl mb-3 text-yellow-200">
+                GitHubとCursorが選んだ理由
+              </h3>
+
+              <p class="text-sm mb-4">
+                <span class="text-yellow-200 font-bold">「人間と区別がつかない」</span>レベルの知性と、<br>
+                <span class="text-yellow-200 font-bold">「疲れ知らず」</span>の実行力の両立
+              </p>
+
+              <div class="flex items-center mb-2">
+                <i class="fas fa-star text-yellow-300 mr-1"></i>
+                <div class="text-sm font-bold">強力なソフトウェアエンジニアリング知識</div>
+              </div>
+              <div class="flex items-center mb-2">
+                <i class="fas fa-star text-yellow-300 mr-1"></i>
+                <div class="text-sm font-bold">強力な問題解決能力</div>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-300 mr-1"></i>
+                <div class="text-sm font-bold">優れた指示追従能力</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight 3 -->
+        <div class="relative">
+          <div class="insight-card p-6" id="insight3">
+            <div class="insight-icon" style="background: #ffbe0b;">
+              <i class="fas fa-balance-scale text-white"></i>
+            </div>
+            <div class="pt-5">
+              <h3 class="font-bold text-xl mb-3 text-yellow-200">
+                2026年、あなたはどちら側にいるか
+              </h3>
+
+              <p class="text-sm mb-4">
+                <span class="text-yellow-200 font-bold">AIを使いこなす1人</span>と、<br>
+                <span class="text-yellow-200 font-bold">AIに使われる99人</span>の差が極限まで広がる
+              </p>
+
+              <div class="bg-black bg-opacity-20 p-3 rounded-lg">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <div>AI活用層</div>
+                  <div>取り残される層</div>
+                </div>
+                <div class="w-full bg-gray-700 bg-opacity-50 h-3 rounded-full mb-1">
+                  <div class="bg-yellow-300 h-full rounded-full" style="width: 10%"></div>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <div>10%</div>
+                  <div>90%</div>
+                </div>
+                <div class="text-xs mt-1 text-center text-yellow-200">
+                  富・機会の分配予測
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Call to Action -->
+      <div class="decision-box p-8 mx-auto max-w-4xl" id="decision">
+        <div class="flex items-center">
+          <div class="decision-icon">
+            <i class="fas fa-crossroads text-yellow-300"></i>
+          </div>
+          <div>
+            <h2 class="highlight-text text-2xl mb-3">選択の時</h2>
+            <div class="glass-divider"></div>
+            <p class="text-xl">
+              <span class="text-yellow-300 font-bold">今、行動を起こすか。</span><br>
+              2年後に後悔するか。
+            </p>
+            <div class="mt-3 text-xl font-bold text-yellow-200">
+              選択は、あなた次第です。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animate insight cards
+      const insightCards = [
+        document.getElementById('insight1'),
+        document.getElementById('insight2'),
+        document.getElementById('insight3')
+      ];
+
+      insightCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.animation = 'fadeInUp 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.25) forwards';
+        }, 300 + (index * 200));
+      });
+
+      // Animate decision box
+      setTimeout(() => {
+        const decisionBox = document.getElementById('decision');
+        decisionBox.style.animation = 'fadeInUp 1s cubic-bezier(0.17, 0.89, 0.32, 1.25) forwards';
+        decisionBox.style.animationDelay = '0.3s';
+      }, 1000);
+    });
+  </script>
+</body>
+
+</html>

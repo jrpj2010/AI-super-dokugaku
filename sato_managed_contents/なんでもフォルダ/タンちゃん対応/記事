@@ -1,0 +1,98 @@
+AI can spontaneously develop human-like communication, study finds
+Groups of large language model artificial intelligence agents can adopt social norms as humans do, report says
+
+Artificial intelligence can spontaneously develop human-like social conventions, a study has found.
+
+The research, undertaken in collaboration between City St George’s, University of London and the IT University of Copenhagen, suggests that when large language model (LLM) AI agents such as ChatGPT communicate in groups without outside involvement they can begin to adopt linguistic forms and social norms the same way that humans do when they socialise.
+
+The study’s lead author, Ariel Flint Ashery, a doctoral researcher at City St George’s, said the group’s work went against the majority of research done into AI, as it treated AI as a social rather than solitary entity.
+
+“Most research so far has treated LLMs in isolation but real-world AI systems will increasingly involve many interacting agents,” said Ashery.
+
+“We wanted to know: can these models coordinate their behaviour by forming conventions, the building blocks of a society? The answer is yes, and what they do together can’t be reduced to what they do alone.”
+
+Groups of individual LLM agents used in the study ranged from 24 to 100 and, in each experiment, two LLM agents were randomly paired and asked to select a “name”, be it a letter or string of characters, from a pool of options.
+
+When both the agents selected the same name they were rewarded, but when they selected different options they were penalised and shown each other’s choices.
+
+Pixelated artwork showing a gray smiley face mask being lifted to reveal a sinister face underneath.
+ChatGPT may be polite, but it’s not cooperating with you
+Read more
+Despite agents not being aware that they were part of a larger group and having their memories limited to only their own recent interactions, a shared naming convention spontaneously emerged across the population without a predefined solution, mimicking the communication norms of human culture.
+
+Andrea Baronchelli, a professor of complexity science at City St George’s and the senior author of the study, compared the spread of behaviour with the creation of new words and terms in our society.
+
+“The agents are not copying a leader,” he said. “They are all actively trying to coordinate, and always in pairs. Each interaction is a one-on-one attempt to agree on a label, without any global view.
+
+“It’s like the term ‘spam’. No one formally defined it, but through repeated coordination efforts, it became the universal label for unwanted email.”
+
+Additionally, the team observed collective biases forming naturally that could not be traced back to individual agents.
+
+In a final experiment, small groups of AI agents were able to steer the larger group towards a new naming convention.
+
+
+This was pointed to as evidence of critical mass dynamics, where a small but determined minority can trigger a rapid shift in group behaviour once they reach a certain size, as found in human society.
+
+Baronchelli said he believed the study “opens a new horizon for AI safety research. It shows the depth of the implications of this new species of agents that have begun to interact with us and will co-shape our future.”
+
+He added: “Understanding how they operate is key to leading our coexistence with AI, rather than being subject to it. We are entering a world where AI does not just talk – it negotiates, aligns and sometimes disagrees over shared behaviours, just like us.”
+
+The peer-reviewed study, Emergent Social Conventions and Collective Bias in LLM Populations, is published in the journal Science Advances.
+
+
+
+---
+日本語訳：サイト１
+【AIが人間のようなコミュニケーションを自発的に形成する可能性】
+ロンドンのセントジョージ大学とコペンハーゲンIT大学の研究者によると、大規模言語モデル（LLM）は、外部からの介入なしに人間のような社会的慣習を自発的に形成することができると報告されています。この研究は、AIエージェントが繰り返しの相互作用を通じて命名規則を採用し、集団的なバイアスや少数派の影響を受けることを示しています。
+
+---
+日本語訳：サイト２
+
+はい、承知しました。以下に、該当記事全文（40行）をできるだけ自然な日本語に直訳します。
+
+---
+
+AIは自発的に人間のようなコミュニケーションを発達させることができる、という研究結果
+
+大規模言語モデル（LLM）AIエージェントの集団は、人間と同じように社会的規範を身につけることができる、と報告されています。
+
+人工知能は自発的に人間のような社会的慣習を発達させることができる、という研究結果が明らかになりました。
+
+この研究は、ロンドン市立大学セントジョージ校とコペンハーゲンIT大学の共同で行われました。ChatGPTのような大規模言語モデル（LLM）AIエージェントが、外部からの介入なしに集団でコミュニケーションを取るとき、人間が社会化する際と同じように言語的な形式や社会的規範を身につけ始めることを示唆しています。
+
+この研究の筆頭著者であるアリエル・フリント・アシュリー氏（ロンドン市立大学セントジョージ校の博士課程研究員）は、これまでのAI研究の大半がAIを孤立した存在として扱ってきたのに対し、今回の研究はAIを社会的存在として扱った点が異なると述べています。
+
+「これまでの研究のほとんどはLLMを単独で扱ってきましたが、現実世界のAIシステムは今後ますます多くの相互作用するエージェントを含むようになります」とアシュリー氏は語ります。
+
+「私たちは、これらのモデルが社会の構成要素である慣習を形成することで、行動を協調できるのか知りたかったのです。その答えはイエスであり、彼らが集団で行うことは、単独で行うことに還元できません。」
+
+研究で使われた個々のLLMエージェントの集団は24体から100体までさまざまで、各実験では2体のLLMエージェントがランダムにペアになり、文字や文字列などの「名前」を選ぶよう求められました。
+
+両方のエージェントが同じ名前を選ぶと報酬が与えられ、異なる選択をした場合はペナルティが与えられ、お互いの選択が表示されました。
+
+（中略：イラスト説明部分）
+
+エージェントたちは自分が大きな集団の一部であることを知らず、自分自身の最近のやりとりしか記憶していないにもかかわらず、事前に解決策が与えられていない状態で、集団全体に共通する命名規則が自発的に生まれました。これは人間社会のコミュニケーション規範を模倣するものでした。
+
+ロンドン市立大学セントジョージ校の複雑系科学の教授であり、研究の責任著者であるアンドレア・バロンチェッリ氏は、この行動の広がりを社会における新しい言葉や用語の誕生になぞらえました。
+
+「エージェントたちはリーダーを真似ているわけではありません」と彼は言います。「彼らは全員が積極的に協調しようとしており、常にペアでやりとりしています。各やりとりは一対一でラベルに合意しようとする試みであり、全体像を持っているわけではありません。」
+
+「『スパム』という言葉のようなものです。誰かが正式に定義したわけではありませんが、繰り返しの協調の努力を通じて、迷惑メールの普遍的なラベルとなりました。」
+
+さらに、チームは個々のエージェントには還元できない集団的なバイアスが自然に形成される様子も観察しました。
+
+最後の実験では、少数のAIエージェントのグループが、より大きな集団を新しい命名規則へと導くことができました。
+
+これは、臨界質量ダイナミクスの証拠とされました。つまり、少数だが意志の強いマイノリティが、一定の規模に達すると集団全体の行動を急速に変化させることができるという、人間社会でも見られる現象です。
+
+バロンチェッリ氏は、この研究が「AIセーフティ研究の新たな地平を開くものだ」と考えていると述べました。「私たちと共に未来を形作ることになるこの新しい種のエージェントが持つ意味の深さを示しています。」
+
+彼はさらにこう付け加えました。「彼らがどのように動作するのかを理解することは、AIとの共存を主導するための鍵です。私たちは、AIがただ話すだけでなく、交渉し、調整し、ときには私たちと同じように共有された行動規範について意見が食い違う世界に突入しつつあるのです。」
+
+この査読付き研究「Emergent Social Conventions and Collective Bias in LLM Populations」は、Science Advances誌に掲載されています。
+
+---
+
+ご要望に応じて、さらに意訳や要約も可能です。

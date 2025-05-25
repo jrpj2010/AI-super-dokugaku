@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 4が変える営業の未来 - タイトル</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 30%, #3b82f6 70%, #60a5fa 100%);
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      background-image:
+        linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+      background-size: 100px 100px;
+      animation: shimmer 20s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100px);
+      }
+
+      100% {
+        transform: translateX(100px);
+      }
+    }
+
+    .slide-container {
+      max-width: 1200px;
+      width: 90%;
+      text-align: center;
+      z-index: 10;
+      padding: 0 2rem;
+    }
+
+    .impact-badge {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .main-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      animation: slideInUp 1s ease-out;
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    .speaker-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 1s ease-out 0.6s both;
+    }
+
+    .speaker {
+      text-align: left;
+    }
+
+    .speaker-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .speaker-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .date-location {
+      text-align: right;
+    }
+
+    .date {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .location {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .ai-accent {
+      background: linear-gradient(45deg, #00d4aa, #00a8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .corner-accent {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 100px;
+      height: 100px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.4rem;
+      }
+
+      .speaker-info {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .speaker,
+      .date-location {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-pattern"></div>
+  <div class="corner-accent">🤖</div>
+
+  <div class="slide-container">
+    <div class="impact-badge">【衝撃レポート】</div>
+
+    <h1 class="main-title">
+      <span class="ai-accent">Claude 4</span>が変える<br>
+      営業の未来
+    </h1>
+
+    <p class="subtitle">
+      世界最高峰AIが見せた「7時間連続稼働」の真実と<br>
+      2026年の予言
+    </p>
+
+    <div class="speaker-info">
+      <div class="speaker">
+        <div class="speaker-name">佐藤 勝彦</div>
+        <div class="speaker-title">TANREN株式会社 代表取締役CEO</div>
+      </div>
+      <div class="date-location">
+        <div class="date">2025年1月23日</div>
+        <div class="location">AI営業革命セミナー</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // スライド表示時のアニメーション強化
+    document.addEventListener('DOMContentLoaded', function () {
+      const elements = document.querySelectorAll('.main-title, .subtitle, .speaker-info');
+      elements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.3}s`;
+      });
+    });
+  </script>
+</body>
+
+</html>

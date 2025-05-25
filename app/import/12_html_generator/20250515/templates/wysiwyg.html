@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,46 +8,66 @@
   <link rel="stylesheet" href="/static/css/tailwind.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    html, body { 
+    html,
+    body {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
     }
-    body { 
-      font-family: sans-serif; 
-      display: flex; 
+
+    body {
+      font-family: sans-serif;
+      display: flex;
       flex-direction: column;
     }
+
     .toolbar {
-      background: #f3f3f3;
-      padding: 8px;
+      background: rgba(243, 243, 243, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 12px;
       border-bottom: 1px solid #ddd;
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       width: 100%;
       box-sizing: border-box;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
+
     .toolbar button {
-      padding: 6px 12px;
+      padding: 8px 12px;
       border: none;
       background: #4f46e5;
       color: #fff;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 20px;
       font-size: 14px;
       display: flex;
       align-items: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .toolbar button:hover { opacity: 0.85; }
+
+    .toolbar button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .toolbar button:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
     .separator {
       width: 1px;
       background: #ddd;
       height: 24px;
       margin: 0 4px;
     }
+
     .main-container {
       flex: 1;
       display: flex;
@@ -56,6 +77,7 @@
       width: 100%;
       box-sizing: border-box;
     }
+
     #editor-frame {
       flex: 1;
       border: none;
@@ -63,24 +85,29 @@
       height: 100%;
       display: block;
     }
+
     .fullscreen-editor #editor-frame {
       height: 100%;
     }
+
     @media (prefers-color-scheme: dark) {
       .toolbar {
         background: #374151;
         border-color: #4b5563;
       }
+
       .separator {
         background: #4b5563;
       }
     }
+
     .material-icons {
       font-size: 18px;
       margin-right: 4px;
     }
   </style>
 </head>
+
 <body>
   <!-- メインツールバー -->
   <div class="toolbar">
@@ -108,41 +135,49 @@
   </div>
 
   <!-- ポップアップダイアログ - 画像 -->
-  <div id="imageDialog" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-50 w-96 hidden">
-    <h3 class="text-lg font-semibold mb-4">画像の挿入</h3>
-    <input type="text" id="imageUrl" placeholder="画像URL" value="https://via.placeholder.com/300x200" class="w-full p-2 mb-2 border rounded">
-    <input type="text" id="imageAlt" placeholder="代替テキスト" class="w-full p-2 mb-4 border rounded">
-    <div class="flex justify-end gap-2">
-      <button id="cancelImageBtn" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">キャンセル</button>
-      <button id="confirmImageBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">挿入</button>
+  <div id="imageDialog"
+    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 glassmorphism p-6 rounded-xl shadow-xl z-50 w-96 hidden">
+    <h3 class="text-lg font-semibold mb-4 flex items-center"><span class="material-icons mr-2">image</span>画像の挿入</h3>
+    <input type="text" id="imageUrl" placeholder="画像URL" value="https://via.placeholder.com/300x200"
+      class="w-full p-3 mb-3 apple-input">
+    <input type="text" id="imageAlt" placeholder="代替テキスト" class="w-full p-3 mb-4 apple-input">
+    <div class="flex justify-end gap-3">
+      <button id="cancelImageBtn" class="px-5 py-2 apple-btn">キャンセル</button>
+      <button id="confirmImageBtn"
+        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow transition transform hover:scale-105">挿入</button>
     </div>
   </div>
 
   <!-- ポップアップダイアログ - リンク -->
-  <div id="linkDialog" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-50 w-96 hidden">
-    <h3 class="text-lg font-semibold mb-4">リンクの挿入</h3>
-    <input type="text" id="linkUrl" placeholder="URL" value="https://" class="w-full p-2 mb-2 border rounded">
-    <input type="text" id="linkText" placeholder="リンクテキスト" class="w-full p-2 mb-2 border rounded">
-    <select id="linkTarget" class="w-full p-2 mb-4 border rounded">
+  <div id="linkDialog"
+    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 glassmorphism p-6 rounded-xl shadow-xl z-50 w-96 hidden">
+    <h3 class="text-lg font-semibold mb-4 flex items-center"><span class="material-icons mr-2">link</span>リンクの挿入</h3>
+    <input type="text" id="linkUrl" placeholder="URL" value="https://" class="w-full p-3 mb-3 apple-input">
+    <input type="text" id="linkText" placeholder="リンクテキスト" class="w-full p-3 mb-3 apple-input">
+    <select id="linkTarget" class="w-full p-3 mb-4 apple-input">
       <option value="_self">同じウィンドウ</option>
       <option value="_blank">新しいウィンドウ</option>
     </select>
-    <div class="flex justify-end gap-2">
-      <button id="cancelLinkBtn" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">キャンセル</button>
-      <button id="confirmLinkBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">挿入</button>
+    <div class="flex justify-end gap-3">
+      <button id="cancelLinkBtn" class="px-5 py-2 apple-btn">キャンセル</button>
+      <button id="confirmLinkBtn"
+        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow transition transform hover:scale-105">挿入</button>
     </div>
   </div>
 
   <!-- ポップアップダイアログ - テーブル -->
-  <div id="tableDialog" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-50 w-96 hidden">
-    <h3 class="text-lg font-semibold mb-4">テーブルの挿入</h3>
+  <div id="tableDialog"
+    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 glassmorphism p-6 rounded-xl shadow-xl z-50 w-96 hidden">
+    <h3 class="text-lg font-semibold mb-4 flex items-center"><span class="material-icons mr-2">table_chart</span>テーブルの挿入
+    </h3>
     <div class="flex gap-4 mb-4">
-      <input type="number" id="tableRows" placeholder="行数" value="3" min="1" max="10" class="w-1/2 p-2 border rounded">
-      <input type="number" id="tableCols" placeholder="列数" value="3" min="1" max="10" class="w-1/2 p-2 border rounded">
+      <input type="number" id="tableRows" placeholder="行数" value="3" min="1" max="10" class="w-1/2 p-3 apple-input">
+      <input type="number" id="tableCols" placeholder="列数" value="3" min="1" max="10" class="w-1/2 p-3 apple-input">
     </div>
-    <div class="flex justify-end gap-2">
-      <button id="cancelTableBtn" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">キャンセル</button>
-      <button id="confirmTableBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">挿入</button>
+    <div class="flex justify-end gap-3">
+      <button id="cancelTableBtn" class="px-5 py-2 apple-btn">キャンセル</button>
+      <button id="confirmTableBtn"
+        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow transition transform hover:scale-105">挿入</button>
     </div>
   </div>
 
@@ -154,14 +189,14 @@
     let currentSelectionRange = null;
     let editorInitialized = false;
     let isFullscreenMode = false;
-    
+
     // エディターフレームの初期化
     function initializeEditorFrame() {
       try {
         // iframeのドキュメントを取得
         const editorFrame = document.getElementById('editor-frame');
         const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
-        
+
         // 基本的なHTML構造を設定
         frameDoc.open();
         frameDoc.write(`
@@ -172,110 +207,125 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>HTML Editor Preview</title>
             <link rel="stylesheet" href="/static/css/tailwind.css">
-            
+
             <!-- Chart.js ライブラリ（グラフ描画用） -->
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            
-            <!-- Mermaid ライブラリ（図表描画用） -->
-            <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-            
-            <style>
-              html, body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                box-sizing: border-box;
-              }
-              body {
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                line-height: 1.5;
-              }
-              #editor-content {
-                outline: none;
-                min-height: 100%;
-                padding: 20px;
-                margin: 0;
-                width: 100%;
-                box-sizing: border-box;
-                overflow: auto;
-              }
-              #editor-content p {
-                margin: 0 0 1em 0;
-              }
-              #editor-content > *:first-child {
-                margin-top: 0;
-              }
-              table {
-                border-collapse: collapse;
-                margin: 10px 0;
-                width: 100%;
-              }
-              table, th, td {
-                border: 1px solid #ddd;
-              }
-              th, td {
-                padding: 8px;
-                text-align: left;
-              }
-              img {
-                max-width: 100%;
-              }
-              
-              /* マーメイド図の表示を調整 */
-              .mermaid {
-                margin: 1em 0;
-                overflow: auto;
-                background-color: white;
-              }
-              
-              /* コード表示の調整 */
-              code, pre {
-                font-family: monospace;
-                background-color: #f5f5f5;
-                border-radius: 4px;
-              }
-              
-              pre {
-                padding: 1em;
-                overflow: auto;
-              }
-              
-              code {
-                padding: 0.2em 0.4em;
-              }
-              
-              /* canvasベースの要素をより表示しやすく */
-              canvas {
-                max-width: 100%;
-                background-color: white;
-                border: 1px solid #eee;
-              }
-              
-              /* 数式やLaTeX風の表示も考慮 */
-              .math, .katex {
-                overflow-x: auto;
-                max-width: 100%;
-              }
-            </style>
-            
-            <!-- 数式表示用ライブラリ（KaTeX） -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-            <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-          </head>
-          <body>
-            <div id="editor-content" contenteditable="true">
-              <p>Claude で生成された HTML がここに表示されます...</p>
-            </div>
-            
-            <script>
+
+  <!-- Mermaid ライブラリ（図表描画用） -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+    }
+
+    #editor-content {
+      outline: none;
+      min-height: 100%;
+      padding: 20px;
+      margin: 0;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+
+    #editor-content p {
+      margin: 0 0 1em 0;
+    }
+
+    #editor-content>*:first-child {
+      margin-top: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    /* マーメイド図の表示を調整 */
+    .mermaid {
+      margin: 1em 0;
+      overflow: auto;
+      background-color: white;
+    }
+
+    /* コード表示の調整 */
+    code,
+    pre {
+      font-family: monospace;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    pre {
+      padding: 1em;
+      overflow: auto;
+    }
+
+    code {
+      padding: 0.2em 0.4em;
+    }
+
+    /* canvasベースの要素をより表示しやすく */
+    canvas {
+      max-width: 100%;
+      background-color: white;
+      border: 1px solid #eee;
+    }
+
+    /* 数式やLaTeX風の表示も考慮 */
+    .math,
+    .katex {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+  </style>
+
+  <!-- 数式表示用ライブラリ（KaTeX） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  </head>
+
+  <body>
+    <div id="editor-content" contenteditable="true">
+      <p>Claude で生成された HTML がここに表示されます...</p>
+    </div>
+
+    <script>
               // Mermaidの初期化
               mermaid.initialize({
                 startOnLoad: true,
                 theme: 'default'
               });
-              
+
               // ミューテーションオブザーバーでDOM変更を監視
               const observer = new MutationObserver((mutations) => {
                 // マーメイド図表を再レンダリング
@@ -284,7 +334,7 @@
                 } catch (e) {
                   console.log('Mermaid rendering error:', e);
                 }
-                
+
                 // Chart.js グラフを探して処理
                 document.querySelectorAll('canvas[data-chart]:not([data-processed])').forEach(canvas => {
                   try {
@@ -295,10 +345,10 @@
                     console.log('Chart rendering error:', e);
                   }
                 });
-                
+
                 // その他のカスタム要素の処理を追加可能
               });
-              
+
               // オブザーバー設定
               observer.observe(document.body, {
                 childList: true,
@@ -306,7 +356,7 @@
                 attributes: false,
                 characterData: true
               });
-              
+
               // 親ウィンドウからのメッセージを受信
               window.addEventListener('message', function(event) {
                 if (event.data && event.data.type === 'set-content') {
@@ -314,333 +364,337 @@
                   document.getElementById('editor-content').innerHTML = event.data.content;
                 }
               });
-            </script>
-          </body>
-          </html>
-        `);
-        frameDoc.close();
-        
-        // 編集可能領域への参照
-        const frameEditor = frameDoc.getElementById('editor-content');
-        if (!frameEditor) {
-          console.error('エディタ要素が見つかりません');
-          return;
-        }
-        
-        // iframe内のWindowオブジェクトへの参照を保存
-        const frameWindow = editorFrame.contentWindow;
-        
-        // 親ウィンドウからのメッセージをiframe内でも処理できるようにする
-        frameWindow.addEventListener('message', function(event) {
-          if (event.data && event.data.type === 'set-content') {
-            console.log('iframe内でコンテンツを設定:', event.data.content);
-            const editorContent = frameDoc.getElementById('editor-content');
-            if (editorContent) {
-              editorContent.innerHTML = event.data.content;
-              // 内容更新後にカスタム要素を再レンダリング
-              try {
-                if (frameWindow.mermaid) {
-                  setTimeout(() => {
-                    frameWindow.mermaid.init(undefined, frameDoc.querySelectorAll('.mermaid:not(.mermaid-rendered)'));
-                  }, 100);
-                }
-              } catch (e) {
-                console.error('コンテンツ更新後の再レンダリングエラー:', e);
-              }
-            }
-          }
-        });
-        
-        // 編集イベントのリスナーを設定
-        frameEditor.addEventListener('input', () => {
-          sendContentToParent(frameEditor.innerHTML);
-        });
-        
-        // 選択範囲を保存するための機能
-        frameEditor.addEventListener('mouseup', saveSelection);
-        frameEditor.addEventListener('keyup', saveSelection);
-        
-        // 特殊コンテンツのレンダリングを初期化
-        initializeSpecialContentRendering(frameDoc);
-        
-        editorInitialized = true;
-      } catch (err) {
-        console.error('Editor frame initialization error:', err);
-      }
-    }
-    
-    // 特殊コンテンツ（マーメイド、グラフなど）のレンダリングを初期化
-    function initializeSpecialContentRendering(doc) {
-      try {
-        // マーメイド図の初期化
-        if (doc.defaultView.mermaid) {
-          setTimeout(() => {
-            doc.defaultView.mermaid.init(undefined, doc.querySelectorAll('.mermaid:not(.mermaid-rendered)'));
-          }, 500);
-        }
-        
-        // その他の特殊コンテンツの初期化
-      } catch (e) {
-        console.error('Special content initialization error:', e);
-      }
-    }
-    
-    // 選択範囲を保存
-    function saveSelection() {
-      const editorFrame = document.getElementById('editor-frame');
-      const frameWin = editorFrame.contentWindow;
-      
-      if (frameWin.getSelection && frameWin.getSelection().getRangeAt && frameWin.getSelection().rangeCount) {
-        currentSelectionRange = frameWin.getSelection().getRangeAt(0);
-      }
-    }
-    
-    // 選択範囲を復元
-    function restoreSelection() {
-      if (!currentSelectionRange) return;
-      
-      const editorFrame = document.getElementById('editor-frame');
-      const frameWin = editorFrame.contentWindow;
-      
-      if (frameWin.getSelection) {
-        const selection = frameWin.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(currentSelectionRange);
-      }
-    }
-    
-    // フォーマットコマンドを実行
-    function executeFormatCommand(command, value = null) {
-      try {
-        const editorFrame = document.getElementById('editor-frame');
-        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
-        
-        // 選択範囲を復元
-        restoreSelection();
-        
-        // コマンドを実行
-        frameDoc.execCommand(command, false, value);
-        
-        // 更新された内容を取得
-        const frameEditor = frameDoc.getElementById('editor-content');
-        sendContentToParent(frameEditor.innerHTML);
-      } catch (err) {
-        console.error('Format command error:', err);
-      }
-    }
-    
-    // 親ウィンドウに内容を送信
-    function sendContentToParent(content) {
-      window.parent.postMessage({
-        type: 'editor-content-update',
-        content: content
-      }, '*');
-    }
-    
-    // テーブルHTMLを作成
-    function createTable(rows, cols) {
-      let tableHtml = '<table class="table-auto w-full"><thead><tr>';
-      
+    </script>
+  </body>
+
+</html>
+`);
+frameDoc.close();
+
+// 編集可能領域への参照
+const frameEditor = frameDoc.getElementById('editor-content');
+if (!frameEditor) {
+console.error('エディタ要素が見つかりません');
+return;
+}
+
+// iframe内のWindowオブジェクトへの参照を保存
+const frameWindow = editorFrame.contentWindow;
+
+// 親ウィンドウからのメッセージをiframe内でも処理できるようにする
+frameWindow.addEventListener('message', function(event) {
+if (event.data && event.data.type === 'set-content') {
+console.log('iframe内でコンテンツを設定:', event.data.content);
+const editorContent = frameDoc.getElementById('editor-content');
+if (editorContent) {
+editorContent.innerHTML = event.data.content;
+// 内容更新後にカスタム要素を再レンダリング
+try {
+if (frameWindow.mermaid) {
+setTimeout(() => {
+frameWindow.mermaid.init(undefined, frameDoc.querySelectorAll('.mermaid:not(.mermaid-rendered)'));
+}, 100);
+}
+} catch (e) {
+console.error('コンテンツ更新後の再レンダリングエラー:', e);
+}
+}
+}
+});
+
+// 編集イベントのリスナーを設定
+frameEditor.addEventListener('input', () => {
+sendContentToParent(frameEditor.innerHTML);
+});
+
+// 選択範囲を保存するための機能
+frameEditor.addEventListener('mouseup', saveSelection);
+frameEditor.addEventListener('keyup', saveSelection);
+
+// 特殊コンテンツのレンダリングを初期化
+initializeSpecialContentRendering(frameDoc);
+
+editorInitialized = true;
+} catch (err) {
+console.error('Editor frame initialization error:', err);
+}
+}
+
+// 特殊コンテンツ（マーメイド、グラフなど）のレンダリングを初期化
+function initializeSpecialContentRendering(doc) {
+try {
+// マーメイド図の初期化
+if (doc.defaultView.mermaid) {
+setTimeout(() => {
+doc.defaultView.mermaid.init(undefined, doc.querySelectorAll('.mermaid:not(.mermaid-rendered)'));
+}, 500);
+}
+
+// その他の特殊コンテンツの初期化
+} catch (e) {
+console.error('Special content initialization error:', e);
+}
+}
+
+// 選択範囲を保存
+function saveSelection() {
+const editorFrame = document.getElementById('editor-frame');
+const frameWin = editorFrame.contentWindow;
+
+if (frameWin.getSelection && frameWin.getSelection().getRangeAt && frameWin.getSelection().rangeCount) {
+currentSelectionRange = frameWin.getSelection().getRangeAt(0);
+}
+}
+
+// 選択範囲を復元
+function restoreSelection() {
+if (!currentSelectionRange) return;
+
+const editorFrame = document.getElementById('editor-frame');
+const frameWin = editorFrame.contentWindow;
+
+if (frameWin.getSelection) {
+const selection = frameWin.getSelection();
+selection.removeAllRanges();
+selection.addRange(currentSelectionRange);
+}
+}
+
+// フォーマットコマンドを実行
+function executeFormatCommand(command, value = null) {
+try {
+const editorFrame = document.getElementById('editor-frame');
+const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+
+// 選択範囲を復元
+restoreSelection();
+
+// コマンドを実行
+frameDoc.execCommand(command, false, value);
+
+// 更新された内容を取得
+const frameEditor = frameDoc.getElementById('editor-content');
+sendContentToParent(frameEditor.innerHTML);
+} catch (err) {
+console.error('Format command error:', err);
+}
+}
+
+// 親ウィンドウに内容を送信
+function sendContentToParent(content) {
+window.parent.postMessage({
+type: 'editor-content-update',
+content: content
+}, '*');
+}
+
+// テーブルHTMLを作成
+function createTable(rows, cols) {
+let tableHtml = '<table class="table-auto w-full">
+  <thead>
+    <tr>';
+
       // ヘッダー行
-      for (let i = 0; i < cols; i++) {
-        tableHtml += `<th>見出し ${i+1}</th>`;
-      }
-      tableHtml += '</tr></thead><tbody>';
-      
-      // データ行
-      for (let i = 0; i < rows-1; i++) {
-        tableHtml += '<tr>';
-        for (let j = 0; j < cols; j++) {
-          tableHtml += `<td>セル ${i+1}-${j+1}</td>`;
+      for (let i = 0; i < cols; i++) { tableHtml +=`<th>見出し ${i+1}</th>`;
         }
-        tableHtml += '</tr>';
+        tableHtml += '</tr>
+  </thead>
+  <tbody>';
+
+    // データ行
+    for (let i = 0; i < rows-1; i++) { tableHtml +='<tr>' ; for (let j=0; j < cols; j++) { tableHtml +=`<td>セル
+      ${i+1}-${j+1}</td>`;
       }
-      
-      tableHtml += '</tbody></table>';
-      return tableHtml;
-    }
-    
-    // ダイアログを表示
-    function showDialog(dialog) {
-      document.getElementById('overlay').style.display = 'block';
-      dialog.style.display = 'block';
-    }
-    
-    // ダイアログを非表示
-    function hideDialog(dialog) {
-      document.getElementById('overlay').style.display = 'none';
-      dialog.style.display = 'none';
-    }
-    
-    // 全画面表示モードを設定
-    function setFullscreenMode(isFullscreen) {
-      const editorContainer = document.getElementById('editor-container');
-      isFullscreenMode = isFullscreen;
-      
-      if (isFullscreen) {
-        document.body.classList.add('fullscreen-editor');
-        editorContainer.style.height = 'calc(100vh - 50px)'; // ツールバーの高さを考慮
-      } else {
-        document.body.classList.remove('fullscreen-editor');
-        editorContainer.style.height = '';
+      tableHtml += '</tr>';
       }
-      
-      // エディターフレームのサイズを調整
-      const editorFrame = document.getElementById('editor-frame');
-      if (editorFrame) {
-        adjustEditorSize();
-        
-        // iframe内のコンテンツスタイルも調整
-        try {
-          const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
-          const editorContent = frameDoc.getElementById('editor-content');
-          
-          if (editorContent) {
-            editorContent.style.margin = '0';
-          }
-        } catch (e) {
-          console.error('iframe content adjustment error:', e);
-        }
-      }
-    }
-    
-    // エディターサイズを調整
-    function adjustEditorSize() {
-      const editorFrame = document.getElementById('editor-frame');
-      const toolbar = document.querySelector('.toolbar');
-      
-      if (editorFrame && toolbar) {
-        const viewportHeight = window.innerHeight;
-        const toolbarHeight = toolbar.offsetHeight;
-        const editorHeight = viewportHeight - toolbarHeight;
-        
-        if (isFullscreenMode) {
-          editorFrame.style.height = `${editorHeight}px`;
-        } else {
-          editorFrame.style.height = `${editorHeight}px`;
-        }
-      }
-    }
 
-    // イベントリスナー - フォーマットボタン
-    document.querySelectorAll('[data-command]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const command = btn.getAttribute('data-command');
-        const value = btn.getAttribute('data-value') || null;
-        executeFormatCommand(command, value);
-      });
-    });
+      tableHtml += '</tbody>
+</table>';
+return tableHtml;
+}
 
-    // イベントリスナー - 画像挿入ボタン
-    document.getElementById('insertImageBtn').addEventListener('click', () => {
-      showDialog(document.getElementById('imageDialog'));
-    });
+// ダイアログを表示
+function showDialog(dialog) {
+document.getElementById('overlay').style.display = 'block';
+dialog.style.display = 'block';
+}
 
-    // イベントリスナー - 画像挿入ダイアログ確定
-    document.getElementById('confirmImageBtn').addEventListener('click', () => {
-      const url = document.getElementById('imageUrl').value;
-      const alt = document.getElementById('imageAlt').value;
-      
-      if (url) {
-        executeFormatCommand('insertHTML', `<img src="${url}" alt="${alt}" class="max-w-full">`);
-      }
-      
-      hideDialog(document.getElementById('imageDialog'));
-    });
+// ダイアログを非表示
+function hideDialog(dialog) {
+document.getElementById('overlay').style.display = 'none';
+dialog.style.display = 'none';
+}
 
-    // イベントリスナー - 画像挿入ダイアログキャンセル
-    document.getElementById('cancelImageBtn').addEventListener('click', () => {
-      hideDialog(document.getElementById('imageDialog'));
-    });
+// 全画面表示モードを設定
+function setFullscreenMode(isFullscreen) {
+const editorContainer = document.getElementById('editor-container');
+isFullscreenMode = isFullscreen;
 
-    // イベントリスナー - リンク挿入ボタン
-    document.getElementById('insertLinkBtn').addEventListener('click', () => {
-      const editorFrame = document.getElementById('editor-frame');
-      const frameWin = editorFrame.contentWindow;
-      const selection = frameWin.getSelection();
-      
-      if (selection && selection.toString()) {
-        document.getElementById('linkText').value = selection.toString();
-      } else {
-        document.getElementById('linkText').value = '';
-      }
-      
-      showDialog(document.getElementById('linkDialog'));
-    });
+if (isFullscreen) {
+document.body.classList.add('fullscreen-editor');
+editorContainer.style.height = 'calc(100vh - 50px)'; // ツールバーの高さを考慮
+} else {
+document.body.classList.remove('fullscreen-editor');
+editorContainer.style.height = '';
+}
 
-    // イベントリスナー - リンク挿入ダイアログ確定
-    document.getElementById('confirmLinkBtn').addEventListener('click', () => {
-      const url = document.getElementById('linkUrl').value;
-      const text = document.getElementById('linkText').value || url;
-      const target = document.getElementById('linkTarget').value;
-      
-      if (url) {
-        executeFormatCommand('insertHTML', `<a href="${url}" target="${target}">${text}</a>`);
-      }
-      
-      hideDialog(document.getElementById('linkDialog'));
-    });
+// エディターフレームのサイズを調整
+const editorFrame = document.getElementById('editor-frame');
+if (editorFrame) {
+adjustEditorSize();
 
-    // イベントリスナー - リンク挿入ダイアログキャンセル
-    document.getElementById('cancelLinkBtn').addEventListener('click', () => {
-      hideDialog(document.getElementById('linkDialog'));
-    });
+// iframe内のコンテンツスタイルも調整
+try {
+const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+const editorContent = frameDoc.getElementById('editor-content');
 
-    // イベントリスナー - テーブル挿入ボタン
-    document.getElementById('insertTableBtn').addEventListener('click', () => {
-      showDialog(document.getElementById('tableDialog'));
-    });
+if (editorContent) {
+editorContent.style.margin = '0';
+}
+} catch (e) {
+console.error('iframe content adjustment error:', e);
+}
+}
+}
 
-    // イベントリスナー - テーブル挿入ダイアログ確定
-    document.getElementById('confirmTableBtn').addEventListener('click', () => {
-      const rows = parseInt(document.getElementById('tableRows').value) || 3;
-      const cols = parseInt(document.getElementById('tableCols').value) || 3;
-      
-      if (rows > 0 && cols > 0) {
-        const tableHtml = createTable(rows, cols);
-        executeFormatCommand('insertHTML', tableHtml);
-      }
-      
-      hideDialog(document.getElementById('tableDialog'));
-    });
+// エディターサイズを調整
+function adjustEditorSize() {
+const editorFrame = document.getElementById('editor-frame');
+const toolbar = document.querySelector('.toolbar');
 
-    // イベントリスナー - テーブル挿入ダイアログキャンセル
-    document.getElementById('cancelTableBtn').addEventListener('click', () => {
-      hideDialog(document.getElementById('tableDialog'));
-    });
+if (editorFrame && toolbar) {
+const viewportHeight = window.innerHeight;
+const toolbarHeight = toolbar.offsetHeight;
+const editorHeight = viewportHeight - toolbarHeight;
 
-    // ウィンドウリサイズ時にエディターサイズを調整
-    window.addEventListener('resize', adjustEditorSize);
+if (isFullscreenMode) {
+editorFrame.style.height = `${editorHeight}px`;
+} else {
+editorFrame.style.height = `${editorHeight}px`;
+}
+}
+}
 
-    // 親ウィンドウからのメッセージを監視
-    window.addEventListener('message', function(event) {
-      if (event.data.type === 'set-content') {
-        const editorFrame = document.getElementById('editor-frame');
-        const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
-        const frameEditor = frameDoc.getElementById('editor-content');
-        
-        if (frameEditor) {
-          frameEditor.innerHTML = event.data.content;
-          // 内容が更新されたことを親ウィンドウに通知
-          sendContentToParent(event.data.content);
-        }
-      } else if (event.data.type === 'layout-change') {
-        // レイアウト変更メッセージを受け取ったら全画面モードを設定
-        setFullscreenMode(event.data.isFullscreen);
-      }
-    });
+// イベントリスナー - フォーマットボタン
+document.querySelectorAll('[data-command]').forEach(btn => {
+btn.addEventListener('click', () => {
+const command = btn.getAttribute('data-command');
+const value = btn.getAttribute('data-value') || null;
+executeFormatCommand(command, value);
+});
+});
 
-    // ページ読み込み時にエディターを初期化
-    window.addEventListener('load', function() {
-      initializeEditorFrame();
-      adjustEditorSize();
-    });
+// イベントリスナー - 画像挿入ボタン
+document.getElementById('insertImageBtn').addEventListener('click', () => {
+showDialog(document.getElementById('imageDialog'));
+});
 
-    // すでにページが読み込まれている場合は初期化
-    if (document.readyState === 'complete') {
-      initializeEditorFrame();
-      adjustEditorSize();
-    }
-  </script>
+// イベントリスナー - 画像挿入ダイアログ確定
+document.getElementById('confirmImageBtn').addEventListener('click', () => {
+const url = document.getElementById('imageUrl').value;
+const alt = document.getElementById('imageAlt').value;
+
+if (url) {
+executeFormatCommand('insertHTML', `<img src="${url}" alt="${alt}" class="max-w-full">`);
+}
+
+hideDialog(document.getElementById('imageDialog'));
+});
+
+// イベントリスナー - 画像挿入ダイアログキャンセル
+document.getElementById('cancelImageBtn').addEventListener('click', () => {
+hideDialog(document.getElementById('imageDialog'));
+});
+
+// イベントリスナー - リンク挿入ボタン
+document.getElementById('insertLinkBtn').addEventListener('click', () => {
+const editorFrame = document.getElementById('editor-frame');
+const frameWin = editorFrame.contentWindow;
+const selection = frameWin.getSelection();
+
+if (selection && selection.toString()) {
+document.getElementById('linkText').value = selection.toString();
+} else {
+document.getElementById('linkText').value = '';
+}
+
+showDialog(document.getElementById('linkDialog'));
+});
+
+// イベントリスナー - リンク挿入ダイアログ確定
+document.getElementById('confirmLinkBtn').addEventListener('click', () => {
+const url = document.getElementById('linkUrl').value;
+const text = document.getElementById('linkText').value || url;
+const target = document.getElementById('linkTarget').value;
+
+if (url) {
+executeFormatCommand('insertHTML', `<a href="${url}" target="${target}">${text}</a>`);
+}
+
+hideDialog(document.getElementById('linkDialog'));
+});
+
+// イベントリスナー - リンク挿入ダイアログキャンセル
+document.getElementById('cancelLinkBtn').addEventListener('click', () => {
+hideDialog(document.getElementById('linkDialog'));
+});
+
+// イベントリスナー - テーブル挿入ボタン
+document.getElementById('insertTableBtn').addEventListener('click', () => {
+showDialog(document.getElementById('tableDialog'));
+});
+
+// イベントリスナー - テーブル挿入ダイアログ確定
+document.getElementById('confirmTableBtn').addEventListener('click', () => {
+const rows = parseInt(document.getElementById('tableRows').value) || 3;
+const cols = parseInt(document.getElementById('tableCols').value) || 3;
+
+if (rows > 0 && cols > 0) {
+const tableHtml = createTable(rows, cols);
+executeFormatCommand('insertHTML', tableHtml);
+}
+
+hideDialog(document.getElementById('tableDialog'));
+});
+
+// イベントリスナー - テーブル挿入ダイアログキャンセル
+document.getElementById('cancelTableBtn').addEventListener('click', () => {
+hideDialog(document.getElementById('tableDialog'));
+});
+
+// ウィンドウリサイズ時にエディターサイズを調整
+window.addEventListener('resize', adjustEditorSize);
+
+// 親ウィンドウからのメッセージを監視
+window.addEventListener('message', function(event) {
+if (event.data.type === 'set-content') {
+const editorFrame = document.getElementById('editor-frame');
+const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
+const frameEditor = frameDoc.getElementById('editor-content');
+
+if (frameEditor) {
+frameEditor.innerHTML = event.data.content;
+// 内容が更新されたことを親ウィンドウに通知
+sendContentToParent(event.data.content);
+}
+} else if (event.data.type === 'layout-change') {
+// レイアウト変更メッセージを受け取ったら全画面モードを設定
+setFullscreenMode(event.data.isFullscreen);
+}
+});
+
+// ページ読み込み時にエディターを初期化
+window.addEventListener('load', function() {
+initializeEditorFrame();
+adjustEditorSize();
+});
+
+// すでにページが読み込まれている場合は初期化
+if (document.readyState === 'complete') {
+initializeEditorFrame();
+adjustEditorSize();
+}
+</script>
 </body>
+
 </html>

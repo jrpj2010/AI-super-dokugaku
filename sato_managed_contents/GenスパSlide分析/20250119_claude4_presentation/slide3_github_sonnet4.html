@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>なぜGitHubとCursorが絶賛？Claude Sonnet 4の破壊力</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2d2d7a 50%, #4a4ab8 100%);
+    }
+
+    .ai-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(97, 218, 251, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(97, 218, 251, 0.08) 1px, transparent 1px);
+      background-size: 35px 35px;
+      animation: gridMove 30s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(35px, 35px);
+      }
+    }
+
+    .slide-title {
+      font-size: 46px;
+      font-weight: 900;
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #ffffff, #61dafb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .comparison-table {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      overflow: hidden;
+    }
+
+    .comparison-table th {
+      background: linear-gradient(45deg, #3023ae, #61dafb);
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .comparison-table td {
+      padding: 8px 12px;
+      color: white;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(97, 218, 251, 0.2);
+    }
+
+    .improvement-badge {
+      background: linear-gradient(45deg, #10b981, #34d399);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .company-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 6px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      height: 80px;
+    }
+
+    .company-card:hover {
+      transform: translateY(-5px);
+      background: rgba(97, 218, 251, 0.15);
+      box-shadow: 0 20px 40px rgba(97, 218, 251, 0.2);
+    }
+
+    .company-logo {
+      font-size: 32px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .github-logo {
+      color: #333;
+    }
+
+    .cursor-logo {
+      color: #007acc;
+    }
+
+    .igent-logo {
+      color: #ff6b6b;
+    }
+
+    .sourcegraph-logo {
+      color: #00b4d8;
+    }
+
+    .company-name {
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .company-quote {
+      color: #d1d5db;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .reasons-list {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+    }
+
+    .reason-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 15px;
+      background: rgba(97, 218, 251, 0.1);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .reason-item:hover {
+      transform: translateX(10px);
+      background: rgba(97, 218, 251, 0.2);
+    }
+
+    .reason-number {
+      background: linear-gradient(45deg, #61dafb, #3023ae);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-right: 20px;
+      font-size: 18px;
+    }
+
+    .reason-text {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-icon {
+      color: #61dafb;
+      font-size: 36px;
+      margin-right: 20px;
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="ai-grid"></div>
+
+    <div class="p-6">
+      <h1 class="slide-title">
+        なぜGitHub・Cursorが絶賛？<br>
+        Claude Sonnet 4の破壊力
+      </h1>
+
+      <div class="grid grid-cols-12 gap-4 h-3/5">
+        <!-- 左カラム: コスパ比較表 -->
+        <div class="col-span-5">
+          <h2 class="section-title">
+            <i class="fas fa-chart-bar section-icon"></i>
+            コスパ最強の実力
+          </h2>
+
+          <table class="comparison-table w-full mb-8">
+            <thead>
+              <tr>
+                <th>比較項目</th>
+                <th>Sonnet 3.7</th>
+                <th>Sonnet 4</th>
+                <th>改善率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>コスト</strong></td>
+                <td>$3/$15</td>
+                <td><span class="text-cyan-300 font-bold">$3/$15</span></td>
+                <td><span class="improvement-badge">据え置き</span></td>
+              </tr>
+              <tr>
+                <td><strong>性能</strong></td>
+                <td>良好</td>
+                <td><span class="text-cyan-300 font-bold">大幅向上</span></td>
+                <td><span class="improvement-badge">+65%</span></td>
+              </tr>
+              <tr>
+                <td><strong>SWE-bench</strong></td>
+                <td>約50%</td>
+                <td><span class="text-cyan-300 font-bold">72.7%</span></td>
+                <td><span class="improvement-badge">+45%</span></td>
+              </tr>
+              <tr>
+                <td><strong>指示追従性</strong></td>
+                <td>過度に意欲的</td>
+                <td><span class="text-cyan-300 font-bold">正確で的確</span></td>
+                <td><span class="improvement-badge">大幅改善</span></td>
+              </tr>
+              <tr>
+                <td><strong>エラー率</strong></td>
+                <td>20%</td>
+                <td><span class="text-cyan-300 font-bold">ほぼ0%</span></td>
+                <td><span class="improvement-badge">-95%</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="reasons-list">
+            <h3 class="text-white text-24 font-bold mb-6">GitHub採用の3つの理由</h3>
+            <div class="reason-item">
+              <div class="reason-number">1</div>
+              <div class="reason-text">強力なソフトウェアエンジニアリング知識</div>
+            </div>
+            <div class="reason-item">
+              <div class="reason-number">2</div>
+              <div class="reason-text">優れた問題解決能力</div>
+            </div>
+            <div class="reason-item">
+              <div class="reason-number">3</div>
+              <div class="reason-text">卓越した指示追従能力</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右カラム: 企業評価 -->
+        <div class="col-span-7">
+          <h2 class="section-title">
+            <i class="fas fa-star section-icon"></i>
+            実際の企業評価
+          </h2>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div class="company-card">
+              <i class="fab fa-github company-logo github-logo"></i>
+              <h3 class="company-name">GitHub</h3>
+              <p class="company-quote">
+                "GitHub Copilotの新エージェントに採用"
+              </p>
+            </div>
+
+            <div class="company-card">
+              <i class="fas fa-code company-logo cursor-logo"></i>
+              <h3 class="company-name">Cursor</h3>
+              <p class="company-quote">
+                "複雑なコードベース理解で飛躍的進歩"
+              </p>
+            </div>
+
+            <div class="company-card">
+              <i class="fas fa-robot company-logo igent-logo"></i>
+              <h3 class="company-name">iGent</h3>
+              <p class="company-quote">
+                "エラー率20%→ほぼ0%削減"
+              </p>
+            </div>
+
+            <div class="company-card">
+              <i class="fas fa-search company-logo sourcegraph-logo"></i>
+              <h3 class="company-name">Sourcegraph</h3>
+              <p class="company-quote">
+                "よりエレガントなコード品質を提供"
+              </p>
+            </div>
+          </div>
+
+          <!-- ミニチャート復活 -->
+          <div class="chart-container mt-4">
+            <h3 class="text-white text-sm font-bold mb-2 text-center">エラー率</h3>
+            <canvas id="errorChart" width="200" height="100"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // GSAP アニメーション
+    gsap.timeline()
+      .from(".slide-title", { duration: 1.2, y: -50, opacity: 0, ease: "power3.out" })
+      .from(".section-title", { duration: 1, y: 30, opacity: 0, stagger: 0.3, ease: "power2.out" }, "-=0.5")
+      .from(".comparison-table", { duration: 1.5, scale: 0.8, opacity: 0, ease: "back.out(1.2)" }, "-=0.8")
+      .from(".reasons-list", { duration: 1.2, x: -100, opacity: 0, ease: "power2.out" }, "-=0.8")
+      .from(".company-card", { duration: 0.8, y: 50, opacity: 0, stagger: 0.15, ease: "power2.out" }, "-=0.5");
+
+    // エラー率チャート生成
+    setTimeout(() => {
+      const ctx = document.getElementById('errorChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Sonnet 3.7', 'Sonnet 4'],
+          datasets: [{
+            label: 'エラー率',
+            data: [20, 1],
+            backgroundColor: ['#ef4444', '#10b981'],
+            borderColor: ['#dc2626', '#059669'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 25,
+              ticks: { color: '#ffffff', font: { size: 10 } }
+            },
+            x: {
+              ticks: { color: '#ffffff', font: { size: 10 } }
+            }
+          }
+        }
+      });
+    }, 2000);
+  </script>
+</body>
+
+</html>

@@ -2,88 +2,311 @@
 
 /* ダークモード切り替え時にちらつきを防止 */
 html.dark {
-    background-color: #111827;
-    color: #f9fafb;
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+/* iframeスタイル */
+iframe {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+html.dark iframe {
+  background-color: #1f2937;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* コードエディタースタイル */
+#code-editor {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  line-height: 1.5;
+  tab-size: 2;
+  white-space: pre-wrap;
+  resize: none;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+/* Apple風のガラスモーフィズム効果 */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glassmorphism {
+  background: rgba(31, 41, 55, 0.7);
+  border: 1px solid rgba(31, 41, 55, 0.18);
+}
+
+/* ヘッダー改良 */
+header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark header.scrolled {
+  background: rgba(31, 41, 55, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Appleスタイルのボタン */
+.apple-btn {
+  padding: 8px 16px;
+  background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+  border-radius: 20px;
+  border: none;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.apple-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.apple-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark .apple-btn {
+  background: linear-gradient(145deg, #2d3748, #1f2937);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Apple風の入力フィールド */
+.apple-input {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.apple-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+.dark .apple-input {
+  border-color: #4b5563;
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.dark .apple-input:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.1);
+}
+
+/* トースト通知のアニメーション改良 */
+[x-cloak] {
+  display: none !important;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* モバイル対応 */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
-  /* iframeスタイル */
-  iframe {
-    background-color: white;
+
+  .toolbar button {
+    font-size: 12px;
+    padding: 4px 8px;
   }
-  
-  html.dark iframe {
-    background-color: #1f2937;
+
+  .material-icons {
+    font-size: 14px;
   }
-  
-  /* コードエディタースタイル */
-  #code-editor {
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-    line-height: 1.5;
-    tab-size: 2;
-    white-space: pre-wrap;
-    resize: none;
+}
+
+/* レイアウトのマージン調整 - 追加 */
+@media (min-width: 1024px) {
+  .lg\:w-1\/2 {
+    width: 48%;
+    /* 50%から48%に変更して間隔を確保 */
   }
-  
-  /* トースト通知のアニメーション */
-  [x-cloak] {
-    display: none !important;
+
+  .flex.flex-col.lg\:flex-row.gap-6 {
+    gap: 2rem !important;
+    /* ギャップを増やす */
+    justify-content: space-between;
+    padding: 0 1rem;
   }
-  
-  .toast-enter-active,
-  .toast-leave-active {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* コンテナの余白を調整 */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  
-  .toast-enter-from,
-  .toast-leave-to {
-    transform: translateY(20px);
-    opacity: 0;
+
+  /* エディタエリアの左マージンを確保 */
+  #wysiwyg-frame,
+  #code-editor,
+  #preview-frame {
+    margin-left: 0.5rem;
   }
-  
-  /* モバイル対応 */
-  @media (max-width: 640px) {
-    .toolbar {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .toolbar button {
-      font-size: 12px;
-      padding: 4px 8px;
-    }
-    
-    .material-icons {
-      font-size: 14px;
-    }
+}
+
+/* エディタエリアのスクロールバー改良 */
+textarea::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.dark textarea::-webkit-scrollbar-thumb,
+.dark .scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+/* アクセシビリティ対応 */
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
+  transition: box-shadow 0.2s ease;
+}
+
+.dark :focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.4);
+}
+
+button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+}
+
+.dark button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.5);
+}
+
+/* visually-hidden クラス（スクリーンリーダー対応） */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* 微細なアニメーションとインタラクション */
+.pulse-on-hover:hover {
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  
-  /* アクセシビリティ対応 */
-  :focus {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
+
+  50% {
+    transform: scale(1.03);
   }
-  
-  .dark :focus {
-    outline-color: #818cf8;
+
+  100% {
+    transform: scale(1);
   }
-  
-  button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
-  }
-  
-  .dark button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.5);
-  }
-  
-  /* visually-hidden クラス（スクリーンリーダー対応） */
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
+}
+
+/* スムーズなページトランジション */
+body {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+body.page-transition {
+  opacity: 0;
+}
+
+/* Apple風のスイッチ */
+.apple-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.apple-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.apple-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e2e8f0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.apple-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.apple-switch input:checked+.apple-switch-slider {
+  background-color: #4f46e5;
+}
+
+.apple-switch input:focus+.apple-switch-slider {
+  box-shadow: 0 0 1px #4f46e5;
+}
+
+.apple-switch input:checked+.apple-switch-slider:before {
+  transform: translateX(24px);
+}

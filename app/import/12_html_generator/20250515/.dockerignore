@@ -1,0 +1,49 @@
+# Git関連
+.git
+.gitignore
+.gitattributes
+
+# Node.js関連
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Python関連
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+lib/
+lib64/
+include/
+share/
+bin/
+man/
+
+# OS生成ファイル
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE/エディタ関連
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker関連
+.dockerignore
+Dockerfile
+
+# その他
+.env
+*.env
+.env.*

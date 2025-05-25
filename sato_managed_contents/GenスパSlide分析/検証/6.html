@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>実録：90分で数日分の仕事を終わらせた衝撃のデモ</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #5e3a8e 0%, #8e2a5e 50%, #e63946 100%);
+      color: #ffffff;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline:before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 60px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s ease;
+    }
+
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 15px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2);
+      z-index: 1;
+    }
+
+    .comparison-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.6s ease;
+    }
+
+    .comparison-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px) !important;
+    }
+
+    .quote-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-left: 4px solid #e63946;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .ai-grid {
+      position: absolute;
+      right: -100px;
+      bottom: -100px;
+      width: 500px;
+      height: 500px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+      z-index: 1;
+    }
+
+    .ai-grid:before,
+    .ai-grid:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    .time-chip {
+      background: rgba(230, 57, 70, 0.7);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.8em;
+      display: inline-block;
+      margin-right: 10px;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .flow-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .animated-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    @keyframes flowRight {
+      from {
+        left: -10px;
+        opacity: 0.7;
+      }
+
+      to {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide flex items-center justify-center">
+    <div class="ai-grid"></div>
+    <div class="flow-line"></div>
+
+    <div class="content-wrapper px-16 py-10 w-full">
+      <h1 class="title text-4xl mb-6">
+        実録：<span class="text-pink-300">90分</span>で数日分の仕事を終わらせた<span class="text-pink-300">衝撃のデモ</span>
+      </h1>
+
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column - Timeline -->
+        <div>
+          <h2 class="text-xl font-bold mb-4 text-pink-300">
+            <i class="fas fa-clock mr-2"></i>Claude Codeの90分間の行動ログ
+          </h2>
+
+          <div class="timeline">
+            <div class="timeline-item" id="time1">
+              <div class="flex items-center mb-1">
+                <div class="time-chip">0-10分</div>
+                <h3 class="font-bold text-lg text-pink-200">ToDoリスト作成・全体設計</h3>
+              </div>
+              <p class="text-sm ml-24 opacity-80">タスクを理解し、全体の実装計画を立案</p>
+            </div>
+
+            <div class="timeline-item" id="time2">
+              <div class="flex items-center mb-1">
+                <div class="time-chip">10-30分</div>
+                <h3 class="font-bold text-lg text-pink-200">コードベース全体を探索・理解</h3>
+              </div>
+              <p class="text-sm ml-24 opacity-80">既存コードの構造と機能を詳細に分析</p>
+            </div>
+
+            <div class="timeline-item" id="time3">
+              <div class="flex items-center mb-1">
+                <div class="time-chip">30-60分</div>
+                <h3 class="font-bold text-lg text-pink-200">機能実装・エラー修正の反復</h3>
+              </div>
+              <p class="text-sm ml-24 opacity-80">コアとなるテーブル機能を実装し、発生する問題を即座に解決</p>
+            </div>
+
+            <div class="timeline-item" id="time4">
+              <div class="flex items-center mb-1">
+                <div class="time-chip">60-80分</div>
+                <h3 class="font-bold text-lg text-pink-200">テスト作成・品質保証</h3>
+              </div>
+              <p class="text-sm ml-24 opacity-80">機能の動作確認とエッジケースのテストを実施</p>
+            </div>
+
+            <div class="timeline-item" id="time5">
+              <div class="flex items-center mb-1">
+                <div class="time-chip">80-90分</div>
+                <h3 class="font-bold text-lg text-pink-200">PR作成・ドキュメント更新</h3>
+              </div>
+              <p class="text-sm ml-24 opacity-80">GitHubへのPR作成と自動ドキュメント更新を完了</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Sales Activity Comparison -->
+        <div>
+          <h2 class="text-xl font-bold mb-4 text-pink-300">
+            <i class="fas fa-sync-alt mr-2"></i>営業活動での相当作業
+          </h2>
+
+          <div class="space-y-4">
+            <div class="comparison-item p-4 rounded-lg" id="comp1">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-pink-800 bg-opacity-40 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-chess text-pink-300 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg text-pink-200">提案戦略の立案</h3>
+                  <p class="text-sm opacity-80">通常所要時間: <span class="line-through opacity-50">3時間</span> → <span
+                      class="font-bold text-white">10分</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="comparison-item p-4 rounded-lg" id="comp2">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-pink-800 bg-opacity-40 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-search text-pink-300 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg text-pink-200">顧客の全履歴・業界分析</h3>
+                  <p class="text-sm opacity-80">通常所要時間: <span class="line-through opacity-50">6時間</span> → <span
+                      class="font-bold text-white">20分</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="comparison-item p-4 rounded-lg" id="comp3">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-pink-800 bg-opacity-40 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-file-alt text-pink-300 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg text-pink-200">提案書作成・修正</h3>
+                  <p class="text-sm opacity-80">通常所要時間: <span class="line-through opacity-50">1日</span> → <span
+                      class="font-bold text-white">30分</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="comparison-item p-4 rounded-lg" id="comp4">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-pink-800 bg-opacity-40 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-tasks text-pink-300 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg text-pink-200">最終版作成・付属資料整備</h3>
+                  <p class="text-sm opacity-80">通常所要時間: <span class="line-through opacity-50">4時間</span> → <span
+                      class="font-bold text-white">20分</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote Section -->
+      <div class="quote-card p-5 mt-6">
+        <div class="flex items-center mb-2">
+          <div class="w-10 h-10 bg-pink-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-quote-left text-pink-300"></i>
+          </div>
+          <h3 class="font-bold text-lg">最も衝撃的だったポイント</h3>
+        </div>
+        <p class="italic ml-14 mb-2">
+          "通常、これにはコードベースのアーキテクチャと、他のすべてのツールがどのように実装されているかを理解する必要がありました。この場合、Claude Codeは<span
+            class="font-bold text-pink-300">文字通り何時間もの作業を私たちに代わって行っています。</span>"
+        </p>
+        <p class="text-right text-sm opacity-70">― Kat Wu氏（Anthropicプロダクトマネージャー）</p>
+      </div>
+
+      <div id="particles-container"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animate timeline items
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, 300 + (index * 200));
+      });
+
+      // Animate comparison items
+      const comparisonItems = document.querySelectorAll('.comparison-item');
+      comparisonItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, 800 + (index * 200));
+      });
+
+      // Create flowing particles
+      const container = document.querySelector('.slide');
+
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('animated-particle');
+
+        // Random vertical position
+        const topPos = Math.random() * 70 + 15; // 15% to 85% of height
+        particle.style.top = `${topPos}%`;
+
+        // Animation duration between 2-5 seconds
+        const duration = Math.random() * 3 + 2;
+        particle.style.animation = `flowRight ${duration}s linear forwards`;
+
+        container.appendChild(particle);
+
+        // Remove particle after animation completes
+        setTimeout(() => {
+          particle.remove();
+        }, duration * 1000);
+      }
+
+      // Create particles periodically
+      setInterval(createParticle, 300);
+    });
+  </script>
+</body>
+
+</html>

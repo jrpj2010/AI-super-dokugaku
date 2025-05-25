@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHubとCursorが絶賛するClaude Sonnet 4</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .comparison-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-left: 5px solid #3b82f6;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .comparison-table th {
+      background: #1e40af;
+      color: white;
+      font-weight: 600;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: #1e40af;
+      text-align: left;
+    }
+
+    .improvement-badge {
+      background: #10b981;
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .companies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .company-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .company-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    }
+
+    .company-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+    }
+
+    .company-logo {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #3b82f6;
+    }
+
+    .company-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 1rem;
+    }
+
+    .company-quote {
+      font-style: italic;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      border-left: 4px solid #3b82f6;
+      padding-left: 1rem;
+    }
+
+    .company-impact {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .key-reasons {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .reason-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #60a5fa;
+    }
+
+    .reason-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+
+    .reason-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .reason-text {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .companies-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reasons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">GitHubとCursorが絶賛するClaude Sonnet 4</h1>
+    <p class="slide-subtitle">コスパ最強の「日常業務革命」モデルの破壊力</p>
+  </div>
+
+  <div class="main-content">
+    <div class="comparison-section">
+      <h2 class="section-title">
+        <i class="fas fa-chart-bar"></i>
+        パフォーマンス比較：驚異的な改善率
+      </h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>Sonnet 3.7（旧）</th>
+            <th>Sonnet 4（新）</th>
+            <th>改善率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>コスト</td>
+            <td>$3/$15</td>
+            <td><strong>$3/$15（据え置き）</strong></td>
+            <td>0%<span class="improvement-badge">コスト据え置き</span></td>
+          </tr>
+          <tr>
+            <td>性能</td>
+            <td>良好</td>
+            <td><strong>大幅向上</strong></td>
+            <td>+65%<span class="improvement-badge">大幅向上</span></td>
+          </tr>
+          <tr>
+            <td>SWE-bench</td>
+            <td>約50%</td>
+            <td><strong>72.7%</strong></td>
+            <td>+45%<span class="improvement-badge">世界最高レベル</span></td>
+          </tr>
+          <tr>
+            <td>指示追従性</td>
+            <td>過度に意欲的</td>
+            <td><strong>正確で的確</strong></td>
+            <td><span class="improvement-badge">大幅改善</span></td>
+          </tr>
+          <tr>
+            <td>エラー率</td>
+            <td>20%</td>
+            <td><strong>ほぼ0%</strong></td>
+            <td>-95%<span class="improvement-badge">革命的改善</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="companies-grid">
+      <div class="company-card">
+        <div class="company-logo">
+          <i class="fab fa-github"></i>
+        </div>
+        <div class="company-name">GitHub</div>
+        <div class="company-quote">
+          "Claude Sonnet 4は、GitHub Copilotの新しいコーディングエージェントを動かすモデルとして採用されました。"
+        </div>
+        <div class="company-impact">Copilot正式採用</div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-logo">
+          <i class="fas fa-code"></i>
+        </div>
+        <div class="company-name">Cursor</div>
+        <div class="company-quote">
+          "最先端のコーディングモデルであり、複雑なコードベース理解において飛躍的な進歩"
+        </div>
+        <div class="company-impact">コードエディタ標準搭載</div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-logo">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="company-name">iGent</div>
+        <div class="company-quote">
+          "ナビゲーションエラーを20%からほぼゼロに削減"
+        </div>
+        <div class="company-impact">エラー率95%削減</div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-logo">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="company-name">Sourcegraph</div>
+        <div class="company-quote">
+          "より長く軌道に乗り続け、問題をより深く理解し、よりエレガントなコード品質を提供"
+        </div>
+        <div class="company-impact">コード品質向上</div>
+      </div>
+    </div>
+
+    <div class="key-reasons">
+      <h2 class="section-title" style="color: white;">
+        <i class="fas fa-star"></i>
+        GitHubが選んだ3つの決定的理由
+      </h2>
+      <div class="reasons-grid">
+        <div class="reason-item">
+          <div class="reason-number">01</div>
+          <div class="reason-title">強力なソフトウェアエンジニアリング知識</div>
+          <div class="reason-text">
+            複雑なコードベースを理解し、適切な編集箇所を瞬時に特定する能力
+          </div>
+        </div>
+        <div class="reason-item">
+          <div class="reason-number">02</div>
+          <div class="reason-title">卓越した問題解決能力</div>
+          <div class="reason-text">
+            コードを見て適切な編集箇所を見つける能力が飛躍的に向上
+          </div>
+        </div>
+        <div class="reason-item">
+          <div class="reason-number">03</div>
+          <div class="reason-title">優れた指示追従能力</div>
+          <div class="reason-text">
+            特にツールとMCPについて、正確で的確な実行を実現
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

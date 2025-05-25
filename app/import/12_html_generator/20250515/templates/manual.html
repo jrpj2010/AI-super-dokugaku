@@ -1,0 +1,979 @@
+{% extends "layout.html" %}
+
+{% block title %}アプリケーションマニュアル - Flask + Claude HTML Generator{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <!-- ヘッダーセクション -->
+  <div class="mb-12 text-center" data-aos="fade-down" data-aos-duration="800">
+    <div class="inline-block mb-6 p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl">
+      <span class="material-icons text-indigo-600 dark:text-indigo-400 text-4xl">code</span>
+    </div>
+    <h1
+      class="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+      Flask + Claude HTML Generator</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">操作マニュアルとプログラム解説</p>
+    <div class="mt-6 flex justify-center">
+      <a href="{{ url_for('index') }}"
+        class="apple-btn inline-flex items-center px-6 py-3 text-base font-medium rounded-full shadow-lg transition-all duration-300 hover:scale-105">
+        <span class="material-icons mr-2">code</span>ジェネレーターを使ってみる
+      </a>
+    </div>
+  </div>
+
+  <!-- イントロダクションセクション -->
+  <section class="mb-20" data-aos="fade-up" data-aos-duration="800">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden glassmorphism">
+      <div class="md:flex">
+        <div class="md:w-1/2 p-8">
+          <h2 class="text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-300 flex items-center">
+            <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">lightbulb</span>
+            はじめに
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            この度は「Flask + Claude HTML Generator」をご利用いただきありがとうございます。このアプリケーションは、入力した指示（プロンプト）に基づいて、AI（Claude 3.7
+            Sonnet）が自動でHTMLコードを生成するツールです。
+          </p>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            このマニュアルでは、基本的な使い方と、プログラムがどのように動いているのかを、専門的な知識がない方にも分かりやすく解説します。
+          </p>
+        </div>
+        <div class="md:w-1/2 bg-indigo-100 dark:bg-indigo-900/20 p-8 flex items-center justify-center">
+          <div class="relative w-full max-w-md">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl transform rotate-1 scale-105 opacity-20 blur-xl">
+            </div>
+            <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 overflow-hidden">
+              <div class="flex justify-between items-center mb-3 border-b pb-2">
+                <div class="flex space-x-1">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="text-xs text-gray-500 dark:text-gray-400">Claude HTML Generator</div>
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-300">
+                <div class="mb-2 font-medium">AIでHTMLを瞬時に生成</div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">プロンプトを入力するだけで美しいHTMLが完成</div>
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                  <div class="h-2 bg-indigo-100 dark:bg-indigo-900/30 rounded"></div>
+                  <div class="h-2 bg-indigo-200 dark:bg-indigo-800/30 rounded"></div>
+                  <div class="h-2 bg-indigo-100 dark:bg-indigo-900/30 rounded"></div>
+                  <div class="h-2 bg-indigo-200 dark:bg-indigo-800/30 rounded"></div>
+                </div>
+                <div class="flex justify-end">
+                  <div
+                    class="inline-flex items-center justify-center px-3 py-1 bg-indigo-600 text-white text-xs rounded-full">
+                    HTMLを生成
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-indigo-50 dark:bg-indigo-900/10 p-4 border-t border-indigo-100 dark:border-indigo-900/20">
+        <div class="flex items-center text-sm text-indigo-600 dark:text-indigo-400">
+          <span class="material-icons mr-2 text-sm">info</span>
+          <span>本アプリケーションはClaudeを活用したHTML生成ツールで、HTML知識がなくても簡単にウェブコンテンツを作成できます。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次セクション -->
+  <section class="mb-16 glassmorphism rounded-2xl p-8" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-300 flex items-center">
+      <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">menu_book</span>
+      マニュアル目次
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <a href="#basic-usage"
+        class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-600">
+        <div
+          class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 rounded-lg mr-4">
+          <span class="material-icons text-indigo-600 dark:text-indigo-400">touch_app</span>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-white">基本的な使い方</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">画面の見方と操作方法</p>
+        </div>
+      </a>
+      <a href="#system-architecture"
+        class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-600">
+        <div
+          class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 rounded-lg mr-4">
+          <span class="material-icons text-indigo-600 dark:text-indigo-400">architecture</span>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-white">システム構成</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">プログラムの仕組みと構成</p>
+        </div>
+      </a>
+      <a href="#file-structure"
+        class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-600">
+        <div
+          class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 rounded-lg mr-4">
+          <span class="material-icons text-indigo-600 dark:text-indigo-400">folder</span>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-white">ファイル構成</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">開発者向け情報</p>
+        </div>
+      </a>
+      <a href="#precautions"
+        class="flex items-center p-4 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-600">
+        <div
+          class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 rounded-lg mr-4">
+          <span class="material-icons text-indigo-600 dark:text-indigo-400">warning</span>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-white">利用上の注意</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">注意点と免責事項</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="basic-usage" class="mb-20 glassmorphism rounded-2xl p-8" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 flex items-center">
+      <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">touch_app</span>
+      画面の見方と基本的な使い方
+    </h2>
+
+    <div class="space-y-12">
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">text_fields</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">1. システムプロンプト</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">画面左上にある大きなテキスト入力欄です。ここには、AIにHTMLを生成させる上での<span
+                  class="text-indigo-600 dark:text-indigo-400 font-medium">基本的な指示や前提条件</span>を入力します。</p>
+
+              <p class="mb-4">例えば：</p>
+              <div class="bg-gray-50 dark:bg-gray-900/30 p-3 rounded-lg mb-4 text-sm">
+                「あなたはプロのウェブデザイナーです。親切で丁寧な言葉遣いで回答してください。生成するHTMLは日本語で、Tailwind CSSのクラスを使用してください。」
+              </div>
+
+              <p>初回アクセス時には、「HTML テキストを生成してください。HTML タグだけを返してください。」という汎用的な指示が入力されています。この内容は編集可能で、よく使う指示はここに固定しておくと便利です。
+              </p>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div
+              class="relative w-full max-w-md border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
+              <!-- システムプロンプト入力エリアのイメージ -->
+              <div
+                class="bg-white dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700 flex items-center text-sm text-gray-500">
+                <span class="material-icons text-sm mr-1">code</span>
+                システムプロンプト
+              </div>
+              <div class="bg-white dark:bg-gray-800 p-4">
+                <div
+                  class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded-md border border-gray-200 dark:border-gray-700 min-h-[100px] text-sm text-gray-700 dark:text-gray-300">
+                  HTML テキストを生成してください。HTML タグだけを返してください。
+                </div>
+              </div>
+              <div class="absolute top-2 right-2 flex space-x-1">
+                <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">tips_and_updates</span>
+            <span>ヒント: システムプロンプトは<strong>AIの役割や制約を設定する</strong>ために使います。具体的なHTMLの内容はユーザープロンプトで指定しましょう。</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">chat</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">2. ユーザープロンプト</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">システムプロンプトの下にあるテキスト入力欄です。ここに、<span
+                  class="text-indigo-600 dark:text-indigo-400 font-medium">具体的にどのようなHTMLを作ってほしいかの指示</span>を入力します。</p>
+
+              <p class="mb-4">例えば：</p>
+              <div class="bg-gray-50 dark:bg-gray-900/30 p-3 rounded-lg mb-4 text-sm">
+                「会社の紹介ページを作ってください。会社名は『AIアシスト株式会社』で、事業内容は『AI導入コンサルティング』です。ヘッダー、主要コンテンツエリア、フッターの3部構成にしてください。」
+              </div>
+
+              <p>細かい要望や具体的なデザイン指示をここに記述すると、より期待通りの結果が得られます。</p>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div
+              class="relative w-full max-w-md border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
+              <!-- ユーザープロンプト入力エリアのイメージ -->
+              <div
+                class="bg-white dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700 flex items-center text-sm text-gray-500">
+                <span class="material-icons text-sm mr-1">person</span>
+                ユーザープロンプト
+              </div>
+              <div class="bg-white dark:bg-gray-800 p-4">
+                <div
+                  class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded-md border border-gray-200 dark:border-gray-700 min-h-[100px] text-sm text-gray-700 dark:text-gray-300">
+                  飲食店のランディングページを作成してください。店名は「和風カフェ 花柚」です。ヘッダー、メニュー紹介、店舗情報、フッターのセクションを含めてください。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">tips_and_updates</span>
+            <span>ヒント: 具体的で詳細なプロンプトほど、期待に近い結果が得られます。色やレイアウトの好みも指定してみましょう。</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">tune</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">3. 生成オプション</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">生成のカスタマイズオプションです。必要に応じて選択できます。</p>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 dark:bg-gray-900/30 p-4 rounded-lg">
+                  <div class="flex items-center mb-2">
+                    <div class="mr-3 w-6 h-6 rounded-md bg-purple-100 flex items-center justify-center">
+                      <span class="material-icons text-purple-600 text-sm">psychology</span>
+                    </div>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">Thinking モード</h4>
+                  </div>
+                  <p class="text-sm">
+                    チェックを入れると、AIがHTMLを生成する際の「思考プロセス」も一緒に表示されます。AIがどのように考えてそのHTMLを作ったのかを知りたい場合に便利です。ただし、生成に少し時間がかかることがあります。
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-900/30 p-4 rounded-lg">
+                  <div class="flex items-center mb-2">
+                    <div class="mr-3 w-6 h-6 rounded-md bg-blue-100 flex items-center justify-center">
+                      <span class="material-icons text-blue-600 text-sm">search</span>
+                    </div>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">Web検索 モード</h4>
+                  </div>
+                  <p class="text-sm">
+                    チェックを入れると、AIがHTMLを生成する際にインターネット上の情報を検索し、それを参考にすることができます。最新情報や特定の固有名詞に関する情報を含めたい場合に役立ちます。こちらも生成に時間がかかることがあります。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div class="w-full max-w-md">
+              <!-- 生成オプションの視覚的表現 -->
+              <div
+                class="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <h4 class="text-gray-700 dark:text-gray-300 font-medium mb-4 flex items-center">
+                  <span class="material-icons mr-2 text-sm">settings</span>
+                  生成オプション
+                </h4>
+
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <label class="apple-switch mr-4">
+                      <input type="checkbox" checked>
+                      <span class="apple-switch-slider"></span>
+                    </label>
+                    <div>
+                      <div class="flex items-center">
+                        <span class="material-icons text-purple-600 dark:text-purple-400 text-sm mr-1">psychology</span>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">Thinking モード</span>
+                      </div>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">Claudeの思考プロセスを表示</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <label class="apple-switch mr-4">
+                      <input type="checkbox">
+                      <span class="apple-switch-slider"></span>
+                    </label>
+                    <div>
+                      <div class="flex items-center">
+                        <span class="material-icons text-blue-600 dark:text-blue-400 text-sm mr-1">search</span>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">Web検索 モード</span>
+                      </div>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">インターネットから最新情報を取得</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">lightbulb</span>
+            <span>開発中のプロジェクトではThinkingモードが非常に便利です。AIの思考過程を見ることで、より良いプロンプトの書き方を学べます。</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">play_arrow</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">4. HTMLを生成 ボタン</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">システムプロンプトとユーザープロンプトを入力し、必要に応じてオプションを選択したら、このボタンをクリックします。</p>
+
+              <p class="mb-4">AIがHTMLの生成を開始します。生成処理が始まると、ボタンの表示が「生成中...」に変わり、進行状況がわかるようになっています。</p>
+
+              <div
+                class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800 dark:text-yellow-200">
+                <div class="flex items-start">
+                  <span class="material-icons text-yellow-600 dark:text-yellow-400 mr-2 mt-0.5 text-base">info</span>
+                  <p>生成には数秒～数十秒かかる場合があります。特にThinkingモードやWeb検索モードを使用している場合は、より時間がかかることがあります。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div class="w-full max-w-md space-y-8">
+              <!-- 通常のボタン状態 -->
+              <div class="flex justify-center items-center">
+                <button
+                  class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-base font-medium rounded-full shadow-lg transition-all duration-300 flex items-center pulse-on-hover">
+                  <span class="material-icons mr-2">code</span>
+                  HTMLを生成
+                </button>
+              </div>
+
+              <!-- 生成中のボタン状態 -->
+              <div class="flex justify-center items-center">
+                <button
+                  class="px-8 py-3 bg-indigo-600 opacity-80 text-white text-base font-medium rounded-full shadow flex items-center cursor-not-allowed">
+                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                  </svg>
+                  生成中...
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">autorenew</span>
+            <span>生成に時間がかかる場合は、シンプルなプロンプトから始めて、徐々に詳細を追加していくとよいでしょう。</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">wysiwyg</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">5. エディタエリア</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">HTMLが生成されると、画面右側のエリアに表示されます。このエリアには複数のタブがあり、用途に応じて表示を切り替えられます。</p>
+
+              <div class="space-y-4 mb-4">
+                <div class="bg-white dark:bg-gray-900/20 p-3 rounded-lg border-l-3 border-indigo-500 shadow-sm">
+                  <div class="flex items-center mb-1">
+                    <span class="material-icons text-indigo-600 dark:text-indigo-400 mr-2 text-sm">edit</span>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">WYSIWYGタブ</h4>
+                  </div>
+                  <p class="text-sm">(What You See Is What You Get の略) 生成されたHTMLを見たまま編集できるモードです。ツールバーのボタン（H1, 太字,
+                    画像挿入など）を使って、直感的に内容を修正できます。</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900/20 p-3 rounded-lg border-l-3 border-indigo-500 shadow-sm">
+                  <div class="flex items-center mb-1">
+                    <span class="material-icons text-indigo-600 dark:text-indigo-400 mr-2 text-sm">code</span>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">コードタブ</h4>
+                  </div>
+                  <p class="text-sm">生成されたHTMLのソースコードを直接編集できます。HTMLの知識がある方向けです。ここでの変更も他のタブに反映されます。</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900/20 p-3 rounded-lg border-l-3 border-indigo-500 shadow-sm">
+                  <div class="flex items-center mb-1">
+                    <span class="material-icons text-indigo-600 dark:text-indigo-400 mr-2 text-sm">visibility</span>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">プレビュータブ</h4>
+                  </div>
+                  <p class="text-sm">生成されたHTMLが実際にブラウザでどのように表示されるかを確認できます。編集はできません。</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900/20 p-3 rounded-lg border-l-3 border-purple-500 shadow-sm">
+                  <div class="flex items-center mb-1">
+                    <span class="material-icons text-purple-600 dark:text-purple-400 mr-2 text-sm">psychology</span>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300">思考プロセスタブ</h4>
+                  </div>
+                  <p class="text-sm">「Thinking モード」を有効にして生成した場合にのみ表示されます。AIがどのようにHTMLを考えて作成したのか、その思考過程を見ることができます。</p>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border-l-4 border-blue-400 text-sm mb-2">
+                <div class="flex items-start">
+                  <span class="material-icons text-blue-600 dark:text-blue-400 mr-2 text-sm">fullscreen</span>
+                  <p>エディタエリアの右上には「全画面表示」ボタンがあり、クリックするとエディタエリアが画面全体に広がります。もう一度クリックすると元に戻ります。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div class="w-full max-w-md">
+              <!-- エディタエリアのモックアップ -->
+              <div
+                class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-md">
+                <!-- タブナビゲーション -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700">
+                  <button
+                    class="px-4 py-2 text-sm font-medium border-b-2 border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 flex items-center">
+                    <span class="material-icons mr-1 text-sm">edit</span> WYSIWYG
+                  </button>
+                  <button
+                    class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-indigo-500 dark:hover:text-indigo-400 flex items-center">
+                    <span class="material-icons mr-1 text-sm">code</span> コード
+                  </button>
+                  <button
+                    class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-indigo-500 dark:hover:text-indigo-400 flex items-center">
+                    <span class="material-icons mr-1 text-sm">visibility</span> プレビュー
+                  </button>
+                  <div class="flex-grow"></div>
+                  <button
+                    class="px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-500 dark:hover:text-indigo-400 flex items-center">
+                    <span class="material-icons text-sm">fullscreen</span>
+                  </button>
+                </div>
+
+                <!-- ツールバー -->
+                <div class="bg-gray-50 dark:bg-gray-900/20 p-2 flex flex-wrap gap-1">
+                  <button class="p-1 rounded bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                    <span class="material-icons text-sm">title</span>
+                  </button>
+                  <button class="p-1 rounded text-gray-700 dark:text-gray-300">
+                    <span class="material-icons text-sm">format_bold</span>
+                  </button>
+                  <button class="p-1 rounded text-gray-700 dark:text-gray-300">
+                    <span class="material-icons text-sm">format_italic</span>
+                  </button>
+                  <button class="p-1 rounded text-gray-700 dark:text-gray-300">
+                    <span class="material-icons text-sm">format_list_bulleted</span>
+                  </button>
+                  <button class="p-1 rounded text-gray-700 dark:text-gray-300">
+                    <span class="material-icons text-sm">link</span>
+                  </button>
+                  <button class="p-1 rounded text-gray-700 dark:text-gray-300">
+                    <span class="material-icons text-sm">image</span>
+                  </button>
+                </div>
+
+                <!-- エディター内容 -->
+                <div
+                  class="p-4 h-32 overflow-hidden bg-white dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-300">
+                  <p class="mb-2 font-medium">Claude で生成された HTML がここに表示されます...</p>
+                  <div class="flex space-x-4 text-xs">
+                    <div class="w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div class="w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">sync</span>
+            <span>エディタで行った変更は、他のすべてのタブにリアルタイムで反映されます。</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-6">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3">
+                <span class="material-icons text-indigo-600 dark:text-indigo-400">download</span>
+              </div>
+              <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300">6. ダウンロード ボタン</h3>
+            </div>
+
+            <div class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p class="mb-4">
+                エディタエリアの下部（全画面表示時は右下）にある緑色のボタンです。クリックすると、現在エディタに表示されているHTMLコードを、「generated.html」というファイル名でダウンロードできます。</p>
+
+              <div class="bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-lg text-sm mb-2">
+                <div class="flex items-start">
+                  <span class="material-icons text-emerald-600 dark:text-emerald-400 mr-2 text-base">lightbulb</span>
+                  <p>ダウンロードしたHTMLファイルは、そのままWebサイトとして公開したり、他のプロジェクトに組み込んだりすることができます。</p>
+                </div>
+              </div>
+
+              <p class="text-sm">ダウンロードされるファイルには、生成されたHTMLの他に、基本的なHTML構造（DOCTYPE宣言、head要素、必要なメタタグなど）も含まれています。</p>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 bg-gray-50 dark:bg-gray-900/10 p-6 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+              <!-- ダウンロードボタンのモックアップ -->
+              <div class="relative">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur opacity-30 animate-pulse">
+                </div>
+                <button
+                  class="relative px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-base font-medium rounded-full shadow-lg flex items-center pulse-on-hover">
+                  <span class="material-icons mr-2">download</span>
+                  ダウンロード
+                </button>
+              </div>
+
+              <!-- ファイルのイラスト表現 -->
+              <div class="mt-8 w-24 h-28 relative">
+                <div
+                  class="absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 transform rotate-3">
+                </div>
+                <div
+                  class="absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 transform -rotate-2">
+                </div>
+                <div
+                  class="absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                  <div
+                    class="w-full h-6 bg-indigo-100 dark:bg-indigo-900/30 border-b border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                    <span class="text-xs text-indigo-600 dark:text-indigo-400 font-medium">HTML</span>
+                  </div>
+                  <div class="p-2">
+                    <div class="h-2 w-full bg-gray-100 dark:bg-gray-700 rounded mb-1"></div>
+                    <div class="h-2 w-2/3 bg-gray-100 dark:bg-gray-700 rounded mb-1"></div>
+                    <div class="h-2 w-5/6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </div>
+                </div>
+                <div
+                  class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg">
+                  <span class="material-icons text-sm">check</span>
+                </div>
+              </div>
+              <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">generated.html</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 px-6 py-3 text-sm text-indigo-700 dark:text-indigo-300 border-t border-indigo-100 dark:border-indigo-900/20">
+          <div class="flex items-center">
+            <span class="material-icons mr-2 text-sm">info</span>
+            <span>HTML変更後に再度ダウンロードする場合、更新した内容が反映されています。最新の変更を保存したい場合は、編集後にもう一度ダウンロードしましょう。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="precautions" class="mb-20 glassmorphism rounded-2xl p-8" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 flex items-center">
+      <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">warning</span>
+      利用上の注意
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-3">
+            <span class="material-icons text-amber-600 dark:text-amber-400">lightbulb</span>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">プロンプト作成のコツ</h3>
+        </div>
+
+        <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-sm">
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span>具体的な指示を心がける（「会社紹介ページ」より「IT企業のランディングページで、サービス紹介・チーム紹介・お問い合わせフォームを含む」の方が良い結果に）</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span>デザインの方向性を指定する（「モダンで明るい雰囲気」「シンプルで洗練されたデザイン」など）</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span>色やフォントの好みがあれば伝える（「青と白を基調としたデザイン」など）</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3">
+            <span class="material-icons text-red-600 dark:text-red-400">gpp_maybe</span>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">注意事項</h3>
+        </div>
+
+        <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-sm">
+          <li class="flex items-start">
+            <span class="material-icons text-red-600 dark:text-red-400 mr-2 text-sm">error</span>
+            <span>生成されたHTMLは必ずしも完璧ではありません。必要に応じて手動で修正してください。</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-red-600 dark:text-red-400 mr-2 text-sm">error</span>
+            <span>複雑すぎる指示や曖昧な指示では、期待通りの結果が得られないことがあります。</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-red-600 dark:text-red-400 mr-2 text-sm">error</span>
+            <span>APIキー（<code>ANTHROPIC_API_KEY</code>）は秘密情報です。第三者に漏れないよう管理してください。</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-xl border-l-4 border-yellow-400 mb-6">
+      <div class="flex items-start">
+        <span class="material-icons text-yellow-600 dark:text-yellow-400 mr-3 mt-1 text-xl">paid</span>
+        <div>
+          <h3 class="font-medium text-yellow-800 dark:text-yellow-300 mb-2">APIコスト</h3>
+          <p class="text-sm text-yellow-700 dark:text-yellow-400">
+            Claude API
+            の利用には、別途Anthropic社との契約と利用料金が発生する場合があります。利用規約をよくご確認ください。このアプリケーション自体の利用は無料ですが、AIの利用料金はユーザー様の負担となります。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl border-l-4 border-blue-400">
+      <div class="flex items-start">
+        <span class="material-icons text-blue-600 dark:text-blue-400 mr-3 mt-1 text-xl">security</span>
+        <div>
+          <h3 class="font-medium text-blue-800 dark:text-blue-300 mb-2">セキュリティ</h3>
+          <p class="text-sm text-blue-700 dark:text-blue-400">
+            このアプリケーションは開発用サーバーで動作しています。本格的な公開環境で利用する場合は、Gunicornなどの本番用WSGIサーバーに切り替え、適切なセキュリティ対策を施すことを推奨します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-xl overflow-hidden mb-12"
+  data-aos="fade-up" data-aos-duration="800">
+  <div class="md:flex items-center">
+    <div class="md:w-2/3 p-8 text-white">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">HTML Generator を始めてみましょう</h2>
+      <p class="mb-6 text-indigo-100">プロンプトを入力するだけで、AIがあなたのアイデアをHTML形式で形にします。今すぐ試してみませんか？</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="{{ url_for('index') }}"
+          class="px-6 py-3 bg-white hover:bg-gray-100 text-indigo-600 font-medium rounded-full shadow-md transition duration-200 flex items-center">
+          <span class="material-icons mr-2">code</span>
+          ジェネレーターに戻る
+        </a>
+        <a href="#"
+          class="px-6 py-3 bg-indigo-700 hover:bg-indigo-800 text-white font-medium rounded-full shadow-md transition duration-200 flex items-center">
+          <span class="material-icons mr-2">school</span>
+          サンプルを見る
+        </a>
+      </div>
+    </div>
+    <div class="md:w-1/3 p-8 flex items-center justify-center">
+      <div class="relative w-40 h-40">
+        <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-20" style="animation-duration: 3s;">
+        </div>
+        <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-20"
+          style="animation-duration: 2s; animation-delay: 0.5s;"></div>
+        <div class="relative w-full h-full bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
+          <span class="material-icons text-white text-6xl">code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <section id="system-architecture" class="mb-20 glassmorphism rounded-2xl p-8" data-aos="fade-up"
+    data-aos-duration="800">
+    <h2 class="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 flex items-center">
+      <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">architecture</span>
+      プログラムの仕組みと構成
+    </h2>
+
+    <div class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+      <p>このアプリケーションは、いくつかの部品が連携して動いています。料理に例えると、材料（指示）を元に、調理器具（プログラム部品）を使って、料理（HTML）を完成させるようなイメージです。</p>
+    </div>
+
+    <div class="relative mb-12">
+      <!-- アーキテクチャの流れ図 -->
+      <div
+        class="absolute top-1/2 left-0 right-0 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 transform -translate-y-1/2 z-0 rounded-full">
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+          data-aos="zoom-in" data-aos-delay="100">
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center">
+            <span class="material-icons text-indigo-600 dark:text-indigo-400 text-2xl">computer</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 text-center text-gray-700 dark:text-gray-300">ブラウザ</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            今あなたが見ているこの画面です。HTML、CSS (Tailwind CSS)、JavaScript (Alpine.js, EditorJS) で作られており、入力欄やボタンを操作します。
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+          data-aos="zoom-in" data-aos-delay="200">
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+            <span class="material-icons text-blue-600 dark:text-blue-400 text-2xl">dns</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 text-center text-gray-700 dark:text-gray-300">Flaskサーバー</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Pythonで書かれた裏方の料理人です。ブラウザから指示を受け取り、AIに渡して生成を依頼します。
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+          data-aos="zoom-in" data-aos-delay="300">
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+            <span class="material-icons text-purple-600 dark:text-purple-400 text-2xl">psychology</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 text-center text-gray-700 dark:text-gray-300">Claude API</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            インターネットの向こう側にいる、とても賢いAIです。指示を元にHTMLコードを考え出し、Flaskサーバーに返します。
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+          data-aos="zoom-in" data-aos-delay="400">
+          <div
+            class="w-16 h-16 mx-auto mb-4 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+            <span class="material-icons text-green-600 dark:text-green-400 text-2xl">code</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 text-center text-gray-700 dark:text-gray-300">生成されたHTML</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            AIが作ったHTMLがブラウザに表示され、エディタで編集したりダウンロードしたりできるようになります。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-indigo-50 dark:bg-indigo-900/10 p-6 rounded-xl border border-indigo-100 dark:border-indigo-900/20">
+      <div class="flex items-start">
+        <span class="material-icons text-indigo-600 dark:text-indigo-400 mr-3 mt-1">lightbulb</span>
+        <div>
+          <h3 class="font-medium text-indigo-700 dark:text-indigo-300 mb-2">データフローの仕組み</h3>
+          <p class="text-sm text-indigo-600 dark:text-indigo-400">
+            1. ユーザーがプロンプトを入力して「HTMLを生成」ボタンをクリック<br>
+            2. ブラウザがFlaskサーバーにリクエストを送信<br>
+            3. FlaskサーバーがClaude APIにプロンプトを送信<br>
+            4. Claude AIがHTMLを生成して返信<br>
+            5. FlaskサーバーがHTMLをブラウザに送信<br>
+            6. ブラウザがHTMLをエディタに表示
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="file-structure" class="mb-20 glassmorphism rounded-2xl p-8" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 flex items-center">
+      <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">folder</span>
+      ファイル構成 (開発者向け情報)
+    </h2>
+
+    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md mb-8">
+      <div class="border-b border-gray-200 dark:border-gray-700 p-4 flex items-center">
+        <span class="material-icons mr-3 text-indigo-600 dark:text-indigo-400">code</span>
+        <h3 class="font-medium text-gray-700 dark:text-gray-300">プロジェクトの構造</h3>
+      </div>
+      <div class="p-5 bg-gray-50 dark:bg-gray-900/20">
+        <pre class="text-sm text-gray-700 dark:text-gray-300 overflow-x-auto font-mono"><code>app/import/12_html_generator/20250515/
+├── Dockerfile              # アプリを動かすための設計図 (Docker用)
+├── docker-compose.yml    # Docker環境を簡単に起動するための設定ファイル
+├── .dockerignore           # Dockerイメージに含めないファイルを指定
+├── .env                    # APIキーなどの秘密情報を保存するファイル (Git管理外)
+├── app.py                  # Flaskサーバー本体 (Pythonプログラム)
+├── requirements.txt        # Pythonが必要とする部品リスト
+├── package.json            # JavaScriptが必要とする部品リスト
+├── tailwind.config.js      # Tailwind CSS (見た目) の設定ファイル
+├── static/                 # CSSやJavaScriptファイル置き場
+│   ├── css/
+│   │   └── tailwind.css  # Tailwind CSSが生成したスタイルシート
+│   └── js/
+│       └── editor.js     # HTML生成やエディタ操作のJavaScriptプログラム
+└── templates/              # HTMLの「型紙」置き場
+    ├── layout.html       # 全ページ共通の骨組み
+    ├── index.html        # メインページの型紙
+    ├── wysiwyg.html      # WYSIWYGエディタページの型紙
+    └── manual.html       # このマニュアルページの型紙 (今見てるこれ！)</code></pre>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+        data-aos="fade-right">
+        <div class="flex items-center mb-4">
+          <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+            <span class="material-icons text-blue-600 dark:text-blue-400">source</span>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">バックエンド (Python)</h3>
+        </div>
+        <ul class="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
+          <li class="flex items-start">
+            <span class="material-icons text-blue-600 dark:text-blue-400 mr-2 text-sm">check_circle</span>
+            <span><code>app.py</code> - Flask アプリケーションの中心。ルート定義、Claude API連携、HTML生成ロジックを含む</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-blue-600 dark:text-blue-400 mr-2 text-sm">check_circle</span>
+            <span><code>requirements.txt</code> - Flask, Claude API, その他の依存関係を定義</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-blue-600 dark:text-blue-400 mr-2 text-sm">check_circle</span>
+            <span><code>.env</code> - 環境変数 (ANTHROPIC_API_KEY など) を設定</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+        data-aos="fade-left">
+        <div class="flex items-center mb-4">
+          <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-3">
+            <span class="material-icons text-amber-600 dark:text-amber-400">desktop_windows</span>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">フロントエンド (JavaScript)</h3>
+        </div>
+        <ul class="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span><code>static/js/editor.js</code> - WYSIWYG エディタの設定、HTML生成リクエスト処理など</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span><code>templates/*.html</code> - Jinja2テンプレートで各ページのHTML構造を定義</span>
+          </li>
+          <li class="flex items-start">
+            <span class="material-icons text-amber-600 dark:text-amber-400 mr-2 text-sm">check_circle</span>
+            <span><code>static/css/tailwind.css</code> - TailwindCSSで生成されたスタイル定義</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-indigo-50 dark:bg-indigo-900/10 p-6 rounded-xl border border-indigo-100 dark:border-indigo-900/20">
+      <div class="flex items-start">
+        <span class="material-icons text-indigo-600 dark:text-indigo-400 mr-3 mt-1">info</span>
+        <div>
+          <h3 class="font-medium text-indigo-700 dark:text-indigo-300 mb-2">開発者向けヒント</h3>
+          <p class="text-sm text-indigo-600 dark:text-indigo-400">
+            このプロジェクトは、以下の技術スタックで構築されています：<br>
+            • <strong>バックエンド</strong>: Python 3.9+, Flask, Anthropic Claude API<br>
+            • <strong>フロントエンド</strong>: HTML, Tailwind CSS, Alpine.js, EditorJS<br>
+            • <strong>開発環境</strong>: Docker, Docker Compose<br><br>
+
+            新機能を追加する場合は、<code>app.py</code>と<code>static/js/editor.js</code>を中心に編集してください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</div>
+
+<style>
+  /* マニュアルページ専用のスタイル */
+  section h2 {
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+
+  .dark section h2 {
+    border-bottom-color: #4a5568;
+  }
+
+  /* アニメーション効果 */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<!-- AOSの初期化 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false,
+      disable: 'mobile'
+    });
+  });
+</script>
+{% endblock %}

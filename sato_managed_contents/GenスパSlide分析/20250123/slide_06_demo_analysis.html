@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>実録：90分で数日分の仕事を終わらせた衝撃のデモ</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .demo-overview {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .demo-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .timeline-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #1e40af, #3b82f6);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      border-color: #3b82f6;
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 1.5rem;
+      width: 12px;
+      height: 12px;
+      background: #3b82f6;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px #3b82f6;
+    }
+
+    .timeline-time {
+      background: #1e40af;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .sales-equivalent {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .comparison-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .comparison-card.traditional {
+      border-color: #dc2626;
+    }
+
+    .comparison-card.ai {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .comparison-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-title.traditional {
+      color: #dc2626;
+    }
+
+    .comparison-title.ai {
+      color: #10b981;
+    }
+
+    .comparison-time {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-time.traditional {
+      color: #dc2626;
+    }
+
+    .comparison-time.ai {
+      color: #10b981;
+    }
+
+    .comparison-features {
+      list-style: none;
+      text-align: left;
+    }
+
+    .comparison-features li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .key-insights {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .insight-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #34d399;
+    }
+
+    .insight-icon {
+      font-size: 2rem;
+      color: #34d399;
+      margin-bottom: 1rem;
+    }
+
+    .insight-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .insight-text {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">実録：90分で数日分の仕事を終わらせた衝撃のデモ</h1>
+    <p class="slide-subtitle">たった1つの指示が生み出した「開発の革命」実際のプロセスを完全解析</p>
+  </div>
+
+  <div class="main-content">
+    <div class="demo-overview">
+      <h2>Excalidrawテーブル機能追加デモ概要</h2>
+      <div class="demo-stats">
+        <div class="stat-box">
+          <span class="stat-number">90</span>
+          <div class="stat-label">分</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">1</span>
+          <div class="stat-label">つの指示</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">数日</span>
+          <div class="stat-label">相当の作業</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">完全</span>
+          <div class="stat-label">自動化</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-section">
+      <h2 class="section-title">
+        <i class="fas fa-clock"></i>
+        90分間の完全行動ログ
+      </h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">0-10分</div>
+          <div class="timeline-title">ToDoリスト作成・全体設計</div>
+          <div class="timeline-content">
+            プロジェクト全体のタスクを分析し、実装すべき機能の優先順位を決定。設計方針とアーキテクチャの基本方針を策定。
+          </div>
+          <div class="sales-equivalent">
+            【営業相当作業】提案戦略の立案・アプローチ方法の決定
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10-30分</div>
+          <div class="timeline-title">コードベース全体を探索・理解</div>
+          <div class="timeline-content">
+            既存のExcalidrawアーキテクチャを完全に理解。他のツールの実装方法を分析し、最適な実装パターンを特定。
+          </div>
+          <div class="sales-equivalent">
+            【営業相当作業】顧客の全履歴・業界分析・競合調査
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">30-60分</div>
+          <div class="timeline-title">機能実装・エラー修正の反復</div>
+          <div class="timeline-content">
+            テーブル機能のコア実装を実行。発生したエラーを即座に検出・修正。品質を保ちながら高速で開発を進行。
+          </div>
+          <div class="sales-equivalent">
+            【営業相当作業】提案書作成・修正・ブラッシュアップ
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">60-80分</div>
+          <div class="timeline-title">テスト作成・品質保証</div>
+          <div class="timeline-content">
+            実装した機能の動作確認とテストケース作成。エッジケースも含めた包括的な品質検証を実施。
+          </div>
+          <div class="sales-equivalent">
+            【営業相当作業】提案内容検証・リスク分析・品質チェック
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">80-90分</div>
+          <div class="timeline-title">PR作成・ドキュメント更新</div>
+          <div class="timeline-content">
+            GitHubプルリクエストを自動作成。コードレビュー用の説明文書とユーザー向けドキュメントも同時に更新。
+          </div>
+          <div class="sales-equivalent">
+            【営業相当作業】最終版作成・付属資料整備・提出準備
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comparison-grid">
+      <div class="comparison-card traditional">
+        <div class="comparison-title traditional">従来の開発手法</div>
+        <div class="comparison-time traditional">数日〜1週間</div>
+        <ul class="comparison-features">
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> 設計に1日</li>
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> コードベース理解に半日</li>
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> 実装に2-3日</li>
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> テストに1日</li>
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> ドキュメント作成に半日</li>
+          <li><i class="fas fa-times" style="color: #dc2626;"></i> レビュー・修正に1日</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card ai">
+        <div class="comparison-title ai">Claude Code活用</div>
+        <div class="comparison-time ai">90分</div>
+        <ul class="comparison-features">
+          <li><i class="fas fa-check" style="color: #10b981;"></i> 設計：10分</li>
+          <li><i class="fas fa-check" style="color: #10b981;"></i> 理解：20分</li>
+          <li><i class="fas fa-check" style="color: #10b981;"></i> 実装：30分</li>
+          <li><i class="fas fa-check" style="color: #10b981;"></i> テスト：20分</li>
+          <li><i class="fas fa-check" style="color: #10b981;"></i> ドキュメント：10分</li>
+          <li><i class="fas fa-check" style="color: #10b981;"></i> 自動PR作成</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-insights">
+      <h2 class="section-title" style="color: white;">
+        <i class="fas fa-lightbulb"></i>
+        営業への3つの重要示唆
+      </h2>
+      <div class="insights-grid">
+        <div class="insight-item">
+          <i class="fas fa-rocket insight-icon"></i>
+          <div class="insight-title">完全自動化の実現</div>
+          <div class="insight-text">
+            人間が6-7時間かかるタスクを自律的に実行。営業活動でも提案書作成から市場分析まで完全自動化が可能。
+          </div>
+        </div>
+        <div class="insight-item">
+          <i class="fas fa-brain insight-icon"></i>
+          <div class="insight-title">人間と区別不可能な品質</div>
+          <div class="insight-text">
+            出力物が人間が作成したものと区別がつかないレベル。顧客も社内も気づかないクオリティでの業務遂行。
+          </div>
+        </div>
+        <div class="insight-item">
+          <i class="fas fa-chart-line insight-icon"></i>
+          <div class="insight-title">生産性の革命的向上</div>
+          <div class="insight-text">
+            96%の時間短縮（90分 vs 数日）。営業チーム全体の生産性を劇的に向上させる可能性を実証。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

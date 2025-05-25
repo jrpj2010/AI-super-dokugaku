@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アジェンダ - Claude 4が変える営業の未来</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 3rem 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1.5rem;
+    }
+
+    .slide-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .agenda-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+    }
+
+    .agenda-item {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .agenda-item:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    }
+
+    .agenda-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+    }
+
+    .agenda-number {
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      background: #1e40af;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .agenda-icon {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .agenda-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .agenda-description {
+      font-size: 1rem;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .agenda-highlight {
+      background: linear-gradient(135deg, #fef3c7, #fbbf24);
+      color: #92400e;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .time-info {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.5rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .corporate-footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .company-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e40af;
+    }
+
+    @media (max-width: 768px) {
+      .agenda-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .slide-title {
+        font-size: 2.2rem;
+      }
+
+      .agenda-item {
+        padding: 1.5rem;
+      }
+    }
+
+    /* アニメーション */
+    .agenda-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInUp 0.6s ease-out forwards;
+    }
+
+    .agenda-item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .agenda-item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .agenda-item:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .agenda-item:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .agenda-item:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .agenda-item:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">本日のアジェンダ</h1>
+    <p class="slide-subtitle">Claude 4が変える営業の未来 - 6つの重要ポイント</p>
+  </div>
+
+  <div class="agenda-container">
+    <div class="agenda-item">
+      <div class="agenda-number">1</div>
+      <i class="fas fa-stopwatch agenda-icon"></i>
+      <h3 class="agenda-title">楽天が証明した「7時間の奇跡」</h3>
+      <p class="agenda-description">
+        Claude Opus 4が示した前例なき持続的パフォーマンス。7時間連続稼働で実証された自律的AI能力の真実。
+      </p>
+      <span class="agenda-highlight">世界最高スペック</span>
+      <div class="time-info">15分</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="agenda-number">2</div>
+      <i class="fab fa-github agenda-icon"></i>
+      <h3 class="agenda-title">GitHubとCursorが絶賛するClaude Sonnet 4</h3>
+      <p class="agenda-description">
+        コスパ最強の「日常業務革命」モデルの実力。なぜ世界のトップ企業が採用を決めたのか。
+      </p>
+      <span class="agenda-highlight">エラー率95%削減</span>
+      <div class="time-info">12分</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="agenda-number">3</div>
+      <i class="fas fa-lightbulb agenda-icon"></i>
+      <h3 class="agenda-title">営業部門必見！Claude 4活用の「5つの極意」</h3>
+      <p class="agenda-description">
+        公式プロンプトエンジニアリングガイドから導いた実践術。明日から使える具体的手法。
+      </p>
+      <span class="agenda-highlight">効率10倍向上</span>
+      <div class="time-info">20分</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="agenda-number">4</div>
+      <i class="fas fa-bolt agenda-icon"></i>
+      <h3 class="agenda-title">90分で数日分の仕事を終わらせた衝撃デモ</h3>
+      <p class="agenda-description">
+        たった1つの指示が生み出した「開発の革命」。実際のプロセスを完全解析。
+      </p>
+      <span class="agenda-highlight">生産性革命</span>
+      <div class="time-info">10分</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="agenda-number">5</div>
+      <i class="fas fa-chart-line agenda-icon"></i>
+      <h3 class="agenda-title">CEO対談「2026年、1人で10億ドル企業」の真実</h3>
+      <p class="agenda-description">
+        ダリオ・アマダイCEOが語った衝撃の予言。なぜ2026年なのか、その根拠を徹底分析。
+      </p>
+      <span class="agenda-highlight">未来予測</span>
+      <div class="time-info">8分</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="agenda-number">6</div>
+      <i class="fas fa-rocket agenda-icon"></i>
+      <h3 class="agenda-title">今すぐ実践！営業×AI融合の第一歩</h3>
+      <p class="agenda-description">
+        TANREN式「AI営業革命」実践ガイド。今日から始められる具体的アクションプラン。
+      </p>
+      <span class="agenda-highlight">即実践可能</span>
+      <div class="time-info">15分</div>
+    </div>
+  </div>
+
+  <div class="corporate-footer">
+    <div class="company-logo">TANREN株式会社</div>
+  </div>
+</body>
+
+</html>

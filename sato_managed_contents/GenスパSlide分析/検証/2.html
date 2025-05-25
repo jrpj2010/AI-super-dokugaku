@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本日のアジェンダ</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #141453 0%, #2f2baa 50%, #9969d3 100%);
+      color: #ffffff;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .agenda-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-left: 4px solid #61dafb;
+      transition: all 0.3s ease;
+    }
+
+    .agenda-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
+    }
+
+    .icon-container {
+      background: rgba(97, 218, 251, 0.3);
+    }
+
+    .agenda-num {
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .agenda-desc {
+      font-size: 15px;
+      opacity: 0.8;
+    }
+
+    .ai-grid {
+      position: absolute;
+      right: -100px;
+      bottom: -100px;
+      width: 500px;
+      height: 500px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+      z-index: 1;
+    }
+
+    .ai-grid:before,
+    .ai-grid:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide flex items-center justify-center">
+    <div class="ai-grid"></div>
+
+    <div class="content-wrapper px-24 py-16 w-full">
+      <h1 class="title text-5xl mb-10 flex items-center">
+        <span class="text-6xl mr-3 text-cyan-300">本日の</span>アジェンダ
+      </h1>
+
+      <div class="agenda-container space-y-4">
+        <!-- Item 1 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fas fa-stopwatch text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 01</p>
+            <h3 class="text-xl font-bold">楽天が証明した「7時間の奇跡」</h3>
+            <p class="agenda-desc">Claude Opus 4が示した前例なき持続的パフォーマンス</p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fab fa-github text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 02</p>
+            <h3 class="text-xl font-bold">GitHubとCursorが絶賛するClaude Sonnet 4</h3>
+            <p class="agenda-desc">コスパ最強の「日常業務革命」モデルの実力</p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fas fa-lightbulb text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 03</p>
+            <h3 class="text-xl font-bold">営業部門必見！Claude 4活用の「5つの極意」</h3>
+            <p class="agenda-desc">公式プロンプトエンジニアリングガイドから導いた実践術</p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fas fa-bolt text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 04</p>
+            <h3 class="text-xl font-bold">90分で数日分の仕事を終わらせた衝撃デモ</h3>
+            <p class="agenda-desc">たった1つの指示が生み出した「開発の革命」</p>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fas fa-chart-line text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 05</p>
+            <h3 class="text-xl font-bold">CEO対談「2026年、1人で10億ドル企業」の真実</h3>
+            <p class="agenda-desc">ダリオ・アマダイCEOが語った衝撃の予言</p>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="agenda-item p-4 rounded-r-lg flex items-center animate-item">
+          <div class="icon-container p-3 rounded-full mr-5">
+            <i class="fas fa-rocket text-2xl"></i>
+          </div>
+          <div>
+            <p class="agenda-num font-bold">TOPIC 06</p>
+            <h3 class="text-xl font-bold">今すぐ実践！営業×AI融合の第一歩</h3>
+            <p class="agenda-desc">TANREN式「AI営業革命」実践ガイド</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.animate-item');
+      items.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+          item.style.transition = 'all 0.5s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, 300 + (index * 150));
+      });
+    });
+  </script>
+</body>
+
+</html>

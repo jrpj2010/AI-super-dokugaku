@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>営業部門必見！Claude 4を100%活用する「5つの極意」</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #2a1a4a 0%, #5e3a8e 50%, #a963df 100%);
+      color: #ffffff;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .tip-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tip-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .tip-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(169, 99, 223, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .highlight {
+      color: #a963df;
+    }
+
+    .code-block {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      padding: 10px;
+      font-size: 0.8em;
+      position: relative;
+    }
+
+    .code-good {
+      border-left: 4px solid #4ade80;
+    }
+
+    .code-bad {
+      border-left: 4px solid #f87171;
+    }
+
+    .code-label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 2px 8px;
+      font-size: 0.7em;
+      border-radius: 0 6px 0 6px;
+    }
+
+    .code-good-label {
+      background: #4ade80;
+      color: #064e3b;
+    }
+
+    .code-bad-label {
+      background: #f87171;
+      color: #7f1d1d;
+    }
+
+    .ai-grid {
+      position: absolute;
+      right: -100px;
+      bottom: -100px;
+      width: 500px;
+      height: 500px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+      z-index: 1;
+    }
+
+    .ai-grid:before,
+    .ai-grid:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    .xml-tag {
+      color: #a963df;
+      font-weight: bold;
+    }
+
+    .tag-highlight {
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide flex items-center justify-center">
+    <div class="ai-grid"></div>
+
+    <div class="content-wrapper px-16 py-10 w-full">
+      <h1 class="title text-4xl mb-6">
+        営業部門必見！Claude 4を<span class="text-purple-300">100%活用する</span>「<span class="text-purple-300">5つの極意</span>」
+      </h1>
+
+      <div class="grid grid-cols-3 gap-4">
+        <!-- Tip 1: Explicit Instructions -->
+        <div class="tip-card p-4 animate-tip">
+          <div class="flex items-center mb-3">
+            <div class="tip-icon">
+              <i class="fas fa-bullseye text-purple-300 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-purple-300">極意①：明示的な指示</h3>
+          </div>
+
+          <p class="text-sm mb-3">曖昧さを排除し、具体的な指示を与えることで精度が劇的に向上</p>
+
+          <div class="code-block code-bad mb-2">
+            <div class="code-label code-bad-label">❌ 悪い例</div>
+            顧客への提案書を作成してください
+          </div>
+
+          <div class="code-block code-good">
+            <div class="code-label code-good-label">✅ 良い例</div>
+            製造業向けDXソリューションの提案書を作成<br>
+            • ROI試算（3年間）<br>
+            • 競合との差別化ポイント<br>
+            • 段階的な導入スケジュール<br>
+            • 成功事例3社
+          </div>
+        </div>
+
+        <!-- Tip 2: Background & Motivation -->
+        <div class="tip-card p-4 animate-tip">
+          <div class="flex items-center mb-3">
+            <div class="tip-icon">
+              <i class="fas fa-map text-purple-300 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-purple-300">極意②：背景と動機</h3>
+          </div>
+
+          <p class="text-sm mb-3">コンテキストを提供することで、より適切な回答を引き出す</p>
+
+          <div class="code-block code-good">
+            <div class="code-label code-good-label">✅ 活用例</div>
+            この提案書は、来週火曜日の役員会議用<br>
+            • 決裁者：技術に詳しくないCFO<br>
+            • 背景：昨年度売上10%減少<br>
+            • 注力点：コスト削減より売上向上<br>
+            → 専門用語を避け、財務メリット重視
+          </div>
+        </div>
+
+        <!-- Tip 3: XML Tags -->
+        <div class="tip-card p-4 animate-tip">
+          <div class="flex items-center mb-3">
+            <div class="tip-icon">
+              <i class="fas fa-code text-purple-300 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-purple-300">極意③：XMLタグ活用</h3>
+          </div>
+
+          <p class="text-sm mb-3">構造化されたフォーマットで出力を完璧にコントロール</p>
+
+          <div class="code-block code-good text-sm">
+            <div class="code-label code-good-label">✅ 例</div>
+            <span class="xml-tag tag-highlight" style="animation-delay: 0.1s">&lt;proposal_structure&gt;</span><br>
+            <span class="ml-2 tag-highlight" style="animation-delay: 0.3s"><span
+                class="xml-tag">&lt;executive_summary&gt;</span>重要ポイント<span
+                class="xml-tag">&lt;/executive_summary&gt;</span></span><br>
+            <span class="ml-2 tag-highlight" style="animation-delay: 0.5s"><span
+                class="xml-tag">&lt;roi_calculation&gt;</span>投資回収表<span
+                class="xml-tag">&lt;/roi_calculation&gt;</span></span><br>
+            <span class="ml-2 tag-highlight" style="animation-delay: 0.7s"><span
+                class="xml-tag">&lt;implementation_plan&gt;</span>フェーズ計画<span
+                class="xml-tag">&lt;/implementation_plan&gt;</span></span><br>
+            <span class="ml-2 tag-highlight" style="animation-delay: 0.9s"><span
+                class="xml-tag">&lt;success_stories&gt;</span>類似事例3社<span
+                class="xml-tag">&lt;/success_stories&gt;</span></span><br>
+            <span class="xml-tag tag-highlight" style="animation-delay: 1.1s">&lt;/proposal_structure&gt;</span>
+          </div>
+        </div>
+
+        <!-- Tip 4: Parallel Processing -->
+        <div class="tip-card p-4 animate-tip">
+          <div class="flex items-center mb-3">
+            <div class="tip-icon">
+              <i class="fas fa-network-wired text-purple-300 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-purple-300">極意④：並列処理活用</h3>
+          </div>
+
+          <p class="text-sm mb-3">複数の独立したタスクを同時実行することで効率が10倍に</p>
+
+          <div class="bg-purple-900 bg-opacity-30 rounded-lg p-3">
+            <h4 class="text-sm font-bold mb-2 text-purple-200">営業での実践例:</h4>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-purple-300 mr-2"></i>
+                競合分析 + 市場調査 + 顧客ニーズ分析を同時実行
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-purple-300 mr-2"></i>
+                複数見込み客への個別メール作成を並列処理
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-purple-300 mr-2"></i>
+                提案書 + プレゼン資料 + FAQ作成を同時進行
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tip 5: Thought Process -->
+        <div class="tip-card p-4 animate-tip">
+          <div class="flex items-center mb-3">
+            <div class="tip-icon">
+              <i class="fas fa-brain text-purple-300 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-purple-300">極意⑤：思考機能活用</h3>
+          </div>
+
+          <p class="text-sm mb-3">段階的思考プロセスを指定することで戦略的提案を生成</p>
+
+          <div class="code-block code-good text-sm">
+            <div class="code-label code-good-label">✅ 例</div>
+            以下のステップで思考してください：<br>
+            1. 顧客の現状と課題を分析<br>
+            2. 競合他社の提案内容を推測<br>
+            3. 自社の強みを最大限活かす方法<br>
+            4. リスクと対策を事前に準備<br>
+            5. 次回アクションを明確化
+          </div>
+        </div>
+
+        <!-- Impact Card -->
+        <div class="col-span-3 bg-purple-900 bg-opacity-20 rounded-lg p-4 mt-2">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-purple-300">
+              <i class="fas fa-bolt mr-2"></i>5つの極意の効果
+            </h3>
+            <div class="flex items-center">
+              <div class="px-3 py-1 bg-purple-700 rounded-full text-sm mr-3">時間削減: 80%</div>
+              <div class="px-3 py-1 bg-purple-700 rounded-full text-sm mr-3">品質向上: 65%</div>
+              <div class="px-3 py-1 bg-purple-700 rounded-full text-sm">成約率: +25%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animate tip cards
+      const tips = document.querySelectorAll('.animate-tip');
+      tips.forEach((tip, index) => {
+        tip.style.opacity = '0';
+        tip.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          tip.style.transition = 'all 0.5s ease';
+          tip.style.opacity = '1';
+          tip.style.transform = 'translateY(0)';
+        }, 300 + (index * 150));
+      });
+    });
+  </script>
+</body>
+
+</html>

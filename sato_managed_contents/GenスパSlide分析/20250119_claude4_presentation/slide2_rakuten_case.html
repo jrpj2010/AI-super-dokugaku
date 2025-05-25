@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>楽天が証明した7時間の奇跡 - Claude Opus 4の実力</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #141453 0%, #2f2baa 50%, #9969d3 100%);
+    }
+
+    .ai-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(97, 218, 251, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(97, 218, 251, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridMove 25s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(40px, 40px);
+      }
+    }
+
+    .slide-title {
+      font-size: 48px;
+      font-weight: 900;
+      color: white;
+      text-align: center;
+      margin-bottom: 24px;
+      background: linear-gradient(45deg, #ffffff, #61dafb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .spec-table {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      overflow: hidden;
+    }
+
+    .spec-table th {
+      background: linear-gradient(45deg, #3023ae, #61dafb);
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .spec-table td {
+      padding: 10px 14px;
+      color: white;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(97, 218, 251, 0.2);
+    }
+
+    .spec-table tr:hover {
+      background: rgba(97, 218, 251, 0.1);
+      transform: scale(1.02);
+      transition: all 0.3s ease;
+    }
+
+    .success-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 4px solid #61dafb;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .success-item:hover {
+      transform: translateX(10px);
+      background: rgba(97, 218, 251, 0.15);
+    }
+
+    .success-item i {
+      color: #61dafb;
+      font-size: 22px;
+      margin-right: 15px;
+    }
+
+    .success-item h4 {
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .success-item p {
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 218, 251, 0.3);
+    }
+
+    .chart-title {
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .rakuten-quote {
+      background: linear-gradient(45deg, #ff6b6b, #feca57);
+      color: white;
+      padding: 18px;
+      border-radius: 15px;
+      font-size: 16px;
+      font-style: italic;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .rakuten-quote::before {
+      content: '"';
+      font-size: 40px;
+      position: absolute;
+      top: -5px;
+      left: 15px;
+      opacity: 0.7;
+    }
+
+    .section-icon {
+      color: #61dafb;
+      font-size: 36px;
+      margin-right: 20px;
+    }
+
+    .section-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="ai-grid"></div>
+
+    <div class="p-6">
+      <h1 class="slide-title">
+        楽天が証明した「7時間の奇跡」<br>
+        Claude Opus 4の実力
+      </h1>
+
+      <div class="grid grid-cols-2 gap-12 h-3/5">
+        <!-- 左カラム: Opus 4スペック -->
+        <div>
+          <h2 class="section-title">
+            <i class="fas fa-microchip section-icon"></i>
+            世界最高のスペック
+          </h2>
+
+          <table class="spec-table w-full">
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>詳細</th>
+                <th>営業への意味</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SWE-bench成績</strong></td>
+                <td><span class="text-cyan-300 font-bold">72.5% (世界最高)</span></td>
+                <td>複雑な業務システムの改善提案が可能に</td>
+              </tr>
+              <tr>
+                <td><strong>Terminal-bench成績</strong></td>
+                <td><span class="text-cyan-300 font-bold">43.2% (業界トップ)</span></td>
+                <td>技術的な顧客質問にも即座に対応</td>
+              </tr>
+              <tr>
+                <td><strong>連続稼働時間</strong></td>
+                <td><span class="text-cyan-300 font-bold">7時間以上 (検証済)</span></td>
+                <td>丸一日分の提案書作成を自動化</td>
+              </tr>
+              <tr>
+                <td><strong>並列処理能力</strong></td>
+                <td><span class="text-cyan-300 font-bold">複数タスク同時実行</span></td>
+                <td>見込み客調査しながら提案書作成</td>
+              </tr>
+              <tr>
+                <td><strong>メモリ機能</strong></td>
+                <td><span class="text-cyan-300 font-bold">自己管理型メモリファイル</span></td>
+                <td>顧客情報を永続的に記憶・活用</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 右カラム: 楽天事例とチャート -->
+        <div>
+          <h2 class="section-title">
+            <i class="fas fa-chart-line section-icon"></i>
+            楽天の実証事例
+          </h2>
+
+          <div class="chart-container mb-8">
+            <h3 class="chart-title">7時間連続パフォーマンス推移</h3>
+            <canvas id="performanceChart" width="400" height="200"></canvas>
+          </div>
+
+          <div class="success-item">
+            <i class="fas fa-clock"></i>
+            <h4>7時間連続で自律的に作業を継続</h4>
+            <p>人間の介入なしでオープンソースのリファクタリング作業を完遂</p>
+          </div>
+
+          <div class="success-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <h4>パフォーマンスの低下なし</h4>
+            <p>持続的な高品質アウトプットを維持、疲労による劣化ゼロ</p>
+          </div>
+
+          <div class="success-item">
+            <i class="fas fa-robot"></i>
+            <h4>完全自律実行の実現</h4>
+            <p>複雑なコードベース理解から実装まで自己完結型で対応</p>
+          </div>
+
+          <div class="rakuten-quote">
+            Rakuten validated its capabilities with a demanding open-source refactor running independently for 7 hours
+            with sustained performance.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Chart.js でパフォーマンスチャートを作成
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const performanceChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['開始', '1時間', '2時間', '3時間', '4時間', '5時間', '6時間', '7時間'],
+        datasets: [{
+          label: 'Claude Opus 4',
+          data: [95, 96, 97, 96, 95, 96, 97, 95],
+          borderColor: '#61dafb',
+          backgroundColor: 'rgba(97, 218, 251, 0.1)',
+          borderWidth: 4,
+          fill: true,
+          tension: 0.4
+        }, {
+          label: '従来のAI',
+          data: [90, 85, 80, 75, 70, 65, 60, 55],
+          borderColor: '#ff6b6b',
+          backgroundColor: 'rgba(255, 107, 107, 0.1)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white',
+              font: {
+                size: 16
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 50,
+            max: 100,
+            grid: {
+              color: 'rgba(97, 218, 251, 0.2)'
+            },
+            ticks: {
+              color: 'white',
+              font: {
+                size: 14
+              }
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(97, 218, 251, 0.2)'
+            },
+            ticks: {
+              color: 'white',
+              font: {
+                size: 14
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // GSAP アニメーション
+    gsap.timeline()
+      .from(".slide-title", { duration: 1.2, y: -50, opacity: 0, ease: "power3.out" })
+      .from(".section-title", { duration: 1, y: 30, opacity: 0, stagger: 0.3, ease: "power2.out" }, "-=0.5")
+      .from(".spec-table", { duration: 1.5, scale: 0.8, opacity: 0, ease: "back.out(1.2)" }, "-=0.8")
+      .from(".chart-container", { duration: 1.2, x: 100, opacity: 0, ease: "power2.out" }, "-=1")
+      .from(".success-item", { duration: 0.8, x: 50, opacity: 0, stagger: 0.2, ease: "power2.out" }, "-=0.5")
+      .from(".rakuten-quote", { duration: 1, scale: 0.9, opacity: 0, ease: "elastic.out(1, 0.5)" }, "-=0.3");
+  </script>
+</body>
+
+</html>

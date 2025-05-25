@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今すぐ実践！営業×AI融合の第一歩</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e63946 0%, #ff9a3c 50%, #ffbe0b 100%);
+      color: #ffffff;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .step-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px) !important;
+    }
+
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 50px;
+      height: 50px;
+      background: #ffbe0b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      color: #e63946;
+    }
+
+    .step-content {
+      padding-top: 10px;
+    }
+
+    .checklist-item {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.4s ease;
+    }
+
+    .ai-grid {
+      position: absolute;
+      left: -150px;
+      bottom: -150px;
+      width: 600px;
+      height: 600px;
+      opacity: 0.05;
+      transform: rotate(15deg);
+      z-index: 0;
+    }
+
+    .ai-grid:before,
+    .ai-grid:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .progress-path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: dash 3s ease-in-out forwards;
+      animation-delay: 1s;
+      stroke: rgba(255, 255, 255, 0.6);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .template-box {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      font-family: monospace;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.5s ease;
+      max-height: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide flex items-center justify-center">
+    <div class="ai-grid"></div>
+
+    <!-- Abstract shapes in background -->
+    <svg class="floating-element" style="right: 100px; top: 100px; width: 200px; height: 200px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+      <circle cx="50" cy="50" r="20" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></circle>
+    </svg>
+
+    <svg class="floating-element" style="right: 50px; bottom: 50px; width: 300px; height: 300px;" viewBox="0 0 100 100">
+      <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></polygon>
+      <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"></polygon>
+    </svg>
+
+    <!-- Progress path connecting steps -->
+    <svg width="100%" height="100%" style="position: absolute; z-index: 1; pointer-events: none;">
+      <path class="progress-path" d="M300,230 C400,230 400,380 500,380 C600,380 600,530 700,530"></path>
+    </svg>
+
+    <div class="content-wrapper px-16 py-10 w-full">
+      <h1 class="title text-4xl mb-10">
+        今すぐ実践！<span class="text-yellow-200">営業×AI融合</span>の第一歩
+      </h1>
+
+      <div class="grid grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="relative">
+          <div class="step-card p-6" id="step1">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="font-bold text-xl mb-4 text-yellow-200">
+                営業プロセスの可視化
+              </h3>
+
+              <div class="space-y-4">
+                <div class="checklist-item" id="check1-1">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-tasks text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">日次タスクの棚卸し</h4>
+                      <p class="text-xs opacity-80 mt-1">
+                        メール返信：2時間/日<br>
+                        提案書作成：3時間/件
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check1-2">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-sync-alt text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">繰り返しパターンの特定</h4>
+                      <div class="flex flex-wrap mt-1">
+                        <span class="tag">質問回答</span>
+                        <span class="tag">報告書作成</span>
+                        <span class="tag">顧客フォロー</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check1-3">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-chart-bar text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">AI化可能性スコアリング</h4>
+                      <div class="mt-1 text-xs">
+                        <div class="flex justify-between items-center">
+                          <span>メール返信</span>
+                          <span class="text-yellow-300">★★★★★</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                          <span>提案書作成</span>
+                          <span class="text-yellow-300">★★★★☆</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                          <span>議事録作成</span>
+                          <span class="text-yellow-300">★★★★★</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative">
+          <div class="step-card p-6" id="step2">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="font-bold text-xl mb-4 text-yellow-200">
+                "Quick Win"から始める
+              </h3>
+
+              <div class="space-y-4">
+                <div class="checklist-item" id="check2-1">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-envelope text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">顧客メール返信の効率化</h4>
+                      <button class="text-xs text-yellow-200 mt-1 flex items-center" id="show-template">
+                        <i class="fas fa-code mr-1"></i>テンプレートを見る
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="template-box mt-2 p-3" id="template-box">
+                    <p class="text-xs leading-tight">
+                      以下のメールに返信してください。<br>
+                      &lt;context&gt;<br>
+                      - 顧客：製造業A社 山田部長<br>
+                      - 関係：3年来の既存顧客<br>
+                      &lt;/context&gt;<br><br>
+
+                      &lt;requirements&gt;<br>
+                      - 丁寧だが堅すぎない口調<br>
+                      - 次のアクションを明確に提示<br>
+                      &lt;/requirements&gt;
+                    </p>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check2-2">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-file-alt text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">提案書自動生成</h4>
+                      <p class="text-xs opacity-80 mt-1">
+                        企業規模・業種・課題に応じた<br>
+                        テンプレート活用
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check2-3">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-search text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">競合情報リサーチ</h4>
+                      <p class="text-xs opacity-80 mt-1">
+                        公開情報から最新の競合分析を<br>
+                        Claude 4が自動生成
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative">
+          <div class="step-card p-6" id="step3">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="font-bold text-xl mb-4 text-yellow-200">
+                "チーム展開"で組織力向上
+              </h3>
+
+              <div class="space-y-4">
+                <div class="checklist-item" id="check3-1">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-users text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">週次AI活用共有会（15分）</h4>
+                      <ul class="text-xs opacity-80 mt-1 list-disc ml-4">
+                        <li>成功事例の共有</li>
+                        <li>失敗から学んだこと</li>
+                        <li>新しい活用アイデア</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check3-2">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-chart-line text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">月次効果測定</h4>
+                      <div class="mt-2 text-xs">
+                        <div class="flex items-center mb-1">
+                          <div class="w-20">時間削減</div>
+                          <div class="w-32 h-3 bg-white bg-opacity-20 rounded-full">
+                            <div class="h-full bg-yellow-300 rounded-full" style="width: 70%"></div>
+                          </div>
+                          <div class="ml-2">70%</div>
+                        </div>
+                        <div class="flex items-center mb-1">
+                          <div class="w-20">品質向上</div>
+                          <div class="w-32 h-3 bg-white bg-opacity-20 rounded-full">
+                            <div class="h-full bg-yellow-300 rounded-full" style="width: 65%"></div>
+                          </div>
+                          <div class="ml-2">65%</div>
+                        </div>
+                        <div class="flex items-center">
+                          <div class="w-20">顧客満足</div>
+                          <div class="w-32 h-3 bg-white bg-opacity-20 rounded-full">
+                            <div class="h-full bg-yellow-300 rounded-full" style="width: 85%"></div>
+                          </div>
+                          <div class="ml-2">85%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checklist-item" id="check3-3">
+                  <div class="flex items-start">
+                    <div
+                      class="w-8 h-8 bg-yellow-600 bg-opacity-30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                      <i class="fas fa-dollar-sign text-yellow-300"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white text-sm">経営層を巻き込む「3つの数字」</h4>
+                      <p class="text-xs font-bold mt-1">
+                        <span class="text-yellow-200">⚡️ 週10時間の時間創出</span><br>
+                        <span class="text-yellow-200">⚡️ 提案書品質向上で成約率15%アップ</span><br>
+                        <span class="text-yellow-200">⚡️ AI投資3ヶ月で回収・年間ROI 400%</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animate step cards
+      const stepCards = [
+        document.getElementById('step1'),
+        document.getElementById('step2'),
+        document.getElementById('step3')
+      ];
+
+      stepCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.transition = 'all 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.25)';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 300 + (index * 300));
+      });
+
+      // Animate checklist items
+      const animateChecklist = (id, delay) => {
+        const items = document.querySelectorAll(`#${id} .checklist-item`);
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.transition = 'all 0.6s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateX(0)';
+          }, delay + (index * 200));
+        });
+      };
+
+      setTimeout(() => animateChecklist('step1', 1000), 300);
+      setTimeout(() => animateChecklist('step2', 1300), 600);
+      setTimeout(() => animateChecklist('step3', 1600), 900);
+
+      // Template show/hide functionality
+      const showTemplateBtn = document.getElementById('show-template');
+      const templateBox = document.getElementById('template-box');
+
+      if (showTemplateBtn && templateBox) {
+        showTemplateBtn.addEventListener('click', function () {
+          if (templateBox.style.maxHeight) {
+            templateBox.style.maxHeight = null;
+            templateBox.style.opacity = '0';
+            showTemplateBtn.innerHTML = '<i class="fas fa-code mr-1"></i>テンプレートを見る';
+          } else {
+            templateBox.style.maxHeight = templateBox.scrollHeight + 'px';
+            templateBox.style.opacity = '1';
+            showTemplateBtn.innerHTML = '<i class="fas fa-times mr-1"></i>閉じる';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

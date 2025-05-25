@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今すぐ実践！営業×AI融合の第一歩</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .framework-hero {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .framework-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .framework-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .steps-container {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .step-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: #10b981;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+    }
+
+    .step-header {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-number {
+      background: rgba(255, 255, 255, 0.2);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .step-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .step-content {
+      padding: 2rem;
+    }
+
+    .step-description {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-items {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .action-item:last-child {
+      border-bottom: none;
+    }
+
+    .action-icon {
+      color: #10b981;
+      font-size: 1.2rem;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .action-text {
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .expected-outcome {
+      background: #f0fdf4;
+      border: 2px solid #10b981;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .outcome-title {
+      font-weight: 700;
+      color: #059669;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .outcome-text {
+      color: #064e3b;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .templates-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 2rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .template-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .template-card:hover {
+      border-color: #3b82f6;
+      transform: translateY(-3px);
+    }
+
+    .template-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .template-code {
+      background: #1f2937;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+
+    .kpi-section {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .kpi-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      border-left: 4px solid #fbbf24;
+    }
+
+    .kpi-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fbbf24;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .kpi-description {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .success-metrics {
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .metrics-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .metrics-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .metric-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 6px;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .metric-icon {
+      color: #f59e0b;
+      font-size: 1.2rem;
+    }
+
+    .metric-text {
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    @media (max-width: 768px) {
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-list {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">今すぐ実践！営業×AI融合の第一歩</h1>
+    <p class="slide-subtitle">TANREN式「AI営業革命」実践ガイド</p>
+  </div>
+
+  <div class="main-content">
+    <div class="framework-hero">
+      <div class="framework-title">3ステップ実装フレームワーク</div>
+      <div class="framework-subtitle">今日から始められる具体的アクションプラン</div>
+    </div>
+
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <div class="step-title">営業プロセスの可視化</div>
+        </div>
+        <div class="step-content">
+          <div class="step-description">
+            現在の営業活動を完全に洗い出し、AI化の優先順位を決定します。効果的なAI導入の前提となる重要なステップです。
+          </div>
+          <ul class="action-items">
+            <li class="action-item">
+              <i class="fas fa-clock action-icon"></i>
+              <span class="action-text">日次タスクの棚卸し（所要時間付き）</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-search action-icon"></i>
+              <span class="action-text">繰り返しパターンの特定</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-chart-bar action-icon"></i>
+              <span class="action-text">AI化可能性スコアリング</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-list-ul action-icon"></i>
+              <span class="action-text">週次レビューミーティング設定</span>
+            </li>
+          </ul>
+          <div class="expected-outcome">
+            <div class="outcome-title">
+              <i class="fas fa-trophy"></i>
+              期待される成果
+            </div>
+            <div class="outcome-text">
+              営業活動の70%が定型化可能であることを発見。最も効果の高い業務から順次AI化を開始できる状態を構築。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <div class="step-title">Quick Winから始める</div>
+        </div>
+        <div class="step-content">
+          <div class="step-description">
+            即効性の高い業務から着手し、早期の成功体験を積み重ねます。チーム全体のAI活用モチベーションを高める重要な段階です。
+          </div>
+          <ul class="action-items">
+            <li class="action-item">
+              <i class="fas fa-envelope action-icon"></i>
+              <span class="action-text">顧客メール返信の効率化</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-file-alt action-icon"></i>
+              <span class="action-text">議事録自動作成システム</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-chart-line action-icon"></i>
+              <span class="action-text">競合分析レポート自動生成</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-users action-icon"></i>
+              <span class="action-text">チーム内ナレッジ共有システム</span>
+            </li>
+          </ul>
+          <div class="expected-outcome">
+            <div class="outcome-title">
+              <i class="fas fa-rocket"></i>
+              期待される成果
+            </div>
+            <div class="outcome-text">
+              1週間で1人あたり5時間の時間創出。成功事例を基にチーム全体のAI活用意識が向上し、本格展開の基盤を構築。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <div class="step-title">チーム展開で組織力向上</div>
+        </div>
+        <div class="step-content">
+          <div class="step-description">
+            個人の成功を組織全体に拡散し、営業チーム全体の生産性を革命的に向上させます。持続可能なAI活用体制を確立します。
+          </div>
+          <ul class="action-items">
+            <li class="action-item">
+              <i class="fas fa-calendar action-icon"></i>
+              <span class="action-text">週次AI活用共有会（15分）</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-chart-pie action-icon"></i>
+              <span class="action-text">月次効果測定レポート</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-graduation-cap action-icon"></i>
+              <span class="action-text">四半期ごとのスキルアップデート</span>
+            </li>
+            <li class="action-item">
+              <i class="fas fa-star action-icon"></i>
+              <span class="action-text">ベストプラクティス標準化</span>
+            </li>
+          </ul>
+          <div class="expected-outcome">
+            <div class="outcome-title">
+              <i class="fas fa-chart-line"></i>
+              期待される成果
+            </div>
+            <div class="outcome-text">
+              3ヶ月で営業チーム全体の生産性が40%向上。成約率15%アップ、新規顧客獲得数30%増加を実現。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="templates-section">
+      <h2 class="section-title">
+        <i class="fas fa-code"></i>
+        明日から使える！Claude 4活用テンプレート
+      </h2>
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-title">
+            <i class="fas fa-envelope"></i>
+            顧客メール返信テンプレート
+          </div>
+          <div class="template-code">
+            以下のメールに返信してください。
+
+            &lt;context&gt;
+            - 顧客：製造業A社 山田部長
+            - 関係：3年来の既存顧客
+            - 前回商談：DXツール導入の相談
+            - 予算規模：年間500万円
+            &lt;/context&gt;
+
+            &lt;customer_email&gt;
+            [顧客メールを貼り付け]
+            &lt;/customer_email&gt;
+
+            &lt;requirements&gt;
+            - 丁寧だが堅すぎない口調
+            - 次のアクションを明確に提示
+            - 技術的な説明は最小限に
+            &lt;/requirements&gt;
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-title">
+            <i class="fas fa-chart-bar"></i>
+            競合分析レポートテンプレート
+          </div>
+          <div class="template-code">
+            &lt;analysis_request&gt;
+            以下の競合他社について分析してください：
+            [競合他社名]
+
+            &lt;analysis_framework&gt;
+            1. 強みと弱みの分析
+            2. 価格戦略の評価
+            3. 市場シェアの推移
+            4. 顧客満足度の比較
+            5. 自社との差別化ポイント
+            &lt;/analysis_framework&gt;
+
+            &lt;output_format&gt;
+            - エグゼクティブサマリー（3行）
+            - 詳細分析（各項目200文字）
+            - 対策提案（具体的アクション）
+            &lt;/output_format&gt;
+            &lt;/analysis_request&gt;
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-title">
+            <i class="fas fa-file-alt"></i>
+            提案書作成テンプレート
+          </div>
+          <div class="template-code">
+            &lt;proposal_request&gt;
+            [業界]向け[ソリューション名]の提案書を作成
+
+            &lt;requirements&gt;
+            - 導入後のROI試算（3年間）
+            - 競合他社との差別化ポイント（表形式）
+            - 段階的な導入スケジュール
+            - 成功事例3社（同業種）
+            - リスクと対策
+            &lt;/requirements&gt;
+
+            &lt;context&gt;
+            - 決裁者：[役職・背景]
+            - 課題：[現在の課題]
+            - 予算：[予算規模]
+            - 期限：[導入希望時期]
+            &lt;/context&gt;
+            &lt;/proposal_request&gt;
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-section">
+      <h2 class="section-title" style="color: white;">
+        <i class="fas fa-target"></i>
+        経営層を巻き込む「3つの数字」
+      </h2>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-number">10時間</span>
+          <div class="kpi-label">週次時間創出</div>
+          <div class="kpi-description">営業担当者1人あたり週10時間の創出により、訪問件数30%増加を実現</div>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">35%</span>
+          <div class="kpi-label">成約率向上</div>
+          <div class="kpi-description">提案書品質向上で成約率15%アップ、レスポンス速度向上で商談数20%増</div>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">400%</span>
+          <div class="kpi-label">年間ROI</div>
+          <div class="kpi-description">AI投資額の3ヶ月での回収を実現し、年間ROI400%を達成</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-metrics">
+      <div class="metrics-title">成功指標チェックリスト</div>
+      <div class="metrics-list">
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">週10時間の時間創出達成</span>
+        </div>
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">提案書作成時間50%短縮</span>
+        </div>
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">顧客満足度15%向上</span>
+        </div>
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">新規顧客獲得数30%増</span>
+        </div>
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">チーム全体のAI活用率80%</span>
+        </div>
+        <div class="metric-item">
+          <i class="fas fa-check metric-icon"></i>
+          <span class="metric-text">AI投資回収期間3ヶ月以内</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

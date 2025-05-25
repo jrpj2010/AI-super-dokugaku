@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEO対談「2026年、1人で10億ドル企業」の真実</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1e40af;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #1e40af;
+      padding-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .prediction-hero {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prediction-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .prediction-question {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 10;
+    }
+
+    .prediction-answer {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: #fbbf24;
+      position: relative;
+      z-index: 10;
+    }
+
+    .prediction-source {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      position: relative;
+      z-index: 10;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .analysis-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .analysis-card:hover {
+      transform: translateY(-5px);
+      border-color: #7c3aed;
+      box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+    }
+
+    .analysis-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #7c3aed, #a855f7, #c084fc);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: #7c3aed;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 1rem;
+    }
+
+    .card-content {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .quote-section {
+      background: #f8fafc;
+      border-left: 6px solid #7c3aed;
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .quote-text {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .quote-attribution {
+      font-weight: 600;
+      color: #7c3aed;
+      font-size: 0.95rem;
+    }
+
+    .impact-assessment {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .impact-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .impact-scenarios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .scenario {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #fbbf24;
+    }
+
+    .scenario-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #fbbf24;
+    }
+
+    .scenario-content {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .timeline-2026 {
+      background: #f0f9ff;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 2rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .timeline-step {
+      background: white;
+      border: 2px solid #3b82f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-year {
+      background: #1e40af;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e40af;
+      margin-bottom: 0.8rem;
+    }
+
+    .step-content {
+      font-size: 0.95rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .key-insight {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-left: 4px solid #f59e0b;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .analysis-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-scenarios {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-title {
+        font-size: 2rem;
+      }
+
+      .prediction-answer {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-header">
+    <h1 class="slide-title">CEO対談「2026年、1人で10億ドル企業」の真実</h1>
+    <p class="slide-subtitle">ダリオ・アマダイCEOが語った衝撃の予言を徹底分析</p>
+  </div>
+
+  <div class="main-content">
+    <div class="prediction-hero">
+      <div class="prediction-question">
+        "1人の人間従業員による10億ドル企業はいつ登場すると思いますか？"
+      </div>
+      <div class="prediction-answer">2026年</div>
+      <div class="prediction-source">— Dario Amodei CEO（即答）</div>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <i class="fas fa-chart-line card-icon"></i>
+        <h3 class="card-title">なぜ「2026年」なのか</h3>
+        <div class="card-content">
+          ダリオCEOが即答した背景には明確な根拠があります。現在のAI進化スピードと、ソフトウェア開発コストの劇的な低下を計算した結果の予測です。
+        </div>
+        <div class="quote-section">
+          <div class="quote-text">
+            "ソフトウェアを生産するコストが下がったときに何が起こるか、経済的またはビジネス的な観点から慎重に考えていないと思います。"
+          </div>
+          <div class="quote-attribution">— Dario Amodei</div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <i class="fas fa-dollar-sign card-icon"></i>
+        <h3 class="card-title">「20セント」の革命</h3>
+        <div class="card-content">
+          最も衝撃的な発言は、ソフトウェア開発コストについての予測でした。
+        </div>
+        <div class="quote-section">
+          <div class="quote-text">
+            "世界は、これらのものがアドホックに作られるようになると、非常に異なるものになると思います。このイベントのためにソフトウェア全体を作ることはないでしょう。でも、20セントで数秒で作れるようになったら？"
+          </div>
+          <div class="quote-attribution">— Dario Amodei</div>
+        </div>
+        <div class="key-insight">
+          営業への意味：顧客1社1社に専用システムを20セントで作成可能
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <i class="fas fa-rocket card-icon"></i>
+        <h3 class="card-title">「野心的であれ」のメッセージ</h3>
+        <div class="card-content">
+          ダリオCEOは、開発者（そして営業職）に向けて重要なアドバイスを送りました。
+        </div>
+        <div class="quote-section">
+          <div class="quote-text">
+            "野心的であれ（Be ambitious）。あなたが不可能だと思うより大きなものを構築してください。そして、それがまだ機能しなくても、次のモデルが数ヶ月後、おそらく2ヶ月後、そして1ヶ月後に出てくるでしょう。"
+          </div>
+          <div class="quote-attribution">— Dario Amodei</div>
+        </div>
+        <div class="key-insight">
+          今の限界を前提とせず、2ヶ月後の能力を見込んで計画せよ
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <i class="fas fa-brain card-icon"></i>
+        <h3 class="card-title">「壁にぶつかる」ことの価値</h3>
+        <div class="card-content">
+          失敗や困難についても、ダリオCEOは前向きな視点を提示しています。
+        </div>
+        <div class="quote-section">
+          <div class="quote-text">
+            "壁に頭をぶつけるのは、実際には時には役立つことがあります。なぜなら、他のすべてのピースを所定の位置に置くからです。そして、モデルが機能するとき、あなたは必要以上に堅牢なものを構築したことになります。"
+          </div>
+          <div class="quote-attribution">— Dario Amodei</div>
+        </div>
+        <div class="key-insight">
+          営業でも「今は難しい」案件の準備をしておけば、AI進化時に大きなアドバンテージ
+        </div>
+      </div>
+    </div>
+
+    <div class="impact-assessment">
+      <h2 class="impact-title">営業にとっての破壊的変化</h2>
+      <div class="impact-scenarios">
+        <div class="scenario">
+          <div class="scenario-title">個別カスタマイズの極致</div>
+          <div class="scenario-content">
+            顧客1社1社に完全オーダーメイドの提案システム。商談のたびに専用の分析ツール作成。顧客の質問に即座に専用FAQ生成。
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-title">役割の根本的変化</div>
+          <div class="scenario-content">
+            「開発者の役割は何ですか？ビジネスの役割は何ですか？スタートアップの役割は何ですか？」— 全ての職種で役割の再定義が必要。
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-title">1人vs99人の格差</div>
+          <div class="scenario-content">
+            AIを使いこなす1人が10億ドル企業を運営する一方、AIに取り残された99人は従来の限界に束縛される極端な格差社会。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-2026">
+      <h2 class="timeline-title">
+        <i class="fas fa-calendar-alt"></i>
+        2026年までのロードマップ
+      </h2>
+      <div class="timeline-steps">
+        <div class="timeline-step">
+          <div class="step-year">2025年</div>
+          <div class="step-title">基盤技術の確立</div>
+          <div class="step-content">
+            Claude 4シリーズの普及。7時間連続稼働の実証。エラー率95%削減の実現。
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-year">2025年後半</div>
+          <div class="step-title">コスト革命の開始</div>
+          <div class="step-content">
+            ソフトウェア開発コストが1/100に。専用ツールが数セントで作成可能になる。
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-year">2026年前半</div>
+          <div class="step-title">個人企業の登場</div>
+          <div class="step-content">
+            AIを完全に使いこなす個人が、従来の大企業と同等の価値を創出し始める。
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-year">2026年後半</div>
+          <div class="step-title">10億ドル企業の実現</div>
+          <div class="step-content">
+            「1人で10億ドル企業」が現実となり、経済の基本構造が根本的に変化。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#f4f1ea"/>
+
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="90" fill="#2c2c2c"/>
+  <text x="60" y="55" font-family="Noto Serif JP" font-size="32" fill="#f4f1ea" font-weight="bold">🚀 Claude 4.0 | 次世代AIの革命的進化</text>
+  <text x="1720" y="55" font-family="Noto Sans JP" font-size="18" fill="#b3322b">2025年リリース</text>
+
+  <!-- グリッドレイアウト - 3カラム -->
+  <!-- 左カラム: モデル概要 -->
+  <g transform="translate(60, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#b3322b" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#b3322b" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">⚡ モデル仕様・性能</text>
+
+    <!-- Opus 4 セクション -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">🏆 Claude Opus 4</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#b3322b" stroke-width="2"/>
+    <circle cx="270" cy="110" r="3" fill="#b3322b"/>
+
+    <text x="30" y="130" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">最高性能・複雑タスク特化型</text>
+
+    <!-- ベンチマーク結果チャート -->
+    <rect x="30" y="145" width="520" height="140" fill="#f8f6f0" stroke="#b3322b" stroke-width="1"/>
+    <text x="40" y="165" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">主要ベンチマーク比較</text>
+
+    <!-- SWE-bench -->
+    <text x="40" y="185" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">SWE-bench</text>
+    <rect x="120" y="175" width="200" height="15" fill="#653a5e" rx="3"/>
+    <text x="330" y="187" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">49.0%</text>
+
+    <!-- Terminal-bench -->
+    <text x="40" y="205" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">Terminal-bench</text>
+    <rect x="120" y="195" width="180" height="15" fill="#1a5b66" rx="3"/>
+    <text x="310" y="207" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">45.2%</text>
+
+    <!-- Coding -->
+    <text x="40" y="225" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">HumanEval</text>
+    <rect x="120" y="215" width="220" height="15" fill="#b3322b" rx="3"/>
+    <text x="350" y="227" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c" font-weight="bold">52.4%</text>
+
+    <!-- 作業時間比較 -->
+    <text x="40" y="250" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">自律作業時間の進化</text>
+    <text x="40" y="270" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">Claude 3 → 数分</text>
+    <text x="40" y="285" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">Claude 3.7 → 45分</text>
+    <text x="40" y="300" font-family="Noto Sans JP" font-size="10" fill="#653a5e" font-weight="bold">Claude 4 → 数時間 (最大7時間実績)</text>
+
+    <!-- Sonnet 4 セクション -->
+    <text x="30" y="340" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">⚡ Claude Sonnet 4</text>
+    <line x1="30" y1="345" x2="550" y2="345" stroke="#1a5b66" stroke-width="2"/>
+    <circle cx="270" cy="350" r="3" fill="#1a5b66"/>
+
+    <text x="30" y="370" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">効率性・日常作業最適化</text>
+
+    <!-- 特徴比較表 -->
+    <rect x="30" y="385" width="520" height="150" fill="#f8f6f0" stroke="#1a5b66" stroke-width="1"/>
+    <text x="40" y="405" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">Sonnet 3.7からの改善点</text>
+
+    <text x="40" y="425" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 同等コストで知性向上</text>
+    <text x="40" y="440" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 過度な意欲の抑制</text>
+    <text x="40" y="455" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 報酬ハッキング問題解決</text>
+    <text x="40" y="470" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 複雑コードベース理解向上</text>
+
+    <!-- Cursor評価 -->
+    <rect x="40" y="485" width="500" height="40" fill="#1a5b66" rx="5"/>
+    <text x="50" y="505" font-family="Noto Sans JP" font-size="11" fill="white">"最先端のコーディングモデル、複雑なコードベース理解の飛躍的進歩" - Cursor</text>
+
+    <!-- ハイブリッドモデル特徴 -->
+    <text x="30" y="565" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🔄 ハイブリッドモデル</text>
+    <line x1="30" y1="570" x2="550" y2="570" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="585" width="250" height="80" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+    <text x="40" y="605" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">⚡ 瞬時レスポンス</text>
+    <text x="40" y="620" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 日常的なタスク</text>
+    <text x="40" y="635" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 簡単な質問応答</text>
+    <text x="40" y="650" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 基本的なコーディング</text>
+
+    <rect x="300" y="585" width="250" height="80" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+    <text x="310" y="605" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">🧠 拡張思考</text>
+    <text x="310" y="620" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 複雑な推論</text>
+    <text x="310" y="635" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 数学的計算</text>
+    <text x="310" y="650" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">• 高度なコーディング</text>
+
+    <!-- リリース情報 -->
+    <rect x="30" y="690" width="520" height="120" fill="#2c2c2c" rx="10"/>
+    <text x="40" y="715" font-family="Noto Serif JP" font-size="16" fill="#f4f1ea" font-weight="bold">📅 即時リリース情報</text>
+    <text x="40" y="740" font-family="Noto Sans JP" font-size="12" fill="#f4f1ea">• Claude.ai & Claude Code</text>
+    <text x="40" y="755" font-family="Noto Sans JP" font-size="12" fill="#f4f1ea">• Anthropic API</text>
+    <text x="40" y="770" font-family="Noto Sans JP" font-size="12" fill="#f4f1ea">• Amazon Bedrock</text>
+    <text x="40" y="785" font-family="Noto Sans JP" font-size="12" fill="#f4f1ea">• Google Cloud Vertex AI</text>
+    <text x="300" y="740" font-family="Noto Sans JP" font-size="11" fill="#b3322b">Free Tier: Sonnet 4のみ</text>
+    <text x="300" y="755" font-family="Noto Sans JP" font-size="11" fill="#b3322b">他プラン: 両モデル利用可</text>
+  </g>
+
+  <!-- 中央カラム: AI エージェント機能 -->
+  <g transform="translate(670, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#1a5b66" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#1a5b66" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">🤖 AIエージェント革命</text>
+
+    <!-- 新機能セクション -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">🚀 ブレークスルー機能</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#1a5b66" stroke-width="2"/>
+
+    <!-- 機能リスト -->
+    <rect x="30" y="120" width="520" height="200" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+
+    <text x="40" y="145" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">⚡ 推論中ツール使用</text>
+    <text x="40" y="160" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">思考プロセス中にWeb検索・計算実行</text>
+
+    <text x="40" y="185" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">🔄 並列ツール処理</text>
+    <text x="40" y="200" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">複数のタスクを同時に効率的実行</text>
+
+    <text x="40" y="225" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">🧠 セッション間メモリ</text>
+    <text x="40" y="240" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">対話履歴・学習内容の永続化</text>
+
+    <text x="40" y="265" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">📁 ローカルファイル管理</text>
+    <text x="40" y="280" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">プロジェクトファイルへの直接アクセス</text>
+
+    <text x="40" y="305" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">⏰ 長時間自律実行</text>
+    <text x="40" y="320" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">最大7時間の継続作業実績</text>
+
+    <!-- コード実行ツール -->
+    <text x="30" y="360" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">💻 コード実行環境</text>
+    <line x1="30" y1="365" x2="550" y2="365" stroke="#653a5e" stroke-width="2"/>
+
+    <rect x="30" y="380" width="520" height="150" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+    <text x="40" y="405" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">データアナリスト機能</text>
+
+    <!-- プロセスフロー -->
+    <g transform="translate(40, 415)">
+      <rect x="0" y="0" width="80" height="30" fill="#653a5e" rx="3"/>
+      <text x="10" y="20" font-family="Noto Sans JP" font-size="10" fill="white">データ読込</text>
+
+      <path d="M85 15 L95 15" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="100" y="0" width="80" height="30" fill="#653a5e" rx="3"/>
+      <text x="115" y="20" font-family="Noto Sans JP" font-size="10" fill="white">クリーニング</text>
+
+      <path d="M185 15 L195 15" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="200" y="0" width="80" height="30" fill="#653a5e" rx="3"/>
+      <text x="220" y="20" font-family="Noto Sans JP" font-size="10" fill="white">分析実行</text>
+
+      <path d="M285 15 L295 15" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="300" y="0" width="80" height="30" fill="#653a5e" rx="3"/>
+      <text x="315" y="20" font-family="Noto Sans JP" font-size="10" fill="white">視覚化</text>
+
+      <path d="M385 15 L395 15" stroke="#653a5e" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <rect x="400" y="0" width="80" height="30" fill="#653a5e" rx="3"/>
+      <text x="420" y="20" font-family="Noto Sans JP" font-size="10" fill="white">反復改良</text>
+    </g>
+
+    <text x="40" y="470" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• リアルタイム結果確認</text>
+    <text x="40" y="485" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 探索的チャート生成</text>
+    <text x="40" y="500" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 異常値検出・ドリルダウン</text>
+    <text x="40" y="515" font-family="Noto Sans JP" font-size="11" fill="white" font-weight="bold">• パターン自動発見</text>
+
+    <!-- アーキテクチャルセーフティ -->
+    <text x="30" y="560" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🛡️ アーキテクチャルセーフティ</text>
+    <line x1="30" y1="565" x2="550" y2="565" stroke="#b3322b" stroke-width="2"/>
+
+    <rect x="30" y="580" width="520" height="180" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+
+    <text x="40" y="605" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">チェックポイント制御</text>
+    <text x="40" y="620" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 主要決定での一時停止</text>
+    <text x="40" y="635" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 人間承認が必要なアクション定義</text>
+
+    <text x="40" y="660" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">悪用対策</text>
+    <text x="40" y="675" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• プロンプトインジェクション対策</text>
+    <text x="40" y="690" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• バトルテスト済み堅牢性</text>
+
+    <text x="40" y="715" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">透明性確保</text>
+    <text x="40" y="730" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 明確なフィードバックループ</text>
+    <text x="40" y="745" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 観察可能な行動パターン</text>
+
+    <!-- MCP統合 -->
+    <rect x="30" y="770" width="520" height="70" fill="#2c2c2c" rx="5"/>
+    <text x="40" y="790" font-family="Noto Serif JP" font-size="14" fill="#f4f1ea" font-weight="bold">🔗 MCP (Model Context Protocol)</text>
+    <text x="40" y="810" font-family="Noto Sans JP" font-size="11" fill="#f4f1ea">Microsoft・Google・OpenAI・Block・Atlassian採用</text>
+    <text x="40" y="825" font-family="Noto Sans JP" font-size="11" fill="#1a5b66">3000+コミュニティ統合・エージェント経済基盤</text>
+  </g>
+
+  <!-- 右カラム: 実際のインパクト・具体例 -->
+  <g transform="translate(1280, 130)">
+    <rect x="0" y="0" width="580" height="850" fill="white" stroke="#653a5e" stroke-width="3" rx="15"/>
+
+    <!-- カラムヘッダー -->
+    <rect x="0" y="0" width="580" height="60" fill="#653a5e" rx="15 15 0 0"/>
+    <text x="30" y="40" font-family="Noto Serif JP" font-size="24" fill="white" font-weight="bold">🌟 実証実績・活用事例</text>
+
+    <!-- 企業活用事例 -->
+    <text x="30" y="100" font-family="Noto Serif JP" font-size="20" fill="#2c2c2c" font-weight="bold">🏢 企業導入実績</text>
+    <line x1="30" y1="105" x2="550" y2="105" stroke="#653a5e" stroke-width="2"/>
+
+    <!-- 楽天事例 -->
+    <rect x="30" y="120" width="520" height="80" fill="#fff0f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+    <text x="40" y="145" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">🇯🇵 楽天 (Rakuten)</text>
+    <text x="40" y="165" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c">持続パフォーマンス実績</text>
+    <text x="40" y="180" font-family="Noto Sans JP" font-size="24" fill="#b3322b" font-weight="bold">7時間</text>
+    <text x="120" y="180" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">連続自律実行</text>
+
+    <!-- TurboTax -->
+    <rect x="30" y="210" width="250" height="65" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+    <text x="40" y="230" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">💰 TurboTax</text>
+    <text x="40" y="245" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">数百万顧客の税務申告</text>
+    <text x="40" y="260" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">連邦税解説AI活用</text>
+
+    <!-- Novo Nordisk -->
+    <rect x="300" y="210" width="250" height="65" fill="#f8f6f0" stroke="#653a5e" stroke-width="1" rx="5"/>
+    <text x="310" y="230" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">🏥 Novo Nordisk</text>
+    <text x="310" y="245" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">臨床試験報告書作成</text>
+    <text x="310" y="260" font-family="Noto Sans JP" font-size="10" fill="#653a5e" font-weight="bold">15週間 → 10分</text>
+
+    <!-- Amazon Alexa Plus -->
+    <rect x="30" y="285" width="520" height="65" fill="#e6f3ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+    <text x="40" y="305" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">🗣️ Amazon Alexa Plus</text>
+    <text x="40" y="325" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">Claudeを音声AI統合モデルとして採用・2025年展開中</text>
+    <text x="40" y="340" font-family="Noto Sans JP" font-size="10" fill="#1a5b66">週末プロトタイプ → 本格パートナーシップへの発展事例</text>
+
+    <!-- 開発効率向上 -->
+    <text x="30" y="380" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">⚡ 開発効率革命</text>
+    <line x1="30" y1="385" x2="550" y2="385" stroke="#b3322b" stroke-width="2"/>
+
+    <!-- Anthropic社内データ -->
+    <rect x="30" y="400" width="520" height="100" fill="#fff5f5" stroke="#b3322b" stroke-width="1" rx="5"/>
+    <text x="40" y="420" font-family="Noto Sans JP" font-size="12" fill="#2c2c2c" font-weight="bold">🏭 Anthropic社内実績</text>
+
+    <text x="40" y="440" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">オンボーディング時間短縮:</text>
+    <text x="40" y="455" font-family="Noto Sans JP" font-size="20" fill="#b3322b" font-weight="bold">2-3週間 → 2-3日</text>
+
+    <text x="300" y="440" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">チーム利用率:</text>
+    <text x="300" y="455" font-family="Noto Sans JP" font-size="20" fill="#b3322b" font-weight="bold">90%+</text>
+
+    <text x="40" y="480" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">複数ターミナルでのマルチエージェント管理</text>
+    <text x="40" y="495" font-family="Noto Sans JP" font-size="10" fill="#2c2c2c">フルスタック開発プロジェクト対応</text>
+
+    <!-- GitHub統合 -->
+    <text x="30" y="530" font-family="Noto Serif JP" font-size="18" fill="#2c2c2c" font-weight="bold">🔗 エコシステム連携</text>
+    <line x1="30" y1="535" x2="550" y2="535" stroke="#1a5b66" stroke-width="2"/>
+
+    <rect x="30" y="550" width="520" height="120" fill="#f0f8ff" stroke="#1a5b66" stroke-width="1" rx="5"/>
+    <text x="40" y="570" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">⚡ GitHub Copilot統合</text>
+    <text x="40" y="590" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• VS Code・GitHub.com・モバイルアプリ対応</text>
+    <text x="40" y="605" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• リアルタイムリリース（Dario発表と同時トリガー）</text>
+    <text x="40" y="620" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• エージェントモード：自律ペアプログラマー</text>
+    <text x="40" y="635" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• プロンプトキャッシュ活用によるコスト効率化</text>
+    <text x="40" y="650" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• Claude Code SDK: GitHub Actions直接統合</text>
+
+    <!-- Claude Code実績 -->
+    <rect x="30" y="680" width="520" height="120" fill="#faf5ff" stroke="#653a5e" stroke-width="1" rx="5"/>
+    <text x="40" y="700" font-family="Noto Sans JP" font-size="14" fill="#2c2c2c" font-weight="bold">🛠️ Claude Code GA (一般提供開始)</text>
+
+    <text x="40" y="720" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• VS Code & JetBrains IDE統合</text>
+    <text x="40" y="735" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• リアルタイム差分表示・自動受け入れモード</text>
+    <text x="40" y="750" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• 90分間でExcalidrawテーブル機能完全実装</text>
+    <text x="40" y="765" font-family="Noto Sans JP" font-size="11" fill="#2c2c2c">• GitHub PR/Issue: @Claude タグでオンデマンド実行</text>
+    <text x="40" y="780" font-family="Noto Sans JP" font-size="11" fill="#653a5e" font-weight="bold">• ボトムアップ社内実験 → 垂直的普及の成功事例</text>
+
+    <!-- 将来展望 -->
+    <rect x="30" y="810" width="520" height="30" fill="#2c2c2c" rx="5"/>
+    <text x="40" y="830" font-family="Noto Serif JP" font-size="12" fill="#f4f1ea" font-weight="bold">🔮 2026年予測: 1人従業員10億ドル企業の実現</text>
+  </g>
+
+  <!-- フッター -->
+  <rect x="0" y="1010" width="1920" height="70" fill="#2c2c2c"/>
+  <text x="60" y="1045" font-family="Noto Sans JP" font-size="16" fill="#f4f1ea">Anthropic "Code with Claude" Developer Conference 2025 | AI超独学TANREN 3Dメソッド分析</text>
+  <text x="1650" y="1045" font-family="Noto Sans JP" font-size="16" fill="#b3322b">1/4</text>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#653a5e"/>
+    </marker>
+  </defs>
+</svg>
