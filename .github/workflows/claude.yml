@@ -1,6 +1,16 @@
 name: Claude Code Action 実験
 
+<<<<<<< HEAD
 # @claude でClaudeが応答するワークフロー
+=======
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write        # ← 追加
+  actions: read          # ← 追加
+
+>>>>>>> adabcfe7f088c4848ace30fbc8b26420e1bdde9f
 on:
   issue_comment:
     types: [created]
@@ -16,6 +26,7 @@ on:
 jobs:
   claude-response:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
 
     # ボット以外のユーザーのみ実行
     if: github.event.sender.type != 'Bot'
@@ -41,9 +52,27 @@ jobs:
 
             このプロジェクトは軽量なテスト環境です。以下の方針で応答してください：
 
+=======
+    if: github.event.sender.type != 'Bot'
+    
+    steps:
+      - uses: actions/checkout@v4    # ← 追加
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          trigger_phrase: "@claude"
+          timeout_minutes: 10
+          allowed_tools: "Edit,Replace"
+          custom_instructions: |
+            あなたはTANREN株式会社のClaude Code Action実験プロジェクト専用アシスタントです。
+            
+>>>>>>> adabcfe7f088c4848ace30fbc8b26420e1bdde9f
             - 日本語で分かりやすく説明
             - 実験的な機能のテストサポート
             - コード改善提案
             - 簡潔で実用的なソリューション提供
+<<<<<<< HEAD
 
             佐藤様の開発効率向上のため、親切で具体的なアドバイスを心がけてください。
+=======
+>>>>>>> adabcfe7f088c4848ace30fbc8b26420e1bdde9f

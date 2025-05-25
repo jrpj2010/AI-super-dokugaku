@@ -1,0 +1,206 @@
+# ビジネス書籍向け構成パターン定義
+
+# 基本構成パターン
+structure_patterns:
+  # 問題解決型（最も一般的）
+  problem_solution:
+    name: "問題解決型構成"
+    description: "現状の問題を提示し、解決策を段階的に展開"
+    chapters:
+      - type: "introduction"
+        title: "はじめに：なぜ今{{main_topic}}が必要なのか"
+        sections:
+          - "現代ビジネスが直面する課題"
+          - "{{main_topic}}による変革の可能性"
+          - "本書の構成と活用方法"
+        word_ratio: 0.08
+        
+      - type: "problem_analysis"
+        title: "第1部：現状分析と課題の本質"
+        chapters_count: 2
+        sections_pattern:
+          - "課題の全体像"
+          - "原因の深掘り分析"
+          - "放置した場合のリスク"
+        word_ratio: 0.20
+        
+      - type: "solution_framework"
+        title: "第2部：{{main_topic}}の基本理解"
+        chapters_count: 2
+        sections_pattern:
+          - "基本概念と原理"
+          - "従来手法との違い"
+          - "導入のメリット・課題"
+        word_ratio: 0.20
+        
+      - type: "implementation"
+        title: "第3部：実践ガイド"
+        chapters_count: 4
+        sections_pattern:
+          - "準備フェーズ"
+          - "実行フェーズ"
+          - "評価・改善フェーズ"
+        word_ratio: 0.40
+        
+      - type: "case_studies"
+        title: "第4部：成功事例と教訓"
+        chapters_count: 1
+        sections_pattern:
+          - "国内企業事例"
+          - "海外企業事例"
+          - "失敗から学ぶ"
+        word_ratio: 0.10
+        
+      - type: "conclusion"
+        title: "おわりに：次のステップへ"
+        sections:
+          - "要点の総括"
+          - "実践へのロードマップ"
+          - "未来への展望"
+        word_ratio: 0.02
+
+  # ステップバイステップ型
+  step_by_step:
+    name: "ステップバイステップ型構成"
+    description: "初心者から上級者まで段階的に学べる構成"
+    chapters:
+      - type: "foundation"
+        title: "基礎編：{{main_topic}}の全体像"
+        chapters_count: 2
+        word_ratio: 0.20
+        
+      - type: "beginner"
+        title: "初級編：最初の一歩"
+        chapters_count: 2
+        word_ratio: 0.25
+        
+      - type: "intermediate"
+        title: "中級編：実践と応用"
+        chapters_count: 3
+        word_ratio: 0.30
+        
+      - type: "advanced"
+        title: "上級編：発展と革新"
+        chapters_count: 2
+        word_ratio: 0.20
+        
+      - type: "mastery"
+        title: "達人編：極意と未来"
+        chapters_count: 1
+        word_ratio: 0.05
+
+  # 理論実践統合型
+  theory_practice:
+    name: "理論実践統合型構成"
+    description: "各章で理論と実践を組み合わせる構成"
+    chapter_template:
+      sections:
+        - "理論：{{chapter_topic}}の原理原則"
+        - "事例：実際の適用例"
+        - "実践：あなたの組織での活用法"
+        - "演習：理解度チェックと応用"
+
+  # トランスフォーメーション型
+  transformation:
+    name: "変革ストーリー型構成"
+    description: "組織や個人の変革プロセスを追う構成"
+    phases:
+      - "覚醒：問題の認識"
+      - "学習：新しい知識の獲得"
+      - "実験：小さな試み"
+      - "実装：本格的な導入"
+      - "定着：文化としての確立"
+      - "進化：次なる成長へ"
+
+# セクション構成テンプレート
+section_templates:
+  standard:
+    name: "標準セクション構成"
+    elements:
+      - "導入（フック）"
+      - "核心内容"
+      - "具体例・事例"
+      - "実践ポイント"
+      - "まとめ・次への橋渡し"
+    
+  case_study:
+    name: "事例紹介セクション"
+    elements:
+      - "背景・課題"
+      - "アプローチ・施策"
+      - "実行プロセス"
+      - "結果・成果"
+      - "学びと応用"
+    
+  how_to:
+    name: "ハウツーセクション"
+    elements:
+      - "ゴール設定"
+      - "必要な準備"
+      - "ステップ1-N"
+      - "よくある失敗"
+      - "成功のコツ"
+    
+  framework:
+    name: "フレームワーク説明"
+    elements:
+      - "概要と目的"
+      - "構成要素"
+      - "使用方法"
+      - "適用例"
+      - "カスタマイズ"
+
+# 章末要素
+chapter_endings:
+  summary:
+    title: "本章のまとめ"
+    elements:
+      - "重要ポイント（3-5個）"
+      - "実践チェックリスト"
+      
+  action_plan:
+    title: "アクションプラン"
+    elements:
+      - "今すぐできること"
+      - "1週間で実践すること"
+      - "1ヶ月で達成すること"
+      
+  reflection:
+    title: "振り返りと思考"
+    elements:
+      - "理解度チェック質問"
+      - "自社への適用検討"
+      - "ディスカッションポイント"
+      
+  resources:
+    title: "参考リソース"
+    elements:
+      - "推奨図書"
+      - "関連ツール"
+      - "追加学習コンテンツ"
+
+# 特殊ページ
+special_pages:
+  quick_reference:
+    title: "クイックリファレンス"
+    location: "巻末"
+    content:
+      - "用語集"
+      - "フレームワーク一覧"
+      - "チェックリスト集"
+      
+  workbook:
+    title: "ワークブック"
+    location: "各章末または巻末"
+    content:
+      - "演習問題"
+      - "テンプレート"
+      - "記入式ワークシート"
+      
+  case_index:
+    title: "事例インデックス"
+    location: "巻末"
+    content:
+      - "業界別索引"
+      - "課題別索引"
+      - "企業規模別索引"

@@ -1,0 +1,73 @@
+# ビジネス書籍サンプルプロジェクト設定
+
+project:
+  type: "ビジネス書籍"
+  title: "AI時代のビジネス変革戦略"
+  subtitle: "データとテクノロジーで実現する持続的成長"
+  author: "山田太郎"
+  target_words: 200000
+  target_audience: "経営者・管理職・DX推進担当者"
+
+# 実際の値で変数を置き換えた設定
+business_book:
+  theme:
+    main_topic: "AI活用によるビジネス変革"
+    sub_topics:
+      - "デジタルトランスフォーメーション"
+      - "データドリブン経営"
+      - "組織変革とリーダーシップ"
+  target_results:
+    - "AI導入の具体的手法の習得"
+    - "自社のAI戦略立案能力の獲得"
+    - "変革リーダーとしてのマインドセット確立"
+  key_concepts:
+    - name: "AIトランスフォーメーション"
+      description: "AIを活用した事業と組織の根本的変革"
+    - name: "データドリブン経営"
+      description: "データに基づく意思決定と経営手法"
+    - name: "アジャイルAI導入"
+      description: "小さく始めて素早く成果を出すAI導入手法"
+
+chapter_structure:
+  total_chapters: 10
+  chapter_pattern: "business_standard"
+  words_per_chapter: 20000
+  sections_per_chapter: 4
+  words_per_section: 5000
+
+writing_style:
+  formality: "formal"
+  perspective: "second_person"
+  tone: "professional_friendly"
+  
+  # ビジネス書特有の配分
+  example_ratio: 0.30
+  theory_ratio: 0.40
+  action_ratio: 0.30
+
+quality_criteria:
+  readability_score: 85
+  consistency_check: "high"
+  fact_checking: true
+  business_relevance: true
+  actionability: true
+
+output_settings:
+  format: "markdown"
+  include_toc: true
+  include_index: true
+  include_references: true
+  include_action_summary: true
+
+# 自動化設定
+automation:
+  auto_review: true
+  github_integration: true
+  quality_threshold: 0.75
+
+# 使用するAIモデル設定
+ai_settings:
+  primary_model: "gpt-4"
+  review_model: "claude-3"
+  temperature: 0.7
+  max_tokens: 4000

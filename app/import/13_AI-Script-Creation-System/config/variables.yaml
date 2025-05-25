@@ -1,0 +1,84 @@
+# AI-Script-Creation-System 汎用変数設定ファイル
+# このファイルで固有名詞を変数として管理し、様々な執筆プロジェクトに対応可能にします
+
+# プロジェクト基本情報
+project:
+  type: "{{project_type}}"  # 例: ライトノベル, ビジネス書籍, 技術書, エッセイ
+  title: "{{project_title}}"  # 例: 天空の城ラピュタ, AI時代の経営戦略
+  subtitle: "{{project_subtitle}}"  # 例: 失われた空の伝説, デジタル変革を成功に導く10の法則
+  author: "{{author_name}}"
+  target_words: "{{target_words}}"  # 例: 150000, 80000
+  target_audience: "{{target_audience}}"  # 例: 10代～20代, 経営者・管理職
+
+# ジャンル別設定
+genre_settings:
+  # ライトノベル用
+  light_novel:
+    characters:
+      protagonist:
+        name: "{{protagonist_name}}"
+        age: "{{protagonist_age}}"
+        role: "{{protagonist_role}}"
+      supporting:
+        - name: "{{support_char1_name}}"
+          age: "{{support_char1_age}}"
+          role: "{{support_char1_role}}"
+    world_setting:
+      main_location: "{{main_location}}"
+      era: "{{era_setting}}"
+      key_elements: "{{key_elements}}"
+    
+  # ビジネス書籍用
+  business_book:
+    theme:
+      main_topic: "{{main_topic}}"  # 例: AI活用, DX推進, リーダーシップ
+      sub_topics:
+        - "{{sub_topic1}}"
+        - "{{sub_topic2}}"
+        - "{{sub_topic3}}"
+    target_results:
+      - "{{expected_result1}}"  # 例: 売上20%向上
+      - "{{expected_result2}}"  # 例: 業務効率化50%
+    key_concepts:
+      - name: "{{concept1_name}}"
+        description: "{{concept1_desc}}"
+      - name: "{{concept2_name}}"
+        description: "{{concept2_desc}}"
+
+# 章構成設定
+chapter_structure:
+  total_chapters: "{{total_chapters}}"  # 例: 8, 10, 12
+  chapter_pattern: "{{chapter_pattern}}"  # 例: story_4parts, business_problem_solution
+  words_per_chapter: "{{words_per_chapter}}"  # 例: 20000, 8000
+  sections_per_chapter: "{{sections_per_chapter}}"  # 例: 4, 3, 5
+  words_per_section: "{{words_per_section}}"  # 例: 5000, 2500
+
+# 文体設定
+writing_style:
+  formality: "{{formality_level}}"  # 例: casual, formal, academic
+  perspective: "{{perspective}}"  # 例: first_person, third_person, second_person
+  tone: "{{tone}}"  # 例: friendly, professional, authoritative
+  
+  # ジャンル別文体詳細
+  dialogue_ratio: "{{dialogue_ratio}}"  # ライトノベル用: 0.45
+  example_ratio: "{{example_ratio}}"    # ビジネス書用: 0.30
+  theory_ratio: "{{theory_ratio}}"      # ビジネス書用: 0.40
+  action_ratio: "{{action_ratio}}"      # ビジネス書用: 0.30
+
+# 品質管理設定
+quality_criteria:
+  readability_score: "{{readability_target}}"  # 例: 80
+  consistency_check: "{{consistency_level}}"   # 例: high, medium
+  fact_checking: "{{fact_check_required}}"     # 例: true, false
+  
+# 出力設定
+output_settings:
+  format: "{{output_format}}"  # 例: markdown, html, pdf
+  include_toc: "{{include_toc}}"  # 例: true, false
+  include_index: "{{include_index}}"  # 例: true, false
+  
+# 自動化設定
+automation:
+  auto_review: "{{auto_review_enabled}}"  # 例: true, false
+  github_integration: "{{github_integration}}"  # 例: true, false
+  quality_threshold: "{{quality_threshold}}"  # 例: 0.8

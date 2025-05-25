@@ -1,0 +1,137 @@
+# デフォルトビジネス書籍設定
+# 10章構成（序章＋本編8章＋最後に＋参考情報）
+
+project:
+  type: "ビジネス書籍"
+  default_structure: "10_chapters_standard"
+  total_words: 200000  # 10章 × 2万字
+
+chapter_defaults:
+  words_per_chapter: 20000
+  sections_per_chapter: 4
+  words_per_section: 5000
+
+standard_chapters:
+  - number: 0
+    type: "序章"
+    title_template: "序章：{{book_title}}へようこそ"
+    default_sections:
+      - "本書を手に取っていただいたあなたへ"
+      - "なぜ今、{{main_topic}}なのか"
+      - "本書で得られる成果"
+      - "効果的な読み進め方"
+    
+  - number: 1
+    type: "本編"
+    title_template: "第1章：{{main_topic}}の本質を理解する"
+    focus: "基礎理解"
+    
+  - number: 2
+    type: "本編"
+    title_template: "第2章：{{sub_topic_1}}の深層理解"
+    focus: "理論深化"
+    
+  - number: 3
+    type: "本編"
+    title_template: "第3章：{{sub_topic_2}}の戦略的活用"
+    focus: "戦略展開"
+    
+  - number: 4
+    type: "本編"
+    title_template: "第4章：{{sub_topic_3}}による組織変革"
+    focus: "組織変革"
+    
+  - number: 5
+    type: "本編"
+    title_template: "第5章：成功事例に学ぶベストプラクティス"
+    focus: "事例研究"
+    
+  - number: 6
+    type: "本編"
+    title_template: "第6章：実践ロードマップの構築"
+    focus: "実践計画"
+    
+  - number: 7
+    type: "本編"
+    title_template: "第7章：成果を最大化する運用術"
+    focus: "運用最適化"
+    
+  - number: 8
+    type: "本編"
+    title_template: "第8章：未来への準備と発展"
+    focus: "未来展望"
+    
+  - number: 9
+    type: "最後に"
+    title_template: "最後に：あなたの成功への道"
+    default_sections:
+      - "本書の要点総まとめ"
+      - "今すぐ始められる10のアクション"
+      - "継続的な学習のために"
+      - "著者からの最後のメッセージ"
+    
+  - number: 10
+    type: "参考情報"
+    title_template: "参考情報まとめ"
+    default_sections:
+      - "用語集・重要概念の解説"
+      - "推薦図書・参考文献"
+      - "便利なツール・サービス一覧"
+      - "Q&A・よくある質問"
+
+section_structure:
+  standard_4_sections:
+    - position: 1
+      title_pattern: "{{section_topic}}の基礎理解"
+      word_target: 5000
+      content_elements:
+        - 導入・問題提起
+        - 基本概念の説明
+        - なぜ重要なのか
+        - 読者への問いかけ
+        
+    - position: 2
+      title_pattern: "{{section_topic}}の詳細解説"
+      word_target: 5000
+      content_elements:
+        - 理論的背景
+        - 具体的な仕組み
+        - 図解・フレームワーク
+        - よくある誤解
+        
+    - position: 3
+      title_pattern: "{{section_topic}}の実践方法"
+      word_target: 5000
+      content_elements:
+        - ステップバイステップ
+        - 実例・ケーススタディ
+        - 注意点・落とし穴
+        - 成功のコツ
+        
+    - position: 4
+      title_pattern: "{{section_topic}}のまとめと次のステップ"
+      word_target: 5000
+      content_elements:
+        - 要点の整理
+        - アクションアイテム
+        - 理解度チェック
+        - 次章への橋渡し
+
+quality_targets:
+  per_section:
+    min_words: 4500
+    max_words: 5500
+    example_ratio: 0.25-0.35
+    theory_ratio: 0.35-0.45
+    action_ratio: 0.20-0.30
+    
+  per_chapter:
+    min_words: 18000
+    max_words: 22000
+    sections_completed: 4
+    coherence_score: 0.85
+    
+  overall_book:
+    total_words: 180000-220000
+    chapters_completed: 11
+    consistency_score: 0.90

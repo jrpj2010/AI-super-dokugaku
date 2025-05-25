@@ -1,0 +1,196 @@
+# ビジネス書籍執筆用テンプレート設定
+# variables.yamlの変数を実際の値で置き換えて使用
+
+project:
+  type: "ビジネス書籍"
+  title: "{{book_title}}"
+  subtitle: "{{book_subtitle}}"
+  author: "{{author_name}}"
+  target_words: "80000"
+  target_audience: "経営者・管理職・ビジネスパーソン"
+
+genre_settings:
+  business_book:
+    theme:
+      main_topic: "{{main_business_topic}}"
+      sub_topics:
+        - "{{sub_topic_1}}"
+        - "{{sub_topic_2}}"
+        - "{{sub_topic_3}}"
+    target_results:
+      - "{{business_result_1}}"
+      - "{{business_result_2}}"
+      - "{{business_result_3}}"
+    key_concepts:
+      - name: "{{key_concept_1}}"
+        description: "{{concept_1_description}}"
+      - name: "{{key_concept_2}}"
+        description: "{{concept_2_description}}"
+
+chapter_structure:
+  total_chapters: "10"
+  chapter_pattern: "business_standard"
+  words_per_chapter: "20000"
+  sections_per_chapter: "4"
+  words_per_section: "5000"
+  
+  # ビジネス書籍の標準的な10章構成
+  chapters:
+    - number: 0
+      title: "序章：{{book_title}}へようこそ"
+      type: "introduction"
+      sections:
+        - "本書を手に取っていただいたあなたへ"
+        - "なぜ今、{{main_topic}}なのか"
+        - "本書で得られる成果"
+        - "効果的な読み進め方"
+      target_words: 20000
+      
+    - number: 1
+      title: "第1章：{{main_topic}}の本質を理解する"
+      type: "main_content"
+      sections:
+        - "{{main_topic}}とは何か - 基本概念の整理"
+        - "なぜ{{main_topic}}が注目されるのか"
+        - "{{main_topic}}がもたらす変革の全体像"
+        - "あなたのビジネスへの影響"
+      target_words: 20000
+      
+    - number: 2
+      title: "第2章：{{sub_topic_1}}の深層理解"
+      type: "main_content"
+      sections:
+        - "{{sub_topic_1}}の基礎知識"
+        - "実践における重要ポイント"
+        - "よくある誤解と正しい理解"
+        - "成功への第一歩"
+      target_words: 20000
+      
+    - number: 3
+      title: "第3章：{{sub_topic_2}}の戦略的活用"
+      type: "main_content"
+      sections:
+        - "{{sub_topic_2}}の全体像"
+        - "効果的な導入アプローチ"
+        - "実践的なフレームワーク"
+        - "期待される成果と測定方法"
+      target_words: 20000
+      
+    - number: 4
+      title: "第4章：{{sub_topic_3}}による組織変革"
+      type: "main_content"
+      sections:
+        - "{{sub_topic_3}}が組織に与えるインパクト"
+        - "変革を推進する具体的方法"
+        - "抵抗を乗り越えるための戦略"
+        - "持続可能な変革の実現"
+      target_words: 20000
+      
+    - number: 5
+      title: "第5章：成功事例に学ぶベストプラクティス"
+      type: "main_content"
+      sections:
+        - "大企業の革新的な取り組み"
+        - "中小企業の機動的な実践"
+        - "スタートアップの破壊的イノベーション"
+        - "失敗事例から学ぶ教訓"
+      target_words: 20000
+      
+    - number: 6
+      title: "第6章：実践ロードマップの構築"
+      type: "main_content"
+      sections:
+        - "現状分析と目標設定"
+        - "段階的な導入計画の立案"
+        - "必要なリソースと体制"
+        - "リスク管理と対応策"
+      target_words: 20000
+      
+    - number: 7
+      title: "第7章：成果を最大化する運用術"
+      type: "main_content"
+      sections:
+        - "日常業務への組み込み方"
+        - "継続的な改善サイクル"
+        - "効果測定とKPI設定"
+        - "スケールアップの戦略"
+      target_words: 20000
+      
+    - number: 8
+      title: "第8章：未来への準備と発展"
+      type: "main_content"
+      sections:
+        - "次世代トレンドの展望"
+        - "持続的競争優位の構築"
+        - "イノベーションの創出"
+        - "グローバル展開への道筋"
+      target_words: 20000
+      
+    - number: 9
+      title: "最後に：あなたの成功への道"
+      type: "conclusion"
+      sections:
+        - "本書の要点総まとめ"
+        - "今すぐ始められる10のアクション"
+        - "継続的な学習のために"
+        - "著者からの最後のメッセージ"
+      target_words: 20000
+      
+    - number: 10
+      title: "参考情報まとめ"
+      type: "reference"
+      sections:
+        - "用語集・重要概念の解説"
+        - "推薦図書・参考文献"
+        - "便利なツール・サービス一覧"
+        - "Q&A・よくある質問"
+      target_words: 20000
+
+writing_style:
+  formality: "formal"
+  perspective: "second_person"  # 「あなた」を主語に
+  tone: "professional_friendly"
+  
+  # ビジネス書特有の配分
+  example_ratio: 0.30    # 事例・ケーススタディ
+  theory_ratio: 0.40     # 理論・概念説明
+  action_ratio: 0.30     # 実践方法・アクションアイテム
+
+quality_criteria:
+  readability_score: 85
+  consistency_check: "high"
+  fact_checking: true
+  business_relevance: true
+  actionability: true  # 実践可能性のチェック
+
+output_settings:
+  format: "markdown"
+  include_toc: true
+  include_index: true
+  include_references: true
+  include_action_summary: true  # 各章末にアクションサマリー
+
+special_elements:
+  # ビジネス書籍特有の要素
+  case_studies:
+    min_per_chapter: 2
+    format: "problem_solution_result"
+    
+  frameworks:
+    include_visual: true
+    format: "mermaid_diagram"
+    
+  checklists:
+    per_chapter: true
+    format: "actionable_items"
+    
+  quotes:
+    business_leaders: true
+    research_data: true
+    
+  callout_boxes:
+    types:
+      - "KEY POINT"
+      - "実践のヒント"
+      - "注意事項"
+      - "事例紹介"
