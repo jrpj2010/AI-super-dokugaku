@@ -1,0 +1,31 @@
+{
+  "session_id": "20250525_154500",
+  "timestamp": "2025-05-25T15:45:00",
+  "state": {
+    "current_chapter": 2,
+    "current_section": "completed",
+    "last_action": "第2章の執筆完了",
+    "written_chars": 35725,
+    "target_chars": 30000,
+    "progress_percent": 119.1,
+    "project_type": "business_book",
+    "section_status": {
+      "2.1 思考OSTANREN_3Dメソッド全貌": "completed",
+      "2.2 X軸_前編（思考の深掘り）": "completed",
+      "2.3 X軸_後編（思考の整理）": "completed",
+      "2.4 Y軸（時間軸の視座）": "completed",
+      "2.5 Z軸（レベル感の把握）": "completed",
+      "2.6 3Dメソッド統合演習": "completed"
+    },
+    "chapter_complete": true,
+    "next_steps": [
+      "第2章の品質チェック",
+      "第3章の執筆開始",
+      "全体の進捗確認"
+    ]
+  },
+  "project_info": {
+    "root": "/Users/jrpj2010/vibe-coding/app/import/13_AI-Script-Creation-System/projects/ai_super_learning",
+    "type": "business_book"
+  }
+}

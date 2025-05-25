@@ -1,0 +1,24 @@
+{
+  "chapter_02": {
+    "total_chars": 16000,
+    "sections": {
+      "section_1": {
+        "chars": 5500,
+        "status": "completed",
+        "last_updated": "2025-05-25T15:00:00"
+      },
+      "section_2": {
+        "chars": 6400,
+        "status": "completed",
+        "last_updated": "2025-05-25T15:10:00"
+      },
+      "section_3": {
+        "chars": 4100,
+        "status": "completed",
+        "last_updated": "2025-05-25T15:20:00"
+      }
+    },
+    "last_updated": "2025-05-25T15:20:00",
+    "status": "in_progress"
+  }
+}

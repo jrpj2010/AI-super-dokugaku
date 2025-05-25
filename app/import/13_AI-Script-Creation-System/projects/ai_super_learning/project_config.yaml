@@ -1,0 +1,73 @@
+# AI超独学法プロジェクト設定ファイル
+project_name: "AI超独学法：TANREN 3Dメソッドで切り拓く、新時代の学びと成長戦略"
+author: "佐藤勝彦"
+genre: "business_book"
+publisher: "SBクリエイティブ株式会社"
+target_audience: "30〜50代のビジネスパーソン"
+
+# 章構成（10章構成：プロローグ＋7章＋エピローグ）
+chapters:
+  - number: 0
+    title: "プロローグ_なぜ今、あなたの学び方をアップデートする必要があるのか"
+    sections: 3
+    target_words: 15000  # プロローグは少し短め
+  - number: 1
+    title: "第1章_AI超独学を起動するマインドセット_使う側から共創する側へ"
+    sections: 3
+    target_words: 20000
+  - number: 2
+    title: "第2章_核理論独学OSTANREN_3Dメソッド完全インストール"
+    sections: 6
+    target_words: 30000  # 核心章なので多め
+  - number: 3
+    title: "第3章_AIとの対話設計術_プロンプトで思考を形にする技術"
+    sections: 6
+    target_words: 30000
+  - number: 4
+    title: "第4章_AIエージェント活用術_自動化と共創で生産性を飛躍させる"
+    sections: 3
+    target_words: 20000
+  - number: 5
+    title: "第5章_実践編1AI共創によるアウトプット革命_企画・文章・資料作成"
+    sections: 3
+    target_words: 20000
+  - number: 6
+    title: "第6章_実践編2リアルな仕事の課題をAIと突破する_職種別シナリオ"
+    sections: 4
+    target_words: 25000
+  - number: 7
+    title: "第7章_学習習慣の壁を壊す_AI時代の継続システム構築法"
+    sections: 5
+    target_words: 25000
+  - number: 8
+    title: "エピローグ_AIと共に進化し続けるあなたへ"
+    sections: 3
+    target_words: 15000
+
+# 本書のキーコンセプト
+key_concepts:
+  - name: "TANREN 3Dメソッド"
+    description: "思考をX軸（深掘り・整理）、Y軸（時間軸）、Z軸（レベル感）で立体的に構造化"
+  - name: "超抽象化"
+    description: "物事の本質を見極め、普遍的な原理原則を抽出する思考法"
+  - name: "超具体化"
+    description: "抽象的な概念を具体的な行動や事例に落とし込む技術"
+  - name: "超構造化"
+    description: "複雑な情報を整理し、理解しやすい形に組み立てる手法"
+  - name: "AI翻訳こんにゃく"
+    description: "AIを使って専門知識や難解な概念を誰でも理解できる形に変換"
+  - name: "AIエージェント"
+    description: "自律的に考え、行動し、成果物を生成するAIの進化形"
+
+# 執筆スタイル
+writing_style:
+  tone: "実践的で親しみやすい"
+  approach: "具体例重視"
+  features:
+    - "実際のビジネスシーンでの活用例を豊富に含む"
+    - "NG例と改善例を対比して示す"
+    - "読者がすぐに実践できるアクションプランを提示"
+    - "著者の実体験に基づく説得力のあるエピソード"
+
+# 素材ファイルのパス
+source_path: "/Users/jrpj2010/vibe-coding/app/import/13_AI-Script-Creation-System/UserInput/『AI超独学法：TANREN 3Dメソッドで切り拓く、新時代の学びと成長戦略』"
