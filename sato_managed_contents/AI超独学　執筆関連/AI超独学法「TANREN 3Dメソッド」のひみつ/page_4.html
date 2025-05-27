@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TANREN 3Dメソッドとは？</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 926px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 926px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .axis-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .axis-card:hover {
+            transform: translateY(-5px);
+        }
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+        .x-axis-color { color: #007BFF; }
+        .y-axis-color { color: #FF4500; }
+        .z-axis-color { color: #FFD700; }
+        
+        .x-axis-bg { background-color: rgba(0, 123, 255, 0.1); }
+        .y-axis-bg { background-color: rgba(255, 69, 0, 0.1); }
+        .z-axis-bg { background-color: rgba(255, 215, 0, 0.1); }
+        
+        .x-axis-border { border-color: #007BFF; }
+        .y-axis-border { border-color: #FF4500; }
+        .z-axis-border { border-color: #FFD700; }
+        
+        .axis-icon {
+            font-size: 2.5rem;
+            height: 80px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-purple-700">TANREN 3Dメソッドとは？</h1>
+<p class="mt-3 text-xl text-gray-700 bg-white px-6 py-2 rounded-full shadow-md">
+                    AIとの会話を劇的に改善する<span class="font-bold">3つの魔法の杖</span>
+</p>
+</div>
+<!-- 3D Coordinate Visualization -->
+<div class="relative w-full h-72 mb-6" id="coordinate-system">
+<!-- D3.js will render here -->
+</div>
+<!-- Axis Explanations -->
+<div class="grid grid-cols-3 gap-6 w-full z-20">
+<!-- X Axis -->
+<div class="axis-card bg-white rounded-xl shadow-lg overflow-hidden border-t-4 x-axis-border">
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="axis-icon x-axis-bg mr-4">
+<i class="fas fa-search-plus x-axis-color"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold x-axis-color">X軸</h3>
+<p class="text-lg font-semibold text-gray-700">考えを研ぎ澄ます</p>
+<p class="text-lg font-semibold text-gray-700">「探偵の虫メガネ」</p>
+</div>
+</div>
+<p class="text-gray-600">
+                            物事をより深く、詳細に見る方法。
+                            <span class="font-bold">超具体化</span>、
+                            <span class="font-bold">超抽象化</span>、
+                            <span class="font-bold">超構造化</span>の
+                            3つの視点で考えを磨く！
+                        </p>
+</div>
+</div>
+<!-- Y Axis -->
+<div class="axis-card bg-white rounded-xl shadow-lg overflow-hidden border-t-4 y-axis-border">
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="axis-icon y-axis-bg mr-4">
+<i class="fas fa-clock y-axis-color"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold y-axis-color">Y軸</h3>
+<p class="text-lg font-semibold text-gray-700">時間を見通す</p>
+<p class="text-lg font-semibold text-gray-700">「タイムマシン」</p>
+</div>
+</div>
+<p class="text-gray-600">
+                            時間の流れの中で物事を捉える方法。
+                            <span class="font-bold">過去</span>を理解し、
+                            <span class="font-bold">現在</span>を把握し、
+                            <span class="font-bold">未来</span>を
+                            見据えよう！
+                        </p>
+</div>
+</div>
+<!-- Z Axis -->
+<div class="axis-card bg-white rounded-xl shadow-lg overflow-hidden border-t-4 z-axis-border">
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="axis-icon z-axis-bg mr-4">
+<i class="fas fa-key z-axis-color"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold z-axis-color">Z軸</h3>
+<p class="text-lg font-semibold text-gray-700">AIとの仲を深める</p>
+<p class="text-lg font-semibold text-gray-700">「レベルアップの鍵」</p>
+</div>
+</div>
+<p class="text-gray-600">
+                            AIとの関係性を深める方法。
+                            <span class="font-bold">レベル1</span>（基本）から
+                            <span class="font-bold">レベル2</span>（協力）、
+                            <span class="font-bold">レベル3</span>（使いこなし）へと
+                            ステップアップ！
+                        </p>
+</div>
+</div>
+</div>
+<!-- Bottom Summary -->
+<div class="mt-6 bg-purple-100 rounded-xl p-4 w-3/4 text-center shadow-md z-20">
+<p class="text-purple-800 text-lg">
+<i class="fas fa-magic mr-2"></i>
+                    この3つの軸を組み合わせれば、AIとの会話がグッと楽しくなる！
+                </p>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+<script>
+        // D3.js visualization for 3D coordinate system
+        document.addEventListener('DOMContentLoaded', function() {
+            const width = 1000;
+            const height = 280;
+            const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+            
+            // Create SVG
+            const svg = d3.select("#coordinate-system")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("viewBox", `0 0 ${width} ${height}`)
+                .attr("style", "max-width: 100%; height: auto;");
+            
+            // Center point
+            const centerX = width / 2;
+            const centerY = height / 2;
+            
+            // Axis lengths
+            const axisLength = 300;
+            
+            // Draw axes
+            // X-Axis
+            svg.append("line")
+                .attr("x1", centerX)
+                .attr("y1", centerY)
+                .attr("x2", centerX + axisLength)
+                .attr("y2", centerY)
+                .attr("stroke", "#007BFF")
+                .attr("stroke-width", 6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            // Y-Axis
+            svg.append("line")
+                .attr("x1", centerX)
+                .attr("y1", centerY)
+                .attr("x2", centerX)
+                .attr("y2", centerY - axisLength)
+                .attr("stroke", "#FF4500")
+                .attr("stroke-width", 6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            // Z-Axis (at 45 degrees)
+            svg.append("line")
+                .attr("x1", centerX)
+                .attr("y1", centerY)
+                .attr("x2", centerX - axisLength * 0.7)
+                .attr("y2", centerY - axisLength * 0.7)
+                .attr("stroke", "#FFD700")
+                .attr("stroke-width", 6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            // Add origin point
+            svg.append("circle")
+                .attr("cx", centerX)
+                .attr("cy", centerY)
+                .attr("r", 10)
+                .attr("fill", "#8A2BE2");
+            
+            // Add axis labels
+            svg.append("text")
+                .attr("x", centerX + axisLength + 10)
+                .attr("y", centerY + 5)
+                .attr("fill", "#007BFF")
+                .attr("font-size", "24px")
+                .attr("font-weight", "bold")
+                .text("X軸");
+            
+            svg.append("text")
+                .attr("x", centerX + 5)
+                .attr("y", centerY - axisLength - 10)
+                .attr("fill", "#FF4500")
+                .attr("font-size", "24px")
+                .attr("font-weight", "bold")
+                .text("Y軸");
+            
+            svg.append("text")
+                .attr("x", centerX - axisLength * 0.7 - 50)
+                .attr("y", centerY - axisLength * 0.7 - 10)
+                .attr("fill", "#FFD700")
+                .attr("font-size", "24px")
+                .attr("font-weight", "bold")
+                .text("Z軸");
+            
+            // Add decorative elements
+            // X-axis icon
+            svg.append("circle")
+                .attr("cx", centerX + axisLength * 0.6)
+                .attr("cy", centerY)
+                .attr("r", 25)
+                .attr("fill", "rgba(0, 123, 255, 0.2)");
+            
+            svg.append("text")
+                .attr("x", centerX + axisLength * 0.6)
+                .attr("y", centerY + 8)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#007BFF")
+                .attr("font-size", "24px")
+                .attr("font-family", "FontAwesome")
+                .text("\uf002"); // Magnifying glass icon
+            
+            // Y-axis icon
+            svg.append("circle")
+                .attr("cx", centerX)
+                .attr("cy", centerY - axisLength * 0.6)
+                .attr("r", 25)
+                .attr("fill", "rgba(255, 69, 0, 0.2)");
+            
+            svg.append("text")
+                .attr("x", centerX)
+                .attr("y", centerY - axisLength * 0.6 + 8)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#FF4500")
+                .attr("font-size", "24px")
+                .attr("font-family", "FontAwesome")
+                .text("\uf017"); // Clock icon
+            
+            // Z-axis icon
+            svg.append("circle")
+                .attr("cx", centerX - axisLength * 0.4)
+                .attr("cy", centerY - axisLength * 0.4)
+                .attr("r", 25)
+                .attr("fill", "rgba(255, 215, 0, 0.2)");
+            
+            svg.append("text")
+                .attr("x", centerX - axisLength * 0.4)
+                .attr("y", centerY - axisLength * 0.4 + 8)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#FFD700")
+                .attr("font-size", "24px")
+                .attr("font-family", "FontAwesome")
+                .text("\uf084"); // Key icon
+        });
+    </script>
+
+</body></html>

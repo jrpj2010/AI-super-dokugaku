@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIとの会話、ビフォー&amp;アフター</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1280px; height: 720px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-top-color: #ffffff;
+            border-bottom: 0;
+            margin-left: -8px;
+            margin-bottom: -8px;
+        }
+        .speech-bubble-ai {
+            background: #f0f9ff;
+            margin-left: 20px;
+        }
+        .speech-bubble-ai:after {
+            border-top-color: #f0f9ff;
+            left: auto;
+            right: 20px;
+        }
+        .before-section {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        }
+        .after-section {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        }
+        .divider-line {
+            background: linear-gradient(to bottom, transparent 0%, #6b7280 20%, #6b7280 80%, transparent 100%);
+            width: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col">
+<!-- Title Section -->
+<div class="text-center py-6 z-20">
+<h1 class="text-4xl font-bold text-purple-700">AIとの会話、ビフォー&amp;アフター</h1>
+<p class="text-lg text-gray-600 mt-2">同じ質問でも、聞き方を変えるだけでこんなに違う！</p>
+</div>
+<!-- Main Comparison Section -->
+<div class="flex-1 flex">
+<!-- Before Section -->
+<div class="w-1/2 before-section p-6 rounded-l-lg">
+<div class="text-center mb-4">
+<div class="inline-flex items-center bg-red-500 text-white px-4 py-2 rounded-full">
+<i class="fas fa-times-circle mr-2"></i>
+<span class="text-xl font-bold">ビフォー</span>
+</div>
+<p class="text-red-700 mt-2">なんだかうまくいかない…</p>
+</div>
+<!-- Before Example 1 -->
+<div class="mb-6">
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-lg mr-2"></i>
+<p class="text-sm">ねえAI、なんか面白い話してよ！</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai">
+<div class="flex items-start">
+<p class="text-sm">どんなジャンルの話がいいですか？</p>
+<i class="fas fa-robot text-blue-400 text-lg ml-2"></i>
+</div>
+</div>
+<div class="text-center mt-2">
+<span class="text-red-600 text-sm">😵 会話が続かない...</span>
+</div>
+</div>
+<!-- Before Example 2 -->
+<div>
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-lg mr-2"></i>
+<p class="text-sm">理科の自由研究のテーマ、なんかいい感じに考えてくれない？</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai">
+<div class="flex items-start">
+<p class="text-sm">どんなことが好きですか？</p>
+<i class="fas fa-robot text-blue-400 text-lg ml-2"></i>
+</div>
+</div>
+<div class="text-center mt-2">
+<span class="text-red-600 text-sm">😞 何も決まらない...</span>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider-line"></div>
+<!-- After Section -->
+<div class="w-1/2 after-section p-6 rounded-r-lg">
+<div class="text-center mb-4">
+<div class="inline-flex items-center bg-green-500 text-white px-4 py-2 rounded-full">
+<i class="fas fa-check-circle mr-2"></i>
+<span class="text-xl font-bold">アフター</span>
+</div>
+<p class="text-green-700 mt-2">AIが最高の相棒に！</p>
+</div>
+<!-- After Example 1 -->
+<div class="mb-6">
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-lg mr-2"></i>
+<p class="text-sm">中学生がワクワクする、10分で読める宇宙冒険SF小説を3つ、あらすじと一緒に教えて！</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai">
+<div class="flex items-start">
+<p class="text-sm">おまかせください！こんな3つはいかがでしょう？<br/>1. 『失われた惑星エウロパの秘密』：...</p>
+<i class="fas fa-robot text-blue-400 text-lg ml-2"></i>
+</div>
+</div>
+<div class="text-center mt-2">
+<span class="text-green-600 text-sm">✨ 具体的で面白そう！</span>
+</div>
+</div>
+<!-- After Example 2 -->
+<div>
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-lg mr-2"></i>
+<p class="text-sm">小学5年生向け、家にあるもので1週間でできる理科実験を3つ、方法と理由も教えて！</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai">
+<div class="flex items-start">
+<p class="text-sm">承知しました！例えばこんなテーマはいかがでしょう？<br/>1. カラフル野菜タワー実験：...</p>
+<i class="fas fa-robot text-blue-400 text-lg ml-2"></i>
+</div>
+</div>
+<div class="text-center mt-2">
+<span class="text-green-600 text-sm">🎯 すぐに始められそう！</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Insight -->
+<div class="bg-white mx-8 mb-4 p-4 rounded-lg shadow-lg">
+<div class="flex items-center justify-center">
+<i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
+<p class="text-lg text-gray-700">
+<span class="font-bold text-purple-700">違いのポイント：</span>
+                        アフターは「具体的」「詳細」「構造化」されている！
+                    </p>
+<i class="fas fa-magic text-purple-500 text-2xl ml-3"></i>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

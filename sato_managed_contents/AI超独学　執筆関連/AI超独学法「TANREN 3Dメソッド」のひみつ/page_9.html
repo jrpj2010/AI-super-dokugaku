@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Y軸：時間を見通す「タイムマシン」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 886px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 886px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .time-card {
+            transition: all 0.3s ease;
+            border-left-width: 8px;
+        }
+        .time-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .time-icon {
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .time-card:hover .time-icon {
+            transform: scale(1.2);
+        }
+        .timeline {
+            height: 10px;
+            background: linear-gradient(to right, #FF4500, #007BFF, #32CD32);
+            position: relative;
+            border-radius: 5px;
+        }
+        .timeline-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: -5px;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        @keyframes pulse {
+            0% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+            }
+            70% {
+                transform: translateX(-50%) scale(1.1);
+                box-shadow: 0 0 0 10px rgba(255, 69, 0, 0);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+            }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-16">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-red-500">Y軸：時間を見通す「タイムマシン」</h1>
+<div class="mt-3 flex justify-center items-center">
+<i class="fas fa-clock text-red-400 text-2xl mr-3"></i>
+<p class="text-xl text-gray-700">物事を時間の流れの中で捉える魔法の視点！</p>
+</div>
+</div>
+<!-- Time Machine Visual -->
+<div class="w-full flex justify-center items-center mb-8 z-20">
+<div class="bg-white rounded-xl shadow-lg p-4 w-3/4 relative">
+<div class="timeline mb-10 mt-6">
+<div class="timeline-point bg-red-500 pulse" style="left: 20%;"></div>
+<div class="timeline-point bg-blue-500 pulse" style="left: 50%;"></div>
+<div class="timeline-point bg-green-500 pulse" style="left: 80%;"></div>
+</div>
+<div class="flex justify-between px-4">
+<div class="text-center">
+<i class="fas fa-history text-red-500 text-3xl mb-2"></i>
+<p class="font-bold text-red-500">過去</p>
+</div>
+<div class="text-center">
+<i class="fas fa-bullseye text-blue-500 text-3xl mb-2"></i>
+<p class="font-bold text-blue-500">現在</p>
+</div>
+<div class="text-center">
+<i class="fas fa-rocket text-green-500 text-3xl mb-2"></i>
+<p class="font-bold text-green-500">未来</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Three Time Perspectives -->
+<div class="grid grid-cols-3 gap-6 w-full z-20">
+<!-- Past -->
+<div class="time-card bg-white rounded-lg shadow-md p-5 border-l-red-500">
+<div class="flex items-center mb-3">
+<i class="fas fa-history time-icon text-red-500 mr-3"></i>
+<h3 class="text-2xl font-bold text-red-500">過去</h3>
+</div>
+<p class="text-lg mb-3">これまでの経緯や背景を理解すること</p>
+<div class="bg-red-50 rounded-lg p-3">
+<p class="text-md"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>「このSF小説、いつ頃書かれたの？」</p>
+<p class="text-sm text-gray-600 mt-2">歴史的背景を知ることで、より深い理解ができる！</p>
+</div>
+</div>
+<!-- Present -->
+<div class="time-card bg-white rounded-lg shadow-md p-5 border-l-blue-500">
+<div class="flex items-center mb-3">
+<i class="fas fa-bullseye time-icon text-blue-500 mr-3"></i>
+<h3 class="text-2xl font-bold text-blue-500">現在</h3>
+</div>
+<p class="text-lg mb-3">今の状況や自分の立場を把握すること</p>
+<div class="bg-blue-50 rounded-lg p-3">
+<p class="text-md"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>「中学生向けの、今面白いSF小説」</p>
+<p class="text-sm text-gray-600 mt-2">自分に合った情報をAIに求めることで、適切なアドバイスを得られる！</p>
+</div>
+</div>
+<!-- Future -->
+<div class="time-card bg-white rounded-lg shadow-md p-5 border-l-green-500">
+<div class="flex items-center mb-3">
+<i class="fas fa-rocket time-icon text-green-500 mr-3"></i>
+<h3 class="text-2xl font-bold text-green-500">未来</h3>
+</div>
+<p class="text-lg mb-3">これからの展望や目標を考えること</p>
+<div class="bg-green-50 rounded-lg p-3">
+<p class="text-md"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>「この自由研究で、みんなを驚かせたい！」</p>
+<p class="text-sm text-gray-600 mt-2">将来の目標をAIに伝えることで、それに向けたステップや提案を得られる！</p>
+</div>
+</div>
+</div>
+<!-- Summary -->
+<div class="mt-8 bg-yellow-50 rounded-xl shadow p-4 w-3/4 z-20 border-2 border-yellow-200">
+<div class="flex items-center">
+<i class="fas fa-magic text-purple-500 text-2xl mr-3"></i>
+<p class="text-lg">Y軸を使うことで、AIとの会話に<span class="font-bold text-purple-600">時間的な深み</span>が生まれ、より豊かな対話ができるようになる！</p>
+</div>
+</div>
+<!-- Page Number -->
+<div class="absolute bottom-4 right-6 bg-purple-100 rounded-full h-8 w-8 flex items-center justify-center shadow">
+<span class="text-purple-700 font-bold">9</span>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>未来：「これから、どうなる？どうしたい？」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1280px; height: 720px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .future-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.3s ease;
+        }
+        .future-card:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        .goal-bubble {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #FFD700;
+        }
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .timeline-line {
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to bottom, #FFD700, #FF4500);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .rocket-animation {
+            animation: rocket-fly 3s ease-in-out infinite;
+        }
+        @keyframes rocket-fly {
+            0% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(-5deg); }
+        }
+        .star-twinkle {
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Stars -->
+<div class="absolute top-10 right-20 text-yellow-400 text-2xl star-twinkle">⭐</div>
+<div class="absolute top-32 right-40 text-yellow-300 text-lg star-twinkle" style="animation-delay: 0.5s;">✨</div>
+<div class="absolute top-20 left-20 text-yellow-500 text-xl star-twinkle" style="animation-delay: 1s;">🌟</div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-8">
+<div class="flex justify-center items-center mb-4">
+<i class="fas fa-rocket text-orange-500 text-4xl mr-4 rocket-animation"></i>
+<h1 class="text-4xl font-bold text-purple-700">未来：「これから、どうなる？どうしたい？」</h1>
+<i class="fas fa-telescope text-blue-500 text-3xl ml-4"></i>
+</div>
+<p class="text-xl text-gray-600">将来を見据えて、目標を立てよう！</p>
+</div>
+<!-- Main Content Area -->
+<div class="grid grid-cols-2 gap-8 flex-1 z-20">
+<!-- Left Side: Future Thinking -->
+<div class="space-y-6">
+<div class="future-card">
+<div class="flex items-center mb-4">
+<i class="fas fa-lightbulb text-yellow-300 text-2xl mr-3"></i>
+<h3 class="text-xl font-semibold">未来を考えるって？</h3>
+</div>
+<ul class="space-y-3 text-lg">
+<li class="flex items-start">
+<i class="fas fa-arrow-right text-yellow-300 mr-2 mt-1"></i>
+                                これからどうなりそうか予測する
+                            </li>
+<li class="flex items-start">
+<i class="fas fa-arrow-right text-yellow-300 mr-2 mt-1"></i>
+                                自分の目標を立てる
+                            </li>
+<li class="flex items-start">
+<i class="fas fa-arrow-right text-yellow-300 mr-2 mt-1"></i>
+                                夢に向かって計画する
+                            </li>
+</ul>
+</div>
+<!-- AI Support Section -->
+<div class="bg-white rounded-xl p-5 border-l-4 border-blue-500 shadow-lg">
+<div class="flex items-center mb-3">
+<i class="fas fa-robot text-blue-500 text-2xl mr-3"></i>
+<h4 class="text-lg font-semibold text-gray-800">AIができること</h4>
+</div>
+<p class="text-gray-700">将来の目標をAIに伝えることで、それに向けたステップや新しい可能性のヒントをくれる！</p>
+</div>
+</div>
+<!-- Right Side: Examples with Timeline -->
+<div class="relative">
+<h3 class="text-2xl font-semibold text-center text-purple-700 mb-6">未来の目標例</h3>
+<!-- Timeline -->
+<div class="relative pl-8">
+<!-- Timeline Line -->
+<div class="absolute left-4 top-0 w-1 h-full bg-gradient-to-b from-yellow-400 to-orange-500"></div>
+<!-- Goal 1 -->
+<div class="relative mb-8">
+<div class="timeline-dot absolute -left-2 top-4"></div>
+<div class="goal-bubble ml-6">
+<div class="flex items-center mb-2">
+<i class="fas fa-flask text-green-500 text-xl mr-3"></i>
+<p class="font-semibold text-gray-800">自由研究の目標</p>
+</div>
+<p class="text-gray-700">「この自由研究を成功させて、みんなを驚かせたい！」</p>
+</div>
+</div>
+<!-- Goal 2 -->
+<div class="relative mb-8">
+<div class="timeline-dot absolute -left-2 top-4"></div>
+<div class="goal-bubble ml-6">
+<div class="flex items-center mb-2">
+<i class="fas fa-space-shuttle text-blue-500 text-xl mr-3"></i>
+<p class="font-semibold text-gray-800">将来の夢</p>
+</div>
+<p class="text-gray-700">「このSF小説を読んで、将来宇宙飛行士になりたいと思った！」</p>
+</div>
+</div>
+<!-- Goal 3 -->
+<div class="relative">
+<div class="timeline-dot absolute -left-2 top-4"></div>
+<div class="goal-bubble ml-6">
+<div class="flex items-center mb-2">
+<i class="fas fa-graduation-cap text-purple-500 text-xl mr-3"></i>
+<p class="font-semibold text-gray-800">学習の目標</p>
+</div>
+<p class="text-gray-700">「AIと一緒に、もっと深く学んでいきたい！」</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="mt-6 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5 z-20">
+<div class="flex items-center justify-center">
+<i class="fas fa-magic text-purple-500 text-2xl mr-4"></i>
+<p class="text-lg text-gray-800 text-center">
+<strong>未来を考えることで、AIは君の可能性を広げるお手伝いをしてくれる！</strong>
+</p>
+<i class="fas fa-star text-yellow-500 text-2xl ml-4"></i>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

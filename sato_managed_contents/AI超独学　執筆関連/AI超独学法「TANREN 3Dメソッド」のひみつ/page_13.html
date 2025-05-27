@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Z軸：AIとの仲を深める「レベルアップの鍵」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 910px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 910px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .level-card {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+        .glow-yellow {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        .glow-blue {
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+        }
+        .glow-purple {
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        .progress-bar {
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(to right, #007BFF, #32CD32, #FFD700, #FF4500, #8A2BE2);
+            position: relative;
+            
+        }
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0.1) 100%);
+            animation: shine 2s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-yellow-600">Z軸：AIとの仲を深める「レベルアップの鍵」</h1>
+<div class="mt-2 w-full max-w-xl mx-auto">
+<div class="progress-bar"></div>
+</div>
+</div>
+<!-- Content Section -->
+<div class="flex flex-row z-20">
+<!-- Left Column - Explanation -->
+<div class="w-1/2 pr-6">
+<div class="bg-white bg-opacity-90 rounded-xl p-5 shadow-lg mb-6">
+<h3 class="text-2xl font-bold text-purple-700 mb-3">Z軸とは？</h3>
+<p class="text-lg text-gray-700 mb-4">
+                            AIとの関係性を深めていく方法です。ゲームのレベルアップのように、AIとの会話スキルを段階的に高めていくことができます。
+                        </p>
+<p class="text-lg text-gray-700">
+<span class="font-bold">Z軸のポイント：</span>
+<span class="bg-yellow-100 px-2 py-1 rounded">どんな目的で</span>、
+                            <span class="bg-blue-100 px-2 py-1 rounded">誰に向けて</span>、
+                            <span class="bg-green-100 px-2 py-1 rounded">どんな新しさの情報がほしいか</span>
+                            を意識することで、AIとのコミュニケーションのレベルを上げていきます。
+                        </p>
+</div>
+<div class="relative">
+<img alt="Z軸レベルアップ" class="rounded-lg shadow-xl w-full object-cover" src="https://picture-search.skywork.ai/aippt/image/sheet/0a56fe07e6b0b8766683fa4333396791.jpg" style="max-height: 320px;"/>
+<div class="absolute bottom-3 right-3 bg-yellow-500 text-white font-bold py-1 px-3 rounded-lg text-sm">
+                            AIとのレベルアップを目指そう！
+                        </div>
+</div>
+</div>
+<!-- Right Column - Levels -->
+<div class="w-1/2 pl-6 space-y-4">
+<!-- Level 1 -->
+<div class="level-card bg-blue-50 rounded-xl p-4 border-l-4 border-blue-400 shadow-lg glow-blue">
+<div class="flex items-center">
+<div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                                Lv.1
+                            </div>
+<h3 class="text-xl font-bold text-blue-700 ml-3">AIにおまかせ</h3>
+<div class="ml-auto">
+<i class="fas fa-robot text-blue-400 text-3xl"></i>
+</div>
+</div>
+<p class="mt-2 text-gray-700">
+                            基本的な質問をして、AIから情報を得る段階。<br/>
+                            例：「〇〇って何？」とシンプルに質問する
+                        </p>
+</div>
+<!-- Level 2 -->
+<div class="level-card bg-purple-50 rounded-xl p-4 border-l-4 border-purple-400 shadow-lg glow-purple">
+<div class="flex items-center">
+<div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                                Lv.2
+                            </div>
+<h3 class="text-xl font-bold text-purple-700 ml-3">AIと協力プレイ</h3>
+<div class="ml-auto">
+<i class="fas fa-hands-helping text-purple-400 text-3xl"></i>
+</div>
+</div>
+<p class="mt-2 text-gray-700">
+                            AIの回答を基に、さらに掘り下げた質問をする段階。<br/>
+                            例：「中学生向けの、今面白いSF小説を3つ教えて」
+                        </p>
+</div>
+<!-- Level 3 -->
+<div class="level-card bg-yellow-50 rounded-xl p-4 border-l-4 border-yellow-400 shadow-lg glow-yellow">
+<div class="flex items-center">
+<div class="bg-yellow-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                                Lv.3
+                            </div>
+<h3 class="text-xl font-bold text-yellow-700 ml-3">AIを使いこなす</h3>
+<div class="ml-auto">
+<i class="fas fa-crown text-yellow-400 text-3xl floating"></i>
+</div>
+</div>
+<p class="mt-2 text-gray-700">
+                            AIを道具として完全に使いこなす段階。<br/>
+                            例：「このデータとこのデータを組み合わせて、未来の社会問題を解決するアイデアを提案して」
+                        </p>
+</div>
+</div>
+</div>
+<!-- Bottom Note -->
+<div class="mt-auto text-center z-20">
+<div class="inline-block bg-white rounded-full px-6 py-2 shadow-md">
+<p class="text-gray-700">
+<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                        それぞれのレベルについて、次のページから詳しく見ていきましょう！
+                    </p>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>13/20</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

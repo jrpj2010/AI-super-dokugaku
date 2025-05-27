@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TANREN 3Dの合わせ技！</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 897px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 897px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .axis-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        .axis-circle:hover {
+            transform: scale(1.1);
+        }
+        .combination-arrow {
+            font-size: 2rem;
+            color: #FFD700;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .power-up-effect {
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+            animation: powerUp 3s infinite;
+        }
+        @keyframes powerUp {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        }
+        .example-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #32CD32;
+        }
+        .highlight-text {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-5xl font-bold text-purple-700 mb-2">TANREN 3Dの合わせ技！</h1>
+<p class="text-xl text-gray-700">3つの軸を組み合わせると、AIとの会話が劇的に変わる！</p>
+</div>
+<!-- Combination Visualization -->
+<div class="flex items-center justify-center space-x-8 mb-8 z-20">
+<!-- X軸 -->
+<div class="text-center">
+<div class="axis-circle bg-blue-500">
+<div>
+<i class="fas fa-search-plus text-2xl mb-1"></i>
+<div class="text-sm">X軸</div>
+</div>
+</div>
+<p class="mt-2 text-sm text-blue-600 font-semibold">探偵の虫メガネ</p>
+</div>
+<!-- Plus -->
+<div class="combination-arrow">
+<i class="fas fa-plus"></i>
+</div>
+<!-- Y軸 -->
+<div class="text-center">
+<div class="axis-circle bg-red-500">
+<div>
+<i class="fas fa-history text-2xl mb-1"></i>
+<div class="text-sm">Y軸</div>
+</div>
+</div>
+<p class="mt-2 text-sm text-red-600 font-semibold">タイムマシン</p>
+</div>
+<!-- Plus -->
+<div class="combination-arrow">
+<i class="fas fa-plus"></i>
+</div>
+<!-- Z軸 -->
+<div class="text-center">
+<div class="axis-circle bg-purple-500">
+<div>
+<i class="fas fa-level-up-alt text-2xl mb-1"></i>
+<div class="text-sm">Z軸</div>
+</div>
+</div>
+<p class="mt-2 text-sm text-purple-600 font-semibold">レベルアップの鍵</p>
+</div>
+<!-- Equals -->
+<div class="combination-arrow">
+<i class="fas fa-equals"></i>
+</div>
+<!-- Result -->
+<div class="text-center">
+<div class="axis-circle power-up-effect">
+<div>
+<i class="fas fa-magic text-3xl mb-1"></i>
+<div class="text-sm">超効果！</div>
+</div>
+</div>
+<p class="mt-2 text-sm text-yellow-600 font-semibold">最強の会話術</p>
+</div>
+</div>
+<!-- Practical Example -->
+<div class="example-box w-full max-w-5xl z-20">
+<div class="flex items-center mb-4">
+<i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
+<h3 class="text-xl font-semibold text-gray-800">実際の合わせ技の例：SF小説を探す場合</h3>
+</div>
+<div class="bg-gray-50 rounded-lg p-4 mb-4">
+<p class="text-lg text-gray-700 leading-relaxed">
+                        「AI、教えて！<span class="highlight-text">中学生が</span>聞いてワクワクするような、
+                        <span class="highlight-text">10分くらいで読み終わる短い</span>SF小説を
+                        <span class="highlight-text">3つ</span>、それぞれの<span class="highlight-text">あらすじと一緒に</span>教えてほしいな。
+                        できれば、主人公が<span class="highlight-text">宇宙を冒険する話</span>がいいな！」
+                    </p>
+</div>
+<!-- Analysis Grid -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-blue-100 rounded-lg p-3 border-l-4 border-blue-500">
+<div class="flex items-center mb-2">
+<i class="fas fa-search text-blue-600 mr-2"></i>
+<h4 class="font-semibold text-blue-700">X軸の要素</h4>
+</div>
+<ul class="text-sm text-blue-600 space-y-1">
+<li>• 「10分くらい」(具体化)</li>
+<li>• 「3つ」(構造化)</li>
+<li>• 「あらすじと一緒に」(構造化)</li>
+<li>• 「宇宙冒険」(具体化)</li>
+</ul>
+</div>
+<div class="bg-red-100 rounded-lg p-3 border-l-4 border-red-500">
+<div class="flex items-center mb-2">
+<i class="fas fa-clock text-red-600 mr-2"></i>
+<h4 class="font-semibold text-red-700">Y軸の要素</h4>
+</div>
+<ul class="text-sm text-red-600 space-y-1">
+<li>• 「中学生が」(現在)</li>
+<li>• 今の自分に合った内容</li>
+<li>• 現在のニーズを明確化</li>
+</ul>
+</div>
+<div class="bg-purple-100 rounded-lg p-3 border-l-4 border-purple-500">
+<div class="flex items-center mb-2">
+<i class="fas fa-heart text-purple-600 mr-2"></i>
+<h4 class="font-semibold text-purple-700">Z軸の要素</h4>
+</div>
+<ul class="text-sm text-purple-600 space-y-1">
+<li>• 「ワクワクする」(感情)</li>
+<li>• AIと協力プレイ</li>
+<li>• レベル2の関係性</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Bottom Message -->
+<div class="mt-4 bg-green-100 rounded-lg p-3 w-full max-w-5xl z-20 border-l-4 border-green-500">
+<div class="flex items-center">
+<i class="fas fa-star text-green-600 text-xl mr-3"></i>
+<p class="text-green-700 font-semibold">
+                        この3つの軸の合わせ技で、AIは君の頭の中を正確に理解して、最高の答えを返してくれる！
+                    </p>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

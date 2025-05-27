@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>過去：「これまで、どうだったんだろう？」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 902px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 902px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .timeline {
+            height: 8px;
+            background: linear-gradient(90deg, #FFD700, #FF4500);
+            border-radius: 4px;
+            position: relative;
+        }
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 4px solid #FF4500;
+            position: absolute;
+            top: -6px;
+            transform: translateX(-50%);
+        }
+        .timeline-label {
+            position: absolute;
+            top: -40px;
+            transform: translateX(-50%);
+            text-align: center;
+            font-weight: bold;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .sepia-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(139, 69, 19, 0.1));
+            z-index: 1;
+        }
+        .old-paper {
+            background-color: #f5e8c0;
+            background-image: 
+                linear-gradient(90deg, rgba(200, 160, 100, 0.1) 50%, transparent 50%),
+                linear-gradient(rgba(200, 160, 100, 0.1) 50%, transparent 50%);
+            background-size: 10px 10px;
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-yellow-50 to-amber-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Sepia Overlay for Historical Feel -->
+<div class="sepia-overlay"></div>
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20 z-0"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-amber-200 rounded-full opacity-20 -ml-40 -mb-40 z-0"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-12 z-10">
+<!-- Title Section -->
+<div class="text-center mb-8">
+<h1 class="text-4xl font-bold text-amber-700">過去：「これまで、どうだったんだろう？」</h1>
+<p class="text-xl text-amber-600 mt-2">Y軸の1つめの視点</p>
+</div>
+<!-- Main Visual - Timeline -->
+<div class="w-4/5 my-6 relative">
+<div class="timeline"></div>
+<!-- Timeline Points -->
+<div class="timeline-dot" style="left: 10%;"></div>
+<div class="timeline-label text-amber-800" style="left: 10%;">昔</div>
+<div class="timeline-dot" style="left: 50%;"></div>
+<div class="timeline-label text-red-600" style="left: 50%;">今</div>
+<div class="timeline-dot" style="left: 90%;"></div>
+<div class="timeline-label text-blue-600" style="left: 90%;">未来</div>
+</div>
+<!-- Content Cards -->
+<div class="grid grid-cols-2 gap-8 w-full mt-4">
+<!-- What is Past Perspective -->
+<div class="info-card p-6 old-paper">
+<div class="icon-circle bg-amber-100 text-amber-700 mb-4 float-animation">
+<i class="fas fa-history text-4xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-amber-800 text-center mb-3">過去の視点とは？</h3>
+<p class="text-lg text-amber-900">
+                        物事の<span class="font-bold">背景や歴史</span>を理解すること。<br/>
+                        「なぜそうなったのか？」<br/>
+                        「どういう経緯があったのか？」<br/>
+                        という視点で考えることで、より深い理解につながります。
+                    </p>
+</div>
+<!-- How AI Helps with Past -->
+<div class="info-card p-6">
+<div class="icon-circle bg-blue-100 text-blue-600 mb-4 float-animation">
+<i class="fas fa-robot text-4xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-blue-700 text-center mb-3">AIは過去をどう教えてくれる？</h3>
+<ul class="text-lg space-y-2">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span>歴史的な出来事や背景を素早く説明してくれる</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span>「このSF小説、いつ頃書かれたの？」という質問に答えてくれる</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span>物事の発展の経緯を時系列で整理してくれる</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Example Box -->
+<div class="mt-8 w-4/5">
+<div class="bg-white rounded-xl shadow-lg p-5 border-l-4 border-amber-500">
+<div class="flex">
+<div class="mr-4 text-amber-500">
+<i class="fas fa-lightbulb text-4xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold text-amber-700">実際に使ってみよう！</h4>
+<p class="text-lg mt-2">「ねえAI、宇宙探査の歴史を教えてくれる？」</p>
+<p class="text-lg mt-1">「ねえAI、この科学実験、昔の人はどうやって発見したの？」</p>
+<p class="text-gray-600 mt-3">
+<i class="fas fa-arrow-right text-amber-500 mr-2"></i>
+                                過去を知ることで、現在をもっと深く理解できるようになります！
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+<!-- Page Number -->
+<div class="absolute bottom-5 left-10 bg-amber-100 rounded-full h-8 w-8 flex items-center justify-center">
+<span class="text-amber-800 font-bold">10</span>
+</div>
+</div>
+</div>
+
+</body></html>

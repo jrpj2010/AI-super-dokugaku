@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>こんなことない？AIとのやりとりでの悩み</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 880px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 880px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: #ffffff;
+            border-bottom: 0;
+            margin-left: -15px;
+            margin-bottom: -15px;
+        }
+        .speech-bubble-right:after {
+            left: 80%;
+        }
+        .speech-bubble-ai {
+            background: #e6f7ff;
+        }
+        .speech-bubble-ai:after {
+            border-top-color: #e6f7ff;
+        }
+        .emoji-thinking {
+            font-size: 2rem;
+            animation: think 2s infinite;
+        }
+        @keyframes think {
+            0% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+            100% { transform: rotate(-10deg); }
+        }
+        .frustrated-face {
+            font-size: 2.5rem;
+            animation: frustrated 1s infinite;
+        }
+        @keyframes frustrated {
+            0% { transform: translateX(-3px); }
+            25% { transform: translateX(3px); }
+            50% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+            100% { transform: translateX(-3px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-8">
+<h1 class="text-4xl font-bold text-purple-700">こんなことない？AIとのやりとりでの悩み</h1>
+<div class="mt-3 flex justify-center">
+<div class="flex items-center bg-white px-5 py-2 rounded-full shadow">
+<span class="frustrated-face mr-3">😵</span>
+<p class="text-xl text-gray-700">AIとの会話、なぜかうまくいかない…</p>
+</div>
+</div>
+</div>
+<!-- Conversation Examples -->
+<div class="grid grid-cols-2 gap-8 w-full mt-4 z-20">
+<!-- Example 1 -->
+<div class="space-y-4">
+<div class="flex justify-center items-center">
+<span class="bg-red-500 text-white text-lg font-bold rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+<h3 class="text-xl font-semibold text-red-500">面白い話を聞きたいとき</h3>
+</div>
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-2xl mr-2 mt-1"></i>
+<p class="text-lg">ねえAI、なんか面白い話してよ！</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai speech-bubble-right ml-12">
+<div class="flex items-start">
+<p class="text-lg">どんなジャンルの話がいいですか？</p>
+<i class="fas fa-robot text-blue-400 text-2xl ml-2 mt-1"></i>
+</div>
+</div>
+<div class="flex justify-center">
+<div class="bg-red-100 rounded-lg p-3 border-l-4 border-red-500">
+<p class="text-red-700"><i class="fas fa-times-circle mr-2"></i>会話が続かなくなっちゃった…</p>
+</div>
+</div>
+</div>
+<!-- Example 2 -->
+<div class="space-y-4">
+<div class="flex justify-center items-center">
+<span class="bg-red-500 text-white text-lg font-bold rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+<h3 class="text-xl font-semibold text-red-500">自由研究のテーマを探すとき</h3>
+</div>
+<div class="speech-bubble">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-2xl mr-2 mt-1"></i>
+<p class="text-lg">AI、理科の自由研究のテーマ、なんかいい感じに考えてくれない？</p>
+</div>
+</div>
+<div class="speech-bubble speech-bubble-ai speech-bubble-right ml-12">
+<div class="flex items-start">
+<p class="text-lg">どんなことが好きですか？</p>
+<i class="fas fa-robot text-blue-400 text-2xl ml-2 mt-1"></i>
+</div>
+</div>
+<div class="flex justify-center">
+<div class="bg-red-100 rounded-lg p-3 border-l-4 border-red-500">
+<p class="text-red-700"><i class="fas fa-times-circle mr-2"></i>結局何も決まらなかった…</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="mt-10 bg-white rounded-xl shadow-lg p-5 w-4/5 z-20">
+<div class="flex items-center">
+<div class="emoji-thinking mr-4">🤔</div>
+<p class="text-xl text-gray-700">こういう時、どうすればいいんだろう？<br/>AIともっと上手に話せる方法はないのかな？</p>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

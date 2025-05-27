@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>X軸：考えを研ぎ澄ます「探偵の虫メガネ」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 880px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 880px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .x-axis-color {
+            color: #007BFF;
+        }
+        .x-axis-bg {
+            background-color: #007BFF;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+            
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 123, 255, 0.2);
+        }
+        .magnify-icon {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .magnify-icon:hover {
+            transform: scale(1.1);
+        }
+        .detective-hat {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(15deg);
+            font-size: 1.8rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold x-axis-color">X軸：考えを研ぎ澄ます「探偵の虫メガネ」</h1>
+<div class="flex justify-center items-center mt-4">
+<div class="w-16 h-2 x-axis-bg rounded-full"></div>
+</div>
+</div>
+<!-- X-axis Introduction -->
+<div class="bg-white rounded-xl shadow-lg p-5 w-4/5 z-20 mb-8">
+<div class="flex items-center">
+<div class="relative magnify-icon mr-5">
+<i class="fas fa-search text-5xl x-axis-color"></i>
+<span class="detective-hat">🕵️</span>
+</div>
+<div>
+<p class="text-xl text-gray-700">X軸は、物事をより深く、詳細に見る方法です。まるで探偵が虫メガネで証拠を調べるように、AIとの会話を<span class="font-bold x-axis-color">鮮明にする力</span>です。</p>
+<p class="text-lg text-gray-600 mt-2">あなたの考えをちょっと整理するだけで、AIがそれを何倍もパワーアップしてくれる魔法の軸です！</p>
+</div>
+</div>
+</div>
+<!-- Three Components -->
+<div class="grid grid-cols-3 gap-6 w-full mt-2 z-20">
+<!-- Ultra-concretization -->
+<div class="feature-card bg-white rounded-xl shadow p-5 border-t-4 border-blue-500">
+<div class="text-center mb-3">
+<i class="fas fa-microscope text-3xl x-axis-color"></i>
+<h3 class="text-xl font-semibold mt-2">超具体化</h3>
+<div class="w-12 h-1 x-axis-bg mx-auto mt-1 rounded-full"></div>
+</div>
+<p class="text-gray-700">「もっと詳しく教えて！」の術</p>
+<ul class="mt-2 text-gray-600 list-disc list-inside">
+<li>アイデアをできるだけ具体的に表現</li>
+<li>「何を」「どのように」を明確に</li>
+<li>AIに細かい指示で高品質な回答を</li>
+</ul>
+</div>
+<!-- Ultra-abstraction -->
+<div class="feature-card bg-white rounded-xl shadow p-5 border-t-4 border-blue-500">
+<div class="text-center mb-3">
+<i class="fas fa-lightbulb text-3xl x-axis-color"></i>
+<h3 class="text-xl font-semibold mt-2">超抽象化</h3>
+<div class="w-12 h-1 x-axis-bg mx-auto mt-1 rounded-full"></div>
+</div>
+<p class="text-gray-700">「つまり、どういうこと？」の術</p>
+<ul class="mt-2 text-gray-600 list-disc list-inside">
+<li>複雑な情報から本質を見抜く</li>
+<li>目的や意図を明確にする</li>
+<li>AIに目的を伝えて関連性の高い提案を</li>
+</ul>
+</div>
+<!-- Ultra-structuring -->
+<div class="feature-card bg-white rounded-xl shadow p-5 border-t-4 border-blue-500">
+<div class="text-center mb-3">
+<i class="fas fa-project-diagram text-3xl x-axis-color"></i>
+<h3 class="text-xl font-semibold mt-2">超構造化</h3>
+<div class="w-12 h-1 x-axis-bg mx-auto mt-1 rounded-full"></div>
+</div>
+<p class="text-gray-700">「つながりはどうなってる？」の術</p>
+<ul class="mt-2 text-gray-600 list-disc list-inside">
+<li>情報を整理し関連性を見出す</li>
+<li>パズルのピースを組み立てる</li>
+<li>AIに情報の提示方法を指定して整理された回答を</li>
+</ul>
+</div>
+</div>
+<!-- Bottom Section: Example -->
+<div class="bg-blue-50 rounded-xl shadow p-4 w-4/5 mt-6 z-20 border border-blue-200">
+<div class="flex items-center">
+<i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
+<p class="text-lg">
+<span class="font-semibold">AIブーストの秘訣：</span>
+                        あなたが「こんな感じかな？」と具体的・整理された情報をAIに渡すと、AIはその条件にピッタリ合う情報を世界中のデータから見つけ出し、パワーアップしてくれます！
+                    </p>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

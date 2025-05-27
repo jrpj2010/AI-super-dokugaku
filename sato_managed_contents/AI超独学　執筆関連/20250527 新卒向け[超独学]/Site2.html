@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【徹底解説】AI時代のビジネス基礎力を飛躍的に向上させる「TANREN3Dメソッド」思考のOS XYZ</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #333;
+      background-color: #f8f9fa;
+      line-height: 1.6;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    }
+
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .axis-card {
+      border-left: 5px solid;
+      transition: all 0.2s;
+    }
+
+    .axis-card:hover {
+      transform: translateX(5px);
+    }
+
+    .x-axis {
+      border-color: #3B82F6;
+    }
+
+    .y-axis {
+      border-color: #10B981;
+    }
+
+    .z-axis {
+      border-color: #F59E0B;
+    }
+
+    .quote {
+      border-left: 4px solid #6366F1;
+      padding-left: 1rem;
+    }
+
+    .highlight {
+      background: linear-gradient(transparent 60%, rgba(99, 102, 241, 0.2) 40%);
+      padding: 0 4px;
+    }
+
+    .example-box {
+      background-color: #F3F4F6;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+    }
+
+    .table-header {
+      background-color: #EEF2FF;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .section-title:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+    }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 1rem;
+    }
+
+    .combine-card {
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      position: relative;
+    }
+
+    .combine-card:before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+      border-radius: 12px;
+      z-index: -1;
+    }
+
+    .step {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .step:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #6366F1;
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .tip-card {
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tip-header {
+      background-color: #EEF2FF;
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .tip-content {
+      padding: 1rem;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen px-4 py-8 md:px-8 lg:px-16 xl:px-32">
+  <!-- ヘッダー -->
+  <header class="mb-12 text-center">
+    <div class="gradient-bg text-white py-12 px-4 rounded-lg mb-8">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">AI時代のビジネス基礎力を飛躍的に向上させる<br>「TANREN3Dメソッド」</h1>
+      <h2 class="text-xl md:text-2xl font-medium mb-6">思考のOS XYZ 徹底解説</h2>
+      <p class="text-lg opacity-90">佐藤勝彦氏の革新的思考フレームワーク</p>
+    </div>
+    <div class="flex flex-col md:flex-row justify-center items-center mb-8">
+      <div class="bg-white p-4 rounded-lg shadow-md mr-0 md:mr-6 mb-4 md:mb-0">
+        <p class="font-medium">講演者</p>
+        <p class="text-lg font-bold">佐藤勝彦</p>
+        <p class="text-sm text-gray-600">TANREN代表</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <p class="font-medium">TANREN3Dメソッド</p>
+        <p class="text-lg font-bold">AIとのコミュニケーション革命</p>
+        <p class="text-sm text-gray-600">思考の3軸アプローチ</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- イントロダクション -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">TANREN3Dメソッドとは</h2>
+    <div class="bg-white p-6 card mb-8">
+      <p class="mb-4">
+        TANREN3Dメソッドは、AI時代において人間の思考力を最大化し、AIとの効果的な連携を実現するための思考フレームワークです。
+        佐藤勝彦氏は「<span class="highlight">AIリーダブル</span>」な指示出しの重要性を説き、AIの能力を引き出すための3つの軸からなる思考回路を提唱しています。
+      </p>
+
+      <div class="quote italic text-gray-700 my-6 pl-4">
+        「これまで普遍と言われてた人がわかりやすいと思っていたことのみならず、AIがわかりやすいものってなんだろう？ってことなんです。ヒューマンリーダブルじゃなくて、<strong>AIリーダブル</strong>であることが求められるんです。」
+      </div>
+
+      <p class="mb-4">
+        AIの知的能力は既に人間のIQ140を超え、さらに向上し続けています。その能力を最大限に引き出すために、
+        私たちはAIとのコミュニケーション方法を根本から見直す必要があります。
+      </p>
+
+      <p>
+        TANREN3Dメソッドは、AIとの対話において3つの軸からなる思考回路を整理し、
+        明確かつ効果的な意図の伝え方を実現します。適切な指示出しにより、AIはあなたの業務遂行能力を3〜5倍に引き上げる可能性を秘めています。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="card bg-white p-5">
+        <div class="icon-circle bg-blue-100 text-blue-600">
+          <i class="fas fa-search-plus fa-2x"></i>
+        </div>
+        <h3 class="text-xl font-bold text-center mb-3">AIファースト</h3>
+        <p class="text-gray-700">
+          AIの速さと処理能力を最大限に活用するアプローチ。人間の思考に先立ちAIを活用することで、スピード感のある業務遂行を実現します。
+        </p>
+      </div>
+      <div class="card bg-white p-5">
+        <div class="icon-circle bg-green-100 text-green-600">
+          <i class="fas fa-brain fa-2x"></i>
+        </div>
+        <h3 class="text-xl font-bold text-center mb-3">思考の強化</h3>
+        <p class="text-gray-700">
+          AIの力を借りて人間の思考を増幅させる方法論。AIと人間の長所を組み合わせることで、従来の限界を超える思考を可能にします。
+        </p>
+      </div>
+      <div class="card bg-white p-5">
+        <div class="icon-circle bg-amber-100 text-amber-600">
+          <i class="fas fa-rocket fa-2x"></i>
+        </div>
+        <h3 class="text-xl font-bold text-center mb-3">業務効率の飛躍</h3>
+        <p class="text-gray-700">
+          適切な指示出しと思考整理により、AIからの出力品質を劇的に向上させ、業務効率と成果物の質を飛躍的に高めます。
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-indigo-50 p-6 rounded-lg mb-6">
+      <h3 class="text-xl font-bold mb-3">TANREN3Dメソッドの3軸</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-blue-600">X軸（思考の解像度）</strong>: 超抽象化・超具体化・超構造化</li>
+        <li><strong class="text-green-600">Y軸（時間軸）</strong>: 過去・現代・未来</li>
+        <li><strong class="text-amber-600">Z軸（レベル感）</strong>: 初級・中級・上級</li>
+      </ul>
+    </div>
+
+    <p class="text-gray-700">
+      これら3つの軸を掛け合わせることで、3×3×3=27通りの思考パターンが生まれ、AIとの効果的なコミュニケーションが可能になります。
+      佐藤氏はこの方法を「独学術」と呼び、自身のAIとの対話に活用して大きな成果を上げています。
+    </p>
+  </section>
+
+  <!-- X軸：思考の解像度 -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">X軸: 思考の解像度</h2>
+    <p class="mb-6">
+      X軸は「思考の解像度」を表し、課題や情報を深掘りして本質を捉え、構造化する分析能力のことです。
+      AIとの対話においては、この解像度を上げることで、得られる情報の質と価値が飛躍的に向上します。
+    </p>
+
+    <div class="space-y-8">
+      <!-- 超抽象化 -->
+      <div class="axis-card x-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-blue-100 rounded-full p-3 mr-4">
+            <i class="fas fa-compress-arrows-alt text-blue-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">超抽象化</h3>
+        </div>
+
+        <p class="mb-4">
+          超抽象化は、大量の情報から本質を見抜き、共通項や軸を見出す能力です。AIを活用することで、
+          人間では到達困難な抽象化レベルに達することができます。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「言葉の塊の中の最も重要なメッセージは何かを抽出する能力が抽象化という能力だと思ってください」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>本質を見抜く力を養う</li>
+          <li>共通項や法則性を発見する</li>
+          <li>複雑な情報を単純化する</li>
+          <li>経営者の視点で物事を捉える</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>AIに「この会議の結論は結局何を意味するのか？」と質問することで、長時間のトークスクリプトから真のエッセンスを抽出できます。経営層が最も注目すべきポイントを尋ねると、より高次元の抽象化が可能になります。</p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">超抽象化の例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「このレポート全体から、最も重要な3つの戦略的示唆を抽出してください。特に経営判断に影響を与える可能性のある洞察に焦点を当ててください。」
+          </p>
+        </div>
+
+        <p>
+          メタ認知スキルを活用し、AIに対して的確な抽象化指示を出すことで、膨大なデータから真に価値ある洞察を得られるようになります。
+        </p>
+      </div>
+
+      <!-- 超具体化 -->
+      <div class="axis-card x-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-blue-100 rounded-full p-3 mr-4">
+            <i class="fas fa-search-plus text-blue-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">超具体化</h3>
+        </div>
+
+        <p class="mb-4">
+          超具体化とは、テーマをドリルダウンして掘り下げ、詳細な分析と情報収集を行うプロセスです。
+          AIによって「なぜ？なぜ？なぜ？」と深掘りし、徹底的な具体化を実現できます。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「なんで多いなって今思うとあれって具体化が足りないという話なんですね。具体化せよなんです。なんでこうなるのって根拠を求められるんですよ」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>詳細なリサーチと分析を行う</li>
+          <li>複数の視点から検証する</li>
+          <li>根拠と事例で裏付ける</li>
+          <li>明確な数値や事実で説明する</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>
+              AIに複数の視点から分析を依頼し、「この点についてもっと詳しく説明してください」と具体化を求めることで、より深い洞察を得られます。一度に複数軸での分析を依頼することで、AIは並列処理を行い、総合的な分析結果を提供します。
+            </p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">超具体化の例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「健康志向の20代から30代の女性をターゲットにした新商品Xの市場規模、成長率、競合3社の強み弱み、価格帯の分析に加え、SNSでのトレンドキーワードと消費者の購買心理も含めて詳細に分析してください。」
+          </p>
+        </div>
+
+        <p>
+          AIを活用することで、個人では時間的にも能力的にも限界がある詳細なリサーチと分析を、短時間で高品質に行えるようになります。
+        </p>
+      </div>
+
+      <!-- 超構造化 -->
+      <div class="axis-card x-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-blue-100 rounded-full p-3 mr-4">
+            <i class="fas fa-cubes text-blue-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">超構造化</h3>
+        </div>
+
+        <p class="mb-4">
+          超構造化は、抽象化と具体化を行き来しながら、情報を論理的に整理し、関連性を明確にする能力です。
+          AIに適切な構造化指示を出すことで、複雑な情報を整理し、わかりやすく伝えることが可能になります。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「全体像を把握し、要素要素の重要な点も理解し、ある程度現場の方がやるべきこうするべきところはこんな具体化だってことが分かりました。構造化されてるんです。先に整理がついてるという一言でまとまります」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>階層構造で情報を整理する</li>
+          <li>論理的な関連性を明確にする</li>
+          <li>ステップバイステップで導く</li>
+          <li>視覚的にわかりやすく提示する</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>
+              レポートや議事録作成の際は、フォーマットと構成を明確に指示しましょう。「主要な決定事項」「各担当者のネクストアクション」「懸案事項」といった項目に分けて表形式やリスト形式で整理するよう依頼すると、構造化された成果物が得られます。
+            </p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">超構造化の例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「昨日の14時から行われた新サービスX開発プロジェクトの定例会議の議事録を作成してください。主要な決定事項と各担当者のネクストアクションをテーブル表で記載し、担当者名、タスク内容、期限を明記してください。また、懸案事項はリスト形式でマークダウン文章でまとめてください。」
+          </p>
+        </div>
+
+        <p>
+          結論ファーストで根拠を3つ示し、事例で補強する「1分で話せ」の構造や、「課題・原因・解決・効果」の構造など、明確なフレームワークを活用することで、AIの構造化能力を最大限に引き出せます。
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 p-6 rounded-lg mt-8">
+      <h3 class="font-bold text-lg mb-3">X軸の実践ポイント</h3>
+      <p class="mb-4">
+        思考の解像度を高めるためには、抽象化と具体化を常に行き来しながら、最終的に構造化された形でアウトプットすることが重要です。
+        AIはこの3つのプロセスを驚異的なスピードと精度で実行できるため、適切な指示出しを行いましょう。
+      </p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>抽象化：「本質は何か？」「共通点は？」「大局的に見ると？」</li>
+        <li>具体化：「なぜそう言えるのか？」「具体例は？」「数値で示すと？」</li>
+        <li>構造化：「どう整理すれば良いか？」「段階的に説明すると？」「関連性は？」</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Y軸：時間軸 -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">Y軸: 時間軸</h2>
+    <p class="mb-6">
+      Y軸は「時間軸」を表し、過去の教訓を生かし、現状を的確に把握し、未来を構想する戦略的な視座を意味します。
+      AIとのコミュニケーションにおいて時間軸を意識することで、より深い洞察と戦略的な判断が可能になります。
+    </p>
+
+    <div class="space-y-8">
+      <!-- 過去 -->
+      <div class="axis-card y-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-green-100 rounded-full p-3 mr-4">
+            <i class="fas fa-history text-green-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">過去</h3>
+        </div>
+
+        <p class="mb-4">
+          過去の視点では、歴史的な経緯や過去の事例、教訓から学ぶことを重視します。
+          AIに過去のデータや経験を分析させることで、現在の課題に対する洞察を得られます。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「検索かけてパッと見つかるRAG文章がないとすると、AIが持ってる知識になっちゃいますよね。必ずその会社その団体そのグループが持ち合わせる素晴らしいデータがあってって叱るべきだと思います」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>過去の類似事例から学ぶ</li>
+          <li>歴史的な経緯を理解する</li>
+          <li>失敗と成功の教訓を活かす</li>
+          <li>データの蓄積と分析を行う</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>RAG（検索拡張生成）を活用して、自社固有のデータベースから過去の知見を引き出しましょう。AIに「Deep Research」を依頼すると、より深い歴史的分析が可能になります。</p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">過去の視点による例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「当社が過去3年間に実施したマーケティングキャンペーンのうち、ROIが最も高かった3つと最も低かった3つを分析してください。それぞれの成功要因と失敗要因をまとめ、特にターゲット層、使用したチャネル、メッセージングの戦略において注目した分析をお願いします。」
+          </p>
+        </div>
+
+        <p>
+          過去のデータがなければ未来の予測も困難です。AIの持つ知識と自社の過去のデータを組み合わせることで、より精度の高い分析が可能になります。
+        </p>
+      </div>
+
+      <!-- 現代 -->
+      <div class="axis-card y-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-green-100 rounded-full p-3 mr-4">
+            <i class="fas fa-bullseye text-green-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">現代</h3>
+        </div>
+
+        <p class="mb-4">
+          現代の視点では、今まさに進行している業務の状況や最新の市場動向に焦点を当てます。
+          リアルタイムなデータ分析により、現在の立ち位置を正確に把握します。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「今この事象っていうのはSNSとかそういったソーシャルメディア界隈で取ってるもので今リアルに現場に出てアナログで肌で感じているものというものが対象になりますね」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>現在の市場動向を分析する</li>
+          <li>リアルタイムのデータを活用する</li>
+          <li>競合状況を把握する</li>
+          <li>現在のニーズと課題に対応する</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>ソーシャルメディア分析には、各プラットフォームに特化したAIツールを活用しましょう。例えばXの分析にはGrokが強みを発揮します。最近のトレンドを把握するには、AIのソーシャル検索機能を活用すると効果的です。
+            </p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">現代の視点による例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「現在のオンライン販売市場における主要3社のポジショニングマップを生成してください。ここにX、Instagram、TikTokの3つのソーシャル分析データがあります。価格帯と機能性を二軸にして各社の主力商品のポジションを可視化し、当社の強み弱みを明確にして、直近6ヶ月間で見られるお客様の動向、購買心理をレポートにまとめてください。」
+          </p>
+        </div>
+
+        <p>
+          現代の情報はソーシャルメディアやWeb上に散在しており、それらを統合・分析することでリアルタイムの洞察を得ることができます。
+          適切なAIツールを選択して、最新の市場動向を把握しましょう。
+        </p>
+      </div>
+
+      <!-- 未来 -->
+      <div class="axis-card y-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-green-100 rounded-full p-3 mr-4">
+            <i class="fas fa-chart-line text-green-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">未来</h3>
+        </div>
+
+        <p class="mb-4">
+          未来の視点では、将来の予測、目標設定、戦略立案に焦点を当てます。
+          過去と現在のデータを基に、AIは将来のシナリオを予測し、最適な戦略を提案できます。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「偉大なる経営者の皆さんっていうのはやっぱりこの思考回路ですよね。今を話してるんじゃないんだよと。1, 2年なんて誤差だと。5年後10年後の社会を見据えて今ここで動いとかないと逆算方式で動いとかないと間に合わんよと」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>将来のトレンドを予測する</li>
+          <li>リスクとチャンスを洗い出す</li>
+          <li>長期的な戦略を立案する</li>
+          <li>複数のシナリオを検討する</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>AIに「デジタルツイン」のようなシミュレーションを依頼し、複数の未来シナリオを分析してもらいましょう。過去と現在のデータを十分に入力することで、より精度の高い予測が可能になります。</p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">未来の視点による例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「当社の新サービスXを市場導入するにあたり、1年後、3年後、5年後とそれぞれの市場規模の予測と売上計画をまとめてください。また各フェーズで想定される3つの主要リスクとそれに対応するための事前対策案を講じてください。市場予測においては類似サービスの成長曲線のデータと現在の業界トレンドを考慮してください。」
+          </p>
+        </div>
+
+        <p>
+          未来予測はAI時代において可能性が大きく広がっています。過去と現在のデータが蓄積され、AIの分析能力が高まることで、
+          より精度の高い未来予測とシナリオプランニングが実現できるようになりました。
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg mt-8">
+      <h3 class="font-bold text-lg mb-3">Y軸の実践ポイント</h3>
+      <p class="mb-4">
+        時間軸を意識することで、単なる現状分析を超えた深い洞察と戦略的な判断が可能になります。
+        特に経営判断や重要な意思決定においては、この3つの時間軸を常に意識しましょう。
+      </p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>過去・現在・未来を常に意識した質問を心がける</li>
+        <li>過去のデータなしに未来予測はできないことを理解する</li>
+        <li>「今だけ」の視点ではなく、時間の流れの中で考える</li>
+        <li>AIに時間軸を明示して質問することで、より質の高い回答が得られる</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Z軸：レベル感 -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">Z軸: レベル感</h2>
+    <p class="mb-6">
+      Z軸は「レベル感」を表し、内容の難易度や専門性のレベルを調整する軸です。
+      相手や目的に合わせて適切なレベル感でコミュニケーションすることで、より効果的な情報伝達が可能になります。
+    </p>
+
+    <div class="space-y-8">
+      <!-- 初級 -->
+      <div class="axis-card z-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-amber-100 rounded-full p-3 mr-4">
+            <i class="fas fa-baby text-amber-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">初級</h3>
+        </div>
+
+        <p class="mb-4">
+          初級レベルは、誰でも理解できる基本的な内容を指します。
+          専門用語を避け、わかりやすい表現で説明することが特徴です。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「初級の定義は僕の中では優勝のサービス一個ぐらいは自信持って話せますが初級の定義にしてるんで」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>基本的な概念と用語を使用</li>
+          <li>ステップバイステップの説明</li>
+          <li>具体例を多用する</li>
+          <li>視覚的な補助を活用する</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>「中学生でも理解できるように説明してください」と依頼することで、AIは専門用語を避け、基本的な表現でわかりやすく説明してくれます。マニュアルやガイドラインを作成する際に特に有効です。</p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">初級レベルの例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「営業報告書の標準的な書式と記入方法を教えてください。初めて報告書を書く新入社員向けに、シンプルで分かりやすい説明と、記入するべき基本的な項目のテンプレートを提供してください。」
+          </p>
+        </div>
+
+        <p>
+          初級レベルでは、「一般的な」「標準的な」「基本的な」といった表現を用いて、簡潔で理解しやすい情報を求めることが重要です。
+          特に新入社員や業界未経験者に向けた情報提供に適しています。
+        </p>
+      </div>
+
+      <!-- 中級 -->
+      <div class="axis-card z-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-amber-100 rounded-full p-3 mr-4">
+            <i class="fas fa-user-graduate text-amber-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">中級</h3>
+        </div>
+
+        <p class="mb-4">
+          中級レベルは、ある程度の知識や経験を前提とした内容です。
+          業界用語や専門的な分析を含み、より深い洞察を提供します。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「並列で並んでいる僕のバディだと考えてください。自分が責任下において自分が責任のポジションにあるところにおいて上も下もなく自分と並列の関係だということを見て僕のバディ僕の分身として振る舞ってもらいたい」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>専門用語を適度に使用</li>
+          <li>一定の背景知識を前提</li>
+          <li>より深い分析と洞察</li>
+          <li>実践的なアドバイスを提供</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>AIに「壁打ちの相手」や「ブレーンストーミングのパートナー」として振る舞うよう依頼すると、より対等な立場での対話が可能になります。自分の責任範囲内の課題について相談する際に効果的です。</p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">中級レベルの例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「先月の顧客アンケート結果を分析して、主要な不満点を3つ特定してください。私はこの部門の責任者として今後の改善策を立案する必要があります。目標値は顧客満足度10%向上です。一緒に効果的な対策を考えていきましょう。」
+          </p>
+        </div>
+
+        <p>
+          中級レベルでは、対等な立場でのコミュニケーションを心がけ、お互いの知識や経験を活かした協働作業を目指します。
+          AIをパートナーとして扱うことで、より創造的な解決策を導き出せます。
+        </p>
+      </div>
+
+      <!-- 上級 -->
+      <div class="axis-card z-axis bg-white p-6 card">
+        <div class="flex items-center mb-4">
+          <div class="bg-amber-100 rounded-full p-3 mr-4">
+            <i class="fas fa-chess-king text-amber-600 fa-2x"></i>
+          </div>
+          <h3 class="text-xl font-bold">上級</h3>
+        </div>
+
+        <p class="mb-4">
+          上級レベルは、高度な専門知識と経験を前提とした内容です。
+          戦略的思考や専門的な分析、業界最先端の知見を含みます。
+        </p>
+
+        <div class="quote italic text-gray-700 my-6 pl-4">
+          「社長から任された役員から任されたって言ったら自分の目線資産の高さだけで物事判断したらレベルが低い回答しか出てこないですよね。ですから2個上の上司これが経営層から見たらどう見られるかということを考えて」
+        </div>
+
+        <h4 class="font-bold mb-2">主なポイント:</h4>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>高度な専門用語を使用</li>
+          <li>戦略的な視点と分析</li>
+          <li>業界最先端の知識を適用</li>
+          <li>複合的な要因を考慮した洞察</li>
+        </ul>
+
+        <div class="tip-card mb-4">
+          <div class="tip-header">
+            <i class="fas fa-lightbulb text-amber-500 mr-2"></i>実践アドバイス
+          </div>
+          <div class="tip-content">
+            <p>
+              AIに「コンサルタントとして我々を導いてください」と依頼すると、より高度で戦略的な視点からのアドバイスを得られます。また、上級のアウトプットを得た後、「初級者向けに簡潔に説明してください」と依頼することで、異なるレベル向けの資料を作成できます。
+            </p>
+          </div>
+        </div>
+
+        <div class="example-box p-4 mb-4">
+          <h4 class="font-bold mb-2">上級レベルの例文:</h4>
+          <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+            「業界トレンドを分析し、今後3年間で成長が見込まれる市場セグメントを3つ特定してください。各セグメントの成長要因、競合状況、参入障壁、そして当社が持つ差別化要因を踏まえた戦略的アプローチを提案してください。また、これらの戦略を実行する上での主要なKPIと、四半期ごとのマイルストーンも設定してください。」
+          </p>
+        </div>
+
+        <p>
+          上級レベルでは、経営層や専門家の視点を取り入れ、より高度な戦略立案や意思決定をサポートします。
+          ただし、自分自身の経験やレベルに合わない場合は、上級の内容を理解しやすいレベルに翻訳することも重要です。
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-amber-50 p-6 rounded-lg mt-8">
+      <h3 class="font-bold text-lg mb-3">Z軸の実践ポイント</h3>
+      <p class="mb-4">
+        レベル感を意識することで、適切なコミュニケーションが可能になります。特に異なるレベル間の「翻訳」は重要なスキルです。
+      </p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>相手のレベルに合わせたコミュニケーションを心がける</li>
+        <li>上級の内容を初級レベルでも理解できるよう翻訳する能力を養う</li>
+        <li>AIに「このレベルで説明してください」と明示的に伝える</li>
+        <li>同じ内容でも異なるレベル向けの複数のバージョンを作成する</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3軸の組み合わせと実践 -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">TANREN3Dメソッドの実践: 3軸の組み合わせ</h2>
+    <p class="mb-6">
+      TANREN3Dメソッドの真の力は、X軸（思考の解像度）、Y軸（時間軸）、Z軸（レベル感）を組み合わせることで
+      発揮されます。3×3×3=27通りの思考パターンを活用することで、AIとの対話の質が飛躍的に向上します。
+    </p>
+
+    <div class="bg-white p-6 card mb-8">
+      <h3 class="text-xl font-bold mb-4">組み合わせの威力</h3>
+      <p class="mb-4">
+        佐藤氏は「超独学術」と表現しているように、これら3軸を組み合わせることで、あらゆる情報を理解し、
+        消化することができます。例えば、上級レベル（Z軸）の専門的な内容を、過去（Y軸）のデータに基づいて
+        抽象化（X軸）するといった複合的な思考が可能になります。
+      </p>
+
+      <div class="quote italic text-gray-700 my-6 pl-4">
+        「これがもう出世頭の人は頭をささっと働かせてAIをブーストしてもうものの見事な解像度で今のやってるプロジェクトを俯瞰して理解できるようになったら出世は早いですよ」
+      </div>
+
+      <div class="combine-card p-6 mb-6">
+        <h4 class="font-bold mb-3">パーソナライズの極意</h4>
+        <p>
+          佐藤氏が強調するAIとのコミュニケーションの最終目標は「パーソナライズ」です。3軸を活用して、
+          AIの出力を自分の状況や目的に最適化することで、真に役立つ情報を得られます。
+        </p>
+        <p class="mt-3">
+          「パーソナライズなんです。AIのゴール地点を目撃したいんであれば、究極意識しないといけない超一言...パーソナライズなんです」
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-xl font-bold mb-4">実践方法: ステップバイステップ</h3>
+      <div class="counter-reset: step-counter;">
+        <div class="step">
+          <h4 class="font-bold">相手の軸を理解する</h4>
+          <p>まず、対話相手（上司や依頼者など）がどの軸でコミュニケーションしているかを見極めます。抽象的な話をしているのか、過去の事例を重視しているのか、どのレベルで話しているのかを理解します。</p>
+        </div>
+
+        <div class="step">
+          <h4 class="font-bold">自分の現在地を把握する</h4>
+          <p>自分自身が現在どの軸で考えているかを認識します。具体的な話に終始していないか、現在のことしか考えていないか、レベルが合っているかを確認します。</p>
+        </div>
+
+        <div class="step">
+          <h4 class="font-bold">AIに適切な指示を出す</h4>
+          <p>AIに対して、必要な軸を明示的に指示します。「この内容を抽象化してください」「過去3年の事例から分析してください」「初級レベルで説明してください」など、具体的な軸を指定します。</p>
+        </div>
+
+        <div class="step">
+          <h4 class="font-bold">軸間の翻訳を依頼する</h4>
+          <p>必要に応じて、異なる軸への「翻訳」をAIに依頼します。例えば、上級レベルの内容を初級レベルに変換したり、抽象的な概念を具体例で説明したりするよう指示します。</p>
+        </div>
+
+        <div class="step">
+          <h4 class="font-bold">組み合わせて最適化する</h4>
+          <p>状況に応じて複数の軸を組み合わせ、最適な情報を引き出します。例えば「過去のデータを分析して、現在の状況を中級レベルで構造化し、未来の戦略を提案してください」といった複合的な指示を出せます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 card mb-8">
+      <h3 class="text-xl font-bold mb-4">実践例: 組み合わせパターン</h3>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="min-w-full border">
+          <thead class="table-header">
+            <tr>
+              <th class="px-4 py-2 border">組み合わせ</th>
+              <th class="px-4 py-2 border">適用シーン</th>
+              <th class="px-4 py-2 border">指示例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-2 border font-medium">
+                <span class="text-blue-600">超具体化</span> ×
+                <span class="text-green-600">過去</span> ×
+                <span class="text-amber-600">初級</span>
+              </td>
+              <td class="px-4 py-2 border">新人研修資料</td>
+              <td class="px-4 py-2 border text-sm">「過去の成功事例を5つ詳細に分析し、初心者でも理解できる具体的なステップと図解で説明してください。」</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 border font-medium">
+                <span class="text-blue-600">超抽象化</span> ×
+                <span class="text-green-600">未来</span> ×
+                <span class="text-amber-600">上級</span>
+              </td>
+              <td class="px-4 py-2 border">経営戦略立案</td>
+              <td class="px-4 py-2 border text-sm">「今後5年間の業界トレンドを分析し、本質的な変化要因と戦略的対応を経営層向けに簡潔にまとめてください。」</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 border font-medium">
+                <span class="text-blue-600">超構造化</span> ×
+                <span class="text-green-600">現代</span> ×
+                <span class="text-amber-600">中級</span>
+              </td>
+              <td class="px-4 py-2 border">プロジェクト計画</td>
+              <td class="px-4 py-2 border text-sm">
+                「現在のプロジェクト状況を分析し、ガントチャートとマイルストーンを含む構造化された計画書を、チームメンバーが実行できるレベルで作成してください。」</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-box p-4 mb-4">
+        <h4 class="font-bold mb-2">究極の組み合わせ例:</h4>
+        <p class="text-gray-700 text-sm bg-white p-3 border border-gray-200 rounded">
+          「当社の過去3年間の販売データと現在の市場動向を分析し、今後2年間の戦略的方向性を示してください。データの詳細分析（超具体化）と本質的な成功要因の抽出（超抽象化）を行い、明確な実行計画（超構造化）としてまとめてください。経営層向けの簡潔な要約（上級）と、現場スタッフ向けの具体的なガイドライン（初級）の両方を作成してください。」
+        </p>
+      </div>
+
+      <p>
+        このように、3軸を自在に組み合わせることで、AIとの対話の質と深さが飛躍的に向上し、
+        より価値の高いアウトプットを得られるようになります。
+      </p>
+    </div>
+
+    <div class="bg-indigo-50 p-6 rounded-lg">
+      <h3 class="font-bold text-lg mb-3">超独学術の実現</h3>
+      <p class="mb-4">
+        佐藤氏が語る「超独学術」は、この3軸の活用によって可能になります。例えば専門的な英語論文を読み解き、
+        日本語で理解するといった高度な学習もAIを活用することで実現できます。
+      </p>
+      <p>
+        「これができるから僕は超独学が進んだんだということが理解できました」と佐藤氏が語るように、
+        AIとの効果的なコミュニケーションは、自己成長と学習の可能性を大きく広げます。
+      </p>
+    </div>
+  </section>
+
+  <!-- まとめ -->
+  <section class="mb-16">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">まとめ: TANREN3Dメソッドの価値</h2>
+
+    <div class="bg-white p-6 card mb-8">
+      <p class="mb-4">
+        TANREN3Dメソッドは、AIとのコミュニケーションを通じてビジネス基礎力を飛躍的に向上させる思考フレームワークです。
+        X軸（思考の解像度）、Y軸（時間軸）、Z軸（レベル感）の3つの軸を組み合わせることで、
+        AIとの対話の質を高め、より価値の高いアウトプットを得ることができます。
+      </p>
+
+      <div class="quote italic text-gray-700 my-6 pl-4">
+        「TANREN3Dメソッドの真の力は、あなたの思考回路を整理し、AIに対してより明確かつ効果的な意図の伝え方を実現することにあります。これにより、あなたのビジネススキルを3倍から5倍に引き上げる可能性があります。」
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h4 class="font-bold text-center mb-2">思考の質向上</h4>
+          <ul class="text-sm space-y-1 list-disc list-inside">
+            <li>複眼的な視点の獲得</li>
+            <li>分析と統合の能力向上</li>
+            <li>構造化された思考の習慣</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h4 class="font-bold text-center mb-2">コミュニケーション進化</h4>
+          <ul class="text-sm space-y-1 list-disc list-inside">
+            <li>意図の明確な伝達</li>
+            <li>効果的な情報収集</li>
+            <li>レベルに応じた説明能力</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h4 class="font-bold text-center mb-2">業務効率化</h4>
+          <ul class="text-sm space-y-1 list-disc list-inside">
+            <li>質の高い成果物の生成</li>
+            <li>処理時間の大幅短縮</li>
+            <li>戦略的視点の獲得</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        AI時代において、単にAIツールを使うだけでなく、AIとの効果的なコミュニケーション方法を身につけることが競争力の源泉となります。
+        TANREN3Dメソッドはそのための実践的なフレームワークであり、あなたのビジネスパフォーマンスを飛躍的に向上させる可能性を秘めています。
+      </p>
+    </div>
+
+    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">これからの展望</h3>
+      <p class="mb-4">
+        佐藤氏が語るように、AIの能力は今後さらに向上し、ASI（超知能）の時代も視野に入っています。
+        そのような時代においても、TANREN3Dメソッドのような思考の枠組みは普遍的な価値を持ち続けるでしょう。
+      </p>
+      <p>
+        「これら3軸を組み合わせて使える能力が皆さんに兼ね揃えられた時にですよ、構造化して物事が思考回路ができるようになり、
+        過去現代未来を全部省略してお話しできるようになり、そしてレベル間の初級中級上級をすべて理解して普遍して、
+        もう俯瞰して物事を見れる能力がついた時に、AIはとんでもない全知全能っぷりを発揮します。」
+      </p>
+    </div>
+  </section>
+
+  <!-- アクション -->
+  <section class="mb-12">
+    <h2 class="section-title text-2xl md:text-3xl font-bold">あなたのアクションプラン</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 card">
+        <h3 class="text-xl font-bold mb-4">今日から始めること</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span
+              class="bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">1</span>
+            <span>AIとの対話で意識的に3軸を使い分ける練習をする</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">2</span>
+            <span>日常業務の中でAIに指示を出す際、軸を明示する</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">3</span>
+            <span>AIファーストの思考を取り入れ、スピード感を重視する</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">4</span>
+            <span>自分の強みや専門性をRAG文書化し、AIとの対話に活用する</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 card">
+        <h3 class="text-xl font-bold mb-4">習慣化のポイント</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span
+              class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">1</span>
+            <span>複雑な課題に直面したら3軸でどう整理できるか考える習慣をつける</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">2</span>
+            <span>AIとの対話の成功例と失敗例を記録し、改善点を洗い出す</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">3</span>
+            <span>異なるレベル間の「翻訳」能力を意識的に高める</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">4</span>
+            <span>常に相手の軸と自分の軸を意識してコミュニケーションする</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="text-center text-gray-600 mt-16 pt-8 border-t border-gray-200">
+    <p class="mb-2">AI時代のビジネス基礎力を飛躍的に向上させる「TANREN3Dメソッド」思考のOS XYZ</p>
+    <p class="mb-4">講演者: 佐藤勝彦（TANREN代表）</p>
+    <p class="text-sm">©︎ 2023 TANREN. All Rights Reserved.</p>
+  </footer>
+</body>
+
+</html>

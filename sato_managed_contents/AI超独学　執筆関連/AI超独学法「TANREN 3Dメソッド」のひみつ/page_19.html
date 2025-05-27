@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>実践例：自由研究のテーマを探す場合</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 889px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 889px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .highlight-text {
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .x-axis-color { background-color: rgba(0, 123, 255, 0.2); color: #007BFF; }
+        .y-axis-color { background-color: rgba(255, 69, 0, 0.2); color: #FF4500; }
+        .z-axis-color { background-color: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .axis-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 8px;
+            color: white;
+        }
+        .result-box {
+            border-left: 5px solid;
+            padding-left: 15px;
+            margin: 10px 0;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-4">
+<h1 class="text-4xl font-bold text-purple-700">実践例：自由研究のテーマを探す場合</h1>
+<div class="mt-2">
+<span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-semibold">
+<i class="fas fa-flask mr-1"></i>TANREN 3Dメソッドの活用例
+                    </span>
+</div>
+</div>
+<!-- Example Query Box -->
+<div class="speech-bubble w-full mb-6 z-20 pulse-animation">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-2xl mr-2 mt-1"></i>
+<div>
+<p class="font-semibold mb-2">AIへの質問例：</p>
+<p class="text-lg">AI、アドバイスお願い！<span class="highlight-text y-axis-color">小学5年生向け</span>の理科の自由研究で、<span class="highlight-text x-axis-color">家にあるもので簡単にできて</span>、<span class="highlight-text x-axis-color">1週間くらいで観察が終わるような</span>実験テーマを<span class="highlight-text x-axis-color">3つ提案</span>してほしいんだ。それぞれの<span class="highlight-text x-axis-color">実験方法と、なんでそうなるのかっていう科学的な理由も簡単に</span>教えてくれると<span class="highlight-text z-axis-color">嬉しいな</span>！</p>
+</div>
+</div>
+</div>
+<!-- TANREN 3D Analysis -->
+<div class="grid grid-cols-3 gap-6 w-full z-20">
+<!-- X-Axis Analysis -->
+<div class="bg-white rounded-xl shadow-md p-4">
+<div class="flex items-center mb-3">
+<span class="axis-badge bg-blue-500">X</span>
+<h3 class="text-xl font-bold text-blue-600">X軸：探偵の虫メガネ</h3>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fas fa-search-plus text-blue-500 mt-1 mr-2"></i>
+<span><strong>超具体化：</strong>「家にあるもので」「1週間で終わる」と材料・期間を明確に</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-sitemap text-blue-500 mt-1 mr-2"></i>
+<span><strong>超構造化：</strong>「3つの実験」「方法と理由をセット」と情報の構成を指定</span>
+</li>
+</ul>
+</div>
+<!-- Y-Axis Analysis -->
+<div class="bg-white rounded-xl shadow-md p-4">
+<div class="flex items-center mb-3">
+<span class="axis-badge bg-red-500">Y</span>
+<h3 class="text-xl font-bold text-red-600">Y軸：タイムマシン</h3>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fas fa-clock text-red-500 mt-1 mr-2"></i>
+<span><strong>現在：</strong>「小学5年生向け」と現在の学年レベルを明確に伝えている</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-calendar-alt text-red-500 mt-1 mr-2"></i>
+<span><strong>時間の枠組み：</strong>「1週間」という時間的制約を設定している</span>
+</li>
+</ul>
+</div>
+<!-- Z-Axis Analysis -->
+<div class="bg-white rounded-xl shadow-md p-4">
+<div class="flex items-center mb-3">
+<span class="axis-badge bg-yellow-500">Z</span>
+<h3 class="text-xl font-bold text-yellow-600">Z軸：レベルアップの鍵</h3>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fas fa-users text-yellow-500 mt-1 mr-2"></i>
+<span><strong>レベル2：</strong>AIと協力プレイ！特定ターゲット(小学生)向けの情報を求めている</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-smile text-yellow-500 mt-1 mr-2"></i>
+<span><strong>感情要素：</strong>「嬉しいな」と感情を込めてAIとの親しみを表現</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Results Section -->
+<div class="bg-white rounded-xl shadow-lg p-5 w-full mt-6 z-20">
+<h3 class="text-xl font-bold text-green-600 mb-3">
+<i class="fas fa-lightbulb mr-2"></i>AIからの回答例：
+                </h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="result-box border-green-400">
+<h4 class="font-bold text-green-700">カラフル野菜タワー実験</h4>
+<p class="text-sm">キッチンペーパーと食紅水で、野菜が水を吸い上げる様子を観察。毛細管現象がわかる！</p>
+</div>
+<div class="result-box border-blue-400">
+<h4 class="font-bold text-blue-700">自家製結晶づくりチャレンジ</h4>
+<p class="text-sm">塩やミョウバンの濃い水溶液から結晶を取り出す。飽和水溶液と結晶化の仕組みが学べる！</p>
+</div>
+<div class="result-box border-purple-400">
+<h4 class="font-bold text-purple-700">10円玉ピカピカ大作戦</h4>
+<p class="text-sm">醤油、ソース、レモン汁など身近な液体で10円玉を磨き比べ。酸化還元反応を体験！</p>
+</div>
+</div>
+</div>
+<!-- Bottom Summary -->
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-4 z-20">
+<div class="flex items-center">
+<i class="fas fa-star text-yellow-500 mr-3 text-xl"></i>
+<p class="text-lg">
+<span class="font-bold text-yellow-700">ポイント：</span>
+                        X・Y・Z軸の要素をバランスよく組み合わせることで、AIは小学生に最適な自由研究のアイデアを提案できた！
+                    </p>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>19 / 20</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

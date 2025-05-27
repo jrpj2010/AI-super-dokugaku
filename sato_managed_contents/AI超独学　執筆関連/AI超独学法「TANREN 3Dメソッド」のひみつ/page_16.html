@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>レベル3：AIを使いこなす！「こうして、ああして！」</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 905px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 905px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .glow {
+            text-shadow: 0 0 10px rgba(66, 153, 225, 0.8);
+        }
+        .feature-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        .level-badge {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            z-index: 10;
+        }
+        .command-box {
+            background: #2a2a2a;
+            color: #32CD32;
+            font-family: monospace;
+            border-radius: 8px;
+            position: relative;
+            
+        }
+        .command-box::before {
+            content: '> ';
+            color: #32CD32;
+        }
+        .pulse-effect {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .float-effect {
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-10 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-purple-700">レベル3：AIを使いこなす！<span class="text-yellow-500">「こうして、ああして！」</span></h1>
+<div class="mt-2">
+<span class="bg-yellow-100 text-yellow-800 px-4 py-1 rounded-full text-lg font-semibold">Z軸の最高レベル！</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 w-full mt-2 z-20">
+<!-- Left Column - Image and Key Points -->
+<div class="flex flex-col items-center">
+<div class="relative w-full mb-4">
+<img alt="Z軸レベルアップ" class="rounded-lg shadow-lg w-full h-auto pulse-effect" src="https://picture-search.skywork.ai/aippt/image/sheet/0a56fe07e6b0b8766683fa4333396791.jpg"/>
+</div>
+<div class="feature-box p-4 w-full">
+<h3 class="text-xl font-bold text-blue-600 mb-2"><i class="fas fa-crown text-yellow-500 mr-2"></i>マスターレベルの特徴</h3>
+<ul class="space-y-2 text-gray-700">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span>AIを<span class="font-bold">道具として完全に使いこなす</span>段階</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span>君が<span class="font-bold">監督</span>になり、AIに具体的な指示を出す</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<span><span class="font-bold">未来志向</span>で、まだ誰も知らない新しい価値を生み出す</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Right Column - Example and Details -->
+<div class="flex flex-col">
+<!-- Example Command -->
+<div class="relative feature-box p-5 mb-4">
+<div class="level-badge">3</div>
+<h3 class="text-xl font-bold text-blue-600 mb-3 ml-10"><i class="fas fa-code text-purple-500 mr-2"></i>レベル3の指示例</h3>
+<div class="command-box p-3 text-lg mb-3">
+                            このデータとこのデータを組み合わせて、未来の社会問題を解決するアイデアを提案して！
+                        </div>
+<div class="flex items-center text-lg text-gray-700">
+<i class="fas fa-arrow-right text-red-500 mr-2 text-xl"></i>
+<span>AIの能力を最大限に引き出して、<span class="font-bold text-red-500">創造的な成果</span>を生み出せる！</span>
+</div>
+</div>
+<!-- Director Relationship -->
+<div class="feature-box p-5">
+<h3 class="text-xl font-bold text-blue-600 mb-3"><i class="fas fa-film text-red-500 mr-2"></i>君はAIの監督だ！</h3>
+<div class="flex space-x-4 items-center justify-center mb-4">
+<div class="bg-blue-100 p-3 rounded-full">
+<i class="fas fa-user-tie text-blue-600 text-3xl float-effect"></i>
+</div>
+<div class="text-3xl text-yellow-500">
+<i class="fas fa-arrows-alt-h"></i>
+</div>
+<div class="bg-purple-100 p-3 rounded-full">
+<i class="fas fa-robot text-purple-600 text-3xl float-effect"></i>
+</div>
+</div>
+<ul class="space-y-3 text-gray-700">
+<li class="flex items-start">
+<i class="fas fa-lightbulb text-yellow-500 mt-1 mr-2"></i>
+<span>複雑なデータを<span class="font-bold">組み合わせる</span>ように指示できる</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-rocket text-purple-500 mt-1 mr-2"></i>
+<span>まだ<span class="font-bold">誰も思いつかなかった</span>アイデアを生み出せる</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-magic text-blue-500 mt-1 mr-2"></i>
+<span>AIを使って<span class="font-bold">未来を創造する</span>クリエイターになれる</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Bottom Quote -->
+<div class="mt-6 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl shadow-lg p-4 w-4/5 z-20 text-center">
+<p class="text-white text-xl font-bold">「AIを使いこなすマスターになって、未来を切り拓こう！」</p>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

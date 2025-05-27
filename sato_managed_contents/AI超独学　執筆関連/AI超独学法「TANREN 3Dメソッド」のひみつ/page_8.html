@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>超構造化：「つながりはどうなってる？」の術</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 949px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 949px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .connector {
+            position: relative;
+            height: 4px;
+            background: linear-gradient(to right, #8A2BE2, #32CD32);
+            margin: 0 15px;
+        }
+        .connector::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid #32CD32;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        .example-box {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .example-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .table-cell {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+        }
+        .table-header {
+            background-color: #EBF4FF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-purple-700">超構造化：「つながりはどうなってる？」の術</h1>
+<div class="mt-2">
+<p class="text-xl text-gray-700">情報の整理の仕方をAIに伝えると、複雑な情報もスッキリ理解できる！</p>
+</div>
+</div>
+<!-- Concept Explanation -->
+<div class="flex items-center justify-center mb-6 z-20">
+<div class="icon-box bg-red-100">
+<i class="fas fa-random text-3xl text-red-500"></i>
+</div>
+<div class="connector w-32"></div>
+<div class="icon-box bg-yellow-100">
+<i class="fas fa-magic text-3xl text-yellow-500"></i>
+</div>
+<div class="connector w-32"></div>
+<div class="icon-box bg-green-100">
+<i class="fas fa-table text-3xl text-green-500"></i>
+</div>
+</div>
+<div class="flex items-center justify-center mb-8 z-20 -mt-1">
+<div class="text-center px-3 w-40">
+<p class="text-lg font-semibold text-red-500">バラバラの情報</p>
+</div>
+<div class="w-32"></div>
+<div class="text-center px-3 w-40">
+<p class="text-lg font-semibold text-yellow-500">AIの整理力</p>
+</div>
+<div class="w-32"></div>
+<div class="text-center px-3 w-40">
+<p class="text-lg font-semibold text-green-500">わかりやすい表・図</p>
+</div>
+</div>
+<!-- Example and Benefits -->
+<div class="grid grid-cols-2 gap-8 w-full z-20">
+<!-- Left Side: Example -->
+<div class="example-box bg-white p-5">
+<h3 class="text-xl font-bold text-blue-600 mb-3">
+<i class="fas fa-lightbulb mr-2"></i>超構造化の例
+                    </h3>
+<div class="mb-4 bg-blue-50 p-3 rounded-lg">
+<p class="text-lg"><span class="font-bold">AIへのお願い：</span>「小説を3つ、それぞれのあらすじと一緒に教えて」</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<tbody><tr>
+<th class="table-cell table-header">タイトル</th>
+<th class="table-cell table-header">あらすじ</th>
+</tr>
+<tr>
+<td class="table-cell font-semibold">『失われた惑星エウロパの秘密』</td>
+<td class="table-cell">主人公の少年が、伝説の惑星に眠る古代文明の謎を追って冒険する</td>
+</tr>
+<tr>
+<td class="table-cell font-semibold">『星くずパイロットと喋る猫』</td>
+<td class="table-cell">宇宙船で運び屋をする少女と、人間の言葉を話す猫が銀河の陰謀に巻き込まれる</td>
+</tr>
+<tr>
+<td class="table-cell font-semibold">『タイムジャンプ・アカデミー』</td>
+<td class="table-cell">宇宙パイロット養成学校で、生徒がタイムマシンを発見し悪の組織に立ち向かう</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<!-- Right Side: Benefits -->
+<div>
+<div class="example-box bg-white p-5 mb-4">
+<h3 class="text-xl font-bold text-blue-600 mb-3">
+<i class="fas fa-star mr-2"></i>超構造化のパワー
+                        </h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<p>AIに「どういう形で教えてほしいか」を伝えると、わかりやすく整理してくれる</p>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<p>複雑な情報も一目でわかる表やグラフに変身！</p>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+<p>「〇〇と△△の関係を図にして」というお願いもOK！</p>
+</li>
+</ul>
+</div>
+<div class="example-box bg-yellow-50 p-5">
+<div class="flex items-center">
+<div class="mr-3 text-yellow-500 text-3xl">
+<i class="fas fa-lightbulb"></i>
+</div>
+<p class="text-lg">
+                                情報をパズルのように組み立てて伝えると、AIもそれに合わせて最高の形で答えてくれる！
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Tip -->
+<div class="mt-6 bg-purple-100 rounded-xl shadow p-4 w-4/5 z-20">
+<div class="flex items-center">
+<div class="text-purple-600 text-3xl mr-4">
+<i class="fas fa-magic"></i>
+</div>
+<p class="text-lg">
+<span class="font-bold text-purple-600">実践ポイント：</span>
+                        「〇〇を3つ」「それぞれ△△と一緒に」「□□という形式で」など、AIに情報の整理の仕方を伝えてみよう！
+                    </p>
+</div>
+</div>
+<!-- Navigation Hint -->
+<div class="absolute bottom-5 right-10 text-gray-500 flex items-center">
+<p>次のページへ</p>
+<i class="fas fa-arrow-right ml-2"></i>
+</div>
+</div>
+</div>
+
+</body></html>

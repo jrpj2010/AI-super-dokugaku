@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANREN 3Dメソッド - AI時代のビジネス基礎力を飛躍的に向上させる思考OS</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #94a3b8;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        .loading-screen.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .loader div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: rotate 1.5s linear infinite;
+        }
+        
+        .loader div:nth-child(2) {
+            border-top-color: var(--secondary-color);
+            animation-delay: 0.2s;
+        }
+        
+        .loader div:nth-child(3) {
+            border-top-color: var(--accent-color);
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .hero-title span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #fff;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 3D Visualization Container */
+        .three-d-container {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            z-index: 1;
+        }
+        
+        #three-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .section-dark {
+            background: var(--dark-bg);
+            color: #fff;
+        }
+        
+        .section-light {
+            background: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Method Cards */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .method-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+        
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #fff;
+        }
+        
+        .method-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .method-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .method-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        
+        .method-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+        
+        .method-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* Axis Detail Sections */
+        .axis-section {
+            padding: 4rem 0;
+        }
+        
+        .axis-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .axis-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .axis-content h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-dark);
+        }
+        
+        .axis-visual {
+            position: relative;
+            height: 400px;
+            background: var(--gradient-1);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .axis-visual::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        /* Interactive Elements */
+        .interactive-demo {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--box-shadow);
+            margin: 3rem 0;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .demo-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .demo-btn:hover,
+        .demo-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        .demo-content {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+        
+        /* Case Study Section */
+        .case-study {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+        
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .case-study-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        
+        .case-study h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .before-after-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .before {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+        }
+        
+        .after {
+            background: #dcfce7;
+            border: 2px solid #22c55e;
+        }
+        
+        .before-after-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: #fff;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        
+        .footer-section p,
+        .footer-section ul {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            padding: 0.5rem 0;
+        }
+        
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+        
+        /* Corporate Training Program Section */
+        .training-programs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .program-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .program-card.featured {
+            border: 3px solid var(--primary-color);
+        }
+        
+        .program-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .program-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .program-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .program-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .program-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .program-features i {
+            color: #22c55e;
+            font-size: 1.1rem;
+        }
+        
+        .program-price {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .price-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price-amount small {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .custom-training {
+            background: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+            border: 2px dashed var(--primary-color);
+        }
+        
+        .custom-training h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .custom-training p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-1);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-white {
+            background: #fff;
+            color: var(--primary-color);
+        }
+        
+        /* Video Interview Section */
+        .video-interviews {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .interview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .interview-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .interview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .play-overlay {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .interview-card:hover .play-overlay {
+            transform: scale(1.2);
+            color: #fff;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .interview-info {
+            padding: 1.5rem;
+        }
+        
+        .interview-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .interview-info p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .interview-summary {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 0.8rem;
+        }
+        
+        /* Audio Player Styles */
+        .audio-player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .audio-player {
+            margin-bottom: 2rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .time-display {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        .progress-container {
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .player-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .speed-btn, .transcript-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .speed-btn:hover, .transcript-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        .transcript-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+        }
+        
+        .transcript-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .transcript-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .transcript-item:hover {
+            background: #f0f0f0;
+        }
+        
+        .transcript-item.active {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        .time-stamp {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 60px;
+        }
+        
+        .transcript-item.active .time-stamp {
+            color: #fff;
+        }
+        
+        /* Speaker Profile Styles */
+        .speaker-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+        }
+        
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--gradient-1);
+        }
+        
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #fff;
+        }
+        
+        .profile-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+        
+        .profile-achievements {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .achievement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .achievement i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        /* AI Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .tool-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #fff;
+        }
+        
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-usage {
+            margin-top: 1.5rem;
+        }
+        
+        .tool-usage h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .tool-usage ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .tool-usage li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .tool-usage li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        /* Workshop Timeline */
+        .workshop-timeline {
+            position: relative;
+            padding: 3rem 0;
+        }
+        
+        .workshop-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 3;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-marker {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .workshop-exercise {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .workshop-exercise h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Resources Section */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .resource-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: #fff;
+        }
+        
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .resource-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .resource-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .download-notice {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .download-notice p {
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        /* FAQ Styles */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: #fff;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--light-bg);
+        }
+        
+        .faq-question h3 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .faq-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .axis-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+            
+            .three-d-container {
+                display: none;
+            }
+            
+            .speaker-profile {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .profile-image {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            
+            .workshop-timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                grid-template-columns: auto 1fr;
+                gap: 1rem;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                grid-column: 2;
+            }
+            
+            .timeline-marker {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .player-controls {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .profile-achievements {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">TANREN 3D</a>
+            <ul class="nav-links">
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#method">メソッド</a></li>
+                <li><a href="#x-axis">X軸</a></li>
+                <li><a href="#y-axis">Y軸</a></li>
+                <li><a href="#z-axis">Z軸</a></li>
+                <li><a href="#case-studies">事例</a></li>
+                <li><a href="#resources">資料</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <canvas class="hero-particles"></canvas>
+        <div class="hero-content">
+            <p class="hero-subtitle">AI時代の新たな思考フレームワーク</p>
+            <h1 class="hero-title">
+                <span>TANREN 3Dメソッド</span>で<br>
+                ビジネス基礎力を飛躍的に向上
+            </h1>
+            <p class="hero-description">
+                思考のOSをアップデートし、AIと共創する時代のプロフェッショナルへ。
+                XYZ軸の3次元思考で、あなたの可能性を最大化します。
+            </p>
+            <div class="hero-buttons">
+                <a href="#method" class="btn btn-primary">メソッドを学ぶ</a>
+                <a href="#case-studies" class="btn btn-secondary">成功事例を見る</a>
+            </div>
+        </div>
+        <div class="three-d-container">
+            <canvas id="three-canvas"></canvas>
+        </div>
+    </section>
+    
+    <!-- Method Overview Section -->
+    <section id="method" class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">The Method</p>
+                <h2 class="section-title">TANREN 3Dメソッドとは</h2>
+                <p class="section-description">
+                    AI時代に必要な思考力を3つの軸で体系化。
+                    人間とAIの両方に分かりやすい、革新的な思考フレームワークです。
+                </p>
+            </div>
+            
+            <div class="method-grid">
+                <div class="method-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="method-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>X軸：思考の解像度</h3>
+                    <p>超抽象化・超具体化・超構造化の3つの思考法で、課題の本質を捉え、明確な解決策を導き出します。</p>
+                    <ul class="method-features">
+                        <li>メタ認知スキルの向上</li>
+                        <li>本質的な問題解決能力</li>
+                        <li>AIへの的確な指示出し</li>
+                    </ul>
+                </div>
+                
+                <div class="method-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="method-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Y軸：時間軸の視座</h3>
+                    <p>過去・現在・未来の3つの時間軸で物事を捉え、戦略的な意思決定を可能にします。</p>
+                    <ul class="method-features">
+                        <li>過去データの活用</li>
+                        <li>現状の的確な把握</li>
+                        <li>未来予測と戦略立案</li>
+                    </ul>
+                </div>
+                
+                <div class="method-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="method-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Z軸：レベル感の把握</h3>
+                    <p>自己認識とスキルレベルを正確に把握し、効果的な成長戦略を構築します。</p>
+                    <ul class="method-features">
+                        <li>客観的な自己評価</li>
+                        <li>段階的な成長計画</li>
+                        <li>AIとの協働レベル設定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- X-Axis Detail Section -->
+    <section id="x-axis" class="section section-dark axis-section">
+        <div class="container">
+            <div class="axis-container">
+                <div class="axis-content" data-aos="fade-right">
+                    <h2>X軸：思考の解像度を極める</h2>
+                    <p>AIリーダブルな思考を身につけ、人間とAIの架け橋となる</p>
+                    
+                    <h3>🔹 超抽象化</h3>
+                    <p>複雑な情報から本質を抽出し、シンプルな概念に昇華させる能力。「要するに何か？」を明確にします。</p>
+                    
+                    <h3>🔹 超具体化</h3>
+                    <p>抽象的なアイデアを実行可能なアクションに落とし込む能力。5W1Hを明確にし、誰でも理解できる形にします。</p>
+                    
+                    <h3>🔹 超構造化</h3>
+                    <p>情報を論理的に整理し、体系的なフレームワークに組み上げる能力。AIが処理しやすい形式に変換します。</p>
+                </div>
+                <div class="axis-visual" data-aos="fade-left">
+                    <div style="text-align: center; color: white;">
+                        <i class="fas fa-cube" style="font-size: 5rem; margin-bottom: 1rem;"></i>
+                        <h3>X-Axis Visualization</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Y-Axis Detail Section -->
+    <section id="y-axis" class="section section-light axis-section">
+        <div class="container">
+            <div class="axis-container">
+                <div class="axis-visual" data-aos="fade-right">
+                    <div style="text-align: center; color: white;">
+                        <i class="fas fa-clock" style="font-size: 5rem; margin-bottom: 1rem;"></i>
+                        <h3>Y-Axis Timeline</h3>
+                    </div>
+                </div>
+                <div class="axis-content" data-aos="fade-left">
+                    <h2>Y軸：時間軸の視座を獲得</h2>
+                    <p>過去から学び、現在を分析し、未来を創造する戦略的思考</p>
+                    
+                    <h3>🕐 過去の教訓</h3>
+                    <p>過去のデータや事例から学び、同じ失敗を繰り返さない。AIのDeep Research機能を活用した徹底的な調査。</p>
+                    
+                    <h3>🕑 現在の把握</h3>
+                    <p>リアルタイムの情報を収集・分析し、現状を正確に理解。SNSやニュースなど最新情報の活用。</p>
+                    
+                    <h3>🕒 未来の構想</h3>
+                    <p>データに基づいた未来予測とシナリオプランニング。AIの予測機能を活用した戦略立案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Z-Axis Detail Section -->
+    <section id="z-axis" class="section section-dark axis-section">
+        <div class="container">
+            <div class="axis-container">
+                <div class="axis-content" data-aos="fade-right">
+                    <h2>Z軸：レベル感の把握と成長</h2>
+                    <p>自己のスキルレベルを客観視し、段階的な成長を実現</p>
+                    
+                    <h3>📊 現在地の認識</h3>
+                    <p>自分のスキルレベルを客観的に評価。強みと改善点を明確化し、成長の出発点を定めます。</p>
+                    
+                    <h3>📈 成長の階段</h3>
+                    <p>段階的な目標設定と達成プロセスの構築。小さな成功体験を積み重ね、着実にレベルアップ。</p>
+                    
+                    <h3>🚀 AIとの協働レベル</h3>
+                    <p>AIツールの活用レベルを段階的に向上。基本的な使い方から高度な協働まで、スキルに応じた活用法。</p>
+                </div>
+                <div class="axis-visual" data-aos="fade-left">
+                    <div style="text-align: center; color: white;">
+                        <i class="fas fa-layer-group" style="font-size: 5rem; margin-bottom: 1rem;"></i>
+                        <h3>Z-Axis Levels</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Demo Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Interactive Demo</p>
+                <h2 class="section-title">実践してみよう</h2>
+                <p class="section-description">
+                    TANREN 3Dメソッドを使った思考プロセスを体験してください
+                </p>
+            </div>
+            
+            <div class="interactive-demo" data-aos="fade-up">
+                <h3>議事録作成の例</h3>
+                <div class="demo-controls">
+                    <button class="demo-btn active" onclick="showDemo('before')">従来の方法</button>
+                    <button class="demo-btn" onclick="showDemo('after')">3Dメソッド適用後</button>
+                </div>
+                <div class="demo-content" id="demo-content">
+                    <div id="demo-before">
+                        <h4>❌ 従来の指示例</h4>
+                        <p style="background: #fee2e2; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            「今日の会議の議事録を作成してください」
+                        </p>
+                        <p>問題点：</p>
+                        <ul>
+                            <li>具体的な内容が不明確</li>
+                            <li>期待する成果物のイメージが共有されていない</li>
+                            <li>AIが必要な情報を推測する必要がある</li>
+                        </ul>
+                    </div>
+                    <div id="demo-after" style="display: none;">
+                        <h4>✅ 3Dメソッド適用後</h4>
+                        <p style="background: #dcfce7; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            「2024年5月27日14:00-15:30に開催された新商品開発会議の議事録を作成してください。<br>
+                            【参加者】山田部長、佐藤課長、鈴木主任、田中（記録者）<br>
+                            【議題】1.市場調査結果の共有 2.商品コンセプトの決定 3.今後のスケジュール<br>
+                            【形式】決定事項、アクションアイテム（担当者・期限付き）、次回会議日程を明記」
+                        </p>
+                        <p>改善点：</p>
+                        <ul>
+                            <li>5W1Hが明確（超具体化）</li>
+                            <li>構造化された情報提供（超構造化）</li>
+                            <li>期待する成果物が明確（超抽象化→本質の理解）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="section section-dark">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Success Stories</p>
+                <h2 class="section-title">導入事例と成果</h2>
+                <p class="section-description">
+                    TANREN 3Dメソッドを実践した新卒社員の成長事例
+                </p>
+            </div>
+            
+            <div class="case-study" data-aos="fade-up">
+                <div class="case-study-header">
+                    <div class="case-study-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3>営業部門 Aさん（入社1年目）</h3>
+                        <p>提案書作成時間を70%削減、成約率30%向上</p>
+                    </div>
+                </div>
+                <div class="before-after">
+                    <div class="before-after-card before">
+                        <h4><i class="fas fa-times-circle"></i> Before</h4>
+                        <ul>
+                            <li>提案書作成に1件あたり8時間</li>
+                            <li>内容が冗長で要点が不明確</li>
+                            <li>顧客ニーズとのズレが頻発</li>
+                        </ul>
+                    </div>
+                    <div class="before-after-card after">
+                        <h4><i class="fas fa-check-circle"></i> After</h4>
+                        <ul>
+                            <li>AIを活用し2.5時間で完成</li>
+                            <li>構造化された分かりやすい提案</li>
+                            <li>顧客の課題に的確にフィット</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study" data-aos="fade-up" data-aos-delay="100">
+                <div class="case-study-header">
+                    <div class="case-study-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <h3>開発部門 Bさん（入社2年目）</h3>
+                        <p>コードレビューの品質向上、開発効率2倍に</p>
+                    </div>
+                </div>
+                <div class="before-after">
+                    <div class="before-after-card before">
+                        <h4><i class="fas fa-times-circle"></i> Before</h4>
+                        <ul>
+                            <li>コードの意図が伝わりにくい</li>
+                            <li>ドキュメント作成が苦手</li>
+                            <li>チーム内の情報共有が不足</li>
+                        </ul>
+                    </div>
+                    <div class="before-after-card after">
+                        <h4><i class="fas fa-check-circle"></i> After</h4>
+                        <ul>
+                            <li>構造化されたコードとコメント</li>
+                            <li>AIを活用した自動ドキュメント生成</li>
+                            <li>効果的な知識共有の実現</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Interviews Section -->
+            <div class="video-interviews" data-aos="fade-up">
+                <h3 style="text-align: center; margin: 3rem 0 2rem; font-size: 2rem;">成功者インタビュー動画</h3>
+                <div class="interview-grid">
+                    <div class="interview-card">
+                        <div class="video-thumbnail">
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="video-duration">12:34</div>
+                        </div>
+                        <div class="interview-info">
+                            <h4>入社1年でトップ営業に</h4>
+                            <p>IT企業 営業部 田中さん（24歳）</p>
+                            <p class="interview-summary">3Dメソッドを活用し、提案書作成時間を80%削減。月間成約数が3倍に。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-card">
+                        <div class="video-thumbnail">
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="video-duration">15:22</div>
+                        </div>
+                        <div class="interview-info">
+                            <h4>新人賞受賞の秘訣</h4>
+                            <p>メーカー 開発部 鈴木さん（23歳）</p>
+                            <p class="interview-summary">AIツールとの協働で開発効率が飛躍的に向上。チーム貢献度No.1に。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-card">
+                        <div class="video-thumbnail">
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="video-duration">10:45</div>
+                        </div>
+                        <div class="interview-info">
+                            <h4>コンサルタントへの転身</h4>
+                            <p>金融機関 企画部 山田さん（25歳）</p>
+                            <p class="interview-summary">思考の構造化により、複雑な課題解決能力が向上。社内コンサルとして活躍。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lecture Audio Section -->
+    <section id="lecture-audio" class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Full Lecture</p>
+                <h2 class="section-title">講演音声を聴く</h2>
+                <p class="section-description">
+                    佐藤勝彦氏による1時間40分の完全版講演をお聴きください
+                </p>
+            </div>
+            
+            <div class="audio-player-container" data-aos="fade-up">
+                <div class="audio-player">
+                    <div class="player-controls">
+                        <button class="play-btn" id="playBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="time-display">
+                            <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    <div class="player-options">
+                        <button class="speed-btn" id="speedBtn">1.0x</button>
+                        <button class="transcript-btn" id="transcriptBtn">
+                            <i class="fas fa-file-alt"></i> トランスクリプト
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transcript-container" id="transcriptContainer" style="display: none;">
+                    <h3>講演トランスクリプト</h3>
+                    <div class="transcript-content">
+                        <div class="transcript-item" data-time="0">
+                            <span class="time-stamp">00:00</span>
+                            <p>はいどうもTANREN代表の佐藤勝彦です。さあ今日はですね。新卒の皆さんにご紹介ということでやらせていただきます。</p>
+                        </div>
+                        <div class="transcript-item" data-time="10">
+                            <span class="time-stamp">00:10</span>
+                            <p>AI時代のビジネス基礎力を飛躍的に向上させるTANREN3Dメソッドと題しまして、思考のOSをXYZというね。</p>
+                        </div>
+                        <div class="transcript-item" data-time="20">
+                            <span class="time-stamp">00:20</span>
+                            <p>大それたタイトルでやっておきますが簡単に言うと、考え方のコツっていうことをね。皆さんにお伝えをさせていただければなというふうに思っております。</p>
+                        </div>
+                        <!-- More transcript items would be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speaker Profile Section -->
+    <section id="speaker" class="section section-dark">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Speaker</p>
+                <h2 class="section-title">講演者プロフィール</h2>
+            </div>
+            
+            <div class="speaker-profile" data-aos="fade-up">
+                <div class="profile-image">
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    <h3>佐藤 勝彦</h3>
+                    <p class="profile-title">TANREN代表 / AI活用コンサルタント</p>
+                    <p class="profile-description">
+                        元調理師から転身し、25年のビジネス経験を持つ。営業職での経験を基に、
+                        抽象化と具体化の思考フレームワークを開発。現在はAI時代に対応した
+                        「TANREN 3Dメソッド」を提唱し、企業の生産性向上を支援している。
+                    </p>
+                    <div class="profile-achievements">
+                        <div class="achievement">
+                            <i class="fas fa-award"></i>
+                            <span>AI活用企業100社以上支援</span>
+                        </div>
+                        <div class="achievement">
+                            <i class="fas fa-users"></i>
+                            <span>延べ5,000人以上の研修実績</span>
+                        </div>
+                        <div class="achievement">
+                            <i class="fas fa-book"></i>
+                            <span>「AI超独学法」著者</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Guide Section -->
+    <section id="ai-tools" class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">AI Tools Guide</p>
+                <h2 class="section-title">推奨AIツール活用ガイド</h2>
+                <p class="section-description">
+                    TANREN 3Dメソッドを実践するための最適なAIツール
+                </p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tool-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>ChatGPT / Claude</h3>
+                    <p>汎用的な対話型AI。文章作成、分析、アイデア出しに最適。</p>
+                    <div class="tool-usage">
+                        <h4>活用例：</h4>
+                        <ul>
+                            <li>議事録の構造化</li>
+                            <li>提案書の作成支援</li>
+                            <li>コードレビュー</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tool-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Perplexity AI</h3>
+                    <p>最新情報の検索と分析に特化。Deep Research機能で徹底調査。</p>
+                    <div class="tool-usage">
+                        <h4>活用例：</h4>
+                        <ul>
+                            <li>市場調査</li>
+                            <li>競合分析</li>
+                            <li>トレンド把握</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tool-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Midjourney / DALL-E</h3>
+                    <p>画像生成AI。プレゼンテーション資料の視覚化に活用。</p>
+                    <div class="tool-usage">
+                        <h4>活用例：</h4>
+                        <ul>
+                            <li>概念図の作成</li>
+                            <li>プレゼン素材</li>
+                            <li>アイデアの視覚化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Section -->
+    <section id="workshop" class="section section-dark">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Practical Workshop</p>
+                <h2 class="section-title">新卒向け実践ワークショップ</h2>
+                <p class="section-description">
+                    段階的に3Dメソッドをマスターする実践プログラム
+                </p>
+            </div>
+            
+            <div class="workshop-timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3>Week 1-2: 基礎理解</h3>
+                        <p>X軸の思考法を習得。抽象化と具体化の練習。</p>
+                        <div class="workshop-exercise">
+                            <h4>演習：</h4>
+                            <p>日々の業務報告を「超抽象化」「超具体化」「超構造化」で整理</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3>Week 3-4: 時間軸導入</h3>
+                        <p>Y軸の視点を加え、過去・現在・未来の分析力を養う。</p>
+                        <div class="workshop-exercise">
+                            <h4>演習：</h4>
+                            <p>プロジェクトの振り返りと未来予測レポート作成</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3>Week 5-6: レベル設定</h3>
+                        <p>Z軸でスキルレベルを把握し、成長計画を立案。</p>
+                        <div class="workshop-exercise">
+                            <h4>演習：</h4>
+                            <p>自己評価シート作成とAI活用レベルの段階的向上</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h3>Week 7-8: 統合実践</h3>
+                        <p>3軸を統合し、実業務での活用を完成させる。</p>
+                        <div class="workshop-exercise">
+                            <h4>演習：</h4>
+                            <p>実際の業務課題を3Dメソッドで解決しプレゼンテーション</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">FAQ</p>
+                <h2 class="section-title">よくある質問</h2>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h3>Q: TANREN 3Dメソッドは誰でも習得できますか？</h3>
+                        <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>はい、新卒の方から経験豊富なビジネスパーソンまで、誰でも習得可能です。
+                        段階的な学習プログラムにより、自分のペースで着実にスキルアップできます。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <h3>Q: AIツールの使用経験がなくても大丈夫ですか？</h3>
+                        <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>もちろん大丈夫です。基本的な使い方から始めて、徐々に高度な活用方法を
+                        学んでいきます。重要なのは思考法であり、ツールは補助的な役割です。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h3>Q: 効果はどのくらいで実感できますか？</h3>
+                        <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>個人差はありますが、多くの方が2-4週間で業務効率の向上を実感されています。
+                        特に文書作成や情報整理の速度は、初週から大幅な改善が見られます。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <h3>Q: 社内研修として導入できますか？</h3>
+                        <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>はい、企業研修プログラムとしても提供しています。御社の業務内容に合わせて
+                        カスタマイズした研修内容をご提案させていただきます。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Download Section -->
+    <section id="resources" class="section section-dark">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Free Resources</p>
+                <h2 class="section-title">無料ダウンロード資料</h2>
+                <p class="section-description">
+                    TANREN 3Dメソッドを今すぐ実践するための各種資料をご用意しました
+                </p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card" data-aos="fade-up">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>3Dメソッド実践ガイド</h3>
+                    <p>全50ページの完全版マニュアル。具体的な実践例と演習問題付き。</p>
+                    <div class="resource-meta">
+                        <span><i class="fas fa-file-alt"></i> PDF形式</span>
+                        <span><i class="fas fa-download"></i> 3.2MB</span>
+                    </div>
+                    <a href="#" class="btn btn-primary">ダウンロード</a>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3>自己評価チェックシート</h3>
+                    <p>スキルレベルを客観的に把握するためのExcelテンプレート。</p>
+                    <div class="resource-meta">
+                        <span><i class="fas fa-table"></i> Excel形式</span>
+                        <span><i class="fas fa-download"></i> 1.5MB</span>
+                    </div>
+                    <a href="#" class="btn btn-primary">ダウンロード</a>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3>社内研修用スライド</h3>
+                    <p>編集可能なPowerPointテンプレート。社内展開にご活用ください。</p>
+                    <div class="resource-meta">
+                        <span><i class="fas fa-presentation"></i> PPT形式</span>
+                        <span><i class="fas fa-download"></i> 8.7MB</span>
+                    </div>
+                    <a href="#" class="btn btn-primary">ダウンロード</a>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>AIプロンプト集</h3>
+                    <p>実務で使える100個のプロンプトテンプレート集。</p>
+                    <div class="resource-meta">
+                        <span><i class="fas fa-code"></i> TXT形式</span>
+                        <span><i class="fas fa-download"></i> 0.5MB</span>
+                    </div>
+                    <a href="#" class="btn btn-primary">ダウンロード</a>
+                </div>
+            </div>
+            
+            <div class="download-notice" data-aos="fade-up">
+                <p><i class="fas fa-info-circle"></i> ダウンロードにはメールアドレスの登録が必要です。登録後、すべての資料にアクセスできます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Training Program Section -->
+    <section id="corporate-training" class="section section-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-subtitle">Corporate Training</p>
+                <h2 class="section-title">企業研修プログラム</h2>
+                <p class="section-description">
+                    御社のニーズに合わせてカスタマイズ可能な研修プログラムをご提供
+                </p>
+            </div>
+            
+            <div class="training-programs">
+                <div class="program-card featured" data-aos="fade-up">
+                    <div class="program-badge">POPULAR</div>
+                    <h3>新入社員向け集中プログラム</h3>
+                    <div class="program-duration">
+                        <i class="fas fa-calendar-alt"></i> 3ヶ月間（週2回）
+                    </div>
+                    <p class="program-description">
+                        新卒・第二新卒向けの基礎から応用まで体系的に学べるプログラム。
+                        実務で即活用できるスキルを段階的に習得。
+                    </p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> 基礎理論の徹底理解</li>
+                        <li><i class="fas fa-check"></i> 実践演習とフィードバック</li>
+                        <li><i class="fas fa-check"></i> AIツール活用トレーニング</li>
+                        <li><i class="fas fa-check"></i> 個別メンタリング付き</li>
+                        <li><i class="fas fa-check"></i> 成果測定レポート</li>
+                    </ul>
+                    <div class="program-price">
+                        <span class="price-label">参加費用</span>
+                        <span class="price-amount">¥50,000<small>/人</small></span>
+                    </div>
+                    <a href="#" class="btn btn-primary">詳細を見る</a>
+                </div>
+                
+                <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>管理職向けリーダーシップ研修</h3>
+                    <div class="program-duration">
+                        <i class="fas fa-calendar-alt"></i> 2日間集中
+                    </div>
+                    <p class="program-description">
+                        AI時代のチームマネジメントに必要な思考法とコミュニケーション手法を習得。
+                    </p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> チーム生産性向上戦略</li>
+                        <li><i class="fas fa-check"></i> AI活用の組織導入</li>
+                        <li><i class="fas fa-check"></i> 部下育成メソッド</li>
+                    </ul>
+                    <div class="program-price">
+                        <span class="price-amount">¥80,000<small>/人</small></span>
+                    </div>
+                    <a href="#" class="btn btn-secondary">詳細を見る</a>
+                </div>
+                
+                <div class="program-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>全社員向けAI活用研修</h3>
+                    <div class="program-duration">
+                        <i class="fas fa-calendar-alt"></i> 1日研修
+                    </div>
+                    <p class="program-description">
+                        全社的なDX推進のための基礎知識とAIツール活用法を学ぶ入門プログラム。
+                    </p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> AI基礎知識</li>
+                        <li><i class="fas fa-check"></i> 実務活用事例</li>
+                        <li><i class="fas fa-check"></i> ハンズオン演習</li>
+                    </ul>
+                    <div class="program-price">
+                        <span class="price-amount">¥30,000<small>/人</small></span>
+                    </div>
+                    <a href="#" class="btn btn-secondary">詳細を見る</a>
+                </div>
+            </div>
+            
+            <div class="custom-training" data-aos="fade-up">
+                <h3>カスタマイズ研修のご相談</h3>
+                <p>御社の課題や目標に合わせて、オーダーメイドの研修プログラムを設計いたします。</p>
+                <a href="#" class="btn btn-primary">無料相談を申し込む</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>今すぐ始めよう</h2>
+                <p>TANREN 3Dメソッドで、あなたのビジネススキルを3-5倍に引き上げる</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-white">無料相談を申し込む</a>
+                    <a href="#" class="btn btn-secondary">資料をダウンロード</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TANREN 3Dメソッド</h3>
+                    <p>AI時代の新たな思考フレームワークで、ビジネスパーソンの成長を加速させます。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>メソッド</h3>
+                    <ul>
+                        <li><a href="#x-axis">X軸：思考の解像度</a></li>
+                        <li><a href="#y-axis">Y軸：時間軸の視座</a></li>
+                        <li><a href="#z-axis">Z軸：レベル感の把握</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>リソース</h3>
+                    <ul>
+                        <li><a href="#">導入事例</a></li>
+                        <li><a href="#">ホワイトペーパー</a></li>
+                        <li><a href="#">ウェビナー</a></li>
+                        <li><a href="#">ブログ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p>Email: info@tanren.jp<br>
+                    Tel: 03-xxxx-xxxx<br>
+                    営業時間: 平日 9:00-18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TANREN Inc. All rights reserved. | Presented by 佐藤勝彦</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('loaded');
+            }, 1000);
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Interactive Demo
+        function showDemo(type) {
+            const buttons = document.querySelectorAll('.demo-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('demo-before').style.display = type === 'before' ? 'block' : 'none';
+            document.getElementById('demo-after').style.display = type === 'after' ? 'block' : 'none';
+        }
+        
+        // Three.js 3D Visualization
+        function init3D() {
+            const container = document.getElementById('three-canvas');
+            if (!container) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create 3D axes
+            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            const edges = new THREE.EdgesGeometry(geometry);
+            const material = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+            const cube = new THREE.LineSegments(edges, material);
+            scene.add(cube);
+            
+            // Add axes labels
+            const axesHelper = new THREE.AxesHelper(3);
+            scene.add(axesHelper);
+            
+            camera.position.z = 5;
+            camera.position.x = 2;
+            camera.position.y = 2;
+            camera.lookAt(0, 0, 0);
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                cube.rotation.x += 0.005;
+                cube.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+        
+        // Initialize 3D visualization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init3D);
+        } else {
+            init3D();
+        }
+        
+        // Particle Effect for Hero Section
+        function initParticles() {
+            const canvas = document.querySelector('.hero-particles');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 100;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                }
+                
+                draw() {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        initParticles();
+        
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate method cards on scroll
+        gsap.utils.toArray('.method-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: i * 0.2
+            });
+        });
+        
+        // Animate axis sections
+        gsap.utils.toArray('.axis-content').forEach(content => {
+            gsap.from(content.children, {
+                scrollTrigger: {
+                    trigger: content,
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                },
+                x: -50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2
+            });
+        });
+        
+        // Audio Player Functionality
+        const audioPlayer = {
+            isPlaying: false,
+            currentTime: 0,
+            duration: 6000, // 100 minutes in seconds
+            playbackRate: 1.0,
+            
+            init() {
+                this.playBtn = document.getElementById('playBtn');
+                this.currentTimeEl = document.getElementById('currentTime');
+                this.durationEl = document.getElementById('duration');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressFill = document.getElementById('progressFill');
+                this.speedBtn = document.getElementById('speedBtn');
+                this.transcriptBtn = document.getElementById('transcriptBtn');
+                this.transcriptContainer = document.getElementById('transcriptContainer');
+                
+                this.setupEventListeners();
+                this.updateDuration();
+            },
+            
+            setupEventListeners() {
+                if (this.playBtn) {
+                    this.playBtn.addEventListener('click', () => this.togglePlay());
+                }
+                
+                if (this.progressBar) {
+                    this.progressBar.addEventListener('click', (e) => this.seek(e));
+                }
+                
+                if (this.speedBtn) {
+                    this.speedBtn.addEventListener('click', () => this.changeSpeed());
+                }
+                
+                if (this.transcriptBtn) {
+                    this.transcriptBtn.addEventListener('click', () => this.toggleTranscript());
+                }
+                
+                // Transcript item clicks
+                document.querySelectorAll('.transcript-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const time = parseFloat(item.getAttribute('data-time'));
+                        this.currentTime = time;
+                        this.updateProgress();
+                        this.highlightTranscript();
+                    });
+                });
+            },
+            
+            togglePlay() {
+                this.isPlaying = !this.isPlaying;
+                const icon = this.playBtn.querySelector('i');
+                
+                if (this.isPlaying) {
+                    icon.classList.remove('fa-play');
+                    icon.classList.add('fa-pause');
+                    this.play();
+                } else {
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                    this.pause();
+                }
+            },
+            
+            play() {
+                this.interval = setInterval(() => {
+                    this.currentTime += 0.1 * this.playbackRate;
+                    if (this.currentTime >= this.duration) {
+                        this.currentTime = this.duration;
+                        this.togglePlay();
+                    }
+                    this.updateProgress();
+                    this.highlightTranscript();
+                }, 100);
+            },
+            
+            pause() {
+                clearInterval(this.interval);
+            },
+            
+            seek(e) {
+                const rect = this.progressBar.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                this.currentTime = percent * this.duration;
+                this.updateProgress();
+                this.highlightTranscript();
+            },
+            
+            changeSpeed() {
+                const speeds = [1.0, 1.25, 1.5, 2.0];
+                const currentIndex = speeds.indexOf(this.playbackRate);
+                const nextIndex = (currentIndex + 1) % speeds.length;
+                this.playbackRate = speeds[nextIndex];
+                this.speedBtn.textContent = `${this.playbackRate}x`;
+            },
+            
+            toggleTranscript() {
+                const isVisible = this.transcriptContainer.style.display !== 'none';
+                this.transcriptContainer.style.display = isVisible ? 'none' : 'block';
+            },
+            
+            updateProgress() {
+                const percent = (this.currentTime / this.duration) * 100;
+                this.progressFill.style.width = `${percent}%`;
+                this.currentTimeEl.textContent = this.formatTime(this.currentTime);
+            },
+            
+            updateDuration() {
+                this.durationEl.textContent = this.formatTime(this.duration);
+            },
+            
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            },
+            
+            highlightTranscript() {
+                const items = document.querySelectorAll('.transcript-item');
+                items.forEach(item => {
+                    const itemTime = parseFloat(item.getAttribute('data-time'));
+                    if (Math.abs(this.currentTime - itemTime) < 5) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        };
+        
+        // Initialize audio player
+        audioPlayer.init();
+        
+        // FAQ Functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

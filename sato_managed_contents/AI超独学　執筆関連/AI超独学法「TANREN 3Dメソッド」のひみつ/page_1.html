@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TANREN 3Dメソッド</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 917px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            
+        }
+        .axis {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            transform-origin: bottom left;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        .x-axis {
+            width: 400px;
+            height: 15px;
+            transform: rotate(0deg);
+            background: #007BFF;
+        }
+        .y-axis {
+            width: 15px;
+            height: 400px;
+            transform: rotate(0deg);
+            background: #FF4500;
+        }
+        .z-axis {
+            width: 350px;
+            height: 15px;
+            transform: rotate(-45deg);
+            background: #FFD700;
+        }
+        .axis-label {
+            position: absolute;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 20;
+        }
+        .title-glow {
+            text-shadow: 0 0 10px rgba(50, 205, 50, 0.7);
+        }
+        .subtitle-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col justify-between items-center py-10 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mt-10">
+<h1 class="text-5xl font-bold text-blue-600 mb-2 title-glow">AI超独学法</h1>
+<h2 class="text-7xl font-bold text-purple-700 mb-6">「TANREN 3Dメソッド」</h2>
+<p class="text-3xl text-red-500 font-semibold">〜中学生向けかんたん解説〜</p>
+</div>
+<!-- 3D Coordinate System Visualization -->
+<div class="relative w-full h-96 flex justify-center items-center z-10">
+<!-- Origin Point -->
+<div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-purple-600 rounded-full z-30 animate-pulse"></div>
+<!-- Axes -->
+<div class="axis x-axis absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="axis y-axis absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="axis z-axis absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+<!-- Axis Labels -->
+<div class="axis-label text-blue-600 absolute" style="left: 70%; top: 50%;">X軸：探偵の虫メガネ</div>
+<div class="axis-label text-red-500 absolute" style="left: 50%; top: 20%;">Y軸：タイムマシン</div>
+<div class="axis-label text-yellow-600 absolute" style="left: 25%; top: 35%;">Z軸：レベルアップの鍵</div>
+</div>
+<!-- Bottom Section -->
+<div class="subtitle-box text-center py-4 px-8 z-20 w-4/5">
+<p class="text-2xl text-gray-700">AIとの会話をもっと楽しく、もっと役立つものにする魔法のメソッド！</p>
+<div class="flex justify-center items-center mt-2">
+<i class="fas fa-robot text-blue-500 text-3xl mx-3"></i>
+<i class="fas fa-plus text-gray-400 text-xl"></i>
+<i class="fas fa-brain text-purple-500 text-3xl mx-3"></i>
+<i class="fas fa-equals text-gray-400 text-xl"></i>
+<i class="fas fa-magic text-yellow-500 text-3xl mx-3"></i>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>超具体化：「もっと詳しく教えて！」の術</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 2096px; height: 951px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 951px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .magnifying-glass {
+            font-size: 4rem;
+            animation: magnify 2s infinite ease-in-out;
+        }
+        @keyframes magnify {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .boost-arrow {
+            font-size: 2rem;
+            color: #FFD700;
+            animation: boost 1.5s infinite;
+        }
+        @keyframes boost {
+            0% { transform: translateX(-10px) scale(1); opacity: 0.7; }
+            50% { transform: translateX(0px) scale(1.2); opacity: 1; }
+            100% { transform: translateX(10px) scale(1); opacity: 0.7; }
+        }
+        .amplify-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            
+        }
+        .amplify-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .example-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #007BFF;
+        }
+        .tip-badge {
+            background: #FFD700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<div class="flex justify-center items-center mb-4">
+<i class="fas fa-search magnifying-glass text-blue-600 mr-4"></i>
+<h1 class="text-4xl font-bold text-blue-600">超具体化</h1>
+</div>
+<p class="text-2xl text-purple-700 font-semibold">「もっと詳しく教えて！」の術</p>
+</div>
+<!-- Main Concept -->
+<div class="grid grid-cols-3 gap-6 items-center mb-8 z-20">
+<!-- Input -->
+<div class="text-center">
+<div class="bg-white rounded-lg p-4 shadow-lg">
+<i class="fas fa-user-circle text-blue-500 text-3xl mb-2"></i>
+<h3 class="text-lg font-bold text-gray-700 mb-2">君の具体的な情報</h3>
+<div class="text-sm text-gray-600">
+<p>• 何を（SF小説）</p>
+<p>• いつまで（10分）</p>
+<p>• いくつ（3つ）</p>
+<p>• どんな感じ（宇宙冒険）</p>
+</div>
+</div>
+</div>
+<!-- Arrow -->
+<div class="text-center">
+<i class="fas fa-arrow-right boost-arrow"></i>
+<p class="text-yellow-600 font-bold mt-2">AIブースト！</p>
+</div>
+<!-- Output -->
+<div class="amplify-box text-center">
+<i class="fas fa-robot text-4xl mb-3"></i>
+<h3 class="text-xl font-bold mb-2">何倍ものアイデア</h3>
+<p class="text-sm">世界中のデータから<br/>ものすごいスピードで<br/>最適な情報を発見！</p>
+</div>
+</div>
+<!-- Examples Section -->
+<div class="grid grid-cols-2 gap-6 mb-6 z-20">
+<!-- Before Example -->
+<div class="example-card">
+<div class="flex items-center mb-3">
+<i class="fas fa-times-circle text-red-500 mr-2"></i>
+<h3 class="text-lg font-bold text-red-500">あいまいな例</h3>
+</div>
+<div class="bg-red-50 p-3 rounded-lg">
+<p class="text-gray-700">「面白い話して！」</p>
+</div>
+<p class="text-sm text-gray-600 mt-2">→ AIも困っちゃう…</p>
+</div>
+<!-- After Example -->
+<div class="example-card">
+<div class="flex items-center mb-3">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<h3 class="text-lg font-bold text-green-500">超具体的な例</h3>
+</div>
+<div class="bg-green-50 p-3 rounded-lg">
+<p class="text-gray-700">「中学生向けの10分で読める<br/>SF小説を3つ、あらすじ付きで！」</p>
+</div>
+<p class="text-sm text-gray-600 mt-2">→ AIが最高の答えを！</p>
+</div>
+</div>
+<!-- Key Tips -->
+<div class="bg-white rounded-xl shadow-lg p-5 z-20">
+<div class="flex items-center mb-3">
+<i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
+<h3 class="text-xl font-bold text-gray-700">超具体化のコツ</h3>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="text-center">
+<span class="tip-badge mb-2">5W1H</span>
+<p class="text-sm text-gray-600">何を、いつ、どこで<br/>誰が、なぜ、どうやって</p>
+</div>
+<div class="text-center">
+<span class="tip-badge mb-2">数字を使う</span>
+<p class="text-sm text-gray-600">「3つ」「10分」<br/>「小学5年生」など</p>
+</div>
+<div class="text-center">
+<span class="tip-badge mb-2">条件を追加</span>
+<p class="text-sm text-gray-600">「家にあるもので」<br/>「簡単に」など</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

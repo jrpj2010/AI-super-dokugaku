@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>実践例：SF小説を探す場合</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+        body {width: 1360px; height: 901px; font-family: 'Kosugi Maru', sans-serif;}
+        .slide {
+            width: 1280px;
+            min-height: 901px;
+            position: relative;
+            
+        }
+        .pattern-bg {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .highlight-x {
+            background-color: rgba(0, 123, 255, 0.2);
+            border-bottom: 2px solid #007BFF;
+        }
+        .highlight-y {
+            background-color: rgba(255, 69, 0, 0.2);
+            border-bottom: 2px solid #FF4500;
+        }
+        .highlight-z {
+            background-color: rgba(255, 215, 0, 0.2);
+            border-bottom: 2px solid #FFD700;
+        }
+        .axis-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 0.85rem;
+        }
+        .badge-x {
+            background-color: #007BFF;
+        }
+        .badge-y {
+            background-color: #FF4500;
+        }
+        .badge-z {
+            background-color: #FFD700;
+            color: #333;
+        }
+        .analysis-box {
+            border-left: 4px solid;
+            padding-left: 12px;
+            margin: 8px 0;
+        }
+        .analysis-box-x {
+            border-color: #007BFF;
+        }
+        .analysis-box-y {
+            border-color: #FF4500;
+        }
+        .analysis-box-z {
+            border-color: #FFD700;
+        }
+        .floating-icon {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="slide bg-gradient-to-br from-blue-50 to-purple-50 pattern-bg rounded-lg shadow-2xl">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-yellow-200 rounded-full opacity-20 -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+<!-- Floating Icons -->
+<i class="fas fa-rocket floating-icon text-7xl text-blue-500" style="top: 15%; right: 5%;"></i>
+<i class="fas fa-book floating-icon text-7xl text-purple-500" style="bottom: 10%; right: 20%;"></i>
+<i class="fas fa-star floating-icon text-7xl text-yellow-500" style="top: 40%; left: 5%;"></i>
+<!-- Main Content -->
+<div class="relative h-full w-full flex flex-col items-center py-8 px-12">
+<!-- Title Section -->
+<div class="text-center z-20 mb-6">
+<h1 class="text-4xl font-bold text-purple-700">実践例：SF小説を探す場合</h1>
+<p class="text-xl text-gray-600 mt-2">TANREN 3Dメソッドの3つの軸が組み合わさった例</p>
+</div>
+<!-- Query Example -->
+<div class="bg-white rounded-xl shadow-lg p-5 w-full z-20 mb-6">
+<div class="flex items-start">
+<i class="fas fa-user-circle text-blue-500 text-3xl mr-3 mt-1"></i>
+<div>
+<p class="text-lg font-semibold mb-2">AIへの質問例：</p>
+<p class="text-xl leading-relaxed">
+                            &#34;AI、教えて！<span class="highlight-y">中学生が</span><span class="highlight-z">聞いてワクワクするような</span>、<span class="highlight-x">10分くらいで読み終わる短いSF小説を3つ</span>、<span class="highlight-x">それぞれのあらすじと一緒に</span>教えてほしいな。できれば、<span class="highlight-x">主人公が宇宙を冒険する話</span>がいいな！&#34;
+                        </p>
+</div>
+</div>
+</div>
+<!-- 3D Analysis -->
+<div class="grid grid-cols-3 gap-5 w-full z-20">
+<!-- X-Axis Analysis -->
+<div class="bg-white rounded-lg shadow p-5">
+<div class="flex items-center mb-3">
+<span class="axis-badge badge-x">X軸</span>
+<h3 class="text-xl font-bold text-blue-600">探偵の虫メガネ</h3>
+</div>
+<div class="analysis-box analysis-box-x">
+<p class="font-semibold">超具体化：</p>
+<ul class="list-disc list-inside text-sm space-y-1 ml-2">
+<li>&#34;10分くらいで読み終わる短い&#34;</li>
+<li>&#34;SF小説を3つ&#34;</li>
+<li>&#34;主人公が宇宙を冒険する話&#34;</li>
+</ul>
+<p class="text-sm mt-2">→ 読書時間・ジャンル・内容を明確に！</p>
+</div>
+<div class="analysis-box analysis-box-x">
+<p class="font-semibold">超構造化：</p>
+<ul class="list-disc list-inside text-sm space-y-1 ml-2">
+<li>&#34;3つ&#34; と数を指定</li>
+<li>&#34;あらすじと一緒に&#34; と形式を指定</li>
+</ul>
+<p class="text-sm mt-2">→ 情報の数と形を整理！</p>
+</div>
+<div class="flex justify-center mt-3">
+<i class="fas fa-search text-4xl text-blue-400"></i>
+</div>
+</div>
+<!-- Y-Axis Analysis -->
+<div class="bg-white rounded-lg shadow p-5">
+<div class="flex items-center mb-3">
+<span class="axis-badge badge-y">Y軸</span>
+<h3 class="text-xl font-bold text-red-500">タイムマシン</h3>
+</div>
+<div class="analysis-box analysis-box-y">
+<p class="font-semibold">現在：</p>
+<ul class="list-disc list-inside text-sm space-y-1 ml-2">
+<li>&#34;中学生が&#34; と現在の自分の状況を明確に</li>
+</ul>
+<p class="text-sm mt-2">→ 今の自分に合った提案をAIから引き出せる！</p>
+</div>
+<div class="analysis-box analysis-box-y mt-4">
+<p class="font-semibold">未来：</p>
+<p class="text-sm mt-1 ml-2">読書を通じて、ワクワクしたい！という未来の目標が含まれている</p>
+</div>
+<div class="flex justify-center mt-10">
+<i class="fas fa-clock text-4xl text-red-400"></i>
+</div>
+</div>
+<!-- Z-Axis Analysis -->
+<div class="bg-white rounded-lg shadow p-5">
+<div class="flex items-center mb-3">
+<span class="axis-badge badge-z">Z軸</span>
+<h3 class="text-xl font-bold text-yellow-600">レベルアップの鍵</h3>
+</div>
+<div class="analysis-box analysis-box-z">
+<p class="font-semibold">レベル2：AIと協力プレイ！</p>
+<ul class="list-disc list-inside text-sm space-y-1 ml-2">
+<li>&#34;聞いてワクワクするような&#34; と感情的要素を含める</li>
+<li>特定のターゲット（中学生）向けの情報を求めている</li>
+<li>今の自分に合った新しい情報を求めている</li>
+</ul>
+<p class="text-sm mt-2">→ AIと二人三脚で、今の自分に最適な情報を探せる！</p>
+</div>
+<div class="flex justify-center mt-10">
+<i class="fas fa-gamepad text-4xl text-yellow-500"></i>
+</div>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="mt-5 bg-purple-100 rounded-xl shadow p-4 w-full z-20">
+<div class="flex items-center justify-center">
+<i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
+<p class="text-lg text-purple-800">
+                        3つの軸を組み合わせることで、AIがピッタリの小説を提案してくれるようになった！
+                    </p>
+</div>
+</div>
+<!-- Page Number -->
+<div class="absolute bottom-3 right-5 text-gray-500">
+<p>18 / 20</p>
+</div>
+</div>
+</div>
+
+</body></html>
