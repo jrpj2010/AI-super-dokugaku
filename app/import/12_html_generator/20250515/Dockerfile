@@ -13,19 +13,23 @@ RUN npm install
 COPY tailwind.config.js ./
 COPY templates ./templates
 COPY static/js ./static/js
-# 入力となるCSSファイル（あれば）
-# COPY static/css/input.css ./static/css/input.css
+# 入力となるCSSファイル
+COPY static/css/input.css ./static/css/input.css
 
 # 出力ディレクトリを作成
 RUN mkdir -p static/css
 
 # Tailwind CSS をビルド
-# package.jsonのscriptsに "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/tailwind.css --minify" のようなコマンドがある想定
-# もしinput.css がなければ、content の glob パターンに基づいて生成
-RUN npx tailwindcss -o ./static/css/tailwind.css --minify
+RUN npx tailwindcss -i ./static/css/input.css -o ./static/css/tailwind.css --minify
 
 # ステージ2: Python環境でFlaskアプリケーションを実行
 FROM python:3.9-slim
+
+# メタデータラベル
+LABEL maintainer="TANREN Inc."
+LABEL version="1.1.0"
+LABEL release_date="2025-05-27"
+LABEL description="HTML Generator App - v1.1.0 - 2025年5月27日版"
 
 WORKDIR /app
 
@@ -47,8 +51,14 @@ COPY static ./static
 # ポートを開放 (Cloud Runは通常8080を期待)
 EXPOSE 8080
 
-# 環境変数を設定 (Flaskがapp.pyを見つけるためにPYTHONPATHを設定する)
+# 環境変数を設定
 ENV PYTHONPATH /app
+ENV PORT 8080
+ENV FLASK_ENV production
+
+# ヘルスチェック
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD python -c "import requests; requests.get('http://localhost:8080/health').raise_for_status()"
 
 # アプリケーションを実行 (Gunicornを使用)
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "4", "--worker-class", "gthread", "app:app"]

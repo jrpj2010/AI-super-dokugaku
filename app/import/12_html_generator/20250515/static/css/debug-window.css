@@ -1,0 +1,65 @@
+/* デバッグウィンドウのスタイル */
+#debug-window {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 30px !important; /* 1行分の高さ */
+    background-color: #000000 !important;
+    border-top: 1px solid #333333 !important;
+    z-index: 9998 !important; /* モーダルより下 */
+}
+
+#debug-window > div {
+    pointer-events: auto; /* 内部コンテンツはスクロール可能 */
+}
+
+#debug-window.minimized {
+    overflow: hidden;
+}
+
+#debug-window #debug-content {
+    scrollbar-width: thin;
+    scrollbar-color: #333 #0a0a0a;
+}
+
+#debug-window #debug-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#debug-window #debug-content::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+#debug-window #debug-content::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+#debug-window #debug-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* メッセージのアニメーション */
+#debug-window #debug-content > div {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 640px) {
+    #debug-window {
+        font-size: 10px;
+        max-height: 30vh;
+    }
+}

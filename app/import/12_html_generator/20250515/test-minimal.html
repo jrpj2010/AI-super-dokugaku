@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>最小テスト</title>
+    <style>
+        #settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #settings-modal.show {
+            display: flex !important;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>設定ボタンテスト</h1>
+    
+    <button id="settings-btn" style="padding: 10px 20px; font-size: 16px;">
+        設定ボタン
+    </button>
+    
+    <!-- 設定モーダル -->
+    <div id="settings-modal" class="hidden">
+        <div class="modal-content">
+            <h2>設定画面</h2>
+            <p>モーダルが表示されました！</p>
+            <button id="close-settings">閉じる</button>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Script started');
+        
+        // 設定ボタン
+        const btn = document.getElementById('settings-btn');
+        console.log('Button found:', !!btn);
+        
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked!');
+                alert('ボタンがクリックされました！');
+                
+                const modal = document.getElementById('settings-modal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('show');
+                    console.log('Modal shown');
+                }
+            });
+        }
+        
+        // 閉じるボタン
+        const closeBtn = document.getElementById('close-settings');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const modal = document.getElementById('settings-modal');
+                if (modal) {
+                    modal.classList.remove('show');
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

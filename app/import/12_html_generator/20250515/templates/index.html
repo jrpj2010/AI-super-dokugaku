@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="flex flex-col lg:flex-row gap-6 fullscreen-container main-layout-container" x-data="{
-    systemPrompt: localStorage.getItem('systemPrompt') || 'HTML テキストを生成してください。HTML タグだけを返してください。',
+    systemPrompt: localStorage.getItem('systemPrompt') || 'あなたはHTMLコード生成の専門家です。ユーザーのリクエストに基づいて、完全で有効なHTMLコードを生成してください。必ず<!DOCTYPE html>から始まる完全なHTML文書を返してください。説明や追加のテキストは含めず、HTMLコードのみを返してください。',
     userPrompt: '',
     useThinking: false,
     useWebSearch: false,

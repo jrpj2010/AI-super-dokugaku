@@ -1,5 +1,7 @@
 {
-    "name": "my‑flask‑app",
+    "name": "html-generator-app",
+    "version": "1.1.0",
+    "description": "HTML Generator App - v1.1.0 - 2025年5月27日版",
     "private": true,
     "devDependencies": {
       "tailwindcss": "^3.4.4",

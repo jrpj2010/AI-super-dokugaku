@@ -1,6 +1,8 @@
 // グローバル変数としてエディターコンテンツを保持
 let editorContent = '';
 let isFullscreenMode = false;
+let wysiwygReady = false;
+let pendingWysiwygContent = null;
 
 // DOM読み込み完了時に初期化
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,6 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.data.type === 'editor-content-update') {
       editorContent = event.data.content;
       syncEditorContent();
+    } else if (event.data.type === 'wysiwyg-content-updated') {
+      console.log('WYSIWYG更新確認:', event.data);
+    } else if (event.data.type === 'wysiwyg-ready') {
+      console.log('WYSIWYG準備完了シグナル受信');
+      wysiwygReady = true;
+      // 保留中のコンテンツがあれば送信
+      if (pendingWysiwygContent) {
+        console.log('保留中のコンテンツを送信中...');
+        const wysiwygFrame = document.getElementById('wysiwyg-frame');
+        if (wysiwygFrame && wysiwygFrame.contentWindow) {
+          wysiwygFrame.contentWindow.postMessage({
+            type: 'set-content',
+            content: pendingWysiwygContent
+          }, '*');
+          pendingWysiwygContent = null;
+        }
+      }
     }
   });
 
@@ -73,25 +92,101 @@ function getEditorContent() {
 
 // エディターコンテンツを設定
 function setEditorContent(html) {
+  console.log('setEditorContent called, html length:', html ? html.length : 0);
   editorContent = html;
   
   // WYSIWYGエディターを更新
   const wysiwygFrame = document.getElementById('wysiwyg-frame');
-  if (wysiwygFrame && wysiwygFrame.contentWindow) {
-    wysiwygFrame.contentWindow.postMessage({
-      type: 'set-content',
-      content: html
-    }, '*');
+  console.log('WYSIWYG frame exists:', !!wysiwygFrame);
+  console.log('WYSIWYG frame src:', wysiwygFrame ? wysiwygFrame.src : 'N/A');
+  console.log('WYSIWYG frame display style:', wysiwygFrame ? window.getComputedStyle(wysiwygFrame.parentElement).display : 'N/A');
+  
+  if (wysiwygFrame) {
+    // WYSIWYGが準備完了しているか確認
+    if (!wysiwygReady) {
+      console.log('WYSIWYG not ready yet, queuing content...');
+      pendingWysiwygContent = html;
+      return;
+    }
+    
+    // フレームが完全に読み込まれているか確認
+    const checkAndSendContent = () => {
+      try {
+        // contentWindowの存在を確認
+        if (!wysiwygFrame.contentWindow) {
+          console.log('WYSIWYG frame contentWindow not ready, retrying...');
+          setTimeout(checkAndSendContent, 100);
+          return;
+        }
+        
+        // contentDocumentも確認（アクセス可能性チェック）
+        const frameDoc = wysiwygFrame.contentDocument || wysiwygFrame.contentWindow.document;
+        if (!frameDoc || frameDoc.readyState !== 'complete') {
+          console.log('WYSIWYG frame document not ready, state:', frameDoc ? frameDoc.readyState : 'null');
+          setTimeout(checkAndSendContent, 100);
+          return;
+        }
+        
+        // editor-content要素の存在を確認
+        const editorElement = frameDoc.getElementById('editor-content');
+        if (!editorElement) {
+          console.log('WYSIWYG editor-content element not found, retrying...');
+          setTimeout(checkAndSendContent, 100);
+          return;
+        }
+        
+        console.log('WYSIWYG frame ready, sending content...');
+        // WYSIWYGフレームのwindowに直接送信
+        wysiwygFrame.contentWindow.postMessage({
+          type: 'set-content',
+          content: html
+        }, '*');
+        console.log('Message posted to WYSIWYG frame contentWindow');
+        
+        // 念のため、src属性も確認
+        if (wysiwygFrame.src && wysiwygFrame.src.includes('wysiwyg')) {
+          console.log('WYSIWYG frame has correct src');
+        }
+        
+        // フォールバック: 直接DOMを操作（同一オリジンの場合のみ可能）
+        try {
+          const frameDoc = wysiwygFrame.contentDocument || wysiwygFrame.contentWindow.document;
+          const editorElement = frameDoc.getElementById('editor-content');
+          if (editorElement && editorElement.innerHTML !== html) {
+            console.log('Fallback: Setting content directly in iframe DOM');
+            editorElement.innerHTML = html;
+          }
+        } catch (e) {
+          console.log('Direct DOM access not possible (expected for cross-origin), relying on postMessage');
+        }
+      } catch (e) {
+        console.error('Error checking WYSIWYG frame:', e);
+        // クロスオリジンエラーの場合でも、メッセージは送信してみる
+        if (wysiwygFrame.contentWindow) {
+          wysiwygFrame.contentWindow.postMessage({
+            type: 'set-content',
+            content: html
+          }, '*');
+          console.log('Message posted despite error (might be cross-origin)');
+        }
+      }
+    };
+    
+    // すぐに試して、必要なら再試行
+    checkAndSendContent();
   }
   
   // コードエディターを更新
   const codeEditor = document.getElementById('code-editor');
+  console.log('Code editor exists:', !!codeEditor);
   if (codeEditor) {
     codeEditor.value = html;
+    console.log('Code editor updated');
   }
   
   // プレビューを更新
   updatePreview(html);
+  console.log('Preview updated');
 }
 
 // プレビューiframeを更新
@@ -169,6 +264,18 @@ function setupTabSwitching() {
         else if (previewTab && !previewTab.closest('[style*="display: none"]')) {
           updatePreview(editorContent);
         }
+        // WYSIWYGタブがアクティブになったら
+        else if (wysiwygTab && !wysiwygTab.closest('[style*="display: none"]')) {
+          console.log('WYSIWYG tab activated, updating content...');
+          // WYSIWYGタブがアクティブになったときにコンテンツを送信
+          if (wysiwygTab.contentWindow) {
+            wysiwygTab.contentWindow.postMessage({
+              type: 'set-content',
+              content: editorContent
+            }, '*');
+            console.log('Content sent to WYSIWYG on tab activation');
+          }
+        }
       }, 50);
     }
   });
@@ -205,6 +312,21 @@ async function generateHTML() {
     setLoadingState(true);
     clearError();
     
+    // デバッグログ（API通信のみ）
+    if (window.logApiEvent) {
+      window.logApiEvent('[API通信] HTML生成リクエストを準備中...');
+      
+      // プロンプトの文字数も表示
+      const systemLen = body.system_prompt.length;
+      const userLen = body.user_prompt.length;
+      window.logApiEvent(`[API通信] プロンプト準備完了 (システム: ${systemLen}文字, ユーザー: ${userLen}文字)`);
+      
+      if (body.use_thinking) {
+        window.logApiEvent('[API通信] シンキングモード: 有効');
+      }
+      window.logApiEvent('[API通信] HTML生成リクエストを送信中...');
+    }
+    
     // 生成開始メッセージ
     showInfoToast('HTMLの生成を開始しました...');
     
@@ -215,6 +337,10 @@ async function generateHTML() {
       body: JSON.stringify(body)
     });
     
+    if (window.logApiEvent) {
+      window.logApiEvent('[API通信] サーバーからレスポンスを受信中...');
+    }
+    
     // エラーチェック
     if (!response.ok) {
       const errorData = await response.json();
@@ -222,8 +348,36 @@ async function generateHTML() {
     }
     
     // レスポンス処理
+    if (window.logApiEvent) {
+      window.logApiEvent('[API通信] HTMLコードを解析中...');
+    }
     const data = await response.json();
+    
+    // デバッグ：レスポンスデータの確認
+    console.log('API Response:', data);
+    if (data.html) {
+      console.log('HTML length:', data.html.length);
+      console.log('HTML preview:', data.html.substring(0, 200));
+      if (window.logApiEvent) {
+        window.logApiEvent(`[API通信] HTML生成成功 (${data.html.length}文字)`);
+      }
+    } else {
+      console.error('No HTML in response:', data);
+      if (window.logApiEvent) {
+        window.logApiEvent('[警告] レスポンスにHTMLが含まれていません');
+      }
+    }
+    
+    if (window.logApiEvent) {
+      window.logApiEvent('[API通信] エディタに結果を反映中...');
+    }
     processResponse(data);
+    
+    // デバッグログ - 成功（API通信のみ）
+    if (window.logApiEvent) {
+      window.logApiEvent('[API通信] レスポンスを受信しました');
+      window.logApiEvent('[API通信] HTML生成が完了しました');
+    }
     
     // 成功メッセージ
     showSuccessToast('HTMLが生成されました！');
@@ -231,8 +385,18 @@ async function generateHTML() {
   } catch (error) {
     console.error('HTMLの生成エラー:', error);
     showErrorToast(`エラー: ${error.message}`);
+    
+    // デバッグログ - エラー
+    if (window.logApiEvent) {
+      window.logApiEvent(`[エラー] HTML生成失敗: ${error.message}`);
+    }
   } finally {
     setLoadingState(false);
+    
+    // デバッグログ - 完了（API通信のみ）
+    if (window.debugLogger && window.debugLogger.logApiEvent) {
+      window.debugLogger.logApiEvent('[API通信] 処理が完了しました');
+    }
   }
 }
 
@@ -248,11 +412,23 @@ function getRequestBody() {
     return null;
   }
   
+  // APIキーを取得（localStorageから直接取得）
+  const apiKey = localStorage.getItem('anthropic_api_key');
+  
+  if (!apiKey) {
+    showError('APIキーが設定されていません。設定画面でAPIキーを入力してください。');
+    if (window.logApiEvent) {
+      window.logApiEvent('[エラー] APIキー未設定 - 設定画面で設定してください');
+    }
+    return null;
+  }
+  
   return {
     system_prompt: systemPromptElem.value,
     user_prompt: userPromptElem.value,
     use_thinking: useThinkingElem ? useThinkingElem.checked : false,
-    use_web_search: useWebSearchElem ? useWebSearchElem.checked : false
+    use_web_search: useWebSearchElem ? useWebSearchElem.checked : false,
+    api_key: apiKey
   };
 }
 
@@ -288,9 +464,35 @@ function clearError() {
 
 // レスポンスの処理
 function processResponse(data) {
+  console.log('processResponse called with:', data);
+  
   // HTMLコンテンツの設定
   if (data.html) {
+    console.log('Calling setEditorContent with HTML length:', data.html.length);
     setEditorContent(data.html);
+    
+    // WYSIWYGタブをアクティブにする（Thinking出力がない場合）
+    if (!data.thinking) {
+      const alpine = getAlpineData();
+      if (alpine) {
+        alpine.activeTab = 'wysiwyg';
+        console.log('Switched to WYSIWYG tab');
+        
+        // タブ切り替え後に再度コンテンツを送信
+        setTimeout(() => {
+          const wysiwygFrame = document.getElementById('wysiwyg-frame');
+          if (wysiwygFrame && wysiwygFrame.contentWindow) {
+            wysiwygFrame.contentWindow.postMessage({
+              type: 'set-content',
+              content: data.html
+            }, '*');
+            console.log('Content re-sent to WYSIWYG after tab switch');
+          }
+        }, 100);
+      }
+    }
+  } else {
+    console.error('No HTML in processResponse data');
   }
   
   // Thinking出力の処理

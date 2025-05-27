@@ -209,10 +209,10 @@
             <link rel="stylesheet" href="/static/css/tailwind.css">
 
             <!-- Chart.js ライブラリ（グラフ描画用） -->
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
 
   <!-- Mermaid ライブラリ（図表描画用） -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"><\/script>
 
   <style>
     html,
@@ -311,7 +311,7 @@
 
   <!-- 数式表示用ライブラリ（KaTeX） -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"><\/script>
   </head>
 
   <body>
@@ -360,26 +360,42 @@
               // 親ウィンドウからのメッセージを受信
               window.addEventListener('message', function(event) {
                 if (event.data && event.data.type === 'set-content') {
-                  console.log('受信したコンテンツ:', event.data.content);
-                  document.getElementById('editor-content').innerHTML = event.data.content;
+                  console.log('[iframe内] メッセージ受信 set-content, 文字数:', event.data.content ? event.data.content.length : 0);
+                  const editorContent = document.getElementById('editor-content');
+                  if (editorContent) {
+                    editorContent.innerHTML = event.data.content;
+                    console.log('[iframe内] HTMLセット完了');
+                    // 親ウィンドウに更新を通知
+                    window.parent.postMessage({
+                      type: 'wysiwyg-content-updated',
+                      status: 'success',
+                      contentLength: event.data.content.length
+                    }, '*');
+                  } else {
+                    console.error('[iframe内] editor-content要素が見つかりません');
+                  }
                 }
               });
-    </script>
+    <\/script>
   </body>
 
 </html>
 `);
 frameDoc.close();
 
-// 編集可能領域への参照
-const frameEditor = frameDoc.getElementById('editor-content');
-if (!frameEditor) {
-console.error('エディタ要素が見つかりません');
-return;
-}
+// iframeの読み込みを待つ
+setTimeout(() => {
+    // 編集可能領域への参照
+    const frameEditor = frameDoc.getElementById('editor-content');
+    if (!frameEditor) {
+        console.error('エディタ要素が見つかりません');
+        // デバッグ情報を出力
+        console.log('iframe body innerHTML:', frameDoc.body ? frameDoc.body.innerHTML : 'body not found');
+        return;
+    }
 
-// iframe内のWindowオブジェクトへの参照を保存
-const frameWindow = editorFrame.contentWindow;
+    // iframe内のWindowオブジェクトへの参照を保存
+    const frameWindow = editorFrame.contentWindow;
 
 // 親ウィンドウからのメッセージをiframe内でも処理できるようにする
 frameWindow.addEventListener('message', function(event) {
@@ -387,7 +403,10 @@ if (event.data && event.data.type === 'set-content') {
 console.log('iframe内でコンテンツを設定:', event.data.content);
 const editorContent = frameDoc.getElementById('editor-content');
 if (editorContent) {
+// HTMLをそのまま設定
 editorContent.innerHTML = event.data.content;
+// 編集可能に設定
+editorContent.contentEditable = 'true';
 // 内容更新後にカスタム要素を再レンダリング
 try {
 if (frameWindow.mermaid) {
@@ -401,6 +420,8 @@ console.error('コンテンツ更新後の再レンダリングエラー:', e);
 }
 }
 });
+}, 100); // setTimeoutの閉じ括弧
+}
 
 // 編集イベントのリスナーを設定
 frameEditor.addEventListener('input', () => {
@@ -490,27 +511,30 @@ content: content
 
 // テーブルHTMLを作成
 function createTable(rows, cols) {
-let tableHtml = '<table class="table-auto w-full">
-  <thead>
-    <tr>';
-
-      // ヘッダー行
-      for (let i = 0; i < cols; i++) { tableHtml +=`<th>見出し ${i+1}</th>`;
-        }
-        tableHtml += '</tr>
-  </thead>
-  <tbody>';
-
+    let tableHtml = `<table class="table-auto w-full">
+        <thead>
+            <tr>`;
+    
+    // ヘッダー行
+    for (let i = 0; i < cols; i++) {
+        tableHtml += `<th>見出し ${i+1}</th>`;
+    }
+    tableHtml += `</tr>
+        </thead>
+        <tbody>`;
+    
     // データ行
-    for (let i = 0; i < rows-1; i++) { tableHtml +='<tr>' ; for (let j=0; j < cols; j++) { tableHtml +=`<td>セル
-      ${i+1}-${j+1}</td>`;
-      }
-      tableHtml += '</tr>';
-      }
-
-      tableHtml += '</tbody>
-</table>';
-return tableHtml;
+    for (let i = 0; i < rows-1; i++) {
+        tableHtml += '<tr>';
+        for (let j = 0; j < cols; j++) {
+            tableHtml += `<td>セル ${i+1}-${j+1}</td>`;
+        }
+        tableHtml += '</tr>';
+    }
+    
+    tableHtml += `</tbody>
+    </table>`;
+    return tableHtml;
 }
 
 // ダイアログを表示
@@ -667,15 +691,24 @@ window.addEventListener('resize', adjustEditorSize);
 
 // 親ウィンドウからのメッセージを監視
 window.addEventListener('message', function(event) {
+console.log('wysiwyg.html received message:', event.data);
 if (event.data.type === 'set-content') {
+console.log('Setting content in WYSIWYG, length:', event.data.content ? event.data.content.length : 0);
 const editorFrame = document.getElementById('editor-frame');
+if (!editorFrame) {
+console.error('editor-frame not found');
+return;
+}
 const frameDoc = editorFrame.contentDocument || editorFrame.contentWindow.document;
 const frameEditor = frameDoc.getElementById('editor-content');
 
 if (frameEditor) {
+console.log('Setting innerHTML in editor-content');
 frameEditor.innerHTML = event.data.content;
 // 内容が更新されたことを親ウィンドウに通知
 sendContentToParent(event.data.content);
+} else {
+console.error('editor-content not found in frame');
 }
 } else if (event.data.type === 'layout-change') {
 // レイアウト変更メッセージを受け取ったら全画面モードを設定
@@ -687,12 +720,24 @@ setFullscreenMode(event.data.isFullscreen);
 window.addEventListener('load', function() {
 initializeEditorFrame();
 adjustEditorSize();
+// 親ウィンドウに準備完了を通知
+window.parent.postMessage({
+  type: 'wysiwyg-ready',
+  status: 'initialized'
+}, '*');
+console.log('WYSIWYG editor initialized and ready signal sent');
 });
 
 // すでにページが読み込まれている場合は初期化
 if (document.readyState === 'complete') {
 initializeEditorFrame();
 adjustEditorSize();
+// 親ウィンドウに準備完了を通知
+window.parent.postMessage({
+  type: 'wysiwyg-ready',
+  status: 'initialized'
+}, '*');
+console.log('WYSIWYG editor initialized and ready signal sent');
 }
 </script>
 </body>

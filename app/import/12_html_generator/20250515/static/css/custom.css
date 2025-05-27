@@ -46,6 +46,17 @@ html.dark iframe {
   border: 1px solid rgba(31, 41, 55, 0.18);
 }
 
+/* 設定モーダルの表示を確実にする */
+#settings-modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#settings-modal:not(.hidden) {
+  display: flex !important;
+}
+
 /* ヘッダー改良 */
 header {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -309,4 +320,19 @@ body.page-transition {
 
 .apple-switch input:checked+.apple-switch-slider:before {
   transform: translateX(24px);
+}
+
+/* モーダルの表示を確実にする */
+#settings-modal {
+    display: none;
+}
+
+#settings-modal:not(.hidden) {
+    display: flex !important;
+}
+
+/* デバッグウィンドウの高さ制限 */
+#debug-window {
+    max-height: 192px; /* 48 * 4 = 192px */
+    overflow-y: auto;
 }
