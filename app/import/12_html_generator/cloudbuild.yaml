@@ -1,0 +1,32 @@
+steps:
+  # Docker イメージをビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/html-generator-app:$COMMIT_SHA', './20250515']
+    
+  # ビルドしたイメージを Container Registry にプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/html-generator-app:$COMMIT_SHA']
+    
+  # Cloud Run にデプロイ
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'html-generator-app'
+      - '--image=gcr.io/$PROJECT_ID/html-generator-app:$COMMIT_SHA'
+      - '--region=asia-northeast1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--memory=512Mi'
+      - '--cpu=1'
+      - '--timeout=300'
+      - '--concurrency=80'
+      - '--max-instances=100'
+
+# 最新タグも作成
+images:
+  - 'gcr.io/$PROJECT_ID/html-generator-app:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/html-generator-app:latest'
+
+timeout: '1200s'
