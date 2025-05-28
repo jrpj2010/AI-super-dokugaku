@@ -39,9 +39,10 @@ export default function TranscriptArea({
     <div 
       ref={scrollContainerRef}
       data-testid="transcript-scroll-container"
-      className="min-h-[100px] max-h-[200px] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth"
+      className="min-h-[80px] max-h-[10vh] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth"
+      style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
     >
-      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
         {transcript}
         {interimTranscript && (
           <span className="text-gray-400 italic">{interimTranscript}</span>

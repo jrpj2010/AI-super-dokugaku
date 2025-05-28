@@ -15,6 +15,16 @@ describe('Gauge Tooltips', () => {
     expect(gaugeContainer).toBeInTheDocument();
   });
 
+  it('should display metric descriptions below gauges', () => {
+    render(<FaceMetricsGauge data={mockData} />);
+    
+    // Check for Face metric description
+    expect(screen.getByText('顔全体の動きの大きさ (0-100)')).toBeInTheDocument();
+    
+    // Check for Sight metric description
+    expect(screen.getByText('カメラへの平均注視率 (%)')).toBeInTheDocument();
+  });
+
   it('should show tooltip on hover over face movement gauge', async () => {
     render(<FaceMetricsGauge data={mockData} />);
     
@@ -29,6 +39,7 @@ describe('Gauge Tooltips', () => {
       const tooltip = screen.getByRole('tooltip');
       expect(tooltip).toBeInTheDocument();
       expect(tooltip).toHaveTextContent('顔の動き: 75%');
+      expect(tooltip).toHaveTextContent('顔全体の動きの大きさ (0-100)');
     });
   });
 
@@ -46,6 +57,7 @@ describe('Gauge Tooltips', () => {
       const tooltip = screen.getByRole('tooltip');
       expect(tooltip).toBeInTheDocument();
       expect(tooltip).toHaveTextContent('視線の動き: 60%');
+      expect(tooltip).toHaveTextContent('カメラへの平均注視率 (%)');
     });
   });
 

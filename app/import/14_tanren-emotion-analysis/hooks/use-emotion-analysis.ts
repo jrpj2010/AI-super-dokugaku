@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { CapturedFrame } from './use-video-frame-capture'
 import { getOptimizedConfig } from '@/lib/performance-config'
 import { emotionCache, EmotionCache } from '@/lib/cache/emotion-cache'
+import { translateEmotionAnalysis } from '@/lib/translation'
 
 const config = getOptimizedConfig()
 
@@ -86,13 +87,19 @@ export function useEmotionAnalysis({
 
       const result = await response.json()
       
+      // 英語のレスポンスを日本語に翻訳
+      const translated = translateEmotionAnalysis(
+        result.facialExpression || '',
+        result.insights || ''
+      )
+      
       const analysisResult: EmotionAnalysisResult = {
         emotions: {
           ...result.emotions,
           timestamp: frame.timestamp
         },
-        insights: result.insights || '',
-        facialExpression: result.facialExpression || ''
+        insights: translated.insights,
+        facialExpression: translated.facialExpression
       }
       
       // 結果をキャッシュに保存

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>1/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.85% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>1/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,40 +122,42 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2914x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2895x</span>
-<span class="cline-any cline-yes">2895x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2895x</span>
-<span class="cline-any cline-yes">55x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2895x</span>
-<span class="cline-any cline-yes">55x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,29 +194,29 @@ interface TranscriptAreaProps {
   error?: string | null
 }
 &nbsp;
-export default function TranscriptArea({
+export default function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >TranscriptArea({</span></span>
   transcript,
   interimTranscript = <span class="branch-0 cbranch-no" title="branch not covered" >"",</span>
   isListening,
-  error = null
+  error = <span class="branch-0 cbranch-no" title="branch not covered" >null</span>
 }: TranscriptAreaProps) {
-  const scrollContainerRef = useRef&lt;HTMLDivElement&gt;(null)
-  const previousTranscriptLength = useRef(transcript.length)
+  const scrollContainerRef = <span class="cstat-no" title="statement not covered" >useRef&lt;HTMLDivElement&gt;(null)</span>
+  const previousTranscriptLength = <span class="cstat-no" title="statement not covered" >useRef(transcript.length)</span>
 &nbsp;
   // 新しいテキストが追加されたときに自動スクロール
-  useEffect(() =&gt; {
-    if (scrollContainerRef.current &amp;&amp; transcript.length &gt; previousTranscriptLength.current) {
-      const element = scrollContainerRef.current
-      element.scrollTop = element.scrollHeight - element.clientHeight
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (scrollContainerRef.current &amp;&amp; transcript.length &gt; previousTranscriptLength.current) {</span>
+      const element = <span class="cstat-no" title="statement not covered" >scrollContainerRef.current</span>
+<span class="cstat-no" title="statement not covered" >      element.scrollTop = element.scrollHeight - element.clientHeight</span>
     }
-    previousTranscriptLength.current = transcript.length
+<span class="cstat-no" title="statement not covered" >    previousTranscriptLength.current = transcript.length</span>
   }, [transcript])
 &nbsp;
   // 中間結果が更新されたときも自動スクロール
-  useEffect(() =&gt; {
-    if (scrollContainerRef.current &amp;&amp; interimTranscript) {
-      const element = scrollContainerRef.current
-      element.scrollTop = element.scrollHeight - element.clientHeight
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (scrollContainerRef.current &amp;&amp; interimTranscript) {</span>
+      const element = <span class="cstat-no" title="statement not covered" >scrollContainerRef.current</span>
+<span class="cstat-no" title="statement not covered" >      element.scrollTop = element.scrollHeight - element.clientHeight</span>
     }
   }, [interimTranscript])
 &nbsp;
@@ -222,11 +224,12 @@ export default function TranscriptArea({
     &lt;div 
       ref={scrollContainerRef}
       data-testid="transcript-scroll-container"
-      className="min-h-[100px] max-h-[200px] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth"
+      className="min-h-[80px] max-h-[10vh] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth"
+      style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
     &gt;
-      &lt;p className="text-gray-700 leading-relaxed whitespace-pre-wrap"&gt;
+      &lt;p className="text-gray-700 leading-relaxed whitespace-pre-wrap break-words"&gt;
         {transcript}
-        {interimTranscript &amp;&amp; (
+        {<span class="branch-0 cbranch-no" title="branch not covered" >interimTranscript &amp;&amp; (</span>
           &lt;span className="text-gray-400 italic"&gt;{interimTranscript}&lt;/span&gt;
         )}
         {!transcript &amp;&amp; !interimTranscript &amp;&amp; (
@@ -235,7 +238,7 @@ export default function TranscriptArea({
           &lt;/span&gt;
         )}
       &lt;/p&gt;
-      {error &amp;&amp; (
+      {<span class="branch-0 cbranch-no" title="branch not covered" >error &amp;&amp; (</span>
         &lt;p className="text-red-500 text-sm mt-2"&gt;{error}&lt;/p&gt;
       )}
     &lt;/div&gt;
@@ -247,7 +250,7 @@ export default function TranscriptArea({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-28T14:05:07.479Z
+                at 2025-05-28T18:18:06.418Z
             </div>
         <script src="../prettify.js"></script>
         <script>

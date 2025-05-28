@@ -19,8 +19,11 @@ import { useSpeechRecognition } from "@/hooks/use-speech-recognition"
 import { useVideoFrameCapture } from "@/hooks/use-video-frame-capture"
 import { useEmotionAnalysis } from "@/hooks/use-emotion-analysis"
 import { useSessionRecording } from "@/hooks/use-session-recording"
+import { useFaceDetection } from "@/hooks/use-face-detection"
 import { useSessionContext } from "@/contexts/session-context"
 import { useRouter } from "next/navigation"
+import { getMediaErrorMessage, getRecordingErrorMessage } from "@/lib/error-messages"
+import { translateEmotionText } from "@/lib/translation"
 
 export default function RealtimeDashboard() {
   const router = useRouter()
@@ -31,7 +34,6 @@ export default function RealtimeDashboard() {
   const [currentEmotion, setCurrentEmotion] = useState<EmotionData | null>(null)
   const [currentFaceMetrics, setCurrentFaceMetrics] = useState<FaceMetrics | null>(null)
   const [sentimentHistory, setSentimentHistory] = useState<any[]>([])
-  const [faceLandmarks, setFaceLandmarks] = useState<any[] | null>(null)
   const [sessionEnded, setSessionEnded] = useState(false)
   const [showPlaybackModal, setShowPlaybackModal] = useState(false)
   const [isProcessingAnalysis, setIsProcessingAnalysis] = useState(false)
@@ -52,6 +54,17 @@ export default function RealtimeDashboard() {
   // ビデオフレームキャプチャ（最適化された設定を使用）
   const { latestFrame, isCapturing } = useVideoFrameCapture({
     stream
+  })
+  
+  // 顔検出
+  const { 
+    landmarks, 
+    isLoading: faceDetectionLoading, 
+    error: faceDetectionError,
+    isDetecting
+  } = useFaceDetection({
+    stream,
+    enabled: isRecording
   })
   
   // 感情分析（最適化された設定を使用）
@@ -103,8 +116,35 @@ export default function RealtimeDashboard() {
         facialExpression,
         insight: insights
       })
+      
+      // 感情データが更新されたときにセンチメントも更新
+      const positive = Math.round((latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest) / 3)
+      const negative = Math.round((latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear) / 3)
+      const neutral = Math.round(100 - positive - negative)
+      
+      setSentimentHistory((prev) => {
+        const currentTime = recordingTime || 0
+        const newDataPoint = {
+          time: `${Math.floor(currentTime / 60)}:${(currentTime % 60).toString().padStart(2, "0")}`,
+          ポジティブ: positive,
+          ネガティブ: negative,
+          ニュートラル: Math.max(0, neutral),
+        }
+        
+        console.log('[RealtimeDashboard] 感情データ更新時のセンチメント:', newDataPoint)
+        
+        // 同じ時刻のデータがある場合は置き換え、なければ追加
+        const existingIndex = prev.findIndex(item => item.time === newDataPoint.time)
+        if (existingIndex >= 0) {
+          const newHistory = [...prev]
+          newHistory[existingIndex] = newDataPoint
+          return newHistory
+        } else {
+          return [...prev, newDataPoint].slice(-10)
+        }
+      })
     }
-  }, [latestEmotions, isRecording, facialExpression, insights, addEmotionData])
+  }, [latestEmotions, isRecording, facialExpression, insights, addEmotionData, recordingTime])
   
   // 文字起こしをセッションに記録
   useEffect(() => {
@@ -135,18 +175,23 @@ export default function RealtimeDashboard() {
           setCurrentEmotion(emotionData)
           
           // センチメント計算
-          const positive = (latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest) / 3
-          const negative = (latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear) / 3
-          const neutral = 100 - positive - negative
+          const positive = Math.round((latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest) / 3)
+          const negative = Math.round((latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear) / 3)
+          const neutral = Math.round(100 - positive - negative)
           
           setSentimentHistory((prev) => {
-            const newHistory = [...prev, {
+            const newDataPoint = {
               time: `${Math.floor(recordingTime / 60)}:${(recordingTime % 60).toString().padStart(2, "0")}`,
               ポジティブ: positive,
               ネガティブ: negative,
               ニュートラル: Math.max(0, neutral),
-            }]
-            return newHistory.slice(-5)
+            }
+            
+            console.log('[RealtimeDashboard] 新しいセンチメントデータ:', newDataPoint)
+            
+            const newHistory = [...prev, newDataPoint]
+            // 最新の10データポイントを保持
+            return newHistory.slice(-10)
           })
         } else {
           // フォールバック：モックデータを使用
@@ -155,13 +200,17 @@ export default function RealtimeDashboard() {
           setCurrentEmotion(emotion)
           
           setSentimentHistory((prev) => {
-            const newHistory = [...prev, {
+            const newDataPoint = {
               time: `${Math.floor(recordingTime / 60)}:${(recordingTime % 60).toString().padStart(2, "0")}`,
-              ポジティブ: sentiment.positive,
-              ネガティブ: sentiment.negative,
-              ニュートラル: sentiment.neutral,
-            }]
-            return newHistory.slice(-5)
+              ポジティブ: Math.round(sentiment.positive),
+              ネガティブ: Math.round(sentiment.negative),
+              ニュートラル: Math.round(sentiment.neutral),
+            }
+            
+            console.log('[RealtimeDashboard] 新しいモックセンチメントデータ:', newDataPoint)
+            
+            const newHistory = [...prev, newDataPoint]
+            return newHistory.slice(-10)
           })
         }
         
@@ -178,6 +227,7 @@ export default function RealtimeDashboard() {
     setSessionEnded(false)
     resetEmotions()
     resetSession()
+    setIsRecording(false) // 確実にfalseに設定
     
     try {
       // ストリームを開始して返されたストリームを使用
@@ -186,66 +236,104 @@ export default function RealtimeDashboard() {
       if (mediaStream) {
         console.log("ストリームが確立されました", mediaStream)
         
-        // セッション記録を開始
-        startSessionRecording(mediaStream)
-        
-        // 音声認識を開始
-        startListening()
-        
-        // 録画状態を設定
-        setIsRecording(true)
-        setRecordingTime(0)
-        setSentimentHistory([])
-        
-        console.log("録画を開始しました")
+        try {
+          // セッション記録を開始
+          startSessionRecording(mediaStream)
+          
+          // 音声認識を開始
+          startListening()
+          
+          // 録画状態を設定（すべての初期化が成功した後）
+          setIsRecording(true)
+          setRecordingTime(0)
+          setSentimentHistory([])
+          
+          console.log("録画を開始しました")
+        } catch (recordingError) {
+          console.error("録画の初期化エラー:", recordingError)
+          // ストリームを停止
+          stopStream()
+          
+          // エラーメッセージを表示
+          if (recordingError instanceof Error) {
+            alert(getRecordingErrorMessage(recordingError))
+          } else {
+            alert('録画の開始に失敗しました。ブラウザの設定を確認してください。')
+          }
+          
+          // 状態をリセット
+          setIsRecording(false)
+        }
       } else {
         console.error("ストリームの確立に失敗しました")
-        alert("カメラとマイクの接続に失敗しました。もう一度お試しください。")
+        
+        // mediaErrorの内容に基づいて詳細なメッセージを表示
+        if (mediaError) {
+          alert(getMediaErrorMessage(mediaError.type, mediaError.message))
+        } else {
+          alert("カメラとマイクの接続に失敗しました。デバイスの接続とブラウザの権限を確認してください。")
+        }
       }
     } catch (error) {
       console.error("録画開始エラー:", error)
-      alert("録画の開始に失敗しました。カメラとマイクの権限を確認してください。")
+      if (error instanceof Error) {
+        alert(getRecordingErrorMessage(error))
+      } else {
+        alert('録画の開始中にエラーが発生しました。カメラとマイクの権限を確認し、もう一度お試しください。')
+      }
+      setIsRecording(false)
     }
   }
 
   const handleStopRecording = async () => {
     console.log("ストップボタンがクリックされました")
     
-    // 録画を停止
-    setIsRecording(false)
-    stopListening()
-    stopSessionRecording()
-    
-    // ストリームを停止する前に少し待つ（録画データの確定のため）
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
-    stopStream()
-    setSessionEnded(true)
-    
-    // セッションデータが確定するまで少し待つ
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
-    // セッションデータを自動保存
-    if (currentSession) {
-      console.log('現在のセッションデータ:', {
-        id: currentSession.id,
-        duration: currentSession.duration,
-        emotionsCount: currentSession.emotions.length,
-        transcriptLength: currentSession.transcript.length,
-        hasVideo: !!currentSession.videoBlob
-      })
+    try {
+      // 録画を停止
+      setIsRecording(false)
+      stopListening()
+      stopSessionRecording()
       
-      const result = await saveSession()
-      if (result.success) {
-        console.log('セッションが正常に保存されました:', result.sessionId)
-        // グローバルコンテキストにセッションを設定
-        setGlobalSession(currentSession)
+      // ストリームを停止する前に少し待つ（録画データの確定のため）
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      stopStream()
+      setSessionEnded(true)
+      
+      // セッションデータが確定するまで少し待つ
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      // セッションデータを自動保存
+      if (currentSession) {
+        console.log('現在のセッションデータ:', {
+          id: currentSession.id,
+          duration: currentSession.duration,
+          emotionsCount: currentSession.emotions.length,
+          transcriptLength: currentSession.transcript.length,
+          hasVideo: !!currentSession.videoBlob
+        })
+        
+        const result = await saveSession()
+        if (result.success) {
+          console.log('セッションが正常に保存されました:', result.sessionId)
+          // グローバルコンテキストにセッションを設定
+          setGlobalSession(currentSession)
+        } else {
+          console.error('セッションの保存に失敗しました:', result.error)
+          alert(`セッションの保存に失敗しました: ${result.error}`)
+        }
       } else {
-        console.error('セッションの保存に失敗しました:', result.error)
-        alert(`セッションの保存に失敗しました: ${result.error}`)
+        console.error('保存するセッションデータがありません')
       }
-    } else {
-      console.error('保存するセッションデータがありません')
+    } catch (error) {
+      console.error('録画停止中にエラーが発生しました:', error)
+      // エラーが発生しても状態は確実にリセット
+      setIsRecording(false)
+      stopStream()
+      setSessionEnded(true)
+      
+      const errorMessage = error instanceof Error ? error.message : "不明なエラー"
+      alert(`録画の停止中にエラーが発生しました: ${errorMessage}`)
     }
   }
   
@@ -300,22 +388,18 @@ export default function RealtimeDashboard() {
             </CardHeader>
             <CardContent>
               <EmotionRadarChart data={isRecording ? currentEmotion : null} />
-              {facialExpression && (
-                <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600">
-                    <span className="font-medium">表情：</span>
-                    {facialExpression}
-                  </p>
-                </div>
-              )}
-              {insights && (
-                <div className="mt-2 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                    <span className="font-medium">インサイト：</span>
-                    {insights}
-                  </p>
-                </div>
-              )}
+              <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium">表情：</span>
+                  {isRecording && facialExpression ? translateEmotionText(facialExpression) : ''}
+                </p>
+              </div>
+              <div className="mt-2 p-3 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-700">
+                  <span className="font-medium">インサイト：</span>
+                  {isRecording && insights ? translateEmotionText(insights) : ''}
+                </p>
+              </div>
               {emotionError && (
                 <div className="mt-2 p-3 bg-red-50 rounded-lg">
                   <p className="text-sm text-red-600">
@@ -341,12 +425,25 @@ export default function RealtimeDashboard() {
           <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
             <CardContent className="p-6">
               {/* ビデオストリーム表示 */}
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <VideoStream 
                   stream={stream} 
                   error={mediaError} 
                   isLoading={mediaLoading} 
                 />
+                {/* エラーメッセージの表示 */}
+                {mediaError && !isRecording && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
+                    <div className="bg-white p-4 rounded-lg max-w-sm text-center">
+                      <p className="text-red-600 font-medium mb-2">
+                        {mediaError.type === 'permission' && "📷 カメラとマイクの許可が必要です"}
+                        {mediaError.type === 'notFound' && "🔌 デバイスが見つかりません"}
+                        {mediaError.type === 'other' && "⚠️ エラーが発生しました"}
+                      </p>
+                      <p className="text-sm text-gray-600">{mediaError.message}</p>
+                    </div>
+                  </div>
+                )}
                 {isRecording && (
                   <div className="absolute bottom-4 left-4 right-4 z-10">
                     <div className="bg-black/50 rounded-lg p-2">
@@ -368,7 +465,7 @@ export default function RealtimeDashboard() {
                 <AudioVisualizer isActive={isRecording} stream={stream} />
               </div>
 
-              <div className="flex justify-center space-x-4">
+              <div className="flex justify-center space-x-4 relative z-10">
                 {!isRecording && !sessionEnded ? (
                   <Button 
                     onClick={handleStartRecording} 
@@ -377,8 +474,17 @@ export default function RealtimeDashboard() {
                     aria-label="録画を開始"
                     aria-live="polite"
                   >
-                    <Mic className="w-4 h-4 mr-2" aria-hidden="true" />
-                    開始
+                    {mediaLoading ? (
+                      <>
+                        <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        準備中...
+                      </>
+                    ) : (
+                      <>
+                        <Mic className="w-4 h-4 mr-2" aria-hidden="true" />
+                        開始
+                      </>
+                    )}
                   </Button>
                 ) : isRecording ? (
                   <Button 
@@ -386,6 +492,8 @@ export default function RealtimeDashboard() {
                     variant="destructive"
                     aria-label="録画を停止"
                     aria-live="polite"
+                    className="relative z-20"
+                    style={{ position: 'relative', zIndex: 20 }}
                   >
                     <Square className="w-4 h-4 mr-2" aria-hidden="true" />
                     ストップ
@@ -431,10 +539,10 @@ export default function RealtimeDashboard() {
                       <Button 
                         variant="outline"
                         onClick={downloadVideo}
-                        size="icon"
                         title="動画をダウンロード"
                       >
-                        <Download className="w-4 h-4" />
+                        <Download className="w-4 h-4 mr-2" />
+                        録画データ(MP4)をダウンロード
                       </Button>
                     )}
                   </>
@@ -462,7 +570,7 @@ export default function RealtimeDashboard() {
               <h3 className="text-lg font-semibold">フェイスマップ</h3>
             </CardHeader>
             <CardContent>
-              <FaceMapVisualization isActive={isRecording} landmarks={faceLandmarks} />
+              <FaceMapVisualization isActive={isRecording} landmarks={landmarks} />
             </CardContent>
           </Card>
         </div>

@@ -36,7 +36,7 @@ describe('TranscriptArea Overflow and Scroll Behavior', () => {
     render(<TranscriptArea transcript="" interimTranscript="" isListening={false} />);
     
     const container = screen.getByTestId('transcript-scroll-container');
-    expect(container).toHaveClass('max-h-[200px]');
+    expect(container).toHaveClass('max-h-[10vh]');
   });
 
   it('should display long transcript with proper formatting', () => {
@@ -227,6 +227,19 @@ describe('TranscriptArea Overflow and Scroll Behavior', () => {
     
     const container = screen.getByTestId('transcript-scroll-container');
     expect(container).toHaveClass('scroll-smooth');
+  });
+
+  it('should have word-wrap styles to prevent text overflow', () => {
+    render(<TranscriptArea transcript="" interimTranscript="" isListening={false} />);
+    
+    const container = screen.getByTestId('transcript-scroll-container');
+    expect(container).toHaveStyle({
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word'
+    });
+    
+    const textElement = container.querySelector('p');
+    expect(textElement).toHaveClass('break-words');
   });
 
   it('should handle transcript updates during active recording', async () => {

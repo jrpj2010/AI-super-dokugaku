@@ -33,7 +33,10 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
   const handleMouseEnter = (type: 'face' | 'sight', event: React.MouseEvent) => {
     const value = type === 'face' ? faceValue : sightValue
     const label = type === 'face' ? '顔の動き' : '視線の動き'
-    setTooltipContent(`${label}: ${value}% (${getValueDescription(value)})`)
+    const description = type === 'face' 
+      ? '顔全体の動きの大きさ (0-100)' 
+      : 'カメラへの平均注視率 (%)'
+    setTooltipContent(`${label}: ${value}% (${getValueDescription(value)})\n${description}`)
     setTooltipType(type)
     
     const rect = event.currentTarget.getBoundingClientRect()
@@ -51,7 +54,10 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
   const handleFocus = (type: 'face' | 'sight') => {
     const value = type === 'face' ? faceValue : sightValue
     const label = type === 'face' ? '顔の動き' : '視線の動き'
-    setTooltipContent(`${label}: ${value}% (${getValueDescription(value)})`)
+    const description = type === 'face' 
+      ? '顔全体の動きの大きさ (0-100)' 
+      : 'カメラへの平均注視率 (%)'
+    setTooltipContent(`${label}: ${value}% (${getValueDescription(value)})\n${description}`)
     setTooltipType(type)
     setTooltipVisible(true)
   }
@@ -100,6 +106,7 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
             </div>
           </div>
         </div>
+        <p className="text-xs text-gray-500 mt-2">顔全体の動きの大きさ (0-100)</p>
       </div>
 
       <div 
@@ -116,6 +123,7 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
           <span className="text-sm font-semibold">{sightValue}</span>
         </div>
         <Progress value={sightValue} className="h-2" />
+        <p className="text-xs text-gray-500 mt-1">カメラへの平均注視率 (%)</p>
       </div>
 
       {/* Tooltip */}
@@ -130,7 +138,7 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
             transform: 'translate(-50%, -100%)'
           }}
         >
-          {tooltipContent}
+          <div className="whitespace-pre-line">{tooltipContent}</div>
           <div className="absolute left-1/2 transform -translate-x-1/2 top-full">
             <div className="border-4 border-transparent border-t-gray-900"></div>
           </div>

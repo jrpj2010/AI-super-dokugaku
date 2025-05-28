@@ -49,8 +49,8 @@ Return the analysis in JSON format with the following structure:
     "confusion": <0-100>,
     "interest": <0-100>
   },
-  "facialExpression": "<brief description of facial expression>",
-  "insights": "<brief insight about the emotional state>"
+  "facialExpression": "<brief description of facial expression in English>",
+  "insights": "<brief insight about the emotional state in English>"
 }
 
 Focus on:
@@ -58,6 +58,11 @@ Focus on:
 - Overall expression and micro-expressions
 - Body language visible in frame
 - Engagement level and attention
+
+Important:
+- Provide facialExpression and insights in simple, clear English
+- Use common emotion words like: happy, sad, angry, surprised, confident, confused, interested
+- Keep descriptions concise (10-15 words maximum)
 
 Ensure all emotion scores are between 0-100 and represent intensity percentages.
 Return ONLY valid JSON, no additional text.`

@@ -1,6 +1,7 @@
 "use client"
 
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis, Legend } from "recharts"
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, CartesianGrid, Tooltip } from "recharts"
+import { useEffect } from "react"
 
 interface SentimentDataPoint {
   time: string
@@ -17,6 +18,17 @@ export default function EmotionTrendChart({ data }: EmotionTrendChartProps) {
   // データがない場合は空の状態を表示
   const hasData = data && data.length > 0
 
+  // デバッグログ
+  useEffect(() => {
+    if (data) {
+      console.log('[EmotionTrendChart] データ更新:', {
+        dataLength: data.length,
+        latestData: data[data.length - 1],
+        allData: data
+      })
+    }
+  }, [data])
+
   return (
     <div className="h-48 relative">
       {!hasData && (
@@ -25,15 +37,60 @@ export default function EmotionTrendChart({ data }: EmotionTrendChartProps) {
         </div>
       )}
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={hasData ? data : []}>
-          <XAxis dataKey="time" className="text-xs" opacity={hasData ? 1 : 0.3} />
-          <YAxis className="text-xs" opacity={hasData ? 1 : 0.3} domain={[0, 100]} />
-          <Legend opacity={hasData ? 1 : 0.3} />
+        <LineChart 
+          data={hasData ? data : []}
+          margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+          <XAxis 
+            dataKey="time" 
+            className="text-xs" 
+            opacity={hasData ? 1 : 0.3}
+            tick={{ fontSize: 10 }}
+          />
+          <YAxis 
+            className="text-xs" 
+            opacity={hasData ? 1 : 0.3} 
+            domain={[0, 100]}
+            tick={{ fontSize: 10 }}
+          />
+          <Tooltip 
+            contentStyle={{ fontSize: 12 }}
+            formatter={(value: number) => `${Math.round(value)}%`}
+          />
+          <Legend 
+            opacity={hasData ? 1 : 0.3}
+            wrapperStyle={{ fontSize: 12 }}
+          />
           {hasData && (
             <>
-              <Line type="monotone" dataKey="ポジティブ" stroke="#10b981" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="ネガティブ" stroke="#ef4444" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="ニュートラル" stroke="#f59e0b" strokeWidth={2} dot={false} />
+              <Line 
+                type="monotone" 
+                dataKey="ポジティブ" 
+                stroke="#10b981" 
+                strokeWidth={2} 
+                dot={true}
+                activeDot={{ r: 4 }}
+                animationDuration={300}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="ネガティブ" 
+                stroke="#ef4444" 
+                strokeWidth={2} 
+                dot={true}
+                activeDot={{ r: 4 }}
+                animationDuration={300}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="ニュートラル" 
+                stroke="#f59e0b" 
+                strokeWidth={2} 
+                dot={true}
+                activeDot={{ r: 4 }}
+                animationDuration={300}
+              />
             </>
           )}
         </LineChart>

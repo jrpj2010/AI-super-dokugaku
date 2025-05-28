@@ -1,4 +1,6 @@
 import { useCallback, useRef, useState, useEffect } from 'react'
+import { getBestVideoFormat, downloadVideoBlob, generateVideoFilename } from '@/lib/video-converter'
+import { PDFGenerator } from '@/lib/pdf-generator'
 
 export interface SessionData {
   id: string
@@ -34,7 +36,7 @@ interface UseSessionRecordingOptions {
 
 export function useSessionRecording({
   maxDuration = 60,
-  mimeType = 'video/webm'
+  mimeType
 }: UseSessionRecordingOptions = {}) {
   const [isRecording, setIsRecording] = useState(false)
   const [currentSession, setCurrentSession] = useState<SessionData | null>(null)
@@ -45,6 +47,7 @@ export function useSessionRecording({
   const startTimeRef = useRef<Date | null>(null)
   const durationIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const sessionDataRef = useRef<SessionData | null>(null)
+  const videoFormatRef = useRef<{ mimeType: string; extension: string }>({ mimeType: 'video/webm', extension: 'webm' })
 
   // Start recording session
   const startRecording = useCallback((stream: MediaStream) => {
@@ -53,10 +56,17 @@ export function useSessionRecording({
     }
 
     try {
-      // Check if the mimeType is supported
-      const options: MediaRecorderOptions = {}
-      if (MediaRecorder.isTypeSupported(mimeType)) {
-        options.mimeType = mimeType
+      // Get the best supported video format
+      const bestFormat = getBestVideoFormat()
+      videoFormatRef.current = bestFormat
+      
+      // Use provided mimeType if supported, otherwise use best format
+      const recordingMimeType = mimeType && MediaRecorder.isTypeSupported(mimeType) 
+        ? mimeType 
+        : bestFormat.mimeType
+        
+      const options: MediaRecorderOptions = {
+        mimeType: recordingMimeType
       }
 
       // Create MediaRecorder
@@ -89,7 +99,7 @@ export function useSessionRecording({
 
       // Handle recording stop
       mediaRecorder.onstop = () => {
-        const blob = new Blob(recordedChunksRef.current, { type: mimeType })
+        const blob = new Blob(recordedChunksRef.current, { type: recordingMimeType })
         
         if (sessionDataRef.current) {
           sessionDataRef.current.videoBlob = blob
@@ -188,18 +198,19 @@ export function useSessionRecording({
 
   // Download recorded video
   const downloadVideo = useCallback(() => {
-    if (!currentSession?.videoBlob) {
+    if (!currentSession?.videoBlob || !currentSession?.id) {
       return
     }
 
-    const url = URL.createObjectURL(currentSession.videoBlob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `tanren_session_${currentSession.id}.webm`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    // Extract session ID (remove 'session_' prefix if present)
+    const sessionId = currentSession.id.replace('session_', '')
+    
+    // Download with appropriate extension
+    downloadVideoBlob(
+      currentSession.videoBlob, 
+      sessionId, 
+      videoFormatRef.current.extension
+    )
   }, [currentSession])
 
   // Export session data as JSON
@@ -337,24 +348,57 @@ export function useSessionRecording({
   // Export session data as CSV
   const exportAsCSV = useCallback(() => {
     if (!currentSession || !currentSession.emotions || currentSession.emotions.length === 0) {
-      return 'timestamp,joy,anger,sadness,surprise,fear,confidence,interest,facialExpression,insight\n'
+      return 'timestamp,joy,anger,sadness,surprise,fear,confidence,interest,confusion,sentimentScore,facialExpression,insight,segmentText,segmentStartTime,segmentEndTime,behaviorMetrics\n'
+    }
+
+    // Calculate sentiment scores for each emotion record
+    const calculateSentimentScore = (emotions: any) => {
+      const positive = (emotions.joy + emotions.confidence + emotions.interest) / 3
+      const negative = (emotions.anger + emotions.sadness + emotions.fear) / 3
+      return Math.round(positive - negative)
+    }
+
+    // Calculate behavior metrics
+    const calculateBehaviorMetrics = (emotions: any) => {
+      const engagement = (emotions.interest + emotions.surprise) / 2
+      const calmness = 100 - (emotions.fear + emotions.confusion) / 2
+      const fluency = (emotions.confidence + emotions.joy) / 2
+      return `engagement:${Math.round(engagement)};calmness:${Math.round(calmness)};fluency:${Math.round(fluency)}`
     }
 
     // Add metadata as comments
     const metadata = [
       `# Session ID: ${currentSession.id}`,
-      `# Date: ${new Date(currentSession.startTime).toLocaleDateString('ja-JP')}`,
+      `# Date: ${new Date(currentSession.startTime).toLocaleDateString('ja-JP')} ${new Date(currentSession.startTime).toLocaleTimeString('ja-JP')}`,
       `# Duration: ${Math.floor(currentSession.duration / 60)}:${(currentSession.duration % 60).toString().padStart(2, '0')}`,
-      `# Transcript: ${currentSession.transcript}`,
+      `# Total Transcript Length: ${currentSession.transcript.length} characters`,
       ''
     ].join('\n')
 
     // CSV headers
-    const headers = 'timestamp,joy,anger,sadness,surprise,fear,confidence,interest,facialExpression,insight'
+    const headers = 'timestamp,joy,anger,sadness,surprise,fear,confidence,interest,confusion,sentimentScore,facialExpression,insight,segmentText,segmentStartTime,segmentEndTime,behaviorMetrics'
+
+    // Split transcript into segments (approximate - every 50 characters or sentence break)
+    const transcriptSegments = currentSession.transcript
+      .split(/[。！？\n]/)
+      .filter(s => s.trim().length > 0)
+      .map(s => s.trim())
 
     // CSV data rows
-    const rows = currentSession.emotions.map(emotion => {
+    const rows = currentSession.emotions.map((emotion, index) => {
       const timestamp = new Date(emotion.timestamp).toISOString()
+      const sentimentScore = calculateSentimentScore(emotion.emotions)
+      const behaviorMetrics = calculateBehaviorMetrics(emotion.emotions)
+      
+      // Get corresponding transcript segment
+      const segmentIndex = Math.min(Math.floor(index * transcriptSegments.length / currentSession.emotions.length), transcriptSegments.length - 1)
+      const segmentText = transcriptSegments[segmentIndex] || ''
+      
+      // Calculate segment times (approximate)
+      const segmentStartTime = new Date(emotion.timestamp).toISOString()
+      const nextTimestamp = index < currentSession.emotions.length - 1 ? currentSession.emotions[index + 1].timestamp : emotion.timestamp + 2000
+      const segmentEndTime = new Date(nextTimestamp).toISOString()
+      
       const values = [
         timestamp,
         emotion.emotions.joy || 0,
@@ -364,8 +408,14 @@ export function useSessionRecording({
         emotion.emotions.fear || 0,
         emotion.emotions.confidence || 0,
         emotion.emotions.interest || 0,
+        emotion.emotions.confusion || 0,
+        sentimentScore,
         `"${(emotion.facialExpression || '').replace(/"/g, '""')}"`,
-        `"${(emotion.insight || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`
+        `"${(emotion.insight || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        `"${segmentText.replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        segmentStartTime,
+        segmentEndTime,
+        `"${behaviorMetrics}"`
       ]
       return values.join(',')
     })
@@ -373,30 +423,33 @@ export function useSessionRecording({
     return metadata + headers + '\n' + rows.join('\n')
   }, [currentSession])
 
-  // Export session data as PDF (stub for now)
+  // Export session data as PDF
   const exportAsPDF = useCallback(async () => {
     if (!currentSession) {
       throw new Error('No session data to export')
     }
 
-    // This would require a PDF library like jsPDF or pdfmake
-    // For now, return a mock implementation
-    const pdfContent = `
-TANREN Emotion Analysis Report
-==============================
-Session ID: ${currentSession.id}
-Date: ${new Date(currentSession.startTime).toLocaleDateString('ja-JP')}
-Duration: ${Math.floor(currentSession.duration / 60)}:${(currentSession.duration % 60).toString().padStart(2, '0')}
+    // レポート要素を取得
+    const reportElement = document.getElementById('analysis-report')
+    if (!reportElement) {
+      throw new Error('レポート要素が見つかりません')
+    }
 
-Transcript:
-${currentSession.transcript}
-
-Emotion Data:
-${currentSession.emotions.map(e => `- ${new Date(e.timestamp).toLocaleTimeString()}: ${e.facialExpression} (${e.insight})`).join('\n')}
-    `
-
-    // Create a text blob for now (would be PDF in real implementation)
-    return new Blob([pdfContent], { type: 'application/pdf' })
+    try {
+      const pdfGenerator = new PDFGenerator()
+      const sessionId = currentSession.id.replace('session_', '')
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+      
+      const pdfBlob = await pdfGenerator.generateReportPDF(
+        reportElement as HTMLElement,
+        { sessionId, timestamp }
+      )
+      
+      return pdfBlob
+    } catch (error) {
+      console.error('PDF generation error:', error)
+      throw error
+    }
   }, [currentSession])
 
   return {

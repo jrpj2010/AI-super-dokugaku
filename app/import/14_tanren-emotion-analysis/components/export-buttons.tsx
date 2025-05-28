@@ -15,9 +15,13 @@ export function ExportButtons() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     
+    // Extract session ID (remove 'session_' prefix if present)
+    const sessionId = currentSession.id.replace('session_', '')
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+    
     const link = document.createElement('a')
     link.href = url
-    link.download = `tanren_emotion_analysis_${new Date().toISOString().slice(0, 10)}.csv`
+    link.download = `tanren_emotion_report_${sessionId}_${timestamp}.csv`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -32,9 +36,13 @@ export function ExportButtons() {
       const pdfBlob = await exportAsPDF()
       const url = URL.createObjectURL(pdfBlob)
       
+      // Extract session ID (remove 'session_' prefix if present)
+      const sessionId = currentSession.id.replace('session_', '')
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+      
       const link = document.createElement('a')
       link.href = url
-      link.download = `tanren_emotion_analysis_${new Date().toISOString().slice(0, 10)}.pdf`
+      link.download = `tanren_emotion_report_${sessionId}_${timestamp}.pdf`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)

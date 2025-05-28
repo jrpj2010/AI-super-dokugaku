@@ -4,7 +4,7 @@ export const PERFORMANCE_CONFIG = {
   // ビデオフレームキャプチャ設定
   video: {
     // フレームキャプチャ間隔（ミリ秒）
-    captureInterval: 3000, // 3秒ごと（以前は1秒ごと）
+    captureInterval: 1500, // 1.5秒ごと（よりリアルタイムに）
     // 最大解像度
     maxWidth: 640,
     maxHeight: 480,
@@ -15,11 +15,11 @@ export const PERFORMANCE_CONFIG = {
   // 感情分析API設定
   emotionAnalysis: {
     // 分析間隔（ミリ秒）
-    analysisInterval: 5000, // 5秒ごと（以前は2秒ごと）
+    analysisInterval: 1000, // 1秒ごと（より高頻度に）
     // バッチサイズ（一度に処理するフレーム数）
     batchSize: 1,
     // 最大保留フレーム数
-    maxQueueSize: 3,
+    maxQueueSize: 5, // キューサイズを増やして取りこぼしを防ぐ
     // タイムアウト（ミリ秒）
     timeout: 10000,
   },
@@ -64,8 +64,8 @@ export function getOptimizedConfig() {
   
   // 開発環境では頻度を上げる
   if (process.env.NODE_ENV === 'development') {
-    config.video.captureInterval = 2000
-    config.emotionAnalysis.analysisInterval = 3000
+    config.video.captureInterval = 1000 // 1秒ごと
+    config.emotionAnalysis.analysisInterval = 1000 // 1秒ごと
   }
   
   // モバイルデバイスの検出

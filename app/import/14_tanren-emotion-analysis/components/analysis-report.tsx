@@ -6,6 +6,7 @@ import ConversationStatusRadar from "@/components/conversation-status-radar"
 import FaceMetricsGauge from "@/components/face-metrics-gauge"
 import EmotionChangeChart from "@/components/emotion-change-chart"
 import SentimentTrendChart from "@/components/sentiment-trend-chart"
+import { ExportButtons } from "@/components/export-buttons"
 import { useSessionContext } from "@/contexts/session-context"
 import { useSessionRecording } from "@/hooks/use-session-recording"
 import { useEffect, useState } from "react"
@@ -15,7 +16,8 @@ import { ja } from 'date-fns/locale'
 
 // Export named version for tests
 export function AnalysisReport() {
-  const { currentSession, isRecording } = useSessionRecording()
+  const { currentSession } = useSessionContext()
+  const { isRecording } = useSessionRecording()
 
   if (isRecording) {
     return (
@@ -48,10 +50,24 @@ export function AnalysisReport() {
   // Format duration
   const durationMinutes = Math.floor(currentSession.duration / 60)
   const durationSeconds = currentSession.duration % 60
-  const formattedDuration = `${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`
+  const formattedDuration = `${durationMinutes}分${durationSeconds}秒`
+
+  // Format date and time
+  const sessionDate = format(currentSession.startTime, 'yyyy年M月d日 HH:mm', { locale: ja })
 
   return (
-    <div className="space-y-6">
+    <div id="analysis-report" className="space-y-6">
+      {/* Header */}
+      <div className="relative">
+        <div className="text-center space-y-2">
+          <h2 className="text-2xl font-bold">{sessionDate} のあなたの状態</h2>
+          <p className="text-sm text-muted-foreground">録画時間: {formattedDuration}</p>
+        </div>
+        <div className="absolute top-0 right-0">
+          <ExportButtons />
+        </div>
+      </div>
+
       {/* Session Metadata */}
       <Card>
         <CardHeader>
@@ -382,11 +398,7 @@ export default function AnalysisReportPage() {
         <h2 className="text-3xl font-bold text-gray-800">感情分析結果</h2>
         <h3 className="text-xl text-gray-600">
           {currentSession ? 
-            new Date(currentSession.startTime).toLocaleDateString('ja-JP', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            }) + 'のあなたの状態' :
+            format(currentSession.startTime, 'yyyy年M月d日 HH:mm', { locale: ja }) + ' のあなたの状態' :
             '今日のあなたの状態'
           }
         </h3>
