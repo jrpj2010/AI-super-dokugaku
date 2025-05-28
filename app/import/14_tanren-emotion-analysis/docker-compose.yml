@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tanren-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - GOOGLE_AI_API_KEY=${GOOGLE_AI_API_KEY}
+      - GOOGLE_AI_MODEL=gemini-2.5-pro-preview-05-06
+      - NEXT_PUBLIC_APP_URL=http://localhost:8080
+    env_file:
+      - .env.local
+    restart: unless-stopped
