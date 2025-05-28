@@ -68,12 +68,19 @@ export function getOptimizedConfig() {
     config.emotionAnalysis.analysisInterval = 1000 // 1秒ごと
   }
   
-  // モバイルデバイスの検出
-  if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && navigator.userAgent && /Mobi|Android/i.test(navigator.userAgent)) {
-    config.video.maxWidth = 480
-    config.video.maxHeight = 360
-    config.video.captureInterval = 5000
-    config.emotionAnalysis.analysisInterval = 10000
+  // モバイルデバイスの検出 - SSRセーフ
+  if (typeof window !== 'undefined') {
+    try {
+      const nav = window.navigator
+      if (nav && nav.userAgent && /Mobi|Android/i.test(nav.userAgent)) {
+        config.video.maxWidth = 480
+        config.video.maxHeight = 360
+        config.video.captureInterval = 5000
+        config.emotionAnalysis.analysisInterval = 10000
+      }
+    } catch (e) {
+      // SSR環境では無視
+    }
   }
   
   return config
