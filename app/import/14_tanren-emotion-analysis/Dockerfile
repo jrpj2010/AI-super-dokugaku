@@ -18,6 +18,9 @@ COPY . .
 # 環境変数の設定（ビルド時）
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Clean any existing build artifacts
+RUN rm -rf .next
+
 RUN corepack enable pnpm && pnpm run build
 
 # ステージ3: 本番環境

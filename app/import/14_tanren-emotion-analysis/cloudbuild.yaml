@@ -3,6 +3,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: 
       - 'build'
+      - '--no-cache'
       - '-t'
       - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/tanren-repo/tanren-emotion-analysis:latest'
       - '.'
