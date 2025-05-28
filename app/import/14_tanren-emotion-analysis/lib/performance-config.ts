@@ -69,7 +69,7 @@ export function getOptimizedConfig() {
   }
   
   // モバイルデバイスの検出
-  if (typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent)) {
+  if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent)) {
     config.video.maxWidth = 480
     config.video.maxHeight = 360
     config.video.captureInterval = 5000
