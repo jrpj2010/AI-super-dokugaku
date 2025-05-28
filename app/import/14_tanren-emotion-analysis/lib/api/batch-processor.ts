@@ -1,7 +1,5 @@
 import { getOptimizedConfig } from '@/lib/performance-config'
 
-const config = getOptimizedConfig()
-
 interface BatchRequest<T> {
   id: string
   data: T
@@ -21,9 +19,14 @@ export class BatchProcessor<TRequest, TResponse> {
   
   constructor(
     private processBatch: (requests: BatchRequest<TRequest>[]) => Promise<BatchResponse<TResponse>[]>,
-    private batchSize: number = config.emotionAnalysis.batchSize,
+    private batchSize?: number,
     private batchDelay: number = 1000
-  ) {}
+  ) {
+    if (!this.batchSize) {
+      const config = getOptimizedConfig()
+      this.batchSize = config.emotionAnalysis.batchSize
+    }
+  }
   
   async add(data: TRequest): Promise<TResponse> {
     return new Promise((resolve, reject) => {

@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import RealtimeDashboard from "@/components/realtime-dashboard"
 import AnalysisReport from "@/components/analysis-report"
-import Footer from "@/components/footer"
 
 export default function AISuite() {
   const [activeTab, setActiveTab] = useState("dashboard")
@@ -34,7 +33,6 @@ export default function AISuite() {
           </TabsContent>
         </Tabs>
       </div>
-      <Footer />
     </div>
   )
 }

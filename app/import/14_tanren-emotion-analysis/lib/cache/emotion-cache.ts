@@ -1,7 +1,5 @@
 import { getOptimizedConfig } from '@/lib/performance-config'
 
-const config = getOptimizedConfig()
-
 interface CacheEntry<T> {
   data: T
   timestamp: number
@@ -11,8 +9,14 @@ interface CacheEntry<T> {
 export class EmotionCache<T> {
   private cache = new Map<string, CacheEntry<T>>()
   private cleanupInterval: NodeJS.Timeout | null = null
+  private defaultTTL: number
   
-  constructor(private defaultTTL: number = config.cache.emotionCacheTTL * 1000) {
+  constructor(defaultTTL?: number) {
+    if (!defaultTTL && typeof window !== 'undefined') {
+      const config = getOptimizedConfig()
+      defaultTTL = config.cache.emotionCacheTTL * 1000
+    }
+    this.defaultTTL = defaultTTL || 60000 // Default 60 seconds
     // 定期的にキャッシュをクリーンアップ
     this.startCleanup()
   }
@@ -104,4 +108,21 @@ export class EmotionCache<T> {
 }
 
 // シングルトンインスタンス
-export const emotionCache = new EmotionCache()
+let _emotionCache: EmotionCache<any> | null = null
+
+export function getEmotionCache() {
+  if (!_emotionCache) {
+    _emotionCache = new EmotionCache()
+  }
+  return _emotionCache
+}
+
+export const emotionCache = {
+  get: <T>(key: string) => getEmotionCache().get<T>(key),
+  set: <T>(key: string, data: T, ttl?: number) => getEmotionCache().set(key, data, ttl),
+  delete: (key: string) => getEmotionCache().delete(key),
+  clear: () => getEmotionCache().clear(),
+  has: (key: string) => getEmotionCache().has(key),
+  cleanup: () => getEmotionCache().cleanup(),
+  stopCleanup: () => getEmotionCache().stopCleanup()
+}

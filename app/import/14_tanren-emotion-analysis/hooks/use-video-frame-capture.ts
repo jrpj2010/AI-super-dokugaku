@@ -8,8 +8,6 @@ interface UseVideoFrameCaptureOptions {
   maxHeight?: number
 }
 
-const config = getOptimizedConfig()
-
 export interface CapturedFrame {
   dataUrl: string
   timestamp: number
@@ -19,10 +17,14 @@ export interface CapturedFrame {
 
 export function useVideoFrameCapture({
   stream,
-  captureInterval = config.video.captureInterval,
-  maxWidth = config.video.maxWidth,
-  maxHeight = config.video.maxHeight
+  captureInterval,
+  maxWidth,
+  maxHeight
 }: UseVideoFrameCaptureOptions) {
+  const config = getOptimizedConfig()
+  const effectiveCaptureInterval = captureInterval ?? config.video.captureInterval
+  const effectiveMaxWidth = maxWidth ?? config.video.maxWidth
+  const effectiveMaxHeight = maxHeight ?? config.video.maxHeight
   const [latestFrame, setLatestFrame] = useState<CapturedFrame | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -76,13 +78,13 @@ export function useVideoFrameCapture({
       let targetHeight = videoHeight
 
       // Scale down if necessary
-      if (targetWidth > maxWidth) {
-        targetWidth = maxWidth
+      if (targetWidth > effectiveMaxWidth) {
+        targetWidth = effectiveMaxWidth
         targetHeight = targetWidth / aspectRatio
       }
 
-      if (targetHeight > maxHeight) {
-        targetHeight = maxHeight
+      if (targetHeight > effectiveMaxHeight) {
+        targetHeight = effectiveMaxHeight
         targetWidth = targetHeight * aspectRatio
       }
 
@@ -109,7 +111,7 @@ export function useVideoFrameCapture({
       console.error('Error capturing frame:', error)
       return null
     }
-  }, [stream, maxWidth, maxHeight])
+  }, [stream, effectiveMaxWidth, effectiveMaxHeight])
 
   // Start capturing frames
   const startCapture = useCallback(async () => {
@@ -142,12 +144,12 @@ export function useVideoFrameCapture({
       // Set up interval for periodic capture
       intervalRef.current = setInterval(() => {
         captureFrame()
-      }, captureInterval)
+      }, effectiveCaptureInterval)
     } catch (error) {
       console.error('Error starting capture:', error)
       setIsCapturing(false)
     }
-  }, [stream, captureInterval, captureFrame, isCapturing])
+  }, [stream, effectiveCaptureInterval, captureFrame, isCapturing])
 
   // Stop capturing frames
   const stopCapture = useCallback(() => {

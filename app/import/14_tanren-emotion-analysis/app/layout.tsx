@@ -3,6 +3,8 @@ import { SessionProvider } from '@/contexts/session-context'
 import Footer from '@/components/footer'
 import './globals.css'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'TANREN 感情分析システム',
   description: 'リアルタイム感情分析とロールプレイ診断',

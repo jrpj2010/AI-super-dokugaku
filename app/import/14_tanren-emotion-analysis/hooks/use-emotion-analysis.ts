@@ -4,8 +4,6 @@ import { getOptimizedConfig } from '@/lib/performance-config'
 import { emotionCache, EmotionCache } from '@/lib/cache/emotion-cache'
 import { translateEmotionAnalysis } from '@/lib/translation'
 
-const config = getOptimizedConfig()
-
 interface EmotionData {
   joy: number
   anger: number
@@ -30,9 +28,11 @@ interface UseEmotionAnalysisOptions {
 }
 
 export function useEmotionAnalysis({
-  analysisInterval = config.emotionAnalysis.analysisInterval,
+  analysisInterval,
   enableAnalysis = true
 }: UseEmotionAnalysisOptions = {}) {
+  const config = getOptimizedConfig()
+  const effectiveInterval = analysisInterval ?? config.emotionAnalysis.analysisInterval
   const [latestEmotions, setLatestEmotions] = useState<EmotionData | null>(null)
   const [emotionHistory, setEmotionHistory] = useState<EmotionData[]>([])
   const [insights, setInsights] = useState<string>('')
@@ -169,7 +169,7 @@ export function useEmotionAnalysis({
     if (enableAnalysis) {
       intervalRef.current = setInterval(() => {
         processAnalysisQueue()
-      }, analysisInterval)
+      }, effectiveInterval)
     }
 
     return () => {
@@ -178,7 +178,7 @@ export function useEmotionAnalysis({
         intervalRef.current = null
       }
     }
-  }, [enableAnalysis, analysisInterval, processAnalysisQueue])
+  }, [enableAnalysis, effectiveInterval, processAnalysisQueue])
 
   // Reset state
   const reset = useCallback(() => {

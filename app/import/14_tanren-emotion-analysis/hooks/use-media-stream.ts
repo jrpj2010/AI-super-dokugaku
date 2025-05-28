@@ -16,6 +16,10 @@ export function useMediaStream() {
     setError(null)
 
     try {
+      if (typeof window === 'undefined' || typeof navigator === 'undefined' || !navigator.mediaDevices) {
+        throw new Error('Media devices not available')
+      }
+      
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: {
           width: { ideal: 1280 },
