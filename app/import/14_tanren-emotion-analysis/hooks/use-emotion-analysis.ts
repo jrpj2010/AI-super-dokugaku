@@ -86,6 +86,7 @@ export function useEmotionAnalysis({
       }
 
       const result = await response.json()
+      console.log('[EmotionAnalysis] APIレスポンス:', result)
       
       // 英語のレスポンスを日本語に翻訳
       const translated = translateEmotionAnalysis(

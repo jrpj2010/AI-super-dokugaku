@@ -128,9 +128,34 @@ export default function RealtimeDashboard() {
       })
       
       // 感情データが更新されたときにセンチメントも更新
-      const positive = Math.round((latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest) / 3)
-      const negative = Math.round((latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear) / 3)
-      const neutral = Math.round(100 - positive - negative)
+      console.log('[RealtimeDashboard] 感情データ詳細:', latestEmotions);
+      
+      // APIが返す感情に基づいて分類
+      const positiveEmotions = ['joy', 'confidence', 'interest', 'surprise']; // surpriseは文脈によってポジティブ
+      const negativeEmotions = ['anger', 'sadness', 'fear', 'confusion'];
+      
+      let positiveSum = 0;
+      let negativeSum = 0;
+      let totalSum = 0;
+      
+      // 各感情の値を集計
+      Object.entries(latestEmotions).forEach(([emotion, value]) => {
+        if (typeof value === 'number') {
+          totalSum += value;
+          if (positiveEmotions.includes(emotion)) {
+            positiveSum += value;
+          } else if (negativeEmotions.includes(emotion)) {
+            negativeSum += value;
+          }
+        }
+      });
+      
+      console.log('[RealtimeDashboard] 感情集計:', { positiveSum, negativeSum, totalSum });
+      
+      // パーセンテージを計算
+      const positive = totalSum > 0 ? Math.round((positiveSum / totalSum) * 100) : 0;
+      const negative = totalSum > 0 ? Math.round((negativeSum / totalSum) * 100) : 0;
+      const neutral = Math.max(0, 100 - positive - negative)
       
       setSentimentHistory((prev) => {
         const currentTime = recordingTime || 0
@@ -184,10 +209,25 @@ export default function RealtimeDashboard() {
           }
           setCurrentEmotion(emotionData)
           
-          // センチメント計算
-          const positive = Math.round((latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest) / 3)
-          const negative = Math.round((latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear) / 3)
-          const neutral = Math.round(100 - positive - negative)
+          // センチメント計算（各感情の重み付け平均）
+          const positiveSum = latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest + (latestEmotions.surprise * 0.5);
+          const negativeSum = latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear + (latestEmotions.confusion * 0.5);
+          const totalSum = positiveSum + negativeSum;
+          
+          let positive = 0;
+          let negative = 0;
+          let neutral = 0;
+          
+          if (totalSum > 0) {
+            positive = Math.round((positiveSum / totalSum) * 100);
+            negative = Math.round((negativeSum / totalSum) * 100);
+            neutral = Math.max(0, 100 - positive - negative);
+          } else {
+            // 全ての感情が0の場合
+            neutral = 100;
+          }
+          
+          console.log('[RealtimeDashboard] センチメント計算:', { positiveSum, negativeSum, totalSum, positive, negative, neutral })
           
           setSentimentHistory((prev) => {
             const newDataPoint = {
