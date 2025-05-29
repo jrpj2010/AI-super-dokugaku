@@ -63,12 +63,17 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
   const sessionDate = format(currentSession.startTime, 'yyyy年M月d日 HH:mm', { locale: ja })
 
   return (
-    <div id="analysis-report" className="space-y-6">
+    <div id="analysis-report" className="space-y-8">
       {/* Header */}
       <div className="relative">
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-bold">{sessionDate} のあなたの状態</h2>
-          <p className="text-sm text-muted-foreground">録画時間: {formattedDuration}</p>
+        <div className="text-center space-y-3 pb-6 border-b border-gray-200">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{sessionDate} のあなたの状態</h2>
+          <div className="flex items-center justify-center gap-2 text-gray-600">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="text-lg">録画時間: {formattedDuration}</p>
+          </div>
         </div>
         <div className="absolute top-0 right-0">
           <ExportButtons />
@@ -76,22 +81,42 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
       </div>
 
       {/* Session Metadata */}
-      <Card>
-        <CardHeader>
-          <CardTitle>セッション情報</CardTitle>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            セッション情報
+          </CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-3 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground">セッションID:</p>
-            <p className="font-medium">{currentSession.id}</p>
+        <CardContent className="grid grid-cols-3 gap-6">
+          <div className="bg-gray-50 rounded-lg p-4">
+            <p className="text-sm text-gray-600 flex items-center gap-1 mb-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+              </svg>
+              セッションID
+            </p>
+            <p className="font-semibold text-gray-800">{currentSession.id}</p>
           </div>
-          <div>
-            <p className="text-sm text-muted-foreground">時間:</p>
-            <p className="font-medium">{formattedDuration}</p>
+          <div className="bg-gray-50 rounded-lg p-4">
+            <p className="text-sm text-gray-600 flex items-center gap-1 mb-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              時間
+            </p>
+            <p className="font-semibold text-gray-800">{formattedDuration}</p>
           </div>
-          <div>
-            <p className="text-sm text-muted-foreground">日付:</p>
-            <p className="font-medium">
+          <div className="bg-gray-50 rounded-lg p-4">
+            <p className="text-sm text-gray-600 flex items-center gap-1 mb-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              日付
+            </p>
+            <p className="font-semibold text-gray-800">
               {format(currentSession.startTime, 'yyyy年M月d日', { locale: ja })}
             </p>
           </div>
@@ -99,65 +124,177 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
       </Card>
 
       {/* Emotion Statistics */}
-      <Card>
-        <CardHeader>
-          <CardTitle>感情統計</CardTitle>
-          <CardDescription>セッション全体の平均感情スコア</CardDescription>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            感情統計
+          </CardTitle>
+          <CardDescription className="text-base">セッション全体の平均感情スコア</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
-            {Object.entries(emotionStats).map(([emotion, value]) => (
-              <div key={emotion} className="flex justify-between items-center">
-                <span className="text-sm">{getEmotionLabel(emotion)}</span>
-                <Badge variant="secondary">{Math.round(value)}%</Badge>
-              </div>
-            ))}
+            {Object.entries(emotionStats).map(([emotion, value]) => {
+              const emotionColors: Record<string, string> = {
+                joy: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+                anger: 'bg-red-100 text-red-800 border-red-300',
+                sadness: 'bg-blue-100 text-blue-800 border-blue-300',
+                fear: 'bg-purple-100 text-purple-800 border-purple-300',
+                surprise: 'bg-green-100 text-green-800 border-green-300',
+                confidence: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+                interest: 'bg-pink-100 text-pink-800 border-pink-300',
+                confusion: 'bg-gray-100 text-gray-800 border-gray-300'
+              }
+              const colorClass = emotionColors[emotion] || 'bg-gray-100 text-gray-800 border-gray-300'
+              
+              return (
+                <div key={emotion} className={`flex justify-between items-center p-3 rounded-lg border ${colorClass}`}>
+                  <span className="font-medium">{getEmotionLabel(emotion)}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-24 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-current h-2 rounded-full transition-all"
+                        style={{ width: `${Math.round(value)}%` }}
+                      />
+                    </div>
+                    <Badge className={colorClass}>{Math.round(value)}%</Badge>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </CardContent>
       </Card>
 
       {/* Emotion Peaks */}
-      <Card>
-        <CardHeader>
-          <CardTitle>感情のピーク</CardTitle>
-          <CardDescription>セッション中の最高値</CardDescription>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            感情のピーク
+          </CardTitle>
+          <CardDescription className="text-base">セッション中の最高値</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span>最高の喜び</span>
-              <Badge>{emotionPeaks.joy}%</Badge>
+        <CardContent className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-6">
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <span className="font-medium">最高の喜び</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-32 bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-yellow-500 h-3 rounded-full transition-all"
+                    style={{ width: `${emotionPeaks.joy}%` }}
+                  />
+                </div>
+                <Badge className="bg-yellow-100 text-yellow-800 font-bold">{emotionPeaks.joy}%</Badge>
+              </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span>最高の自信</span>
-              <Badge>{emotionPeaks.confidence}%</Badge>
+            <div className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
+                <span className="font-medium">最高の自信</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-32 bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-indigo-500 h-3 rounded-full transition-all"
+                    style={{ width: `${emotionPeaks.confidence}%` }}
+                  />
+                </div>
+                <Badge className="bg-indigo-100 text-indigo-800 font-bold">{emotionPeaks.confidence}%</Badge>
+              </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span>最高の興味</span>
-              <Badge>{emotionPeaks.interest}%</Badge>
+            <div className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-pink-500 rounded-full"></div>
+                <span className="font-medium">最高の興味</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-32 bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-pink-500 h-3 rounded-full transition-all"
+                    style={{ width: `${emotionPeaks.interest}%` }}
+                  />
+                </div>
+                <Badge className="bg-pink-100 text-pink-800 font-bold">{emotionPeaks.interest}%</Badge>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Emotion Trend Chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle>感情の推移</CardTitle>
-          <CardDescription>時間経過による感情の変化</CardDescription>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+            感情の推移
+          </CardTitle>
+          <CardDescription className="text-base">時間経過による感情の変化</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div data-testid="emotion-trend-chart" className="h-[300px]">
+        <CardContent className="p-6">
+          <div data-testid="emotion-trend-chart" className="h-[350px] bg-gray-50 rounded-lg p-4">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
-                <YAxis domain={[0, 100]} />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="joy" stroke="#10b981" name="喜び" />
-                <Line type="monotone" dataKey="confidence" stroke="#3b82f6" name="自信" />
-                <Line type="monotone" dataKey="interest" stroke="#f59e0b" name="興味" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis 
+                  dataKey="time" 
+                  tick={{ fill: '#6b7280' }}
+                  axisLine={{ stroke: '#e5e7eb' }}
+                />
+                <YAxis 
+                  domain={[0, 100]} 
+                  tick={{ fill: '#6b7280' }}
+                  axisLine={{ stroke: '#e5e7eb' }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                  }}
+                />
+                <Legend 
+                  wrapperStyle={{ paddingTop: '20px' }}
+                  iconType="circle"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="joy" 
+                  stroke="#fbbf24" 
+                  strokeWidth={3}
+                  name="喜び" 
+                  dot={{ fill: '#fbbf24', r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="confidence" 
+                  stroke="#6366f1" 
+                  strokeWidth={3}
+                  name="自信" 
+                  dot={{ fill: '#6366f1', r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="interest" 
+                  stroke="#ec4899" 
+                  strokeWidth={3}
+                  name="興味" 
+                  dot={{ fill: '#ec4899', r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -165,26 +302,38 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
       </Card>
 
       {/* Transcript */}
-      <Card>
-        <CardHeader>
-          <CardTitle>セッション転写</CardTitle>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            セッション転写
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm leading-relaxed">{currentSession.transcript}</p>
+        <CardContent className="p-6">
+          <div className="bg-gray-50 rounded-lg p-6 max-h-[300px] overflow-y-auto custom-scrollbar">
+            <p className="text-sm leading-relaxed text-gray-700 whitespace-pre-wrap">{currentSession.transcript}</p>
+          </div>
         </CardContent>
       </Card>
 
       {/* Insights */}
-      <Card>
-        <CardHeader>
-          <CardTitle>主要な洞察</CardTitle>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            主要な洞察
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <ul className="space-y-2">
+        <CardContent className="p-6">
+          <ul className="space-y-3">
             {currentSession.insights.map((insight, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span className="text-sm">{insight}</span>
+              <li key={index} className="flex items-start gap-3 p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg hover:shadow-sm transition-all">
+                <span className="text-indigo-600 font-bold text-lg mt-0.5">{index + 1}</span>
+                <span className="text-sm text-gray-700 leading-relaxed flex-1">{insight}</span>
               </li>
             ))}
           </ul>
@@ -192,24 +341,45 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
       </Card>
 
       {/* Timeline */}
-      <Card>
-        <CardHeader>
-          <CardTitle>感情タイムライン</CardTitle>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            感情タイムライン
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-6">
+          <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
             {currentSession.emotions.map((emotion, index) => {
               const timeOffset = Math.floor((emotion.timestamp - currentSession.emotions[0].timestamp) / 1000)
               const minutes = Math.floor(timeOffset / 60)
               const seconds = timeOffset % 60
               const timeLabel = `${minutes}:${seconds.toString().padStart(2, '0')}`
               
+              // Get dominant emotion for coloring
+              const maxEmotion = Object.entries(emotion.emotions).reduce((max, [key, value]) => 
+                value > max.value ? { key, value } : max, { key: 'joy', value: 0 })
+              
+              const emotionColors: Record<string, string> = {
+                joy: 'border-yellow-400 bg-yellow-50',
+                anger: 'border-red-400 bg-red-50',
+                sadness: 'border-blue-400 bg-blue-50',
+                fear: 'border-purple-400 bg-purple-50',
+                surprise: 'border-green-400 bg-green-50',
+                confidence: 'border-indigo-400 bg-indigo-50',
+                interest: 'border-pink-400 bg-pink-50',
+                confusion: 'border-gray-400 bg-gray-50'
+              }
+              const bgColorClass = emotionColors[maxEmotion.key] || 'border-gray-400 bg-gray-50'
+              
               return (
-                <div key={index} data-testid="timeline-item" className="flex gap-4 items-start">
-                  <Badge variant="outline">{timeLabel}</Badge>
+                <div key={index} data-testid="timeline-item" className={`flex gap-4 items-start p-4 rounded-lg border-l-4 ${bgColorClass} transition-all hover:shadow-md`}>
+                  <Badge className="bg-white shadow-sm font-mono">{timeLabel}</Badge>
                   <div className="flex-1">
-                    <p className="text-sm font-medium">{emotion.facialExpression}</p>
-                    <p className="text-xs text-muted-foreground">{emotion.insight}</p>
+                    <p className="text-sm font-semibold text-gray-800 mb-1">{emotion.facialExpression}</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{emotion.insight}</p>
                   </div>
                 </div>
               )
@@ -219,12 +389,19 @@ export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
       </Card>
 
       {/* Recommendations */}
-      <Card>
-        <CardHeader>
-          <CardTitle>推奨事項</CardTitle>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-indigo-50 to-purple-50">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            推奨事項
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm">{recommendation}</p>
+        <CardContent className="p-6">
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <p className="text-base leading-relaxed text-gray-700">{recommendation}</p>
+          </div>
         </CardContent>
       </Card>
     </div>
@@ -398,35 +575,45 @@ function AnalysisReportPage() {
   return (
     <div className="space-y-8">
       {/* ヘッダータイトルグループ */}
-      <div className="text-center space-y-4">
-        <Badge variant="secondary" className="text-sm">
+      <div className="text-center space-y-4 pb-8 border-b border-gray-200">
+        <Badge variant="secondary" className="text-sm px-4 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700">
           Result
         </Badge>
-        <h2 className="text-3xl font-bold text-gray-800">感情分析結果</h2>
-        <h3 className="text-xl text-gray-600">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">感情分析結果</h2>
+        <h3 className="text-2xl text-gray-700 font-medium">
           {currentSession ? 
             format(currentSession.startTime, 'yyyy年M月d日 HH:mm', { locale: ja }) + ' のあなたの状態' :
             '今日のあなたの状態'
           }
         </h3>
         {currentSession && (
-          <div className="text-sm text-gray-500">
-            録画時間: {Math.floor(currentSession.duration / 60)}分{currentSession.duration % 60}秒
+          <div className="flex items-center justify-center gap-2 text-gray-600">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-lg">
+              録画時間: {Math.floor(currentSession.duration / 60)}分{currentSession.duration % 60}秒
+            </span>
           </div>
         )}
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
           話している時の顔の表情、声の抑揚、発話内容から、あなたの感情と
           会話の特徴を分析します。TANRENはこれらの情報を基に、あなたの接客・営業スキル向上や 自己理解をサポートします。
         </p>
       </div>
 
       {/* サマリーメトリクス行 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
-          <CardHeader>
-            <CardTitle>会話の状態</CardTitle>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
+          <CardHeader className="pb-4">
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              会話の状態
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <ConversationStatusRadar data={conversationMetrics ? {
               blinkRate: Math.min(100, conversationMetrics.surprise || 50),
               calmness: Math.min(100, 100 - (conversationMetrics.fear || 0) - (conversationMetrics.confusion || 0)),
@@ -437,11 +624,17 @@ function AnalysisReportPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
-          <CardHeader>
-            <CardTitle>顔/視線の動き</CardTitle>
+        <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
+          <CardHeader className="pb-4">
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              顔/視線の動き
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <FaceMetricsGauge data={conversationMetrics ? {
               faceMovement: Math.min(100, (conversationMetrics.surprise || 0) + (conversationMetrics.interest || 0)) / 2,
               sightMovement: Math.min(100, conversationMetrics.interest || 50)

@@ -91,7 +91,7 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
     if (faceDetectionError) {
       console.error('[RealtimeDashboard] フェイス検出エラー:', faceDetectionError);
     }
-    if (isDetecting) {
+    if (isDetecting && process.env.NODE_ENV === 'development') {
       console.log('[RealtimeDashboard] フェイス検出実行中, landmarks:', landmarks ? '検出' : '未検出');
     }
   }, [landmarks, isDetecting, faceDetectionError]);
@@ -132,11 +132,13 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
   // フレームをキューに追加
   useEffect(() => {
     if (latestFrame && isRecording) {
-      console.log('[RealtimeDashboard] フレームをキューに追加:', { 
-        hasFrame: !!latestFrame, 
-        isRecording,
-        timestamp: latestFrame?.timestamp 
-      })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[RealtimeDashboard] フレームをキューに追加:', { 
+          hasFrame: !!latestFrame, 
+          isRecording,
+          timestamp: latestFrame?.timestamp 
+        })
+      }
       queueFrameForAnalysis(latestFrame)
     }
   }, [latestFrame, isRecording, queueFrameForAnalysis])
@@ -152,7 +154,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
       })
       
       // 感情データが更新されたときにセンチメントも更新
-      console.log('[RealtimeDashboard] 感情データ詳細:', latestEmotions);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[RealtimeDashboard] 感情データ詳細:', latestEmotions);
+      }
       
       // APIが返す感情に基づいて分類
       const positiveEmotions = ['joy', 'confidence', 'interest', 'surprise']; // surpriseは文脈によってポジティブ
@@ -174,7 +178,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
         }
       });
       
-      console.log('[RealtimeDashboard] 感情集計:', { positiveSum, negativeSum, totalSum });
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[RealtimeDashboard] 感情集計:', { positiveSum, negativeSum, totalSum });
+      }
       
       // パーセンテージを計算
       const positive = totalSum > 0 ? Math.round((positiveSum / totalSum) * 100) : 0;
@@ -214,7 +220,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
 
   // 録画タイマーとデータ更新
   useEffect(() => {
-    console.log('[RealtimeDashboard] 録画状態:', { isRecording, latestEmotions, sentimentHistory })
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[RealtimeDashboard] 録画状態:', { isRecording, latestEmotions, sentimentHistory })
+    }
     let interval: NodeJS.Timeout
     if (isRecording) {
       interval = setInterval(() => {
@@ -236,33 +244,47 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
           }
           setCurrentEmotion(emotionData)
           
-          // センチメント計算（各感情の重み付け平均）
-          const positiveSum = latestEmotions.joy + latestEmotions.confidence + latestEmotions.interest + (latestEmotions.surprise * 0.5);
-          const negativeSum = latestEmotions.anger + latestEmotions.sadness + latestEmotions.fear + (latestEmotions.confusion * 0.5);
-          const totalSum = positiveSum + negativeSum;
+          // センチメント計算（改善版：より敏感な反応）
+          // ポジティブ感情に重み付け（joy=1.2, confidence=1.0, interest=0.8, surprise=0.6）
+          const positiveSum = (latestEmotions.joy * 1.2) + 
+                            (latestEmotions.confidence * 1.0) + 
+                            (latestEmotions.interest * 0.8) + 
+                            (latestEmotions.surprise * 0.6);
           
-          let positive = 0;
-          let negative = 0;
-          let neutral = 0;
+          // ネガティブ感情に重み付け（anger=1.2, sadness=1.2, fear=1.0, confusion=0.6）
+          const negativeSum = (latestEmotions.anger * 1.2) + 
+                            (latestEmotions.sadness * 1.2) + 
+                            (latestEmotions.fear * 1.0) + 
+                            (latestEmotions.confusion * 0.6);
           
-          if (totalSum > 0) {
-            positive = Math.round((positiveSum / totalSum) * 100);
-            negative = Math.round((negativeSum / totalSum) * 100);
-            neutral = Math.max(0, 100 - positive - negative);
-          } else {
-            // 全ての感情が0の場合
-            neutral = 100;
+          // 最大可能値で正規化（各感情の最大値100 × 重み）
+          const maxPositive = 100 * (1.2 + 1.0 + 0.8 + 0.6);
+          const maxNegative = 100 * (1.2 + 1.2 + 1.0 + 0.6);
+          
+          // パーセンテージに変換（感度を上げるために平方根を使用）
+          let positive = Math.round(Math.sqrt(positiveSum / maxPositive) * 100);
+          let negative = Math.round(Math.sqrt(negativeSum / maxNegative) * 100);
+          
+          // 正規化して合計が100%になるように調整
+          const total = positive + negative;
+          if (total > 100) {
+            positive = Math.round((positive / total) * 100);
+            negative = Math.round((negative / total) * 100);
           }
           
-          console.log('[RealtimeDashboard] センチメント計算:', { 
-            latestEmotions,
-            positiveSum, 
-            negativeSum, 
-            totalSum, 
-            positive, 
-            negative, 
-            neutral 
-          })
+          let neutral = Math.max(0, 100 - positive - negative);
+          
+          if (process.env.NODE_ENV === 'development') {
+            console.log('[RealtimeDashboard] センチメント計算:', { 
+              latestEmotions,
+              positiveSum, 
+              negativeSum, 
+              totalSum, 
+              positive, 
+              negative, 
+              neutral 
+            })
+          }
           
           setSentimentHistory((prev) => {
             const newDataPoint = {
@@ -272,7 +294,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
               ニュートラル: Math.max(0, neutral),
             }
             
-            console.log('[RealtimeDashboard] 新しいセンチメントデータ:', newDataPoint)
+            if (process.env.NODE_ENV === 'development') {
+              console.log('[RealtimeDashboard] 新しいセンチメントデータ:', newDataPoint)
+            }
             
             const newHistory = [...prev, newDataPoint]
             // 最新の10データポイントを保持
@@ -297,7 +321,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
               ニュートラル: Math.max(0, Math.min(100, Math.round(demoNeutral))),
             }
             
-            console.log('[RealtimeDashboard] 新しいモックセンチメントデータ:', newDataPoint)
+            if (process.env.NODE_ENV === 'development') {
+              console.log('[RealtimeDashboard] 新しいモックセンチメントデータ:', newDataPoint)
+            }
             
             const newHistory = [...prev, newDataPoint]
             return newHistory.slice(-10)
@@ -313,7 +339,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
   }, [isRecording, recordingTime, latestEmotions])
 
   const handleStartRecording = async () => {
-    console.log("開始ボタンがクリックされました")
+    if (process.env.NODE_ENV === 'development') {
+      console.log("開始ボタンがクリックされました")
+    }
     setSessionEnded(false)
     resetEmotions()
     resetSession()
@@ -324,7 +352,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
       const mediaStream = await startStream()
       
       if (mediaStream) {
-        console.log("ストリームが確立されました", mediaStream)
+        if (process.env.NODE_ENV === 'development') {
+          console.log("ストリームが確立されました", mediaStream)
+        }
         
         try {
           // セッション記録を開始
@@ -338,7 +368,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
           setRecordingTime(0)
           setSentimentHistory([])
           
-          console.log("録画を開始しました")
+          if (process.env.NODE_ENV === 'development') {
+            console.log("録画を開始しました")
+          }
         } catch (recordingError) {
           console.error("録画の初期化エラー:", recordingError)
           // ストリームを停止
@@ -376,11 +408,15 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
   }
 
   const handleStopRecording = async () => {
-    console.log("ストップボタンがクリックされました")
+    if (process.env.NODE_ENV === 'development') {
+      console.log("ストップボタンがクリックされました")
+    }
     
     // 二重クリック防止
     if (!isRecording) {
-      console.log("既に停止処理中です")
+      if (process.env.NODE_ENV === 'development') {
+        console.log("既に停止処理中です")
+      }
       return
     }
     
@@ -403,29 +439,37 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
       
       // セッションデータを自動保存
       if (currentSession) {
-        console.log('現在のセッションデータ:', {
-          id: currentSession.id,
-          duration: currentSession.duration,
-          emotionsCount: currentSession.emotions.length,
-          transcriptLength: currentSession.transcript.length,
-          hasVideo: !!currentSession.videoBlob
-        })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('現在のセッションデータ:', {
+            id: currentSession.id,
+            duration: currentSession.duration,
+            emotionsCount: currentSession.emotions.length,
+            transcriptLength: currentSession.transcript.length,
+            hasVideo: !!currentSession.videoBlob
+          })
+        }
         
         const result = await saveSession()
         if (result.success) {
-          console.log('セッションが正常に保存されました:', result.sessionId)
+          if (process.env.NODE_ENV === 'development') {
+            console.log('セッションが正常に保存されました:', result.sessionId)
+          }
           // グローバルコンテキストにセッションを設定
           setGlobalSession(currentSession)
           
           // 分析完了コールバックを実行
           if (onAnalysisComplete) {
-            console.log('[RealtimeDashboard] 分析完了、レポート画面へ遷移します')
+            if (process.env.NODE_ENV === 'development') {
+              console.log('[RealtimeDashboard] 分析完了、レポート画面へ遷移します')
+            }
             setTimeout(() => {
               onAnalysisComplete(currentSession)
             }, 1000)
           } else {
             // コールバックがない場合は従来の動作
-            console.log('[RealtimeDashboard] 3秒後にレポート画面に自動遷移します')
+            if (process.env.NODE_ENV === 'development') {
+              console.log('[RealtimeDashboard] 3秒後にレポート画面に自動遷移します')
+            }
           }
           setTimeout(() => {
             router.push('/?tab=report')
@@ -435,7 +479,9 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
           alert(`セッションの保存に失敗しました: ${result.error}`)
         }
       } else {
-        console.error('保存するセッションデータがありません')
+        if (process.env.NODE_ENV === 'development') {
+          console.error('保存するセッションデータがありません')
+        }
       }
     } catch (error) {
       console.error('録画停止中にエラーが発生しました:', error)
@@ -586,10 +632,7 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
               <div className="flex justify-center items-center gap-2 md:gap-4 flex-wrap relative z-10">
                 {!isRecording && !sessionEnded ? (
                   <Button 
-                    onClick={(e) => {
-                      console.log("開始ボタンクリックイベント発火", e)
-                      handleStartRecording()
-                    }} 
+                    onClick={handleStartRecording} 
                     className="bg-blue-500 hover:bg-blue-600"
                     disabled={mediaLoading}
                     aria-label="録画を開始"
@@ -610,18 +653,15 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
                 ) : isRecording ? (
                   <Button 
                     onClick={(e) => {
-                      console.log("停止ボタンクリックイベント発火", e)
                       e.stopPropagation()
                       e.preventDefault()
                       handleStopRecording()
                     }}
                     onMouseDown={(e) => {
-                      console.log("停止ボタンマウスダウンイベント", e)
                       e.stopPropagation()
                       e.preventDefault()
                     }}
                     onTouchStart={(e) => {
-                      console.log("停止ボタンタッチスタートイベント", e)
                       e.stopPropagation()
                     }}
                     variant="destructive"

@@ -4,9 +4,14 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Download } from 'lucide-react'
 import { useSessionRecording } from '@/hooks/use-session-recording'
+import { useSessionContext } from '@/contexts/session-context'
 
 export function ExportButtons() {
-  const { currentSession, isRecording, exportAsCSV, exportAsPDF } = useSessionRecording()
+  const { currentSession: contextSession } = useSessionContext()
+  const { currentSession: recordingSession, isRecording, exportAsCSV, exportAsPDF } = useSessionRecording()
+  
+  // レポート画面ではcontextSessionを優先的に使用
+  const currentSession = contextSession || recordingSession
 
   const handleCSVDownload = () => {
     if (!currentSession || !exportAsCSV) return

@@ -58,7 +58,9 @@ export function useEmotionAnalysis({
       // キャッシュをチェック
       const cachedResult = emotionCache.get<EmotionAnalysisResult>(cacheKey)
       if (cachedResult) {
-        console.log('Using cached emotion analysis result')
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Using cached emotion analysis result')
+        }
         return {
           ...cachedResult,
           emotions: {
@@ -85,7 +87,9 @@ export function useEmotionAnalysis({
       }
 
       const result = await response.json()
-      console.log('[EmotionAnalysis] APIレスポンス:', result)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[EmotionAnalysis] APIレスポンス:', result)
+      }
       
       const analysisResult: EmotionAnalysisResult = {
         emotions: {
@@ -132,11 +136,13 @@ export function useEmotionAnalysis({
       const result = await analyzeFrame(frame)
       
       if (result) {
-        console.log('[EmotionAnalysis] 分析結果取得:', {
-          emotions: result.emotions,
-          insights: result.insights?.substring(0, 50) + '...',
-          facialExpression: result.facialExpression
-        })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[EmotionAnalysis] 分析結果取得:', {
+            emotions: result.emotions,
+            insights: result.insights?.substring(0, 50) + '...',
+            facialExpression: result.facialExpression
+          })
+        }
         setLatestEmotions(result.emotions)
         setInsights(result.insights)
         setFacialExpression(result.facialExpression)
@@ -157,12 +163,16 @@ export function useEmotionAnalysis({
   // Add frame to analysis queue
   const queueFrameForAnalysis = useCallback((frame: CapturedFrame) => {
     if (!enableAnalysis) {
-      console.log('[EmotionAnalysis] 分析が無効化されています')
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[EmotionAnalysis] 分析が無効化されています')
+      }
       return
     }
 
     analysisQueueRef.current.push(frame)
-    console.log('[EmotionAnalysis] フレームをキューに追加:', { queueLength: analysisQueueRef.current.length })
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[EmotionAnalysis] フレームをキューに追加:', { queueLength: analysisQueueRef.current.length })
+    }
   }, [enableAnalysis])
 
   // Start periodic processing of analysis queue

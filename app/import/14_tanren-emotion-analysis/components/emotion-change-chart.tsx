@@ -1,6 +1,6 @@
 "use client"
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Legend } from "recharts"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Legend, Tooltip, CartesianGrid } from "recharts"
 import { EmotionData } from "@/lib/mock-data"
 
 interface EmotionChangeData {
@@ -11,6 +11,7 @@ interface EmotionChangeData {
   嫌悪: number
   恐れ: number
   驚き: number
+  [key: string]: string | number // For dynamic access
 }
 
 interface EmotionChangeChartProps {
@@ -47,19 +48,75 @@ export default function EmotionChangeChart({ data, emotionHistory }: EmotionChan
   } else {
     chartData = data || defaultData
   }
+  // Custom tooltip component
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
+          <p className="font-semibold text-sm mb-2">発話 {label}</p>
+          <div className="space-y-1">
+            {payload.map((entry: any, index: number) => (
+              <div key={index} className="flex items-center gap-2 text-xs">
+                <div 
+                  className="w-3 h-3 rounded-full" 
+                  style={{ backgroundColor: entry.color }}
+                />
+                <span className="text-gray-600">{entry.name}:</span>
+                <span className="font-medium">{entry.value}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+    return null
+  }
+
+  // Custom legend component
+  const CustomLegend = (props: any) => {
+    const { payload } = props
+    return (
+      <div className="flex flex-wrap justify-center gap-3 mt-4">
+        {payload.map((entry: any, index: number) => (
+          <div key={index} className="flex items-center gap-1">
+            <div 
+              className="w-3 h-3 rounded-full" 
+              style={{ backgroundColor: entry.color }}
+            />
+            <span className="text-xs text-gray-600">{entry.value}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
-    <div className="h-64">
+    <div className="h-80 bg-gray-50 rounded-lg p-4">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={chartData}>
-          <XAxis dataKey="utterance" className="text-xs" />
-          <YAxis className="text-xs" />
-          <Legend />
-          <Bar dataKey="幸せ" stackId="a" fill="#10b981" />
-          <Bar dataKey="哀しみ" stackId="a" fill="#94a3b8" />
-          <Bar dataKey="怒り" stackId="a" fill="#ef4444" />
-          <Bar dataKey="嫌悪" stackId="a" fill="#8b5cf6" />
-          <Bar dataKey="恐れ" stackId="a" fill="#06b6d4" />
-          <Bar dataKey="驚き" stackId="a" fill="#f59e0b" />
+        <BarChart 
+          data={chartData}
+          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+          <XAxis 
+            dataKey="utterance" 
+            tick={{ fill: '#6b7280', fontSize: 12 }}
+            axisLine={{ stroke: '#e5e7eb' }}
+            label={{ value: '発話番号', position: 'insideBottom', offset: -5, style: { fill: '#6b7280' } }}
+          />
+          <YAxis 
+            tick={{ fill: '#6b7280', fontSize: 12 }}
+            axisLine={{ stroke: '#e5e7eb' }}
+            label={{ value: '感情スコア (%)', angle: -90, position: 'insideLeft', style: { fill: '#6b7280' } }}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend content={<CustomLegend />} />
+          <Bar dataKey="幸せ" stackId="a" fill="#fbbf24" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="哀しみ" stackId="a" fill="#60a5fa" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="怒り" stackId="a" fill="#f87171" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="嫌悪" stackId="a" fill="#fb923c" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="恐れ" stackId="a" fill="#c084fc" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="驚き" stackId="a" fill="#34d399" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -83,8 +83,10 @@ export function useAudioVisualizer(stream: MediaStream | null, isActive: boolean
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
       }
-      if (audioContextRef.current) {
-        audioContextRef.current.close()
+      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        audioContextRef.current.close().catch(error => {
+          console.warn('AudioContext close error (ignored):', error)
+        })
       }
     }
   }, [initializeAudio])

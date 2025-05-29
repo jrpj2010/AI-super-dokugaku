@@ -22,12 +22,15 @@ export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationFrameRef = useRef<number | null>(null)
   
-  // デバッグ: landmarksの状態を確認
+  // デバッグ: landmarksの状態を確認（環境変数でコントロール）
   useEffect(() => {
-    if (landmarks) {
-      console.log('[FaceMapCanvas] Landmarks受信:', landmarks.length, 'ポイント');
-    } else {
-      console.log('[FaceMapCanvas] Landmarksが空またはnull');
+    if (process.env.NODE_ENV === 'development') {
+      if (landmarks && landmarks.length > 0) {
+        // サンプルポイントの位置をチェックして実際に変化しているか確認
+        const samplePoints = [1, 13, 14, 33, 133]; // 鼻先、口、目
+        const positions = samplePoints.map(i => landmarks[i] ? `${i}:(${landmarks[i].x.toFixed(3)},${landmarks[i].y.toFixed(3)})` : '').join(' ');
+        console.log('[FaceMapCanvas] Landmarks更新:', positions);
+      }
     }
   }, [landmarks])
 
@@ -42,11 +45,10 @@ export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: 
       ctx.clearRect(0, 0, width, height)
 
       if (landmarks && landmarks.length > 0) {
-        console.log('[FaceMapCanvas] 描画中:', landmarks.length, 'ポイント');
         // Draw connections (wireframe)
-        ctx.strokeStyle = '#00ff00'
-        ctx.lineWidth = 1
-        ctx.globalAlpha = 0.6
+        ctx.strokeStyle = '#00ff88'
+        ctx.lineWidth = 1.5
+        ctx.globalAlpha = 0.8
 
         connections.forEach(([start, end]) => {
           if (landmarks[start] && landmarks[end]) {
@@ -108,7 +110,6 @@ export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: 
         })
       } else {
         // Draw placeholder when no face is detected
-        console.log('[FaceMapCanvas] プレースホルダー描画');
         ctx.strokeStyle = '#666666'
         ctx.lineWidth = 1
         ctx.globalAlpha = 0.3

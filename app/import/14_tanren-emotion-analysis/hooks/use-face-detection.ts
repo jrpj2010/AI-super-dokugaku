@@ -17,19 +17,25 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
   // Initialize MediaPipe Face Landmarker
   const initializeFaceLandmarker = useCallback(async () => {
     try {
-      console.log('[FaceDetection] 初期化開始');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[FaceDetection] 初期化開始');
+      }
       setIsLoading(true);
       setError(null);
 
       // シンプルなエラーハンドリングで確実に初期化
       try {
-        console.log('[FaceDetection] MediaPipe初期化開始...');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[FaceDetection] MediaPipe初期化開始...');
+        }
         
         // FilesetResolverをロード
         const vision = await FilesetResolver.forVisionTasks(
           'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm'
         );
-        console.log('[FaceDetection] FilesetResolverロード完了');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[FaceDetection] FilesetResolverロード完了');
+        }
         
         // FaceLandmarkerを作成
         const landmarker = await FaceLandmarker.createFromOptions(vision, {
@@ -45,14 +51,18 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
         });
         
         faceLandmarkerRef.current = landmarker;
-        console.log('[FaceDetection] FaceLandmarker初期化成功！');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[FaceDetection] FaceLandmarker初期化成功！');
+        }
         
       } catch (error) {
         console.error('[FaceDetection] 初期化エラー詳細:', error);
         
         // GPUが失敗した場合はCPUで再試行
         if (error instanceof Error && error.message.includes('GPU')) {
-          console.log('[FaceDetection] GPU初期化失敗、CPUで再試行...');
+          if (process.env.NODE_ENV === 'development') {
+            console.log('[FaceDetection] GPU初期化失敗、CPUで再試行...');
+          }
           try {
             const vision = await FilesetResolver.forVisionTasks(
               'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm'
@@ -69,7 +79,9 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
               minTrackingConfidence: 0.3,
             });
             faceLandmarkerRef.current = landmarker;
-            console.log('[FaceDetection] CPUモードで初期化成功！');
+            if (process.env.NODE_ENV === 'development') {
+              console.log('[FaceDetection] CPUモードで初期化成功！');
+            }
           } catch (cpuError) {
             console.error('[FaceDetection] CPUモードでも失敗:', cpuError);
             throw cpuError;
@@ -90,9 +102,11 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
   // Process video frame
   const detectFaces = useCallback(() => {
     if (!faceLandmarkerRef.current || !videoRef.current || !enabled) {
-      if (!faceLandmarkerRef.current) console.log('[FaceDetection] FaceLandmarkerが初期化されていません');
-      if (!videoRef.current) console.log('[FaceDetection] ビデオ要素が存在しません');
-      if (!enabled) console.log('[FaceDetection] 検出が無効化されています');
+      if (process.env.NODE_ENV === 'development') {
+        if (!faceLandmarkerRef.current) console.log('[FaceDetection] FaceLandmarkerが初期化されていません');
+        if (!videoRef.current) console.log('[FaceDetection] ビデオ要素が存在しません');
+        if (!enabled) console.log('[FaceDetection] 検出が無効化されています');
+      }
       return;
     }
 
@@ -130,7 +144,9 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
     videoRef.current = video;
 
     video.onloadedmetadata = () => {
-      console.log('[FaceDetection] ビデオメタデータ読み込み完了');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[FaceDetection] ビデオメタデータ読み込み完了');
+      }
       video.play();
       detectFaces();
     };
@@ -148,13 +164,17 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
   // Initialize when stream is available
   useEffect(() => {
     if (enabled && stream) {
-      console.log('[FaceDetection] Streamが利用可能になりました。FaceLandmarkerを初期化します');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[FaceDetection] Streamが利用可能になりました。FaceLandmarkerを初期化します');
+      }
       initializeFaceLandmarker();
     }
 
     return () => {
       if (faceLandmarkerRef.current) {
-        console.log('[FaceDetection] FaceLandmarkerをクリーンアップ');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[FaceDetection] FaceLandmarkerをクリーンアップ');
+        }
         faceLandmarkerRef.current.close();
         faceLandmarkerRef.current = null;
       }
