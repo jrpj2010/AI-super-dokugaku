@@ -33,6 +33,9 @@ export function useSpeechRecognition() {
   const [isListening, setIsListening] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const recognitionRef = useRef<any>(null)
+  const isListeningRef = useRef(false) // リスニング状態をrefでも管理
+  const lastRestartTimeRef = useRef<number>(0) // 最後に再起動した時刻
+  const reconnectIntervalRef = useRef<NodeJS.Timeout | null>(null) // 定期再接続用タイマー
 
   const initializeRecognition = useCallback(() => {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
@@ -44,15 +47,23 @@ export function useSpeechRecognition() {
     const recognition = new SpeechRecognition()
 
     recognition.continuous = true
+    recognition.maxAlternatives = 1
     recognition.interimResults = true
     recognition.lang = 'ja-JP'
 
     recognition.onstart = () => {
+      console.log('[SpeechRecognition] onstartイベント')
       setIsListening(true)
       setError(null)
     }
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
+      console.log('[SpeechRecognition] onresultイベント:', {
+        resultIndex: event.resultIndex,
+        resultsLength: event.results.length,
+        timestamp: new Date().toISOString()
+      });
+      
       let finalTranscript = ''
       let interimTranscript = ''
 
@@ -105,8 +116,26 @@ export function useSpeechRecognition() {
     }
 
     recognition.onend = () => {
-      setIsListening(false)
-      // 自動再接続は行わない（明示的な制御のため）
+      console.log('[SpeechRecognition] onendイベント発生');
+      
+      // リスニング中に終了した場合は自動再接続
+      if (isListeningRef.current) {
+        console.log('[SpeechRecognition] 自動再接続を試みます');
+        setTimeout(() => {
+          if (isListeningRef.current && recognitionRef.current) {
+            try {
+              recognitionRef.current.start();
+              console.log('[SpeechRecognition] 再接続成功');
+            } catch (e) {
+              console.error('[SpeechRecognition] 再接続失敗:', e);
+              setError('音声認識が中断されました');
+              setIsListening(false);
+            }
+          }
+        }, 100); // 100ms後に再接続
+      } else {
+        setIsListening(false);
+      }
     }
 
     return recognition
@@ -125,6 +154,23 @@ export function useSpeechRecognition() {
       
       try {
         recognition.start()
+        setIsListening(true)
+        isListeningRef.current = true
+        setError(null)
+        lastRestartTimeRef.current = Date.now()
+        console.log('[SpeechRecognition] 開始成功')
+        
+        // 50秒ごとに再接続するタイマーを設定（Chromeの60秒制限に対応）
+        if (reconnectIntervalRef.current) {
+          clearInterval(reconnectIntervalRef.current)
+        }
+        reconnectIntervalRef.current = setInterval(() => {
+          if (isListeningRef.current && recognitionRef.current) {
+            console.log('[SpeechRecognition] 定期再接続実行')
+            recognitionRef.current.stop()
+            // stopイベントがonendをトリガーし、そこで再接続される
+          }
+        }, 50000) // 50秒
       } catch (e) {
         console.error('Failed to start recognition:', e)
         setError('音声認識の開始に失敗しました')
@@ -133,6 +179,15 @@ export function useSpeechRecognition() {
   }, [initializeRecognition])
 
   const stopListening = useCallback(() => {
+    console.log('[SpeechRecognition] 停止呼び出し')
+    isListeningRef.current = false
+    
+    // 定期再接続タイマーをクリア
+    if (reconnectIntervalRef.current) {
+      clearInterval(reconnectIntervalRef.current)
+      reconnectIntervalRef.current = null
+    }
+    
     if (recognitionRef.current) {
       recognitionRef.current.stop()
       recognitionRef.current = null
