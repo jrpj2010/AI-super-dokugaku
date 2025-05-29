@@ -550,13 +550,22 @@ export default function RealtimeDashboard() {
                     onClick={(e) => {
                       console.log("停止ボタンクリックイベント発火", e)
                       e.stopPropagation()
+                      e.preventDefault()
                       handleStopRecording()
-                    }} 
+                    }}
+                    onMouseDown={(e) => {
+                      console.log("停止ボタンマウスダウンイベント", e)
+                      e.stopPropagation()
+                    }}
+                    onTouchStart={(e) => {
+                      console.log("停止ボタンタッチスタートイベント", e)
+                      e.stopPropagation()
+                    }}
                     variant="destructive"
                     aria-label="録画を停止"
                     aria-live="polite"
-                    className="relative z-50"
-                    style={{ position: 'relative', zIndex: 50 }}
+                    className="relative z-50 pointer-events-auto"
+                    style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
                   >
                     <Square className="w-4 h-4 mr-2" aria-hidden="true" />
                     ストップ
