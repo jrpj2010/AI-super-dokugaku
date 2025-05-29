@@ -521,7 +521,7 @@ export default function RealtimeDashboard() {
                 <AudioVisualizer isActive={isRecording} stream={stream} />
               </div>
 
-              <div className="flex justify-center items-center gap-4 flex-wrap relative z-10">
+              <div className="flex justify-center items-center gap-2 md:gap-4 flex-wrap relative z-10">
                 {!isRecording && !sessionEnded ? (
                   <Button 
                     onClick={(e) => {
@@ -574,36 +574,37 @@ export default function RealtimeDashboard() {
                   <>
                     <Button 
                       onClick={handleStartRecording} 
-                      className="bg-blue-500 hover:bg-blue-600"
+                      className="bg-blue-500 hover:bg-blue-600 text-sm md:text-base"
                       aria-label="新しいセッションを開始"
                     >
-                      <Mic className="w-4 h-4 mr-2" aria-hidden="true" />
-                      新しいセッション
+                      <Mic className="w-4 h-4 mr-1 md:mr-2" aria-hidden="true" />
+                      <span className="hidden sm:inline">新しい</span>セッション
                     </Button>
                     <Button 
                       variant="outline"
                       onClick={handlePlayback}
                       disabled={!currentSession?.videoBlob}
                       aria-label="録画を再生"
+                      className="text-sm md:text-base"
                     >
-                      <Play className="w-4 h-4 mr-2" aria-hidden="true" />
+                      <Play className="w-4 h-4 mr-1 md:mr-2" aria-hidden="true" />
                       再生
                     </Button>
                     <Button 
                       variant="default"
                       onClick={handleShowReport}
                       disabled={!currentSession || isProcessingAnalysis}
-                      className="bg-green-500 hover:bg-green-600"
+                      className="bg-green-500 hover:bg-green-600 text-sm md:text-base"
                     >
                       {isProcessingAnalysis ? (
                         <>
-                          <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                          <div className="w-4 h-4 mr-1 md:mr-2 animate-spin rounded-full border-2 border-white border-t-transparent" />
                           分析中...
                         </>
                       ) : (
                         <>
-                          <FileText className="w-4 h-4 mr-2" />
-                          分析処理を開始
+                          <FileText className="w-4 h-4 mr-1 md:mr-2" />
+                          <span className="hidden sm:inline">分析処理を</span>開始
                         </>
                       )}
                     </Button>
@@ -612,9 +613,10 @@ export default function RealtimeDashboard() {
                         variant="outline"
                         onClick={downloadVideo}
                         title="動画をダウンロード"
+                        className="text-sm md:text-base"
                       >
-                        <Download className="w-4 h-4 mr-2" />
-                        録画データ(MP4)をダウンロード
+                        <Download className="w-4 h-4 mr-1 md:mr-2" />
+                        <span className="hidden md:inline">録画データ(MP4)を</span>ダウンロード
                       </Button>
                     )}
                   </>
