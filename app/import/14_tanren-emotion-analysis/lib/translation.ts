@@ -79,6 +79,34 @@ const emotionDictionary: Record<string, string> = {
   'genuine': '本物の',
   'forced': '作られた',
   
+  // 追加の一般的な表現
+  'looking': '見ている',
+  'feeling': '感じている',
+  'person': '人',
+  'subject': '被験者',
+  'currently': '現在',
+  'likely': 'おそらく',
+  'possibly': 'たぶん',
+  'strong': '強い',
+  'weak': '弱い',
+  'clear': '明らかな',
+  'subtle': '微妙な',
+  'evident': '明白な',
+  'noticeable': '目立つ',
+  'emotion': '感情',
+  'emotions': '感情',
+  'feeling good': '気分が良い',
+  'feeling bad': '気分が悪い',
+  'overall': '全体的に',
+  'generally': '一般的に',
+  'mainly': '主に',
+  'mostly': 'ほとんど',
+  'partly': '部分的に',
+  'sign': '兆候',
+  'signs': '兆候',
+  'indication': '示售',
+  'indications': '示售',
+  
   // 分析関連
   'analysis': '分析',
   'detected': '検出された',
@@ -103,20 +131,20 @@ const emotionDictionary: Record<string, string> = {
 
 // フレーズパターンと翻訳ルール
 const phrasePatterns: Array<{pattern: RegExp, replacement: string | ((match: any) => string)}> = [
-  // "The person appears [emotion]" -> "その人は[感情]に見えます"
+  // "The person appears [emotion]" -> "[感情]な様子です"
   {
     pattern: /the person appears (\w+)/gi,
     replacement: (match: RegExpMatchArray) => {
       const emotion = match[1].toLowerCase()
-      return `その人は${translateWord(emotion)}に見えます`
+      return `${translateWord(emotion)}な様子です`
     }
   },
-  // "Shows/Showing [emotion]" -> "[感情]を示している"
+  // "Shows/Showing [emotion]" -> "[感情]を表しています"
   {
     pattern: /shows?\s+(\w+)/gi,
     replacement: (match: RegExpMatchArray) => {
       const emotion = match[1].toLowerCase()
-      return `${translateWord(emotion)}を示している`
+      return `${translateWord(emotion)}を表しています`
     }
   },
   // "[Adjective] [emotion]" -> "[形容詞][感情]"
@@ -134,6 +162,57 @@ const phrasePatterns: Array<{pattern: RegExp, replacement: string | ((match: any
     replacement: (match: RegExpMatchArray) => {
       const characteristic = match[1].toLowerCase()
       return `${translateWord(characteristic)}を伴って`
+    }
+  },
+  // "Feeling [emotion]" -> "[感情]を感じています"
+  {
+    pattern: /feeling\s+(\w+)/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const emotion = match[1].toLowerCase()
+      return `${translateWord(emotion)}を感じています`
+    }
+  },
+  // "Looks [emotion]" -> "[感情]に見えます"
+  {
+    pattern: /looks?\s+(\w+)/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const emotion = match[1].toLowerCase()
+      return `${translateWord(emotion)}に見えます`
+    }
+  },
+  // "Seems to be [emotion]" -> "[感情]のようです"
+  {
+    pattern: /seems? to be\s+(\w+)/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const emotion = match[1].toLowerCase()
+      return `${translateWord(emotion)}のようです`
+    }
+  },
+  // "[Number]% [emotion]" -> "[感情]が[Number]%"
+  {
+    pattern: /(\d+)%\s+(\w+)/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const percent = match[1]
+      const emotion = match[2].toLowerCase()
+      return `${translateWord(emotion)}が${percent}%`
+    }
+  },
+  // "High [emotion]" -> "高い[感情]"
+  {
+    pattern: /(high|low|moderate)\s+(\w+)/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const level = match[1].toLowerCase()
+      const emotion = match[2].toLowerCase()
+      const levelJp = level === 'high' ? '高い' : level === 'low' ? '低い' : '中程度の'
+      return `${levelJp}${translateWord(emotion)}`
+    }
+  },
+  // "No [emotion] detected" -> "[感情]は検出されませんでした"
+  {
+    pattern: /no\s+(\w+)\s+detected/gi,
+    replacement: (match: RegExpMatchArray) => {
+      const emotion = match[1].toLowerCase()
+      return `${translateWord(emotion)}は検出されませんでした`
     }
   }
 ]

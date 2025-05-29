@@ -63,6 +63,8 @@ Important:
 - Provide facialExpression and insights in simple, clear English
 - Use common emotion words like: happy, sad, angry, surprised, confident, confused, interested
 - Keep descriptions concise (10-15 words maximum)
+- For facialExpression, describe what you see (e.g., "Smiling with raised eyebrows", "Frowning with narrowed eyes")
+- For insights, provide meaningful observations (e.g., "Shows genuine happiness and engagement", "Appears tired but focused")
 
 Ensure all emotion scores are between 0-100 and represent intensity percentages.
 Return ONLY valid JSON, no additional text.`

@@ -10,19 +10,23 @@ interface EmotionRadarChartProps {
 export default function EmotionRadarChart({ data }: EmotionRadarChartProps) {
   // データがない場合は空のチャートを表示
   const chartData = data ? [
-    { emotion: "幸せ", value: data.happiness || data.joy || 0 },
-    { emotion: "哀しみ", value: data.sadness || 0 },
+    { emotion: "喜び", value: data.happiness || data.joy || 0 },
+    { emotion: "悲しみ", value: data.sadness || 0 },
     { emotion: "怒り", value: data.anger || 0 },
-    { emotion: "嫌悪", value: data.disgust || 0 },
-    { emotion: "恐れ", value: data.fear || 0 },
     { emotion: "驚き", value: data.surprise || 0 },
+    { emotion: "恐れ", value: data.fear || 0 },
+    { emotion: "自信", value: data.confidence || data.trust || 0 },
+    { emotion: "困惑", value: data.confusion || 0 },
+    { emotion: "興味", value: data.interest || data.anticipation || 0 },
   ] : [
-    { emotion: "幸せ", value: 0 },
-    { emotion: "哀しみ", value: 0 },
+    { emotion: "喜び", value: 0 },
+    { emotion: "悲しみ", value: 0 },
     { emotion: "怒り", value: 0 },
-    { emotion: "嫌悪", value: 0 },
-    { emotion: "恐れ", value: 0 },
     { emotion: "驚き", value: 0 },
+    { emotion: "恐れ", value: 0 },
+    { emotion: "自信", value: 0 },
+    { emotion: "困惑", value: 0 },
+    { emotion: "興味", value: 0 },
   ]
 
   return (
