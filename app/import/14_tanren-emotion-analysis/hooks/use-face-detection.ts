@@ -27,7 +27,7 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
         
         // FilesetResolverをロード
         const vision = await FilesetResolver.forVisionTasks(
-          'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
+          'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm'
         );
         console.log('[FaceDetection] FilesetResolverロード完了');
         
@@ -55,7 +55,7 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
           console.log('[FaceDetection] GPU初期化失敗、CPUで再試行...');
           try {
             const vision = await FilesetResolver.forVisionTasks(
-              'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
+              'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm'
             );
             const landmarker = await FaceLandmarker.createFromOptions(vision, {
               baseOptions: {

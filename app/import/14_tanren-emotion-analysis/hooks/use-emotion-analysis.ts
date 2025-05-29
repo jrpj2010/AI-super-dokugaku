@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { CapturedFrame } from './use-video-frame-capture'
 import { getOptimizedConfig } from '@/lib/performance-config'
 import { emotionCache, EmotionCache } from '@/lib/cache/emotion-cache'
-import { translateEmotionAnalysis } from '@/lib/translation'
 
 interface EmotionData {
   joy: number
@@ -88,19 +87,13 @@ export function useEmotionAnalysis({
       const result = await response.json()
       console.log('[EmotionAnalysis] APIレスポンス:', result)
       
-      // 英語のレスポンスを日本語に翻訳
-      const translated = translateEmotionAnalysis(
-        result.facialExpression || '',
-        result.insights || ''
-      )
-      
       const analysisResult: EmotionAnalysisResult = {
         emotions: {
           ...result.emotions,
           timestamp: frame.timestamp
         },
-        insights: translated.insights,
-        facialExpression: translated.facialExpression
+        insights: result.insights || '',
+        facialExpression: result.facialExpression || ''
       }
       
       // 結果をキャッシュに保存
@@ -139,6 +132,11 @@ export function useEmotionAnalysis({
       const result = await analyzeFrame(frame)
       
       if (result) {
+        console.log('[EmotionAnalysis] 分析結果取得:', {
+          emotions: result.emotions,
+          insights: result.insights?.substring(0, 50) + '...',
+          facialExpression: result.facialExpression
+        })
         setLatestEmotions(result.emotions)
         setInsights(result.insights)
         setFacialExpression(result.facialExpression)
@@ -159,10 +157,12 @@ export function useEmotionAnalysis({
   // Add frame to analysis queue
   const queueFrameForAnalysis = useCallback((frame: CapturedFrame) => {
     if (!enableAnalysis) {
+      console.log('[EmotionAnalysis] 分析が無効化されています')
       return
     }
 
     analysisQueueRef.current.push(frame)
+    console.log('[EmotionAnalysis] フレームをキューに追加:', { queueLength: analysisQueueRef.current.length })
   }, [enableAnalysis])
 
   // Start periodic processing of analysis queue

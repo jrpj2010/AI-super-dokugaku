@@ -468,6 +468,12 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
       
       setIsProcessingAnalysis(false)
       
+      // レポート画面に自動遷移
+      if (onAnalysisComplete) {
+        console.log('[RealtimeDashboard] 分析完了、レポート画面へ遷移')
+        onAnalysisComplete(currentSession)
+      }
+      
       // レポート画面に遷移
       router.push('/?tab=report')
     }
@@ -621,9 +627,8 @@ export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashbo
                     variant="destructive"
                     aria-label="録画を停止"
                     aria-live="polite"
-                    className="relative z-50 pointer-events-auto hover:bg-red-600 active:bg-red-700 transition-colors"
-                    style={{ position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}
-                    disabled={!isRecording}
+                    className="relative z-[9999] pointer-events-auto hover:bg-red-600 active:bg-red-700 transition-colors cursor-pointer"
+                    style={{ position: 'relative', zIndex: 9999, pointerEvents: 'auto', cursor: 'pointer' }}
                   >
                     <Square className="w-4 h-4 mr-2" aria-hidden="true" />
                     ストップ

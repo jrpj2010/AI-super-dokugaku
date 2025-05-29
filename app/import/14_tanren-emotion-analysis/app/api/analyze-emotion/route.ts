@@ -36,8 +36,8 @@ export async function POST(request: NextRequest) {
     // Get the generative model
     const model = genAI.getGenerativeModel({ model: process.env.GOOGLE_AI_MODEL || 'gemini-2.0-flash-exp' })
 
-    const prompt = `Analyze the facial expression in this image and provide emotion scores.
-Return the analysis in JSON format with the following structure:
+    const prompt = `この画像の人物の表情を分析し、感情スコアを提供してください。
+以下の構造のJSON形式で分析結果を返してください：
 {
   "emotions": {
     "joy": <0-100>,
@@ -49,25 +49,25 @@ Return the analysis in JSON format with the following structure:
     "confusion": <0-100>,
     "interest": <0-100>
   },
-  "facialExpression": "<brief description of facial expression in English>",
-  "insights": "<brief insight about the emotional state in English>"
+  "facialExpression": "表情の簡潔な説明（日本語で）",
+  "insights": "感情状態に関する洞察（日本語で）"
 }
 
-Focus on:
-- Facial features (eyes, eyebrows, mouth)
-- Overall expression and micro-expressions
-- Body language visible in frame
-- Engagement level and attention
+分析のポイント：
+- 顔の特徴（目、眉、口）
+- 全体的な表情と微細な表情
+- フレーム内に見えるボディランゲージ
+- エンゲージメントレベルと注意力
 
-Important:
-- Provide facialExpression and insights in simple, clear English
-- Use common emotion words like: happy, sad, angry, surprised, confident, confused, interested
-- Keep descriptions concise (10-15 words maximum)
-- For facialExpression, describe what you see (e.g., "Smiling with raised eyebrows", "Frowning with narrowed eyes")
-- For insights, provide meaningful observations (e.g., "Shows genuine happiness and engagement", "Appears tired but focused")
+重要事項：
+- facialExpressionとinsightsは自然な日本語で記述してください
+- 一般的な感情表現を使用：喜んでいる、悲しそう、怒っている、驚いている、自信がある、困惑している、興味を示している
+- 簡潔に（10-15文字以内）
+- facialExpression: 見たままを説明（例：「眉を上げて微笑んでいる」「目を細めて眉をひそめている」）
+- insights: 意味のある洞察（例：「真の喜びと関与を示している」「疲れているが集中している」）
 
-Ensure all emotion scores are between 0-100 and represent intensity percentages.
-Return ONLY valid JSON, no additional text.`
+すべての感情スコアは0～100の範囲で、強度のパーセンテージを表します。
+有効なJSONのみを返し、追加のテキストは含めないでください。`
 
     // Generate content with image
     const result = await model.generateContent([
