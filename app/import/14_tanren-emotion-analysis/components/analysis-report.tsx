@@ -318,7 +318,7 @@ function generateRecommendation(stats: Record<string, number>): string {
 }
 
 // Original component for backward compatibility
-export default function AnalysisReportPage() {
+function AnalysisReportPage() {
   const { currentSession } = useSessionContext()
   const [utterances, setUtterances] = useState<string[]>([])
   const [emotionData, setEmotionData] = useState<any[]>([])
