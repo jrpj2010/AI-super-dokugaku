@@ -7,6 +7,7 @@ import AnalysisReport from "@/components/analysis-report"
 
 export default function AISuite() {
   const [activeTab, setActiveTab] = useState("dashboard")
+  const [sessionData, setSessionData] = useState<any>(null)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50">
@@ -25,11 +26,16 @@ export default function AISuite() {
           </TabsList>
 
           <TabsContent value="dashboard">
-            <RealtimeDashboard />
+            <RealtimeDashboard 
+              onAnalysisComplete={(data) => {
+                setSessionData(data)
+                setActiveTab("report")
+              }}
+            />
           </TabsContent>
 
           <TabsContent value="report">
-            <AnalysisReport />
+            <AnalysisReport sessionData={sessionData} />
           </TabsContent>
         </Tabs>
       </div>

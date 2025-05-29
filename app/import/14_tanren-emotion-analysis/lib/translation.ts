@@ -21,6 +21,10 @@ const emotionDictionary: Record<string, string> = {
   'confusion': '困惑',
   'interested': '興味',
   'interest': '興味',
+  'tired': '疲れた',
+  'energetic': '元気な',
+  'bored': '退屈した',
+  'enthusiastic': '熱心な',
   
   // 表情関連
   'neutral': 'ニュートラル',
@@ -120,13 +124,56 @@ const emotionDictionary: Record<string, string> = {
   
   // 顔の部位
   'eyes': '目',
+  'eye': '目',
   'eyebrows': '眉',
+  'eyebrow': '眉',
   'mouth': '口',
   'face': '顔',
   'forehead': '額',
   'cheeks': '頬',
+  'cheek': '頬',
   'chin': '顎',
-  'nose': '鼻'
+  'nose': '鼻',
+  'lips': '唇',
+  'lip': '唇',
+  
+  // 動作・状態
+  'looking down': '下を向いている',
+  'looking up': '上を向いている',
+  'looking away': '視線をそらしている',
+  'making eye contact': 'アイコンタクトを取っている',
+  'eyes narrowed': '目を細めている',
+  'eyes wide open': '目を大きく開けている',
+  'raising eyebrows': '眉を上げている',
+  'furrowing brows': '眉をひそめている',
+  'smiling widely': '大きく笑っている',
+  'slight smile': '微笑んでいる',
+  'pressed lips': '唇を結んでいる',
+  'open mouth': '口を開けている',
+  'tight lips': '唇を固く結んでいる',
+  'relaxed face': 'リラックスした表情',
+  'tense face': '緊張した表情',
+  'blank expression': '無表情',
+  'animated expression': '活き活きとした表情',
+  
+  // よくある誤訳の修正
+  'looking': '見ている',
+  'down': '下',
+  'up': '上',
+  'away': '離れて',
+  'wide': '広い',
+  'narrow': '狭い',
+  'open': '開いた',
+  'closed': '閉じた',
+  'tight': 'きつい',
+  'loose': 'ゆるい',
+  'raised': '上げた',
+  'lowered': '下げた',
+  'furrowed': 'しわを寄せた',
+  'relaxed': 'リラックスした',
+  'tense': '緊張した',
+  'focused': '集中した',
+  'distracted': '気が散った'
 }
 
 // フレーズパターンと翻訳ルール
@@ -233,6 +280,15 @@ export function translateEmotionText(text: string): string {
   
   let translatedText = text
   
+  // まず、一般的な誤訳パターンを修正
+  // "目 looking down" -> "下を向いている目"
+  translatedText = translatedText.replace(/目\s+looking\s+down/gi, '下を向いている目')
+  translatedText = translatedText.replace(/目\s+looking\s+up/gi, '上を向いている目')
+  translatedText = translatedText.replace(/口\s+open/gi, '開いた口')
+  translatedText = translatedText.replace(/口\s+closed/gi, '閉じた口')
+  translatedText = translatedText.replace(/眉\s+raised/gi, '上げた眉')
+  translatedText = translatedText.replace(/眉\s+furrowed/gi, 'しわを寄せた眉')
+  
   // フレーズパターンを適用
   for (const { pattern, replacement } of phrasePatterns) {
     translatedText = translatedText.replace(pattern, replacement as any)
@@ -261,6 +317,23 @@ export function translateEmotionText(text: string): string {
     .replace(/\bthe\b/gi, '')
     .replace(/\ba\b/gi, '')
     .replace(/\ban\b/gi, '')
+  
+  // 残った英単語のクリーンアップ
+  // 一般的な動詞
+  translatedText = translatedText
+    .replace(/\bis\b/gi, 'は')
+    .replace(/\bare\b/gi, 'は')
+    .replace(/\bwas\b/gi, 'でした')
+    .replace(/\bwere\b/gi, 'でした')
+    .replace(/\bhas\b/gi, 'ある')
+    .replace(/\bhave\b/gi, 'ある')
+    .replace(/\bshowing\b/gi, '示している')
+    .replace(/\bshows?\b/gi, '示す')
+    .replace(/\bappears?\b/gi, '見える')
+    .replace(/\bseems?\b/gi, '思われる')
+    .replace(/\blooks?\b/gi, '見える')
+    .replace(/\bfeels?\b/gi, '感じる')
+    .replace(/\bfeeling\b/gi, '感じている')
   
   // 文末の調整
   if (translatedText.endsWith('.')) {

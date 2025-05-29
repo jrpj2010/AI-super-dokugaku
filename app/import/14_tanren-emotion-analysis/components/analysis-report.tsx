@@ -14,10 +14,17 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { format } from 'date-fns'
 import { ja } from 'date-fns/locale'
 
+interface AnalysisReportProps {
+  sessionData?: any
+}
+
 // Export named version for tests
-export function AnalysisReport() {
-  const { currentSession } = useSessionContext()
+export function AnalysisReport({ sessionData }: AnalysisReportProps = {}) {
+  const { currentSession: contextSession } = useSessionContext()
   const { isRecording } = useSessionRecording()
+  
+  // sessionDataがpropsで渡された場合はそれを使用、そうでなければcontextから取得
+  const currentSession = sessionData || contextSession
 
   if (isRecording) {
     return (
@@ -495,3 +502,6 @@ export default function AnalysisReportPage() {
     </div>
   )
 }
+
+// Default export
+export default AnalysisReport

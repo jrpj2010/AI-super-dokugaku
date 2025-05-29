@@ -20,12 +20,17 @@ import { useVideoFrameCapture } from "@/hooks/use-video-frame-capture"
 import { useEmotionAnalysis } from "@/hooks/use-emotion-analysis"
 import { useSessionRecording } from "@/hooks/use-session-recording"
 import { useFaceDetection } from "@/hooks/use-face-detection"
+import { useSimpleFaceDetection } from "@/hooks/use-simple-face-detection"
 import { useSessionContext } from "@/contexts/session-context"
 import { useRouter } from "next/navigation"
 import { getMediaErrorMessage, getRecordingErrorMessage } from "@/lib/error-messages"
 import { translateEmotionText } from "@/lib/translation"
 
-export default function RealtimeDashboard() {
+interface RealtimeDashboardProps {
+  onAnalysisComplete?: (data: any) => void
+}
+
+export default function RealtimeDashboard({ onAnalysisComplete }: RealtimeDashboardProps = {}) {
   const router = useRouter()
   const { setCurrentSession: setGlobalSession } = useSessionContext()
   
@@ -53,19 +58,33 @@ export default function RealtimeDashboard() {
   
   // ビデオフレームキャプチャ（最適化された設定を使用）
   const { latestFrame, isCapturing } = useVideoFrameCapture({
-    stream
+    stream,
+    enabled: isRecording
   })
   
   // 顔検出
   const { 
-    landmarks, 
+    landmarks: mediaLandmarks, 
     isLoading: faceDetectionLoading, 
     error: faceDetectionError,
-    isDetecting
+    isDetecting: mediaDetecting
   } = useFaceDetection({
     stream,
     enabled: isRecording
   })
+  
+  // MediaPipeが失敗した場合のフォールバック
+  const {
+    landmarks: simpleLandmarks,
+    isDetecting: simpleDetecting
+  } = useSimpleFaceDetection({
+    stream,
+    enabled: isRecording && !mediaLandmarks
+  })
+  
+  // どちらかのランドマークを使用
+  const landmarks = mediaLandmarks || simpleLandmarks
+  const isDetecting = mediaDetecting || simpleDetecting
   
   // デバッグ: landmarks状態を監視
   useEffect(() => {
@@ -113,6 +132,11 @@ export default function RealtimeDashboard() {
   // フレームをキューに追加
   useEffect(() => {
     if (latestFrame && isRecording) {
+      console.log('[RealtimeDashboard] フレームをキューに追加:', { 
+        hasFrame: !!latestFrame, 
+        isRecording,
+        timestamp: latestFrame?.timestamp 
+      })
       queueFrameForAnalysis(latestFrame)
     }
   }, [latestFrame, isRecording, queueFrameForAnalysis])
@@ -190,13 +214,16 @@ export default function RealtimeDashboard() {
 
   // 録画タイマーとデータ更新
   useEffect(() => {
+    console.log('[RealtimeDashboard] 録画状態:', { isRecording, latestEmotions, sentimentHistory })
     let interval: NodeJS.Timeout
     if (isRecording) {
       interval = setInterval(() => {
         setRecordingTime((prev) => prev + 1)
         
         // リアルタイムの感情データがある場合は使用、なければモックデータを使用
-        if (latestEmotions) {
+        const hasEmotionData = latestEmotions && Object.values(latestEmotions).some(v => v > 0)
+        
+        if (hasEmotionData) {
           const emotionData: EmotionData = {
             joy: latestEmotions.joy,
             sadness: latestEmotions.sadness,
@@ -227,7 +254,15 @@ export default function RealtimeDashboard() {
             neutral = 100;
           }
           
-          console.log('[RealtimeDashboard] センチメント計算:', { positiveSum, negativeSum, totalSum, positive, negative, neutral })
+          console.log('[RealtimeDashboard] センチメント計算:', { 
+            latestEmotions,
+            positiveSum, 
+            negativeSum, 
+            totalSum, 
+            positive, 
+            negative, 
+            neutral 
+          })
           
           setSentimentHistory((prev) => {
             const newDataPoint = {
@@ -244,17 +279,22 @@ export default function RealtimeDashboard() {
             return newHistory.slice(-10)
           })
         } else {
-          // フォールバック：モックデータを使用
+          // フォールバック：モックデータを使用（グラフ表示確認用）
           const emotion = generateEmotionData(recordingTime)
           const sentiment = generateSentimentData(emotion)
           setCurrentEmotion(emotion)
           
+          // グラフ描画確認用のデモデータ
+          const demoPositive = 30 + Math.sin(recordingTime / 5) * 20 + Math.random() * 10
+          const demoNegative = 20 + Math.cos(recordingTime / 7) * 15 + Math.random() * 10
+          const demoNeutral = 100 - demoPositive - demoNegative
+          
           setSentimentHistory((prev) => {
             const newDataPoint = {
               time: `${Math.floor(recordingTime / 60)}:${(recordingTime % 60).toString().padStart(2, "0")}`,
-              ポジティブ: Math.round(sentiment.positive),
-              ネガティブ: Math.round(sentiment.negative),
-              ニュートラル: Math.round(sentiment.neutral),
+              ポジティブ: Math.max(0, Math.min(100, Math.round(demoPositive))),
+              ネガティブ: Math.max(0, Math.min(100, Math.round(demoNegative))),
+              ニュートラル: Math.max(0, Math.min(100, Math.round(demoNeutral))),
             }
             
             console.log('[RealtimeDashboard] 新しいモックセンチメントデータ:', newDataPoint)
@@ -338,9 +378,17 @@ export default function RealtimeDashboard() {
   const handleStopRecording = async () => {
     console.log("ストップボタンがクリックされました")
     
+    // 二重クリック防止
+    if (!isRecording) {
+      console.log("既に停止処理中です")
+      return
+    }
+    
     try {
-      // 録画を停止
+      // 即座に録画状態をfalseに設定（UIの即座更新）
       setIsRecording(false)
+      
+      // 各種停止処理
       stopListening()
       stopSessionRecording()
       
@@ -369,8 +417,16 @@ export default function RealtimeDashboard() {
           // グローバルコンテキストにセッションを設定
           setGlobalSession(currentSession)
           
-          // 3秒後に自動的にレポート画面に遷移
-          console.log('[RealtimeDashboard] 3秒後にレポート画面に自動遷移します')
+          // 分析完了コールバックを実行
+          if (onAnalysisComplete) {
+            console.log('[RealtimeDashboard] 分析完了、レポート画面へ遷移します')
+            setTimeout(() => {
+              onAnalysisComplete(currentSession)
+            }, 1000)
+          } else {
+            // コールバックがない場合は従来の動作
+            console.log('[RealtimeDashboard] 3秒後にレポート画面に自動遷移します')
+          }
           setTimeout(() => {
             router.push('/?tab=report')
           }, 3000)
@@ -447,13 +503,13 @@ export default function RealtimeDashboard() {
               <div className="mt-3 p-3 bg-gray-50 rounded-lg">
                 <p className="text-sm text-gray-600">
                   <span className="font-medium">表情：</span>
-                  {isRecording ? (facialExpression ? translateEmotionText(facialExpression) : '分析中...') : 'セッション開始後に表示されます'}
+                  {isRecording ? (facialExpression || '分析中...') : 'セッション開始後に表示されます'}
                 </p>
               </div>
               <div className="mt-2 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-700">
                   <span className="font-medium">インサイト：</span>
-                  {isRecording ? (insights ? translateEmotionText(insights) : '分析中...') : 'セッション開始後に表示されます'}
+                  {isRecording ? (insights || '分析中...') : 'セッション開始後に表示されます'}
                 </p>
               </div>
               {emotionError && (
@@ -471,7 +527,7 @@ export default function RealtimeDashboard() {
               <CardTitle className="text-lg font-semibold">感情の変化をリアルタイムに推定</CardTitle>
             </CardHeader>
             <CardContent>
-              <EmotionTrendChart data={isRecording ? sentimentHistory : []} />
+              <EmotionTrendChart data={sentimentHistory} />
             </CardContent>
           </Card>
         </div>
@@ -556,6 +612,7 @@ export default function RealtimeDashboard() {
                     onMouseDown={(e) => {
                       console.log("停止ボタンマウスダウンイベント", e)
                       e.stopPropagation()
+                      e.preventDefault()
                     }}
                     onTouchStart={(e) => {
                       console.log("停止ボタンタッチスタートイベント", e)
@@ -564,8 +621,9 @@ export default function RealtimeDashboard() {
                     variant="destructive"
                     aria-label="録画を停止"
                     aria-live="polite"
-                    className="relative z-50 pointer-events-auto"
-                    style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
+                    className="relative z-50 pointer-events-auto hover:bg-red-600 active:bg-red-700 transition-colors"
+                    style={{ position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}
+                    disabled={!isRecording}
                   >
                     <Square className="w-4 h-4 mr-2" aria-hidden="true" />
                     ストップ

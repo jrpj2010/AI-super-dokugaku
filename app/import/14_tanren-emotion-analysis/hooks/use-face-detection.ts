@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { FaceLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
+import { FaceLandmarker, FilesetResolver, DrawingUtils } from '@mediapipe/tasks-vision';
 
 interface UseFaceDetectionOptions {
   stream: MediaStream | null;
@@ -21,35 +21,62 @@ export function useFaceDetection({ stream, enabled = true }: UseFaceDetectionOpt
       setIsLoading(true);
       setError(null);
 
-      let vision;
+      // シンプルなエラーハンドリングで確実に初期化
       try {
-        console.log('[FaceDetection] FilesetResolver読み込み中...');
-        vision = await FilesetResolver.forVisionTasks(
+        console.log('[FaceDetection] MediaPipe初期化開始...');
+        
+        // FilesetResolverをロード
+        const vision = await FilesetResolver.forVisionTasks(
           'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
         );
-        console.log('[FaceDetection] FilesetResolver読み込み完了');
-      } catch (visionErr) {
-        console.error('[FaceDetection] FilesetResolverエラー:', visionErr);
-        throw new Error(`FilesetResolver初期化失敗: ${visionErr}`);
-      }
-
-      try {
-        console.log('[FaceDetection] FaceLandmarkerモデル読み込み中...');
-        faceLandmarkerRef.current = await FaceLandmarker.createFromOptions(vision, {
+        console.log('[FaceDetection] FilesetResolverロード完了');
+        
+        // FaceLandmarkerを作成
+        const landmarker = await FaceLandmarker.createFromOptions(vision, {
           baseOptions: {
             modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task',
-            delegate: 'CPU' // GPUからCPUに変更（互換性向上のため）
+            delegate: 'GPU' // GPUを試し、失敗したらCPUにフォールバック
           },
           runningMode: 'VIDEO',
           numFaces: 1,
-          minFaceDetectionConfidence: 0.5,
-          minFacePresenceConfidence: 0.5,
-          minTrackingConfidence: 0.5,
+          minFaceDetectionConfidence: 0.3, // より低い闾値で検出を容易に
+          minFacePresenceConfidence: 0.3,
+          minTrackingConfidence: 0.3,
         });
-        console.log('[FaceDetection] FaceLandmarker初期化完了');
-      } catch (landmarkerErr) {
-        console.error('[FaceDetection] FaceLandmarkerエラー:', landmarkerErr);
-        throw new Error(`FaceLandmarker初期化失敗: ${landmarkerErr}`);
+        
+        faceLandmarkerRef.current = landmarker;
+        console.log('[FaceDetection] FaceLandmarker初期化成功！');
+        
+      } catch (error) {
+        console.error('[FaceDetection] 初期化エラー詳細:', error);
+        
+        // GPUが失敗した場合はCPUで再試行
+        if (error instanceof Error && error.message.includes('GPU')) {
+          console.log('[FaceDetection] GPU初期化失敗、CPUで再試行...');
+          try {
+            const vision = await FilesetResolver.forVisionTasks(
+              'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
+            );
+            const landmarker = await FaceLandmarker.createFromOptions(vision, {
+              baseOptions: {
+                modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task',
+                delegate: 'CPU'
+              },
+              runningMode: 'VIDEO',
+              numFaces: 1,
+              minFaceDetectionConfidence: 0.3,
+              minFacePresenceConfidence: 0.3,
+              minTrackingConfidence: 0.3,
+            });
+            faceLandmarkerRef.current = landmarker;
+            console.log('[FaceDetection] CPUモードで初期化成功！');
+          } catch (cpuError) {
+            console.error('[FaceDetection] CPUモードでも失敗:', cpuError);
+            throw cpuError;
+          }
+        } else {
+          throw error;
+        }
       }
 
       setIsLoading(false);

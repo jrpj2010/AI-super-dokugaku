@@ -39,17 +39,21 @@ export default function TranscriptArea({
     <div 
       ref={scrollContainerRef}
       data-testid="transcript-scroll-container"
-      className="min-h-[80px] max-h-[200px] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth"
-      style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
+      className="min-h-[100px] max-h-[250px] overflow-y-auto p-4 bg-gray-50 rounded-lg scroll-smooth border border-gray-200"
+      style={{ 
+        wordWrap: 'break-word', 
+        overflowWrap: 'break-word',
+        scrollBehavior: 'smooth'
+      }}
     >
-      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
+      <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words font-mono">
         {transcript}
         {interimTranscript && (
-          <span className="text-gray-400 italic">{interimTranscript}</span>
+          <span className="text-gray-400 italic ml-1">{interimTranscript}</span>
         )}
         {!transcript && !interimTranscript && (
-          <span className="text-gray-400">
-            {isListening ? "音声を認識中..." : "音声認識による文字起こしがここに表示されます..."}
+          <span className="text-gray-400 text-center block">
+            {isListening ? "🎤 音声を認識中..." : "📝 音声認識による文字起こしがここに表示されます"}
           </span>
         )}
       </p>

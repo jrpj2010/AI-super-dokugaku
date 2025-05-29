@@ -81,6 +81,17 @@ export function useSpeechRecognition() {
         setTranscript(prev => {
           // 重複を避けるため、新しいテキストのみを追加
           const newText = prev + finalTranscript
+          
+          // 最大文字数制限（50,000文字、約150KB）
+          const MAX_TRANSCRIPT_LENGTH = 50000
+          
+          if (newText.length > MAX_TRANSCRIPT_LENGTH) {
+            // 古い部分を削除して新しい部分を保持
+            const trimmedText = '...' + newText.slice(-(MAX_TRANSCRIPT_LENGTH - 3))
+            console.warn('[SpeechRecognition] 文字起こしが最大長を超えたため、古い部分を削除しました')
+            return trimmedText
+          }
+          
           console.log('[SpeechRecognition] 文字起こし更新:', { 
             previousLength: prev.length, 
             addedText: finalTranscript,
@@ -117,6 +128,16 @@ export function useSpeechRecognition() {
 
     recognition.onend = () => {
       console.log('[SpeechRecognition] onendイベント発生');
+      
+      // 長時間のセッションでは自動的に再開する
+      if (isListeningRef.current && recognitionRef.current) {
+        console.log('[SpeechRecognition] 音声認識を自動再開します');
+        try {
+          recognitionRef.current.start();
+        } catch (error) {
+          console.error('[SpeechRecognition] 再開エラー:', error);
+        }
+      }
       
       // リスニング中に終了した場合は自動再接続
       if (isListeningRef.current) {

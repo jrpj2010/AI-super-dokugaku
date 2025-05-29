@@ -180,13 +180,23 @@ export function useSessionRecording({
     }
   }, [isRecording])
 
-  // Update transcript
+  // Update transcript with size management
   const updateTranscript = useCallback((transcript: string) => {
     if (!sessionDataRef.current) {
       return
     }
 
-    sessionDataRef.current.transcript = transcript
+    // 最大文字数制限（10万文字約300KB）
+    const MAX_TRANSCRIPT_LENGTH = 100000
+    
+    if (transcript.length > MAX_TRANSCRIPT_LENGTH) {
+      // 古い部分を削除して新しい部分を保持
+      const trimmedTranscript = '...' + transcript.slice(-(MAX_TRANSCRIPT_LENGTH - 3))
+      sessionDataRef.current.transcript = trimmedTranscript
+      console.warn('[SessionRecording] 文字起こしが最大長を超えたため、古い部分を削除しました')
+    } else {
+      sessionDataRef.current.transcript = transcript
+    }
   }, [])
 
   // Get recorded video URL
