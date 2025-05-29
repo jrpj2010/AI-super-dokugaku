@@ -67,6 +67,16 @@ export default function RealtimeDashboard() {
     enabled: isRecording
   })
   
+  // デバッグ: landmarks状態を監視
+  useEffect(() => {
+    if (faceDetectionError) {
+      console.error('[RealtimeDashboard] フェイス検出エラー:', faceDetectionError);
+    }
+    if (isDetecting) {
+      console.log('[RealtimeDashboard] フェイス検出実行中, landmarks:', landmarks ? '検出' : '未検出');
+    }
+  }, [landmarks, isDetecting, faceDetectionError]);
+  
   // 感情分析（最適化された設定を使用）
   const {
     latestEmotions,

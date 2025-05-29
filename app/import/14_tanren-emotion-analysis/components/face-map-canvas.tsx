@@ -21,6 +21,15 @@ const connections = [
 export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: FaceMapCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationFrameRef = useRef<number | null>(null)
+  
+  // デバッグ: landmarksの状態を確認
+  useEffect(() => {
+    if (landmarks) {
+      console.log('[FaceMapCanvas] Landmarks受信:', landmarks.length, 'ポイント');
+    } else {
+      console.log('[FaceMapCanvas] Landmarksが空またはnull');
+    }
+  }, [landmarks])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -33,6 +42,7 @@ export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: 
       ctx.clearRect(0, 0, width, height)
 
       if (landmarks && landmarks.length > 0) {
+        console.log('[FaceMapCanvas] 描画中:', landmarks.length, 'ポイント');
         // Draw connections (wireframe)
         ctx.strokeStyle = '#00ff00'
         ctx.lineWidth = 1
@@ -98,6 +108,7 @@ export default function FaceMapCanvas({ landmarks, width = 320, height = 240 }: 
         })
       } else {
         // Draw placeholder when no face is detected
+        console.log('[FaceMapCanvas] プレースホルダー描画');
         ctx.strokeStyle = '#666666'
         ctx.lineWidth = 1
         ctx.globalAlpha = 0.3
