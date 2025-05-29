@@ -391,13 +391,13 @@ export default function RealtimeDashboard() {
               <div className="mt-3 p-3 bg-gray-50 rounded-lg">
                 <p className="text-sm text-gray-600">
                   <span className="font-medium">表情：</span>
-                  {isRecording && facialExpression ? translateEmotionText(facialExpression) : ''}
+                  {isRecording ? (facialExpression ? translateEmotionText(facialExpression) : '分析中...') : 'セッション開始後に表示されます'}
                 </p>
               </div>
               <div className="mt-2 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-700">
                   <span className="font-medium">インサイト：</span>
-                  {isRecording && insights ? translateEmotionText(insights) : ''}
+                  {isRecording ? (insights ? translateEmotionText(insights) : '分析中...') : 'セッション開始後に表示されます'}
                 </p>
               </div>
               {emotionError && (
@@ -465,10 +465,13 @@ export default function RealtimeDashboard() {
                 <AudioVisualizer isActive={isRecording} stream={stream} />
               </div>
 
-              <div className="flex justify-center space-x-4 relative z-10">
+              <div className="flex justify-center items-center gap-4 flex-wrap relative z-10">
                 {!isRecording && !sessionEnded ? (
                   <Button 
-                    onClick={handleStartRecording} 
+                    onClick={(e) => {
+                      console.log("開始ボタンクリックイベント発火", e)
+                      handleStartRecording()
+                    }} 
                     className="bg-blue-500 hover:bg-blue-600"
                     disabled={mediaLoading}
                     aria-label="録画を開始"
@@ -488,12 +491,16 @@ export default function RealtimeDashboard() {
                   </Button>
                 ) : isRecording ? (
                   <Button 
-                    onClick={handleStopRecording} 
+                    onClick={(e) => {
+                      console.log("停止ボタンクリックイベント発火", e)
+                      e.stopPropagation()
+                      handleStopRecording()
+                    }} 
                     variant="destructive"
                     aria-label="録画を停止"
                     aria-live="polite"
-                    className="relative z-20"
-                    style={{ position: 'relative', zIndex: 20 }}
+                    className="relative z-50"
+                    style={{ position: 'relative', zIndex: 50 }}
                   >
                     <Square className="w-4 h-4 mr-2" aria-hidden="true" />
                     ストップ

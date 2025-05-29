@@ -56,18 +56,27 @@ export function useSpeechRecognition() {
       let finalTranscript = ''
       let interimTranscript = ''
 
-      for (let i = event.results.length - 5; i < event.results.length; i++) {
-        if (i < 0) continue
+      // 最新の結果のみを処理
+      for (let i = event.resultIndex; i < event.results.length; i++) {
         const result = event.results[i]
         if (result.isFinal) {
-          finalTranscript += result[0].transcript
+          finalTranscript += result[0].transcript + ' '
         } else {
           interimTranscript += result[0].transcript
         }
       }
 
       if (finalTranscript) {
-        setTranscript(prev => prev + finalTranscript)
+        setTranscript(prev => {
+          // 重複を避けるため、新しいテキストのみを追加
+          const newText = prev + finalTranscript
+          console.log('[SpeechRecognition] 文字起こし更新:', { 
+            previousLength: prev.length, 
+            addedText: finalTranscript,
+            totalLength: newText.length 
+          })
+          return newText
+        })
       }
       setInterimTranscript(interimTranscript)
     }

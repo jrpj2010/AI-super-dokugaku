@@ -74,6 +74,11 @@ export default function FaceMetricsGauge({ data }: FaceMetricsGaugeProps) {
 
   return (
     <div className="space-y-6" data-testid="face-metrics-gauge">
+      {/* 指標の説明 */}
+      <div className="text-xs text-gray-500 space-y-1 mb-4 px-2">
+        <p>• 顔の動き: 表情変化の活発さ (0-100)</p>
+        <p>• 視線の動き: カメラへの注視率 (%)</p>
+      </div>
       <div className="text-center">
         <div 
           className="relative w-32 h-32 mx-auto mb-4 cursor-pointer"

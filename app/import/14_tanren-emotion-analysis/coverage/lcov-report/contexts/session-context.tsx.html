@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>5/10</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>5/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,25 +115,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -153,9 +153,9 @@ interface SessionContextType {
 &nbsp;
 const SessionContext = createContext&lt;SessionContextType | undefined&gt;(undefined)
 &nbsp;
-export function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >SessionProvider(</span></span>{ children }: { children: ReactNode }) {
-  const [currentSession, setCurrentSession] = <span class="cstat-no" title="statement not covered" >useState&lt;SessionData | null&gt;(null)</span>
-  const [selectedSessionId, setSelectedSessionId] = <span class="cstat-no" title="statement not covered" >useState&lt;string | null&gt;(null)</span>
+export function SessionProvider({ children }: { children: ReactNode }) {
+  const [currentSession, setCurrentSession] = useState&lt;SessionData | null&gt;(null)
+  const [selectedSessionId, setSelectedSessionId] = useState&lt;string | null&gt;(null)
 &nbsp;
   return (
     &lt;SessionContext.Provider 
@@ -171,7 +171,7 @@ export function <span class="cstat-no" title="statement not covered" ><span clas
   )
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useSessionContext(</span>) {
+export function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >useSessionContext(</span></span>) {
   const context = <span class="cstat-no" title="statement not covered" >useContext(SessionContext)</span>
 <span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!context) {</span>
 <span class="cstat-no" title="statement not covered" >    throw new Error('useSessionContext must be used within a SessionProvider')</span>
@@ -184,7 +184,7 @@ export function <span class="fstat-no" title="function not covered" >useSessionC
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-28T18:15:32.126Z
+                at 2025-05-29T01:13:40.287Z
             </div>
         <script src="../prettify.js"></script>
         <script>
