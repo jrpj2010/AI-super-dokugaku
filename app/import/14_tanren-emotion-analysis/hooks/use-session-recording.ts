@@ -66,7 +66,9 @@ export function useSessionRecording({
         : bestFormat.mimeType
         
       const options: MediaRecorderOptions = {
-        mimeType: recordingMimeType
+        mimeType: recordingMimeType,
+        videoBitsPerSecond: 2500000, // 2.5 Mbpsに増加（高品質）
+        audioBitsPerSecond: 128000  // 128 kbps（音声は維持）
       }
 
       // Create MediaRecorder
@@ -109,7 +111,7 @@ export function useSessionRecording({
       }
 
       // Start recording
-      mediaRecorder.start(1000) // Collect data every second
+      mediaRecorder.start(500) // 500msごとにデータを収集（フレームレート向上）
       setIsRecording(true)
       setRecordingDuration(0)
 

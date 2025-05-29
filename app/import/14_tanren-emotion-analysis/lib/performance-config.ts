@@ -35,10 +35,10 @@ export const PERFORMANCE_CONFIG = {
   // セッション記録設定
   recording: {
     // MediaRecorderのビットレート
-    videoBitsPerSecond: 1000000, // 1 Mbps
+    videoBitsPerSecond: 2500000, // 2.5 Mbps（高品質録画）
     audioBitsPerSecond: 128000, // 128 kbps
     // チャンクサイズ（ミリ秒）
-    timeslice: 1000,
+    timeslice: 500, // 500ms（よりスムーズな録画）
   },
   
   // UI更新設定

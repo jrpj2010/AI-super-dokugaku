@@ -24,7 +24,8 @@ export function useMediaStream() {
         video: {
           width: { ideal: 1280 },
           height: { ideal: 720 },
-          facingMode: 'user'
+          facingMode: 'user',
+          frameRate: { ideal: 30, min: 24 } // 30fpsを目指し、最低24fpsを保証
         },
         audio: {
           echoCancellation: true,
