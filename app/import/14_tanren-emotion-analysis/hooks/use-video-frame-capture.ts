@@ -53,6 +53,11 @@ export function useVideoFrameCapture({
   // Capture a single frame
   const captureFrame = useCallback(async (): Promise<CapturedFrame | null> => {
     if (!videoRef.current || !canvasRef.current || !stream) {
+      console.log('[VideoFrameCapture] フレームキャプチャスキップ:', {
+        hasVideo: !!videoRef.current,
+        hasCanvas: !!canvasRef.current,
+        hasStream: !!stream
+      })
       return null
     }
 

@@ -20,13 +20,12 @@ export default function EmotionTrendChart({ data }: EmotionTrendChartProps) {
 
   // デバッグログ
   useEffect(() => {
-    if (data) {
-      console.log('[EmotionTrendChart] データ更新:', {
-        dataLength: data.length,
-        latestData: data[data.length - 1],
-        allData: data
-      })
-    }
+    console.log('[EmotionTrendChart] データ更新:', {
+      hasData: !!data,
+      dataLength: data?.length || 0,
+      latestData: data && data.length > 0 ? data[data.length - 1] : null,
+      allData: data
+    })
   }, [data])
 
   return (
@@ -62,37 +61,36 @@ export default function EmotionTrendChart({ data }: EmotionTrendChartProps) {
             opacity={hasData ? 1 : 0.3}
             wrapperStyle={{ fontSize: 12 }}
           />
-          {hasData && (
-            <>
-              <Line 
-                type="monotone" 
-                dataKey="ポジティブ" 
-                stroke="#10b981" 
-                strokeWidth={2} 
-                dot={true}
-                activeDot={{ r: 4 }}
-                animationDuration={300}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="ネガティブ" 
-                stroke="#ef4444" 
-                strokeWidth={2} 
-                dot={true}
-                activeDot={{ r: 4 }}
-                animationDuration={300}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="ニュートラル" 
-                stroke="#f59e0b" 
-                strokeWidth={2} 
-                dot={true}
-                activeDot={{ r: 4 }}
-                animationDuration={300}
-              />
-            </>
-          )}
+          <Line 
+            type="monotone" 
+            dataKey="ポジティブ" 
+            stroke="#10b981" 
+            strokeWidth={2} 
+            dot={true}
+            activeDot={{ r: 4 }}
+            animationDuration={300}
+            hide={!hasData}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="ネガティブ" 
+            stroke="#ef4444" 
+            strokeWidth={2} 
+            dot={true}
+            activeDot={{ r: 4 }}
+            animationDuration={300}
+            hide={!hasData}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="ニュートラル" 
+            stroke="#f59e0b" 
+            strokeWidth={2} 
+            dot={true}
+            activeDot={{ r: 4 }}
+            animationDuration={300}
+            hide={!hasData}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
