@@ -368,6 +368,12 @@ export default function RealtimeDashboard() {
           console.log('セッションが正常に保存されました:', result.sessionId)
           // グローバルコンテキストにセッションを設定
           setGlobalSession(currentSession)
+          
+          // 3秒後に自動的にレポート画面に遷移
+          console.log('[RealtimeDashboard] 3秒後にレポート画面に自動遷移します')
+          setTimeout(() => {
+            router.push('/?tab=report')
+          }, 3000)
         } else {
           console.error('セッションの保存に失敗しました:', result.error)
           alert(`セッションの保存に失敗しました: ${result.error}`)
