@@ -1,0 +1,251 @@
+１、**[marp] ビジュアル重視プレゼンテーション作成ガイド**
+
+このガイドは、鎌利式プレゼンテーションの原則に基づき、Marpの全機能を活用してインパクトのあるビジュアルプレゼンテーションを作成するための完全版です。**必ず以下の2つのファイルを別々に作成**してください。
+
+## 必須納品ファイル（2つ）
+
+### 1. CSSファイル（カスタムテーマファイル）
+- ファイル名: `visual-kamari-style.css` または適切なテーマ名.css
+- **必ず冒頭に** `/* @theme テーマ名 */` を記載
+- 画像オーバーレイ、グラデーション、アニメーションを含む
+
+### 2. Markdownファイル（プレゼンテーション本体）
+- ファイル名: 適切な名前.md
+- front matterで `theme: テーマ名` を指定
+- **各スライドで積極的に背景画像を活用**
+
+## ビジュアル要素の活用方法
+
+### 背景画像の使用パターン
+```markdown
+<!--
+_backgroundImage: url('https://images.unsplash.com/photo-xxx')
+_backgroundSize: cover
+_backgroundPosition: center
+-->
+```
+
+### 推奨フリー画像サービス
+- **Unsplash**: https://images.unsplash.com/
+- **Pexels**: https://images.pexels.com/
+- **Pixabay**: https://cdn.pixabay.com/
+
+### 画像選定の基準
+- 高解像度（最低1920×1080）
+- メッセージと調和する内容
+- 文字の可読性を考慮した明暗
+
+## CSSでの画像処理テクニック
+
+### オーバーレイ効果
+```css
+/* 半透明オーバーレイで文字を読みやすく */
+section.image-slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+section.image-slide > * {
+  position: relative;
+  z-index: 2;
+}
+```
+
+### グラデーションオーバーレイ
+```css
+.gradient-overlay::before {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 91, 172, 0.9) 0%,
+    rgba(217, 0, 0, 0.9) 100%
+  );
+}
+```
+
+## スライドパターン集
+
+### 1. フルスクリーン画像＋インパクト文字
+```markdown
+<!--
+_class: image-slide
+_backgroundImage: url('https://images.unsplash.com/photo-xxx')
+-->
+
+# <!-- fit --> **インパクトメッセージ**
+```
+
+### 2. 左右分割レイアウト
+```markdown
+<!-- _class: split-layout -->
+
+<div class="left">
+![](https://images.pexels.com/photos/xxx)
+</div>
+
+<div class="right">
+# ポイント
+- 要点1
+- 要点2
+</div>
+```
+
+### 3. 数字＋ビジュアル
+```markdown
+<!--
+_backgroundImage: url('https://images.unsplash.com/photo-growth')
+_class: number-visual
+-->
+
+<p class="impact-number">300%</p>
+<p class="subtitle">成長率</p>
+```
+
+## Marpディレクティブ活用法
+
+### グローバルディレクティブ（front matter）
+```yaml
+---
+marp: true
+theme: visual-kamari-style
+size: 16:9
+paginate: true
+header: 'プレゼンタイトル'
+footer: '© 2024 Your Company'
+---
+```
+
+### ローカルディレクティブ（スライドごと）
+```markdown
+<!--
+_backgroundColor: #000
+_color: #fff
+_backgroundImage: url('image.jpg')
+_backgroundSize: contain
+_backgroundPosition: right
+_class: dark-slide
+_paginate: false
+-->
+```
+
+## フィッティング機能の活用
+```markdown
+# <!-- fit --> 画面いっぱいに
+## <!-- fit --> このメッセージを表示
+```
+
+## インライン画像の配置テクニック
+```markdown
+<!-- アイコンとして -->
+![w:50](icon.png) タイトル
+
+<!-- 中央配置 -->
+![bg right:40%](image.jpg)
+
+<!-- 複数画像グリッド -->
+![w:300](image1.jpg) ![w:300](image2.jpg)
+```
+
+## アニメーション要素（CSS）
+```css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide > * {
+  animation: fadeInUp 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-slide > *:nth-child(1) { animation-delay: 0.1s; }
+.animate-slide > *:nth-child(2) { animation-delay: 0.3s; }
+.animate-slide > *:nth-child(3) { animation-delay: 0.5s; }
+```
+
+## サンプル構成
+
+### CSSファイル例（visual-kamari-style.css）
+```css
+/* @theme visual-kamari-style */
+
+/* 基本設定は従来の鎌利式を継承 */
+
+/* 画像スライド用スタイル */
+section.image-slide {
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* スプリットレイアウト */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ビジュアルエフェクト */
+.blur-bg {
+  backdrop-filter: blur(5px);
+  background: rgba(255,255,255,0.9);
+  padding: 2em;
+  border-radius: 20px;
+}
+```
+
+### Markdownファイル例
+```markdown
+---
+marp: true
+theme: visual-kamari-style
+---
+
+<!--
+_class: image-slide
+_backgroundImage: url('https://images.unsplash.com/photo-xxxx')
+-->
+
+# <!-- fit --> **ビジュアル**
+## <!-- fit --> プレゼンテーション
+
+---
+
+<!-- _backgroundImage: linear-gradient(135deg, #667eea 0%, #764ba2 100%) -->
+
+# タイトル
+
+<div class="blur-bg">
+重要なメッセージをここに
+</div>
+```
+
+## 画像選定のコツ
+1. **メッセージとの調和**: 内容を視覚的に補強する画像
+2. **色調の統一**: ブランドカラーと調和する色合い
+3. **余白の活用**: テキストを配置できるスペース
+4. **高画質**: 大画面でも美しい解像度
+5. **著作権**: 商用利用可能なライセンス確認
+
+## 注意事項
+- 画像のロード時間を考慮（最適化推奨）
+- オフライン環境では画像をローカル保存
+- アクセシビリティ（色覚多様性への配慮）
+- 著作権表記が必要な場合は footer に記載
+```
+
+勝さん、このシステムプロンプトなら、Marpの全機能を活かしたビジュアル重視のプレゼンテーションが作成できます！背景画像、グラデーション、アニメーション、フィッティング機能など、すべてを組み合わせて、聴衆の心を掴むプレゼンが実現できますよ。
+
+特に重要なのは：
+- **背景画像の積極活用**（各スライドで異なる画像）
+- **オーバーレイ効果**で文字の可読性確保
+- **フィッティング機能**でインパクトある見出し
+- **アニメーション**で動きのある演出
+
+これで、より洗練されたビジュアルプレゼンテーションが作成できるはずです！

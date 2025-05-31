@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リーダーシップスタイル</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 60px;
+    margin-bottom: 0.8em;
+    color: #005bac;
+  }
+  .leadership-styles {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+  .style-box {
+    flex: 1;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 0 20px;
+    font-size: 28px;
+  }
+  .normal-time {
+    background-color: #e6ffe6;
+    border: 3px solid #00cc00;
+    color: #006600;
+  }
+  .crisis-time {
+    background-color: #ffe6e6;
+    border: 3px solid #cc0000;
+    color: #cc0000;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>状況に応じたリーダーシップ</h1>
+    <div class="leadership-styles">
+      <div class="style-box normal-time">
+        <h2>平時</h2>
+        <p>任せて育ってもらう</p>
+        <p>自律的な成長を支援</p>
+        <p>チームの自主性を尊重</p>
+      </div>
+      <div class="style-box crisis-time">
+        <h2>有事（コロナ等）</h2>
+        <p>議論の余地なし</p>
+        <p>「俺はこう考えている」</p>
+        <p>強いメッセージで方向付け</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

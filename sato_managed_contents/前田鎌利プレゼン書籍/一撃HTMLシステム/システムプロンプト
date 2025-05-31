@@ -1,0 +1,168 @@
+３、**[HTML] と [CSS] 形式でのフォーマット定義と指示**
+
+このHTML/CSSフォーマット定義は、ウェブ技術を用いて鎌利式プレゼンテーションを作成するためのガイドラインです。AIがHTML/CSSベースのスライドを生成する際は、以下の指針に従ってください。
+
+*   **HTML構造:**
+    *   各スライドを`<div class="slide">`のようなコンテナ要素で区切ります。
+    *   スライド内のコンテンツは、`<h1>`, `<h2>`, `<p>`, `<img>`などのセマンティックなHTMLタグで構造化します。
+    *   キーメッセージや図解には、専用のクラス名を付与してCSSでスタイリングしやすくします。
+*   **CSSスタイリング (鎌利式):**
+    *   **フォント:** `font-family`にはゴシック系太字フォント（例: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif）を指定し、`font-weight: bold;` を基本とします。
+    *   **文字サイズ:** `h1`は非常に大きく（例: `60px`以上）、本文`p`も視認性を確保できるサイズ（例: `32px`）にします。`.impact-number`クラスなどで数字を極端に大きく表示します。
+    *   **色:** 基本は白背景（`background-color: #fff;`）に黒文字（`color: #000;`）。強調色として青（例: `#005bac`）や赤（例: `#d90000`）を効果的に使用します。`.invert`クラスで黒背景・白文字スライドも定義します。
+    *   **レイアウト:** 1スライド1メッセージの原則に従い、スライド全体（`.slide`）は`display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;`で中央配置を基本とします。余白（`padding`）を十分に取ります。「左グラフ・右メッセージ」のような特定のレイアウトはFlexboxやGridで構築します。
+    *   **画像:** `<img>`タグやCSSの`background-image`プロパティを使用し、画像を大きくダイナミックに表示します。フルスクリーンの背景画像も活用します。
+    *   **図解:** ベン図やフロー図は、シンプルなものはCSSで（例: `.flow-chart`）、複雑なものはSVGを埋め込むか画像として挿入します。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鎌利式プレゼンフォーマット HTML/CSS</title>
+<style>
+  /* 鎌利式プレゼン HTML/CSS 基本スタイル */
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold; /* 全体的に太字 */
+    background-color: #f0f0f0; /* スライド間の背景色 */
+  }
+  .slide {
+    width: 1280px; /* 16:9 想定 */
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%; /* スライド内の余白 */
+    box-sizing: border-box;
+    overflow: hidden; /* 内容がはみ出ないように */
+    position: relative; /* 背景画像や絶対配置要素の基準 */
+    margin: 20px auto; /* ページ中央にスライドを表示 */
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1, .slide h2, .slide h3, .slide h4, .slide h5, .slide h6 {
+    color: #000; /* 基本は黒 */
+    font-weight: bold; /* 見出しも太字 */
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+  .slide h1 { font-size: 60px; }
+  .slide h2 { font-size: 48px; }
+  .slide p { font-size: 32px; line-height: 1.6; margin-bottom: 1em; }
+  .slide strong { color: #005bac; /* 強調色: 青の例 */ }
+
+  /* インパクト数字用スタイル */
+  .impact-number {
+    font-size: 200px;
+    color: #d90000; /* 強調色: 赤の例 */
+    margin: 0.1em 0;
+    line-height: 1;
+  }
+  /* 全画面背景画像 */
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* アスペクト比を保ちつつ全体をカバー */
+    z-index: 0; /* テキストより後ろ */
+  }
+  .slide > * { position: relative; z-index: 1; /* テキストが画像より手前に来るように */}
+
+  /* 黒背景・白文字スタイル */
+  .invert {
+    background-color: #000;
+    color: #fff;
+  }
+  .invert h1, .invert h2, .invert p, .invert strong {
+    color: #fff;
+  }
+  .invert strong { color: #77ccff; /* 反転時の強調色 */ }
+
+  /* 左グラフ・右メッセージレイアウト */
+  .layout-left-graph-right-message {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: left;
+  }
+  .layout-left-graph-right-message .graph-container {
+    flex: 1; /* 比率調整可能 */
+    padding-right: 30px;
+  }
+  .layout-left-graph-right-message .graph-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #ddd;
+  }
+  .layout-left-graph-right-message .message-container {
+    flex: 1; /* 比率調整可能 */
+  }
+
+  /* シンプルなフロー図 (CSSのみでの表現例) */
+  .flow-chart { display: flex; justify-content: space-around; align-items: center; width: 90%; margin-top: 30px;}
+  .flow-step { border: 4px solid #005bac; color: #005bac; padding: 20px 30px; border-radius: 10px; font-size: 28px; position: relative; background-color: #fff; }
+  .flow-arrow { font-size: 48px; color: #005bac; margin: 0 10px;}
+
+  .caption { font-size: 18px; color: #555; margin-top: auto; padding-top:20px;}
+  .invert .caption { color: #aaa; }
+</style>
+</head>
+<body>
+
+  <div class="slide">
+    <h1>社外プレゼンの極意</h1>
+    <h2>ビジュアルで感情を動かす技術</h2>
+    <p>これは<strong>鎌利式</strong>プレゼンテーションの基本です。</p>
+  </div>
+
+  <div class="slide invert">
+    <h1>伝えることは難しかった（はず・・・）</h1>
+    <p>黒背景に白文字で<strong>深刻さ</strong>を演出します。</p>
+  </div>
+
+  <div class="slide">
+    <p class="impact-number">91%</p>
+    <h2>この数字があなたのビジネスに与える影響とは？</h2>
+    <p class="caption">出典: 2021年Duarte社サーベイ</p>
+  </div>
+
+  <div class="slide">
+    <img src="https://via.placeholder.com/1280x720/FFA500/000000?text=Full+Screen+Emotional+Visual" alt="感情に訴える背景画像" class="bg-image">
+    <h1 style="color:white; text-shadow: 2px 2px 4px #000000;">愛の表現</h1>
+    <p style="color:white; background-color:rgba(0,0,0,0.5); padding:10px;">夕日をバックにしたカップルのシルエットで感情を揺さぶる。</p>
+  </div>
+
+  <div class="slide layout-left-graph-right-message">
+    <div class="graph-container">
+      <img src="https://via.placeholder.com/500x350/28a745/FFFFFF?text=Sales+Growth+Graph" alt="売上成長グラフ">
+    </div>
+    <div class="message-container">
+      <h2>圧倒的な成果</h2>
+      <p>このグラフが示すように、新戦略導入後、売上は<strong>3ヶ月で200%増加</strong>しました。これは明確な成功事例です。</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h1>成功への3ステップ</h1>
+    <div class="flow-chart">
+      <div class="flow-step">課題の<br>明確化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">戦略的<br>解決策</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">圧倒的<br>成果</div>
+    </div>
+  </div>
+
+</body>
+</html>
+```

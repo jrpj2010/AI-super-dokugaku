@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#000000"/>
+  <circle cx="440" cy="360" r="180" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="440" y="380" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="50" font-weight="900" fill="#FFFFFF">ONLINE</text>
+  <circle cx="840" cy="360" r="180" fill="none" stroke="#d90000" stroke-width="8"/>
+  <text x="840" y="380" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="50" font-weight="900" fill="#d90000">OFFLINE</text>
+  <path d="M 620,360 Q 640,330 660,360 Q 640,390 620,360" fill="#FFFFFF"/>
+</svg>

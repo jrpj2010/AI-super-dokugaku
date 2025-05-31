@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <text x="640" y="200" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="100" font-weight="900" fill="#000000">リード・セルフ</text>
+  <rect x="440" y="280" width="400" height="10" fill="#d90000"/>
+  <text x="640" y="450" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="80" font-weight="bold" fill="#000000">自分を導く力</text>
+  <path d="M 640,500 L 640,600 L 660,580 M 640,600 L 620,580" stroke="#d90000" stroke-width="8" fill="none"/>
+</svg>

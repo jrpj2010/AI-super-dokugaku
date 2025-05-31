@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#000000"/>
+  <text x="640" y="250" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="150" font-weight="900" fill="#FFFFFF">面白がり</text>
+  <text x="640" y="450" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="250" font-weight="900" fill="#d90000">力</text>
+  <circle cx="200" cy="150" r="30" fill="#d90000" opacity="0.5"/>
+  <circle cx="1080" cy="150" r="30" fill="#d90000" opacity="0.5"/>
+  <circle cx="200" cy="570" r="30" fill="#d90000" opacity="0.5"/>
+  <circle cx="1080" cy="570" r="30" fill="#d90000" opacity="0.5"/>
+</svg>

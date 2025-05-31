@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <path d="M 400,360 Q 450,300 550,350 Q 650,400 750,350 Q 850,300 900,360" stroke="#005bac" stroke-width="8" fill="none"/>
+  <text x="640" y="250" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="100" font-weight="900" fill="#000000">口に出して</text>
+  <text x="640" y="450" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="150" font-weight="900" fill="#d90000">言う</text>
+  <text x="640" y="550" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="60" font-weight="bold" fill="#000000">効果</text>
+</svg>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現在の時代への対応</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 60px;
+    margin-bottom: 0.5em;
+    color: #d90000;
+  }
+  .slide h2 {
+    font-size: 48px;
+    margin-bottom: 0.5em;
+    color: #005bac;
+  }
+  .response-list {
+    text-align: left;
+    font-size: 32px;
+    line-height: 1.8;
+    margin-top: 40px;
+  }
+  .response-item {
+    margin-bottom: 25px;
+    padding-left: 40px;
+    position: relative;
+  }
+  .response-item::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #d90000;
+    font-size: 36px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>今の時代への対応</h1>
+    <h2>インナーで見ると</h2>
+    <div class="response-list">
+      <div class="response-item">すごくいいタイトルに見える</div>
+      <div class="response-item">もともとベストで作ったと思っていた</div>
+      <div class="response-item">余計にこう響く感じがする</div>
+    </div>
+    <p style="font-size: 42px; margin-top: 40px; color: #005bac;">
+      時代が本に追いついた
+    </p>
+  </div>
+</body>
+</html>
