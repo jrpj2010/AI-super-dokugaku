@@ -1,0 +1,182 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and definitions -->
+  <defs>
+    <linearGradient id="bgGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f3a;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow4">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="50" x2="100" y2="50" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+      <line x1="50" y1="0" x2="50" y2="100" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="50" cy="50" r="3" fill="#1e3a5f" opacity="0.3"/>
+    </pattern>
+    
+    <!-- Gradient for brain -->
+    <radialGradient id="brainGrad">
+      <stop offset="0%" style="stop-color:#64b5f6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1976d2;stop-opacity:0.3" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient4)"/>
+  <rect width="1920" height="1080" fill="url(#circuit)"/>
+  
+  <!-- Title -->
+  <text x="960" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#fff">
+    RAG文書とシステムプロンプトの関係性
+  </text>
+  <text x="960" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#64b5f6">
+    The Synergy Between RAG Documents and System Prompts
+  </text>
+  
+  <!-- Central Brain Visualization -->
+  <g transform="translate(960, 400)">
+    <!-- AI Brain -->
+    <circle cx="0" cy="0" r="150" fill="url(#brainGrad)" stroke="#4fc3f7" stroke-width="3" filter="url(#glow4)"/>
+    
+    <!-- Brain neural network -->
+    <g opacity="0.7">
+      <path d="M-100,-50 Q-50,-80 0,-50 T100,-50" fill="none" stroke="#ffeb3b" stroke-width="2"/>
+      <path d="M-100,0 Q-50,-30 0,0 T100,0" fill="none" stroke="#ffeb3b" stroke-width="2"/>
+      <path d="M-100,50 Q-50,20 0,50 T100,50" fill="none" stroke="#ffeb3b" stroke-width="2"/>
+      
+      <circle cx="-50" cy="-30" r="5" fill="#ffeb3b"/>
+      <circle cx="0" cy="0" r="8" fill="#ffeb3b"/>
+      <circle cx="50" cy="30" r="5" fill="#ffeb3b"/>
+    </g>
+    
+    <text x="0" y="0" text-anchor="middle" font-size="28" font-weight="bold" fill="#fff">AI Agent</text>
+    <text x="0" y="30" text-anchor="middle" font-size="18" fill="#fff">知能コア</text>
+  </g>
+  
+  <!-- Left Side: RAG Documents -->
+  <g transform="translate(400, 400)">
+    <rect x="-150" y="-200" width="300" height="400" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.9" rx="15"/>
+    
+    <text x="0" y="-160" text-anchor="middle" font-size="24" font-weight="bold" fill="#4fc3f7">RAG文書</text>
+    <text x="0" y="-130" text-anchor="middle" font-size="16" fill="#64b5f6">Knowledge Base</text>
+    
+    <!-- Document layers -->
+    <g transform="translate(0, -80)">
+      <rect x="-120" y="0" width="240" height="50" fill="#1565c0" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">基礎知識層</text>
+    </g>
+    
+    <g transform="translate(0, -20)">
+      <rect x="-120" y="0" width="240" height="50" fill="#1976d2" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">専門知識層</text>
+    </g>
+    
+    <g transform="translate(0, 40)">
+      <rect x="-120" y="0" width="240" height="50" fill="#1e88e5" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">実践知識層</text>
+    </g>
+    
+    <g transform="translate(0, 100)">
+      <rect x="-120" y="0" width="240" height="50" fill="#2196f3" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">事例・データ層</text>
+    </g>
+    
+    <!-- Characteristics -->
+    <text x="0" y="180" text-anchor="middle" font-size="14" fill="#ffeb3b">10万字の体系化された知識</text>
+  </g>
+  
+  <!-- Right Side: System Prompt -->
+  <g transform="translate(1520, 400)">
+    <rect x="-150" y="-200" width="300" height="400" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.9" rx="15"/>
+    
+    <text x="0" y="-160" text-anchor="middle" font-size="24" font-weight="bold" fill="#4fc3f7">システムプロンプト</text>
+    <text x="0" y="-130" text-anchor="middle" font-size="16" fill="#64b5f6">Control System</text>
+    
+    <!-- Control elements -->
+    <g transform="translate(0, -80)">
+      <rect x="-120" y="0" width="240" height="50" fill="#f44336" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">役割定義</text>
+    </g>
+    
+    <g transform="translate(0, -20)">
+      <rect x="-120" y="0" width="240" height="50" fill="#ff5722" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">行動指針</text>
+    </g>
+    
+    <g transform="translate(0, 40)">
+      <rect x="-120" y="0" width="240" height="50" fill="#ff6f00" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">応答パターン</text>
+    </g>
+    
+    <g transform="translate(0, 100)">
+      <rect x="-120" y="0" width="240" height="50" fill="#ff8f00" stroke="#4fc3f7" stroke-width="1" rx="5"/>
+      <text x="0" y="30" text-anchor="middle" font-size="16" fill="#fff">制約・ルール</text>
+    </g>
+    
+    <!-- Characteristics -->
+    <text x="0" y="180" text-anchor="middle" font-size="14" fill="#ffeb3b">精密な行動制御システム</text>
+  </g>
+  
+  <!-- Connection arrows and labels -->
+  <g>
+    <!-- Left arrow -->
+    <path d="M 550 400 Q 750 350 810 400" fill="none" stroke="#ffeb3b" stroke-width="3" marker-end="url(#arrowhead)" filter="url(#glow4)"/>
+    <text x="680" y="360" text-anchor="middle" font-size="16" fill="#fff">知識の供給</text>
+    
+    <!-- Right arrow -->
+    <path d="M 1110 400 Q 1170 350 1370 400" fill="none" stroke="#ffeb3b" stroke-width="3" marker-end="url(#arrowhead)" filter="url(#glow4)"/>
+    <text x="1240" y="360" text-anchor="middle" font-size="16" fill="#fff">行動の制御</text>
+  </g>
+  
+  <!-- Bottom explanation panel -->
+  <g transform="translate(960, 750)">
+    <rect x="-700" y="0" width="1400" height="250" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.8" rx="15"/>
+    
+    <text x="0" y="40" text-anchor="middle" font-size="28" font-weight="bold" fill="#4fc3f7">
+      相乗効果の仕組み
+    </text>
+    
+    <!-- Three columns -->
+    <g transform="translate(-450, 80)">
+      <text x="0" y="0" font-size="20" font-weight="bold" fill="#4fc3f7">RAGの役割</text>
+      <text x="0" y="35" font-size="16" fill="#fff">• 豊富な知識を提供</text>
+      <text x="0" y="60" font-size="16" fill="#fff">• 文脈に応じた情報</text>
+      <text x="0" y="85" font-size="16" fill="#fff">• 専門性の深さ</text>
+      <text x="0" y="110" font-size="16" fill="#fff">• 事例とデータ</text>
+    </g>
+    
+    <g transform="translate(0, 80)">
+      <text x="0" y="0" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffeb3b">統合効果</text>
+      <text x="-80" y="35" font-size="16" fill="#fff">• 知識×制御</text>
+      <text x="-80" y="60" font-size="16" fill="#fff">• 深さ×一貫性</text>
+      <text x="-80" y="85" font-size="16" fill="#fff">• 専門性×人格</text>
+      <text x="-80" y="110" font-size="16" fill="#fff">• データ×判断</text>
+    </g>
+    
+    <g transform="translate(450, 80)">
+      <text x="0" y="0" font-size="20" font-weight="bold" fill="#4fc3f7">プロンプトの役割</text>
+      <text x="0" y="35" font-size="16" fill="#fff">• 一貫した人格</text>
+      <text x="0" y="60" font-size="16" fill="#fff">• 適切な応答制御</text>
+      <text x="0" y="85" font-size="16" fill="#fff">• 品質の保証</text>
+      <text x="0" y="110" font-size="16" fill="#fff">• エラー防止</text>
+    </g>
+  </g>
+  
+  <!-- Practical example -->
+  <g transform="translate(960, 150)">
+    <rect x="-400" y="0" width="800" height="80" fill="#0a0e27" stroke="#ffeb3b" stroke-width="2" opacity="0.8" rx="10"/>
+    <text x="0" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#ffeb3b">実例：医療AIエージェント</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" fill="#fff">RAG：医学知識・症例データ ＋ プロンプト：医師としての倫理・対話スタイル ＝ 信頼できる医療AI</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="960" y="1050" text-anchor="middle" font-size="14" fill="#64b5f6" opacity="0.7">
+    Knowledge + Control = Intelligent AI Agent
+  </text>
+</svg>

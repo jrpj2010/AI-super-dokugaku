@@ -1,0 +1,202 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and definitions -->
+  <defs>
+    <linearGradient id="bgGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f3a;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow5">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <pattern id="checkerboard" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="20" height="20" fill="#1a2f4a" opacity="0.3"/>
+      <rect x="20" y="20" width="20" height="20" fill="#1a2f4a" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient5)"/>
+  <rect width="1920" height="1080" fill="url(#checkerboard)"/>
+  
+  <!-- Title -->
+  <text x="960" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#fff">
+    Q&amp;A トラブルシューティングガイド
+  </text>
+  <text x="960" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#64b5f6">
+    Troubleshooting Guide: Common Questions &amp; Solutions
+  </text>
+  
+  <!-- Central Checklist Icon -->
+  <g transform="translate(960, 180)">
+    <rect x="-40" y="-20" width="80" height="100" fill="#1e88e5" stroke="#4fc3f7" stroke-width="2" rx="5" filter="url(#glow5)"/>
+    <line x1="-25" y1="0" x2="25" y2="0" stroke="#fff" stroke-width="2"/>
+    <line x1="-25" y1="20" x2="25" y2="20" stroke="#fff" stroke-width="2"/>
+    <line x1="-25" y1="40" x2="25" y2="40" stroke="#fff" stroke-width="2"/>
+    <line x1="-25" y1="60" x2="25" y2="60" stroke="#fff" stroke-width="2"/>
+    <path d="M-30,10 L-25,15 L-20,5" fill="none" stroke="#4caf50" stroke-width="3"/>
+    <path d="M-30,30 L-25,35 L-20,25" fill="none" stroke="#4caf50" stroke-width="3"/>
+    <path d="M-30,50 L-25,55 L-20,45" fill="none" stroke="#4caf50" stroke-width="3"/>
+  </g>
+  
+  <!-- Q&A Sections -->
+  <g transform="translate(200, 300)">
+    <!-- Section 1: Knowledge Issues -->
+    <rect x="0" y="0" width="400" height="300" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.9" rx="10"/>
+    <text x="200" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#f44336">知識系の問題</text>
+    
+    <g transform="translate(20, 70)">
+      <circle cx="10" cy="10" r="5" fill="#ff5252"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 回答が表面的すぎる</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: RAG文書の深さを確認</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ 専門知識層を充実させる</text>
+    </g>
+    
+    <g transform="translate(20, 140)">
+      <circle cx="10" cy="10" r="5" fill="#ff5252"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 情報が古い・不正確</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: Deep Researchの再実施</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ 最新データで更新</text>
+    </g>
+    
+    <g transform="translate(20, 210)">
+      <circle cx="10" cy="10" r="5" fill="#ff5252"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 専門用語の誤用</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: 用語定義の明確化</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ RAGに用語集を追加</text>
+    </g>
+  </g>
+  
+  <g transform="translate(650, 300)">
+    <!-- Section 2: Control Issues -->
+    <rect x="0" y="0" width="400" height="300" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.9" rx="10"/>
+    <text x="200" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#ff9800">制御系の問題</text>
+    
+    <g transform="translate(20, 70)">
+      <circle cx="10" cy="10" r="5" fill="#ffa726"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 応答が冗長すぎる</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: プロンプトで簡潔指示</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ "簡潔に答えて"を追加</text>
+    </g>
+    
+    <g transform="translate(20, 140)">
+      <circle cx="10" cy="10" r="5" fill="#ffa726"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: トーンが不適切</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: 人格設定の調整</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ 役割定義を詳細化</text>
+    </g>
+    
+    <g transform="translate(20, 210)">
+      <circle cx="10" cy="10" r="5" fill="#ffa726"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 指示を無視する</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: 制約条件の強化</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ ルールを明示的に</text>
+    </g>
+  </g>
+  
+  <g transform="translate(1100, 300)">
+    <!-- Section 3: Technical Issues -->
+    <rect x="0" y="0" width="400" height="300" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.9" rx="10"/>
+    <text x="200" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#4caf50">技術系の問題</text>
+    
+    <g transform="translate(20, 70)">
+      <circle cx="10" cy="10" r="5" fill="#66bb6a"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 応答が遅い</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: RAG文書の最適化</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ チャンク分割を見直す</text>
+    </g>
+    
+    <g transform="translate(20, 140)">
+      <circle cx="10" cy="10" r="5" fill="#66bb6a"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: エラーが頻発</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: API設定の確認</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ 権限・制限を確認</text>
+    </g>
+    
+    <g transform="translate(20, 210)">
+      <circle cx="10" cy="10" r="5" fill="#66bb6a"/>
+      <text x="25" y="15" font-size="16" font-weight="bold" fill="#ffeb3b">Q: 機能が動作しない</text>
+      <text x="25" y="35" font-size="14" fill="#fff">A: GPTs設定の見直し</text>
+      <text x="40" y="55" font-size="12" fill="#64b5f6">→ Actions設定を確認</text>
+    </g>
+  </g>
+  
+  <!-- Success Checklist -->
+  <g transform="translate(960, 670)">
+    <rect x="-600" y="0" width="1200" height="300" fill="#0a0e27" stroke="#4fc3f7" stroke-width="2" opacity="0.8" rx="15"/>
+    
+    <text x="0" y="40" text-anchor="middle" font-size="28" font-weight="bold" fill="#4fc3f7">
+      成功のためのファイナルチェック
+    </text>
+    
+    <!-- Two columns of checks -->
+    <g transform="translate(-500, 80)">
+      <text x="0" y="0" font-size="20" font-weight="bold" fill="#4caf50">実装前チェック</text>
+      <g transform="translate(0, 30)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#4caf50" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#4caf50" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">RAG文書は10万字以上か？</text>
+      </g>
+      <g transform="translate(0, 60)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#4caf50" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#4caf50" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">プロンプトは明確か？</text>
+      </g>
+      <g transform="translate(0, 90)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#4caf50" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#4caf50" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">役割定義は具体的か？</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#4caf50" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#4caf50" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">制約条件は設定済みか？</text>
+      </g>
+    </g>
+    
+    <g transform="translate(100, 80)">
+      <text x="0" y="0" font-size="20" font-weight="bold" fill="#2196f3">運用前チェック</text>
+      <g transform="translate(0, 30)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#2196f3" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#2196f3" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">テスト対話は実施したか？</text>
+      </g>
+      <g transform="translate(0, 60)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#2196f3" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#2196f3" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">エラーケースは確認したか？</text>
+      </g>
+      <g transform="translate(0, 90)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#2196f3" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#2196f3" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">ドキュメントは整備したか？</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <rect x="0" y="0" width="20" height="20" fill="none" stroke="#2196f3" stroke-width="2" rx="3"/>
+        <path d="M5,10 L8,13 L15,6" stroke="#2196f3" stroke-width="2" fill="none"/>
+        <text x="30" y="15" font-size="16" fill="#fff">更新計画は立てたか？</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Final Message -->
+  <g transform="translate(960, 1000)">
+    <rect x="-300" y="-30" width="600" height="80" fill="#4caf50" stroke="#fff" stroke-width="3" rx="10" filter="url(#glow5)"/>
+    <text x="0" y="5" text-anchor="middle" font-size="24" font-weight="bold" fill="#fff">
+      全てクリアなら、AIエージェント完成！
+    </text>
+    <text x="0" y="35" text-anchor="middle" font-size="18" fill="#fff">
+      Your AI Agent is Ready to Launch! 🚀
+    </text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="960" y="1050" text-anchor="middle" font-size="14" fill="#64b5f6" opacity="0.7">
+    Final Check: Ensure Quality Before Going Live
+  </text>
+</svg>
