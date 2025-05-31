@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIを使う側 vs 使われる側</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  .slide h1 {
+    font-size: 56px;
+    margin: 0 0 60px 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .split-container {
+    display: flex;
+    width: 90%;
+    height: 300px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  .use-side {
+    background-color: rgba(255,255,255,0.2);
+    border-right: 4px solid #fff;
+  }
+  .used-side {
+    background-color: rgba(0,0,0,0.2);
+  }
+  .percentage {
+    font-size: 72px;
+    margin-bottom: 20px;
+  }
+  .description {
+    font-size: 28px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>AIを使う側 vs 使われる側</h1>
+    <div class="split-container">
+      <div class="side use-side">
+        <p class="percentage">20%</p>
+        <p class="description">仕掛ける側</p>
+      </div>
+      <div class="side used-side">
+        <p class="percentage">80%</p>
+        <p class="description">使われる側</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>時間感覚も変化</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  .slide h1 {
+    font-size: 56px;
+    margin: 0 0 60px 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .async-concept {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 80%;
+  }
+  .async-item {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 30px;
+    font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .old-way {
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+  .new-way {
+    color: #ffd93d;
+    font-weight: bold;
+  }
+  .arrow {
+    font-size: 36px;
+    margin: 0 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>時間感覚も変化</h1>
+    <div class="async-concept">
+      <div class="async-item">
+        <span class="old-way">即レス</span>
+        <span class="arrow">→</span>
+        <span class="new-way">非同期OK</span>
+      </div>
+      <div class="async-item">
+        <span class="old-way">会議</span>
+        <span class="arrow">→</span>
+        <span class="new-way">AI対応で「お待ち下さい」</span>
+      </div>
+      <div class="async-item">
+        <span class="old-way">同期的</span>
+        <span class="arrow">→</span>
+        <span class="new-way">深い没入体験型</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaaS is Dead?</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .year {
+    font-size: 48px;
+    color: #ff6b6b;
+    margin-bottom: 40px;
+  }
+  .main-text {
+    font-size: 96px;
+    margin: 0;
+    text-decoration: line-through;
+    text-decoration-color: #ff0000;
+    text-decoration-thickness: 8px;
+    color: #666;
+  }
+  .new-era {
+    font-size: 64px;
+    color: #4ecdc4;
+    margin-top: 40px;
+    animation: slideIn 1s ease-out;
+  }
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <p class="year">来年</p>
+    <h1 class="main-text">SaaS is Dead</h1>
+    <p class="new-era">AIポン出しアプリ時代</p>
+  </div>
+</body>
+</html>

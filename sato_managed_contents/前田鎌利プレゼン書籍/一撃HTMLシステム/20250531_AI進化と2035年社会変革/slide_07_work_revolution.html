@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手作業、もう不要</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 64px;
+    margin: 0 0 60px 0;
+    color: #d90000;
+  }
+  .comparison {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+  }
+  .before, .after {
+    flex: 1;
+    padding: 20px;
+  }
+  .before {
+    background-color: #f0f0f0;
+    color: #666;
+  }
+  .after {
+    background-color: #005bac;
+    color: #fff;
+  }
+  .label {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .content {
+    font-size: 36px;
+    line-height: 1.5;
+  }
+  .arrow {
+    font-size: 60px;
+    color: #005bac;
+    margin: 0 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>手作業、もう不要</h1>
+    <div class="comparison">
+      <div class="before">
+        <div class="label">Before</div>
+        <div class="content">
+          資料作成<br>
+          3時間<br>
+          編集作業<br>
+          2時間
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="after">
+        <div class="label">After</div>
+        <div class="content">
+          AIにテーマ<br>
+          10秒<br>
+          資料完成<br>
+          即利用可能
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エンタメも激変</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 56px;
+    margin: 0 0 60px 0;
+    color: #ffd93d;
+  }
+  .movie-reel {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .film-item {
+    background-color: rgba(255,255,255,0.1);
+    border: 3px solid #666;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .past {
+    border-color: #ff6b6b;
+  }
+  .future {
+    border-color: #4ecdc4;
+  }
+  .film-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .film-desc {
+    font-size: 18px;
+    color: #aaa;
+  }
+  .arrow {
+    font-size: 48px;
+    color: #ffd93d;
+  }
+  .conclusion {
+    font-size: 32px;
+    color: #ff6b6b;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>エンタメも激変</h1>
+    <div class="movie-reel">
+      <div class="film-item past">
+        <div class="film-title">ハリウッドスター</div>
+        <div class="film-desc">往年化</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="film-item future">
+        <div class="film-title">AI俳優</div>
+        <div class="film-desc">短編映画完成</div>
+      </div>
+    </div>
+    <p class="conclusion">新創造、困難な時代</p>
+  </div>
+</body>
+</html>

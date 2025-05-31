@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGI・ASI、圧倒的性能</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 56px;
+    margin: 0 0 60px 0;
+    color: #005bac;
+  }
+  .evolution-path {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+  .stage {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 30px;
+    width: 200px;
+    text-align: center;
+    border: 4px solid;
+    transition: transform 0.3s ease;
+  }
+  .stage:hover {
+    transform: scale(1.1);
+  }
+  .ai { border-color: #28a745; }
+  .agi { border-color: #ffc107; }
+  .asi { border-color: #dc3545; }
+  .stage-name {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .stage-desc {
+    font-size: 20px;
+    color: #666;
+  }
+  .arrow {
+    font-size: 48px;
+    color: #005bac;
+  }
+  .warning {
+    font-size: 32px;
+    color: #dc3545;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>AGI・ASI、圧倒的性能</h1>
+    <div class="evolution-path">
+      <div class="stage ai">
+        <div class="stage-name">AI</div>
+        <div class="stage-desc">現在</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage agi">
+        <div class="stage-name">AGI</div>
+        <div class="stage-desc">汎用AI</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage asi">
+        <div class="stage-name">ASI</div>
+        <div class="stage-desc">超知能</div>
+      </div>
+    </div>
+    <p class="warning">人間君、終わった説</p>
+  </div>
+</body>
+</html>

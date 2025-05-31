@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>品質8割レベルへ到達</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 {
+    font-size: 56px;
+    margin: 0 0 50px 0;
+    color: #000;
+  }
+  .percentage {
+    font-size: 240px;
+    color: #28a745;
+    margin: 0;
+    line-height: 1;
+  }
+  .gauge-container {
+    width: 600px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .gauge-fill {
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    animation: fillGauge 2s ease-out;
+  }
+  @keyframes fillGauge {
+    from { width: 0%; }
+    to { width: 80%; }
+  }
+  .note {
+    font-size: 32px;
+    color: #666;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <h1>品質8割レベルへ到達</h1>
+    <p class="percentage">80%</p>
+    <div class="gauge-container">
+      <div class="gauge-fill"></div>
+    </div>
+    <p class="note">来年には「これで良くね？」</p>
+  </div>
+</body>
+</html>
