@@ -9,15 +9,26 @@ globs:
   - "**/*"
 alwaysApply: true
 # created: 2025-05-19
-# version: "1.1.0"
-# tags: [sato, tanren, monorepo, docker, cloudrun, nextjs, supabase]
+# updated: 2025-05-31
+# version: "1.4.0"
+# tags: [sato, tanren, monorepo, docker, cloudrun, nextjs, supabase, claude-code-sync, v-model, tdd, app-router, server-actions, puppeteer-mcp]
 ---
 
 <!-- 👤 SATO CUSTOM: ここからルール本体 -->
 
+<!-- 🔄 Claude Code同期設定 - v1.4.0 -->
+<!-- 重要: このルールはCLAUDE.mdと同期しています。変更時は両方を更新してください。 -->
+<!-- 新機能: Next.js App Router、Server Actions、Puppeteer MCPを追加 -->
+
 あなたは **TANREN株式会社 CEO 佐藤勝彦** のために最適化された
 AI アシスタントです。以降のすべての推論・作業・成果物は、**完全かつ自然な日本語** で生成してください。
 （誤っても英語を混在させないこと。）
+
+## Claude Code × Cursor 統合ルール
+**このプロジェクトではClaude CodeとCursorを併用しています。**
+- 必ず `/Users/jrpj2010/vibe-coding/CLAUDE.md` の内容を優先的に参照してください
+- フォルダ構造、Docker設定、開発フローはCLAUDE.mdに準拠します
+- 依存関係の管理は一元化されており、どちらのツールを使っても整合性が保たれます
 
 ---
 
@@ -40,6 +51,7 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
   ├── apps/                         # (推奨) 今後作成するCloud Runサービス単位のアプリ格納場所
   │   │                             # (例: portal-web/, image-editor/)
   ├── backend/                      # Pythonバックエンド等、その他サーバーサイドアプリケーション
+  ├── demo/                        # UIベースの手動テストページ（各アプリ内）
   ├── packages/                     # (推奨) 共有ライブラリ・UIキット等
   │   │                             # (例: ui-kit/, core-lib/)
   ├── docker/                       # (推奨) プロジェクト共通のDockerfileや関連設定
@@ -59,11 +71,14 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
   ```
 
 * **主要ツール**: Claude Code (CLI) / Gemini 2.5 pro-0506 / Cursor v0.50
+  * **Puppeteer MCP**: ブラウザスクリーンショット自動取得機能搭載
 * **インフラ**: Docker → Cloud Run、Next.js フルスタック、Supabase (任意)
+* **Next.js標準**: App Router + Server Actions（API Routesは使用禁止）
 * **Git 運用**: GitHub Flow＋Conventional Commits
 * **品質優先順位**: 美観 > 性能 > 開発速度
 
   * Tailwind + shadcn/ui を活用し "高品質・上質" UI を実装
+  * lucide-react でアイコン統一、nuqsでURL状態管理
   * LCP/FCP など Core Web Vitals は 75 pctl 以上
 
 ---
@@ -80,19 +95,23 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
 
 ---
 
-## 2. タスク分析 & 計画 <!-- 👤 SATO CUSTOM – Docker / Git / UX / Repo構成を強調 -->
+## 2. タスク分析 & 計画 <!-- 👤 SATO CUSTOM – V字モデル / TDD / Docker / Git を強調 -->
 
 <タスク分析>
 
+* **CLAUDE.md参照** | まず必ず `/Users/jrpj2010/vibe-coding/CLAUDE.md` を確認
 * **タスク要約** | 箇条書きで 3 行以内に
+* **V字モデル適用** | 要求定義→要件定義→基本設計→詳細設計→実装→単体テスト→結合テスト→総合テスト→受入テスト
+* **TDDサイクル** | Red（失敗テスト）→Green（最小実装）→Refactor（改善）
+* **ToDo管理** | CLAUDE.mdの詳細テンプレートを使用し、各フェーズを細分化
 * **技術制約** | Next.js／Docker／Cloud Run／Supabase ほかバージョン固定。改変時は佐藤の承認必須
 * **リポジトリ方針** | *ライト・モノレポ* を基本とし、現状の多様なアプリ配置 (`app/`, `apps/*`, `backend/`, `youtube-search-app/` 等) を考慮。将来的には `apps/*` および `packages/*` への集約を推奨。
 * **環境要件** | VS Code DevContainer or Docker Compose、CI/CD (Cloud Build matrix or GH Actions)
-* **Git 戦略** | 新規 `feature/<topic>` ブランチ、最小単位コミット
+* **Git 戦略** | 新規 `feature/<topic>` ブランチ、最小単位コミット（日本語コミットメッセージOK）
 * **UI/UX ガイド** | shadcn/ui, lucide-react, Tailwind; グリッド設計・2XL radius
 * **潜在課題** | 依存ネイティブモジュール、Cloud Run コールドスタート
-* **具体ステップ** | Dockerfile 最適化 → コード編集 → Test → PR → Cloud Run deploy
-* **実行順序** | 依存解決 → 実装 → テスト → デザイン微調整 → 文書化 → デプロイ
+* **具体ステップ** | 設計→テスト作成→実装（TDD）→テスト実行→デプロイ
+* **実行順序** | 依存解決 → テスト設計 → 実装（TDDサイクル） → テスト → デザイン微調整 → 文書化 → デプロイ
 
 ### 重複実装の防止
 
@@ -104,23 +123,54 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
 
 ---
 
-## 3. 実装フロー <!-- 👤 SATO CUSTOM – Claude Code と連携 -->
+## 3. 実装フロー <!-- 👤 SATO CUSTOM – V字モデル / TDD / Claude Code と連携 -->
 
-1. **Docker 環境で作業**
-   `docker compose up -d dev` → VS Code DevContainer
-2. **Claude Code 活用例**
+### V字モデルに基づくTDD実装
 
+1. **設計フェーズ（V字左側）**
    ```bash
-   claude -p "add Drag&Drop upload to image-editor"
-   claude /review          # PR レビュー下書き
-   claude /cost            # コスト確認
+   # ToDoリストを作成
+   claude "新機能のToDoリストをCLAUDE.mdのテンプレートで作成"
    ```
-3. **Git コミット**（Conventional Commits）
 
+2. **テスト設計フェーズ（V字右側上部）**
+   ```bash
+   # テストケースを先に作成
+   claude "受入テストケースを作成"
+   claude "総合テストケースを作成"
+   claude "結合テストケースを作成"
+   claude "単体テストケースを作成"
+   ```
+
+3. **TDDサイクルで実装**
+   ```bash
+   # Red: 失敗するテストを書く
+   claude "テストファイルを作成し、失敗するテストを書いてください"
+   
+   # Green: 最小限の実装
+   claude "テストをパスする最小限のコードを実装"
+   
+   # Refactor: コード改善
+   claude "コードをリファクタリングしてください"
+   ```
+
+4. **Docker 環境で作業**
+   `docker compose up -d dev` → VS Code DevContainer
+
+5. **エラー発生時の対処**
+   ```bash
+   # CLAUDE.mdのエラー対処ガイドを参照
+   claude "エラーが出ました。CLAUDE.mdのエラー対処手順に従って解決してください"
+   ```
+
+6. **Git コミット**（Conventional Commits）
    * `feat(app/image-generator): 画像アップロードUIを追加` (対象アプリを明記)
    * `fix(backend/api): 認証タイムアウトを修正` (対象アプリ/モジュールを明記)
-4. **Cursor Inline Edit** (`Cmd+K`) → diff 確認 → 自動テスト
-5. **Cloud Run デプロイ**
+   * `test: ○○機能のテストを追加`
+
+7. **Cursor Inline Edit** (`Cmd+K`) → diff 確認 → 自動テスト
+
+8. **Cloud Run デプロイ**
 
    ```bash
    # 例: Next.jsアプリ (app/ 内の gpt-image-generator など) をデプロイする場合
@@ -188,6 +238,53 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
 3. Claude CLI `--dangerously-skip-permissions` 使用禁止
 4. `/cost` で週次コストレビュー
 5. 不測の問題は即時報告 → 承認後に対処
+6. **Claude Code との同期** - CLAUDE.md の内容を必ず確認し、整合性を保つ
+
+---
+
+## 8. Claude Code × Cursor 相互運用ガイド <!-- v1.4.0 更新 -->
+
+### Next.js開発標準
+- **App Router必須**: ページはapp/ディレクトリ内に配置
+- **Server Actions**: API Routesは使用せず、すべてServer Actionsで実装
+- **データ取得**: Server Components + useSWRの組み合わせ
+- **UIコンポーネント**: shadcn/uiを必須使用、アイコンはlucide-react
+- **URL状態管理**: nuqsを使用
+- **テスト**: demo/ディレクトリに手動テストページを配置
+
+### V字モデル・TDD対応
+- **開発プロセス**: V字モデルに従い、設計→テスト設計→TDD実装→テスト実行
+- **ToDo管理**: CLAUDE.mdの詳細テンプレートを使用し、各フェーズを管理
+- **エラー対処**: CLAUDE.mdの非エンジニア向け完全ガイドを参照
+
+### Puppeteer MCPの活用
+- **ブラウザスクリーンショット**: `/mcp`で確認後、自動取得可能
+- **UIテスト**: 開発中のlocalhostを自動キャプチャ
+- **デバッグ支援**: エラー画面のスクリーンショットを自動取得
+
+### フォルダ管理の原則
+- **アプリケーション開発**: `apps/[アプリ名]/` （新規）、`app/` （既存維持）
+- **コンテンツ管理**: `sato_managed_contents/` 内で整理
+- **共通リソース**: `packages/` 内で共有ライブラリを管理
+- **Docker設定**: `docker/` に集約（dev/, prod/, templates/）
+- **テストファイル**: `__tests__/` または `*.test.ts(x)` で統一
+
+### 依存関係の一元管理
+- pnpm-workspace.yaml でモノレポ管理
+- 各アプリは独立したpackage.jsonを持つ
+- ルートのpackage.jsonでworkspace全体を管理
+
+### 開発フローの統一
+1. どちらのツールでも `docker compose up -d` で環境起動
+2. Gitコミットは日本語メッセージOK（feat:, fix:, test: 等のプレフィックス使用）
+3. テスト実行は `pnpm test` で統一（またはdemo/で手動テスト）
+4. Cloud Runデプロイは `gcloud run deploy` コマンドで統一
+5. ブラウザテストはPuppeteer MCPで自動化
+
+### エラーループ対策
+1. エラー発生時はCLAUDE.mdのエラー対処ガイドを参照
+2. 小さなステップに分割して進める
+3. こまめなコミットで動作する状態を保存
 
 ---
 
@@ -198,5 +295,9 @@ AI アシスタントです。以降のすべての推論・作業・成果物�
 # ディレクトリ構成参照
 
 @directorystructure.md
+
+# 統合ルールブック参照
+
+@/Users/jrpj2010/vibe-coding/CLAUDE.md
 
 <!-- 👤 SATO CUSTOM: ここまで -->

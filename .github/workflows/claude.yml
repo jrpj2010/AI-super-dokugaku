@@ -1,11 +1,4 @@
-name: Claude Code Action 実験
-
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  id-token: write
-  actions: read
+name: Claude PR Assistant
 
 on:
   issue_comment:
@@ -18,12 +11,12 @@ on:
     types: [submitted]
 
 jobs:
-  claude:
+  claude-code-action:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,28 +24,17 @@ jobs:
       issues: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: anthropics/claude-code-action@beta
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          # Anthropic APIキーを使用
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          
-          # @claude でトリガー
-          trigger_phrase: "@claude"
-          
-          # 実行タイムアウト
-          timeout_minutes: 60
-          
-          # 基本ツールのみ許可
-          allowed_tools: "Edit,Replace"
-          
-          # TANREN実験用カスタム指示
-          custom_instructions: |
-            あなたはTANREN株式会社のClaude Code Action実験プロジェクト専用アシスタントです。
-            
-            - 日本語で分かりやすく説明
-            - 実験的な機能のテストサポート
-            - コード改善提案
-            - 簡潔で実用的なソリューション提供
-            
-            佐藤様の開発効率向上のため、親切で具体的なアドバイスを心がけてください。
+          fetch-depth: 1
+
+      - name: Run Claude PR Action
+        uses: grll/claude-code-action@beta
+        with:
+          use_oauth: true
+          claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
+          claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
+          claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
+
+          timeout_minutes: "60"
