@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感情表現型音声合成システム - Gemini 2.5 Preview TTS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .conversation-line {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .speaker-select {
+            width: 120px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .emotion-select {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .text-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .add-line-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .add-line-btn:hover {
+            background: #1557b0;
+        }
+        
+        .generate-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .generate-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .status.loading {
+            background: #e3f2fd;
+            color: #1976d2;
+            display: block;
+        }
+        
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+        
+        .voice-info {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .remove-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .remove-btn:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 感情表現型音声合成システム</h1>
+            <p class="subtitle">Google Gemini 2.5 Flash Preview TTS - 複数話者対応</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="panel">
+                <h2>会話の作成</h2>
+                <div id="conversationLines">
+                    <div class="conversation-line">
+                        <select class="speaker-select">
+                            <option value="Joe">Joe</option>
+                            <option value="Jane">Jane</option>
+                            <option value="Mike">Mike</option>
+                            <option value="Sarah">Sarah</option>
+                        </select>
+                        <select class="emotion-select">
+                            <option value="">通常</option>
+                            <option value="happy">😊 嬉しい</option>
+                            <option value="sad">😢 悲しい</option>
+                            <option value="angry">😠 怒り</option>
+                            <option value="excited">🎉 興奮</option>
+                            <option value="worried">😟 心配</option>
+                        </select>
+                        <input type="text" class="text-input" placeholder="テキストを入力..." value="やあ、元気？">
+                    </div>
+                    <div class="conversation-line">
+                        <select class="speaker-select">
+                            <option value="Joe">Joe</option>
+                            <option value="Jane" selected>Jane</option>
+                            <option value="Mike">Mike</option>
+                            <option value="Sarah">Sarah</option>
+                        </select>
+                        <select class="emotion-select">
+                            <option value="">通常</option>
+                            <option value="happy" selected>😊 嬉しい</option>
+                            <option value="sad">😢 悲しい</option>
+                            <option value="angry">😠 怒り</option>
+                            <option value="excited">🎉 興奮</option>
+                            <option value="worried">😟 心配</option>
+                        </select>
+                        <input type="text" class="text-input" placeholder="テキストを入力..." value="うん、元気だよ!">
+                    </div>
+                </div>
+                <button class="add-line-btn" onclick="addLine()">+ 行を追加</button>
+                
+                <div class="voice-info">
+                    <strong>利用可能な音声:</strong><br>
+                    • Kore - 男性的な声<br>
+                    • Puck - 女性的な声<br>
+                    • Aoede - 中性的な声<br>
+                    • Charon - 低い男性声
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2>音声生成</h2>
+                <button class="generate-btn" onclick="generateConversation()">
+                    🎙️ 音声を生成
+                </button>
+                
+                <div id="status" class="status"></div>
+                
+                <audio id="audioPlayer" controls class="audio-player" style="display: none;"></audio>
+                
+                <div class="voice-info">
+                    <strong>話者と音声の割り当て:</strong><br>
+                    <div id="speakerVoiceMapping"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 話者と音声のマッピング
+        const voiceMapping = {
+            'Joe': 'Kore',
+            'Jane': 'Puck',
+            'Mike': 'Charon',
+            'Sarah': 'Aoede'
+        };
+        
+        function updateSpeakerVoiceMapping() {
+            const mapping = document.getElementById('speakerVoiceMapping');
+            const speakers = new Set();
+            
+            document.querySelectorAll('.speaker-select').forEach(select => {
+                speakers.add(select.value);
+            });
+            
+            let html = '';
+            speakers.forEach(speaker => {
+                html += `• ${speaker} → ${voiceMapping[speaker]}<br>`;
+            });
+            
+            mapping.innerHTML = html;
+        }
+        
+        // 初期表示
+        updateSpeakerVoiceMapping();
+        
+        // 話者が変更されたときに更新
+        document.addEventListener('change', (e) => {
+            if (e.target.classList.contains('speaker-select')) {
+                updateSpeakerVoiceMapping();
+            }
+        });
+        
+        function addLine() {
+            const container = document.getElementById('conversationLines');
+            const newLine = document.createElement('div');
+            newLine.className = 'conversation-line';
+            newLine.innerHTML = `
+                <select class="speaker-select">
+                    <option value="Joe">Joe</option>
+                    <option value="Jane">Jane</option>
+                    <option value="Mike">Mike</option>
+                    <option value="Sarah">Sarah</option>
+                </select>
+                <select class="emotion-select">
+                    <option value="">通常</option>
+                    <option value="happy">😊 嬉しい</option>
+                    <option value="sad">😢 悲しい</option>
+                    <option value="angry">😠 怒り</option>
+                    <option value="excited">🎉 興奮</option>
+                    <option value="worried">😟 心配</option>
+                </select>
+                <input type="text" class="text-input" placeholder="テキストを入力...">
+                <button class="remove-btn" onclick="removeLine(this)">削除</button>
+            `;
+            container.appendChild(newLine);
+            updateSpeakerVoiceMapping();
+        }
+        
+        function removeLine(button) {
+            button.parentElement.remove();
+            updateSpeakerVoiceMapping();
+        }
+        
+        async function generateConversation() {
+            const button = document.querySelector('.generate-btn');
+            const status = document.getElementById('status');
+            const audio = document.getElementById('audioPlayer');
+            
+            // 会話データを収集
+            const conversation = [];
+            const speakers = new Set();
+            
+            document.querySelectorAll('.conversation-line').forEach(line => {
+                const speaker = line.querySelector('.speaker-select').value;
+                const emotion = line.querySelector('.emotion-select').value;
+                const text = line.querySelector('.text-input').value.trim();
+                
+                if (text) {
+                    conversation.push({ speaker, emotion, text });
+                    speakers.add(speaker);
+                }
+            });
+            
+            if (conversation.length === 0) {
+                showStatus('会話を入力してください', 'error');
+                return;
+            }
+            
+            // 話者設定を作成
+            const speakerConfigs = Array.from(speakers).map(speaker => ({
+                name: speaker,
+                voice: voiceMapping[speaker] || 'Kore'
+            }));
+            
+            button.disabled = true;
+            showStatus('音声を生成中...', 'loading');
+            
+            try {
+                const response = await fetch('/api/conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        conversation,
+                        speakers: speakerConfigs
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('音声生成に失敗しました');
+                }
+                
+                const blob = await response.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                
+                audio.src = audioUrl;
+                audio.style.display = 'block';
+                audio.play();
+                
+                showStatus('音声が生成されました！', 'success');
+                
+            } catch (error) {
+                showStatus('エラー: ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#000000"/>
+  <path d="M 640,200 L 440,400 M 640,200 L 640,400 M 640,200 L 840,400" stroke="#FFFFFF" stroke-width="8" fill="none"/>
+  <circle cx="440" cy="400" r="40" fill="#d90000"/>
+  <circle cx="640" cy="400" r="40" fill="#d90000"/>
+  <circle cx="840" cy="400" r="40" fill="#d90000"/>
+  <text x="640" y="550" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="80" font-weight="900" fill="#FFFFFF">選択することの</text>
+  <text x="640" y="650" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="80" font-weight="900" fill="#d90000">難しさ</text>
+</svg>

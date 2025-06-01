@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRT対応音声合成システム - Gemini 2.5 Preview TTS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #1a73e8;
+            background: #f8f9fa;
+        }
+        
+        .upload-area.dragover {
+            border-color: #1a73e8;
+            background: #e3f2fd;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        .conversation-preview {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .conversation-line {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .speaker-label {
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 5px;
+        }
+        
+        .text-content {
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .generate-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .generate-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .status.loading {
+            background: #e3f2fd;
+            color: #1976d2;
+            display: block;
+        }
+        
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+        
+        .voice-mapping {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a73e8;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .sample-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .sample-btn:hover {
+            background: #1557b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 SRT対応音声合成システム</h1>
+            <p class="subtitle">Google Gemini 2.5 Flash Preview TTS - 字幕ファイルから音声生成</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="panel">
+                <h2>SRTファイルアップロード</h2>
+                
+                <button class="sample-btn" onclick="loadSample()">サンプルSRTを読み込む</button>
+                
+                <div class="upload-area" onclick="document.getElementById('srtFile').click()" 
+                     ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                    <div class="upload-icon">📄</div>
+                    <p>SRTファイルをドラッグ＆ドロップ<br>またはクリックして選択</p>
+                </div>
+                <input type="file" id="srtFile" class="file-input" accept=".srt" onchange="handleFileSelect(event)">
+                
+                <div class="stats" id="stats" style="display: none;">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalLines">0</div>
+                        <div class="stat-label">総行数</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalSpeakers">0</div>
+                        <div class="stat-label">話者数</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalDuration">0:00</div>
+                        <div class="stat-label">総時間</div>
+                    </div>
+                </div>
+                
+                <div class="conversation-preview" id="preview" style="display: none;"></div>
+                
+                <div class="voice-mapping">
+                    <strong>話者と音声の割り当て:</strong><br>
+                    <div id="speakerVoiceMapping">
+                        • 佐藤 → Kore（男性的な声）<br>
+                        • アシスタント → Puck（女性的な声）
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2>音声生成</h2>
+                <button class="generate-btn" onclick="generateFromSrt()" id="generateBtn" disabled>
+                    🎙️ SRTから音声を生成
+                </button>
+                
+                <div id="status" class="status"></div>
+                
+                <audio id="audioPlayer" controls class="audio-player" style="display: none;"></audio>
+                
+                <div class="voice-mapping">
+                    <strong>利用可能な音声:</strong><br>
+                    • Kore - 男性的な声<br>
+                    • Puck - 女性的な声<br>
+                    • Aoede - 中性的な声<br>
+                    • Charon - 低い男性声
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let parsedSrt = [];
+        
+        // 話者と音声のマッピング
+        const voiceMapping = {
+            '佐藤': 'Kore',
+            'アシスタント': 'Puck',
+            'ナレーター': 'Aoede',
+            'default': 'Aoede'
+        };
+        
+        // サンプルSRTデータ
+        const sampleSrt = `1
+00:00:00,000 --> 00:00:04,000
+佐藤：皆さん、こんにちは。TANREN株式会社CEOの佐藤勝彦です。
+
+2
+00:00:04,500 --> 00:00:08,500
+アシスタント：本日は「AI進化と2035年社会変革」について、佐藤さんにお話を伺います。
+
+3
+00:00:09,000 --> 00:00:12,000
+佐藤：まず最初に言いたいことがあります。
+
+4
+00:00:12,500 --> 00:00:15,000
+アシスタント：なんでしょうか？
+
+5
+00:00:15,500 --> 00:00:18,000
+佐藤：未来、ヤバい。`;
+        
+        function loadSample() {
+            parseSrtContent(sampleSrt);
+            document.getElementById('generateBtn').disabled = false;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.add('dragover');
+        }
+        
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].name.endsWith('.srt')) {
+                readFile(files[0]);
+            }
+        }
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file && file.name.endsWith('.srt')) {
+                readFile(file);
+            }
+        }
+        
+        function readFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                parseSrtContent(e.target.result);
+                document.getElementById('generateBtn').disabled = false;
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+        
+        function parseSrtContent(content) {
+            parsedSrt = [];
+            const blocks = content.trim().split(/\n\n+/);
+            
+            for (const block of blocks) {
+                const lines = block.trim().split('\n');
+                if (lines.length < 3) continue;
+                
+                const id = parseInt(lines[0]);
+                const [startTime, endTime] = lines[1].split(' --> ');
+                const text = lines.slice(2).join(' ');
+                
+                // 話者を抽出
+                const speakerMatch = text.match(/^([^：:]+)[：:]/);
+                let speaker = 'ナレーター';
+                let cleanText = text;
+                
+                if (speakerMatch) {
+                    speaker = speakerMatch[1].trim();
+                    cleanText = text.substring(speakerMatch[0].length).trim();
+                }
+                
+                parsedSrt.push({
+                    id,
+                    startTime,
+                    endTime,
+                    text: cleanText,
+                    speaker
+                });
+            }
+            
+            displayPreview();
+            updateStats();
+        }
+        
+        function displayPreview() {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = parsedSrt.map(entry => `
+                <div class="conversation-line">
+                    <div class="speaker-label">${entry.speaker} (${entry.startTime})</div>
+                    <div class="text-content">${entry.text}</div>
+                </div>
+            `).join('');
+            preview.style.display = 'block';
+        }
+        
+        function updateStats() {
+            const speakers = new Set(parsedSrt.map(e => e.speaker));
+            
+            // 総時間を計算
+            if (parsedSrt.length > 0) {
+                const lastEntry = parsedSrt[parsedSrt.length - 1];
+                const [minutes, seconds] = lastEntry.endTime.split(':').slice(1, 3);
+                document.getElementById('totalDuration').textContent = `${parseInt(minutes)}:${seconds.split(',')[0]}`;
+            }
+            
+            document.getElementById('totalLines').textContent = parsedSrt.length;
+            document.getElementById('totalSpeakers').textContent = speakers.size;
+            document.getElementById('stats').style.display = 'grid';
+            
+            // 話者マッピングを更新
+            const mapping = document.getElementById('speakerVoiceMapping');
+            let html = '';
+            speakers.forEach(speaker => {
+                const voice = voiceMapping[speaker] || voiceMapping.default;
+                html += `• ${speaker} → ${voice}<br>`;
+            });
+            mapping.innerHTML = html;
+        }
+        
+        async function generateFromSrt() {
+            if (parsedSrt.length === 0) {
+                showStatus('SRTファイルを選択してください', 'error');
+                return;
+            }
+            
+            const button = document.getElementById('generateBtn');
+            const status = document.getElementById('status');
+            const audio = document.getElementById('audioPlayer');
+            
+            // 会話データを作成
+            const conversation = parsedSrt.map(entry => ({
+                speaker: entry.speaker,
+                text: entry.text,
+                emotion: '' // SRTには感情情報がないため空
+            }));
+            
+            // 話者設定を作成
+            const speakersSet = new Set(parsedSrt.map(e => e.speaker));
+            const speakers = Array.from(speakersSet).map(speaker => ({
+                name: speaker,
+                voice: voiceMapping[speaker] || voiceMapping.default
+            }));
+            
+            button.disabled = true;
+            showStatus('音声を生成中... これには少し時間がかかる場合があります', 'loading');
+            
+            try {
+                const response = await fetch('/api/conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        conversation,
+                        speakers
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('音声生成に失敗しました');
+                }
+                
+                const blob = await response.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                
+                audio.src = audioUrl;
+                audio.style.display = 'block';
+                audio.play();
+                
+                showStatus('音声が生成されました！', 'success');
+                
+                // ダウンロードリンクを追加
+                const downloadLink = document.createElement('a');
+                downloadLink.href = audioUrl;
+                downloadLink.download = 'generated_audio.wav';
+                downloadLink.textContent = '💾 音声ファイルをダウンロード';
+                downloadLink.style.display = 'block';
+                downloadLink.style.marginTop = '10px';
+                downloadLink.style.color = '#1a73e8';
+                audio.parentElement.appendChild(downloadLink);
+                
+            } catch (error) {
+                showStatus('エラー: ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+    </script>
+</body>
+</html>

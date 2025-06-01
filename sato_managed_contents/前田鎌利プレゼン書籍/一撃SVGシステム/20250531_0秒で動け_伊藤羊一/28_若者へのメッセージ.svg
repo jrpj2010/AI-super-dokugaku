@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#000000"/>
+  <text x="640" y="250" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="100" font-weight="900" fill="#FFFFFF">若者への</text>
+  <text x="640" y="450" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="180" font-weight="900" fill="#d90000">メッセージ</text>
+  <path d="M 200,550 L 1080,550 L 1050,530 M 1080,550 L 1050,570" stroke="#d90000" stroke-width="8" fill="none"/>
+</svg>

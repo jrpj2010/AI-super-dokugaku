@@ -1,0 +1,70 @@
+# Git 関連
+.git
+.gitignore
+.gitattributes
+
+# 依存関係
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-store
+
+# 開発ツール設定
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# 環境設定
+.env
+.env.*
+!.env.example
+
+# ビルド成果物
+.next
+out
+dist
+build
+
+# テスト関連
+coverage
+.nyc_output
+*.test.js
+*.spec.js
+__tests__
+__mocks__
+
+# ドキュメント
+*.md
+docs
+LICENSE
+
+# 一時ファイル
+tmp
+temp
+*.tmp
+*.temp
+*.log
+
+# 音声出力ファイル（開発時の生成物）
+*.wav
+*.mp3
+output.*
+
+# Docker 関連
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+cloudbuild.yaml
+
+# その他
+.prettierrc
+.eslintrc*
+.stylelintrc*
+jest.config.*
+tsconfig.tsbuildinfo
