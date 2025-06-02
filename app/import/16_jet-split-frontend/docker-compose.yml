@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  jet-split-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3016:3000"
+    environment:
+      - NODE_ENV=development
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: sh -c "pnpm install && pnpm dev"
+    networks:
+      - jet-split-network
+
+networks:
+  jet-split-network:
+    driver: bridge

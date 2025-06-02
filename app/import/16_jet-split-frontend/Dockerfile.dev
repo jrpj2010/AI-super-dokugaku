@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Install FFmpeg for local testing (optional)
+RUN apk add --no-cache ffmpeg
+
+EXPOSE 3000
+
+# Keep container running
+CMD ["sh", "-c", "pnpm install && pnpm dev"]
