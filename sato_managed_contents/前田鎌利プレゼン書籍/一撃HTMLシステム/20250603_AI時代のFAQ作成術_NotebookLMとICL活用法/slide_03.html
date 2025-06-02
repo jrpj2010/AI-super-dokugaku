@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 3</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0a0a0a;
+            color: #FFFFFF;
+            font-family: "游ゴシック", "Yu Gothic", sans-serif;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 90%;
+        }
+        .impact {
+            font-size: 200px;
+            color: #FF4444;
+            margin-bottom: 40px;
+            animation: pulse 2s infinite;
+        }
+        .subtitle {
+            font-size: 70px;
+            color: #FFFFFF;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="impact">78%</p>
+        <p class="subtitle">企業のお問い合わせが<br>FAQ作成業務に占める時間</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代のFAQ作成術 - プレゼンテーション</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "游ゴシック", "Yu Gothic", sans-serif;
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+        }
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 1000;
+        }
+        .nav-button {
+            background: #FFD700;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: #FFA500;
+            transform: scale(1.05);
+        }
+        .nav-button:disabled {
+            background: #555;
+            color: #999;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        .fullscreen-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00BFFF;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 25px;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+        .fullscreen-button:hover {
+            background: #0080FF;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <iframe id="slide-frame" src="slide_01.html"></iframe>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" id="prev-btn" onclick="previousSlide()">◀ 前へ</button>
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / 30
+        </div>
+        <button class="nav-button" id="next-btn" onclick="nextSlide()">次へ ▶</button>
+    </div>
+    
+    <button class="fullscreen-button" onclick="toggleFullscreen()">🖥 フルスクリーン</button>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 30;
+        
+        function updateSlide() {
+            const frame = document.getElementById('slide-frame');
+            const slideNumber = currentSlide.toString().padStart(2, '0');
+            frame.src = `slide_${slideNumber}.html`;
+            
+            document.getElementById('current-slide').textContent = currentSlide;
+            
+            // ボタンの有効/無効を制御
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+        
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+        
+        // キーボードナビゲーション
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                    previousSlide();
+                    break;
+                case 'f':
+                case 'F':
+                    toggleFullscreen();
+                    break;
+                case 'Home':
+                    currentSlide = 1;
+                    updateSlide();
+                    break;
+                case 'End':
+                    currentSlide = totalSlides;
+                    updateSlide();
+                    break;
+            }
+        });
+        
+        // 初期設定
+        updateSlide();
+    </script>
+</body>
+</html>

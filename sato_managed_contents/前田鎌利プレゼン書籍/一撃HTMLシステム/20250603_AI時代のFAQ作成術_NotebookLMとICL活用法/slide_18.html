@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 18</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000033;
+            color: #FFFFFF;
+            font-family: "游ゴシック", "Yu Gothic", sans-serif;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 90%;
+        }
+        .result {
+            font-size: 250px;
+            color: #FFD700;
+            margin-bottom: 50px;
+            animation: bounce 2s infinite;
+        }
+        .text {
+            font-size: 80px;
+            color: #FFFFFF;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="result">432倍</p>
+        <p class="text">作業効率の向上</p>
+    </div>
+</body>
+</html>

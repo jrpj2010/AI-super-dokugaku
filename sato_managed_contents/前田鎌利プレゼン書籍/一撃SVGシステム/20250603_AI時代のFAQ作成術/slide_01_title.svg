@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&amp;display=swap');
+      .titleText { 
+        font-family: 'Noto Sans JP', 'Arial Black', sans-serif; 
+        font-weight: 900; 
+        font-size: 72px; 
+        fill: #000000; 
+        text-anchor: middle;
+      }
+      .subtitleText { 
+        font-family: 'Noto Sans JP', sans-serif; 
+        font-weight: 700; 
+        font-size: 36px; 
+        fill: #d90000; 
+        text-anchor: middle;
+      }
+      .captionText { 
+        font-family: 'Noto Sans JP', sans-serif; 
+        font-weight: 500; 
+        font-size: 24px; 
+        fill: #666666; 
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="640" y="300" class="titleText">AI時代の</text>
+  <text x="640" y="390" class="titleText">FAQ作成術</text>
+  <text x="640" y="480" class="subtitleText">〜10分で劇的効率化〜</text>
+  <text x="640" y="600" class="captionText">NotebookLM × ICL × TANREN</text>
+</svg>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 11</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+            font-family: "游ゴシック", "Yu Gothic", sans-serif;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 90%;
+        }
+        .time {
+            font-size: 200px;
+            color: #FF1493;
+            margin-bottom: 40px;
+            animation: flash 1.5s infinite;
+        }
+        .impact {
+            font-size: 80px;
+            color: #FFFFFF;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="time">10分</p>
+        <p class="impact">従来の3日分の作業が<br>わずか10分に短縮</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&amp;display=swap');
+      .chapterText { 
+        font-family: 'Noto Sans JP', 'Arial Black', sans-serif; 
+        font-weight: 900; 
+        font-size: 48px; 
+        fill: #d90000; 
+        text-anchor: middle;
+      }
+      .mainText { 
+        font-family: 'Noto Sans JP', 'Arial Black', sans-serif; 
+        font-weight: 900; 
+        font-size: 96px; 
+        fill: #000000; 
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="640" y="280" class="chapterText">第1章</text>
+  <text x="640" y="420" class="mainText">データ品質が命！</text>
+</svg>

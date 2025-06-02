@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&amp;display=swap');
+      .mainText { 
+        font-family: 'Noto Sans JP', 'Arial Black', sans-serif; 
+        font-weight: 900; 
+        font-size: 72px; 
+        fill: #000000; 
+        text-anchor: middle;
+      }
+      .speakerText { 
+        font-family: 'Noto Sans JP', sans-serif; 
+        font-weight: 700; 
+        font-size: 32px; 
+        text-anchor: start;
+      }
+      .dialogText { 
+        font-family: 'Noto Sans JP', sans-serif; 
+        font-weight: 400; 
+        font-size: 28px; 
+        fill: #333333; 
+        text-anchor: start;
+      }
+    </style>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  
+  <text x="640" y="150" class="mainText">話者分離</text>
+  
+  <!-- 話者A -->
+  <circle cx="200" cy="300" r="40" fill="#005bac" opacity="0.3"/>
+  <text x="200" y="310" text-anchor="middle" class="speakerText" fill="#005bac">A</text>
+  <text x="260" y="310" class="dialogText">お困りの内容を教えてください</text>
+  
+  <!-- 話者B -->
+  <circle cx="200" cy="420" r="40" fill="#d90000" opacity="0.3"/>
+  <text x="200" y="430" text-anchor="middle" class="speakerText" fill="#d90000">B</text>
+  <text x="260" y="430" class="dialogText">ネットが繋がらないんです</text>
+  
+  <!-- 話者A -->
+  <circle cx="200" cy="540" r="40" fill="#005bac" opacity="0.3"/>
+  <text x="200" y="550" text-anchor="middle" class="speakerText" fill="#005bac">A</text>
+  <text x="260" y="550" class="dialogText">いつからですか？</text>
+  
+  <text x="640" y="650" class="mainText" style="font-size: 48px; fill: #666666;">誰が何を言ったか</text>
+</svg>

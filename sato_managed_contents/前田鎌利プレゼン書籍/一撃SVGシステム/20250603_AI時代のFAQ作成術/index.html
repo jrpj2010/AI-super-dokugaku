@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代のFAQ作成術 - 鎌利式プレゼンテーション</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide-wrapper {
+            width: 90vw;
+            max-width: 1280px;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background-color: rgba(0,0,0,0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn {
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .slide-list {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .slide-list.show {
+            display: block;
+        }
+        
+        .slide-list h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .slide-list ul {
+            list-style: none;
+        }
+        
+        .slide-list li {
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+        
+        .slide-list li:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .slide-list li.active {
+            background-color: rgba(255,255,255,0.2);
+            font-weight: bold;
+        }
+        
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                bottom: 20px;
+                padding: 10px 20px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .slide-counter {
+                font-size: 16px;
+                min-width: 80px;
+            }
+            
+            .slide-list {
+                right: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="btn fullscreen-btn" onclick="toggleFullscreen()">全画面</button>
+    <button class="btn menu-toggle" onclick="toggleSlideList()">スライド一覧</button>
+    
+    <div class="presentation-container">
+        <div class="slide-wrapper" id="slideWrapper">
+            <!-- スライドが動的に挿入されます -->
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="btn" id="prevBtn" onclick="previousSlide()">← 前へ</button>
+        <div class="slide-counter" id="slideCounter">1 / 30</div>
+        <button class="btn" id="nextBtn" onclick="nextSlide()">次へ →</button>
+    </div>
+    
+    <div class="slide-list" id="slideList">
+        <h3>スライド一覧</h3>
+        <ul id="slideListItems">
+            <!-- スライドリストが動的に挿入されます -->
+        </ul>
+    </div>
+    
+    <script>
+        const slides = [
+            { file: 'slide_01_title.svg', title: '表紙 - AI時代のFAQ作成術' },
+            { file: 'slide_02_problem.svg', title: '現代の課題 - FAQ作成は時間泥棒' },
+            { file: 'slide_03_91percent.svg', title: '91% - 伝えることに苦手意識' },
+            { file: 'slide_04_voice_data.svg', title: '音声データの山' },
+            { file: 'slide_05_ai_partner.svg', title: 'AIという相棒' },
+            { file: 'slide_06_three_points.svg', title: '本日の3つのポイント' },
+            { file: 'slide_07_chapter1.svg', title: '第1章 - データ品質が命！' },
+            { file: 'slide_08_language_pitfall.svg', title: '言葉の落とし穴' },
+            { file: 'slide_09_misrecognition.svg', title: '誤認識の実例' },
+            { file: 'slide_10_systemization.svg', title: '仕組み化 - 置換辞書の威力' },
+            { file: 'slide_11_speaker_separation.svg', title: '話者分離' },
+            { file: 'slide_12_garbage_data.svg', title: 'ゴミデータ' },
+            { file: 'slide_13_chapter2.svg', title: '第2章 - AIが喜ぶデータ作り' },
+            { file: 'slide_14_ai_readable.svg', title: 'AIリーダブル' },
+            { file: 'slide_15_code_block.svg', title: '構造化の技術' },
+            { file: 'slide_16_notebooklm.svg', title: 'NotebookLM' },
+            { file: 'slide_17_file_formats.svg', title: 'ファイル形式' },
+            { file: 'slide_18_chapter3.svg', title: '第3章 - 人間の知恵でAIを強化' },
+            { file: 'slide_19_pin_word.svg', title: 'Pin!ワード' },
+            { file: 'slide_20_good_bad_examples.svg', title: '良い事例・悪い事例' },
+            { file: 'slide_21_curation.svg', title: 'キュレーション' },
+            { file: 'slide_22_jsonl.svg', title: 'JSON L形式' },
+            { file: 'slide_23_icl.svg', title: 'ICL - インコンテキストラーニング' },
+            { file: 'slide_24_qa_bot.svg', title: '質疑応答bot' },
+            { file: 'slide_25_specialized_bots.svg', title: '専門botの例' },
+            { file: 'slide_26_hallucination.svg', title: 'ハルシネーション' },
+            { file: 'slide_27_human_verification.svg', title: '人間による検証' },
+            { file: 'slide_28_ai_collaboration.svg', title: 'AIとの協調' },
+            { file: 'slide_29_four_pillars.svg', title: '4本柱のまとめ' },
+            { file: 'slide_30_call_to_action.svg', title: '行動喚起 - 今すぐ始めよう' }
+        ];
+        
+        let currentSlide = 0;
+        
+        function initializePresentation() {
+            const slideWrapper = document.getElementById('slideWrapper');
+            const slideListItems = document.getElementById('slideListItems');
+            
+            // スライドを作成
+            slides.forEach((slide, index) => {
+                // スライド要素を作成
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slide';
+                slideDiv.id = `slide-${index}`;
+                if (index === 0) slideDiv.classList.add('active');
+                
+                const img = document.createElement('img');
+                img.src = slide.file;
+                img.alt = slide.title;
+                
+                slideDiv.appendChild(img);
+                slideWrapper.appendChild(slideDiv);
+                
+                // スライドリストアイテムを作成
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${slide.title}`;
+                listItem.onclick = () => goToSlide(index);
+                if (index === 0) listItem.classList.add('active');
+                slideListItems.appendChild(listItem);
+            });
+            
+            updateSlideCounter();
+            updateButtons();
+        }
+        
+        function showSlide(index) {
+            const allSlides = document.querySelectorAll('.slide');
+            const allListItems = document.querySelectorAll('#slideListItems li');
+            
+            allSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            
+            allListItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
+            currentSlide = index;
+            updateSlideCounter();
+            updateButtons();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function goToSlide(index) {
+            showSlide(index);
+        }
+        
+        function updateSlideCounter() {
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+        
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
+        }
+        
+        function toggleSlideList() {
+            document.getElementById('slideList').classList.toggle('show');
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // キーボードショートカット
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    previousSlide();
+                    break;
+                case 'ArrowRight':
+                    nextSlide();
+                    break;
+                case 'Escape':
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                    break;
+                case 'f':
+                case 'F':
+                    toggleFullscreen();
+                    break;
+                case 'm':
+                case 'M':
+                    toggleSlideList();
+                    break;
+            }
+        });
+        
+        // スワイプ対応（モバイル）
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide();
+            }
+        }
+        
+        // 初期化
+        initializePresentation();
+    </script>
+</body>
+</html>
