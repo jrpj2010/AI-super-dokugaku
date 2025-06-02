@@ -102,3 +102,10 @@ vibecoding-site/
 
 # Trash directory
 _trash/
+
+# Backup directory
+backup/
+
+# Docker ignore files
+.dockerignore
+.gcloudignore
