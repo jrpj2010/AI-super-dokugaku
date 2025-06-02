@@ -1,0 +1,53 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-enable-automatic-updates: 'false'
+    run.googleapis.com/build-id: 90c3bab5-62ab-4049-aa98-248a22421bec
+    run.googleapis.com/build-image-uri: asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/tts-test-main
+    run.googleapis.com/build-name: projects/632969986222/locations/asia-northeast1/builds/90c3bab5-62ab-4049-aa98-248a22421bec
+    run.googleapis.com/build-source-location: gs://run-sources-gemini-20241115-asia-northeast1/services/tts-test-main/1748848525.859732-f228f4ce04f141ecaf5b9d9ddf92ae9b.zip#1748848525955146
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/urls: '["https://tts-test-main-632969986222.asia-northeast1.run.app","https://tts-test-main-q6fk4arjta-an.a.run.app"]'
+  labels:
+    cloud.googleapis.com/location: asia-northeast1
+  name: tts-test-main
+  namespace: '632969986222'
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '10'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 522.0.0
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: rvcfveshfr
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: GOOGLE_GENERATIVE_AI_API_KEY
+        - name: NODE_ENV
+          value: production
+        image: asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/tts-test-main@sha256:c089f2bc777c722742bfbb75e3f17ec8f6818de89863d8519b27a6ac4f0f3f4f
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: '1'
+            memory: 1Gi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      serviceAccountName: 632969986222-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100

@@ -29,6 +29,7 @@ WORKDIR /app
 # 必要なファイルのみコピー
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml* ./
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/index.html ./
 COPY --from=builder /app/demo.html ./
 COPY --from=builder /app/demo-srt.html ./
 

@@ -1,149 +1,179 @@
-# 🎭 感情表現型音声合成システム
+# Gemini 2.5 TTS - 全話者対応音声合成システム v1.1.0
 
-Google Gemini 2.5 Flash Preview TTSモデルを使用した、複数話者対応の感情表現型音声合成システムです。
+Google Gemini 2.5 Flash/Pro Preview TTSモデルを使用した、日本語対応の高品質音声合成Webアプリケーションです。
 
-## 🚀 主な特徴
+## 🌟 主な機能
 
-- **複数話者対応**: 異なる話者に異なる音声を割り当て可能
-- **感情表現**: 各発話に感情（喜び、悲しみ、怒り等）を付与可能
-- **リアルタイム生成**: Gemini 2.5 Flash Preview TTSによる高速な音声生成
-- **WebUI**: 直感的なWebインターフェースで会話を作成
-- **日本語対応**: 日本語の自然な音声生成をサポート
+### 1. シンプル音声生成
+- テキストを入力して即座に音声を生成
+- 30種類以上の話者から選択可能
+- リアルタイムストリーミング再生
 
-## 📋 前提条件
+### 2. 複数話者対話
+- 最大2名の話者による自然な対話音声を生成
+- 話者ごとに感情（喜び、悲しみ、怒り、興奮、落ち着き）を設定可能
+- 会話のトーンを自動最適化
 
-- Node.js (v18.0.0 以降)
-- pnpm
-- Google AI Studio APIキー
-  1. [Google AI Studio](https://makersuite.google.com/app/apikey) にアクセス
-  2. API キーを作成
-  3. 安全な場所に保管
+### 3. SRT字幕ファイル対応
+- SRTファイルをアップロードまたはテキスト入力で処理
+- 話者を自動認識し、適切な音声を割り当て
+- タイムコードに基づいた正確な音声生成
 
-## 🛠️ インストール
+### 4. カスタムインタラクション（v1.1.0新機能）
+- AI（Gemini 2.5 Flash Preview）による自動スタイル生成
+- 「疲れた様子で話す」「明るく元気に話す」など、細かな表現指定
+- 手動でのスタイルカスタマイズも可能
 
-1. 依存関係をインストールします：
+## 🗣️ 話者の特徴（実際の聴き比べに基づく分類）
+
+### 女性の声
+- **Leda**: アニメ声・若い女性・明るい
+- **Aoede**: 成人女性・セクシー・少し声枯れ
+- **Callirrhoe**: 成人女性・AIっぽい・聞きなれた
+- **Laomedeia**: 成人女性・落ち着いた・ナレーター向き
+- 他12種類
+
+### 男性の声
+- **Puck**: 成人男性・ナレーター向き・誠実そう
+- **Charon**: 成人男性・落ち着いた・頭が良さそう
+- **Enceladus**: ヒロシ・落ち着いた・父親
+- **Algieba**: 成人男性・声枯れ・詐欺師・ダミ声
+- 他14種類
+
+## 🚀 デプロイ済みURL
+
+https://tts-test-main-632969986222.asia-northeast1.run.app
+
+## 💻 ローカル開発
+
+### 必要な環境
+- Node.js 18以上
+- Google Cloud SDK
+- Gemini API Key
+
+### セットアップ
+
+1. リポジトリをクローン
 ```bash
-pnpm install
+git clone https://github.com/jrpj2010/tts-test-main.git
+cd tts-test-main
 ```
 
-2. `.env` ファイルを作成し、API キーを設定します：
+2. 依存関係をインストール
+```bash
+npm install
+```
+
+3. 環境変数を設定
 ```bash
 cp .env.example .env
-# .envファイルを編集して、実際のAPIキーを設定
+# .envファイルを編集してGOOGLE_GENERATIVE_AI_API_KEYを設定
 ```
 
-## 🚀 使い方
+4. 開発サーバーを起動
+```bash
+npm run dev
+```
 
-プロジェクトを実行するには、以下のコマンドを使用します：
+5. ブラウザで http://localhost:8080 を開く
+
+### ビルド
 
 ```bash
-pnpm start
+npm run build
 ```
 
-## 📝 実行結果
+## 🐳 Docker対応
 
-実行すると、以下のファイルが生成されます：
-- `output.pcm`: 生のPCMオーディオデータ
-- `output.wav`: 再生可能なWAVファイル
-
-## 🎯 利用可能な音声
-
-- **Kore**: 男性的な声
-- **Puck**: 女性的な声  
-- **Aoede**: 中性的な声
-- **Charon**: 低い男性声
-
-## 🌐 WebUIの使用方法
-
-1. サーバーを起動:
+### Dockerビルド
 ```bash
-pnpm server
+docker build -t tts-test-main .
 ```
 
-2. ブラウザでアクセス:
-```
-http://localhost:8080/demo
-```
-
-3. 会話を作成:
-   - 話者を選択
-   - 感情を選択（オプション）
-   - テキストを入力
-   - 「音声を生成」をクリック
-
-## 📡 API エンドポイント
-
-### 単一テキスト音声生成
+### Docker実行
 ```bash
-POST /api/tts
-Content-Type: application/json
+docker run -p 8080:8080 -e GOOGLE_GENERATIVE_AI_API_KEY=your-api-key tts-test-main
+```
 
+## ☁️ Cloud Runへのデプロイ
+
+```bash
+gcloud run deploy tts-test-main \
+  --source=. \
+  --region=asia-northeast1 \
+  --allow-unauthenticated \
+  --project=your-project-id
+```
+
+## 📝 API仕様
+
+### POST /api/tts
+単一話者の音声生成
+
+```json
 {
-  "text": "こんにちは、世界！"
+  "text": "こんにちは",
+  "voice": "Puck",
+  "model": "gemini-2.5-flash-preview-tts",
+  "style": "明るく元気に話す"
 }
 ```
 
-### 複数話者会話生成
-```bash
-POST /api/conversation
-Content-Type: application/json
+### POST /api/conversation
+複数話者の対話音声生成
 
+```json
 {
   "conversation": [
-    {"speaker": "Joe", "text": "やあ、元気？", "emotion": "happy"},
-    {"speaker": "Jane", "text": "うん、元気だよ！", "emotion": "excited"}
+    { "speaker": "田中", "text": "おはようございます", "emotion": "happy" },
+    { "speaker": "佐藤", "text": "おはようございます", "emotion": "" }
   ],
   "speakers": [
-    {"name": "Joe", "voice": "Kore"},
-    {"name": "Jane", "voice": "Puck"}
-  ]
+    { "name": "田中", "voice": "Leda" },
+    { "name": "佐藤", "voice": "Puck" }
+  ],
+  "model": "gemini-2.5-flash-preview-tts",
+  "style": "朝の挨拶、爽やかに"
 }
-
-## 🐳 Dockerを使用した実行
-
-```bash
-# Dockerイメージのビルド
-docker build -t gemini-tts .
-
-# コンテナの実行
-docker run -e GOOGLE_GENERATIVE_AI_API_KEY=your-api-key-here gemini-tts
 ```
 
-## 🔧 開発
+### POST /api/generate-style
+スタイル自動生成
 
-```bash
-# 開発モード（ファイル変更を監視）
-pnpm dev
-
-# TypeScriptのビルド
-pnpm build
-
-# 型チェック
-pnpm type-check
-
-# リント
-pnpm lint
-
-# フォーマット
-pnpm format
+```json
+{
+  "text": "今日は本当に暑いですね...",
+  "type": "simple"
+}
 ```
 
-## 📂 プロジェクト構造
+## ⚠️ 制限事項
 
-```
-.
-├── main.ts          # メインスクリプト
-├── package.json     # パッケージ設定
-├── tsconfig.json    # TypeScript設定
-├── .env.example     # 環境変数のサンプル
-├── Dockerfile       # Docker設定
-└── README.md        # このファイル
-```
+- API レート制限: 1分あたり10リクエストまで
+- 複数話者対話: 最大2名まで
+- 処理時間: Cloud Runのタイムアウト（5分）以内
+- 対応言語: 24言語（日本語、英語、中国語、韓国語など）
+
+## 🛠️ 技術スタック
+
+- **フロントエンド**: Vanilla JavaScript, HTML5, CSS3
+- **バックエンド**: Node.js, TypeScript
+- **AI/ML**: Google Gemini 2.5 Flash/Pro Preview
+- **インフラ**: Google Cloud Run, Docker
+- **音声処理**: Web Audio API, wav library
+
+## 📄 ライセンス
+
+MIT License
 
 ## 🤝 貢献
 
-プルリクエストを歓迎します。大きな変更の場合は、まずissueを開いて変更内容について議論してください。
+Issues や Pull Requests は歓迎します。
 
-## 📝 ライセンス
+## 📞 連絡先
 
-MIT
+質問や要望がある場合は、GitHubのIssuesでお知らせください。
+
+---
+
+**Made with ❤️ by TANREN Inc.**

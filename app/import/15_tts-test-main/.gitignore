@@ -31,11 +31,31 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+/dist
+tsconfig.tsbuildinfo
 
 # audio files
 *.wav
 *.mp3
+*.pcm
+output.*
 
 # IDE
 .vscode/
 .idea/
+
+# logs
+*.log
+
+# temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

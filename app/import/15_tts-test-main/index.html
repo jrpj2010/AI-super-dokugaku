@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 2.5 TTS - 全話者対応音声合成システム</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --male-color: #3b82f6;
+            --female-color: #ec4899;
+            --neutral-color: #8b5cf6;
+            --info-color: #06b6d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* モデル選択 */
+        .model-selector {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .model-selector label {
+            font-weight: 600;
+        }
+
+        .model-selector select {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            background: white;
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* 言語サポート情報 */
+        .language-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* タブ */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin: 2rem 0 0 0;
+            background: var(--card-bg);
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            background: var(--card-bg);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            background: #f1f5f9;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            background: var(--card-bg);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        /* メインコンテンツ */
+        .main-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            min-height: 600px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* カテゴリー */
+        .voice-category {
+            margin-bottom: 2rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .category-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .category-icon.male {
+            background: var(--male-color);
+            color: white;
+        }
+
+        .category-icon.female {
+            background: var(--female-color);
+            color: white;
+        }
+
+        .category-icon.neutral {
+            background: var(--neutral-color);
+            color: white;
+        }
+
+        .category-icon.info {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* 話者選択グリッド */
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .voice-card {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .voice-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .voice-card.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .voice-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .voice-card .voice-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-card .voice-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .voice-card .voice-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-card .voice-lang {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .voice-card button {
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .voice-card button:hover {
+            background: var(--secondary-color);
+        }
+
+        .voice-card button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* 共通スタイル */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        button {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ステータス表示 */
+        .status {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .status.loading {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        /* オーディオプレーヤー */
+        audio {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* SRT専用スタイル */
+        .file-upload {
+            border: 3px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .file-upload.drag-over {
+            border-color: var(--primary-color);
+            background: #dbeafe;
+        }
+
+        .file-info {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .file-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-item .label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* 会話入力 */
+        .conversation-lines {
+            margin: 1.5rem 0;
+        }
+
+        .conversation-line {
+            display: grid;
+            grid-template-columns: 200px 1fr 150px auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        select, input {
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-remove {
+            background: var(--error-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-remove:hover {
+            background: #dc2626;
+        }
+
+        .btn-add {
+            background: var(--success-color);
+            color: white;
+            margin-top: 1rem;
+        }
+
+        .btn-add:hover {
+            background: #059669;
+        }
+
+        /* スピーカーマッピング */
+        .speaker-mapping {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .speaker-mapping h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .mapping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .mapping-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .speaker-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* SRTプレビューのスクロールスタイル */
+        .srt-preview-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f8fafc;
+            margin-top: 1rem;
+        }
+
+        .srt-preview-item {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .srt-preview-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .srt-preview-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .srt-preview-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .srt-preview-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* スタイル設定セクション */
+        .style-settings {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .style-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .style-toggle button {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .style-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .style-toggle button:hover:not(.active) {
+            background: #eff6ff;
+        }
+
+        .style-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .style-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .style-hint {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .conversation-line {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .voice-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        /* ローディングスピナー */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>
+                <span>🎙️</span>
+                Gemini 2.5 TTS <span style="font-size: 0.6em; opacity: 0.8;">v1.1.0</span>
+            </h1>
+            <p class="subtitle">Google最新AIモデルによる全話者対応音声合成システム</p>
+            
+            <div class="model-selector">
+                <label for="model-select">モデル選択:</label>
+                <select id="model-select" onchange="updateModel()">
+                    <option value="gemini-2.5-flash-preview-tts">Gemini 2.5 Flash Preview TTS (高速)</option>
+                    <option value="gemini-2.5-pro-preview-tts">Gemini 2.5 Pro Preview TTS (高品質)</option>
+                </select>
+            </div>
+            
+            <div class="language-info">
+                🌐 対応言語: 日本語、英語、中国語、韓国語など24言語に対応
+            </div>
+            
+            <div class="language-info" style="background: rgba(255, 193, 7, 0.2); margin-top: 0.5rem;">
+                ⚠️ レート制限: 1分あたり10リクエストまで。連続使用時はご注意ください。
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('simple')">
+                シンプル音声生成
+            </button>
+            <button class="tab" onclick="switchTab('conversation')">
+                複数話者対話
+            </button>
+            <button class="tab" onclick="switchTab('srt')">
+                SRT字幕ファイル
+            </button>
+        </div>
+
+        <div class="main-content">
+            <!-- シンプル音声生成タブ -->
+            <div id="simple-tab" class="tab-content active">
+                <div class="section">
+                    <div class="form-group">
+                        <label for="simple-text">テキストを入力してください：</label>
+                        <textarea id="simple-text" rows="5" placeholder="ここに音声化したいテキストを入力してください...">こんにちは、これはGemini 2.5 TTSモデルのテストです。自然で滑らかな音声を生成できます。</textarea>
+                    </div>
+                    
+                    <!-- 会話スタイル設定 -->
+                    <div class="style-settings">
+                        <h3 style="margin: 0 0 1rem 0; font-size: 1.1rem;">会話スタイル設定</h3>
+                        <div class="style-toggle">
+                            <button class="active" onclick="toggleStyleMode('simple', 'auto')">🤖 自動生成</button>
+                            <button onclick="toggleStyleMode('simple', 'manual')">✏️ 手動入力</button>
+                        </div>
+                        <div id="simple-style-auto" style="display: block;">
+                            <p class="style-hint">テキストの内容から最適なスタイル指示を自動生成します</p>
+                            <div id="simple-auto-style-preview" style="margin-top: 0.5rem; padding: 0.75rem; background: white; border-radius: 6px; border: 1px solid var(--border-color); font-style: italic; color: var(--text-secondary);">
+                                スタイルを生成中...
+                            </div>
+                        </div>
+                        <div id="simple-style-manual" style="display: none;">
+                            <textarea id="simple-style-input" class="style-input" rows="2" placeholder="例: 疲れた様子で話す、明るく元気に話す、緊張しながら話す など（100文字以内）" maxlength="100"></textarea>
+                            <p class="style-hint">話し方の特徴や感情を指定してください</p>
+                            <button id="generateSimpleStyleBtn" class="btn-primary" style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="generateSimpleStyle()">
+                                スタイルを自動生成
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="generateSimpleAudio()">
+                        選択した話者で音声を生成
+                    </button>
+                    
+                    <div id="simple-status" class="status"></div>
+                    <audio id="simple-audio" controls style="display: none;"></audio>
+                </div>
+
+                <div class="section">
+                    <h2>話者を選択</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        クリックで話者を選択し、「試聴」ボタンで即座にサンプル音声を聞けます
+                    </p>
+                    
+                    <div id="voice-categories">
+                        <!-- カテゴリーがここに動的に生成されます -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 複数話者対話タブ -->
+            <div id="conversation-tab" class="tab-content">
+                <div class="section">
+                    <h2>複数話者による対話生成</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        異なる話者と感情を組み合わせて、リアルな対話音声を生成します。
+                    </p>
+                    
+                    <div style="background: #e0f2fe; border: 1px solid #0284c7; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; color: #075985;">
+                            <strong>ℹ️ 推奨</strong>: 最適な音声品質のため、<strong>2話者での対話</strong>を推奨します。
+                        </p>
+                    </div>
+                    
+                    <div id="conversation-lines" class="conversation-lines">
+                        <div class="conversation-line">
+                            <select class="speaker-select" onchange="updateSpeakerMapping()">
+                                <!-- オプションは動的に生成されます -->
+                            </select>
+                            <input type="text" class="text-input" placeholder="セリフを入力..." value="こんにちは！今日はいい天気ですね。">
+                            <select class="emotion-select">
+                                <option value="">通常</option>
+                                <option value="happy">喜び</option>
+                                <option value="sad">悲しみ</option>
+                                <option value="angry">怒り</option>
+                                <option value="excited">興奮</option>
+                                <option value="calm">落ち着き</option>
+                            </select>
+                            <button class="btn-remove" onclick="removeLine(this)">削除</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-add" onclick="addConversationLine()">
+                        + 行を追加
+                    </button>
+                    
+                    <div class="speaker-mapping">
+                        <h3>話者設定</h3>
+                        <div id="speaker-mapping-display" class="mapping-grid"></div>
+                    </div>
+                    
+                    <!-- 会話スタイル設定 -->
+                    <div class="style-settings">
+                        <h3 style="margin: 0 0 1rem 0; font-size: 1.1rem;">会話スタイル設定</h3>
+                        <div class="style-toggle">
+                            <button class="active" onclick="toggleStyleMode('conversation', 'auto')">🤖 自動生成</button>
+                            <button onclick="toggleStyleMode('conversation', 'manual')">✏️ 手動入力</button>
+                        </div>
+                        <div id="conversation-style-auto" style="display: block;">
+                            <p class="style-hint">対話内容から最適なスタイル指示を自動生成します</p>
+                            <div id="conversation-auto-style-preview" style="margin-top: 0.5rem; padding: 0.75rem; background: white; border-radius: 6px; border: 1px solid var(--border-color); font-style: italic; color: var(--text-secondary);">
+                                スタイルを生成中...
+                            </div>
+                        </div>
+                        <div id="conversation-style-manual" style="display: none;">
+                            <textarea id="conversation-style-input" class="style-input" rows="2" placeholder="例: カジュアルな友人同士の会話、ビジネスの打ち合わせ、親子の温かい会話 など（100文字以内）" maxlength="100"></textarea>
+                            <p class="style-hint">会話全体の雰囲気や状況を指定してください</p>
+                            <button id="generateConversationStyleBtn" class="btn-primary" style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="generateConversationStyle()">
+                                スタイルを自動生成
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="generateConversationAudio()">
+                        対話音声を生成
+                    </button>
+                    
+                    <div id="conversation-status" class="status"></div>
+                    <audio id="conversation-audio" controls style="display: none;"></audio>
+                </div>
+            </div>
+
+            <!-- SRT字幕ファイルタブ -->
+            <div id="srt-tab" class="tab-content">
+                <div class="section">
+                    <h2>SRT字幕ファイルから音声生成</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        SRT形式の字幕ファイルをアップロードして、自動的に話者を認識し音声を生成します。
+                    </p>
+                    
+                    <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <h3 style="color: #92400e; margin: 0 0 0.5rem 0; font-size: 1.1rem;">⚠️ 重要な制限事項</h3>
+                        <ul style="margin: 0; padding-left: 1.5rem; color: #92400e;">
+                            <li><strong>2話者まで対応</strong>: 現在のAPIは最大2名の話者までしか対応していません。</li>
+                            <li>3話者以上のSRTファイルの場合、最初の話者の音声のみが再生されます。</li>
+                            <li><strong>処理時間制限</strong>: Cloud Runのタイムアウト制限により、5分以内に処理が完了する必要があります。</li>
+                            <li>長時間のSRTファイルは分割して処理することをお勧めします。</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <button class="btn-primary" onclick="switchSRTMode('file')" id="srt-file-mode-btn">
+                            📁 ファイルをアップロード
+                        </button>
+                        <button class="btn-primary" onclick="switchSRTMode('text')" id="srt-text-mode-btn" style="background: #64748b;">
+                            ✏️ テキストエディタ
+                        </button>
+                    </div>
+                    
+                    <div id="srt-file-mode">
+                        <div class="file-upload" id="file-upload" onclick="document.getElementById('srt-file').click()">
+                            <input type="file" id="srt-file" accept=".srt" style="display: none;" onchange="handleFileSelect(event)">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📁</div>
+                            <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">
+                                SRTファイルをドラッグ＆ドロップ
+                            </p>
+                            <p style="color: var(--text-secondary);">
+                                またはクリックしてファイルを選択
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div id="srt-text-mode" style="display: none;">
+                        <div class="form-group">
+                            <label for="srt-text-input" style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; display: block;">
+                                SRT形式のテキストを貼り付けてください：
+                            </label>
+                            <textarea id="srt-text-input" rows="15" placeholder="1&#10;00:00:00,000 --> 00:00:03,000&#10;田中: おはようございます！今日はいい天気ですね。&#10;&#10;2&#10;00:00:03,500 --> 00:00:06,500&#10;佐藤: そうですね。散歩日和です。&#10;&#10;※注意: 各エントリーの前に連番（1, 2, 3...）が必要です" style="width: 100%; font-family: monospace; font-size: 0.9rem;"></textarea>
+                        </div>
+                        <button class="btn-primary" onclick="processSRTText()">
+                            SRTテキストを処理
+                        </button>
+                    </div>
+                    
+                    <button class="btn-primary" style="margin-top: 1rem;" onclick="loadSampleSRT()">
+                        サンプルSRTを読み込む
+                    </button>
+                    
+                    <div id="file-info" class="file-info" style="display: none;">
+                        <h3>ファイル情報</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="label">ファイル名</div>
+                                <div class="value" id="file-name">-</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="label">総行数</div>
+                                <div class="value" id="total-lines">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="label">話者数</div>
+                                <div class="value" id="speaker-count">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="label">総時間</div>
+                                <div class="value" id="total-duration">00:00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="srt-speaker-mapping" class="speaker-mapping" style="display: none;">
+                        <h3>話者と音声の割り当て</h3>
+                        <div id="srt-speaker-selects"></div>
+                    </div>
+                    
+                    <div id="srt-content" style="margin-top: 1.5rem;"></div>
+                    
+                    <!-- 会話スタイル設定 -->
+                    <div id="srt-style-settings" class="style-settings" style="display: none;">
+                        <h3 style="margin: 0 0 1rem 0; font-size: 1.1rem;">会話スタイル設定</h3>
+                        <div class="style-toggle">
+                            <button class="active" onclick="toggleStyleMode('srt', 'auto')">🤖 自動生成</button>
+                            <button onclick="toggleStyleMode('srt', 'manual')">✏️ 手動入力</button>
+                        </div>
+                        <div id="srt-style-auto" style="display: block;">
+                            <p class="style-hint">SRT内容から最適なスタイル指示を自動生成します</p>
+                            <div id="srt-auto-style-preview" style="margin-top: 0.5rem; padding: 0.75rem; background: white; border-radius: 6px; border: 1px solid var(--border-color); font-style: italic; color: var(--text-secondary);">
+                                スタイルを生成中...
+                            </div>
+                        </div>
+                        <div id="srt-style-manual" style="display: none;">
+                            <textarea id="srt-style-input" class="style-input" rows="2" placeholder="例: ドキュメンタリー風のナレーション、アニメ風の演技、ラジオドラマ風 など（100文字以内）" maxlength="100"></textarea>
+                            <p class="style-hint">音声全体の演出や雰囲気を指定してください</p>
+                            <button id="generateSRTStyleBtn" class="btn-primary" style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="generateSRTStyle()">
+                                スタイルを自動生成
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button id="generate-srt-btn" class="btn-primary" style="display: none; margin-top: 1.5rem;" onclick="generateSRTAudio()">
+                        SRT音声を生成
+                    </button>
+                    
+                    <div id="srt-status" class="status"></div>
+                    <audio id="srt-audio" controls style="display: none;"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // グローバル変数
+        let currentTab = 'simple';
+        let srtData = null;
+        let selectedVoice = 'Puck';
+        let currentModel = 'gemini-2.5-flash-preview-tts';
+        let srtSpeakerMapping = {};
+        let sampleAudios = {};
+        let styleMode = {
+            simple: 'auto',
+            conversation: 'auto',
+            srt: 'auto'
+        };
+        let autoGeneratedStyles = {
+            simple: '',
+            conversation: '',
+            srt: ''
+        };
+
+        // カテゴリー別の話者リスト（実際の聴き比べに基づく分類）
+        const voiceCategories = {
+            'female': {
+                title: '女性の声',
+                icon: '👩',
+                voices: [
+                    { id: 'Leda', name: 'Leda', desc: 'アニメ声・若い女性・明るい', icon: '🌸' },
+                    { id: 'Aoede', name: 'Aoede', desc: '成人女性・セクシー・少し声枯れ', icon: '💋' },
+                    { id: 'Autonoe', name: 'Autonoe', desc: '成人女性・落ち着いた・少年っぽさも', icon: '🌙' },
+                    { id: 'Callirrhoe', name: 'Callirrhoe', desc: '成人女性・AIっぽい・聞きなれた', icon: '🤖' },
+                    { id: 'Despina', name: 'Despina', desc: 'アニメ声・セクシー・好印象', icon: '✨' },
+                    { id: 'Erinome', name: 'Erinome', desc: '成人女性・明るい・聞きなれた', icon: '☀️' },
+                    { id: 'Kore', name: 'Kore', desc: '成人女性・明るい・楽しそう', icon: '😊' },
+                    { id: 'Laomedeia', name: 'Laomedeia', desc: '成人女性・落ち着いた・ナレーター向き', icon: '🎙️' },
+                    { id: 'Sulafat', name: 'Sulafat', desc: 'アニメ声・セクシー・落ち着いた', icon: '🌹' },
+                    { id: 'Vindemiatrix', name: 'Vindemiatrix', desc: 'オバサン・明るい・声枯れ', icon: '👵' },
+                    { id: 'Zephyr', name: 'Zephyr', desc: '成人女性・落ち着いた・通る声', icon: '🎤' },
+                    { id: 'Achernar', name: 'Achernar', desc: '声が低めの女性・少年っぽさも', icon: '🎭' }
+                ]
+            },
+            'male': {
+                title: '男性の声',
+                icon: '👨',
+                voices: [
+                    { id: 'Puck', name: 'Puck', desc: '成人男性・ナレーター向き・誠実そう', icon: '📢' },
+                    { id: 'Charon', name: 'Charon', desc: '成人男性・落ち着いた・頭が良さそう', icon: '🎓' },
+                    { id: 'Fenrir', name: 'Fenrir', desc: '高い男性・ナレーター向き・通る声', icon: '📣' },
+                    { id: 'Orus', name: 'Orus', desc: '成人男性・明るい・誠実そう', icon: '😄' },
+                    { id: 'Enceladus', name: 'Enceladus', desc: 'ヒロシ・落ち着いた・父親', icon: '👨‍👧' },
+                    { id: 'Iapetus', name: 'Iapetus', desc: '成人男性・落ち着いた・ナレーター向き', icon: '🎙️' },
+                    { id: 'Algenib', name: 'Algenib', desc: '外国人男性・陽気・明るい', icon: '🌍' },
+                    { id: 'Rasalgethi', name: 'Rasalgethi', desc: '成人男性・ナレーター向き・誠実そう', icon: '📖' },
+                    { id: 'Alnilam', name: 'Alnilam', desc: 'オタク男性・根暗', icon: '🤓' },
+                    { id: 'Gacrux', name: 'Gacrux', desc: '優しそう・少し高い声・痩せてそう', icon: '🤗' },
+                    { id: 'Achird', name: 'Achird', desc: '成人男性・誠実そう', icon: '🤝' },
+                    { id: 'Zubenelgenubi', name: 'Zubenelgenubi', desc: '雰囲気イケメン・少し低めの声・落ち着いた', icon: '😎' },
+                    { id: 'Sadaltager', name: 'Sadaltager', desc: '成人男性・明るい', icon: '☀️' },
+                    { id: 'Pulcherrima', name: 'Pulcherrima', desc: '若い男性・フランク・雰囲気イケメン', icon: '✨' },
+                    { id: 'Algieba', name: 'Algieba', desc: '成人男性・声枯れ・詐欺師・ダミ声', icon: '🎭' },
+                    { id: 'Schedar', name: 'Schedar', desc: '成人男性・ナチュラル・職人', icon: '🔨' },
+                    { id: 'Sadachbia', name: 'Sadachbia', desc: 'オジサン・ワイルド・明るい', icon: '🦁' },
+                    { id: 'Umbriel', name: 'Umbriel', desc: '成人男性・AIっぽい・通る声', icon: '🤖' }
+                ]
+            }
+        };
+
+        // 全話者リスト（プルダウン用）
+        const allVoices = [];
+        Object.values(voiceCategories).forEach(category => {
+            category.voices.forEach(voice => {
+                allVoices.push({
+                    id: voice.id,
+                    name: voice.name,
+                    desc: voice.desc,
+                    lang: 'multi',
+                    icon: voice.icon,
+                    category: category.title
+                });
+            });
+        });
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeVoiceCategories();
+            updateSpeakerOptions();
+            updateSpeakerMapping();
+            generateAutoStyle('simple'); // 初期スタイルを生成
+            // レート制限対策のため、サンプル音声の事前読み込みはコメントアウト
+            // preloadSampleAudios();
+        });
+
+        // サンプル音声を事前読み込み（レート制限対策付き）
+        async function preloadSampleAudios() {
+            console.log('サンプル音声の事前読み込みを開始...');
+            
+            // 各話者のサンプルテキスト
+            const sampleText = "こんにちは、私は{voice}です。よろしくお願いします。";
+            
+            // バッチ処理でレート制限を回避
+            const batchSize = 5; // 一度に処理する数
+            const delayBetweenBatches = 7000; // 7秒待機
+            
+            for (let i = 0; i < allVoices.length; i += batchSize) {
+                const batch = allVoices.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (voice) => {
+                    try {
+                        const text = sampleText.replace('{voice}', voice.name);
+                        const response = await fetch('/api/tts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ 
+                                text: text,
+                                voice: voice.id,
+                                model: currentModel
+                            })
+                        });
+                        
+                        if (response.ok) {
+                            const blob = await response.blob();
+                            const audioUrl = URL.createObjectURL(blob);
+                            sampleAudios[voice.id] = audioUrl;
+                            console.log(`${voice.id}のサンプル音声を読み込みました`);
+                        }
+                    } catch (error) {
+                        console.error(`${voice.id}のサンプル音声読み込みエラー:`, error);
+                    }
+                }));
+                
+                // 次のバッチまで待機
+                if (i + batchSize < allVoices.length) {
+                    console.log(`レート制限対策のため${delayBetweenBatches / 1000}秒待機中...`);
+                    await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
+                }
+            }
+            
+            console.log('サンプル音声の事前読み込み完了');
+        }
+
+        // モデル更新
+        function updateModel() {
+            currentModel = document.getElementById('model-select').value;
+            console.log('Model changed to:', currentModel);
+            // モデル変更時はサンプル音声を再読み込み
+            sampleAudios = {};
+            preloadSampleAudios();
+        }
+
+        // 話者カテゴリーを初期化
+        function initializeVoiceCategories() {
+            const container = document.getElementById('voice-categories');
+            container.innerHTML = '';
+            
+            Object.entries(voiceCategories).forEach(([key, category]) => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'voice-category';
+                
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.innerHTML = `
+                    <div class="category-icon ${key}">${category.icon}</div>
+                    <div class="category-title">${category.title}</div>
+                `;
+                categoryDiv.appendChild(header);
+                
+                const grid = document.createElement('div');
+                grid.className = 'voice-grid';
+                
+                category.voices.forEach(voice => {
+                    const card = document.createElement('div');
+                    card.className = 'voice-card';
+                    if (voice.id === selectedVoice) {
+                        card.classList.add('selected');
+                    }
+                    card.onclick = () => selectVoice(voice.id);
+                    
+                    card.innerHTML = `
+                        <div class="voice-icon">${voice.icon}</div>
+                        <div class="voice-name">${voice.name}</div>
+                        <div class="voice-desc">${voice.desc}</div>
+                        <div class="voice-lang">24言語対応</div>
+                        <button id="btn-${voice.id}" onclick="event.stopPropagation(); testVoice('${voice.id}')">
+                            試聴
+                        </button>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+                
+                categoryDiv.appendChild(grid);
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // 話者を選択
+        function selectVoice(voiceId) {
+            selectedVoice = voiceId;
+            document.querySelectorAll('.voice-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+
+        // 話者を試聴（事前読み込み済みの音声を即座に再生）
+        async function testVoice(voiceId) {
+            const button = document.getElementById(`btn-${voiceId}`);
+            const originalText = button.textContent;
+            
+            // 既に読み込み済みの音声がある場合は即座に再生
+            if (sampleAudios[voiceId]) {
+                const audio = new Audio(sampleAudios[voiceId]);
+                audio.play();
+                
+                button.textContent = '再生中...';
+                audio.onended = () => {
+                    button.textContent = originalText;
+                };
+                return;
+            }
+            
+            // 読み込み済みでない場合は生成
+            button.disabled = true;
+            button.innerHTML = '生成中<span class="loading-spinner"></span>';
+            
+            try {
+                const testText = `こんにちは、私は${voiceId}です。よろしくお願いします。`;
+                const response = await fetch('/api/tts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        text: testText,
+                        voice: voiceId,
+                        model: currentModel
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('音声生成に失敗しました');
+                }
+                
+                // ストリーミング再生（試聴用）
+                const reader = response.body.getReader();
+                const chunks = [];
+                let firstChunkReceived = false;
+                const audio = new Audio();
+                
+                const readStream = async () => {
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        
+                        chunks.push(value);
+                        
+                        // 最初のチャンクで再生開始（16KB以上溜まったら）
+                        if (!firstChunkReceived && chunks.reduce((sum, chunk) => sum + chunk.length, 0) >= 16384) {
+                            const partialBlob = new Blob(chunks, { type: 'audio/wav' });
+                            const partialUrl = URL.createObjectURL(partialBlob);
+                            audio.src = partialUrl;
+                            audio.play().catch(e => console.log('試聴再生エラー:', e));
+                            firstChunkReceived = true;
+                            button.textContent = '再生中...';
+                        }
+                    }
+                    
+                    // 完全なデータをキャッシュに保存
+                    const fullBlob = new Blob(chunks, { type: 'audio/wav' });
+                    const fullUrl = URL.createObjectURL(fullBlob);
+                    sampleAudios[voiceId] = fullUrl;
+                };
+                
+                readStream();
+                
+                audio.onended = () => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                };
+                
+            } catch (error) {
+                button.textContent = 'エラー';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // 話者オプションを更新
+        function updateSpeakerOptions() {
+            // カテゴリー別にオプションをグループ化
+            let optionsHTML = '';
+            
+            // 女性の声
+            optionsHTML += '<optgroup label="女性の声 👩">';
+            voiceCategories.female.voices.forEach(voice => {
+                optionsHTML += `<option value="${voice.id}">${voice.name} - ${voice.desc}</option>`;
+            });
+            optionsHTML += '</optgroup>';
+            
+            // 男性の声
+            optionsHTML += '<optgroup label="男性の声 👨">';
+            voiceCategories.male.voices.forEach(voice => {
+                optionsHTML += `<option value="${voice.id}">${voice.name} - ${voice.desc}</option>`;
+            });
+            optionsHTML += '</optgroup>';
+            
+            document.querySelectorAll('.speaker-select').forEach(select => {
+                select.innerHTML = optionsHTML;
+            });
+        }
+
+        // タブ切り替え
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // タブボタンの状態を更新
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // タブコンテンツの表示を更新
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // タブ切り替え時にスタイルを生成
+            if (styleMode[tabName] === 'auto') {
+                generateAutoStyle(tabName);
+            }
+        }
+
+        // スタイルモード切り替え
+        function toggleStyleMode(tab, mode) {
+            styleMode[tab] = mode;
+            
+            // ボタンの状態を更新
+            const toggleButtons = document.querySelectorAll(`#${tab}-tab .style-toggle button`);
+            toggleButtons.forEach(btn => btn.classList.remove('active'));
+            if (mode === 'auto') {
+                toggleButtons[0].classList.add('active');
+            } else {
+                toggleButtons[1].classList.add('active');
+            }
+            
+            // 表示を切り替え
+            const autoDiv = document.getElementById(`${tab}-style-auto`);
+            const manualDiv = document.getElementById(`${tab}-style-manual`);
+            
+            if (mode === 'auto') {
+                autoDiv.style.display = 'block';
+                manualDiv.style.display = 'none';
+                generateAutoStyle(tab);
+            } else {
+                autoDiv.style.display = 'none';
+                manualDiv.style.display = 'block';
+            }
+        }
+
+        // スタイル自動生成関数（サーバーAPIを使用）
+        async function generateStyleForText(text, type) {
+            if (!text.trim()) {
+                updateStatus('テキストを入力してください。', 'error');
+                return '';
+            }
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+                const response = await fetch('/api/generate-style', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text, type }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.style || '';
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    updateStatus('スタイル生成がタイムアウトしました。', 'error');
+                } else {
+                    updateStatus(`スタイル生成エラー: ${error.message}`, 'error');
+                }
+                return '';
+            }
+        }
+
+        // 自動スタイル生成（各タブ用）
+        async function generateAutoStyle(tab) {
+            let content = '';
+            const previewElement = document.getElementById(`${tab}-auto-style-preview`);
+            
+            // コンテンツの取得
+            if (tab === 'simple') {
+                content = document.getElementById('simple-text').value;
+            } else if (tab === 'conversation') {
+                const lines = document.querySelectorAll('.conversation-line');
+                const conversation = [];
+                lines.forEach(line => {
+                    const text = line.querySelector('.text-input').value;
+                    if (text.trim()) {
+                        conversation.push(text);
+                    }
+                });
+                content = conversation.join('\n');
+            } else if (tab === 'srt' && srtData) {
+                content = srtData.slice(0, 5).map(entry => `${entry.speaker}: ${entry.text}`).join('\n');
+            }
+            
+            if (!content || content.trim().length === 0) {
+                autoGeneratedStyles[tab] = '';
+                if (previewElement) {
+                    previewElement.textContent = 'コンテンツが入力されていません';
+                }
+                return;
+            }
+            
+            if (previewElement) {
+                previewElement.textContent = 'スタイルを生成中...';
+            }
+            
+            const style = await generateStyleForText(content, tab);
+            autoGeneratedStyles[tab] = style || getDefaultStyle(tab);
+            
+            if (previewElement) {
+                previewElement.textContent = autoGeneratedStyles[tab] || 'スタイルを生成できませんでした';
+            }
+        }
+
+        // 各タブのスタイル生成関数
+        async function generateSimpleStyle() {
+            const text = document.getElementById('simple-text').value;
+            const styleTextarea = document.getElementById('simple-style-input');
+            const generateBtn = document.getElementById('generateSimpleStyleBtn');
+            
+            setButtonLoading('generateSimpleStyleBtn', true);
+            updateStatus('スタイルを生成中...', 'processing');
+            
+            const style = await generateStyleForText(text, 'simple');
+            if (style) {
+                styleTextarea.value = style;
+                updateStatus('スタイルの生成が完了しました！', 'success');
+            }
+            
+            setButtonLoading('generateSimpleStyleBtn', false);
+        }
+
+        async function generateConversationStyle() {
+            const lines = document.querySelectorAll('.conversation-line');
+            const conversation = [];
+            lines.forEach(line => {
+                const text = line.querySelector('.text-input').value;
+                if (text.trim()) {
+                    conversation.push(text);
+                }
+            });
+            const content = conversation.join('\n');
+            
+            const styleTextarea = document.getElementById('conversation-style-input');
+            
+            setButtonLoading('generateConversationStyleBtn', true);
+            updateStatus('スタイルを生成中...', 'processing');
+            
+            const style = await generateStyleForText(content, 'conversation');
+            if (style) {
+                styleTextarea.value = style;
+                updateStatus('スタイルの生成が完了しました！', 'success');
+            }
+            
+            setButtonLoading('generateConversationStyleBtn', false);
+        }
+
+        async function generateSRTStyle() {
+            if (!srtData || srtData.length === 0) {
+                updateStatus('SRTデータがありません。', 'error');
+                return;
+            }
+            
+            const content = srtData.slice(0, 5).map(entry => `${entry.speaker}: ${entry.text}`).join('\n');
+            const styleTextarea = document.getElementById('srt-style-input');
+            
+            setButtonLoading('generateSRTStyleBtn', true);
+            updateStatus('スタイルを生成中...', 'processing');
+            
+            const style = await generateStyleForText(content, 'srt');
+            if (style) {
+                styleTextarea.value = style;
+                updateStatus('スタイルの生成が完了しました！', 'success');
+            }
+            
+            setButtonLoading('generateSRTStyleBtn', false);
+        }
+
+        // デフォルトスタイルを取得
+        function getDefaultStyle(tab) {
+            const defaults = {
+                simple: '自然で聞き取りやすい口調で話す',
+                conversation: 'カジュアルで親しみやすい会話',
+                srt: '場面に応じた自然な演技'
+            };
+            return defaults[tab] || '自然な話し方';
+        }
+
+        // 現在のスタイルを取得
+        function getCurrentStyle(tab) {
+            if (styleMode[tab] === 'auto') {
+                return autoGeneratedStyles[tab] || getDefaultStyle(tab);
+            } else {
+                const input = document.getElementById(`${tab}-style-input`);
+                return input ? input.value.trim() : '';
+            }
+        }
+
+        // シンプル音声生成（ストリーミング対応）
+        async function generateSimpleAudio() {
+            const text = document.getElementById('simple-text').value;
+            const status = document.getElementById('simple-status');
+            const audio = document.getElementById('simple-audio');
+            const button = event.target;
+            
+            if (!text.trim()) {
+                showStatus(status, 'テキストを入力してください。', 'error');
+                return;
+            }
+            
+            button.disabled = true;
+            
+            // 自動スタイル生成モードで、スタイルがまだ生成されていない場合
+            let style = getCurrentStyle('simple');
+            if (styleMode.simple === 'auto' && !style) {
+                showStatus(status, 'スタイルを自動生成中...', 'loading');
+                style = await generateStyleForText(text, 'simple');
+                if (style) {
+                    autoGeneratedStyles.simple = style;
+                    const previewElement = document.getElementById('simple-auto-style-preview');
+                    if (previewElement) {
+                        previewElement.textContent = style;
+                    }
+                }
+            }
+            
+            showStatus(status, '音声を生成中...', 'loading');
+            
+            try {
+                const response = await fetch('/api/tts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        text,
+                        voice: selectedVoice,
+                        model: currentModel,
+                        style: style || ''
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('音声生成に失敗しました');
+                }
+                
+                // ストリーミング再生の実装
+                await streamAudio(response, audio, status);
+                
+            } catch (error) {
+                showStatus(status, 'エラー: ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        // 複数話者対話の行を追加
+        function addConversationLine() {
+            const container = document.getElementById('conversation-lines');
+            const newLine = document.createElement('div');
+            newLine.className = 'conversation-line';
+            
+            const optionsHTML = allVoices.map(voice => 
+                `<option value="${voice.id}">${voice.name} - ${voice.desc}</option>`
+            ).join('');
+            
+            newLine.innerHTML = `
+                <select class="speaker-select" onchange="updateSpeakerMapping()">
+                    ${optionsHTML}
+                </select>
+                <input type="text" class="text-input" placeholder="セリフを入力...">
+                <select class="emotion-select">
+                    <option value="">通常</option>
+                    <option value="happy">喜び</option>
+                    <option value="sad">悲しみ</option>
+                    <option value="angry">怒り</option>
+                    <option value="excited">興奮</option>
+                    <option value="calm">落ち着き</option>
+                </select>
+                <button class="btn-remove" onclick="removeLine(this)">削除</button>
+            `;
+            container.appendChild(newLine);
+            updateSpeakerMapping();
+        }
+
+        // 行を削除
+        function removeLine(button) {
+            button.parentElement.remove();
+            updateSpeakerMapping();
+        }
+
+        // 話者マッピングを更新
+        function updateSpeakerMapping() {
+            const speakers = new Map();
+            document.querySelectorAll('.speaker-select').forEach(select => {
+                const speaker = select.value;
+                if (!speakers.has(speaker)) {
+                    speakers.set(speaker, speaker);
+                }
+            });
+            
+            const display = document.getElementById('speaker-mapping-display');
+            display.innerHTML = '';
+            
+            speakers.forEach((voice, speaker) => {
+                const voiceInfo = allVoices.find(v => v.id === speaker);
+                const item = document.createElement('div');
+                item.className = 'mapping-item';
+                item.innerHTML = `
+                    <div class="speaker-icon">${voiceInfo?.icon || '🎤'}</div>
+                    <div>
+                        <div style="font-weight: 600;">${speaker}</div>
+                        <div style="font-size: 0.875rem; color: var(--text-secondary);">${voiceInfo?.desc || 'Unknown'}</div>
+                    </div>
+                `;
+                display.appendChild(item);
+            });
+        }
+
+        // 複数話者音声生成（ストリーミング対応）
+        async function generateConversationAudio() {
+            const lines = document.querySelectorAll('.conversation-line');
+            const status = document.getElementById('conversation-status');
+            const audio = document.getElementById('conversation-audio');
+            const button = event.target;
+            
+            const conversation = [];
+            const speakerSet = new Set();
+            
+            lines.forEach(line => {
+                const speaker = line.querySelector('.speaker-select').value;
+                const text = line.querySelector('.text-input').value;
+                const emotion = line.querySelector('.emotion-select').value;
+                
+                if (text.trim()) {
+                    conversation.push({ speaker, text, emotion });
+                    speakerSet.add(speaker);
+                }
+            });
+            
+            if (conversation.length === 0) {
+                showStatus(status, '少なくとも1つのセリフを入力してください。', 'error');
+                return;
+            }
+            
+            const speakers = Array.from(speakerSet).map(name => ({
+                name,
+                voice: name
+            }));
+            
+            button.disabled = true;
+            
+            // 自動スタイル生成モードで、スタイルがまだ生成されていない場合
+            let style = getCurrentStyle('conversation');
+            if (styleMode.conversation === 'auto' && !style) {
+                showStatus(status, 'スタイルを自動生成中...', 'loading');
+                const content = conversation.map(c => c.text).join('\n');
+                style = await generateStyleForText(content, 'conversation');
+                if (style) {
+                    autoGeneratedStyles.conversation = style;
+                    const previewElement = document.getElementById('conversation-auto-style-preview');
+                    if (previewElement) {
+                        previewElement.textContent = style;
+                    }
+                }
+            }
+            
+            showStatus(status, '対話音声を生成中...', 'loading');
+            
+            try {
+                const response = await fetch('/api/conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        conversation, 
+                        speakers,
+                        model: currentModel,
+                        style: style || ''
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '音声生成に失敗しました');
+                }
+                
+                // ストリーミング再生の実装
+                await streamAudio(response, audio, status);
+                
+            } catch (error) {
+                showStatus(status, 'エラー: ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        // SRTモード切り替え
+        function switchSRTMode(mode) {
+            const fileMode = document.getElementById('srt-file-mode');
+            const textMode = document.getElementById('srt-text-mode');
+            const fileModeBtn = document.getElementById('srt-file-mode-btn');
+            const textModeBtn = document.getElementById('srt-text-mode-btn');
+            
+            if (mode === 'file') {
+                fileMode.style.display = 'block';
+                textMode.style.display = 'none';
+                fileModeBtn.style.background = '#2563eb'; // --primary-color
+                textModeBtn.style.background = '#64748b';
+            } else {
+                fileMode.style.display = 'none';
+                textMode.style.display = 'block';
+                fileModeBtn.style.background = '#64748b';
+                textModeBtn.style.background = '#2563eb'; // --primary-color
+            }
+            
+            // エラーメッセージをクリア
+            const status = document.getElementById('srt-status');
+            if (status) {
+                status.style.display = 'none';
+            }
+        }
+        
+        // SRTテキスト処理
+        function processSRTText() {
+            const textInput = document.getElementById('srt-text-input');
+            const srtText = textInput.value.trim();
+            
+            if (!srtText) {
+                const status = document.getElementById('srt-status');
+                showStatus(status, 'SRTテキストを入力してください。', 'error');
+                return;
+            }
+            
+            console.log('Processing SRT text:', srtText.substring(0, 100) + '...');
+            
+            try {
+                parseSRT(srtText, 'text-input.srt');
+            } catch (error) {
+                console.error('Error parsing SRT:', error);
+                const status = document.getElementById('srt-status');
+                showStatus(status, 'SRTフォーマットエラー: ' + error.message, 'error');
+            }
+        }
+        
+        // SRTファイル処理
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file && file.name.endsWith('.srt')) {
+                readSRTFile(file);
+            }
+        }
+
+        // ドラッグ&ドロップ処理
+        const fileUpload = document.getElementById('file-upload');
+        
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.classList.add('drag-over');
+        });
+        
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.classList.remove('drag-over');
+        });
+        
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.classList.remove('drag-over');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.name.endsWith('.srt')) {
+                readSRTFile(file);
+            }
+        });
+
+        // SRTファイルを読み込む
+        function readSRTFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                parseSRT(content, file.name);
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        // SRTをパース
+        function parseSRT(content, fileName) {
+            // 改行を統一
+            content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            
+            const lines = content.trim().split('\n');
+            const entries = [];
+            let currentEntry = null;
+            let state = 'index';
+            let entryIndex = 1;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                
+                if (state === 'index') {
+                    // 空行はスキップ
+                    if (line === '') continue;
+                    
+                    // 数字のみの行をインデックスとして認識
+                    if (/^\d+$/.test(line)) {
+                        currentEntry = { index: parseInt(line) };
+                        state = 'time';
+                    } else if (line.includes('-->')) {
+                        // インデックスがなく直接タイムコードの場合
+                        currentEntry = { index: entryIndex++ };
+                        i--; // この行を再処理
+                        state = 'time';
+                    }
+                } else if (state === 'time') {
+                    // タイムコードを探す
+                    if (line.includes('-->')) {
+                        const [start, end] = line.split('-->').map(t => t.trim());
+                        currentEntry.start = start;
+                        currentEntry.end = end;
+                        currentEntry.text = '';
+                        state = 'text';
+                    } else if (line === '') {
+                        // 空行なら状態をリセット
+                        state = 'index';
+                    }
+                } else if (state === 'text') {
+                    if (line === '') {
+                        // 空行でエントリー終了
+                        if (currentEntry && currentEntry.text) {
+                            entries.push(currentEntry);
+                        }
+                        currentEntry = null;
+                        state = 'index';
+                    } else {
+                        // テキストを追加
+                        if (currentEntry.text) {
+                            currentEntry.text += '\n' + line;
+                        } else {
+                            currentEntry.text = line;
+                        }
+                    }
+                }
+            }
+            
+            // 最後のエントリーを追加
+            if (currentEntry && currentEntry.text && state === 'text') {
+                entries.push(currentEntry);
+            }
+            
+            if (currentEntry.text) {
+                entries.push(currentEntry);
+            }
+            
+            // 話者を自動認識
+            entries.forEach(entry => {
+                const match = entry.text.match(/^([^：:]+)[：:]\s*(.+)/);
+                if (match) {
+                    entry.speaker = match[1].trim();
+                    entry.text = match[2].trim();
+                } else {
+                    // 話者が明示されていない場合は、既存の話者から推測
+                    // 最初のエントリーまたは前のエントリーと同じ話者とする
+                    if (entries.indexOf(entry) === 0) {
+                        entry.speaker = '話者1';
+                    } else {
+                        const prevEntry = entries[entries.indexOf(entry) - 1];
+                        entry.speaker = prevEntry.speaker || '話者1';
+                    }
+                }
+                // 時間情報を保持
+                entry.startTime = parseTime(entry.start);
+                entry.endTime = parseTime(entry.end);
+                entry.duration = entry.endTime - entry.startTime;
+            });
+            
+            srtData = entries;
+            displaySRTInfo(fileName, entries);
+        }
+
+        // SRT情報を表示
+        function displaySRTInfo(fileName, entries) {
+            document.getElementById('file-name').textContent = fileName;
+            document.getElementById('total-lines').textContent = entries.length;
+            
+            const speakers = new Set(entries.map(e => e.speaker));
+            document.getElementById('speaker-count').textContent = speakers.size;
+            
+            // 総時間を計算
+            if (entries.length > 0) {
+                const lastEntry = entries[entries.length - 1];
+                document.getElementById('total-duration').textContent = lastEntry.end.split(',')[0];
+            }
+            
+            document.getElementById('file-info').style.display = 'block';
+            
+            // 3話者以上の場合は警告を表示
+            if (speakers.size > 2) {
+                const status = document.getElementById('srt-status');
+                showStatus(status, `警告: ${speakers.size}人の話者が検出されました。現在のAPIは2話者までしか対応していません。音声生成を続行すると、最初の話者の音声のみが生成されます。`, 'error');
+                document.getElementById('generate-srt-btn').style.display = 'block';
+            } else {
+                document.getElementById('generate-srt-btn').style.display = 'block';
+            }
+            
+            // スタイル設定セクションを表示
+            document.getElementById('srt-style-settings').style.display = 'block';
+            generateAutoStyle('srt');
+            
+            // 話者マッピングを表示
+            const speakerMapping = document.getElementById('srt-speaker-mapping');
+            const speakerSelects = document.getElementById('srt-speaker-selects');
+            speakerMapping.style.display = 'block';
+            speakerSelects.innerHTML = '';
+            
+            Array.from(speakers).forEach((speaker, index) => {
+                // 話者名から性別を推測して最適な音声を提案
+                const defaultVoice = recommendVoiceForSpeaker(speaker, index);
+                srtSpeakerMapping[speaker] = defaultVoice;
+                
+                const div = document.createElement('div');
+                div.style.cssText = 'display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;';
+                
+                // カテゴリー別オプションを生成
+                let optionsHTML = '';
+                
+                // 女性の声
+                optionsHTML += '<optgroup label="女性の声 👩">';
+                voiceCategories.female.voices.forEach(voice => {
+                    optionsHTML += `<option value="${voice.id}" ${voice.id === defaultVoice ? 'selected' : ''}>${voice.name} - ${voice.desc}</option>`;
+                });
+                optionsHTML += '</optgroup>';
+                
+                // 男性の声
+                optionsHTML += '<optgroup label="男性の声 👨">';
+                voiceCategories.male.voices.forEach(voice => {
+                    optionsHTML += `<option value="${voice.id}" ${voice.id === defaultVoice ? 'selected' : ''}>${voice.name} - ${voice.desc}</option>`;
+                });
+                optionsHTML += '</optgroup>';
+                
+                div.innerHTML = `
+                    <span style="min-width: 150px; font-weight: 600;">${speaker}:</span>
+                    <select onchange="srtSpeakerMapping['${speaker}'] = this.value" style="flex: 1;">
+                        ${optionsHTML}
+                    </select>
+                `;
+                
+                speakerSelects.appendChild(div);
+            });
+            
+            // プレビュー表示
+            const contentDiv = document.getElementById('srt-content');
+            contentDiv.innerHTML = '<h3>プレビュー</h3><div class="srt-preview-container" id="srt-preview-container"></div>';
+            
+            const previewContainer = document.getElementById('srt-preview-container');
+            entries.forEach(entry => {
+                const item = document.createElement('div');
+                item.className = 'srt-preview-item';
+                item.innerHTML = `
+                    <div style="font-size: 0.875rem; color: var(--text-secondary);">${entry.start} → ${entry.end}</div>
+                    <div style="margin-top: 0.5rem;">
+                        <strong>${entry.speaker}:</strong> ${entry.text}
+                    </div>
+                `;
+                previewContainer.appendChild(item);
+            });
+        }
+
+        // サンプルSRTを読み込む
+        function loadSampleSRT() {
+            const sampleSRT = `1
+00:00:00,000 --> 00:00:03,000
+田中: おはようございます！今日はいい天気ですね。
+
+2
+00:00:03,500 --> 00:00:06,500
+佐藤: そうですね。散歩日和です。
+
+3
+00:00:07,000 --> 00:00:10,000
+田中: 公園でも行きましょうか？
+
+4
+00:00:10,500 --> 00:00:13,500
+佐藤: いいですね！準備してきます。
+
+5
+00:00:14,000 --> 00:00:18,000
+田中: じゃあ、10分後に玄関で待ち合わせしましょう。
+
+6
+00:00:18,500 --> 00:00:22,000
+佐藤: 了解です。水筒も持っていきますね。`;
+            
+            // テキストエディタモードの場合はテキストエリアにも設定
+            const textInput = document.getElementById('srt-text-input');
+            if (textInput) {
+                textInput.value = sampleSRT;
+            }
+            
+            parseSRT(sampleSRT, 'sample.srt');
+        }
+
+        // SRT音声生成
+        async function generateSRTAudio() {
+            if (!srtData || srtData.length === 0) {
+                showStatus(document.getElementById('srt-status'), 'SRTファイルを読み込んでください。', 'error');
+                return;
+            }
+            
+            const status = document.getElementById('srt-status');
+            const audio = document.getElementById('srt-audio');
+            const button = event.target;
+            
+            const speakerSet = new Set(srtData.map(e => e.speaker));
+            const uniqueSpeakers = Array.from(speakerSet);
+            
+            // APIの制限に対応
+            let speakers = [];
+            let conversation = [];
+            
+            if (uniqueSpeakers.length === 1) {
+                // 単一話者の場合
+                conversation = srtData.map(entry => ({
+                    speaker: entry.speaker,
+                    text: entry.text,
+                    emotion: ''
+                }));
+            } else if (uniqueSpeakers.length === 2) {
+                // 2話者の場合
+                speakers = uniqueSpeakers.map(name => ({
+                    name,
+                    voice: srtSpeakerMapping[name]
+                }));
+                conversation = srtData.map(entry => ({
+                    speaker: entry.speaker,
+                    text: entry.text,
+                    emotion: ''
+                }));
+            } else {
+                // 3話者以上の場合は各話者ごとに別々に処理
+                showStatus(status, `${uniqueSpeakers.length}人の話者が検出されました。現在のAPIは2話者までしか対応していません。最初の話者の音声のみを生成します。`, 'error');
+                
+                // 各話者ごとに音声を生成して結合
+                const audioBuffers = [];
+                
+                for (const speakerName of uniqueSpeakers) {
+                    const speakerLines = srtData.filter(entry => entry.speaker === speakerName);
+                    if (speakerLines.length === 0) continue;
+                    
+                    const speakerConversation = speakerLines.map(entry => ({
+                        speaker: entry.speaker,
+                        text: entry.text,
+                        emotion: ''
+                    }));
+                    
+                    showStatus(status, `${speakerName}の音声を生成中...`, 'loading');
+                    
+                    try {
+                        const response = await fetch('/api/tts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ 
+                                text: speakerConversation.map(line => line.text).join(' '),
+                                voice: srtSpeakerMapping[speakerName],
+                                model: currentModel
+                            })
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`${speakerName}の音声生成に失敗しました`);
+                        }
+                        
+                        const blob = await response.blob();
+                        audioBuffers.push({ speaker: speakerName, blob, entries: speakerLines });
+                        
+                        // レート制限対策のために少し待機
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        
+                    } catch (error) {
+                        console.error(`Error generating audio for ${speakerName}:`, error);
+                        showStatus(status, `${speakerName}の音声生成エラー: ${error.message}`, 'error');
+                    }
+                }
+                
+                // 簡易的に最初の話者の音声を再生（本来は時間軸に沿って結合すべき）
+                if (audioBuffers.length > 0) {
+                    const firstAudio = audioBuffers[0];
+                    const audioUrl = URL.createObjectURL(firstAudio.blob);
+                    audio.src = audioUrl;
+                    audio.style.display = 'block';
+                    audio.play();
+                    showStatus(status, `音声が生成されました（${audioBuffers.length}人の話者）。時間軸の結合は未実装です。`, 'success');
+                }
+                
+                return;
+            }
+            
+            button.disabled = true;
+            
+            // 自動スタイル生成モードで、スタイルがまだ生成されていない場合
+            let style = getCurrentStyle('srt');
+            if (styleMode.srt === 'auto' && !style) {
+                showStatus(status, 'スタイルを自動生成中...', 'loading');
+                const content = srtData.slice(0, 5).map(entry => `${entry.speaker}: ${entry.text}`).join('\n');
+                style = await generateStyleForText(content, 'srt');
+                if (style) {
+                    autoGeneratedStyles.srt = style;
+                    const previewElement = document.getElementById('srt-auto-style-preview');
+                    if (previewElement) {
+                        previewElement.textContent = style;
+                    }
+                }
+            }
+            
+            showStatus(status, 'SRT音声を生成中...', 'loading');
+            
+            try {
+                const response = await fetch('/api/conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        conversation, 
+                        speakers,
+                        model: currentModel,
+                        style: style || ''
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '音声生成に失敗しました');
+                }
+                
+                const blob = await response.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                
+                audio.src = audioUrl;
+                audio.style.display = 'block';
+                
+                // 既存のダウンロードリンクを削除
+                const existingLink = audio.parentElement.querySelector('a[download]');
+                if (existingLink) {
+                    existingLink.remove();
+                }
+                
+                // 新しいダウンロードリンクを追加
+                const downloadLink = document.createElement('a');
+                downloadLink.href = audioUrl;
+                downloadLink.download = 'srt_audio.wav';
+                downloadLink.textContent = '音声をダウンロード';
+                downloadLink.className = 'btn-primary';
+                downloadLink.style.cssText = 'display: inline-block; margin-top: 1rem; text-decoration: none;';
+                
+                audio.parentElement.insertBefore(downloadLink, audio.nextSibling);
+                
+                audio.play();
+                showStatus(status, 'SRT音声が生成されました！', 'success');
+                
+            } catch (error) {
+                showStatus(status, 'エラー: ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        // ステータス表示
+        function showStatus(element, message, type) {
+            element.textContent = message;
+            element.className = `status ${type}`;
+            element.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // 統一的なステータス更新関数
+        function updateStatus(message, type) {
+            // 現在のタブに応じてステータス要素を取得
+            let statusElement;
+            if (currentTab === 'simple') {
+                statusElement = document.getElementById('simple-status');
+            } else if (currentTab === 'conversation') {
+                statusElement = document.getElementById('conversation-status');
+            } else if (currentTab === 'srt') {
+                statusElement = document.getElementById('srt-status');
+            }
+            
+            if (statusElement) {
+                showStatus(statusElement, message, type);
+            }
+        }
+
+        // ボタンのローディング状態を設定
+        function setButtonLoading(buttonId, isLoading) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            
+            button.disabled = isLoading;
+            if (isLoading) {
+                button.innerHTML = button.textContent + '<span class="loading-spinner"></span>';
+            } else {
+                // スピナーを削除
+                const spinner = button.querySelector('.loading-spinner');
+                if (spinner) {
+                    spinner.remove();
+                }
+            }
+        }
+        
+        // 話者名から最適な音声を推奨
+        function recommendVoiceForSpeaker(speakerName, index) {
+            const nameLower = speakerName.toLowerCase();
+            
+            // 女性的な名前のパターン
+            const femalePatterns = ['美', '花', '子', '香', '菜', '佳', '奈', '愛', '由', '恵', '真', '優', '彩', '結', 'さん', 'san', 'chan', 'ちゃん'];
+            // 男性的な名前のパターン
+            const malePatterns = ['君', 'くん', 'kun', '太', '郎', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '雄', '彦', '武', '剛', '龍', '虎'];
+            
+            // 女性パターンにマッチ
+            for (const pattern of femalePatterns) {
+                if (speakerName.includes(pattern)) {
+                    const femaleVoices = voiceCategories.female.voices;
+                    return femaleVoices[index % femaleVoices.length].id;
+                }
+            }
+            
+            // 男性パターンにマッチ
+            for (const pattern of malePatterns) {
+                if (speakerName.includes(pattern)) {
+                    const maleVoices = voiceCategories.male.voices;
+                    return maleVoices[index % maleVoices.length].id;
+                }
+            }
+            
+            // 英語名の場合
+            if (/^[a-zA-Z]+$/.test(speakerName)) {
+                // 一般的な女性名
+                const femaleNames = ['mary', 'sarah', 'emma', 'anna', 'lisa', 'kate', 'jane', 'emily', 'jessica', 'ashley'];
+                // 一般的な男性名
+                const maleNames = ['john', 'james', 'robert', 'michael', 'david', 'william', 'richard', 'joseph', 'thomas', 'charles'];
+                
+                if (femaleNames.some(name => nameLower.includes(name))) {
+                    const femaleVoices = voiceCategories.female.voices;
+                    return femaleVoices[index % femaleVoices.length].id;
+                }
+                if (maleNames.some(name => nameLower.includes(name))) {
+                    const maleVoices = voiceCategories.male.voices;
+                    return maleVoices[index % maleVoices.length].id;
+                }
+            }
+            
+            // マッチしない場合はインデックスに基づいて交互に
+            if (index % 2 === 0) {
+                const femaleVoices = voiceCategories.female.voices;
+                return femaleVoices[Math.floor(index / 2) % femaleVoices.length].id;
+            } else {
+                const maleVoices = voiceCategories.male.voices;
+                return maleVoices[Math.floor(index / 2) % maleVoices.length].id;
+            }
+        }
+        
+        // SRT時間をミリ秒に変換
+        function parseTime(timeStr) {
+            const parts = timeStr.split(':');
+            const [hours, minutes] = parts;
+            const [seconds, milliseconds] = parts[2].split(',');
+            return parseInt(hours) * 3600000 + parseInt(minutes) * 60000 + parseInt(seconds) * 1000 + parseInt(milliseconds);
+        }
+
+        // ストリーミング音声再生
+        async function streamAudio(response, audioElement, statusElement) {
+            const reader = response.body.getReader();
+            const chunks = [];
+            let totalSize = 0;
+            
+            // 初期バッファサイズ（最初の数チャンクを待つ）
+            const initialBufferSize = 16384; // 16KB（WAVヘッダーを確実に含むサイズ）
+            let isPlaying = false;
+            let currentBlob = null;
+            
+            while (true) {
+                const { done, value } = await reader.read();
+                
+                if (done) break;
+                
+                chunks.push(value);
+                totalSize += value.length;
+                
+                // 初期バッファが溜まったら再生開始
+                if (!isPlaying && totalSize >= initialBufferSize) {
+                    currentBlob = new Blob(chunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(currentBlob);
+                    audioElement.src = audioUrl;
+                    audioElement.style.display = 'block';
+                    
+                    // 音声の再生準備ができたら再生
+                    audioElement.addEventListener('canplay', () => {
+                        audioElement.play().catch(e => console.log('再生エラー:', e));
+                    }, { once: true });
+                    
+                    isPlaying = true;
+                    showStatus(statusElement, 'ストリーミング再生中...', 'loading');
+                }
+                
+                // 定期的に音声データを更新（より大きなチャンクで）
+                if (isPlaying && totalSize % (64 * 1024) === 0) { // 64KBごとに更新
+                    const currentTime = audioElement.currentTime;
+                    const wasPaused = audioElement.paused;
+                    
+                    // 古いBlobのURLを解放
+                    if (currentBlob) {
+                        URL.revokeObjectURL(audioElement.src);
+                    }
+                    
+                    currentBlob = new Blob(chunks, { type: 'audio/wav' });
+                    const newUrl = URL.createObjectURL(currentBlob);
+                    audioElement.src = newUrl;
+                    
+                    // 再生位置を復元
+                    audioElement.addEventListener('loadedmetadata', () => {
+                        audioElement.currentTime = currentTime;
+                        if (!wasPaused) {
+                            audioElement.play().catch(e => console.log('再生再開エラー:', e));
+                        }
+                    }, { once: true });
+                }
+            }
+            
+            // 最終的な完全なデータで音声を設定
+            if (currentBlob) {
+                URL.revokeObjectURL(audioElement.src);
+            }
+            
+            const fullBlob = new Blob(chunks, { type: 'audio/wav' });
+            const fullUrl = URL.createObjectURL(fullBlob);
+            
+            // 現在の再生状態を保存
+            const currentTime = audioElement.currentTime;
+            const wasPaused = audioElement.paused;
+            
+            // 完全な音声に切り替え
+            audioElement.src = fullUrl;
+            
+            if (isPlaying && currentTime > 0) {
+                audioElement.addEventListener('loadedmetadata', () => {
+                    audioElement.currentTime = currentTime;
+                    if (!wasPaused) {
+                        audioElement.play().catch(e => console.log('最終再生エラー:', e));
+                    }
+                }, { once: true });
+            }
+            
+            showStatus(statusElement, '音声が生成されました！', 'success');
+        }
+    </script>
+</body>
+</html>
