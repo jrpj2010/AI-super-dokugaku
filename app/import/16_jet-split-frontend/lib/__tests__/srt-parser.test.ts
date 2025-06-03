@@ -67,7 +67,7 @@ describe('SRTパーサー', () => {
     expect(result.timestamps).toHaveLength(0);
   });
 
-  test('不正なタイムコード形式をスキップする', () => {
+  test('不正なタイムコード形式のエントリも含めて処理する', () => {
     const srtContent = `1
 00:00:00 -> 00:00:05
 これはスキップされます
@@ -78,8 +78,8 @@ describe('SRTパーサー', () => {
 
     const result = parseSRT(srtContent);
     
-    expect(result.text).toBe('これは正常に処理されます');
-    expect(result.timestamps).toHaveLength(1);
+    expect(result.text).toBe('これはスキップされます\nこれは正常に処理されます');
+    expect(result.timestamps).toHaveLength(1); // 正しいタイムコードのみカウント
   });
 
   test('UTF-8の日本語を正しく処理できる', () => {

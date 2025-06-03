@@ -10,6 +10,10 @@ module.exports = {
     '**/__tests__/**/*.(ts|tsx|js)',
     '**/*.(test|spec).(ts|tsx|js)'
   ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/tests/e2e/',
+  ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     'lib/**/*.{js,jsx,ts,tsx}',
