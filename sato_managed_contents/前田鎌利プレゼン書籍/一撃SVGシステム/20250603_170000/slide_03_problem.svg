@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="150" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    問題提起
+  </text>
+  
+  <!-- メインメッセージ -->
+  <g transform="translate(960, 540)">
+    <!-- 誤解の強調 -->
+    <rect x="-700" y="-250" width="1400" height="500" fill="#DC2626" rx="30"/>
+    
+    <text x="0" y="-100" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+      「AIに任せれば
+    </text>
+    <text x="0" y="20" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+      大丈夫」
+    </text>
+    <text x="0" y="150" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#FFFF00">
+      という誤解
+    </text>
+  </g>
+  
+  <!-- 警告アイコン -->
+  <g transform="translate(1600, 200)">
+    <path d="M 0 0 L 60 100 L -60 100 Z" fill="#FFFF00"/>
+    <text x="0" y="70" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#000000">!</text>
+  </g>
+  
+  <!-- 下部の補足情報 -->
+  <text x="960" y="950" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#CCCCCC">
+    AIは万能ではない - 正しい理解と活用が重要
+  </text>
+</svg>

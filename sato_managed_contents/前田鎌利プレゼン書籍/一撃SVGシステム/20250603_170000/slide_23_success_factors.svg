@@ -1,0 +1,99 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+    成功要因：8つのポイント
+  </text>
+  
+  <!-- 成功要因のサークル -->
+  <g transform="translate(960, 550)">
+    <!-- 中心の円 -->
+    <circle cx="0" cy="0" r="100" fill="#10B981"/>
+    <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#FFFFFF">AI活用</text>
+    <text x="0" y="20" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#FFFFFF">成功</text>
+    
+    <!-- 円周上の8つの要因 -->
+    <!-- 1. 明確なビジョン -->
+    <g transform="rotate(0)">
+      <circle cx="0" cy="-250" r="80" fill="#3B82F6"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">1</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">明確な</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">ビジョン</text>
+    </g>
+    
+    <!-- 2. 経営コミット -->
+    <g transform="rotate(45)">
+      <circle cx="0" cy="-250" r="80" fill="#8B5CF6"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">2</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">経営</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">コミット</text>
+    </g>
+    
+    <!-- 3. 段階的導入 -->
+    <g transform="rotate(90)">
+      <circle cx="0" cy="-250" r="80" fill="#EC4899"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">3</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">段階的</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">導入</text>
+    </g>
+    
+    <!-- 4. 現場主導 -->
+    <g transform="rotate(135)">
+      <circle cx="0" cy="-250" r="80" fill="#EF4444"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">4</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">現場</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">主導</text>
+    </g>
+    
+    <!-- 5. 定量評価 -->
+    <g transform="rotate(180)">
+      <circle cx="0" cy="-250" r="80" fill="#F59E0B"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">5</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">定量</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">評価</text>
+    </g>
+    
+    <!-- 6. 継続的改善 -->
+    <g transform="rotate(225)">
+      <circle cx="0" cy="-250" r="80" fill="#14B8A6"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">6</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">継続的</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">改善</text>
+    </g>
+    
+    <!-- 7. 人材育成 -->
+    <g transform="rotate(270)">
+      <circle cx="0" cy="-250" r="80" fill="#0EA5E9"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">7</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">人材</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">育成</text>
+    </g>
+    
+    <!-- 8. 組織文化 -->
+    <g transform="rotate(315)">
+      <circle cx="0" cy="-250" r="80" fill="#6366F1"/>
+      <text x="0" y="-255" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">8</text>
+      <text x="0" y="-230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">組織</text>
+      <text x="0" y="-210" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">文化</text>
+    </g>
+    
+    <!-- 接続線 -->
+    <g opacity="0.3">
+      <line x1="0" y1="-100" x2="0" y2="-170" stroke="#666666" stroke-width="2"/>
+      <line x1="71" y1="-71" x2="120" y2="-120" stroke="#666666" stroke-width="2"/>
+      <line x1="100" y1="0" x2="170" y2="0" stroke="#666666" stroke-width="2"/>
+      <line x1="71" y1="71" x2="120" y2="120" stroke="#666666" stroke-width="2"/>
+      <line x1="0" y1="100" x2="0" y2="170" stroke="#666666" stroke-width="2"/>
+      <line x1="-71" y1="71" x2="-120" y2="120" stroke="#666666" stroke-width="2"/>
+      <line x1="-100" y1="0" x2="-170" y2="0" stroke="#666666" stroke-width="2"/>
+      <line x1="-71" y1="-71" x2="-120" y2="-120" stroke="#666666" stroke-width="2"/>
+    </g>
+  </g>
+  
+  <!-- 下部のメッセージ -->
+  <text x="960" y="950" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#059669">
+    すべての要素が連動して成功へ導く
+  </text>
+</svg>

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    参考資料・関連情報
+  </text>
+  
+  <!-- 資料リスト -->
+  <g transform="translate(300, 250)">
+    <!-- 資料カテゴリ1 -->
+    <rect x="0" y="0" width="600" height="250" fill="#1F2937" rx="15" stroke="#3B82F6" stroke-width="3"/>
+    <text x="300" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#3B82F6">基礎知識</text>
+    <text x="50" y="100" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ AI活用入門ガイド</text>
+    <text x="50" y="140" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ プロンプトエンジニアリング基礎</text>
+    <text x="50" y="180" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 各AIサービス比較表</text>
+    <text x="50" y="220" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 業界別活用事例集</text>
+  </g>
+  
+  <g transform="translate(1020, 250)">
+    <!-- 資料カテゴリ2 -->
+    <rect x="0" y="0" width="600" height="250" fill="#1F2937" rx="15" stroke="#10B981" stroke-width="3"/>
+    <text x="300" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#10B981">実践ツール</text>
+    <text x="50" y="100" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ Pin!ワードテンプレート集</text>
+    <text x="50" y="140" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 効果測定Excelシート</text>
+    <text x="50" y="180" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 導入チェックリスト</text>
+    <text x="50" y="220" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ トラブルシューティングガイド</text>
+  </g>
+  
+  <g transform="translate(300, 550)">
+    <!-- 資料カテゴリ3 -->
+    <rect x="0" y="0" width="600" height="250" fill="#1F2937" rx="15" stroke="#F59E0B" stroke-width="3"/>
+    <text x="300" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F59E0B">研修・セミナー</text>
+    <text x="50" y="100" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 初級者向けAI活用研修（月次）</text>
+    <text x="50" y="140" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 実践ワークショップ（隔月）</text>
+    <text x="50" y="180" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ オンラインセミナー（毎週）</text>
+    <text x="50" y="220" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 個別コンサルティング</text>
+  </g>
+  
+  <g transform="translate(1020, 550)">
+    <!-- 資料カテゴリ4 -->
+    <rect x="0" y="0" width="600" height="250" fill="#1F2937" rx="15" stroke="#EF4444" stroke-width="3"/>
+    <text x="300" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#EF4444">コミュニティ</text>
+    <text x="50" y="100" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ AI活用ユーザー会</text>
+    <text x="50" y="140" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ Slackコミュニティ</text>
+    <text x="50" y="180" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ ナレッジ共有フォーラム</text>
+    <text x="50" y="220" font-family="Arial, sans-serif" font-size="24" fill="#D1D5DB">・ 成功事例発表会</text>
+  </g>
+  
+  <!-- ダウンロードリンク -->
+  <text x="960" y="900" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" fill="#F59E0B">
+    資料ダウンロード：telecom-agency.jp/ai-resources
+  </text>
+</svg>

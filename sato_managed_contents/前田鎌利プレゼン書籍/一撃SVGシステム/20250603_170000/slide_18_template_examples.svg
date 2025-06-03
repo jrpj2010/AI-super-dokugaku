@@ -1,0 +1,57 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="80" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    テンプレート集
+  </text>
+  
+  <!-- テンプレート1: 顧客対応分析 -->
+  <g transform="translate(200, 180)">
+    <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#3B82F6" stroke-width="3"/>
+    <rect x="0" y="0" width="700" height="60" fill="#3B82F6" rx="15 15 0 0"/>
+    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">顧客対応分析テンプレート</text>
+    
+    <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: [分析の目的を記載]</text>
+    <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: [対象データを指定]</text>
+    <text x="30" y="160" font-family="monospace" font-size="20" fill="#F3F4F6">Pin!ワード: [視点を設定]</text>
+    <text x="30" y="190" font-family="monospace" font-size="20" fill="#F3F4F6">分析軸:</text>
+    <text x="50" y="220" font-family="monospace" font-size="20" fill="#F3F4F6">- 時間帯別傾向</text>
+    <text x="50" y="250" font-family="monospace" font-size="20" fill="#F3F4F6">- 問題カテゴリ別</text>
+    <text x="50" y="280" font-family="monospace" font-size="20" fill="#F3F4F6">- 解決率</text>
+    <text x="30" y="310" font-family="monospace" font-size="20" fill="#F3F4F6">出力: TOP5改善ポイント</text>
+  </g>
+  
+  <!-- テンプレート2: 営業分析 -->
+  <g transform="translate(1020, 180)">
+    <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#10B981" stroke-width="3"/>
+    <rect x="0" y="0" width="700" height="60" fill="#10B981" rx="15 15 0 0"/>
+    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">営業活動分析テンプレート</text>
+    
+    <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: 成約率向上施策の特定</text>
+    <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: 営業活動ログ[期間]</text>
+    <text x="30" y="160" font-family="monospace" font-size="20" fill="#F3F4F6">Pin!ワード: 「成約率」</text>
+    <text x="30" y="190" font-family="monospace" font-size="20" fill="#F3F4F6">分析要素:</text>
+    <text x="50" y="220" font-family="monospace" font-size="20" fill="#F3F4F6">- 成功パターン</text>
+    <text x="50" y="250" font-family="monospace" font-size="20" fill="#F3F4F6">- 失敗要因</text>
+    <text x="50" y="280" font-family="monospace" font-size="20" fill="#F3F4F6">- 改善提案</text>
+    <text x="30" y="310" font-family="monospace" font-size="20" fill="#F3F4F6">出力: アクションプラン</text>
+  </g>
+  
+  <!-- テンプレート3: マーケティング -->
+  <g transform="translate(610, 580)">
+    <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#EF4444" stroke-width="3"/>
+    <rect x="0" y="0" width="700" height="60" fill="#EF4444" rx="15 15 0 0"/>
+    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">マーケティング分析テンプレート</text>
+    
+    <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: キャンペーン効果最大化</text>
+    <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: 広告パフォーマンスデータ</text>
+    <text x="30" y="160" font-family="monospace" font-size="20" fill="#F3F4F6">Pin!ワード: 「ROI」</text>
+    <text x="30" y="190" font-family="monospace" font-size="20" fill="#F3F4F6">分析ポイント:</text>
+    <text x="50" y="220" font-family="monospace" font-size="20" fill="#F3F4F6">- チャネル別効果</text>
+    <text x="50" y="250" font-family="monospace" font-size="20" fill="#F3F4F6">- ターゲット別反応</text>
+    <text x="50" y="280" font-family="monospace" font-size="20" fill="#F3F4F6">- 最適化提案</text>
+    <text x="30" y="310" font-family="monospace" font-size="20" fill="#F3F4F6">出力: 次回施策提案</text>
+  </g>
+</svg>

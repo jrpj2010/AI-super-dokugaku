@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+    Pin!ワード機能
+  </text>
+  
+  <!-- メインメッセージ -->
+  <g transform="translate(960, 350)">
+    <rect x="-600" y="-120" width="1200" height="240" fill="#EF4444" rx="20"/>
+    <text x="0" y="-20" font-family="Arial Black, sans-serif" font-size="90" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+      AIに視点を教える
+    </text>
+    <text x="0" y="70" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+      分析の方向性をコントロール
+    </text>
+  </g>
+  
+  <!-- 機能説明 -->
+  <g transform="translate(960, 700)">
+    <!-- 左側：伝統的なAI分析 -->
+    <g transform="translate(-500, 0)">
+      <rect x="-200" y="-100" width="400" height="300" fill="#F3F4F6" rx="15" stroke="#9CA3AF" stroke-width="2"/>
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">従来のAI分析</text>
+      <text x="0" y="10" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">「このデータを</text>
+      <text x="0" y="50" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">分析してください」</text>
+      <text x="0" y="120" font-family="Arial, sans-serif" font-size="60" text-anchor="middle" fill="#9CA3AF">?</text>
+      <text x="0" y="170" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#EF4444">結果がバラバラ</text>
+    </g>
+    
+    <!-- 中央：矢印 -->
+    <g transform="translate(0, 0)">
+      <path d="M -150 0 L 150 0" stroke="#374151" stroke-width="8" fill="none" marker-end="url(#arrowhead2)"/>
+      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#EF4444">Pin!</text>
+    </g>
+    
+    <!-- 右側：Pin!ワード付き分析 -->
+    <g transform="translate(500, 0)">
+      <rect x="-200" y="-100" width="400" height="300" fill="#FEF3C7" rx="15" stroke="#F59E0B" stroke-width="3"/>
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">Pin!ワード付き</text>
+      <text x="0" y="10" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">「顧客満足度の</text>
+      <text x="0" y="50" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">観点で分析して」</text>
+      <text x="0" y="120" font-family="Arial, sans-serif" font-size="60" text-anchor="middle" fill="#10B981">✓</text>
+      <text x="0" y="170" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#10B981">一貫した結果</text>
+    </g>
+  </g>
+  
+  <!-- 矢印の定義 -->
+  <defs>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#374151"/>
+    </marker>
+  </defs>
+  
+  <!-- 下部のポイント -->
+  <text x="960" y="1020" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#DC2626">
+    同じデータでも、視点が違えば結果が変わる
+  </text>
+</svg>

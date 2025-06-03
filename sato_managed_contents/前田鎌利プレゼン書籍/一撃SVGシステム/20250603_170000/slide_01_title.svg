@@ -1,0 +1,27 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- メインタイトル -->
+  <text x="960" y="450" font-family="Arial Black, sans-serif" font-size="180" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    AI活用勉強会
+  </text>
+  
+  <!-- サブタイトル -->
+  <text x="960" y="620" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    顧客対応分析の進化と実践
+  </text>
+  
+  <!-- 横線 -->
+  <line x1="300" y1="720" x2="1620" y2="720" stroke="#FFFFFF" stroke-width="4"/>
+  
+  <!-- 会社名 -->
+  <text x="960" y="850" font-family="Arial, sans-serif" font-size="60" text-anchor="middle" fill="#FFFFFF">
+    テレコムエージェンシー様
+  </text>
+  
+  <!-- 日付 -->
+  <text x="960" y="950" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#CCCCCC">
+    2025年6月3日
+  </text>
+</svg>

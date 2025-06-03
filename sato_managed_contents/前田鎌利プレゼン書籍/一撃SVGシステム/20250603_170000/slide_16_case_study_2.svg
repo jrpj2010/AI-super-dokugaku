@@ -1,0 +1,65 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="80" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    ケーススタディ2：デジタルマーケティング
+  </text>
+  
+  <!-- Before/After比較 -->
+  <g transform="translate(480, 350)">
+    <!-- Before -->
+    <text x="0" y="-50" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#EF4444">Before</text>
+    <rect x="-200" y="0" width="400" height="400" fill="#1F2937" rx="15" stroke="#EF4444" stroke-width="3"/>
+    
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#FFFFFF">広告配信</text>
+    <text x="0" y="120" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#EF4444">CTR 1.2%</text>
+    <text x="0" y="180" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#EF4444">CVR 0.8%</text>
+    <text x="0" y="240" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#EF4444">ROI 0.9x</text>
+    
+    <text x="0" y="320" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#9CA3AF">人的勘による</text>
+    <text x="0" y="360" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#9CA3AF">ターゲティング</text>
+  </g>
+  
+  <g transform="translate(1440, 350)">
+    <!-- After -->
+    <text x="0" y="-50" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#10B981">After</text>
+    <rect x="-200" y="0" width="400" height="400" fill="#1F2937" rx="15" stroke="#10B981" stroke-width="3"/>
+    
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#FFFFFF">AI最適化</text>
+    <text x="0" y="120" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#10B981">CTR 3.8%</text>
+    <text x="0" y="180" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#10B981">CVR 2.4%</text>
+    <text x="0" y="240" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#10B981">ROI 3.2x</text>
+    
+    <text x="0" y="320" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#10B981">AIによる</text>
+    <text x="0" y="360" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#10B981">精密ターゲティング</text>
+  </g>
+  
+  <!-- 中央の矢印 -->
+  <g transform="translate(960, 550)">
+    <path d="M -200 0 L 200 0" stroke="#F59E0B" stroke-width="8" fill="none" marker-end="url(#arrowhead6)"/>
+    <text x="0" y="-30" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F59E0B">AI導入</text>
+  </g>
+  
+  <!-- Pin!ワード説明 -->
+  <g transform="translate(960, 850)">
+    <rect x="-600" y="-60" width="1200" height="150" fill="#374151" rx="15"/>
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F59E0B">
+      Pin!ワード：「ROI最大化」
+    </text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#FFFFFF">
+      AI：Gemini（高速処理でリアルタイム最適化）
+    </text>
+    <text x="0" y="85" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#9CA3AF">
+      ※ CTR: Click Through Rate / CVR: Conversion Rate / ROI: Return on Investment
+    </text>
+  </g>
+  
+  <!-- 矢印の定義 -->
+  <defs>
+    <marker id="arrowhead6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#F59E0B"/>
+    </marker>
+  </defs>
+</svg>

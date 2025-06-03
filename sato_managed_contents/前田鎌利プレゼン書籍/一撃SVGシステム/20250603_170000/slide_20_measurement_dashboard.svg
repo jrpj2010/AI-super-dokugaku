@@ -1,0 +1,86 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="80" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    AI活用成果ダッシュボード
+  </text>
+  
+  <!-- ダッシュボードコンテナ -->
+  <rect x="100" y="150" width="1720" height="850" fill="#111827" rx="20" stroke="#374151" stroke-width="2"/>
+  
+  <!-- 全体スコア -->
+  <g transform="translate(300, 250)">
+    <rect x="0" y="0" width="400" height="200" fill="#1F2937" rx="15" stroke="#10B981" stroke-width="3"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#10B981">AI活用スコア</text>
+    <text x="200" y="120" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#10B981">87</text>
+    <text x="200" y="170" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#6EE7B7">前月比 +12pt</text>
+  </g>
+  
+  <!-- 投資対効果 -->
+  <g transform="translate(760, 250)">
+    <rect x="0" y="0" width="400" height="200" fill="#1F2937" rx="15" stroke="#3B82F6" stroke-width="3"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#3B82F6">ROI</text>
+    <text x="200" y="120" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#3B82F6">2.8x</text>
+    <text x="200" y="170" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#93C5FD">目標 2.0x 達成</text>
+  </g>
+  
+  <!-- 時間短縮 -->
+  <g transform="translate(1220, 250)">
+    <rect x="0" y="0" width="400" height="200" fill="#1F2937" rx="15" stroke="#F59E0B" stroke-width="3"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#F59E0B">業務時間短縮</text>
+    <text x="200" y="120" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#F59E0B">-32%</text>
+    <text x="200" y="170" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FCD34D">年間720時間削減</text>
+  </g>
+  
+  <!-- グラフエリア -->
+  <g transform="translate(300, 500)">
+    <rect x="0" y="0" width="650" height="400" fill="#1F2937" rx="15" stroke="#374151" stroke-width="2"/>
+    <text x="325" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#F3F4F6">月次推移</text>
+    
+    <!-- グラフ -->
+    <line x1="80" y1="350" x2="580" y2="350" stroke="#6B7280" stroke-width="2"/>
+    <line x1="80" y1="80" x2="80" y2="350" stroke="#6B7280" stroke-width="2"/>
+    
+    <!-- データポイント -->
+    <path d="M 120,320 L 200,280 L 280,220 L 360,160 L 440,120 L 520,100" stroke="#10B981" stroke-width="4" fill="none"/>
+    <circle cx="120" cy="320" r="6" fill="#10B981"/>
+    <circle cx="200" cy="280" r="6" fill="#10B981"/>
+    <circle cx="280" cy="220" r="6" fill="#10B981"/>
+    <circle cx="360" cy="160" r="6" fill="#10B981"/>
+    <circle cx="440" cy="120" r="6" fill="#10B981"/>
+    <circle cx="520" cy="100" r="6" fill="#10B981"/>
+    
+    <!-- ラベル -->
+    <text x="120" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">1月</text>
+    <text x="200" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">2月</text>
+    <text x="280" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">3月</text>
+    <text x="360" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">4月</text>
+    <text x="440" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">5月</text>
+    <text x="520" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">6月</text>
+  </g>
+  
+  <!-- 部門別活用率 -->
+  <g transform="translate(1020, 500)">
+    <rect x="0" y="0" width="600" height="400" fill="#1F2937" rx="15" stroke="#374151" stroke-width="2"/>
+    <text x="300" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#F3F4F6">部門別AI活用率</text>
+    
+    <!-- 棒グラフ -->
+    <rect x="100" y="250" width="80" height="100" fill="#10B981"/>
+    <text x="140" y="240" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#10B981">92%</text>
+    <text x="140" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">営業</text>
+    
+    <rect x="220" y="180" width="80" height="170" fill="#3B82F6"/>
+    <text x="260" y="170" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#3B82F6">85%</text>
+    <text x="260" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">CS</text>
+    
+    <rect x="340" y="200" width="80" height="150" fill="#F59E0B"/>
+    <text x="380" y="190" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F59E0B">78%</text>
+    <text x="380" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">マーケ</text>
+    
+    <rect x="460" y="220" width="80" height="130" fill="#EF4444"/>
+    <text x="500" y="210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#EF4444">65%</text>
+    <text x="500" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">管理</text>
+  </g>
+</svg>

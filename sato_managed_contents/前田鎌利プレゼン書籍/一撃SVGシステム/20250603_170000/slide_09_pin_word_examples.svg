@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+  
+  <!-- タイトル -->
+  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+    Pin!ワード活用例
+  </text>
+  
+  <!-- 表のヘッダー -->
+  <g transform="translate(160, 200)">
+    <rect x="0" y="0" width="1600" height="80" fill="#1F2937"/>
+    <text x="200" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#FFFFFF">分析シーン</text>
+    <text x="600" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Pin!ワード</text>
+    <text x="1000" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#FFFFFF">分析結果</text>
+    <text x="1400" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#FFFFFF">効果</text>
+  </g>
+  
+  <!-- 表の内容 -->
+  <!-- 行1 -->
+  <g transform="translate(160, 280)">
+    <rect x="0" y="0" width="1600" height="120" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">カスタマー</text>
+    <text x="200" y="75" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">サポート対応</text>
+    <text x="600" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#EF4444">解決時間</text>
+    <text x="1000" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">対応時間を</text>
+    <text x="1000" y="75" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">短縮する方法を提案</text>
+    <text x="1400" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#10B981">35%短縮</text>
+  </g>
+  
+  <!-- 行2 -->
+  <g transform="translate(160, 400)">
+    <rect x="0" y="0" width="1600" height="120" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">営業活動</text>
+    <text x="200" y="75" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">分析</text>
+    <text x="600" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#EF4444">成約率</text>
+    <text x="1000" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">成約に至る</text>
+    <text x="1000" y="75" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">パターンを抽出</text>
+    <text x="1400" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#10B981">22%向上</text>
+  </g>
+  
+  <!-- 行3 -->
+  <g transform="translate(160, 520)">
+    <rect x="0" y="0" width="1600" height="120" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">製品開発</text>
+    <text x="200" y="75" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">フィードバック</text>
+    <text x="600" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#EF4444">優先度</text>
+    <text x="1000" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">改善ポイントを</text>
+    <text x="1000" y="75" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">優先度付け</text>
+    <text x="1400" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#10B981">精度90%</text>
+  </g>
+  
+  <!-- 行4 -->
+  <g transform="translate(160, 640)">
+    <rect x="0" y="0" width="1600" height="120" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="200" y="40" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">マーケティング</text>
+    <text x="200" y="75" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">キャンペーン</text>
+    <text x="600" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#EF4444">ROI</text>
+    <text x="1000" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">費用対効果を</text>
+    <text x="1000" y="75" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#000000">最大化する施策</text>
+    <text x="1400" y="60" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#10B981">ROI 3.2倍</text>
+  </g>
+  
+  <!-- ポイント -->
+  <g transform="translate(960, 900)">
+    <rect x="-600" y="-40" width="1200" height="100" fill="#FEF3C7" rx="15" stroke="#F59E0B" stroke-width="3"/>
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#92400E">
+      重要：明確なPin!ワード設定が成果の鍵
+    </text>
+    <text x="0" y="45" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#92400E">
+      目的に応じた適切なワード選定が必要
+    </text>
+  </g>
+</svg>
