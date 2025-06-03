@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     現状分析：期待と現実のギャップ
   </text>
   
@@ -14,9 +14,9 @@
     
     <!-- Y軸 -->
     <line x1="100" y1="50" x2="100" y2="600" stroke="#333333" stroke-width="4"/>
-    <text x="30" y="60" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#000000">100%</text>
-    <text x="30" y="330" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#000000">50%</text>
-    <text x="30" y="600" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#000000">0%</text>
+    <text x="30" y="60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" fill="#000000">100%</text>
+    <text x="30" y="330" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" fill="#000000">50%</text>
+    <text x="30" y="600" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" fill="#000000">0%</text>
     
     <!-- X軸 -->
     <line x1="100" y1="600" x2="1400" y2="600" stroke="#333333" stroke-width="4"/>
@@ -25,26 +25,26 @@
     <!-- 期待値 -->
     <g transform="translate(400, 0)">
       <rect x="-150" y="85" width="300" height="515" fill="#3B82F6" rx="10"/>
-      <text x="0" y="50" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#3B82F6">95%</text>
-      <text x="0" y="650" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#000000">期待値</text>
-      <text x="0" y="300" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">「AIがすべて</text>
-      <text x="0" y="350" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">解決してくれる」</text>
+      <text x="0" y="50" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#3B82F6">95%</text>
+      <text x="0" y="650" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#000000">期待値</text>
+      <text x="0" y="300" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">「AIがすべて</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">解決してくれる」</text>
     </g>
     
     <!-- 実際の効果 -->
     <g transform="translate(1000, 0)">
       <rect x="-150" y="270" width="300" height="330" fill="#EF4444" rx="10"/>
-      <text x="0" y="235" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#EF4444">60%</text>
-      <text x="0" y="650" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#000000">実際の効果</text>
-      <text x="0" y="400" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">「適切な活用が</text>
-      <text x="0" y="450" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">必要」</text>
+      <text x="0" y="235" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#EF4444">60%</text>
+      <text x="0" y="650" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#000000">実際の効果</text>
+      <text x="0" y="400" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">「適切な活用が</text>
+      <text x="0" y="450" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">必要」</text>
     </g>
     
     <!-- ギャップの矢印 -->
     <g transform="translate(700, 200)">
       <path d="M 0 -100 L 0 100" stroke="#FF6B6B" stroke-width="8" fill="none" marker-end="url(#arrowhead)"/>
-      <text x="0" y="-120" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#FF6B6B">35%</text>
-      <text x="0" y="-160" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FF6B6B">ギャップ</text>
+      <text x="0" y="-120" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#FF6B6B">35%</text>
+      <text x="0" y="-160" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FF6B6B">ギャップ</text>
     </g>
   </g>
   
@@ -56,7 +56,7 @@
   </defs>
   
   <!-- コメント -->
-  <text x="960" y="1000" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" fill="#666666">
+  <text x="960" y="1000" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" text-anchor="middle" fill="#666666">
     ※ 2024年度 AI活用企業500社調査結果より
   </text>
 </svg>

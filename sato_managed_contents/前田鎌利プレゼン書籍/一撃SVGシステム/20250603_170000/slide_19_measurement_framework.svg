@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     成果測定フレームワーク
   </text>
   
@@ -12,35 +12,35 @@
     <!-- レベル1: 結果指標 -->
     <g>
       <path d="M 0,-150 L 400,50 L -400,50 Z" fill="#EF4444" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="0" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" text-anchor="middle" fill="#FFFFFF">  結果指標</text>
-      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">ROI・売上・利益</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#FFFFFF">  結果指標</text>
+      <text x="0" y="-50" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">ROI・売上・利益</text>
     </g>
     
     <!-- レベル2: 成果指標 -->
     <g>
       <path d="M -400,50 L 400,50 L 300,250 L -300,250 Z" fill="#F59E0B" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="150" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" text-anchor="middle" fill="#FFFFFF">成果指標</text>
-      <text x="0" y="190" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">効率化・品質向上・満足度</text>
+      <text x="0" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#FFFFFF">成果指標</text>
+      <text x="0" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">効率化・品質向上・満足度</text>
     </g>
     
     <!-- レベル3: 活動指標 -->
     <g>
       <path d="M -300,250 L 300,250 L 200,450 L -200,450 Z" fill="#10B981" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="350" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" text-anchor="middle" fill="#FFFFFF">活動指標</text>
-      <text x="0" y="390" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">実施率・活用頻度・適用範囲</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#FFFFFF">活動指標</text>
+      <text x="0" y="390" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF">実施率・活用頻度・適用範囲</text>
     </g>
   </g>
   
   <!-- 測定ステップ -->
   <g transform="translate(200, 700)">
     <rect x="0" y="0" width="1520" height="250" fill="#F3F4F6" rx="15" stroke="#D1D5DB" stroke-width="2"/>
-    <text x="760" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">測定ステップ</text>
+    <text x="760" y="50" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">測定ステップ</text>
     
     <!-- Step 1 -->
     <g transform="translate(150, 120)">
       <circle cx="0" cy="0" r="60" fill="#374151"/>
-      <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">1</text>
-      <text x="0" y="100" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">ベースライン設定</text>
+      <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+      <text x="0" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">ベースライン設定</text>
     </g>
     
     <path d="M 360 820 L 460 820" stroke="#9CA3AF" stroke-width="4" fill="none" marker-end="url(#arrowhead7)"/>
@@ -48,8 +48,8 @@
     <!-- Step 2 -->
     <g transform="translate(460, 120)">
       <circle cx="0" cy="0" r="60" fill="#374151"/>
-      <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">2</text>
-      <text x="0" y="100" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">定期測定</text>
+      <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+      <text x="0" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">定期測定</text>
     </g>
     
     <path d="M 670 820 L 770 820" stroke="#9CA3AF" stroke-width="4" fill="none" marker-end="url(#arrowhead7)"/>
@@ -57,8 +57,8 @@
     <!-- Step 3 -->
     <g transform="translate(760, 120)">
       <circle cx="0" cy="0" r="60" fill="#374151"/>
-      <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">3</text>
-      <text x="0" y="100" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">分析・評価</text>
+      <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+      <text x="0" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">分析・評価</text>
     </g>
     
     <path d="M 970 820 L 1070 820" stroke="#9CA3AF" stroke-width="4" fill="none" marker-end="url(#arrowhead7)"/>
@@ -66,8 +66,8 @@
     <!-- Step 4 -->
     <g transform="translate(1070, 120)">
       <circle cx="0" cy="0" r="60" fill="#374151"/>
-      <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">4</text>
-      <text x="0" y="100" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">改善アクション</text>
+      <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">4</text>
+      <text x="0" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">改善アクション</text>
     </g>
     
     <path d="M 1280 820 L 1380 820" stroke="#9CA3AF" stroke-width="4" fill="none" marker-end="url(#arrowhead7)"/>
@@ -75,8 +75,8 @@
     <!-- Step 5 -->
     <g transform="translate(1370, 120)">
       <circle cx="0" cy="0" r="60" fill="#EF4444"/>
-      <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">5</text>
-      <text x="0" y="100" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">成果確認</text>
+      <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">5</text>
+      <text x="0" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">成果確認</text>
     </g>
   </g>
   

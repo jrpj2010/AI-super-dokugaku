@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     主要AIの特性比較
   </text>
   
@@ -26,12 +26,12 @@
     </g>
     
     <!-- ラベル -->
-    <text x="0" y="-330" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">速度</text>
-    <text x="285" y="-165" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="start" fill="#000000">正確性</text>
-    <text x="285" y="165" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="start" fill="#000000">創造性</text>
-    <text x="0" y="350" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">専門性</text>
-    <text x="-285" y="165" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#000000">会話力</text>
-    <text x="-285" y="-165" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#000000">コスト</text>
+    <text x="0" y="-330" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">速度</text>
+    <text x="285" y="-165" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="start" fill="#000000">正確性</text>
+    <text x="285" y="165" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="start" fill="#000000">創造性</text>
+    <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">専門性</text>
+    <text x="-285" y="165" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#000000">会話力</text>
+    <text x="-285" y="-165" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#000000">コスト</text>
     
     <!-- ChatGPT -->
     <g opacity="0.8">
@@ -53,35 +53,35 @@
   <g transform="translate(200, 200)">
     <rect x="0" y="0" width="450" height="200" fill="#F3F4F6" rx="10" stroke="#D1D5DB" stroke-width="2"/>
     <rect x="30" y="30" width="30" height="30" fill="#10A37F"/>
-    <text x="80" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">ChatGPT</text>
+    <text x="80" y="50" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" fill="#000000">ChatGPT</text>
     <rect x="30" y="80" width="30" height="30" fill="#D97757"/>
-    <text x="80" y="100" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Claude</text>
+    <text x="80" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" fill="#000000">Claude</text>
     <rect x="30" y="130" width="30" height="30" fill="#4285F4"/>
-    <text x="80" y="150" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Gemini</text>
+    <text x="80" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" fill="#000000">Gemini</text>
   </g>
   
   <!-- スコア表 -->
   <g transform="translate(1300, 200)">
     <rect x="0" y="0" width="500" height="300" fill="#F3F4F6" rx="10" stroke="#D1D5DB" stroke-width="2"/>
-    <text x="250" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">特性スコア（/100）</text>
+    <text x="250" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">特性スコア（/100）</text>
     
     <!-- ヘッダー -->
     <line x1="20" y1="70" x2="480" y2="70" stroke="#666666" stroke-width="2"/>
-    <text x="100" y="100" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#666666">AI</text>
-    <text x="220" y="100" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#666666">総合力</text>
-    <text x="340" y="100" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#666666">特化領域</text>
+    <text x="100" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#666666">AI</text>
+    <text x="220" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#666666">総合力</text>
+    <text x="340" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#666666">特化領域</text>
     
     <!-- データ -->
-    <text x="100" y="140" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#10A37F">GPT</text>
-    <text x="220" y="140" font-family="Arial Black, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">85</text>
-    <text x="340" y="140" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#666666">会話・汎用</text>
+    <text x="100" y="140" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#10A37F">GPT</text>
+    <text x="220" y="140" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">85</text>
+    <text x="340" y="140" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#666666">会話・汎用</text>
     
-    <text x="100" y="190" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#D97757">Claude</text>
-    <text x="220" y="190" font-family="Arial Black, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">88</text>
-    <text x="340" y="190" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#666666">分析・論理</text>
+    <text x="100" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#D97757">Claude</text>
+    <text x="220" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">88</text>
+    <text x="340" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#666666">分析・論理</text>
     
-    <text x="100" y="240" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#4285F4">Gemini</text>
-    <text x="220" y="240" font-family="Arial Black, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">82</text>
-    <text x="340" y="240" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#666666">速度・統合</text>
+    <text x="100" y="240" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#4285F4">Gemini</text>
+    <text x="220" y="240" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">82</text>
+    <text x="340" y="240" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#666666">速度・統合</text>
   </g>
 </svg>

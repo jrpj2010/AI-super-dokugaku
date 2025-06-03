@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     実装ロードマップ
   </text>
   
@@ -16,68 +16,68 @@
     <g transform="translate(0, 0)">
       <circle cx="0" cy="300" r="20" fill="#3B82F6"/>
       <rect x="-100" y="150" width="200" height="120" fill="#DBEAFE" rx="10" stroke="#3B82F6" stroke-width="2"/>
-      <text x="0" y="190" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1E40AF">Phase 1</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#1E40AF">試験導入</text>
-      <text x="0" y="250" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#666666">1-2ヶ月</text>
+      <text x="0" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1E40AF">Phase 1</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#1E40AF">試験導入</text>
+      <text x="0" y="250" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">1-2ヶ月</text>
       
-      <text x="0" y="350" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">パイロットチーム</text>
-      <text x="0" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">小規模検証</text>
-      <text x="0" y="410" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">効果測定</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">パイロットチーム</text>
+      <text x="0" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">小規模検証</text>
+      <text x="0" y="410" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">効果測定</text>
     </g>
     
     <!-- Phase 2: 部門展開 -->
     <g transform="translate(380, 0)">
       <circle cx="0" cy="300" r="20" fill="#10B981"/>
       <rect x="-100" y="150" width="200" height="120" fill="#D1FAE5" rx="10" stroke="#10B981" stroke-width="2"/>
-      <text x="0" y="190" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#059669">Phase 2</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#059669">部門展開</text>
-      <text x="0" y="250" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#666666">3-4ヶ月</text>
+      <text x="0" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#059669">Phase 2</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#059669">部門展開</text>
+      <text x="0" y="250" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">3-4ヶ月</text>
       
-      <text x="0" y="350" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">優先部門から</text>
-      <text x="0" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">プロセス標準化</text>
-      <text x="0" y="410" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">トレーニング実施</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">優先部門から</text>
+      <text x="0" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">プロセス標準化</text>
+      <text x="0" y="410" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">トレーニング実施</text>
     </g>
     
     <!-- Phase 3: 全社展開 -->
     <g transform="translate(760, 0)">
       <circle cx="0" cy="300" r="20" fill="#F59E0B"/>
       <rect x="-100" y="150" width="200" height="120" fill="#FEF3C7" rx="10" stroke="#F59E0B" stroke-width="2"/>
-      <text x="0" y="190" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#D97706">Phase 3</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#D97706">全社展開</text>
-      <text x="0" y="250" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#666666">5-6ヶ月</text>
+      <text x="0" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#D97706">Phase 3</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#D97706">全社展開</text>
+      <text x="0" y="250" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">5-6ヶ月</text>
       
-      <text x="0" y="350" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">全部門導入</text>
-      <text x="0" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">プラットフォーム化</text>
-      <text x="0" y="410" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">自動化推進</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">全部門導入</text>
+      <text x="0" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">プラットフォーム化</text>
+      <text x="0" y="410" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">自動化推進</text>
     </g>
     
     <!-- Phase 4: 最適化 -->
     <g transform="translate(1140, 0)">
       <circle cx="0" cy="300" r="20" fill="#EF4444"/>
       <rect x="-100" y="150" width="200" height="120" fill="#FEE2E2" rx="10" stroke="#EF4444" stroke-width="2"/>
-      <text x="0" y="190" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#DC2626">Phase 4</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#DC2626">最適化</text>
-      <text x="0" y="250" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#666666">7ヶ月目以降</text>
+      <text x="0" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#DC2626">Phase 4</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#DC2626">最適化</text>
+      <text x="0" y="250" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">7ヶ月目以降</text>
       
-      <text x="0" y="350" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">継続的改善</text>
-      <text x="0" y="380" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">高度化推進</text>
-      <text x="0" y="410" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">ナレッジ共有</text>
+      <text x="0" y="350" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">継続的改善</text>
+      <text x="0" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">高度化推進</text>
+      <text x="0" y="410" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#000000">ナレッジ共有</text>
     </g>
     
     <!-- 未来 -->
     <g transform="translate(1520, 0)">
       <path d="M 0 280 L 40 300 L 0 320" stroke="#374151" stroke-width="4" fill="none"/>
-      <text x="-20" y="250" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="end" fill="#374151">継続的進化</text>
+      <text x="-20" y="250" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="end" fill="#374151">継続的進化</text>
     </g>
   </g>
   
   <!-- 重要ポイント -->
   <g transform="translate(960, 850)">
     <rect x="-600" y="-50" width="1200" height="100" fill="#F3F4F6" rx="15" stroke="#D1D5DB" stroke-width="2"/>
-    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">
+    <text x="0" y="-5" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">
       成功の鍵：スモールスタートで確実に成果を出し、段階的に拡大
     </text>
-    <text x="0" y="35" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">
+    <text x="0" y="35" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#666666">
       各フェーズでPDCAサイクルを回し、組織全体のナレッジを蓄積
     </text>
   </g>

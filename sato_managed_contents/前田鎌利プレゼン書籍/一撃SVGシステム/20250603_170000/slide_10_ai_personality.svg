@@ -3,14 +3,14 @@
   <rect width="1920" height="1080" fill="#000000"/>
   
   <!-- タイトル -->
-  <text x="960" y="120" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="120" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
     AIの個性理解
   </text>
   
   <!-- メインメッセージ -->
   <g transform="translate(960, 300)">
     <rect x="-700" y="-80" width="1400" height="160" fill="#DC2626" rx="20"/>
-    <text x="0" y="20" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+    <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
       すべてのAIは同じではない
     </text>
   </g>
@@ -20,33 +20,33 @@
     <!-- ChatGPT -->
     <g transform="translate(-600, 0)">
       <circle cx="0" cy="0" r="150" fill="#10A37F"/>
-      <text x="0" y="0" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">ChatGPT</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">汎用性</text>
-      <text x="0" y="260" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">幅広い対応力</text>
-      <text x="0" y="300" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">会話的</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">ChatGPT</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">汎用性</text>
+      <text x="0" y="260" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">幅広い対応力</text>
+      <text x="0" y="300" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">会話的</text>
     </g>
     
     <!-- Claude -->
     <g transform="translate(0, 0)">
       <circle cx="0" cy="0" r="150" fill="#D97757"/>
-      <text x="0" y="0" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">Claude</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">論理性</text>
-      <text x="0" y="260" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">詳細な分析</text>
-      <text x="0" y="300" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">慎重な回答</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">Claude</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">論理性</text>
+      <text x="0" y="260" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">詳細な分析</text>
+      <text x="0" y="300" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">慎重な回答</text>
     </g>
     
     <!-- Gemini -->
     <g transform="translate(600, 0)">
       <circle cx="0" cy="0" r="150" fill="#4285F4"/>
-      <text x="0" y="0" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#FFFFFF">Gemini</text>
-      <text x="0" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">多機能性</text>
-      <text x="0" y="260" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">マルチモーダル</text>
-      <text x="0" y="300" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">高速処理</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">Gemini</text>
+      <text x="0" y="220" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">多機能性</text>
+      <text x="0" y="260" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">マルチモーダル</text>
+      <text x="0" y="300" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">高速処理</text>
     </g>
   </g>
   
   <!-- ポイント -->
-  <text x="960" y="1020" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#F59E0B">
+  <text x="960" y="1020" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#F59E0B">
     各AIの特性を理解し、目的に合わせて選択・活用
   </text>
 </svg>

@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#000000"/>
   
   <!-- タイトル -->
-  <text x="960" y="80" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="70" font-weight="700" text-anchor="middle" fill="#FFFFFF">
     テンプレート集
   </text>
   
@@ -11,7 +11,7 @@
   <g transform="translate(200, 180)">
     <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#3B82F6" stroke-width="3"/>
     <rect x="0" y="0" width="700" height="60" fill="#3B82F6" rx="15 15 0 0"/>
-    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">顧客対応分析テンプレート</text>
+    <text x="350" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">顧客対応分析テンプレート</text>
     
     <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: [分析の目的を記載]</text>
     <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: [対象データを指定]</text>
@@ -27,7 +27,7 @@
   <g transform="translate(1020, 180)">
     <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#10B981" stroke-width="3"/>
     <rect x="0" y="0" width="700" height="60" fill="#10B981" rx="15 15 0 0"/>
-    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">営業活動分析テンプレート</text>
+    <text x="350" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">営業活動分析テンプレート</text>
     
     <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: 成約率向上施策の特定</text>
     <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: 営業活動ログ[期間]</text>
@@ -43,7 +43,7 @@
   <g transform="translate(610, 580)">
     <rect x="0" y="0" width="700" height="350" fill="#1F2937" rx="15" stroke="#EF4444" stroke-width="3"/>
     <rect x="0" y="0" width="700" height="60" fill="#EF4444" rx="15 15 0 0"/>
-    <text x="350" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">マーケティング分析テンプレート</text>
+    <text x="350" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">マーケティング分析テンプレート</text>
     
     <text x="30" y="100" font-family="monospace" font-size="20" fill="#F3F4F6">目的: キャンペーン効果最大化</text>
     <text x="30" y="130" font-family="monospace" font-size="20" fill="#F3F4F6">データ: 広告パフォーマンスデータ</text>

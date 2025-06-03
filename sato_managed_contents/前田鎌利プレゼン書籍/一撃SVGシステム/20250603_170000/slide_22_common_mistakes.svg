@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#000000"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
     よくある失敗パターン
   </text>
   
@@ -12,69 +12,69 @@
     <!-- 失敗パターン1 -->
     <g transform="translate(-700, -250)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">1</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">目的が不明確</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">目的が不明確</text>
     </g>
     
     <!-- 失敗パターン2 -->
     <g transform="translate(0, -250)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">2</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">一度に全部導入</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">一度に全部導入</text>
     </g>
     
     <!-- 失敗パターン3 -->
     <g transform="translate(700, -250)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">3</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">成果測定なし</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">成果測定なし</text>
     </g>
     
     <!-- 失敗パターン4 -->
     <g transform="translate(-700, 0)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">4</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">トレーニング不足</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">4</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">トレーニング不足</text>
     </g>
     
     <!-- 失敗パターン5 -->
     <g transform="translate(0, 0)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">5</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">現場の声無視</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">5</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">現場の声無視</text>
     </g>
     
     <!-- 失敗パターン6 -->
     <g transform="translate(700, 0)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">6</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">技術偏重</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">6</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">技術偏重</text>
     </g>
     
     <!-- 失敗パターン7 -->
     <g transform="translate(-350, 250)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">7</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">継続性の欠如</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">7</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">継続性の欠如</text>
     </g>
     
     <!-- 失敗パターン8 -->
     <g transform="translate(350, 250)">
       <rect x="-150" y="-50" width="300" height="100" fill="#7F1D1D" rx="10"/>
-      <text x="0" y="-10" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#FFFFFF">8</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">予算不足</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#FFFFFF">8</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF">予算不足</text>
     </g>
     
     <!-- 中央の警告 -->
     <g transform="translate(0, -100)">
       <circle cx="0" cy="0" r="80" fill="#FFFF00" opacity="0.2"/>
       <path d="M 0,-60 L 60,60 L -60,60 Z" fill="#FFFF00"/>
-      <text x="0" y="20" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">!</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">!</text>
     </g>
   </g>
   
   <!-- 重要メッセージ -->
-  <text x="960" y="950" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#EF4444">
+  <text x="960" y="950" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#EF4444">
     これらのパターンを避けることが成功の第一歩
   </text>
 </svg>

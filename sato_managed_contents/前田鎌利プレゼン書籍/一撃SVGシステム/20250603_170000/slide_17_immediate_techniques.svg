@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     即実践テクニック
   </text>
   
@@ -12,56 +12,56 @@
     <!-- テクニック1 -->
     <g transform="translate(-650, -200)">
       <rect x="-150" y="-80" width="300" height="160" fill="#DBEAFE" rx="15" stroke="#3B82F6" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#1E40AF">1</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1E40AF">テンプレート活用</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">基本フォーマットを準備</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#1E40AF">1</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1E40AF">テンプレート活用</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">基本フォーマットを準備</text>
     </g>
     
     <!-- テクニック2 -->
     <g transform="translate(0, -200)">
       <rect x="-150" y="-80" width="300" height="160" fill="#F3E8FF" rx="15" stroke="#8B5CF6" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#6B21F5">2</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#6B21F5">段階的指示</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">複雑なタスクを分割</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#6B21F5">2</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#6B21F5">段階的指示</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">複雑なタスクを分割</text>
     </g>
     
     <!-- テクニック3 -->
     <g transform="translate(650, -200)">
       <rect x="-150" y="-80" width="300" height="160" fill="#D1FAE5" rx="15" stroke="#10B981" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#059669">3</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#059669">フィードバックループ</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">結果を改善に活用</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#059669">3</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#059669">フィードバックループ</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">結果を改善に活用</text>
     </g>
     
     <!-- テクニック4 -->
     <g transform="translate(-650, 100)">
       <rect x="-150" y="-80" width="300" height="160" fill="#FEF3C7" rx="15" stroke="#F59E0B" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#D97706">4</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#D97706">コンテキスト設定</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">背景情報を明確に</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#D97706">4</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#D97706">コンテキスト設定</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">背景情報を明確に</text>
     </g>
     
     <!-- テクニック5 -->
     <g transform="translate(0, 100)">
       <rect x="-150" y="-80" width="300" height="160" fill="#FCE7F3" rx="15" stroke="#EC4899" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#BE185D">5</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#BE185D">プロンプトライブラリ</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">成功事例を蓄積</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#BE185D">5</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#BE185D">プロンプトライブラリ</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">成功事例を蓄積</text>
     </g>
     
     <!-- テクニック6 -->
     <g transform="translate(650, 100)">
       <rect x="-150" y="-80" width="300" height="160" fill="#FEE2E2" rx="15" stroke="#EF4444" stroke-width="3"/>
-      <text x="0" y="-30" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#DC2626">6</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#DC2626">チーム共有</text>
-      <text x="0" y="55" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#374151">ナレッジを組織化</text>
+      <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#DC2626">6</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#DC2626">チーム共有</text>
+      <text x="0" y="55" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="22" text-anchor="middle" fill="#374151">ナレッジを組織化</text>
     </g>
   </g>
   
   <!-- ポイント -->
   <g transform="translate(960, 950)">
     <rect x="-700" y="-40" width="1400" height="80" fill="#1F2937" rx="10"/>
-    <text x="0" y="15" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    <text x="0" y="15" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
       小さく始めて、成功体験を積み重ねることが重要
     </text>
   </g>

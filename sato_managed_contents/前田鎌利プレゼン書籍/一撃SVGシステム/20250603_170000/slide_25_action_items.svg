@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     今日から始めるアクション
   </text>
   
@@ -12,55 +12,55 @@
     <!-- 今日 -->
     <g transform="translate(-650, 0)">
       <rect x="-150" y="-150" width="300" height="300" fill="#EF4444" rx="20"/>
-      <text x="0" y="-80" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#FFFFFF">今日</text>
+      <text x="0" y="-80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#FFFFFF">今日</text>
       <line x1="-100" y1="-40" x2="100" y2="-40" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="0" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・チームで課題共有</text>
-      <text x="0" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・小さなタスク選定</text>
-      <text x="0" y="80" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・無料AIで試す</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・チームで課題共有</text>
+      <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・小さなタスク選定</text>
+      <text x="0" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・無料AIで試す</text>
     </g>
     
     <!-- 今週 -->
     <g transform="translate(0, 0)">
       <rect x="-150" y="-150" width="300" height="300" fill="#F59E0B" rx="20"/>
-      <text x="0" y="-80" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#FFFFFF">今週</text>
+      <text x="0" y="-80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#FFFFFF">今週</text>
       <line x1="-100" y1="-40" x2="100" y2="-40" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="0" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・パイロット計画</text>
-      <text x="0" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・成功指標設定</text>
-      <text x="0" y="80" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・チーム編成</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・パイロット計画</text>
+      <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・成功指標設定</text>
+      <text x="0" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・チーム編成</text>
     </g>
     
     <!-- 今月 -->
     <g transform="translate(650, 0)">
       <rect x="-150" y="-150" width="300" height="300" fill="#10B981" rx="20"/>
-      <text x="0" y="-80" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" text-anchor="middle" fill="#FFFFFF">今月</text>
+      <text x="0" y="-80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#FFFFFF">今月</text>
       <line x1="-100" y1="-40" x2="100" y2="-40" stroke="#FFFFFF" stroke-width="3"/>
-      <text x="0" y="0" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・初期成果測定</text>
-      <text x="0" y="40" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・改善ポイント整理</text>
-      <text x="0" y="80" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・次フェーズ準備</text>
+      <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・初期成果測定</text>
+      <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・改善ポイント整理</text>
+      <text x="0" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・次フェーズ準備</text>
     </g>
   </g>
   
   <!-- チェックリスト -->
   <g transform="translate(960, 850)">
     <rect x="-700" y="-80" width="1400" height="160" fill="#F3F4F6" rx="15" stroke="#D1D5DB" stroke-width="2"/>
-    <text x="0" y="-30" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">
+    <text x="0" y="-30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">
       クイックスタートチェックリスト
     </text>
     <g transform="translate(-600, 20)">
       <rect x="0" y="0" width="30" height="30" fill="none" stroke="#374151" stroke-width="3" rx="5"/>
-      <text x="50" y="22" font-family="Arial, sans-serif" font-size="24" fill="#374151">目的明確化</text>
+      <text x="50" y="22" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" fill="#374151">目的明確化</text>
     </g>
     <g transform="translate(-300, 20)">
       <rect x="0" y="0" width="30" height="30" fill="none" stroke="#374151" stroke-width="3" rx="5"/>
-      <text x="50" y="22" font-family="Arial, sans-serif" font-size="24" fill="#374151">チーム構築</text>
+      <text x="50" y="22" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" fill="#374151">チーム構築</text>
     </g>
     <g transform="translate(0, 20)">
       <rect x="0" y="0" width="30" height="30" fill="none" stroke="#374151" stroke-width="3" rx="5"/>
-      <text x="50" y="22" font-family="Arial, sans-serif" font-size="24" fill="#374151">小さく開始</text>
+      <text x="50" y="22" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" fill="#374151">小さく開始</text>
     </g>
     <g transform="translate(300, 20)">
       <rect x="0" y="0" width="30" height="30" fill="none" stroke="#374151" stroke-width="3" rx="5"/>
-      <text x="50" y="22" font-family="Arial, sans-serif" font-size="24" fill="#374151">成果測定</text>
+      <text x="50" y="22" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" fill="#374151">成果測定</text>
     </g>
   </g>
 </svg>

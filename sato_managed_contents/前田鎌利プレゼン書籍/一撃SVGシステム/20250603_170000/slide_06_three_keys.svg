@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#000000"/>
   
   <!-- タイトル -->
-  <text x="960" y="120" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="120" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#FFFFFF">
     AI活用を成功させる3つの鍵
   </text>
   
@@ -11,47 +11,47 @@
   <g transform="translate(960, 550)">
     <!-- 中心の円 -->
     <circle cx="0" cy="0" r="100" fill="#FFFFFF"/>
-    <text x="0" y="10" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#000000">
+    <text x="0" y="10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#000000">
       AI活用
     </text>
     
     <!-- Key 1: Pin!ワード -->
     <g transform="translate(-400, -200)">
       <circle cx="0" cy="0" r="180" fill="#EF4444"/>
-      <text x="0" y="-40" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">1</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Pin!</text>
-      <text x="0" y="70" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">ワード</text>
+      <text x="0" y="-40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="120" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Pin!</text>
+      <text x="0" y="70" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">ワード</text>
       
       <!-- 説明ボックス -->
       <rect x="-250" y="-350" width="400" height="120" fill="#FFFFFF" rx="10"/>
-      <text x="-50" y="-310" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">AIに視点を与える</text>
-      <text x="-50" y="-270" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">分析の方向性を明確化</text>
+      <text x="-50" y="-310" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">AIに視点を与える</text>
+      <text x="-50" y="-270" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#666666">分析の方向性を明確化</text>
     </g>
     
     <!-- Key 2: AIの個性 -->
     <g transform="translate(400, -200)">
       <circle cx="0" cy="0" r="180" fill="#3B82F6"/>
-      <text x="0" y="-40" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">2</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">AIの</text>
-      <text x="0" y="70" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">個性</text>
+      <text x="0" y="-40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="120" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">AIの</text>
+      <text x="0" y="70" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">個性</text>
       
       <!-- 説明ボックス -->
       <rect x="-150" y="-350" width="400" height="120" fill="#FFFFFF" rx="10"/>
-      <text x="50" y="-310" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">各AIの特性を理解</text>
-      <text x="50" y="-270" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">適材適所の活用</text>
+      <text x="50" y="-310" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">各AIの特性を理解</text>
+      <text x="50" y="-270" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#666666">適材適所の活用</text>
     </g>
     
     <!-- Key 3: 効果的な指示 -->
     <g transform="translate(0, 300)">
       <circle cx="0" cy="0" r="180" fill="#10B981"/>
-      <text x="0" y="-40" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">3</text>
-      <text x="0" y="30" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">効果的な</text>
-      <text x="0" y="70" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">指示</text>
+      <text x="0" y="-40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="120" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+      <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">効果的な</text>
+      <text x="0" y="70" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">指示</text>
       
       <!-- 説明ボックス -->
       <rect x="-200" y="220" width="400" height="120" fill="#FFFFFF" rx="10"/>
-      <text x="0" y="260" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">明確で具体的な指示</text>
-      <text x="0" y="300" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#666666">プロンプトエンジニアリング</text>
+      <text x="0" y="260" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#000000">明確で具体的な指示</text>
+      <text x="0" y="300" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#666666">プロンプトエンジニアリング</text>
     </g>
     
     <!-- 接続線 -->

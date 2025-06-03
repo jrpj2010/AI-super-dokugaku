@@ -3,7 +3,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#000000">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     効果的な指示の作り方
   </text>
   
@@ -12,42 +12,42 @@
     <!-- Before -->
     <g transform="translate(-500, 0)">
       <rect x="-350" y="-250" width="700" height="500" fill="#FEE2E2" rx="15" stroke="#EF4444" stroke-width="3"/>
-      <text x="0" y="-200" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#DC2626">Before</text>
-      <text x="0" y="-140" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#DC2626">×</text>
+      <text x="0" y="-200" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#DC2626">Before</text>
+      <text x="0" y="-140" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#DC2626">×</text>
       
       <rect x="-300" y="-100" width="600" height="120" fill="#FFFFFF" rx="10"/>
-      <text x="0" y="-60" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">「このデータを分析して</text>
-      <text x="0" y="-20" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#000000">いい感じにまとめてください」</text>
+      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#000000">「このデータを分析して</text>
+      <text x="0" y="-20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="28" text-anchor="middle" fill="#000000">いい感じにまとめてください」</text>
       
-      <text x="0" y="70" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#DC2626">問題点</text>
-      <text x="0" y="120" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 目的が不明確</text>
-      <text x="0" y="160" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 基準が曖昧</text>
-      <text x="0" y="200" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 期待結果が不明</text>
+      <text x="0" y="70" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#DC2626">問題点</text>
+      <text x="0" y="120" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 目的が不明確</text>
+      <text x="0" y="160" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 基準が曖昧</text>
+      <text x="0" y="200" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 期待結果が不明</text>
     </g>
     
     <!-- After -->
     <g transform="translate(500, 0)">
       <rect x="-350" y="-250" width="700" height="500" fill="#D1FAE5" rx="15" stroke="#10B981" stroke-width="3"/>
-      <text x="0" y="-200" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#059669">After</text>
-      <text x="0" y="-140" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#059669">○</text>
+      <text x="0" y="-200" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" font-weight="700" text-anchor="middle" fill="#059669">After</text>
+      <text x="0" y="-140" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#059669">○</text>
       
       <rect x="-300" y="-100" width="600" height="180" fill="#FFFFFF" rx="10"/>
-      <text x="0" y="-70" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">「顧客問い合わせデータを</text>
-      <text x="0" y="-40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">「対応時間」の観点で分析し、</text>
-      <text x="0" y="-10" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">改善ポイントを3つ</text>
-      <text x="0" y="20" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">優先度付けて提示してください」</text>
+      <text x="0" y="-70" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#000000">「顧客問い合わせデータを</text>
+      <text x="0" y="-40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#000000">「対応時間」の観点で分析し、</text>
+      <text x="0" y="-10" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#000000">改善ポイントを3つ</text>
+      <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#000000">優先度付けて提示してください」</text>
       
-      <text x="0" y="110" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#059669">成功要因</text>
-      <text x="0" y="160" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 明確な目的</text>
-      <text x="0" y="200" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 具体的な基準</text>
-      <text x="0" y="240" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 期待アウトプット</text>
+      <text x="0" y="110" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#059669">成功要因</text>
+      <text x="0" y="160" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 明確な目的</text>
+      <text x="0" y="200" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 具体的な基準</text>
+      <text x="0" y="240" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#666666">&#8226; 期待アウトプット</text>
     </g>
   </g>
   
   <!-- ポイント -->
   <g transform="translate(960, 950)">
     <rect x="-600" y="-40" width="1200" height="80" fill="#1F2937" rx="10"/>
-    <text x="0" y="15" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    <text x="0" y="15" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
       5W1Hを意識した明確な指示がAI活用の鍵
     </text>
   </g>
