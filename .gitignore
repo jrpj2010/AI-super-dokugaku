@@ -109,3 +109,10 @@ backup/
 # Docker ignore files
 .dockerignore
 .gcloudignore
+
+# Test results and reports
+**/playwright-report/
+**/test-results/
+**/.pnpm-store/
+**/coverage/
+**/.nyc_output/
