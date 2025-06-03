@@ -1,9 +1,9 @@
 <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1920" height="1080" fill="#000000"/>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     問題提起
   </text>
   
@@ -30,7 +30,7 @@
   </g>
   
   <!-- 下部の補足情報 -->
-  <text x="960" y="950" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" text-anchor="middle" fill="#CCCCCC">
+  <text x="960" y="950" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" text-anchor="middle" fill="#666666">
     AIは万能ではない - 正しい理解と活用が重要
   </text>
 </svg>

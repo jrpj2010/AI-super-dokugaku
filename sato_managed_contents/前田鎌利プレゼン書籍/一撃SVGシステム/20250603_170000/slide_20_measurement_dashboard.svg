@@ -1,9 +1,9 @@
 <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1920" height="1080" fill="#000000"/>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="70" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="70" font-weight="700" text-anchor="middle" fill="#000000">
     AI活用成果ダッシュボード
   </text>
   
@@ -53,12 +53,12 @@
     <circle cx="520" cy="100" r="6" fill="#10B981"/>
     
     <!-- ラベル -->
-    <text x="120" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">1月</text>
-    <text x="200" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">2月</text>
-    <text x="280" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">3月</text>
-    <text x="360" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">4月</text>
-    <text x="440" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">5月</text>
-    <text x="520" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">6月</text>
+    <text x="120" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">1月</text>
+    <text x="200" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">2月</text>
+    <text x="280" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">3月</text>
+    <text x="360" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">4月</text>
+    <text x="440" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">5月</text>
+    <text x="520" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">6月</text>
   </g>
   
   <!-- 部門別活用率 -->
@@ -69,18 +69,18 @@
     <!-- 棒グラフ -->
     <rect x="100" y="250" width="80" height="100" fill="#10B981"/>
     <text x="140" y="240" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#10B981">92%</text>
-    <text x="140" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">営業</text>
+    <text x="140" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">営業</text>
     
     <rect x="220" y="180" width="80" height="170" fill="#3B82F6"/>
     <text x="260" y="170" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#3B82F6">85%</text>
-    <text x="260" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">CS</text>
+    <text x="260" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">CS</text>
     
     <rect x="340" y="200" width="80" height="150" fill="#F59E0B"/>
     <text x="380" y="190" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F59E0B">78%</text>
-    <text x="380" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">マーケ</text>
+    <text x="380" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">マーケ</text>
     
     <rect x="460" y="220" width="80" height="130" fill="#EF4444"/>
     <text x="500" y="210" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#EF4444">65%</text>
-    <text x="500" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#9CA3AF">管理</text>
+    <text x="500" y="380" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#666666">管理</text>
   </g>
 </svg>

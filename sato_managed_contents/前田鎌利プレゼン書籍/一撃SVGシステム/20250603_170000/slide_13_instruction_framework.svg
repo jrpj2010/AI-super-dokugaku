@@ -1,9 +1,9 @@
 <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1920" height="1080" fill="#000000"/>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     指示作成フレームワーク
   </text>
   
@@ -11,8 +11,8 @@
   <g transform="translate(960, 540)">
     <!-- 中心のコア -->
     <circle cx="0" cy="0" r="120" fill="#FFFFFF"/>
-    <text x="0" y="-20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#000000">効果的な</text>
-    <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#000000">指示</text>
+    <text x="0" y="-20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">効果的な</text>
+    <text x="0" y="30" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#FFFFFF">指示</text>
     
     <!-- 5W1Hの各要素 -->
     <!-- What -->
@@ -58,12 +58,12 @@
     </g>
     
     <!-- 接続線 -->
-    <line x1="-200" y1="-200" x2="-100" y2="-80" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
-    <line x1="200" y1="-200" x2="100" y2="-80" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
-    <line x1="330" y1="0" x2="120" y2="0" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
-    <line x1="200" y1="200" x2="100" y2="80" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
-    <line x1="-200" y1="200" x2="-100" y2="80" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
-    <line x1="-330" y1="0" x2="-120" y2="0" stroke="#FFFFFF" stroke-width="3" opacity="0.5"/>
+    <line x1="-200" y1="-200" x2="-100" y2="-80" stroke="#333333" stroke-width="3" opacity="0.5"/>
+    <line x1="200" y1="-200" x2="100" y2="-80" stroke="#333333" stroke-width="3" opacity="0.5"/>
+    <line x1="330" y1="0" x2="120" y2="0" stroke="#333333" stroke-width="3" opacity="0.5"/>
+    <line x1="200" y1="200" x2="100" y2="80" stroke="#333333" stroke-width="3" opacity="0.5"/>
+    <line x1="-200" y1="200" x2="-100" y2="80" stroke="#333333" stroke-width="3" opacity="0.5"/>
+    <line x1="-330" y1="0" x2="-120" y2="0" stroke="#333333" stroke-width="3" opacity="0.5"/>
   </g>
   
   <!-- 例文 -->

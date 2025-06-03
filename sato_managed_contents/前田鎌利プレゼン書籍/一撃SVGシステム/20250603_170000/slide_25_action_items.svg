@@ -32,8 +32,8 @@
     <!-- 今月 -->
     <g transform="translate(650, 0)">
       <rect x="-150" y="-150" width="300" height="300" fill="#10B981" rx="20"/>
-      <text x="0" y="-80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#FFFFFF">今月</text>
-      <line x1="-100" y1="-40" x2="100" y2="-40" stroke="#FFFFFF" stroke-width="3"/>
+      <text x="0" y="-80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="60" font-weight="700" text-anchor="middle" fill="#000000">今月</text>
+      <line x1="-100" y1="-40" x2="100" y2="-40" stroke="#333333" stroke-width="3"/>
       <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・初期成果測定</text>
       <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・改善ポイント整理</text>
       <text x="0" y="80" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="26" text-anchor="middle" fill="#FFFFFF">・次フェーズ準備</text>

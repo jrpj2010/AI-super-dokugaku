@@ -1,9 +1,9 @@
 <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1920" height="1080" fill="#000000"/>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
   
   <!-- タイトル -->
-  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+  <text x="960" y="100" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="80" font-weight="700" text-anchor="middle" fill="#000000">
     まとめ
   </text>
   
@@ -12,7 +12,7 @@
     <!-- ポイント1 -->
     <g transform="translate(-600, 0)">
       <circle cx="0" cy="0" r="180" fill="#EF4444"/>
-      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#000000">1</text>
       <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Pin!ワードで</text>
       <text x="0" y="60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">視点を明確に</text>
     </g>
@@ -20,7 +20,7 @@
     <!-- ポイント2 -->
     <g transform="translate(0, 0)">
       <circle cx="0" cy="0" r="180" fill="#3B82F6"/>
-      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#000000">2</text>
       <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">AIの特性を</text>
       <text x="0" y="60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">理解して選択</text>
     </g>
@@ -28,7 +28,7 @@
     <!-- ポイント3 -->
     <g transform="translate(600, 0)">
       <circle cx="0" cy="0" r="180" fill="#10B981"/>
-      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+      <text x="0" y="-60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="100" font-weight="700" text-anchor="middle" fill="#000000">3</text>
       <text x="0" y="20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">具体的な</text>
       <text x="0" y="60" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">指示で成果を</text>
     </g>
@@ -40,7 +40,7 @@
     <text x="0" y="-20" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
       AIはツール、成功の鍵は「使い方」にあり
     </text>
-    <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" text-anchor="middle" fill="#9CA3AF">
+    <text x="0" y="40" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="36" text-anchor="middle" fill="#666666">
       今日から始めて、明日の競争力を手に入れましょう
     </text>
   </g>

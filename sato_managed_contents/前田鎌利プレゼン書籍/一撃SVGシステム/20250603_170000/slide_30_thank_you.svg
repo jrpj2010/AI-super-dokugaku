@@ -1,38 +1,43 @@
 <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1920" height="1080" fill="#000000"/>
-  
+  <rect width="1920" height="1080" fill="#FFFFFF" />
+
   <!-- メインメッセージ -->
   <g transform="translate(960, 400)">
-    <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="150" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+    <text x="0" y="0" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="150" font-weight="700"
+      text-anchor="middle" fill="#000000">
       ご清聴
     </text>
-    <text x="0" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="150" font-weight="700" text-anchor="middle" fill="#FFFFFF">
+    <text x="0" y="150" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="150" font-weight="700"
+      text-anchor="middle" fill="#000000">
       ありがとうございました
     </text>
   </g>
-  
+
   <!-- サブメッセージ -->
-  <text x="960" y="700" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" text-anchor="middle" fill="#9CA3AF">
+  <text x="960" y="700" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="50" text-anchor="middle"
+    fill="#005BAC">
     AIで未来を創るパートナーとして
   </text>
-  
+
   <!-- 会社名 -->
-  <text x="960" y="850" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" text-anchor="middle" fill="#666666">
-    テレコムエージェンシー
+  <text x="960" y="850" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="40" text-anchor="middle"
+    fill="#333333">
+    テレコムエージェンシー様向け
   </text>
-  
+
   <!-- 日付 -->
-  <text x="960" y="950" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="30" text-anchor="middle" fill="#4B5563">
+  <text x="960" y="950" font-family="Noto Sans, Noto Sans JP, sans-serif" font-size="30" text-anchor="middle"
+    fill="#666666">
     2025.06.03
   </text>
-  
+
   <!-- 装飾的な要素 -->
   <g transform="translate(960, 540)" opacity="0.2">
-    <circle cx="-400" cy="0" r="60" fill="#3B82F6"/>
-    <circle cx="-200" cy="0" r="60" fill="#10B981"/>
-    <circle cx="0" cy="0" r="60" fill="#F59E0B"/>
-    <circle cx="200" cy="0" r="60" fill="#EF4444"/>
-    <circle cx="400" cy="0" r="60" fill="#8B5CF6"/>
+    <circle cx="-400" cy="0" r="60" fill="#3B82F6" />
+    <circle cx="-200" cy="0" r="60" fill="#10B981" />
+    <circle cx="0" cy="0" r="60" fill="#F59E0B" />
+    <circle cx="200" cy="0" r="60" fill="#EF4444" />
+    <circle cx="400" cy="0" r="60" fill="#8B5CF6" />
   </g>
 </svg>
