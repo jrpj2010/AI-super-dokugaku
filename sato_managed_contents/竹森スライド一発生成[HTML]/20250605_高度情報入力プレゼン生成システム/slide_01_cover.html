@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高度情報入力型プレゼンテーション生成Webアプリ</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: transparent;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .accent-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 120px;
+            height: 6px;
+            background: linear-gradient(90deg, #00d4ff 0%, #0099ff 100%);
+            transform: translateY(-50%);
+        }
+
+        .main-title {
+            font-size: 72px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.3;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 36px;
+            font-weight: 300;
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            color: #b0c4de;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
+
+        .date-info {
+            position: absolute;
+            bottom: 60px;
+            right: 80px;
+            font-size: 20px;
+            color: #708090;
+        }
+
+        .company-logo {
+            position: absolute;
+            bottom: 60px;
+            left: 80px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .decorative-element {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-line"></div>
+        <div class="decorative-element"></div>
+        
+        <h1 class="main-title">
+            高度情報入力型<br>
+            プレゼンテーション生成Webアプリ
+        </h1>
+        
+        <p class="subtitle">AIエージェントが創造する次世代プレゼンテーション</p>
+        
+        <p class="tagline">
+            顧客情報・コンテキスト・多様な情報群から<br>
+            プロフェッショナル品質のHTMLプレゼンテーションを自動生成
+        </p>
+        
+        <div class="company-logo">TANREN Inc.</div>
+        <div class="date-info">2025年6月5日</div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">1 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="#" class="nav-button disabled">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_02_executive_summary.html" class="nav-button">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_02_executive_summary.html';
+            } else if (e.key === 'ArrowLeft') {
+                // 最初のスライドなので前へは移動しない
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_02_executive_summary.html';
+            }
+            // 右スワイプ（前へ）は最初のスライドなので無効
+        }
+    </script>
+</body>
+</html>

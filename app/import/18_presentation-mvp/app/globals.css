@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme (Default) */
+    --background: 20 33% 96%; /* light-canvas, e.g., #FDFBF7 */
+    --foreground: 240 10% 3.9%; /* near black for text */
+
+    --card: 0 0% 100%; /* white */
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 340 60% 35%; /* wine-red, e.g., #8C274C */
+    --primary-foreground: 0 0% 100%; /* white for text on wine-red */
+
+    --secondary: 340 20% 90%; /* light wine-red/pinkish gray */
+    --secondary-foreground: 340 60% 35%; /* wine-red */
+
+    --muted: 220 10% 92%; /* light gray */
+    --muted-foreground: 220 10% 45%; /* medium gray */
+
+    --accent: 30 80% 60%; /* accent-gold, e.g., #E6A23C */
+    --accent-foreground: 240 10% 3.9%;
+
+    --destructive: 0 70% 50%; /* a suitable red for destructive actions */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%; /* light gray border */
+    --input: 220 15% 88%; /* input border */
+    --ring: 340 60% 55%; /* wine-red for focus rings */
+
+    --radius: 0.375rem; /* Slightly softer radius */
+
+    /* Custom presentation styles */
+    --primary-gradient: linear-gradient(135deg, hsl(var(--primary) / 0.9) 0%, hsl(var(--primary)) 100%);
+    --secondary-gradient: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent) / 0.8) 100%);
+
+    /* More subtle shadows for Meiji modern style */
+    --card-shadow-subtle: 0 2px 8px -1px rgba(140, 39, 76, 0.06), 0 1px 3px -1px rgba(140, 39, 76, 0.04);
+    --card-shadow-strong: 0 5px 15px -3px rgba(140, 39, 76, 0.1), 0 3px 6px -3px rgba(140, 39, 76, 0.07);
+  }
+
+  .dark {
+    /* Dark Theme (Optional, if ever needed) */
+    --background: 240 10% 10%;
+    --foreground: 210 40% 98%;
+    /* ... (define other dark theme variables if needed) ... */
+    --primary: 340 70% 60%; /* Brighter wine-red for dark mode */
+    --primary-foreground: 210 40% 98%;
+    --card: 240 10% 15%;
+    --border: 240 5% 25%;
+    --input: 240 5% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-light-canvas text-foreground;
+    font-family: "Noto Sans JP", var(--font-noto-sans-jp), sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-noto-serif text-slate-800; /* Default to Noto Serif for headings */
+  }
+  .font-noto-serif {
+    font-family: "Noto Serif JP", var(--font-noto-serif-jp), serif;
+  }
+  .font-roboto-mono {
+    font-family: "Roboto Mono", var(--font-roboto-mono), monospace;
+  }
+}
+
+/* Custom scrollbar for content areas within slides */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--background) / 0.5);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Print styles */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: white !important;
+    color: black !important;
+  }
+  .slide-container {
+    width: 100% !important;
+    height: 100% !important;
+    page-break-after: always;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: 1px solid #ccc !important; /* Add a light border for print separation */
+  }
+  .slide-container:last-child {
+    page-break-after: auto;
+  }
+  .slide-content {
+    padding: 1.25rem !important; /* Adjust padding for print */
+  }
+  .page-number {
+    color: #555 !important;
+    background-color: transparent !important;
+    font-size: 0.7rem !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    /* Gradients might not print well, consider solid fallbacks or ensure high-quality print settings */
+  }
+  .text-transparent.bg-clip-text {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  canvas {
+    max-width: 100% !important;
+    max-height: 55vh !important;
+    display: block !important;
+  }
+  /* Ensure text is not white on white for print */
+  .text-white,
+  .text-white\/80,
+  .text-white\/70,
+  .text-white\/90 {
+    color: #333 !important; /* Fallback for white text on colored backgrounds */
+  }
+  .bg-wine-red,
+  .bg-wine-red-light,
+  .bg-wine-red-dark,
+  .bg-accent-gold,
+  .bg-accent-gold-light,
+  .bg-accent-gold-dark {
+    /* If backgrounds are complex, ensure text on them is legible in print */
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0.8cm; /* Adjust margins */
+}
+
+/* Utility classes for shadows based on CSS variables */
+.shadow-subtle {
+  box-shadow: var(--card-shadow-subtle);
+}
+.shadow-strong {
+  box-shadow: var(--card-shadow-strong);
+}

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>実装ロードマップ</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #3f51b5;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .roadmap-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            height: calc(100% - 200px);
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3f51b5 0%, #3f51b5 33%, #5c6bc0 33%, #5c6bc0 66%, #9fa8da 66%, #9fa8da 100%);
+            z-index: 1;
+        }
+
+        .phase {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .phase:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(63, 81, 181, 0.15);
+        }
+
+        .phase-number {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: #3f51b5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(63, 81, 181, 0.3);
+        }
+
+        .phase:nth-child(2) .phase-number {
+            background: #5c6bc0;
+        }
+
+        .phase:nth-child(3) .phase-number {
+            background: #7986cb;
+        }
+
+        .phase:nth-child(4) .phase-number {
+            background: #9fa8da;
+        }
+
+        .phase-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #3f51b5;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .phase-duration {
+            font-size: 18px;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .phase-tasks {
+            list-style: none;
+        }
+
+        .phase-task {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #4a5568;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-icon {
+            color: #3f51b5;
+            font-size: 18px;
+        }
+
+        .phase-deliverables {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .deliverables-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .deliverable-item {
+            background: #e8eaf6;
+            color: #3f51b5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .timeline-summary {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            right: 80px;
+            background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(63, 81, 181, 0.2);
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-label {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .phase-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">11</div>
+            <h2 class="slide-title">実装ロードマップ：フェーズ別の開発計画</h2>
+        </div>
+
+        <div class="roadmap-container">
+            <div class="timeline-line"></div>
+            
+            <div class="phase">
+                <div class="phase-number">0</div>
+                <h3 class="phase-title">準備・設計</h3>
+                <p class="phase-duration">2週間</p>
+                
+                <ul class="phase-tasks">
+                    <li class="phase-task">
+                        <span class="task-icon">📋</span>
+                        要件定義の最終化
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🎨</span>
+                        UI/UXデザイン作成
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🏗️</span>
+                        技術アーキテクチャ設計
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🔍</span>
+                        AIエージェントPoC
+                    </li>
+                </ul>
+                
+                <div class="phase-deliverables">
+                    <h4 class="deliverables-title">成果物</h4>
+                    <span class="deliverable-item">設計書</span>
+                    <span class="deliverable-item">プロトタイプ</span>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">1</div>
+                <h3 class="phase-title">コア開発</h3>
+                <p class="phase-duration">6週間</p>
+                
+                <ul class="phase-tasks">
+                    <li class="phase-task">
+                        <span class="task-icon">🤖</span>
+                        AIエージェント実装
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">⚡</span>
+                        バックエンドAPI構築
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">💻</span>
+                        フロントエンド開発
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🔗</span>
+                        システム統合
+                    </li>
+                </ul>
+                
+                <div class="phase-deliverables">
+                    <h4 class="deliverables-title">成果物</h4>
+                    <span class="deliverable-item">MVP版</span>
+                    <span class="deliverable-item">基本機能実装</span>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">2</div>
+                <h3 class="phase-title">テスト・改善</h3>
+                <p class="phase-duration">4週間</p>
+                
+                <ul class="phase-tasks">
+                    <li class="phase-task">
+                        <span class="task-icon">🧪</span>
+                        統合テスト実施
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🎯</span>
+                        AI精度チューニング
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">⚡</span>
+                        パフォーマンス最適化
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">👥</span>
+                        ユーザビリティテスト
+                    </li>
+                </ul>
+                
+                <div class="phase-deliverables">
+                    <h4 class="deliverables-title">成果物</h4>
+                    <span class="deliverable-item">β版</span>
+                    <span class="deliverable-item">テスト報告書</span>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">3</div>
+                <h3 class="phase-title">リリース</h3>
+                <p class="phase-duration">2週間</p>
+                
+                <ul class="phase-tasks">
+                    <li class="phase-task">
+                        <span class="task-icon">☁️</span>
+                        本番環境構築
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">🚀</span>
+                        デプロイ実施
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">📊</span>
+                        監視システム設定
+                    </li>
+                    <li class="phase-task">
+                        <span class="task-icon">📚</span>
+                        運用ドキュメント整備
+                    </li>
+                </ul>
+                
+                <div class="phase-deliverables">
+                    <h4 class="deliverables-title">成果物</h4>
+                    <span class="deliverable-item">本番版</span>
+                    <span class="deliverable-item">運用開始</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-summary">
+            <div class="summary-item">
+                <p class="summary-label">総開発期間</p>
+                <p class="summary-value">14週間</p>
+            </div>
+            <div class="summary-item">
+                <p class="summary-label">投入リソース</p>
+                <p class="summary-value">8名</p>
+            </div>
+            <div class="summary-item">
+                <p class="summary-label">リリース予定</p>
+                <p class="summary-value">2025年9月</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">11 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_10_use_cases.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_12_next_steps.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_12_next_steps.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_10_use_cases.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_12_next_steps.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_10_use_cases.html';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>導入効果・ROI</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .roi-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            height: calc(100% - 140px);
+        }
+
+        .metrics-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5cc 100%);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(255, 193, 7, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(255, 193, 7, 0.2);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metric-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        .metric-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffc107;
+        }
+
+        .metric-description {
+            font-size: 18px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .roi-visual {
+            background: #1e3a5f;
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .roi-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .roi-chart {
+            width: 100%;
+            max-width: 400px;
+            margin: 30px 0;
+        }
+
+        .roi-period {
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .roi-period-label {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .cost-benefit {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .cost-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .cost-label {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .cost-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffc107;
+        }
+
+        .impact-summary {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            right: 80px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(40, 167, 69, 0.2);
+        }
+
+        .impact-item {
+            text-align: center;
+        }
+
+        .impact-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .impact-text {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .arrow-up {
+            color: #28a745;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">09</div>
+            <h2 class="slide-title">導入効果・ROI：生産性向上と品質改善の定量的効果</h2>
+        </div>
+
+        <div class="roi-container">
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3 class="metric-title">作業時間削減</h3>
+                        <div class="metric-value">90%<span class="arrow-up">↓</span></div>
+                    </div>
+                    <p class="metric-description">
+                        従来15時間かかっていたプレゼン作成が<br>
+                        わずか1.5時間で完成。週13.5時間の創出。
+                    </p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3 class="metric-title">品質向上</h3>
+                        <div class="metric-value">3倍<span class="arrow-up">↑</span></div>
+                    </div>
+                    <p class="metric-description">
+                        AIによる一貫性のある構成と<br>
+                        プロフェッショナルなデザイン品質を実現。
+                    </p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3 class="metric-title">受注率向上</h3>
+                        <div class="metric-value">35%<span class="arrow-up">↑</span></div>
+                    </div>
+                    <p class="metric-description">
+                        高品質な提案資料により<br>
+                        商談成功率が大幅に改善。
+                    </p>
+                </div>
+            </div>
+
+            <div class="roi-visual">
+                <h3 class="roi-title">投資回収期間</h3>
+                <div class="roi-period">6ヶ月</div>
+                <p class="roi-period-label">ROI実現まで</p>
+                
+                <div class="cost-benefit">
+                    <div class="cost-item">
+                        <p class="cost-label">初期投資</p>
+                        <p class="cost-value">¥8M</p>
+                    </div>
+                    <div class="cost-item">
+                        <p class="cost-label">年間削減コスト</p>
+                        <p class="cost-value">¥24M</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="impact-summary">
+            <div class="impact-item">
+                <div class="impact-icon">💰</div>
+                <p class="impact-text">年間¥16Mの純利益</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-icon">⏰</div>
+                <p class="impact-text">700時間/年の時間創出</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-icon">📈</div>
+                <p class="impact-text">生産性300%向上</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">9 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_08_tech_stack.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_10_use_cases.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_10_use_cases.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_08_tech_stack.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_10_use_cases.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_08_tech_stack.html';
+            }
+        }
+    </script>
+</body>
+</html>

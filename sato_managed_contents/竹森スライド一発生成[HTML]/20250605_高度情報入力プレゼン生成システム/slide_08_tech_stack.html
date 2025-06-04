@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術スタック</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #20c997;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .tech-overview {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .tech-subtitle {
+            font-size: 28px;
+            color: #20c997;
+            font-weight: 600;
+        }
+
+        .tech-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .tech-layer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-layer:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(32, 201, 151, 0.15);
+        }
+
+        .layer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .layer-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1e3a5f;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .layer-icon {
+            width: 50px;
+            height: 50px;
+            background: #20c997;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .tech-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .tech-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #20c997;
+            margin-bottom: 8px;
+        }
+
+        .tech-description {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        .integration-diagram {
+            position: absolute;
+            bottom: 100px;
+            right: 100px;
+            background: #20c997;
+            color: white;
+            padding: 25px 40px;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(32, 201, 151, 0.3);
+        }
+
+        .tech-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .frontend-icon { background: #61dafb; }
+        .backend-icon { background: #009688; }
+        .ai-icon { background: #6f42c1; }
+        .infra-icon { background: #ff6b6b; }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">08</div>
+            <h2 class="slide-title">技術スタック：最先端技術の統合</h2>
+        </div>
+
+        <div class="tech-overview">
+            <p class="tech-subtitle">エンタープライズグレードの技術基盤</p>
+        </div>
+
+        <div class="tech-layers">
+            <div class="tech-layer">
+                <div class="layer-header">
+                    <div class="layer-title">
+                        <div class="layer-icon frontend-icon">🎨</div>
+                        <span>フロントエンド</span>
+                    </div>
+                    <span class="tech-highlight">高速・高品質UI</span>
+                </div>
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <div class="tech-name">Next.js 14</div>
+                        <div class="tech-description">最新のReactフレームワーク</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">TypeScript</div>
+                        <div class="tech-description">型安全な開発環境</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">Tailwind CSS</div>
+                        <div class="tech-description">効率的なスタイリング</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">WebSocket</div>
+                        <div class="tech-description">リアルタイム通信</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-layer">
+                <div class="layer-header">
+                    <div class="layer-title">
+                        <div class="layer-icon backend-icon">⚙️</div>
+                        <span>バックエンド</span>
+                    </div>
+                    <span class="tech-highlight">高性能・スケーラブル</span>
+                </div>
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <div class="tech-name">FastAPI</div>
+                        <div class="tech-description">高速Python Webフレームワーク</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">Celery</div>
+                        <div class="tech-description">非同期タスク処理</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">PostgreSQL</div>
+                        <div class="tech-description">信頼性の高いDB</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">Redis</div>
+                        <div class="tech-description">高速キャッシュ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-layer">
+                <div class="layer-header">
+                    <div class="layer-title">
+                        <div class="layer-icon ai-icon">🧠</div>
+                        <span>AI・機械学習</span>
+                    </div>
+                    <span class="tech-highlight">最新AI技術</span>
+                </div>
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <div class="tech-name">LangChain</div>
+                        <div class="tech-description">LLMオーケストレーション</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">GPT-4 / Claude</div>
+                        <div class="tech-description">最先端言語モデル</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">Vector DB</div>
+                        <div class="tech-description">知識ベース管理</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-name">RAG</div>
+                        <div class="tech-description">情報検索強化生成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-diagram">
+            全てが統合された次世代プラットフォーム
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">8 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_07_ai_agents_detail.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_09_roi_benefits.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_09_roi_benefits.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_07_ai_agents_detail.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_09_roi_benefits.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_07_ai_agents_detail.html';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エグゼクティブサマリー</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #0099ff;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            height: calc(100% - 180px);
+        }
+
+        .key-point {
+            background: #f0f8ff;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 6px solid #0099ff;
+            transition: transform 0.3s ease;
+        }
+
+        .key-point:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.1);
+        }
+
+        .key-point h3 {
+            font-size: 32px;
+            color: #0099ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .key-point p {
+            font-size: 22px;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        .highlight {
+            color: #0099ff;
+            font-weight: 600;
+        }
+
+        .center-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+        }
+
+        .main-message {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .sub-points {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px;
+        }
+
+        .point-card {
+            text-align: center;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .point-number {
+            font-size: 64px;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .point-text {
+            font-size: 20px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">02</div>
+            <h2 class="slide-title">エグゼクティブサマリー</h2>
+        </div>
+
+        <div class="center-message">
+            <div class="main-message">
+                AIエージェントシステムが<br>
+                プレゼンテーション作成を<span class="highlight">革新</span>します
+            </div>
+
+            <div class="sub-points">
+                <div class="point-card">
+                    <div class="point-number">90%</div>
+                    <div class="point-text">
+                        作成時間の削減<br>
+                        従来比で大幅な効率化
+                    </div>
+                </div>
+                <div class="point-card">
+                    <div class="point-number">3x</div>
+                    <div class="point-text">
+                        品質向上<br>
+                        プロフェッショナル水準を担保
+                    </div>
+                </div>
+                <div class="point-card">
+                    <div class="point-number">∞</div>
+                    <div class="point-text">
+                        スケーラビリティ<br>
+                        無限の拡張可能性
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">2 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_01_cover.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_03_current_challenges.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_03_current_challenges.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_01_cover.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_03_current_challenges.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_01_cover.html';
+            }
+        }
+    </script>
+</body>
+</html>

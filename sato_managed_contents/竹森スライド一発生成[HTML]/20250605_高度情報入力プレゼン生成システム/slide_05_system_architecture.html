@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>システムアーキテクチャ</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #6f42c1;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .architecture-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100% - 140px);
+            position: relative;
+        }
+
+        .agent-system {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 30px;
+            padding: 60px;
+            width: 90%;
+            height: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .system-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            color: #6f42c1;
+            margin-bottom: 40px;
+        }
+
+        .agents-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70%;
+        }
+
+        .agent-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(111, 66, 193, 0.2);
+        }
+
+        .agent-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #6f42c1;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .agent-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .agent-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6f42c1;
+            margin-bottom: 15px;
+        }
+
+        .agent-role {
+            font-size: 18px;
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .agent-tasks {
+            text-align: left;
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .agent-tasks li {
+            margin-bottom: 10px;
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .agent-tasks li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #6f42c1;
+        }
+
+        .flow-arrows {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            right: 25%;
+            height: 3px;
+            background: linear-gradient(90deg, #6f42c1 0%, #6f42c1 50%, transparent 50%, transparent 100%);
+            background-size: 20px 3px;
+            animation: flow 2s linear infinite;
+        }
+
+        @keyframes flow {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 0; }
+        }
+
+        .tech-stack {
+            position: absolute;
+            bottom: 40px;
+            left: 80px;
+            right: 80px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .tech-item {
+            text-align: center;
+        }
+
+        .tech-label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .tech-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">05</div>
+            <h2 class="slide-title">システムアーキテクチャ</h2>
+        </div>
+
+        <div class="architecture-container">
+            <div class="agent-system">
+                <h3 class="system-title">3つのAIエージェントによる高度な処理フロー</h3>
+                
+                <div class="flow-arrows"></div>
+                
+                <div class="agents-container">
+                    <div class="agent-card">
+                        <div class="agent-number">1</div>
+                        <div class="agent-icon">🔍</div>
+                        <h4 class="agent-name">情報分析官</h4>
+                        <p class="agent-role">Information Analyst</p>
+                        <ul class="agent-tasks">
+                            <li>顧客プロファイル抽出</li>
+                            <li>コンテキスト理解</li>
+                            <li>情報の構造化</li>
+                            <li>重要度の評価</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-number">2</div>
+                        <div class="agent-icon">📝</div>
+                        <h4 class="agent-name">構成作家</h4>
+                        <p class="agent-role">Story Architect</p>
+                        <ul class="agent-tasks">
+                            <li>論理的流れの設計</li>
+                            <li>最適レイアウト選択</li>
+                            <li>ページ構成の決定</li>
+                            <li>視覚的バランス調整</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-number">3</div>
+                        <div class="agent-icon">✨</div>
+                        <h4 class="agent-name">コピーライター</h4>
+                        <p class="agent-role">Content Creator</p>
+                        <ul class="agent-tasks">
+                            <li>コンテンツ生成</li>
+                            <li>文体の最適化</li>
+                            <li>ビジュアル要素作成</li>
+                            <li>HTML組立実行</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-item">
+                <p class="tech-label">LLM Framework</p>
+                <p class="tech-name">LangChain</p>
+            </div>
+            <div class="tech-item">
+                <p class="tech-label">Backend</p>
+                <p class="tech-name">FastAPI + Celery</p>
+            </div>
+            <div class="tech-item">
+                <p class="tech-label">Frontend</p>
+                <p class="tech-name">Next.js</p>
+            </div>
+            <div class="tech-item">
+                <p class="tech-label">Knowledge Base</p>
+                <p class="tech-name">Vector DB (RAG)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">5 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_04_solution_overview.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_06_core_features.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_06_core_features.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_04_solution_overview.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_06_core_features.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_04_solution_overview.html';
+            }
+        }
+    </script>
+</body>
+</html>

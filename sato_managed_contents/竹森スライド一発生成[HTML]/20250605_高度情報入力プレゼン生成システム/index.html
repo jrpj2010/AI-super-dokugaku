@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高度情報入力型プレゼンテーション生成Webアプリ - スライド一覧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            color: #00d4ff;
+        }
+
+        .date {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #b0c4de;
+        }
+
+        .slide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .slide-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .slide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .slide-number {
+            display: inline-block;
+            background: #0099ff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .slide-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .slide-description {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .navigation {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .nav-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 153, 255, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 153, 255, 0.4);
+        }
+
+        .secondary-button {
+            background: linear-gradient(135deg, #6c757d 0%, #868e96 100%);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.3);
+        }
+
+        .secondary-button:hover {
+            box-shadow: 0 8px 30px rgba(108, 117, 125, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #e9ecef;
+            color: #6c757d;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">高度情報入力型プレゼンテーション生成Webアプリ</h1>
+            <p class="subtitle">AIエージェントが創造する次世代プレゼンテーション</p>
+            <p class="date">2025年6月5日</p>
+        </div>
+
+        <div class="slide-grid">
+            <a href="slide_01_cover.html" class="slide-card">
+                <div class="slide-number">01</div>
+                <h2 class="slide-title">表紙</h2>
+                <p class="slide-description">高度情報入力型プレゼンテーション生成Webアプリの紹介</p>
+            </a>
+
+            <a href="slide_02_executive_summary.html" class="slide-card">
+                <div class="slide-number">02</div>
+                <h2 class="slide-title">エグゼクティブサマリー</h2>
+                <p class="slide-description">革新的なAI駆動プレゼンテーション生成システムの概要</p>
+            </a>
+
+            <a href="slide_03_current_challenges.html" class="slide-card">
+                <div class="slide-number">03</div>
+                <h2 class="slide-title">現状の課題</h2>
+                <p class="slide-description">従来のプレゼンテーション作成における問題点</p>
+            </a>
+
+            <a href="slide_04_solution_overview.html" class="slide-card">
+                <div class="slide-number">04</div>
+                <h2 class="slide-title">ソリューション概要</h2>
+                <p class="slide-description">AIエージェントシステムによる革新的アプローチ</p>
+            </a>
+
+            <a href="slide_05_system_architecture.html" class="slide-card">
+                <div class="slide-number">05</div>
+                <h2 class="slide-title">システムアーキテクチャ</h2>
+                <p class="slide-description">3つのAIエージェントによる高度な処理フロー</p>
+            </a>
+
+            <a href="slide_06_core_features.html" class="slide-card">
+                <div class="slide-number">06</div>
+                <h2 class="slide-title">コア機能</h2>
+                <p class="slide-description">A・B・Cウィンドウによる直感的な情報入力システム</p>
+            </a>
+
+            <a href="slide_07_ai_agents_detail.html" class="slide-card">
+                <div class="slide-number">07</div>
+                <h2 class="slide-title">AIエージェントの詳細</h2>
+                <p class="slide-description">情報分析官・構成作家・コピーライター補助の役割</p>
+            </a>
+
+            <a href="slide_08_tech_stack.html" class="slide-card">
+                <div class="slide-number">08</div>
+                <h2 class="slide-title">技術スタック</h2>
+                <p class="slide-description">最先端技術の統合（LangChain, FastAPI, Next.js）</p>
+            </a>
+
+            <a href="slide_09_roi_benefits.html" class="slide-card">
+                <div class="slide-number">09</div>
+                <h2 class="slide-title">導入効果・ROI</h2>
+                <p class="slide-description">生産性向上と品質改善の定量的効果</p>
+            </a>
+
+            <a href="slide_10_use_cases.html" class="slide-card">
+                <div class="slide-number">10</div>
+                <h2 class="slide-title">ユースケース</h2>
+                <p class="slide-description">広告代理店・コンサルティングファームでの活用事例</p>
+            </a>
+
+            <a href="slide_11_roadmap.html" class="slide-card">
+                <div class="slide-number">11</div>
+                <h2 class="slide-title">実装ロードマップ</h2>
+                <p class="slide-description">フェーズ別の開発計画とマイルストーン</p>
+            </a>
+
+            <a href="slide_12_next_steps.html" class="slide-card">
+                <div class="slide-number">12</div>
+                <h2 class="slide-title">次のステップ</h2>
+                <p class="slide-description">推奨アクションとお問い合わせ</p>
+            </a>
+        </div>
+
+        <div class="navigation">
+            <h3 class="nav-title">プレゼンテーション操作</h3>
+            <a href="slide_01_cover.html" class="button">プレゼンテーションを開始</a>
+            <a href="talk_script.md" class="button secondary-button">トークスクリプトを見る</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 TANREN Inc. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

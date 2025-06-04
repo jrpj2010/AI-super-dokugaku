@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIエージェントの詳細</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #fd7e14;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .agents-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            height: calc(100% - 180px);
+        }
+
+        .agent-detail-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .agent-detail-card:hover {
+            transform: translateY(-5px);
+            border-color: #fd7e14;
+            box-shadow: 0 15px 50px rgba(253, 126, 20, 0.15);
+        }
+
+        .agent-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .agent-icon-large {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .agent-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fd7e14;
+            margin-bottom: 10px;
+        }
+
+        .agent-subtitle {
+            font-size: 18px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .process-flow {
+            background: #fff5e6;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .process-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .process-steps {
+            list-style: none;
+        }
+
+        .process-steps li {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .process-steps li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #fd7e14;
+            font-weight: bold;
+        }
+
+        .output-section {
+            background: #e6f7ff;
+            border-radius: 15px;
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .output-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0099ff;
+            margin-bottom: 15px;
+        }
+
+        .output-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .output-tag {
+            background: #0099ff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .integration-note {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #fd7e14 0%, #ff9a44 100%);
+            color: white;
+            padding: 25px 50px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(253, 126, 20, 0.3);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #fd7e14;
+            color: white;
+            border-radius: 50%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">07</div>
+            <h2 class="slide-title">AIエージェントの詳細：協調的な知的処理システム</h2>
+        </div>
+
+        <div class="agents-detail-grid">
+            <div class="agent-detail-card">
+                <div class="agent-header">
+                    <div class="agent-icon-large">🔍</div>
+                    <h3 class="agent-title">情報分析官</h3>
+                    <p class="agent-subtitle">Information Analyst Agent</p>
+                </div>
+
+                <div class="process-flow">
+                    <h4 class="process-title">
+                        <span class="step-number">1</span>
+                        処理プロセス
+                    </h4>
+                    <ul class="process-steps">
+                        <li>A・B・C全情報の統合解析</li>
+                        <li>顧客特性・ニーズの抽出</li>
+                        <li>重要キーワードの特定</li>
+                        <li>情報の優先順位付け</li>
+                    </ul>
+                </div>
+
+                <div class="output-section">
+                    <h4 class="output-title">生成アウトプット</h4>
+                    <div class="output-items">
+                        <span class="output-tag">構造化データ</span>
+                        <span class="output-tag">顧客プロファイル</span>
+                        <span class="output-tag">キーメッセージ</span>
+                        <span class="output-tag">重要度マップ</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-detail-card">
+                <div class="agent-header">
+                    <div class="agent-icon-large">📝</div>
+                    <h3 class="agent-title">構成作家</h3>
+                    <p class="agent-subtitle">Story Architect Agent</p>
+                </div>
+
+                <div class="process-flow">
+                    <h4 class="process-title">
+                        <span class="step-number">2</span>
+                        処理プロセス
+                    </h4>
+                    <ul class="process-steps">
+                        <li>論理的ストーリーライン構築</li>
+                        <li>最適レイアウトパターン選択</li>
+                        <li>ページ配分の最適化</li>
+                        <li>視覚的インパクトの設計</li>
+                    </ul>
+                </div>
+
+                <div class="output-section">
+                    <h4 class="output-title">生成アウトプット</h4>
+                    <div class="output-items">
+                        <span class="output-tag">スライド構成案</span>
+                        <span class="output-tag">レイアウト指示</span>
+                        <span class="output-tag">ページフロー</span>
+                        <span class="output-tag">デザイン仕様</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-detail-card">
+                <div class="agent-header">
+                    <div class="agent-icon-large">✨</div>
+                    <h3 class="agent-title">コピーライター</h3>
+                    <p class="agent-subtitle">Content Creator Agent</p>
+                </div>
+
+                <div class="process-flow">
+                    <h4 class="process-title">
+                        <span class="step-number">3</span>
+                        処理プロセス
+                    </h4>
+                    <ul class="process-steps">
+                        <li>最適な文体での文章生成</li>
+                        <li>ビジュアル要素の作成</li>
+                        <li>HTMLテンプレート適用</li>
+                        <li>最終品質チェック</li>
+                    </ul>
+                </div>
+
+                <div class="output-section">
+                    <h4 class="output-title">生成アウトプット</h4>
+                    <div class="output-items">
+                        <span class="output-tag">完成テキスト</span>
+                        <span class="output-tag">グラフ・図表</span>
+                        <span class="output-tag">HTMLコード</span>
+                        <span class="output-tag">最終成果物</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-note">
+            3つのエージェントが連携し、人間以上の品質を実現
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">7 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_06_core_features.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_08_tech_stack.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_08_tech_stack.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_06_core_features.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_08_tech_stack.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_06_core_features.html';
+            }
+        }
+    </script>
+</body>
+</html>

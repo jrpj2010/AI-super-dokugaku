@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コア機能</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #17a2b8;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .ui-mockup {
+            background: #f5f7fa;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+
+        .browser-bar {
+            background: #e9ecef;
+            border-radius: 10px 10px 0 0;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dc3545;
+        }
+
+        .browser-dot:nth-child(2) {
+            background: #ffc107;
+        }
+
+        .browser-dot:nth-child(3) {
+            background: #28a745;
+        }
+
+        .input-sections {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-label {
+            display: inline-block;
+            background: #17a2b8;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .input-area {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 120px;
+            font-size: 16px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .c-sections {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .c-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .c-items {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .c-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 250px;
+            border: 2px solid #e9ecef;
+        }
+
+        .c-item-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #17a2b8;
+            margin-bottom: 10px;
+        }
+
+        .generate-button {
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 40px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .generate-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 153, 255, 0.4);
+        }
+
+        .feature-highlight {
+            position: absolute;
+            bottom: 80px;
+            right: 80px;
+            background: #17a2b8;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">06</div>
+            <h2 class="slide-title">コア機能：A・B・Cウィンドウによる直感的な情報入力</h2>
+        </div>
+
+        <div class="ui-mockup">
+            <div class="browser-bar">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+            </div>
+
+            <div class="input-sections">
+                <div class="input-section">
+                    <span class="section-label">A</span>
+                    <h3 class="section-title">対象顧客情報</h3>
+                    <p class="section-description">
+                        名刺情報、企業概要、担当者情報など
+                    </p>
+                    <div class="input-area">
+                        株式会社〇〇商事<br>
+                        営業部長 山田太郎様<br>
+                        従業員数: 500名...
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <span class="section-label">B</span>
+                    <h3 class="section-title">コンテキスト解説</h3>
+                    <p class="section-description">
+                        プレゼンの目的、背景、重要ポイント
+                    </p>
+                    <div class="input-area">
+                        DX推進提案書作成<br>
+                        C1は現状分析、C2は競合調査<br>
+                        ROI重視の提案を...
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-sections">
+                <div class="c-header">
+                    <div>
+                        <span class="section-label">C</span>
+                        <h3 class="section-title" style="display: inline-block; margin-left: 15px;">
+                            情報ソース群
+                        </h3>
+                    </div>
+                    <button class="add-button">
+                        <span>+</span> 情報ソースを追加
+                    </button>
+                </div>
+                
+                <div class="c-items">
+                    <div class="c-item">
+                        <div class="c-item-header">C1: 議事録</div>
+                        <div class="input-area" style="min-height: 80px;">
+                            初回MTGメモ...<br>
+                            課題: 業務効率化...
+                        </div>
+                    </div>
+                    <div class="c-item">
+                        <div class="c-item-header">C2: 競合分析</div>
+                        <div class="input-area" style="min-height: 80px;">
+                            A社: AI活用済み<br>
+                            B社: 検討中...
+                        </div>
+                    </div>
+                    <div class="c-item">
+                        <div class="c-item-header">C3: 提案骨子</div>
+                        <div class="input-area" style="min-height: 80px;">
+                            Phase1: 現状分析<br>
+                            Phase2: 実装...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="generate-button">
+                プレゼンテーションを生成
+            </button>
+        </div>
+
+        <div class="feature-highlight">
+            誰でも簡単に使える直感的UI
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">6 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_05_system_architecture.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_07_ai_agents_detail.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_07_ai_agents_detail.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_05_system_architecture.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_07_ai_agents_detail.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_05_system_architecture.html';
+            }
+        }
+    </script>
+</body>
+</html>

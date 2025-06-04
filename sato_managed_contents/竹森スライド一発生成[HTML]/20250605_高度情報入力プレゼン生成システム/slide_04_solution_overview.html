@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソリューション概要</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #28a745;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .solution-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-message {
+            font-size: 36px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 20px;
+        }
+
+        .hero-submessage {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: 500;
+        }
+
+        .solution-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .flow-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .flow-description {
+            font-size: 18px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .flow-arrow {
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #28a745 50%, transparent 100%);
+            z-index: 1;
+        }
+
+        .benefits-section {
+            background: #f0fff4;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .benefits-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #28a745;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 36px;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .benefit-text {
+            font-size: 20px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .highlight-box {
+            position: absolute;
+            bottom: 80px;
+            right: 80px;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            font-size: 24px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">04</div>
+            <h2 class="slide-title">ソリューション概要</h2>
+        </div>
+
+        <div class="solution-hero">
+            <h3 class="hero-message">AIエージェントシステムによる革新的アプローチ</h3>
+            <p class="hero-submessage">情報を入力するだけで、プロ品質のプレゼンテーションが完成</p>
+        </div>
+
+        <div class="solution-flow">
+            <div class="flow-arrow"></div>
+            <div class="flow-step">
+                <div class="flow-icon">A</div>
+                <h4 class="flow-title">顧客情報入力</h4>
+                <p class="flow-description">
+                    対象顧客の情報を<br>
+                    シンプルに入力
+                </p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">B</div>
+                <h4 class="flow-title">コンテキスト設定</h4>
+                <p class="flow-description">
+                    プレゼンの目的と<br>
+                    背景を明確化
+                </p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">C</div>
+                <h4 class="flow-title">情報群投入</h4>
+                <p class="flow-description">
+                    議事録・データ等を<br>
+                    自由に追加
+                </p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">AI</div>
+                <h4 class="flow-title">AI自動生成</h4>
+                <p class="flow-description">
+                    最適な構成とデザインで<br>
+                    プレゼン完成
+                </p>
+            </div>
+        </div>
+
+        <div class="benefits-section">
+            <h3 class="benefits-title">実現される価値</h3>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <p class="benefit-text">作成時間90%削減</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✨</div>
+                    <p class="benefit-text">品質の標準化</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚀</div>
+                    <p class="benefit-text">無限のスケール</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            完全自動化された知的生産性
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">4 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_03_current_challenges.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_05_system_architecture.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_05_system_architecture.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_03_current_challenges.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_05_system_architecture.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_03_current_challenges.html';
+            }
+        }
+    </script>
+</body>
+</html>

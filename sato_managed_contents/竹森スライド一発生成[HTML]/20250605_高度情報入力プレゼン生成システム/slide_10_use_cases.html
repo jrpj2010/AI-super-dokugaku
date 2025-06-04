@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユースケース</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #e91e63;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #708090;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            height: calc(100% - 140px);
+        }
+
+        .use-case-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(233, 30, 99, 0.15);
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+            color: white;
+            padding: 30px;
+        }
+
+        .industry-label {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .case-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .case-company {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .case-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-scenario {
+            background: #fce4ec;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .scenario-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .scenario-text {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .case-results {
+            flex-grow: 1;
+        }
+
+        .results-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+        }
+
+        .result-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        .result-icon {
+            width: 40px;
+            height: 40px;
+            background: #e91e63;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            border-left: 4px solid #e91e63;
+            padding: 20px;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        .testimonial-author {
+            text-align: right;
+            margin-top: 10px;
+            font-style: normal;
+            font-weight: 600;
+            color: #e91e63;
+        }
+
+        .summary-message {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 25px 60px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(30, 58, 95, 0.3);
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="slide-number">10</div>
+            <h2 class="slide-title">ユースケース：広告代理店・コンサルティングファームでの活用事例</h2>
+        </div>
+
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <div class="case-header">
+                    <p class="industry-label">広告代理店</p>
+                    <h3 class="case-title">新商品PR戦略提案</h3>
+                    <p class="case-company">株式会社クリエイティブエージェンシー</p>
+                </div>
+                <div class="case-content">
+                    <div class="case-scenario">
+                        <h4 class="scenario-title">導入シナリオ</h4>
+                        <p class="scenario-text">
+                            飲料メーカーの新製品PR戦略を2日で作成。
+                            市場調査、競合分析、議事録を統合し、
+                            AIが最適な構成で15ページの提案書を生成。
+                        </p>
+                    </div>
+                    <div class="case-results">
+                        <h4 class="results-title">導入効果</h4>
+                        <div class="result-items">
+                            <div class="result-item">
+                                <div class="result-icon">⏱️</div>
+                                <span>作成時間：15時間 → 1.5時間</span>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-icon">💰</div>
+                                <span>案件受注率：45% → 68%</span>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-icon">📊</div>
+                                <span>月間提案数：8件 → 25件</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        "情報を入力するだけで、私たちが求める品質の提案書が完成。革命的です。"
+                        <p class="testimonial-author">- 企画部 高橋様</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="case-header">
+                    <p class="industry-label">経営コンサルティング</p>
+                    <h3 class="case-title">業務改善提案書作成</h3>
+                    <p class="case-company">コンサルティング＆パートナーズ</p>
+                </div>
+                <div class="case-content">
+                    <div class="case-scenario">
+                        <h4 class="scenario-title">導入シナリオ</h4>
+                        <p class="scenario-text">
+                            製造業クライアントへの業務プロセス診断結果を
+                            まとめた中間報告書を作成。ヒアリング議事録と
+                            データ分析結果から8ページの報告書を自動生成。
+                        </p>
+                    </div>
+                    <div class="case-results">
+                        <h4 class="results-title">導入効果</h4>
+                        <div class="result-items">
+                            <div class="result-item">
+                                <div class="result-icon">👥</div>
+                                <span>対応可能案件数：3倍増</span>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-icon">✨</div>
+                                <span>資料品質の標準化達成</span>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-icon">🎯</div>
+                                <span>顧客満足度：85% → 96%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        "複数案件を並行して高品質に処理できるようになり、ビジネスが拡大しました。"
+                        <p class="testimonial-author">- シニアコンサルタント 中村様</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-message">
+            あらゆる業界で即座に価値を創出
+        </div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">10 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_09_roi_benefits.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="slide_11_roadmap.html" class="nav-button ">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'slide_11_roadmap.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_09_roi_benefits.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                window.location.href = 'slide_11_roadmap.html';
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_09_roi_benefits.html';
+            }
+        }
+    </script>
+</body>
+</html>

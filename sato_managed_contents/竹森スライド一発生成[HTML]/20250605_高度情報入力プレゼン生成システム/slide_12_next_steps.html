@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次のステップ</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            aspect-ratio: 16 / 9;
+            background: transparent;
+            padding: 4%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .header {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            color: #b0c4de;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 56px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section {
+            text-align: center;
+            max-width: 1200px;
+        }
+
+        .main-message {
+            font-size: 36px;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 60px;
+            color: #00d4ff;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .action-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+        }
+
+        .action-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+
+        .action-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #b0c4de;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            border-radius: 30px;
+            padding: 60px 80px;
+            box-shadow: 0 20px 60px rgba(0, 153, 255, 0.4);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .contact-item {
+            font-size: 20px;
+        }
+
+        .contact-label {
+            font-weight: 300;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .contact-value {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .final-message {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffd700;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .decorative-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .circle1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .circle2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 153, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .company-footer {
+            position: absolute;
+            bottom: 60px;
+            right: 80px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        /* ナビゲーションボタン */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* キーボードナビゲーション表示 */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #708090;
+            opacity: 0.7;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container {
+                width: calc(100vh * 16 / 9);
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decorative-elements">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+        </div>
+
+        <div class="header">
+            <div class="slide-number">12</div>
+        </div>
+
+        <h2 class="slide-title">次のステップ</h2>
+
+        <div class="cta-section">
+            <p class="main-message">
+                AIが創造する新しいプレゼンテーションの世界へ<br>
+                今すぐ一歩を踏み出しましょう
+            </p>
+
+            <div class="action-cards">
+                <div class="action-card">
+                    <div class="action-icon">🎯</div>
+                    <h3 class="action-title">詳細デモ</h3>
+                    <p class="action-description">
+                        実際の動作を<br>
+                        ご覧いただけます
+                    </p>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">💡</div>
+                    <h3 class="action-title">カスタマイズ相談</h3>
+                    <p class="action-description">
+                        貴社のニーズに<br>
+                        合わせた提案
+                    </p>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">🚀</div>
+                    <h3 class="action-title">PoC実施</h3>
+                    <p class="action-description">
+                        小規模での<br>
+                        効果検証から
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h3 class="contact-title">お問い合わせ</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <p class="contact-label">メール</p>
+                        <p class="contact-value">ai@tanren.co.jp</p>
+                    </div>
+                    <div class="contact-item">
+                        <p class="contact-label">電話</p>
+                        <p class="contact-value">03-1234-5678</p>
+                    </div>
+                    <div class="contact-item">
+                        <p class="contact-label">担当</p>
+                        <p class="contact-value">AIソリューション部</p>
+                    </div>
+                    <div class="contact-item">
+                        <p class="contact-label">Web</p>
+                        <p class="contact-value">tanren.co.jp/ai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="final-message">
+            Transform Your Presentations with AI
+        </p>
+
+        <div class="company-footer">TANREN Inc.</div>
+    </div>
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">12 / 12</div>
+
+    <!-- ナビゲーションコントロール -->
+    <div class="nav-controls">
+        <a href="index.html" class="nav-button">
+            <span>⏮</span> 一覧へ
+        </a>
+        <a href="slide_11_roadmap.html" class="nav-button ">
+            <span>◀</span> 前へ
+        </a>
+        <a href="#" class="nav-button disabled">
+            次へ <span>▶</span>
+        </a>
+    </div>
+
+    <!-- キーボードヒント -->
+    <div class="keyboard-hint">
+        キーボード: ← 前へ | → 次へ | ESC 一覧へ
+    </div>
+
+    <script>
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                // 最後のスライド
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'slide_11_roadmap.html';
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // タッチスワイプ対応（モバイル用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 左スワイプ（次へ）
+                // 最後のスライド
+            } else if (touchEndX > touchStartX + 50) {
+                // 右スワイプ（前へ）
+                window.location.href = 'slide_11_roadmap.html';
+            }
+        }
+    </script>
+</body>
+</html>
