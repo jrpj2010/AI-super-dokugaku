@@ -16,6 +16,9 @@ import markdown
 import logging
 import random
 from health import health_bp
+import yt_dlp
+import tempfile
+import io
 
 # ロギングの設定
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -51,13 +54,15 @@ COUNTRY_TO_LANGUAGE = {
     'IN': 'hi'
 }
 
-# プロキシリスト（無料のオープンプロキシ - 実際の運用では信頼性の高いプロキシサービスを使用することを推奨）
-PROXY_LIST = [
-    None,  # プロキシなしでの直接接続も試行
-    # 以下は例示用のダミープロキシです。実際には機能しません。
-    # 'http://proxy1.example.com:8080',
-    # 'http://proxy2.example.com:8080',
-]
+# プロキシリスト（環境変数から取得、なければNoneのみ）
+PROXY_LIST = [None]  # デフォルトはプロキシなし
+if os.getenv('HTTP_PROXY'):
+    PROXY_LIST.append(os.getenv('HTTP_PROXY'))
+if os.getenv('HTTPS_PROXY'):
+    PROXY_LIST.append(os.getenv('HTTPS_PROXY'))
+# Torプロキシが利用可能な場合
+if os.getenv('TOR_PROXY'):
+    PROXY_LIST.append(os.getenv('TOR_PROXY'))
 
 # ISO8601形式の期間を分に変換
 def parse_duration_to_minutes(duration_str):
@@ -82,8 +87,9 @@ def get_transcript(video_id):
     
     # 複数の方法を試行
     methods = [
-        get_transcript_with_scraping, # スクレイピングを優先
-        get_transcript_with_api
+        get_transcript_with_yt_dlp,    # yt-dlpを最優先（最も信頼性が高い）
+        get_transcript_with_api,       # YouTube Transcript API
+        get_transcript_with_scraping   # スクレイピングは最終手段
     ]
     
     last_error = None
@@ -107,6 +113,152 @@ def get_transcript(video_id):
     logger.error(f"All transcript methods failed for {video_id}: {error_message}")
     return error_message, ""
 
+# yt-dlpを使用して字幕を取得（新しい方法）
+def get_transcript_with_yt_dlp(video_id):
+    """
+    yt-dlpを使用して字幕を取得する関数（最も信頼性が高い）
+    """
+    logger.info(f"Trying to get transcript with yt-dlp for {video_id}")
+    
+    try:
+        # プロキシをランダムに選択
+        proxy = random.choice(PROXY_LIST)
+        
+        # yt-dlpのオプション設定
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'skip_download': True,  # 動画はダウンロードしない
+            'writesubtitles': True,
+            'writeautomaticsub': True,  # 自動生成字幕も取得
+            'subtitleslangs': ['ja', 'en', 'ja-JP', 'en-US'],  # 取得する言語
+            'subtitlesformat': 'json3',  # JSON形式で取得（タイムスタンプ付き）
+        }
+        
+        # プロキシが設定されている場合
+        if proxy:
+            logger.info(f"Using proxy: {proxy}")
+            ydl_opts['proxy'] = proxy
+        
+        # 一時ファイル用のディレクトリ
+        with tempfile.TemporaryDirectory() as temp_dir:
+            ydl_opts['outtmpl'] = f'{temp_dir}/%(id)s.%(ext)s'
+            
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                try:
+                    # 動画情報を取得
+                    info = ydl.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
+                    
+                    # 利用可能な字幕を確認
+                    subtitles = info.get('subtitles', {})
+                    automatic_captions = info.get('automatic_captions', {})
+                    
+                    logger.info(f"Available subtitles: {list(subtitles.keys())}")
+                    logger.info(f"Available automatic captions: {list(automatic_captions.keys())}")
+                    
+                    # 字幕を選択（優先順位：日本語手動 > 日本語自動 > 英語手動 > 英語自動）
+                    selected_lang = None
+                    selected_subs = None
+                    is_auto = False
+                    
+                    # 日本語字幕をチェック
+                    for lang in ['ja', 'ja-JP']:
+                        if lang in subtitles:
+                            selected_lang = lang
+                            selected_subs = subtitles[lang]
+                            break
+                    
+                    # 日本語自動字幕をチェック
+                    if not selected_subs:
+                        for lang in ['ja', 'ja-JP']:
+                            if lang in automatic_captions:
+                                selected_lang = lang
+                                selected_subs = automatic_captions[lang]
+                                is_auto = True
+                                break
+                    
+                    # 英語字幕をチェック
+                    if not selected_subs:
+                        for lang in ['en', 'en-US']:
+                            if lang in subtitles:
+                                selected_lang = lang
+                                selected_subs = subtitles[lang]
+                                break
+                    
+                    # 英語自動字幕をチェック
+                    if not selected_subs:
+                        for lang in ['en', 'en-US']:
+                            if lang in automatic_captions:
+                                selected_lang = lang
+                                selected_subs = automatic_captions[lang]
+                                is_auto = True
+                                break
+                    
+                    # 字幕が見つからない場合
+                    if not selected_subs:
+                        logger.warning(f"No subtitles found via yt-dlp for {video_id}")
+                        return "字幕は利用できません。この動画には字幕がありません。", ""
+                    
+                    logger.info(f"Selected {'automatic' if is_auto else 'manual'} subtitle: {selected_lang}")
+                    
+                    # JSON3形式の字幕URLを探す
+                    json3_url = None
+                    for sub in selected_subs:
+                        if sub.get('ext') == 'json3':
+                            json3_url = sub.get('url')
+                            break
+                    
+                    if not json3_url:
+                        # JSON3がない場合は他の形式を試す
+                        for sub in selected_subs:
+                            if sub.get('url'):
+                                json3_url = sub.get('url')
+                                break
+                    
+                    if not json3_url:
+                        logger.warning("No subtitle URL found")
+                        return "字幕は利用できません。字幕URLが見つかりませんでした。", ""
+                    
+                    # 字幕データをダウンロード
+                    logger.info(f"Downloading subtitle from: {json3_url[:100]}...")
+                    response = requests.get(json3_url, timeout=10)
+                    response.raise_for_status()
+                    
+                    # JSON3形式の解析
+                    subtitle_data = response.json()
+                    
+                    # 字幕エントリを変換
+                    transcript_data = []
+                    for event in subtitle_data.get('events', []):
+                        if 'segs' in event:
+                            # テキストを結合
+                            text = ''.join([seg.get('utf8', '') for seg in event['segs']])
+                            if text.strip():
+                                transcript_data.append({
+                                    'text': text.strip(),
+                                    'start': event.get('tStartMs', 0) / 1000.0,  # ミリ秒を秒に変換
+                                    'duration': event.get('dDurationMs', 0) / 1000.0
+                                })
+                    
+                    if not transcript_data:
+                        logger.warning("No transcript data extracted from subtitle")
+                        return "字幕は利用できません。字幕データが空です。", ""
+                    
+                    logger.info(f"Successfully extracted {len(transcript_data)} transcript entries via yt-dlp")
+                    return transcript_data, selected_lang
+                    
+                except yt_dlp.utils.DownloadError as e:
+                    logger.error(f"yt-dlp download error: {str(e)}")
+                    if "Private video" in str(e):
+                        return "字幕は利用できません。この動画は非公開です。", ""
+                    elif "Video unavailable" in str(e):
+                        return "字幕は利用できません。動画が利用できません。", ""
+                    raise
+                    
+    except Exception as e:
+        logger.error(f"Error in get_transcript_with_yt_dlp: {str(e)}")
+        raise
+
 # YouTube Transcript APIを使用して字幕を取得
 def get_transcript_with_api(video_id):
     """
@@ -127,8 +279,16 @@ def get_transcript_with_api(video_id):
         
         # 字幕を取得
         try:
+            # プロキシをランダムに選択
+            proxy = random.choice(PROXY_LIST)
+            proxies = None
+            
+            if proxy:
+                logger.info(f"Using proxy for YouTube Transcript API: {proxy}")
+                proxies = {'http': proxy, 'https': proxy}
+            
             # 利用可能な字幕リストを取得
-            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id, proxies=proxies)
             
             # 利用可能な字幕言語を記録
             logger.info(f"Available transcript languages for {video_id}:")
@@ -160,10 +320,41 @@ def get_transcript_with_api(video_id):
                 logger.info(f"Selected transcript: {selected_transcript.language}")
                 
                 # 字幕を取得
-                transcript_data = selected_transcript.fetch()
-                
-                # 直接transcript_dataを返す（後で整形）
-                return transcript_data, selected_transcript.language_code
+                try:
+                    transcript_data = selected_transcript.fetch()
+                    logger.info(f"Successfully fetched {len(transcript_data)} transcript entries")
+                    
+                    # 直接transcript_dataを返す（後で整形）
+                    return transcript_data, selected_transcript.language_code
+                except Exception as fetch_error:
+                    logger.error(f"Error fetching transcript data: {str(fetch_error)}")
+                    logger.error(f"Error type: {type(fetch_error).__name__}")
+                    
+                    # XMLパースエラーやコンテンツが空の場合
+                    if "xml" in str(fetch_error).lower() or "no element found" in str(fetch_error):
+                        logger.warning(f"Transcript data appears to be empty or corrupted for video {video_id}")
+                        # 他の言語を試してみる
+                        logger.info("Attempting alternative languages...")
+                        tried_languages = [selected_transcript.language_code]
+                        
+                        for transcript in transcript_list:
+                            if transcript.language_code not in tried_languages:
+                                try:
+                                    logger.info(f"Trying alternative language: {transcript.language} ({transcript.language_code})")
+                                    alt_data = transcript.fetch()
+                                    if alt_data and len(alt_data) > 0:
+                                        logger.info(f"Successfully fetched transcript in {transcript.language}")
+                                        return alt_data, transcript.language_code
+                                    tried_languages.append(transcript.language_code)
+                                except Exception as alt_error:
+                                    logger.warning(f"Failed to fetch {transcript.language}: {str(alt_error)}")
+                                    tried_languages.append(transcript.language_code)
+                                    continue
+                        
+                        # すべての言語で失敗した場合
+                        return "字幕は利用できません。この動画の字幕データは現在アクセスできない状態です。", ""
+                    
+                    raise fetch_error
             else:
                 logger.warning(f"No suitable transcripts found for video {video_id}")
                 return "字幕は利用できません。適切な字幕が見つかりませんでした。", ""
@@ -173,6 +364,9 @@ def get_transcript_with_api(video_id):
             return "字幕は利用できません。この動画には字幕がありません。", ""
         except Exception as e:
             logger.error(f"Error getting transcript via API: {str(e)}")
+            # XMLパースエラーの場合は、エラーメッセージを返す
+            if "no element found" in str(e) or "xml" in str(e).lower():
+                return "字幕は利用できません。字幕データの取得中にエラーが発生しました。", ""
             raise
             
     except Exception as e:
@@ -246,8 +440,12 @@ def get_transcript_with_scraping(video_id):
                                     transcript_response = requests.get(base_url, headers=headers, proxies=proxies, timeout=10)
                                     transcript_response.raise_for_status()
                                     
-                                    # XMLを解析
-                                    transcript_soup = BeautifulSoup(transcript_response.text, 'xml')
+                                    # XMLを解析（lxml-xmlパーサーを使用）
+                                    try:
+                                        transcript_soup = BeautifulSoup(transcript_response.text, 'lxml-xml')
+                                    except:
+                                        # lxml-xmlが使えない場合はlxmlを使う
+                                        transcript_soup = BeautifulSoup(transcript_response.text, 'lxml')
                                     text_elements = transcript_soup.find_all('text')
                                     
                                     if text_elements:
