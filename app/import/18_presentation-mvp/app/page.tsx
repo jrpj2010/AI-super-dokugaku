@@ -6,9 +6,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
-import { PlusCircle, XCircle, Loader2, Wand2 } from "lucide-react"
+import { PlusCircle, XCircle, Loader2, Wand2, HelpCircle } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast" // shadcn/uiのtoastを想定
+import Link from "next/link"
 
 interface InfoSource {
   id: string
@@ -16,7 +17,7 @@ interface InfoSource {
   content: string
 }
 
-type GeminiModel = "gemini-1.5-pro-latest" | "gemini-1.5-flash-latest"
+type GeminiModel = "gemini-2.5-pro-preview-05-06" | "gemini-2.5-flash-preview-05-20"
 
 export default function HomePage() {
   const router = useRouter()
@@ -27,7 +28,7 @@ export default function HomePage() {
     { id: "c1", label: "例: 打ち合わせ議事録", content: "" },
   ])
   const [presentationTitle, setPresentationTitle] = useState("サンプルプレゼンテーション")
-  const [selectedModel, setSelectedModel] = useState<GeminiModel>("gemini-1.5-flash-latest")
+  const [selectedModel, setSelectedModel] = useState<GeminiModel>("gemini-2.5-flash-preview-05-20")
   const [isLoading, setIsLoading] = useState(false)
 
   const addInfoSource = () => {
@@ -87,11 +88,20 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-light-canvas p-4 sm:p-8 text-slate-800">
-      <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold font-noto-serif text-wine-red">高度情報入力型 プレゼンテーション生成</h1>
-        <p className="text-slate-600 mt-2">
-          顧客情報、コンテキスト、関連情報を入力し、AIモデルを選択して最適なプレゼンテーションを生成します。
-        </p>
+      <header className="mb-8">
+        <div className="text-center mb-4">
+          <h1 className="text-4xl font-bold font-noto-serif text-wine-red">高度情報入力型 プレゼンテーション生成</h1>
+          <p className="text-slate-600 mt-2">
+            顧客情報、コンテキスト、関連情報を入力し、AIモデルを選択して最適なプレゼンテーションを生成します。
+          </p>
+        </div>
+        <div className="flex justify-center items-center gap-4 text-sm">
+          <span className="text-slate-500">Version 1.0.0</span>
+          <Link href="/manual" className="text-wine-red hover:text-wine-red/80 underline flex items-center">
+            <HelpCircle size={16} className="mr-1" />
+            操作マニュアル
+          </Link>
+        </div>
       </header>
 
       <div className="space-y-6 max-w-4xl mx-auto">
@@ -120,8 +130,8 @@ export default function HomePage() {
               <SelectValue placeholder="モデルを選択してください" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="gemini-1.5-flash-latest">標準: Gemini 1.5 Flash (高速・バランス)</SelectItem>
-              <SelectItem value="gemini-1.5-pro-latest">高性能: Gemini 1.5 Pro (高品質・詳細)</SelectItem>
+              <SelectItem value="gemini-2.5-flash-preview-05-20">標準: Gemini 2.5 Flash Preview (高速・バランス)</SelectItem>
+              <SelectItem value="gemini-2.5-pro-preview-05-06">高性能: Gemini 2.5 Pro Preview (高品質・詳細)</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-xs text-slate-500 mt-1">

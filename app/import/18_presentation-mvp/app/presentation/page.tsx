@@ -8,8 +8,9 @@ import DetailSlideA from "@/components/presentation/detail-slide-a"
 import ThankYouSlide from "@/components/presentation/thankyou-slide"
 import { dummyCoverData, dummyAgendaData, dummyDetailDataA, dummyThankYouData } from "@/lib/dummy-data"
 import type { CoverData, AgendaData, DetailDataA, ThankYouData } from "@/lib/dummy-data" // 型をインポート
-import { ChevronLeft, ChevronRight, Printer, Download, AlertTriangle } from "lucide-react"
+import { ChevronLeft, ChevronRight, Printer, Download, AlertTriangle, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface PresentationData {
   coverData: CoverData
@@ -119,13 +120,26 @@ export default function PresentationPage() {
         </div>
       )}
       <div className="w-full max-w-5xl mb-4 flex justify-between items-center print:hidden">
-        <h1 className="text-2xl font-bold text-wine-red font-noto-serif">{presentationTitle}</h1>
         <div>
+          <h1 className="text-2xl font-bold text-wine-red font-noto-serif">{presentationTitle}</h1>
+          <p className="text-xs text-slate-500 mt-1">Version 1.0.0</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link href="/manual">
+            <Button
+              variant="outline"
+              size="icon"
+              className="text-wine-red border-wine-red/50 hover:bg-wine-red/5 hover:border-wine-red"
+              aria-label="マニュアル"
+            >
+              <HelpCircle size={20} />
+            </Button>
+          </Link>
           <Button
             variant="outline"
             size="icon"
             onClick={handlePrint}
-            className="mr-2 text-wine-red border-wine-red/50 hover:bg-wine-red/5 hover:border-wine-red"
+            className="text-wine-red border-wine-red/50 hover:bg-wine-red/5 hover:border-wine-red"
             aria-label="印刷"
           >
             <Printer size={20} />

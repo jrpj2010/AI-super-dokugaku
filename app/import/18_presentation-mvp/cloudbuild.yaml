@@ -1,0 +1,41 @@
+steps:
+  # Dockerイメージをビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/presentation-mvp', '.']
+  
+  # Dockerイメージをプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/presentation-mvp']
+  
+  # Cloud Runへデプロイ
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'presentation-mvp'
+      - '--image'
+      - 'asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/presentation-mvp'
+      - '--region'
+      - 'asia-northeast1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1Gi'
+      - '--timeout'
+      - '300s'
+      - '--max-instances'
+      - '10'
+      - '--concurrency'
+      - '100'
+      - '--cpu'
+      - '2'
+      - '--set-env-vars'
+      - 'GOOGLE_GENERATIVE_AI_API_KEY=$_GOOGLE_GENERATIVE_AI_API_KEY'
+
+images:
+  - 'asia-northeast1-docker.pkg.dev/gemini-20241115/cloud-run-source-deploy/presentation-mvp'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -19,6 +19,7 @@ from health import health_bp
 import yt_dlp
 import tempfile
 import io
+from xml.etree import ElementTree as ET
 
 # ロギングの設定
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -224,21 +225,51 @@ def get_transcript_with_yt_dlp(video_id):
                     response = requests.get(json3_url, timeout=10)
                     response.raise_for_status()
                     
-                    # JSON3形式の解析
-                    subtitle_data = response.json()
-                    
-                    # 字幕エントリを変換
+                    # コンテンツの形式を判定してパース
+                    content_type = response.headers.get('content-type', '')
                     transcript_data = []
-                    for event in subtitle_data.get('events', []):
-                        if 'segs' in event:
-                            # テキストを結合
-                            text = ''.join([seg.get('utf8', '') for seg in event['segs']])
-                            if text.strip():
-                                transcript_data.append({
-                                    'text': text.strip(),
-                                    'start': event.get('tStartMs', 0) / 1000.0,  # ミリ秒を秒に変換
-                                    'duration': event.get('dDurationMs', 0) / 1000.0
-                                })
+                    
+                    try:
+                        # まずJSONとして解析を試みる
+                        subtitle_data = response.json()
+                        
+                        # JSON3形式の解析
+                        for event in subtitle_data.get('events', []):
+                            if 'segs' in event:
+                                # テキストを結合
+                                text = ''.join([seg.get('utf8', '') for seg in event['segs']])
+                                if text.strip():
+                                    transcript_data.append({
+                                        'text': text.strip(),
+                                        'start': event.get('tStartMs', 0) / 1000.0,  # ミリ秒を秒に変換
+                                        'duration': event.get('dDurationMs', 0) / 1000.0
+                                    })
+                    except json.JSONDecodeError:
+                        # JSONでない場合はXMLとして解析
+                        logger.info("Response is not JSON, trying XML format")
+                        try:
+                            from xml.etree import ElementTree as ET
+                            root = ET.fromstring(response.text)
+                            
+                            for text_elem in root.findall('.//text'):
+                                text = text_elem.text
+                                if text and text.strip():
+                                    start = float(text_elem.get('start', 0))
+                                    duration = float(text_elem.get('dur', 0))
+                                    transcript_data.append({
+                                        'text': text.strip(),
+                                        'start': start,
+                                        'duration': duration
+                                    })
+                        except ET.ParseError as xml_error:
+                            logger.error(f"Failed to parse as XML: {str(xml_error)}")
+                            # 最後の手段として、テキストの最初の部分を確認
+                            if response.text.strip() == '':
+                                logger.warning("Empty response from subtitle URL")
+                                return "字幕は利用できません。字幕データが空です。", ""
+                            else:
+                                logger.error(f"Unknown subtitle format. First 100 chars: {response.text[:100]}")
+                                return "字幕は利用できません。未知の字幕形式です。", ""
                     
                     if not transcript_data:
                         logger.warning("No transcript data extracted from subtitle")
