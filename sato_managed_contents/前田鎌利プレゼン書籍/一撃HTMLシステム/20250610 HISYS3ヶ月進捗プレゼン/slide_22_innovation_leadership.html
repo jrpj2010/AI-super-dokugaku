@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イノベーションリーダーシップ</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .leadership-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 700px;
+            margin-top: 40px;
+        }
+        .innovation-pillars {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+        }
+        .market-impact {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border: 3px solid #d90000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .pillars-title {
+            color: #005bac;
+            background: white;
+            border: 2px solid #005bac;
+        }
+        .impact-title {
+            color: #d90000;
+            background: white;
+            border: 2px solid #d90000;
+        }
+        .pillar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            height: 480px;
+        }
+        .pillar-item {
+            background: white;
+            border: 2px solid #005bac;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 5px 15px rgba(0,91,172,0.1);
+        }
+        .pillar-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .pillar-content {
+            flex: 1;
+        }
+        .pillar-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 10px;
+        }
+        .pillar-detail {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .impact-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            height: 480px;
+        }
+        .metric-card {
+            background: white;
+            border: 2px solid #d90000;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(217,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 64px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 15px;
+        }
+        .metric-label {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .metric-description {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.3;
+        }
+        .leadership-statement {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            padding: 30px 60px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,91,172,0.3);
+            border: 3px solid #ffff00;
+        }
+        .statement-text {
+            font-size: 32px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">イノベーションリーダーシップ</div>
+            <div class="subtitle">〜業界の先駆者としての使命〜</div>
+        </div>
+        
+        <div class="leadership-container">
+            <div class="innovation-pillars">
+                <div class="section-title pillars-title">イノベーション3つの柱</div>
+                <div class="pillar-list">
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🚀</div>
+                        <div class="pillar-content">
+                            <div class="pillar-name">技術的先進性</div>
+                            <div class="pillar-detail">最新AI技術をいち早く導入し、競合より常に2歩先を行く技術リーダーシップ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🎯</div>
+                        <div class="pillar-content">
+                            <div class="pillar-name">実用的実装力</div>
+                            <div class="pillar-detail">理論だけでなく、実際の業務で使えるソリューションを短期間で実現する実行力</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pillar-item">
+                        <div class="pillar-icon">📈</div>
+                        <div class="pillar-content">
+                            <div class="pillar-name">持続的進化</div>
+                            <div class="pillar-detail">一度導入して終わりではなく、継続的な改善と進化で価値を最大化するアプローチ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="market-impact">
+                <div class="section-title impact-title">市場へのインパクト</div>
+                <div class="impact-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">2年</div>
+                        <div class="metric-label">先行アドバンテージ</div>
+                        <div class="metric-description">競合他社より2年先を行く技術導入</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value">10倍</div>
+                        <div class="metric-label">品質向上率</div>
+                        <div class="metric-description">従来比で10倍の品質改善を実現</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value">3分の1</div>
+                        <div class="metric-label">コスト削減</div>
+                        <div class="metric-description">運用コストを3分の1に圧縮</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value">無限</div>
+                        <div class="metric-label">成長ポテンシャル</div>
+                        <div class="metric-description">持続的イノベーションで無限成長</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="leadership-statement">
+            <div class="statement-text">
+                日立システムズは既に業界のイノベーションリーダーです！
+            </div>
+        </div>
+    </div>
+</body>
+</html>

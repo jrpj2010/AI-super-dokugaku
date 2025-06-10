@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音声フィードバック戦略</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e2a5e 0%, #3d5a80 50%, #6b9bd1 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FFA500;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 165, 0, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .strategy-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .cost-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .cost-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+        
+        .expensive {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid rgba(255, 100, 100, 0.4);
+        }
+        
+        .affordable {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid rgba(100, 255, 100, 0.4);
+        }
+        
+        .advantage-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 0.5rem 0;
+        }
+        
+        .advantage-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            background: rgba(255, 165, 0, 0.3);
+        }
+        
+        .decoration-wave {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            width: 120px;
+            height: 80px;
+            background: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.1) 0px,
+                rgba(255, 255, 255, 0.1) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            border-radius: 40px;
+        }
+        
+        .decoration-sound {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgba(255, 165, 0, 0.3);
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .decoration-sound::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60%;
+            height: 60%;
+            border: 2px solid rgba(255, 165, 0, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-wave"></div>
+        <div class="decoration-sound"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-6 fade-in-up">
+                音声フィードバック<span class="highlight">戦略</span>
+            </h1>
+            <h2 class="text-2xl text-gray-100 mb-8 fade-in-up">
+                コスト効率と実用性の最適化
+            </h2>
+            
+            <div class="strategy-box fade-in-up-delay-1 mb-6">
+                <h3 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-dollar-sign mr-3 text-green-300"></i>
+                    劇的なコスト削減効果
+                </h3>
+                
+                <div class="cost-comparison">
+                    <div class="cost-item expensive fade-in-up-delay-2">
+                        <h4 class="text-xl text-white font-bold mb-2">動画処理</h4>
+                        <div class="text-3xl text-red-300 font-bold mb-2">高コスト</div>
+                        <div class="text-gray-200 text-sm">
+                            • 処理時間：長時間<br/>
+                            • インフラ負荷：重い<br/>
+                            • ネットワーク：不安定
+                        </div>
+                    </div>
+                    
+                    <div class="text-4xl text-white">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="cost-item affordable fade-in-up-delay-3">
+                        <h4 class="text-xl text-white font-bold mb-2">音声処理</h4>
+                        <div class="text-3xl text-green-300 font-bold mb-2">超低コスト</div>
+                        <div class="text-gray-200 text-sm">
+                            • 処理時間：高速<br/>
+                            • インフラ負荷：軽い<br/>
+                            • ネットワーク：安定
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="strategy-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-bullseye mr-3 text-blue-300"></i>
+                        市場セグメント最適化
+                    </h3>
+                    <div class="space-y-3 text-left">
+                        <div>
+                            <div class="text-orange-300 font-bold">法人営業</div>
+                            <div class="text-gray-200 text-sm">商談分析・提案改善・クロージング強化</div>
+                        </div>
+                        <div>
+                            <div class="text-orange-300 font-bold">インサイドセールス</div>
+                            <div class="text-gray-200 text-sm">電話対応・アポ獲得・フォローアップ</div>
+                        </div>
+                        <div>
+                            <div class="text-orange-300 font-bold">店舗接客（簡易版）</div>
+                            <div class="text-gray-200 text-sm">音声波形による感情分析</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="strategy-box fade-in-up-delay-3">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-cogs mr-3 text-purple-300"></i>
+                        技術的優位性
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="advantage-item">
+                            <div class="advantage-icon">
+                                <i class="fas fa-clock text-orange-300"></i>
+                            </div>
+                            <div class="text-left flex-1">
+                                <div class="text-white font-bold">リアルタイム処理</div>
+                                <div class="text-gray-200 text-sm">1-2時間の音声を瞬時に分析</div>
+                            </div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">
+                                <i class="fas fa-wave-square text-orange-300"></i>
+                            </div>
+                            <div class="text-left flex-1">
+                                <div class="text-white font-bold">音声波形解析</div>
+                                <div class="text-gray-200 text-sm">感情、ペース、間の分析</div>
+                            </div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">
+                                <i class="fas fa-database text-orange-300"></i>
+                            </div>
+                            <div class="text-left flex-1">
+                                <div class="text-white font-bold">CRM連携</div>
+                                <div class="text-gray-200 text-sm">要素分解・自動入力</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="strategy-box fade-in-up-delay-2 mt-6">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-lightbulb mr-3 text-yellow-300"></i>
+                    独自機能による差別化
+                </h3>
+                <p class="text-gray-200 text-lg leading-relaxed">
+                    「5分ぶわーっと喋って、該当時間にインデックス項目をタグ付けし、
+                    一言メモに分解してデータベース化」<br/>
+                    <span class="text-orange-300 font-bold">→ 10年の経験値を活かした唯一無二のUI設計</span>
+                </p>
+            </div>
+            
+            <div class="mt-8 text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-target mr-3 text-orange-400"></i>
+                実用性重視による<span class="highlight">市場浸透</span>戦略
+            </div>
+        </div>
+    </div>
+</body>
+</html>

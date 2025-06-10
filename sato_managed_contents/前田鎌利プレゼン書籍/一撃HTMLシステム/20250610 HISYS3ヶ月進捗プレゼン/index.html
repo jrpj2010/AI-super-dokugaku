@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日立システムズ様 AI活用3ヶ月進捗報告プレゼンテーション</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .header h1 {
+    font-size: 48px;
+    color: #fdcb6e;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  .header h2 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 15px;
+  }
+  
+  .header p {
+    font-size: 18px;
+    color: #ddd;
+    font-weight: normal;
+  }
+  
+  .slides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .slide-card {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .slide-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+  
+  .slide-number {
+    font-size: 24px;
+    color: #fdcb6e;
+    margin-bottom: 10px;
+  }
+  
+  .slide-title {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  
+  .slide-description {
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
+    line-height: 1.4;
+  }
+  
+  .slide-category {
+    display: inline-block;
+    background-color: #005bac;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .navigation {
+    text-align: center;
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .nav-button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 12px 24px;
+    background-color: #005bac;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #0066cc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #ddd;
+    font-size: 14px;
+    font-weight: normal;
+  }
+</style>
+<script>
+  function openSlide(slideFile) {
+    window.open(slideFile, '_blank');
+  }
+  
+  function playSlideshow() {
+    let currentSlide = 1;
+    const totalSlides = 30;
+    
+    function showNextSlide() {
+      if (currentSlide <= totalSlides) {
+        const slideFile = 'slide_' + String(currentSlide).padStart(2, '0') + '_' + getSlideFileName(currentSlide) + '.html';
+        window.open(slideFile, '_blank');
+        currentSlide++;
+        setTimeout(showNextSlide, 3000); // 3秒間隔で次のスライドを表示
+      }
+    }
+    
+    showNextSlide();
+  }
+  
+  function getSlideFileName(slideNumber) {
+    const fileNames = [
+      'title', 'ichizan_konryuu', 'agenda', 'three_months_before', 'transformation_number',
+      'achievement_1', 'achievement_2', 'achievement_3', 'customer_voice', 'challenges_faced',
+      'lessons_learned', 'future_vision', 'roadmap', 'new_technology', 'roi_analysis',
+      'competitive_advantage', 'management_message', 'next_actions', 'team_enhancement', 'risk_management',
+      'success_confidence', 'innovation_leadership', 'business_transformation', 'future_vision_2026', 'investment_returns',
+      'strategic_partnerships', 'sustainability_innovation', 'global_expansion', 'call_to_action', 'thank_you'
+    ];
+    return fileNames[slideNumber - 1] || 'slide' + slideNumber;
+  }
+</script>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>AI活用3ヶ月進捗報告</h1>
+    <h2>～共に歩む成長の軌跡～</h2>
+    <p>日立システムズ様向けプレゼンテーション</p>
+    <p>2025年6月10日 | TANREN株式会社</p>
+  </div>
+  
+  <div class="navigation">
+    <a href="#" class="nav-button" onclick="playSlideshow()">📺 スライドショー再生</a>
+    <a href="#" class="nav-button" onclick="window.print()">🖨️ 印刷版</a>
+    <a href="slide_01_title.html" class="nav-button" target="_blank">🚀 プレゼン開始</a>
+  </div>
+  
+  <div class="slides-grid">
+    <!-- Part 1: イントロダクション -->
+    <div class="slide-card" onclick="openSlide('slide_01_title.html')">
+      <div class="slide-category">イントロ</div>
+      <div class="slide-number">01</div>
+      <div class="slide-title">AI活用3ヶ月進捗報告</div>
+      <div class="slide-description">タイトルスライド - 共に歩む成長の軌跡をテーマとした開始スライド</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_02_ichizan_konryuu.html')">
+      <div class="slide-category">マインド</div>
+      <div class="slide-number">02</div>
+      <div class="slide-title">一座建立</div>
+      <div class="slide-description">茶道の精神に基づく、共に成功を目指す姿勢を示す</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_03_agenda.html')">
+      <div class="slide-category">構成</div>
+      <div class="slide-number">03</div>
+      <div class="slide-title">本日のアジェンダ</div>
+      <div class="slide-description">3つの重要ポイント：成果・課題・次への飛躍</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_04_three_months_before.html')">
+      <div class="slide-category">Before</div>
+      <div class="slide-number">04</div>
+      <div class="slide-title">3ヶ月前の状況</div>
+      <div class="slide-description">AI導入の壁、未経験者の存在、予算課題等の出発点</div>
+    </div>
+    
+    <!-- Part 2: 成果報告 -->
+    <div class="slide-card" onclick="openSlide('slide_05_transformation_number.html')">
+      <div class="slide-category">成果</div>
+      <div class="slide-number">05</div>
+      <div class="slide-title">劇的な変化 - 3倍向上</div>
+      <div class="slide-description">AI活用レベルが3倍に向上した具体的数値</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_06_achievement_1.html')">
+      <div class="slide-category">成果</div>
+      <div class="slide-number">06</div>
+      <div class="slide-title">成果① 高性能AI環境の実現</div>
+      <div class="slide-description">TANREN CHAT導入90%達成とグラフによる説明</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_07_achievement_2.html')">
+      <div class="slide-category">成果</div>
+      <div class="slide-number">07</div>
+      <div class="slide-title">成果② 全社的なAIスキル革命</div>
+      <div class="slide-description">89名の研修完了と階層別研修体系の構築</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_08_achievement_3.html')">
+      <div class="slide-category">成果</div>
+      <div class="slide-number">08</div>
+      <div class="slide-title">成果③ クリエイティブ業務の革新</div>
+      <div class="slide-description">Adobe Firefly導入による制作効率5倍改善</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_09_customer_voice.html')">
+      <div class="slide-category">証言</div>
+      <div class="slide-number">09</div>
+      <div class="slide-title">社員の声</div>
+      <div class="slide-description">4部署からの具体的な成果報告と満足度</div>
+    </div>
+    
+    <!-- Part 3: 課題と学び -->
+    <div class="slide-card" onclick="openSlide('slide_10_challenges_faced.html')">
+      <div class="slide-category">課題</div>
+      <div class="slide-number">10</div>
+      <div class="slide-title">直面した課題と学び</div>
+      <div class="slide-description">4つの主要課題とそれぞれから得た重要な学び</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_11_lessons_learned.html')">
+      <div class="slide-category">知見</div>
+      <div class="slide-number">11</div>
+      <div class="slide-title">獲得した重要な知見</div>
+      <div class="slide-description">段階的導入・人材育成・効果測定の3つの重要知見</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_12_future_vision.html')">
+      <div class="slide-category">未来</div>
+      <div class="slide-number">12</div>
+      <div class="slide-title">次の3ヶ月への飛躍</div>
+      <div class="slide-description">4つのゴールによる次段階への展望</div>
+    </div>
+    
+    <!-- Part 4: 戦略と計画 -->
+    <div class="slide-card" onclick="openSlide('slide_13_roadmap.html')">
+      <div class="slide-category">戦略</div>
+      <div class="slide-number">13</div>
+      <div class="slide-title">今後のロードマップ</div>
+      <div class="slide-description">3段階のステップアップ計画詳細</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_14_new_technology.html')">
+      <div class="slide-category">技術</div>
+      <div class="slide-number">14</div>
+      <div class="slide-title">次世代AI技術への挑戦</div>
+      <div class="slide-description">Gemini、Claude 3.5、OpenAI o1の導入計画</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_15_roi_analysis.html')">
+      <div class="slide-category">分析</div>
+      <div class="slide-number">15</div>
+      <div class="slide-title">ROI分析結果</div>
+      <div class="slide-description">340%の投資回収率達成の詳細分析</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_16_competitive_advantage.html')">
+      <div class="slide-category">競合</div>
+      <div class="slide-number">16</div>
+      <div class="slide-title">競合他社との差別化</div>
+      <div class="slide-description">競合比較による決定的優位性の説明</div>
+    </div>
+    
+    <!-- Part 5: 経営層向けメッセージ -->
+    <div class="slide-card" onclick="openSlide('slide_17_management_message.html')">
+      <div class="slide-category">経営</div>
+      <div class="slide-number">17</div>
+      <div class="slide-title">経営層へのメッセージ</div>
+      <div class="slide-description">AI革命の最前線に立つ重要性とリーダーシップ</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_18_next_actions.html')">
+      <div class="slide-category">行動</div>
+      <div class="slide-number">18</div>
+      <div class="slide-title">具体的アクションプラン</div>
+      <div class="slide-description">3段階の具体的実行計画とタイムライン</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_19_team_enhancement.html')">
+      <div class="slide-category">組織</div>
+      <div class="slide-number">19</div>
+      <div class="slide-title">チーム体制強化戦略</div>
+      <div class="slide-description">新組織体制と専門チーム設立計画</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_20_risk_management.html')">
+      <div class="slide-category">リスク</div>
+      <div class="slide-number">20</div>
+      <div class="slide-title">リスク管理システム</div>
+      <div class="slide-description">4つのリスク分野と対応策詳細</div>
+    </div>
+    
+    <!-- Part 6: ビジョンと確信 -->
+    <div class="slide-card" onclick="openSlide('slide_21_success_confidence.html')">
+      <div class="slide-category">確信</div>
+      <div class="slide-number">21</div>
+      <div class="slide-title">成功への確信</div>
+      <div class="slide-description">既に実現した成果に基づく未来への確信</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_22_innovation_leadership.html')">
+      <div class="slide-category">革新</div>
+      <div class="slide-number">22</div>
+      <div class="slide-title">イノベーションリーダーシップ</div>
+      <div class="slide-description">3つの柱による業界リーダーシップ戦略</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_23_business_transformation.html')">
+      <div class="slide-category">変革</div>
+      <div class="slide-number">23</div>
+      <div class="slide-title">ビジネス変革の実現</div>
+      <div class="slide-description">大幅なBefore/After比較による変革実証</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_24_future_vision_2026.html')">
+      <div class="slide-category">未来</div>
+      <div class="slide-number">24</div>
+      <div class="slide-title">2026年への未来ビジョン</div>
+      <div class="slide-description">3段階の成長展望と長期戦略</div>
+    </div>
+    
+    <!-- Part 7: 投資と成長 -->
+    <div class="slide-card" onclick="openSlide('slide_25_investment_returns.html')">
+      <div class="slide-category">投資</div>
+      <div class="slide-number">25</div>
+      <div class="slide-title">投資リターンの継続拡大</div>
+      <div class="slide-description">ROI成長トレンドと将来予測</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_26_strategic_partnerships.html')">
+      <div class="slide-category">連携</div>
+      <div class="slide-number">26</div>
+      <div class="slide-title">戦略的パートナーシップ</div>
+      <div class="slide-description">8社との戦略連携による相乗効果</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_27_sustainability_innovation.html')">
+      <div class="slide-category">持続性</div>
+      <div class="slide-number">27</div>
+      <div class="slide-title">持続可能性とイノベーション</div>
+      <div class="slide-description">ESG経営とAI活用の融合戦略</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_28_global_expansion.html')">
+      <div class="slide-category">拡大</div>
+      <div class="slide-number">28</div>
+      <div class="slide-title">グローバル展開戦略</div>
+      <div class="slide-description">4地域での展開計画と成長戦略</div>
+    </div>
+    
+    <!-- Part 8: クロージング -->
+    <div class="slide-card" onclick="openSlide('slide_29_call_to_action.html')">
+      <div class="slide-category">行動喚起</div>
+      <div class="slide-number">29</div>
+      <div class="slide-title">今こそ行動を</div>
+      <div class="slide-description">緊急性を伝える強力なコール・トゥ・アクション</div>
+    </div>
+    
+    <div class="slide-card" onclick="openSlide('slide_30_thank_you.html')">
+      <div class="slide-category">感謝</div>
+      <div class="slide-number">30</div>
+      <div class="slide-title">感謝とお礼</div>
+      <div class="slide-description">3ヶ月の成果まとめと今後への期待</div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>© 2025 TANREN株式会社 | 前田鎌利式プレゼンテーション手法を活用</p>
+    <p>一座建立の精神で、共に未来を築いてまいります</p>
+  </div>
+</div>
+
+</body>
+</html>

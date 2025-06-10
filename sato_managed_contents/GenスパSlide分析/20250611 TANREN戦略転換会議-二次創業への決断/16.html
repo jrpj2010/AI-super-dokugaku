@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バイアウト戦略</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FFD700;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 215, 0, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .buyout-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .timeline-item::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFD700;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .year-marker {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .valuation-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        .target-acquirers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .acquirer-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .exit-value {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 3px solid rgba(255, 215, 0, 0.4);
+        }
+        
+        .decoration-handshake {
+            position: absolute;
+            top: 60px;
+            right: 80px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            transform: rotate(15deg);
+        }
+        
+        .decoration-growth {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            width: 120px;
+            height: 120px;
+            background: 
+                linear-gradient(45deg, rgba(255,215,0,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,215,0,0.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,215,0,0.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,215,0,0.1) 75%);
+            background-size: 20px 20px;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-handshake">
+            <i class="fas fa-handshake"></i>
+        </div>
+        <div class="decoration-growth"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-6 fade-in-up">
+                <span class="highlight">バイアウト</span>戦略
+            </h1>
+            <h2 class="text-2xl text-gray-100 mb-8 fade-in-up">
+                5年以内の戦略的Exit実現
+            </h2>
+            
+            <div class="buyout-box fade-in-up-delay-1 mb-6">
+                <h3 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-calendar-alt mr-3 text-yellow-300"></i>
+                    5年間ロードマップ
+                </h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item fade-in-up-delay-2">
+                        <div class="year-marker">Y1</div>
+                        <h4 class="text-white font-bold mb-2">基盤構築</h4>
+                        <div class="text-gray-200 text-sm">
+                            プロダクト開発<br/>
+                            初期顧客獲得
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-2">
+                        <div class="year-marker">Y2</div>
+                        <h4 class="text-white font-bold mb-2">市場参入</h4>
+                        <div class="text-gray-200 text-sm">
+                            グローバル展開<br/>
+                            収益モデル確立
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-2">
+                        <div class="year-marker">Y3</div>
+                        <h4 class="text-white font-bold mb-2">成長加速</h4>
+                        <div class="text-gray-200 text-sm">
+                            スケール実現<br/>
+                            ARR 500万達成
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-3">
+                        <div class="year-marker">Y4</div>
+                        <h4 class="text-white font-bold mb-2">市場支配</h4>
+                        <div class="text-gray-200 text-sm">
+                            業界リーダー<br/>
+                            ARR 1000万突破
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-3">
+                        <div class="year-marker">Y5</div>
+                        <h4 class="text-white font-bold mb-2">Exit実現</h4>
+                        <div class="text-gray-200 text-sm">
+                            戦略的売却<br/>
+                            価値最大化
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exit-value fade-in-up-delay-2">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-yen-sign mr-3 text-yellow-300"></i>
+                    目標Exit価値
+                </h3>
+                <div class="text-6xl text-yellow-300 font-bold mb-2">5-10億円</div>
+                <div class="text-white text-lg">
+                    ARR 1000万 × 倍率50-100倍
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="buyout-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-bullseye mr-3 text-green-300"></i>
+                        想定買収企業
+                    </h3>
+                    <div class="target-acquirers">
+                        <div class="acquirer-item">
+                            <i class="fas fa-building text-2xl text-blue-300 mb-2"></i>
+                            <div class="text-white text-sm font-bold">大手IT企業</div>
+                        </div>
+                        
+                        <div class="acquirer-item">
+                            <i class="fas fa-graduation-cap text-2xl text-green-300 mb-2"></i>
+                            <div class="text-white text-sm font-bold">教育企業</div>
+                        </div>
+                        
+                        <div class="acquirer-item">
+                            <i class="fas fa-chart-line text-2xl text-purple-300 mb-2"></i>
+                            <div class="text-white text-sm font-bold">HR Tech</div>
+                        </div>
+                        
+                        <div class="acquirer-item">
+                            <i class="fas fa-globe text-2xl text-orange-300 mb-2"></i>
+                            <div class="text-white text-sm font-bold">外資系</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buyout-box fade-in-up-delay-3">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-star mr-3 text-purple-300"></i>
+                        バリュエーション要因
+                    </h3>
+                    <div class="space-y-3 text-left">
+                        <div>
+                            <div class="text-yellow-300 font-bold">技術的優位性</div>
+                            <div class="text-gray-200 text-sm">マルチモーダルAI統合プラットフォーム</div>
+                        </div>
+                        <div>
+                            <div class="text-yellow-300 font-bold">グローバルリーチ</div>
+                            <div class="text-gray-200 text-sm">非言語対応による世界展開</div>
+                        </div>
+                        <div>
+                            <div class="text-yellow-300 font-bold">収益性</div>
+                            <div class="text-gray-200 text-sm">高マージン・スケーラブルモデル</div>
+                        </div>
+                        <div>
+                            <div class="text-yellow-300 font-bold">ブランド価値</div>
+                            <div class="text-gray-200 text-sm">日本品質×AI技術の希少性</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-rocket mr-3 text-yellow-400"></i>
+                戦略的価値創造による<span class="highlight">成功Exit</span>実現
+            </div>
+        </div>
+    </div>
+</body>
+</html>

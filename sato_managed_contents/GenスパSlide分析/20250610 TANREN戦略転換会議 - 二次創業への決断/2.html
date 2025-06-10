@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TANREN戦略会議 - 課題分析</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .challenge-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border-left: 4px solid #FF6B6B;
+      transition: all 0.3s ease;
+    }
+
+    .challenge-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-container {
+      background: rgba(255, 107, 107, 0.2);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .danger-quote {
+      border-left: 4px solid #FF6B6B;
+      background: rgba(255, 107, 107, 0.1);
+      padding: 12px 20px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .emphasis {
+      color: #FF6B6B;
+      font-weight: 700;
+    }
+
+    .corner-shape {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 107, 107, 0.08);
+      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-12">
+    <div class="corner-shape"></div>
+
+    <h1 class="title text-4xl mb-6">
+      現状の<span class="emphasis">深刻な課題</span>と危機感
+    </h1>
+
+    <p class="text-xl mb-8">我々が直面する3つの生存危機</p>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <!-- Challenge 1 -->
+      <div class="challenge-card p-4 flex items-start">
+        <div class="icon-container mr-4 flex-shrink-0">
+          <i class="fas fa-user-clock text-2xl text-yellow-300"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">初心者対応の限界と経営資源の枯渇</h3>
+          <p class="opacity-80 mb-2">
+            「初心者を相手にするとそうなるのよ。ド素人集団は俺の言ってることなすこと全てが難しいになっちゃう。本当にさ、それをずっとやってくると結構な経営危機にまた落ちるのよね。」</p>
+          <div class="flex items-center">
+            <div class="h-2 bg-red-500 rounded-full w-full">
+              <div class="h-2 bg-gradient-to-r from-red-300 to-red-500 rounded-full" style="width: 95%"></div>
+            </div>
+            <span class="ml-2 text-sm opacity-80">リソース使用率: 95%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge 2 -->
+      <div class="challenge-card p-4 flex items-start">
+        <div class="icon-container mr-4 flex-shrink-0">
+          <i class="fas fa-robot text-2xl text-yellow-300"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">AGIによる内製化・模倣リスク</h3>
+          <p class="opacity-80 mb-2">
+            「多少かじったことのある人だったら1発で『コマコミタ年。別にそんな難しくないっすよ』って作れちゃいますよ。半年経ったらおしまい。気づいたらもう裏側に似たようなサービスが立ち上がってました。」</p>
+          <div class="flex items-center">
+            <i class="fas fa-exclamation-triangle text-yellow-300 mr-2"></i>
+            <span class="text-sm opacity-80">推定脅威レベル: 高</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge 3 -->
+      <div class="challenge-card p-4 flex items-start">
+        <div class="icon-container mr-4 flex-shrink-0">
+          <i class="fas fa-comments-dollar text-2xl text-yellow-300"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">汎用AIとの競合と価格圧力</h3>
+          <p class="opacity-80 mb-2">「ChatGPTと同じ金額払うんだから、ChatGPTにある機能全部入れてよって話になっちゃうじゃん。すごく趣旨が伝わってなくなってくるわけよね。」</p>
+          <div class="flex items-center">
+            <div class="flex items-center mr-4">
+              <div class="h-1 w-3 bg-red-500 rounded-full mr-1"></div>
+              <span class="text-xs opacity-80">TANREN</span>
+            </div>
+            <div class="flex items-center">
+              <div class="h-1 w-12 bg-blue-500 rounded-full mr-1"></div>
+              <span class="text-xs opacity-80">汎用AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="danger-quote mt-2 text-lg">
+      「このままでは<span class="emphasis">5年以内に淘汰される</span>。我々の独自価値が希薄化し、ユーザーからの要求と現実のギャップは拡大する一方だ」
+    </div>
+  </div>
+</body>
+
+</html>

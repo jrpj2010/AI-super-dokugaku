@@ -1,0 +1,5 @@
+{
+  "name": "YouTube Subtitle Manager",
+  "description": "An application to search YouTube videos and manage their subtitles.",
+  "requestFramePermissions": []
+}

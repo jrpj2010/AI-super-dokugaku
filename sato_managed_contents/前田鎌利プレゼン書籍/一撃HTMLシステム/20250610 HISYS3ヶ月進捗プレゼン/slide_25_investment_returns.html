@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資リターンの継続的拡大</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .returns-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            height: 700px;
+            margin-top: 40px;
+        }
+        .growth-chart {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+            position: relative;
+        }
+        .chart-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005bac;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chart-area {
+            height: 480px;
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            border: 2px solid #005bac;
+            overflow: hidden;
+        }
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            height: 100%;
+            padding: 20px;
+            gap: 10px;
+        }
+        .chart-bar {
+            background: linear-gradient(to top, #005bac, #0066cc);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+            min-width: 80px;
+            color: white;
+            font-weight: bold;
+        }
+        .bar-q1 { height: 25%; }
+        .bar-q2 { height: 45%; }
+        .bar-q3 { height: 70%; }
+        .bar-current { height: 85%; background: linear-gradient(to top, #d90000, #ff1a1a); }
+        .bar-future1 { height: 95%; background: linear-gradient(to top, #ff8800, #ffaa00); }
+        .bar-future2 { height: 100%; background: linear-gradient(to top, #00aa00, #00cc00); }
+        .bar-value {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -40px;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .returns-summary {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border: 3px solid #d90000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .summary-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d90000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .summary-item {
+            background: white;
+            border: 2px solid #d90000;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        .summary-period {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .summary-roi {
+            font-size: 48px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 10px;
+        }
+        .summary-description {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .cumulative-impact {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            padding: 30px 60px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,91,172,0.3);
+        }
+        .impact-text {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .highlight-number {
+            color: #ffff00;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">投資リターンの継続的拡大</div>
+            <div class="subtitle">〜加速する収益性と持続的成長〜</div>
+        </div>
+        
+        <div class="returns-container">
+            <div class="growth-chart">
+                <div class="chart-title">ROI成長トレンド（四半期別）</div>
+                <div class="chart-area">
+                    <div class="chart-bars">
+                        <div class="chart-bar bar-q1">
+                            <div class="bar-value">120%</div>
+                            <div class="bar-label">2024 Q4<br>導入開始</div>
+                        </div>
+                        <div class="chart-bar bar-q2">
+                            <div class="bar-value">200%</div>
+                            <div class="bar-label">2025 Q1<br>基盤構築</div>
+                        </div>
+                        <div class="chart-bar bar-q3">
+                            <div class="bar-value">280%</div>
+                            <div class="bar-label">2025 Q2<br>本格稼働</div>
+                        </div>
+                        <div class="chart-bar bar-current">
+                            <div class="bar-value">340%</div>
+                            <div class="bar-label">2025 Q3<br>現在</div>
+                        </div>
+                        <div class="chart-bar bar-future1">
+                            <div class="bar-value">450%</div>
+                            <div class="bar-label">2025 Q4<br>予測</div>
+                        </div>
+                        <div class="chart-bar bar-future2">
+                            <div class="bar-value">600%</div>
+                            <div class="bar-label">2026 Q1<br>目標</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="returns-summary">
+                <div class="summary-title">累積投資効果</div>
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <div class="summary-period">3ヶ月累積</div>
+                        <div class="summary-roi">1,280%</div>
+                        <div class="summary-description">初期投資の<br>12.8倍を回収済み</div>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <div class="summary-period">6ヶ月予測</div>
+                        <div class="summary-roi">2,100%</div>
+                        <div class="summary-description">21倍のリターンを<br>確実に見込む</div>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <div class="summary-period">12ヶ月目標</div>
+                        <div class="summary-roi">4,500%</div>
+                        <div class="summary-description">45倍の投資効果で<br>業界記録を樹立</div>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <div class="summary-period">年間削減効果</div>
+                        <div class="summary-roi">3.2億円</div>
+                        <div class="summary-description">コスト削減による<br>直接的な利益創出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cumulative-impact">
+            <div class="impact-text">
+                累積投資効果 <span class="highlight-number">21億円</span> を2年以内に達成見込み
+            </div>
+        </div>
+    </div>
+</body>
+</html>

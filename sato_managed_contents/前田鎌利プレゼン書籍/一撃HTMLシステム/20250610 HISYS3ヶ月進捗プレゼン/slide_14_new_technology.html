@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次世代AI技術への挑戦</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            height: 650px;
+        }
+        .tech-card {
+            background: white;
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .tech-card.featured {
+            border-color: #d90000;
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .tech-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .tech-card.featured .tech-icon {
+            background: linear-gradient(135deg, #d90000, #ff1a1a);
+        }
+        .tech-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .tech-card.featured .tech-name {
+            color: #d90000;
+        }
+        .tech-description {
+            font-size: 24px;
+            line-height: 1.4;
+            color: #333;
+            margin-bottom: 30px;
+            flex: 1;
+        }
+        .tech-impact {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #005bac;
+            font-size: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .tech-card.featured .tech-impact {
+            border-left-color: #d90000;
+            background: #fff5f5;
+        }
+        .impact-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d90000;
+        }
+        .coming-soon {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            transform: rotate(15deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">次世代AI技術への挑戦</div>
+            <div class="subtitle">〜最先端技術で更なる高みへ〜</div>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">G</div>
+                <div class="tech-name">Google Gemini</div>
+                <div class="tech-description">
+                    Googleの最新マルチモーダルAI<br>
+                    画像・音声・テキストを<br>
+                    統合処理
+                </div>
+                <div class="tech-impact">
+                    業務効率<br>
+                    <span class="impact-number">250%</span>向上予測
+                </div>
+                <div class="coming-soon">7月導入予定</div>
+            </div>
+            
+            <div class="tech-card featured">
+                <div class="tech-icon">C</div>
+                <div class="tech-name">Claude 3.5 Sonnet</div>
+                <div class="tech-description">
+                    Anthropicの最高峰AI<br>
+                    論理的思考と<br>
+                    創造性を両立
+                </div>
+                <div class="tech-impact">
+                    品質向上<br>
+                    <span class="impact-number">300%</span>実現見込み
+                </div>
+                <div class="coming-soon">6月導入予定</div>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">O</div>
+                <div class="tech-name">OpenAI o1</div>
+                <div class="tech-description">
+                    推論特化型AI<br>
+                    複雑な問題解決に<br>
+                    特化した性能
+                </div>
+                <div class="tech-impact">
+                    問題解決力<br>
+                    <span class="impact-number">400%</span>向上期待
+                </div>
+                <div class="coming-soon">8月導入予定</div>
+            </div>
+        </div>
+        
+        <div style="position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); text-align: center;">
+            <div style="font-size: 32px; font-weight: bold; color: #005bac; margin-bottom: 10px;">
+                3つの最先端技術で競合を圧倒
+            </div>
+            <div style="font-size: 28px; color: #666;">
+                段階的導入により、リスクを最小化しながら最大効果を実現
+            </div>
+        </div>
+    </div>
+</body>
+</html>

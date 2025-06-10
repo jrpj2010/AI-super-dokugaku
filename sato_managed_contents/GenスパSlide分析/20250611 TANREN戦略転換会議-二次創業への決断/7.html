@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バイブコーディング実証</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4facfe 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #00FFFF;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(0, 255, 255, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .proof-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 0.8rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00FFFF;
+        }
+        
+        .step-number {
+            background: #00FFFF;
+            color: #1e3c72;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .decoration-code-1 {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            transform: rotate(45deg);
+        }
+        
+        .decoration-code-2 {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-code-1"></div>
+        <div class="decoration-code-2"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-6 fade-in-up">
+                バイブコーディング<span class="highlight">実証事例</span>
+            </h1>
+            <h2 class="text-2xl text-gray-100 mb-8 fade-in-up">
+                230万文字書籍原稿を一晩で修正完了
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-6 mb-8">
+                <div class="proof-box fade-in-up-delay-1">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-clock mr-3 text-cyan-300"></i>
+                        従来手法
+                    </h3>
+                    <div class="text-left space-y-2">
+                        <div class="text-gray-200">• 編集者要求の理解：半日</div>
+                        <div class="text-gray-200">• 原稿修正作業：2-3週間</div>
+                        <div class="text-gray-200">• 校正・確認：1週間</div>
+                        <div class="text-red-300 font-bold">総計：約1ヶ月</div>
+                    </div>
+                </div>
+                
+                <div class="proof-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-rocket mr-3 text-green-300"></i>
+                        AIエージェント手法
+                    </h3>
+                    <div class="text-left space-y-2">
+                        <div class="text-gray-200">• 音声での要求録音：15分</div>
+                        <div class="text-gray-200">• AI処理・修正：8時間</div>
+                        <div class="text-gray-200">• 確認・微調整：2時間</div>
+                        <div class="text-green-300 font-bold">総計：約10時間</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="proof-box fade-in-up-delay-1 mb-8">
+                <h3 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-cogs mr-3 text-yellow-300"></i>
+                    自動化ワークフロー
+                </h3>
+                
+                <div class="space-y-3">
+                    <div class="workflow-step fade-in-up-delay-2">
+                        <div class="step-number">1</div>
+                        <div class="flex-1 text-left">
+                            <div class="text-white font-bold">音声入力</div>
+                            <div class="text-gray-200">会食での要求事項を自然言語で録音</div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step fade-in-up-delay-2">
+                        <div class="step-number">2</div>
+                        <div class="flex-1 text-left">
+                            <div class="text-white font-bold">フォルダ一括処理</div>
+                            <div class="text-gray-200">20ファイル、230万文字を一括読み込み</div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step fade-in-up-delay-3">
+                        <div class="step-number">3</div>
+                        <div class="flex-1 text-left">
+                            <div class="text-white font-bold">並列修正実行</div>
+                            <div class="text-gray-200">複数エージェントでの同時修正処理</div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step fade-in-up-delay-3">
+                        <div class="step-number">4</div>
+                        <div class="flex-1 text-left">
+                            <div class="text-white font-bold">品質確認</div>
+                            <div class="text-gray-200">要求仕様との適合性を自動チェック</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-chart-line mr-3 text-cyan-400"></i>
+                生産性向上：<span class="highlight">7200%</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

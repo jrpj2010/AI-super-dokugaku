@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANREN戦略転換会議 - 二次創業への決断</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .slide-preview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .slide-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slide-iframe {
+            width: 100%;
+            height: 180px;
+            border: none;
+            border-radius: 10px;
+            pointer-events: none;
+            background: white;
+        }
+        
+        .presentation-btn {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .presentation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+        
+        .slide-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .slide-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .analysis-summary {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4">
+        <div class="header">
+            <h1 class="text-5xl font-bold mb-4">
+                <i class="fas fa-rocket mr-3 text-yellow-300"></i>
+                TANREN戦略転換会議
+            </h1>
+            <h2 class="text-3xl mb-6">二次創業への決断</h2>
+            <p class="text-xl opacity-90">
+                AGI時代を見据えた戦略的ピボット提案書
+            </p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="text-3xl font-bold text-yellow-300">20</div>
+                    <div class="text-white">スライド</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-3xl font-bold text-green-300">5年</div>
+                    <div class="text-white">バイアウト計画</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-3xl font-bold text-blue-300">200万</div>
+                    <div class="text-white">戦略投資（円）</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-3xl font-bold text-purple-300">世界標準</div>
+                    <div class="text-white">プラットフォーム</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="analysis-summary">
+            <h3 class="text-2xl font-bold text-white mb-4">
+                <i class="fas fa-chart-line mr-3 text-cyan-300"></i>
+                コンサルレベル分析サマリー
+            </h3>
+            <div class="text-white text-lg leading-relaxed">
+                <p class="mb-4">
+                    <strong class="text-yellow-300">現状認識：</strong>
+                    既存TANREN事業は初心者向けニーズに引っ張られ複雑化、700円サービスにChatGPT同等機能要求という構造的矛盾を抱える。
+                    AGI時代の内製化脅威により、半年後には競合サービス登場の可能性が高い。
+                </p>
+                <p class="mb-4">
+                    <strong class="text-green-300">戦略提案：</strong>
+                    既存事業（V9）は著名人活用で完了、全く新しい次世代AIフィードバック事業への二次創業を実行。
+                    Claude Code（月3.5万円）による24時間稼働エージェントで生産性を7200%向上、世界標準プラットフォームとして展開。
+                </p>
+                <p>
+                    <strong class="text-purple-300">実行計画：</strong>
+                    200万円追加投資で3ヶ月基盤構築、6ヶ月で収益化、5年以内に5-10億円でのバイアウト実現。
+                    音声フィードバック単体売りによる非言語対応で、80億人市場への参入を目指す。
+                </p>
+            </div>
+        </div>
+        
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6">
+                <i class="fas fa-play mr-3 text-green-300"></i>
+                プレゼンテーションを開始
+            </h2>
+            <a href="presentation.html" class="presentation-btn">
+                <i class="fas fa-rocket mr-3"></i>
+                フルプレゼンテーション実行
+            </a>
+            <p class="text-white mt-4 opacity-75">
+                矢印キー（←→）またはスペースキーで操作できます
+            </p>
+        </div>
+        
+        <div>
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">
+                <i class="fas fa-images mr-3 text-blue-300"></i>
+                個別スライド一覧
+            </h2>
+            
+            <div class="preview-grid">
+                <div class="slide-preview">
+                    <iframe src="1.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 1</h3>
+                        <p class="text-gray-200 text-sm mb-3">タイトル：戦略転換会議</p>
+                        <a href="1.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="2.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 2</h3>
+                        <p class="text-gray-200 text-sm mb-3">経営課題の本質</p>
+                        <a href="2.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="3.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 3</h3>
+                        <p class="text-gray-200 text-sm mb-3">現状事業の構造的問題</p>
+                        <a href="3.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="4.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 4</h3>
+                        <p class="text-gray-200 text-sm mb-3">バージョン9完了戦略</p>
+                        <a href="4.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="5.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 5</h3>
+                        <p class="text-gray-200 text-sm mb-3">AGI時代の存在脅威</p>
+                        <a href="5.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="6.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 6</h3>
+                        <p class="text-gray-200 text-sm mb-3">Claude Code革命</p>
+                        <a href="6.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="7.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 7</h3>
+                        <p class="text-gray-200 text-sm mb-3">バイブコーディング実証</p>
+                        <a href="7.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="8.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 8</h3>
+                        <p class="text-gray-200 text-sm mb-3">カーソル組織変革</p>
+                        <a href="8.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="9.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 9</h3>
+                        <p class="text-gray-200 text-sm mb-3">マルチモーダルAI技術</p>
+                        <a href="9.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="10.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 10</h3>
+                        <p class="text-gray-200 text-sm mb-3">音声フィードバック戦略</p>
+                        <a href="10.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="11.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 11</h3>
+                        <p class="text-gray-200 text-sm mb-3">YouTube知識収集システム</p>
+                        <a href="11.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="12.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 12</h3>
+                        <p class="text-gray-200 text-sm mb-3">二次創業戦略</p>
+                        <a href="12.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="13.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 13</h3>
+                        <p class="text-gray-200 text-sm mb-3">AIフィードバック単体売り</p>
+                        <a href="13.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="14.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 14</h3>
+                        <p class="text-gray-200 text-sm mb-3">世界標準プラットフォーム</p>
+                        <a href="14.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="15.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 15</h3>
+                        <p class="text-gray-200 text-sm mb-3">3名体制極限効率化</p>
+                        <a href="15.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="16.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 16</h3>
+                        <p class="text-gray-200 text-sm mb-3">バイアウト戦略</p>
+                        <a href="16.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="17.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 17</h3>
+                        <p class="text-gray-200 text-sm mb-3">リソース配分戦略</p>
+                        <a href="17.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="18.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 18</h3>
+                        <p class="text-gray-200 text-sm mb-3">実行計画</p>
+                        <a href="18.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="19.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 19</h3>
+                        <p class="text-gray-200 text-sm mb-3">2030年ビジョン</p>
+                        <a href="19.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-preview">
+                    <iframe src="20.html" class="slide-iframe"></iframe>
+                    <div class="text-center">
+                        <h3 class="text-white font-bold mb-2">Slide 20</h3>
+                        <p class="text-gray-200 text-sm mb-3">決断の時</p>
+                        <a href="20.html" class="slide-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            個別表示
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center py-8">
+            <p class="text-white opacity-75">
+                <i class="fas fa-robot mr-2"></i>
+                Generated by Gen-Spa AI Presentation System
+            </p>
+            <p class="text-white opacity-50 text-sm mt-2">
+                TANREN株式会社 CEO 佐藤勝彦様 専用戦略分析資料
+            </p>
+        </div>
+    </div>
+</body>
+</html>

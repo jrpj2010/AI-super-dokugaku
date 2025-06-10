@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チーム体制強化戦略</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 700px;
+            margin-top: 40px;
+        }
+        .team-structure {
+            background: white;
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+        }
+        .training-plan {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border: 3px solid #d90000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .structure-title {
+            color: #005bac;
+            background: #f0f8ff;
+            border: 2px solid #005bac;
+        }
+        .training-title {
+            color: #d90000;
+            background: white;
+            border: 2px solid #d90000;
+        }
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 480px;
+        }
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .role-box {
+            background: #f8f9fa;
+            border: 2px solid #005bac;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            min-width: 180px;
+        }
+        .role-box.leader {
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            transform: scale(1.1);
+        }
+        .role-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .role-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 5px;
+        }
+        .role-box.leader .role-count {
+            color: #ffff00;
+        }
+        .role-detail {
+            font-size: 16px;
+            line-height: 1.3;
+        }
+        .training-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            height: 480px;
+        }
+        .training-item {
+            background: white;
+            border: 2px solid #d90000;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .training-icon {
+            width: 60px;
+            height: 60px;
+            background: #d90000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .training-content {
+            flex: 1;
+        }
+        .training-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 8px;
+        }
+        .training-detail {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .training-metric {
+            text-align: center;
+            min-width: 100px;
+        }
+        .metric-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d90000;
+        }
+        .metric-unit {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">チーム体制強化戦略</div>
+            <div class="subtitle">〜人材育成で競合優位を加速〜</div>
+        </div>
+        
+        <div class="team-grid">
+            <div class="team-structure">
+                <div class="section-title structure-title">新組織体制</div>
+                <div class="org-chart">
+                    <div class="level">
+                        <div class="role-box leader">
+                            <div class="role-title">AI戦略リーダー</div>
+                            <div class="role-count">3名</div>
+                            <div class="role-detail">全社AI戦略立案<br>技術選定・導入</div>
+                        </div>
+                    </div>
+                    <div class="level">
+                        <div class="role-box">
+                            <div class="role-title">AIエキスパート</div>
+                            <div class="role-count">12名</div>
+                            <div class="role-detail">技術的専門性<br>プロジェクトリード</div>
+                        </div>
+                        <div class="role-box">
+                            <div class="role-title">品質管理スペシャリスト</div>
+                            <div class="role-count">8名</div>
+                            <div class="role-detail">品質保証<br>プロセス最適化</div>
+                        </div>
+                    </div>
+                    <div class="level">
+                        <div class="role-box">
+                            <div class="role-title">AIプラクティショナー</div>
+                            <div class="role-count">45名</div>
+                            <div class="role-detail">日常業務でのAI活用<br>現場改善推進</div>
+                        </div>
+                        <div class="role-box">
+                            <div class="role-title">トレーニングコーディネーター</div>
+                            <div class="role-count">15名</div>
+                            <div class="role-detail">社内研修企画<br>スキル測定</div>
+                        </div>
+                    </div>
+                    <div class="level">
+                        <div class="role-box">
+                            <div class="role-title">全社員</div>
+                            <div class="role-count">320名</div>
+                            <div class="role-detail">AIリテラシー習得<br>業務効率化実現</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="training-plan">
+                <div class="section-title training-title">研修プログラム</div>
+                <div class="training-list">
+                    <div class="training-item">
+                        <div class="training-icon">1</div>
+                        <div class="training-content">
+                            <div class="training-name">初級コース</div>
+                            <div class="training-detail">AIファンダメンタル、プロンプトエンジニアリング基礎</div>
+                        </div>
+                        <div class="training-metric">
+                            <div class="metric-number">3</div>
+                            <div class="metric-unit">日間</div>
+                        </div>
+                    </div>
+                    
+                    <div class="training-item">
+                        <div class="training-icon">2</div>
+                        <div class="training-content">
+                            <div class="training-name">中級コース</div>
+                            <div class="training-detail">業務アプリケーション開発、カスタムソリューション構築</div>
+                        </div>
+                        <div class="training-metric">
+                            <div class="metric-number">5</div>
+                            <div class="metric-unit">日間</div>
+                        </div>
+                    </div>
+                    
+                    <div class="training-item">
+                        <div class="training-icon">3</div>
+                        <div class="training-content">
+                            <div class="training-name">上級コース</div>
+                            <div class="training-detail">AI戦略立案、競合分析、ROI最適化手法</div>
+                        </div>
+                        <div class="training-metric">
+                            <div class="metric-number">7</div>
+                            <div class="metric-unit">日間</div>
+                        </div>
+                    </div>
+                    
+                    <div class="training-item">
+                        <div class="training-icon">4</div>
+                        <div class="training-content">
+                            <div class="training-name">リーダーシップコース</div>
+                            <div class="training-detail">チームマネジメント、変革リーダーシップ、経営層報告</div>
+                        </div>
+                        <div class="training-metric">
+                            <div class="metric-number">10</div>
+                            <div class="metric-unit">日間</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

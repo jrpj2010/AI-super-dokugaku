@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>既存事業の完了戦略</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #134e5e 0%, #71b280 50%, #a8e6cf 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF6B6B;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 107, 107, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .completion-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .expert-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .decoration-hexagon {
+            position: absolute;
+            top: 50px;
+            right: 80px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+        
+        .decoration-triangle-1 {
+            position: absolute;
+            bottom: 100px;
+            left: 60px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-hexagon"></div>
+        <div class="decoration-triangle-1"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-8 fade-in-up">
+                バージョン9：<span class="highlight">完了戦略</span>
+            </h1>
+            
+            <div class="completion-box fade-in-up-delay-1 mb-8">
+                <h2 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-star mr-3 text-yellow-300"></i>
+                    著名人活用による差別化完了
+                </h2>
+                
+                <div class="grid grid-cols-2 gap-8 mt-8">
+                    <div class="expert-card fade-in-up-delay-2">
+                        <div class="text-4xl mb-4">
+                            <i class="fas fa-microphone text-blue-300"></i>
+                        </div>
+                        <h3 class="text-2xl text-white font-bold mb-2">
+                            伊藤羊一
+                        </h3>
+                        <p class="text-gray-100 text-lg">
+                            プレゼンテーション<br/>
+                            メンタリング
+                        </p>
+                    </div>
+                    
+                    <div class="expert-card fade-in-up-delay-3">
+                        <div class="text-4xl mb-4">
+                            <i class="fas fa-chart-bar text-green-300"></i>
+                        </div>
+                        <h3 class="text-2xl text-white font-bold mb-2">
+                            前田鎌利
+                        </h3>
+                        <p class="text-gray-100 text-lg">
+                            資料作成<br/>
+                            メソッド
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-6">
+                <div class="completion-box fade-in-up-delay-1">
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        <i class="fas fa-handshake mr-2 text-yellow-300"></i>
+                        契約完了
+                    </h3>
+                    <p class="text-gray-100 text-base">
+                        既存コンテンツの<br/>
+                        ブランド価値を確定
+                    </p>
+                </div>
+                
+                <div class="completion-box fade-in-up-delay-2">
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        <i class="fas fa-lock mr-2 text-blue-300"></i>
+                        クローズ戦略
+                    </h3>
+                    <p class="text-gray-100 text-base">
+                        新規開発を停止し<br/>
+                        現状維持で運用
+                    </p>
+                </div>
+                
+                <div class="completion-box fade-in-up-delay-3">
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        <i class="fas fa-money-bill-wave mr-2 text-green-300"></i>
+                        売上確保
+                    </h3>
+                    <p class="text-gray-100 text-base">
+                        安定収益源として<br/>
+                        次期投資の原資に
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-xl text-white fade-in-up-delay-3">
+                <i class="fas fa-arrow-right mr-3 text-yellow-300"></i>
+                既存事業の<span class="highlight">計画的収束</span>による新事業へのリソース集中
+            </div>
+        </div>
+    </div>
+</body>
+</html>

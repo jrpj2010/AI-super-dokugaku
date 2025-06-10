@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リスク管理システム</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 700px;
+            margin-top: 40px;
+        }
+        .risk-identification {
+            background: white;
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+        }
+        .mitigation-strategies {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border: 3px solid #d90000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .identification-title {
+            color: #005bac;
+            background: #f0f8ff;
+            border: 2px solid #005bac;
+        }
+        .mitigation-title {
+            color: #d90000;
+            background: white;
+            border: 2px solid #d90000;
+        }
+        .risk-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 480px;
+        }
+        .risk-item {
+            background: #f8f9fa;
+            border: 2px solid #005bac;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .risk-level {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        .risk-high {
+            background: #d90000;
+        }
+        .risk-medium {
+            background: #ff8800;
+        }
+        .risk-low {
+            background: #00aa00;
+        }
+        .risk-content {
+            flex: 1;
+        }
+        .risk-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 8px;
+        }
+        .risk-description {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .risk-probability {
+            text-align: center;
+            min-width: 80px;
+        }
+        .probability-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d90000;
+        }
+        .probability-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .mitigation-item {
+            background: white;
+            border: 2px solid #d90000;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .strategy-icon {
+            width: 60px;
+            height: 60px;
+            background: #d90000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .strategy-content {
+            flex: 1;
+        }
+        .strategy-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 8px;
+        }
+        .strategy-detail {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .effectiveness {
+            text-align: center;
+            min-width: 100px;
+        }
+        .effectiveness-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00aa00;
+        }
+        .effectiveness-label {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">リスク管理システム</div>
+            <div class="subtitle">〜万全の備えで安心して進める〜</div>
+        </div>
+        
+        <div class="risk-matrix">
+            <div class="risk-identification">
+                <div class="section-title identification-title">リスク特定・評価</div>
+                <div class="risk-list">
+                    <div class="risk-item">
+                        <div class="risk-level risk-medium">中</div>
+                        <div class="risk-content">
+                            <div class="risk-name">技術的リスク</div>
+                            <div class="risk-description">新技術導入時の一時的な性能低下、互換性の問題</div>
+                        </div>
+                        <div class="risk-probability">
+                            <div class="probability-value">25%</div>
+                            <div class="probability-label">発生確率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-item">
+                        <div class="risk-level risk-low">低</div>
+                        <div class="risk-content">
+                            <div class="risk-name">コストリスク</div>
+                            <div class="risk-description">予算超過、想定以上のランニングコストの発生</div>
+                        </div>
+                        <div class="risk-probability">
+                            <div class="probability-value">15%</div>
+                            <div class="probability-label">発生確率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-item">
+                        <div class="risk-level risk-medium">中</div>
+                        <div class="risk-content">
+                            <div class="risk-name">人的リスク</div>
+                            <div class="risk-description">スキル不足、トレーニング遅延、キーパーソンの離職</div>
+                        </div>
+                        <div class="risk-probability">
+                            <div class="probability-value">20%</div>
+                            <div class="probability-label">発生確率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-item">
+                        <div class="risk-level risk-low">低</div>
+                        <div class="risk-content">
+                            <div class="risk-name">外部環境リスク</div>
+                            <div class="risk-description">競合他社の技術革新、市場状況の急変</div>
+                        </div>
+                        <div class="risk-probability">
+                            <div class="probability-value">10%</div>
+                            <div class="probability-label">発生確率</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mitigation-strategies">
+                <div class="section-title mitigation-title">リスク緩和戦略</div>
+                <div class="risk-list">
+                    <div class="mitigation-item">
+                        <div class="strategy-icon">🛡️</div>
+                        <div class="strategy-content">
+                            <div class="strategy-name">段階的導入アプローチ</div>
+                            <div class="strategy-detail">パイロットテスト、小規模検証、段階的拡大でリスクを最小化</div>
+                        </div>
+                        <div class="effectiveness">
+                            <div class="effectiveness-value">95%</div>
+                            <div class="effectiveness-label">有効性</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mitigation-item">
+                        <div class="strategy-icon">📊</div>
+                        <div class="strategy-content">
+                            <div class="strategy-name">リアルタイムモニタリング</div>
+                            <div class="strategy-detail">コスト、パフォーマンス、品質を常時監視、早期発見・対応</div>
+                        </div>
+                        <div class="effectiveness">
+                            <div class="effectiveness-value">90%</div>
+                            <div class="effectiveness-label">有効性</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mitigation-item">
+                        <div class="strategy-icon">🎯</div>
+                        <div class="strategy-content">
+                            <div class="strategy-name">専門人材の継続育成</div>
+                            <div class="strategy-detail">内部スキル、外部コンサルティング、ナレッジシェアリング</div>
+                        </div>
+                        <div class="effectiveness">
+                            <div class="effectiveness-value">85%</div>
+                            <div class="effectiveness-label">有効性</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mitigation-item">
+                        <div class="strategy-icon">🔄</div>
+                        <div class="strategy-content">
+                            <div class="strategy-name">柔軟な戦略調整</div>
+                            <div class="strategy-detail">市場動向、技術トレンドに合わせた迅速な戦略修正</div>
+                        </div>
+                        <div class="effectiveness">
+                            <div class="effectiveness-value">80%</div>
+                            <div class="effectiveness-label">有効性</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

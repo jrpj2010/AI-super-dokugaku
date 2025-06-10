@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGI時代の脅威分析</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 50%, #ff6347 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FFD700;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 215, 0, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .threat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .danger-icon {
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .decoration-alert-1 {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 215, 0, 0.1);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        
+        .decoration-triangle-1 {
+            position: absolute;
+            bottom: 50px;
+            left: 80px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-alert-1"></div>
+        <div class="decoration-triangle-1"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-8 fade-in-up">
+                AGI時代の<span class="highlight">存在脅威</span>
+            </h1>
+            
+            <div class="grid grid-cols-2 gap-8 mt-8">
+                <div class="threat-box fade-in-up-delay-1">
+                    <div class="danger-icon">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        内製化の容易さ
+                    </h3>
+                    <p class="text-gray-200 text-lg leading-relaxed">
+                        「多少かじったことのある人だったら<br/>
+                        <span class="text-yellow-300">1発で作れちゃう</span><br/>
+                        別にそんな難しくない」
+                    </p>
+                </div>
+                
+                <div class="threat-box fade-in-up-delay-2">
+                    <div class="danger-icon">
+                        <i class="fas fa-clock text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        競合発生の速度
+                    </h3>
+                    <p class="text-gray-200 text-lg leading-relaxed">
+                        1-3ヶ月使用後に離脱<br/>
+                        <span class="text-yellow-300">半年後には類似サービス</span><br/>
+                        が立ち上がる現実
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <h2 class="text-3xl text-white mb-6 font-bold fade-in-up-delay-1">
+                    <i class="fas fa-hourglass-half mr-3 text-yellow-400"></i>
+                    脅威の進行タイムライン
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="timeline-item fade-in-up-delay-2">
+                        <div class="flex-1">
+                            <div class="text-yellow-300 font-bold text-lg">1-2ヶ月目</div>
+                            <div class="text-white text-lg">顧客による機能理解と分析開始</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-2">
+                        <div class="flex-1">
+                            <div class="text-yellow-300 font-bold text-lg">3-6ヶ月目</div>
+                            <div class="text-white text-lg">内製化検討・開発チーム編成</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up-delay-3">
+                        <div class="flex-1">
+                            <div class="text-yellow-300 font-bold text-lg">6ヶ月後</div>
+                            <div class="text-white text-lg">完全離脱・競合サービス誕生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-shield-alt mr-3 text-red-400"></i>
+                技術的優位性だけでは<span class="highlight">守れない</span>時代
+            </div>
+        </div>
+    </div>
+</body>
+</html>

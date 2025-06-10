@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現状事業分析</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2c1810 0%, #3d2914 50%, #4a3319 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF6B6B;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 107, 107, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .current-state-box {
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px solid rgba(255, 165, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(10px);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .problem-indicator {
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .decoration-diamond-1 {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 165, 0, 0.1);
+            transform: rotate(45deg);
+        }
+        
+        .decoration-diamond-2 {
+            position: absolute;
+            bottom: 80px;
+            right: 100px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 107, 107, 0.15);
+            transform: rotate(45deg);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-diamond-1"></div>
+        <div class="decoration-diamond-2"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-8 fade-in-up">
+                現状事業の<span class="highlight">構造的問題</span>
+            </h1>
+            
+            <div class="grid grid-cols-3 gap-6 mt-12">
+                <div class="current-state-box fade-in-up-delay-1">
+                    <div class="problem-indicator">
+                        <i class="fas fa-exclamation text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        複雑化の悪循環
+                    </h3>
+                    <p class="text-gray-200 text-base leading-relaxed">
+                        初心者要望に応えるほど<br/>
+                        機能が複雑化し、<br/>
+                        <span class="text-orange-300">新規説明が困難</span>に
+                    </p>
+                </div>
+                
+                <div class="current-state-box fade-in-up-delay-2">
+                    <div class="problem-indicator">
+                        <i class="fas fa-dollar-sign text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        価格圧力の限界
+                    </h3>
+                    <p class="text-gray-200 text-base leading-relaxed">
+                        700円で提供しているが<br/>
+                        <span class="text-orange-300">ChatGPT全機能</span>を<br/>
+                        要求される矛盾
+                    </p>
+                </div>
+                
+                <div class="current-state-box fade-in-up-delay-3">
+                    <div class="problem-indicator">
+                        <i class="fas fa-route text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-bold">
+                        顧客導線の問題
+                    </h3>
+                    <p class="text-gray-200 text-base leading-relaxed">
+                        単連チャットから<br/>
+                        セールス鍛錬まで<br/>
+                        <span class="text-orange-300">道のりが遠すぎる</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-2 gap-8">
+                <div class="current-state-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-cogs mr-3 text-yellow-400"></i>
+                        技術的負債
+                    </h3>
+                    <ul class="text-gray-200 text-lg space-y-2 text-left">
+                        <li>• Azure依存による制約</li>
+                        <li>• レガシーコードの蓄積</li>
+                        <li>• 機能追加の困難さ</li>
+                    </ul>
+                </div>
+                
+                <div class="current-state-box fade-in-up-delay-3">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-shield-alt mr-3 text-red-400"></i>
+                        競合脅威
+                    </h3>
+                    <ul class="text-gray-200 text-lg space-y-2 text-left">
+                        <li>• 内製化の容易さ</li>
+                        <li>• AGIによる代替可能性</li>
+                        <li>• 差別化要素の希薄化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

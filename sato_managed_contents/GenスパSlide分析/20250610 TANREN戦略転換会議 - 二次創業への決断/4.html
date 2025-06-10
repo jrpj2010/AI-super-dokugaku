@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TANREN戦略会議 - AIエージェント活用</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .cursor-feature {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border-left: 4px solid #4ED8E2;
+      transition: all 0.3s ease;
+    }
+
+    .cursor-feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-container {
+      background: rgba(78, 216, 226, 0.2);
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .boost-container {
+      position: relative;
+      text-align: center;
+      width: 220px;
+    }
+
+    .boost-circle {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(78, 216, 226, 0.1);
+      border: 2px solid #4ED8E2;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .boost-bg-circle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(78, 216, 226, 0.03);
+      z-index: 1;
+    }
+
+    .emphasis {
+      color: #4ED8E2;
+      font-weight: 700;
+    }
+
+    .productivity-quote {
+      border-left: 4px solid #4ED8E2;
+      background: rgba(78, 216, 226, 0.1);
+      padding: 12px 20px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .code-bracket {
+      font-family: monospace;
+      color: #4ED8E2;
+      font-size: 1.5em;
+    }
+
+    .progress-container {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #4ED8E2 0%, #4CC9F0 100%);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-12">
+    <h1 class="title text-4xl mb-6">
+      <span class="emphasis">AIエージェント(Cursor)</span>活用による業務革命
+    </h1>
+
+    <p class="text-xl mb-6">「世の中がついてこれないレベル」の生産性向上を実現</p>
+
+    <div class="flex">
+      <!-- Left side: Features -->
+      <div class="w-2/3 pr-6">
+        <div class="grid grid-cols-1 gap-5 mb-3">
+          <!-- Feature 1 -->
+          <div class="cursor-feature p-4 flex items-start">
+            <div class="icon-container mr-4 flex-shrink-0">
+              <i class="fas fa-book-open text-2xl text-blue-300"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-1">書籍執筆の超高速化</h3>
+              <p class="opacity-80 text-sm mb-2">「昨日の会食で出た編集者の要望を、30万文字の書籍原稿に一晩で反映。編集長が『ありえない速さ』と驚嘆」</p>
+              <div class="flex items-center">
+                <span class="text-xs mr-2 opacity-70">通常作業</span>
+                <div class="progress-container w-32 mr-3">
+                  <div class="progress-bar" style="width: 10%"></div>
+                </div>
+                <span class="text-xs opacity-70">Cursor活用</span>
+                <div class="progress-container w-32 ml-1">
+                  <div class="progress-bar" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="cursor-feature p-4 flex items-start">
+            <div class="icon-container mr-4 flex-shrink-0">
+              <i class="fas fa-comments text-2xl text-blue-300"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-1">商談・経営会議の分析</h3>
+              <p class="opacity-80 text-sm mb-2">「Notionに記録した顧客との3ヶ月分の議事録を自動解析。『最近お客様が増えすぎて何を話しているか分からなくなっていた』問題を解決」</p>
+              <div class="flex items-baseline">
+                <span class="code-bracket mr-1">{</span>
+                <span class="text-xs mr-1">課題抽出</span>
+                <i class="fas fa-arrow-right text-xs mx-1"></i>
+                <span class="text-xs mr-1">要約生成</span>
+                <i class="fas fa-arrow-right text-xs mx-1"></i>
+                <span class="text-xs mr-1">アクション提案</span>
+                <span class="code-bracket ml-1">}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="cursor-feature p-4 flex items-start">
+            <div class="icon-container mr-4 flex-shrink-0">
+              <i class="fas fa-laptop-code text-2xl text-blue-300"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-1">プレゼン資料の全自動生成</h3>
+              <p class="opacity-80 text-sm mb-2">「前田鎌利氏のプレゼンスタイルを学習させたAIが、分析データから30枚のスライドを自動作成。HTML/CSSを自動記述し、即座に共有可能」
+              </p>
+              <div class="flex items-center">
+                <div class="flex items-center mr-4">
+                  <i class="fas fa-clock mr-1 text-yellow-300 opacity-80"></i>
+                  <span class="text-xs opacity-80">作業時間 ▼95%</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-star mr-1 text-yellow-300 opacity-80"></i>
+                  <span class="text-xs opacity-80">クオリティ ▲70%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Productivity boost -->
+      <div class="w-1/3 flex flex-col items-center justify-between">
+        <div class="boost-container mb-4">
+          <div class="boost-circle">
+            <div class="boost-bg-circle"></div>
+            <i class="fas fa-bolt text-yellow-300 text-3xl mb-1"></i>
+            <div class="text-4xl font-bold text-white">2-3<span class="text-lg">倍</span></div>
+            <div class="text-sm opacity-70">生産性向上</div>
+          </div>
+          <div class="mt-3 text-sm opacity-80">
+            AIエージェント活用で<br>業務効率が飛躍的に向上
+          </div>
+        </div>
+
+        <div class="cursor-feature p-4 w-full">
+          <div class="flex items-center justify-center mb-2">
+            <i class="fas fa-chart-line text-blue-300 text-2xl mr-2"></i>
+            <span class="text-xl font-bold">コスト効率</span>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-white mb-1">
+              <span class="text-lg">月額</span> 200<span class="text-lg">ドル</span>
+            </div>
+            <div class="text-xs opacity-80 mb-3">
+              24時間365日働く自分の分身
+            </div>
+            <div class="text-sm">
+              「経営から見たらとんでもない<br><span class="emphasis">バカ安</span>よ」
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="productivity-quote mt-4 text-lg">
+      「AIツールを単に使うだけでなく、<span class="emphasis">仕掛ける側</span>の思考を身につけろ。カーソルをマスターすれば、ドキュメント、コード、分析、創作...あらゆる業務が一変する」
+    </div>
+  </div>
+</body>
+
+</html>

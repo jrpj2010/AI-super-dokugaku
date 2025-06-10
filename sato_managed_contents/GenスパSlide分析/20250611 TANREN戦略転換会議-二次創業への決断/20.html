@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>決断の時</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF6B6B;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 107, 107, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .decision-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 107, 107, 0.4);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        
+        .call-to-action {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 30px;
+            margin: 2rem 0;
+            border: 4px solid rgba(255, 107, 107, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
+            }
+        }
+        
+        .urgency-factors {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .urgency-item {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border-left: 5px solid #FF6B6B;
+        }
+        
+        .commitment-statement {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        .action-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .step-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .step-number {
+            background: rgba(255, 107, 107, 0.8);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .decoration-decision {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 107, 107, 0.3);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .decoration-time {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            width: 100px;
+            height: 100px;
+            border: 4px solid rgba(255, 107, 107, 0.4);
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .decoration-time::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 2px;
+            height: 30%;
+            background: rgba(255, 107, 107, 0.6);
+            transform-origin: bottom;
+            transform: translateX(-50%);
+        }
+        
+        .decoration-time::after {
+            content: '';
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            width: 2px;
+            height: 15%;
+            background: rgba(255, 107, 107, 0.6);
+            transform-origin: bottom;
+            transform: translateX(-50%) rotate(90deg);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-decision"></div>
+        <div class="decoration-time"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-6xl text-white mb-8 fade-in-up">
+                <span class="highlight">決断の時</span>
+            </h1>
+            <h2 class="text-3xl text-gray-100 mb-12 fade-in-up">
+                AGI時代を生き抜く戦略的ピボット
+            </h2>
+            
+            <div class="call-to-action fade-in-up-delay-1">
+                <h3 class="text-4xl text-white mb-6 font-bold">
+                    <i class="fas fa-exclamation-triangle mr-3 text-red-400"></i>
+                    今この瞬間が分岐点
+                </h3>
+                <div class="text-2xl text-gray-100 leading-relaxed">
+                    既存の延長線上では<span class="text-red-300 font-bold">生存不可能</span><br/>
+                    <span class="text-red-300 font-bold">二次創業</span>による抜本的変革が唯一の道
+                </div>
+            </div>
+            
+            <div class="decision-box fade-in-up-delay-2">
+                <h3 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-clock mr-3 text-yellow-300"></i>
+                    緊急性の根拠
+                </h3>
+                
+                <div class="urgency-factors">
+                    <div class="urgency-item fade-in-up-delay-2">
+                        <h4 class="text-xl text-white font-bold mb-3">
+                            <i class="fas fa-rocket mr-2 text-blue-300"></i>
+                            技術進化の加速
+                        </h4>
+                        <div class="text-gray-200">
+                            AGI・Claude Code・マルチモーダルAIの急速な普及により、
+                            <span class="text-red-300 font-bold">競争環境が根本的に変化</span>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-item fade-in-up-delay-2">
+                        <h4 class="text-xl text-white font-bold mb-3">
+                            <i class="fas fa-hourglass-half mr-2 text-orange-300"></i>
+                            機会ウィンドウ
+                        </h4>
+                        <div class="text-gray-200">
+                            世界標準プラットフォームへの参入は
+                            <span class="text-red-300 font-bold">今後2-3年が最後のチャンス</span>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-item fade-in-up-delay-3">
+                        <h4 class="text-xl text-white font-bold mb-3">
+                            <i class="fas fa-shield-alt mr-2 text-green-300"></i>
+                            内製化リスク
+                        </h4>
+                        <div class="text-gray-200">
+                            現行サービスは半年以内に
+                            <span class="text-red-300 font-bold">容易に模倣・代替される可能性</span>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-item fade-in-up-delay-3">
+                        <h4 class="text-xl text-white font-bold mb-3">
+                            <i class="fas fa-chart-line mr-2 text-purple-300"></i>
+                            成長限界
+                        </h4>
+                        <div class="text-gray-200">
+                            3名体制での現行事業は
+                            <span class="text-red-300 font-bold">スケーラビリティの限界に到達</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="commitment-statement fade-in-up-delay-2">
+                <h3 class="text-3xl text-white mb-4 font-bold">
+                    <i class="fas fa-handshake mr-3 text-red-400"></i>
+                    コミットメント
+                </h3>
+                <div class="text-xl text-white leading-relaxed">
+                    <span class="text-red-300 font-bold">200万円の戦略投資</span>と<br/>
+                    <span class="text-red-300 font-bold">5年間のバイアウト計画</span>で<br/>
+                    世界標準のAI人材育成プラットフォームを実現する
+                </div>
+            </div>
+            
+            <div class="decision-box fade-in-up-delay-3">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-flag-checkered mr-3 text-green-300"></i>
+                    次の30日間の行動
+                </h3>
+                
+                <div class="action-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4 class="text-white font-bold mb-2">チーム強化</h4>
+                        <div class="text-gray-200 text-sm">
+                            Cursor・AI活用スキル<br/>
+                            集中研修実施
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4 class="text-white font-bold mb-2">技術基盤</h4>
+                        <div class="text-gray-200 text-sm">
+                            Claude Code Pro導入<br/>
+                            プロトタイプ開発
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4 class="text-white font-bold mb-2">新法人設立</h4>
+                        <div class="text-gray-200 text-sm">
+                            事業分離・独立<br/>
+                            投資実行
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-4xl text-white fade-in-up-delay-3">
+                <i class="fas fa-rocket mr-4 text-red-400"></i>
+                <span class="highlight">今、行動を起こす</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

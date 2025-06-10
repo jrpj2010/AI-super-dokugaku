@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グローバル展開戦略</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 80px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #005bac;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 36px;
+            color: #d90000;
+            font-weight: bold;
+        }
+        .expansion-map {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            height: 650px;
+            margin-top: 40px;
+        }
+        .world-regions {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            border: 3px solid #005bac;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,91,172,0.1);
+            position: relative;
+        }
+        .map-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005bac;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .regions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            height: 480px;
+        }
+        .region-card {
+            background: white;
+            border: 2px solid #005bac;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,91,172,0.1);
+        }
+        .region-card.priority {
+            border-color: #d90000;
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            transform: scale(1.02);
+        }
+        .region-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .region-flag {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            font-weight: bold;
+        }
+        .region-card.priority .region-flag {
+            background: linear-gradient(135deg, #d90000, #ff1a1a);
+        }
+        .region-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #005bac;
+        }
+        .region-card.priority .region-name {
+            color: #d90000;
+        }
+        .region-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-label {
+            font-size: 16px;
+            color: #666;
+        }
+        .detail-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .priority-value {
+            color: #d90000;
+        }
+        .expansion-timeline {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border: 3px solid #d90000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(217,0,0,0.2);
+        }
+        .timeline-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d90000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .timeline-phases {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 480px;
+        }
+        .timeline-phase {
+            background: white;
+            border: 2px solid #d90000;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .phase-date {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d90000, #ff1a1a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .phase-content {
+            flex: 1;
+        }
+        .phase-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d90000;
+            margin-bottom: 8px;
+        }
+        .phase-description {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .global-impact {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #005bac, #0066cc);
+            color: white;
+            padding: 30px 60px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,91,172,0.3);
+        }
+        .impact-text {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .highlight-number {
+            color: #ffff00;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div class="title">グローバル展開戦略</div>
+            <div class="subtitle">〜世界市場での競争優位確立〜</div>
+        </div>
+        
+        <div class="expansion-map">
+            <div class="world-regions">
+                <div class="map-title">ターゲット市場分析</div>
+                <div class="regions-grid">
+                    <div class="region-card priority">
+                        <div class="region-header">
+                            <div class="region-flag">🇺🇸</div>
+                            <div class="region-name">北米市場</div>
+                        </div>
+                        <div class="region-details">
+                            <div class="detail-item">
+                                <div class="detail-label">市場規模</div>
+                                <div class="detail-value priority-value">$2.5兆</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">成長率</div>
+                                <div class="detail-value priority-value">+15%/年</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">参入時期</div>
+                                <div class="detail-value priority-value">2025年Q3</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">優先度</div>
+                                <div class="detail-value priority-value">最高</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="region-card">
+                        <div class="region-header">
+                            <div class="region-flag">🇪🇺</div>
+                            <div class="region-name">欧州市場</div>
+                        </div>
+                        <div class="region-details">
+                            <div class="detail-item">
+                                <div class="detail-label">市場規模</div>
+                                <div class="detail-value">$1.8兆</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">成長率</div>
+                                <div class="detail-value">+12%/年</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">参入時期</div>
+                                <div class="detail-value">2026年Q1</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">優先度</div>
+                                <div class="detail-value">高</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="region-card">
+                        <div class="region-header">
+                            <div class="region-flag">🇸🇬</div>
+                            <div class="region-name">東南アジア</div>
+                        </div>
+                        <div class="region-details">
+                            <div class="detail-item">
+                                <div class="detail-label">市場規模</div>
+                                <div class="detail-value">$800億</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">成長率</div>
+                                <div class="detail-value">+25%/年</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">参入時期</div>
+                                <div class="detail-value">2025年Q4</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">優先度</div>
+                                <div class="detail-value">高</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="region-card">
+                        <div class="region-header">
+                            <div class="region-flag">🇦🇺</div>
+                            <div class="region-name">オセアニア</div>
+                        </div>
+                        <div class="region-details">
+                            <div class="detail-item">
+                                <div class="detail-label">市場規模</div>
+                                <div class="detail-value">$200億</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">成長率</div>
+                                <div class="detail-value">+18%/年</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">参入時期</div>
+                                <div class="detail-value">2026年Q2</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">優先度</div>
+                                <div class="detail-value">中</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expansion-timeline">
+                <div class="timeline-title">展開スケジュール</div>
+                <div class="timeline-phases">
+                    <div class="timeline-phase">
+                        <div class="phase-date">2025<br>Q3</div>
+                        <div class="phase-content">
+                            <div class="phase-title">北米進出開始</div>
+                            <div class="phase-description">シリコンバレー拠点設立<br>現地パートナー連携開始</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="phase-date">2025<br>Q4</div>
+                        <div class="phase-content">
+                            <div class="phase-title">ASEAN市場参入</div>
+                            <div class="phase-description">シンガポール・ハブ設立<br>東南アジア展開本格化</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="phase-date">2026<br>Q1</div>
+                        <div class="phase-content">
+                            <div class="phase-title">欧州市場開拓</div>
+                            <div class="phase-description">ロンドン・ベルリン拠点<br>GDPR対応サービス展開</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="phase-date">2026<br>Q2</div>
+                        <div class="phase-content">
+                            <div class="phase-title">全市場統合運営</div>
+                            <div class="phase-description">グローバル統一プラットフォーム<br>24時間サポート体制完成</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-phase">
+                        <div class="phase-date">2027<br>〜</div>
+                        <div class="phase-content">
+                            <div class="phase-title">世界市場リーダー</div>
+                            <div class="phase-description">グローバル標準技術確立<br>業界をリードする存在に</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="global-impact">
+            <div class="impact-text">
+                <span class="highlight-number">18ヶ月</span>で世界<span class="highlight-number">4地域</span>に展開、グローバル企業への進化
+            </div>
+        </div>
+    </div>
+</body>
+</html>

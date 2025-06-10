@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2030年ビジョン</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FFD700;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 215, 0, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .vision-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .future-scenario {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 25px;
+            margin: 2rem 0;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .impact-areas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .impact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        .impact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+        
+        .global-icon { background: rgba(255, 215, 0, 0.3); }
+        .innovation-icon { background: rgba(50, 205, 50, 0.3); }
+        .legacy-icon { background: rgba(255, 69, 0, 0.3); }
+        
+        .legacy-statement {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 69, 0, 0.1);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 69, 0, 0.3);
+        }
+        
+        .transformation-journey {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .journey-step {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .journey-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .journey-step:last-child::after {
+            display: none;
+        }
+        
+        .decoration-future {
+            position: absolute;
+            top: 60px;
+            right: 80px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 215, 0, 0.3);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        .decoration-infinity {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            width: 120px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-radius: 60px 60px 60px 60px;
+            transform: rotate(45deg);
+        }
+        
+        .decoration-infinity::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-future"></div>
+        <div class="decoration-infinity"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-6 fade-in-up">
+                2030年<span class="highlight">ビジョン</span>
+            </h1>
+            <h2 class="text-2xl text-gray-100 mb-8 fade-in-up">
+                AI時代の人材育成プラットフォームへ
+            </h2>
+            
+            <div class="future-scenario fade-in-up-delay-1">
+                <h3 class="text-3xl text-white mb-4 font-bold">
+                    <i class="fas fa-globe mr-3 text-yellow-300"></i>
+                    未来シナリオ
+                </h3>
+                <div class="text-xl text-white leading-relaxed">
+                    <span class="text-yellow-300 font-bold">「TANREN」</span>が世界標準の<br/>
+                    AI駆動人材育成プラットフォームとして<br/>
+                    <span class="text-yellow-300 font-bold">80億人の成長を支援</span>
+                </div>
+            </div>
+            
+            <div class="vision-box fade-in-up-delay-2 mb-6">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-chart-line mr-3 text-green-300"></i>
+                    変革の軌跡
+                </h3>
+                
+                <div class="transformation-journey">
+                    <div class="journey-step fade-in-up-delay-2">
+                        <div class="text-yellow-300 font-bold text-lg mb-2">2025</div>
+                        <div class="text-white text-sm">
+                            二次創業<br/>
+                            AI基盤構築
+                        </div>
+                    </div>
+                    
+                    <div class="journey-step fade-in-up-delay-2">
+                        <div class="text-yellow-300 font-bold text-lg mb-2">2027</div>
+                        <div class="text-white text-sm">
+                            グローバル展開<br/>
+                            市場リーダー
+                        </div>
+                    </div>
+                    
+                    <div class="journey-step fade-in-up-delay-3">
+                        <div class="text-yellow-300 font-bold text-lg mb-2">2028</div>
+                        <div class="text-white text-sm">
+                            戦略的Exit<br/>
+                            価値実現
+                        </div>
+                    </div>
+                    
+                    <div class="journey-step fade-in-up-delay-3">
+                        <div class="text-yellow-300 font-bold text-lg mb-2">2030</div>
+                        <div class="text-white text-sm">
+                            業界標準<br/>
+                            レガシー確立
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vision-box fade-in-up-delay-2">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-impact mr-3 text-purple-300"></i>
+                    社会への影響
+                </h3>
+                
+                <div class="impact-areas">
+                    <div class="impact-item fade-in-up-delay-2">
+                        <div class="impact-icon global-icon">
+                            <i class="fas fa-globe text-yellow-300"></i>
+                        </div>
+                        <h4 class="text-lg text-white font-bold mb-2">グローバルスタンダード</h4>
+                        <div class="text-gray-200 text-sm">
+                            世界中の企業が<br/>
+                            TANRENメソッドを採用
+                        </div>
+                    </div>
+                    
+                    <div class="impact-item fade-in-up-delay-2">
+                        <div class="impact-icon innovation-icon">
+                            <i class="fas fa-lightbulb text-green-300"></i>
+                        </div>
+                        <h4 class="text-lg text-white font-bold mb-2">イノベーション加速</h4>
+                        <div class="text-gray-200 text-sm">
+                            AI×人間協働による<br/>
+                            新たな価値創造
+                        </div>
+                    </div>
+                    
+                    <div class="impact-item fade-in-up-delay-3">
+                        <div class="impact-icon legacy-icon">
+                            <i class="fas fa-crown text-orange-300"></i>
+                        </div>
+                        <h4 class="text-lg text-white font-bold mb-2">日本発ブランド</h4>
+                        <div class="text-gray-200 text-sm">
+                            Made in Japanの<br/>
+                            AI技術世界進出
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legacy-statement fade-in-up-delay-3">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-monument mr-3 text-orange-300"></i>
+                    未来への遺産
+                </h3>
+                <div class="text-xl text-white leading-relaxed">
+                    <span class="text-orange-300 font-bold">「人の成長にテクノロジーで貢献する」</span><br/>
+                    この想いが世界中で実現され、<br/>
+                    新しい時代の人材育成のスタンダードを築く
+                </div>
+            </div>
+            
+            <div class="mt-8 text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-rocket mr-3 text-yellow-400"></i>
+                今日の決断が<span class="highlight">未来を創る</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>経営課題の本質</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF6B6B;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 107, 107, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .decoration-circle-1 {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+        }
+        
+        .decoration-triangle-1 {
+            position: absolute;
+            bottom: 50px;
+            right: 80px;
+            width: 120px;
+            height: 120px;
+            background: rgba(108, 92, 231, 0.1);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: rotate(30deg);
+        }
+        
+        .decoration-triangle-2 {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(236, 201, 75, 0.15);
+            clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
+        }
+        
+        .crisis-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-circle-1"></div>
+        <div class="decoration-triangle-1"></div>
+        <div class="decoration-triangle-2"></div>
+        
+        <div class="text-center z-10 max-w-6xl px-8">
+            <h1 class="title text-5xl text-white mb-8 fade-in-up">
+                経営課題の<span class="highlight">本質</span>
+            </h1>
+            
+            <div class="grid grid-cols-2 gap-8 mt-12">
+                <div class="crisis-box fade-in-up-delay-1">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-exclamation-triangle mr-3 text-yellow-400"></i>
+                        価格vs機能の矛盾
+                    </h3>
+                    <p class="text-gray-200 text-lg">
+                        700円のサービスに<br/>
+                        <span class="text-yellow-300">ChatGPT同等機能</span>を要求される
+                    </p>
+                </div>
+                
+                <div class="crisis-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-users mr-3 text-blue-400"></i>
+                        初心者向けの罠
+                    </h3>
+                    <p class="text-gray-200 text-lg">
+                        複雑化により<br/>
+                        <span class="text-blue-300">開発負債</span>が蓄積
+                    </p>
+                </div>
+                
+                <div class="crisis-box fade-in-up-delay-2">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-robot mr-3 text-green-400"></i>
+                        AGI時代の脅威
+                    </h3>
+                    <p class="text-gray-200 text-lg">
+                        <span class="text-green-300">内製化リスク</span>の<br/>
+                        急速な高まり
+                    </p>
+                </div>
+                
+                <div class="crisis-box fade-in-up-delay-3">
+                    <h3 class="text-2xl text-white mb-4 font-bold">
+                        <i class="fas fa-chart-line-down mr-3 text-purple-400"></i>
+                        スケール限界
+                    </h3>
+                    <p class="text-gray-200 text-lg">
+                        3名体制での<br/>
+                        <span class="text-purple-300">成長限界</span>に到達
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-2xl text-gray-300 fade-in-up-delay-3">
+                <i class="fas fa-arrow-right mr-3 text-red-400"></i>
+                戦略的ピボットの<span class="highlight">必要性</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

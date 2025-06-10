@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>次の3ヶ月への飛躍</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial Black', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .slide h1 { 
+    font-size: 60px; 
+    color: #fff; 
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  .vision-content {
+    max-width: 900px;
+    text-align: center;
+  }
+  .vision-statement {
+    font-size: 36px;
+    color: #fdcb6e;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.4;
+  }
+  .vision-goals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .goal-item {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+  }
+  .goal-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+  .goal-title {
+    font-size: 24px;
+    color: #fdcb6e;
+    margin-bottom: 15px;
+  }
+  .goal-description {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.5;
+    font-weight: normal;
+  }
+  .excitement-indicator {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 60px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="excitement-indicator">🚀</div>
+  
+  <h1>次の3ヶ月への飛躍</h1>
+  
+  <div class="vision-content">
+    <div class="vision-statement">
+      ここまでの成功体験を基盤として、<br>
+      さらなる<strong>AI活用の高度化</strong>と<br>
+      <strong>組織全体のDX加速</strong>を実現します
+    </div>
+    
+    <div class="vision-goals">
+      <div class="goal-item">
+        <div class="goal-icon">🎯</div>
+        <div class="goal-title">業務自動化の拡大</div>
+        <div class="goal-description">
+          現在の3倍規模での業務プロセス自動化を目指し、生産性のさらなる向上を実現
+        </div>
+      </div>
+      
+      <div class="goal-item">
+        <div class="goal-icon">🌟</div>
+        <div class="goal-title">AI活用エキスパート育成</div>
+        <div class="goal-description">
+          各部署にAI活用のスペシャリストを配置し、自律的なイノベーション創出体制を構築
+        </div>
+      </div>
+      
+      <div class="goal-item">
+        <div class="goal-icon">🔄</div>
+        <div class="goal-title">顧客価値創造</div>
+        <div class="goal-description">
+          AI活用で得た知見をお客様のDX支援に活かし、新たなビジネス機会を創出
+        </div>
+      </div>
+      
+      <div class="goal-item">
+        <div class="goal-icon">⚡</div>
+        <div class="goal-title">イノベーション文化</div>
+        <div class="goal-description">
+          失敗を恐れず新しい技術に挑戦する、組織全体のマインドセット変革を推進
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

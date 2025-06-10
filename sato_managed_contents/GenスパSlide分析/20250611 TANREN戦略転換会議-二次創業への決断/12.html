@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二次創業戦略</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #8360c3 0%, #2ebf91 50%, #ffeaa7 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF1744;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 23, 68, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .strategy-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .new-business-pillar {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin: 0.5rem;
+        }
+        
+        .separation-strategy {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .old-business, .new-business {
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .old-business {
+            background: rgba(255, 165, 0, 0.2);
+            border: 2px solid rgba(255, 165, 0, 0.4);
+        }
+        
+        .new-business {
+            background: rgba(0, 255, 127, 0.2);
+            border: 2px solid rgba(0, 255, 127, 0.4);
+        }
+        
+        .philosophy-contrast {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            gap: 2rem;
+        }
+        
+        .philosophy-item {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .human-focused { background: rgba(255, 193, 7, 0.2); }
+        .ai-focused { background: rgba(33, 150, 243, 0.2); }
+        
+        .decoration-rocket {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 23, 68, 0.3);
+            clip-path: polygon(50% 0%, 60% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 40% 35%);
+            transform: rotate(45deg);
+        }
+        
+        .decoration-separation {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            width: 120px;
+            height: 80px;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1) 0px,
+                rgba(255, 255, 255, 0.1) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decoration-rocket"></div>
+        <div class="decoration-separation"></div>
+        
+        <div class="text-center z-10 max-w-7xl px-8">
+            <h1 class="title text-5xl text-white mb-6 fade-in-up">
+                <span class="highlight">二次創業</span>戦略
+            </h1>
+            <h2 class="text-2xl text-gray-100 mb-8 fade-in-up">
+                既存しがらみからの完全分離による新事業創造
+            </h2>
+            
+            <div class="strategy-box fade-in-up-delay-1 mb-6">
+                <h3 class="text-3xl text-white mb-6 font-bold">
+                    <i class="fas fa-cut mr-3 text-red-300"></i>
+                    完全分離アプローチ
+                </h3>
+                
+                <div class="separation-strategy">
+                    <div class="old-business fade-in-up-delay-2">
+                        <h4 class="text-xl text-white font-bold mb-2">既存事業</h4>
+                        <div class="text-gray-200 text-sm">
+                            • バージョン9で完了<br/>
+                            • 著名人ブランド活用<br/>
+                            • 安定収益確保<br/>
+                            • 新規開発停止
+                        </div>
+                    </div>
+                    
+                    <div class="text-4xl text-white">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    
+                    <div class="new-business fade-in-up-delay-3">
+                        <h4 class="text-xl text-white font-bold mb-2">新法人事業</h4>
+                        <div class="text-gray-200 text-sm">
+                            • 完全新設計<br/>
+                            • 世界標準対応<br/>
+                            • AI完全自動化<br/>
+                            • バイアウト設計
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="strategy-box fade-in-up-delay-2 mb-6">
+                <h3 class="text-2xl text-white mb-4 font-bold">
+                    <i class="fas fa-balance-scale mr-3 text-yellow-300"></i>
+                    思想の対比
+                </h3>
+                
+                <div class="philosophy-contrast">
+                    <div class="philosophy-item human-focused fade-in-up-delay-2">
+                        <h4 class="text-lg text-white font-bold mb-2">従来TANREN</h4>
+                        <div class="text-gray-800 text-sm">
+                            ヒューマンフィードバック重視<br/>
+                            佐藤個人による評価<br/>
+                            日本市場特化
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-item ai-focused fade-in-up-delay-3">
+                        <h4 class="text-lg text-white font-bold mb-2">次世代事業</h4>
+                        <div class="text-gray-800 text-sm">
+                            AI完全自動化<br/>
+                            アルゴリズム評価<br/>
+                            グローバル展開
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-4">
+                <div class="new-business-pillar fade-in-up-delay-2">
+                    <i class="fas fa-globe text-3xl text-green-300 mb-2"></i>
+                    <div class="text-white font-bold">非言語対応</div>
+                    <div class="text-gray-200 text-xs">世界市場参入</div>
+                </div>
+                
+                <div class="new-business-pillar fade-in-up-delay-2">
+                    <i class="fas fa-robot text-3xl text-blue-300 mb-2"></i>
+                    <div class="text-white font-bold">完全自動化</div>
+                    <div class="text-gray-200 text-xs">手離れの良い運営</div>
+                </div>
+                
+                <div class="new-business-pillar fade-in-up-delay-3">
+                    <i class="fas fa-chart-line text-3xl text-purple-300 mb-2"></i>
+                    <div class="text-white font-bold">高収益性</div>
+                    <div class="text-gray-200 text-xs">500-1000万規模</div>
+                </div>
+                
+                <div class="new-business-pillar fade-in-up-delay-3">
+                    <i class="fas fa-handshake text-3xl text-orange-300 mb-2"></i>
+                    <div class="text-white font-bold">バイアウト</div>
+                    <div class="text-gray-200 text-xs">5年以内実現</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-2xl text-white fade-in-up-delay-3">
+                <i class="fas fa-seedling mr-3 text-green-400"></i>
+                ゼロからの<span class="highlight">価値創造</span>による競争優位確立
+            </div>
+        </div>
+    </div>
+</body>
+</html>
