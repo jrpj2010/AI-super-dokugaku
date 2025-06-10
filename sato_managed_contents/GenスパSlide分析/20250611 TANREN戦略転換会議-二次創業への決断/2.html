@@ -16,7 +16,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #2c1810 0%, #3d2914 50%, #FF6B6B 100%);
             font-family: 'Noto Sans JP', sans-serif;
         }
         
@@ -62,7 +62,7 @@
             right: 80px;
             width: 120px;
             height: 120px;
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(255, 107, 107, 0.15);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             transform: rotate(30deg);
         }
@@ -73,17 +73,21 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background: rgba(236, 201, 75, 0.15);
+            background: rgba(255, 107, 107, 0.15);
             clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
         }
         
         .crisis-box {
             background: rgba(255, 107, 107, 0.1);
             border: 2px solid rgba(255, 107, 107, 0.3);
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 1.5rem;
-            margin: 1rem 0;
+            margin: 0.5rem;
             backdrop-filter: blur(10px);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .fade-in-up {

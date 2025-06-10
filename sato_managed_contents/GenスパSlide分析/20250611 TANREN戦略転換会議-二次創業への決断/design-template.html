@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANREN統一デザインテンプレート</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 統一デザイン基準 */
+        
+        /* 1280x720px固定レイアウト */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Noto Sans JP', sans-serif;
+            /* 統一カラーパレット: 赤系メインのグラデーション */
+            background: linear-gradient(135deg, #2c1810 0%, #3d2914 50%, #FF6B6B 100%);
+        }
+        
+        /* 統一タイトルスタイル */
+        .title {
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            font-size: 3rem; /* 統一フォントサイズ */
+        }
+        
+        /* 統一ハイライト */
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF6B6B;
+            transform: rotate(-1deg);
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: rgba(255, 107, 107, 0.3);
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        /* 統一カードスタイル */
+        .card {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            backdrop-filter: blur(10px);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* 統一アイコンサイズ */
+        .icon-standard {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+        
+        /* 統一装飾要素 */
+        .decoration-triangle-red {
+            position: absolute;
+            background: rgba(255, 107, 107, 0.15);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .decoration-circle-red {
+            position: absolute;
+            border: 2px solid rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+        }
+        
+        .decoration-diamond-red {
+            position: absolute;
+            background: rgba(255, 107, 107, 0.1);
+            transform: rotate(45deg);
+        }
+        
+        /* 統一アニメーション */
+        .fade-in-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in-up-delay-3 {
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 統一文字サイズ */
+        .text-title { font-size: 3rem; }
+        .text-subtitle { font-size: 2rem; }
+        .text-body { font-size: 1.125rem; }
+        .text-small { font-size: 1rem; }
+        
+        /* 統一間隔 */
+        .spacing-section { margin: 2rem 0; }
+        .spacing-element { margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <!-- 統一デザインテンプレート使用例 -->
+    <div class="slide-container">
+        <!-- 装飾要素 -->
+        <div class="decoration-triangle-red" style="top: 60px; right: 80px; width: 100px; height: 100px;"></div>
+        <div class="decoration-circle-red" style="top: -50px; left: -50px; width: 200px; height: 200px;"></div>
+        <div class="decoration-diamond-red" style="bottom: 60px; left: 60px; width: 80px; height: 80px;"></div>
+        
+        <!-- メインコンテンツ -->
+        <div class="text-center z-10 max-w-6xl px-8">
+            <h1 class="title text-white mb-8 fade-in-up">
+                統一デザイン<span class="highlight">テンプレート</span>
+            </h1>
+            
+            <div class="grid grid-cols-2 gap-6 spacing-section">
+                <div class="card fade-in-up-delay-1">
+                    <h3 class="text-subtitle text-white mb-4 font-bold">
+                        <i class="fas fa-star icon-standard text-yellow-400"></i>
+                        カードタイトル1
+                    </h3>
+                    <p class="text-body text-gray-200">
+                        統一されたカードデザインのサンプルテキストです。
+                    </p>
+                </div>
+                
+                <div class="card fade-in-up-delay-2">
+                    <h3 class="text-subtitle text-white mb-4 font-bold">
+                        <i class="fas fa-rocket icon-standard text-blue-400"></i>
+                        カードタイトル2
+                    </h3>
+                    <p class="text-body text-gray-200">
+                        統一されたカードデザインのサンプルテキストです。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
