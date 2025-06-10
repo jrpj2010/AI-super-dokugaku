@@ -116,3 +116,4 @@ backup/
 **/.pnpm-store/
 **/coverage/
 **/.nyc_output/
+github-youtube-transcript/
