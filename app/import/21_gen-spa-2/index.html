@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gen-Spa 2.0 - プレゼンテーション生成システム</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+      body {
+        font-family: 'Noto Sans JP', sans-serif !important; /* Ensure Noto Sans JP is prioritized */
+        background-color: #f8f9fa; /* Tailwind's gray-50 equivalent */
+        color: #212529; /* Tailwind's gray-800 equivalent */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Custom scrollbar for webkit browsers - Light theme with wine-red accent */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #e9ecef; /* gray-200 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #BE123C; /* rose-700 (wine-red) */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9F1239; /* rose-800 (darker wine-red) */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.4.0",
+    "react-markdown": "https://esm.sh/react-markdown@8.0.7",
+    "remark-gfm": "https://esm.sh/remark-gfm@3.0.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <noscript>このアプリを実行するにはJavaScriptを有効にする必要があります。</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
