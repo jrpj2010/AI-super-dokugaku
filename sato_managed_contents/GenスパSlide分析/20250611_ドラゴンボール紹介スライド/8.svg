@@ -1,0 +1,225 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="evolution-bg" cx="50%" cy="50%">
+            <stop offset="0%" style="stop-color:#ffb300;" />
+            <stop offset="30%" style="stop-color:#ff8f00;" />
+            <stop offset="70%" style="stop-color:#e65100;" />
+            <stop offset="100%" style="stop-color:#1a1a1a;" />
+        </radialGradient>
+        
+        <linearGradient id="super-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffeb3b;" />
+            <stop offset="50%" style="stop-color:#ffc107;" />
+            <stop offset="100%" style="stop-color:#ff8f00;" />
+        </linearGradient>
+
+        <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2196f3;" />
+            <stop offset="50%" style="stop-color:#1976d2;" />
+            <stop offset="100%" style="stop-color:#0d47a1;" />
+        </linearGradient>
+
+        <filter id="super-glow">
+            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="evolution-glow">
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 68px; 
+            font-weight: bold; 
+            fill: url(#super-gradient);
+            filter: url(#super-glow);
+        }
+        .subtitle { 
+            font-size: 32px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .form-title {
+            font-size: 22px;
+            font-weight: bold;
+            fill: #fff3e0;
+        }
+        .form-description {
+            font-size: 16px;
+            fill: #ffcc80;
+        }
+        .evolution-text {
+            font-size: 24px;
+            fill: #fff3e0;
+        }
+        .power-level {
+            font-size: 18px;
+            font-weight: bold;
+            fill: #ffeb3b;
+        }
+
+        
+        }
+        
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .fade-in {
+            
+        }
+        
+        .power-aura {
+            
+        }
+        
+        .energy-flow {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 24px !important; }
+            .form-title { font-size: 18px !important; }
+            .form-description { font-size: 14px !important; }
+            .evolution-text { font-size: 18px !important; }
+            .power-level { font-size: 16px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#evolution-bg)" />
+
+    <!-- エネルギーオーラ -->
+    <ellipse cx="640" cy="360" rx="500" ry="250" fill="rgba(255,235,59,0.2)" class="power-aura mobile-hide"/>
+    <ellipse cx="640" cy="360" rx="350" ry="180" fill="rgba(255,193,7,0.3)" class="power-aura mobile-hide" />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 90)" text-anchor="middle">
+        <text y="0" class="title fade-in power-aura">
+            変身進化
+        </text>
+        <text y="60" class="subtitle fade-in" >
+            ～ <tspan class="highlight">超サイヤ人</tspan>への覚醒と<tspan class="highlight">限界突破</tspan> ～
+        </text>
+    </g>
+
+    <!-- 変身段階の表示 -->
+    
+    <!-- 通常悟空 -->
+    <g transform="translate(150, 280)" class="fade-in energy-flow" >
+        <circle r="40" fill="#ff7043" filter="url(#super-glow)" />
+        <circle cx="-8" cy="-8" r="3" fill="#333" />
+        <circle cx="8" cy="-8" r="3" fill="#333" />
+        <text y="70" text-anchor="middle" class="form-title">通常状態</text>
+        <text y="90" text-anchor="middle" class="form-description">純粋な心の戦士</text>
+        <text y="110" text-anchor="middle" class="power-level">パワーレベル：基準値</text>
+    </g>
+
+    <!-- 超サイヤ人1 -->
+    <g transform="translate(350, 260)" class="fade-in energy-flow" >
+        <circle r="45" fill="#ffeb3b" filter="url(#super-glow)" />
+        <circle cx="-8" cy="-8" r="3" fill="#333" />
+        <circle cx="8" cy="-8" r="3" fill="#333" />
+        <path d="M -20,-20 Q 0,-35 20,-20" stroke="#ffcc02" stroke-width="3" fill="none" />
+        <text y="75" text-anchor="middle" class="form-title">超サイヤ人</text>
+        <text y="95" text-anchor="middle" class="form-description">怒りによる覚醒</text>
+        <text y="115" text-anchor="middle" class="power-level">50倍パワーアップ</text>
+    </g>
+
+    <!-- 超サイヤ人2 -->
+    <g transform="translate(550, 240)" class="fade-in energy-flow" >
+        <circle r="48" fill="#ffc107" filter="url(#super-glow)" />
+        <circle cx="-8" cy="-8" r="3" fill="#333" />
+        <circle cx="8" cy="-8" r="3" fill="#333" />
+        <path d="M -25,-25 Q 0,-40 25,-25" stroke="#ff8f00" stroke-width="4" fill="none" />
+        <path d="M -15,-35 L -10,-45 M 0,-40 L 5,-50 M 15,-35 L 20,-45" stroke="#ffeb3b" stroke-width="2" />
+        <text y="78" text-anchor="middle" class="form-title">超サイヤ人2</text>
+        <text y="98" text-anchor="middle" class="form-description">さらなる進化</text>
+        <text y="118" text-anchor="middle" class="power-level">100倍の力</text>
+    </g>
+
+    <!-- 超サイヤ人3 -->
+    <g transform="translate(750, 220)" class="fade-in energy-flow" >
+        <ellipse rx="45" ry="55" fill="#ff8f00" filter="url(#super-glow)" />
+        <circle cx="-8" cy="-5" r="3" fill="#333" />
+        <circle cx="8" cy="-5" r="3" fill="#333" />
+        <path d="M -30,-30 Q 0,-50 30,-30" stroke="#e65100" stroke-width="5" fill="none" />
+        <path d="M -40,-25 Q 0,-60 40,-25" stroke="#ff6f00" stroke-width="3" fill="none" />
+        <text y="85" text-anchor="middle" class="form-title">超サイヤ人3</text>
+        <text y="105" text-anchor="middle" class="form-description">究極の変身</text>
+        <text y="125" text-anchor="middle" class="power-level">400倍の破壊力</text>
+    </g>
+
+    <!-- 超サイヤ人ゴッド -->
+    <g transform="translate(950, 260)" class="fade-in energy-flow" >
+        <circle r="50" fill="#e53935" filter="url(#evolution-glow)" />
+        <circle cx="-8" cy="-8" r="3" fill="#333" />
+        <circle cx="8" cy="-8" r="3" fill="#333" />
+        <path d="M -20,-20 Q 0,-30 20,-20" stroke="#c62828" stroke-width="3" fill="none" />
+        <circle cx="0" cy="0" r="60" fill="none" stroke="rgba(229,57,53,0.3)" stroke-width="2" class="power-aura"/>
+        <text y="80" text-anchor="middle" class="form-title">超サイヤ人ゴッド</text>
+        <text y="100" text-anchor="middle" class="form-description">神の力を得た戦士</text>
+        <text y="120" text-anchor="middle" class="power-level">神レベルの強さ</text>
+    </g>
+
+    <!-- 超サイヤ人ブルー -->
+    <g transform="translate(1130, 280)" class="fade-in energy-flow" >
+        <circle r="48" fill="#2196f3" filter="url(#evolution-glow)" />
+        <circle cx="-8" cy="-8" r="3" fill="#333" />
+        <circle cx="8" cy="-8" r="3" fill="#333" />
+        <path d="M -20,-20 Q 0,-30 20,-20" stroke="#1565c0" stroke-width="3" fill="none" />
+        <circle cx="0" cy="0" r="65" fill="none" stroke="rgba(33,150,243,0.4)" stroke-width="3" class="power-aura"/>
+        <text y="78" text-anchor="middle" class="form-title">超サイヤ人ブルー</text>
+        <text y="98" text-anchor="middle" class="form-description">完璧なコントロール</text>
+        <text y="118" text-anchor="middle" class="power-level">神を超えし力</text>
+    </g>
+
+    <!-- 進化の矢印と流れ -->
+    <g class="mobile-hide">
+        <path d="M 190 280 L 310 260" stroke="rgba(255,235,59,0.8)" stroke-width="3" fill="none" 
+              marker-end="url(#arrowhead)" class="fade-in" />
+        <path d="M 390 260 L 510 240" stroke="rgba(255,235,59,0.8)" stroke-width="3" fill="none" 
+              class="fade-in" />
+        <path d="M 590 240 L 710 220" stroke="rgba(255,235,59,0.8)" stroke-width="3" fill="none" 
+              class="fade-in" />
+        <path d="M 790 230 L 910 250" stroke="rgba(255,235,59,0.8)" stroke-width="3" fill="none" 
+              class="fade-in" />
+        <path d="M 990 260 L 1090 270" stroke="rgba(255,235,59,0.8)" stroke-width="3" fill="none" 
+              class="fade-in" />
+    </g>
+
+    <!-- 底部メッセージ -->
+    <g transform="translate(640, 480)" text-anchor="middle">
+        <rect x="-580" y="-30" width="1160" height="140" fill="rgba(0,0,0,0.7)" rx="20" class="fade-in" />
+        
+        <text y="0" class="evolution-text fade-in" >
+            <tspan class="highlight">変身</tspan>は外見の変化ではなく、<tspan class="highlight">心の成長</tspan>の証
+        </text>
+        <text y="30" class="evolution-text fade-in" >
+            限界を突破するたび、新たな<tspan class="highlight">可能性</tspan>が開かれる
+        </text>
+        <text y="60" class="evolution-text fade-in" >
+            「もっと強く」→「大切なものを守るために」→ <tspan class="highlight">真の強さ</tspan>への道 ⚡
+        </text>
+        <text y="90" class="evolution-text fade-in" >
+            これこそが<tspan class="highlight">ドラゴンボール</tspan>が描く<tspan class="highlight">成長物語</tspan>の真髄
+        </text>
+    </g>
+
+</svg>

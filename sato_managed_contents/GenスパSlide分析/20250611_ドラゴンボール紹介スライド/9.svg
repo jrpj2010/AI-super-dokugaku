@@ -1,0 +1,219 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="global-bg" cx="50%" cy="50%">
+            <stop offset="0%" style="stop-color:#1976d2;" />
+            <stop offset="30%" style="stop-color:#1565c0;" />
+            <stop offset="70%" style="stop-color:#0d47a1;" />
+            <stop offset="100%" style="stop-color:#1a1a1a;" />
+        </radialGradient>
+        
+        <linearGradient id="world-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#42a5f5;" />
+            <stop offset="50%" style="stop-color:#2196f3;" />
+            <stop offset="100%" style="stop-color:#1976d2;" />
+        </linearGradient>
+
+        <filter id="global-glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="world-glow">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 68px; 
+            font-weight: bold; 
+            fill: url(#world-gradient);
+            filter: url(#global-glow);
+        }
+        .subtitle { 
+            font-size: 32px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .impact-title {
+            font-size: 24px;
+            font-weight: bold;
+            fill: #e3f2fd;
+        }
+        .impact-description {
+            font-size: 18px;
+            fill: #bbdefb;
+        }
+        .global-text {
+            font-size: 22px;
+            fill: #e3f2fd;
+        }
+        .statistic {
+            font-size: 32px;
+            font-weight: bold;
+            fill: #42a5f5;
+        }
+
+            to { transform: rotate(360deg); }
+        }
+        
+        
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        
+        .fade-in {
+            
+        }
+        
+        .world-rotate {
+            
+        }
+        
+        .global-pulse {
+            
+        }
+        
+        .wave {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 24px !important; }
+            .impact-title { font-size: 20px !important; }
+            .impact-description { font-size: 16px !important; }
+            .global-text { font-size: 18px !important; }
+            .statistic { font-size: 24px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#global-bg)" />
+
+    <!-- 世界的な広がりを示す同心円 -->
+    <circle cx="640" cy="360" r="300" fill="none" stroke="rgba(66,165,245,0.3)" stroke-width="2" 
+            class="global-pulse mobile-hide" />
+    <circle cx="640" cy="360" r="200" fill="none" stroke="rgba(66,165,245,0.4)" stroke-width="2" 
+            class="global-pulse mobile-hide"  />
+    <circle cx="640" cy="360" r="100" fill="none" stroke="rgba(66,165,245,0.5)" stroke-width="2" 
+            class="global-pulse mobile-hide"  />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 90)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            文化的影響
+        </text>
+        <text y="60" class="subtitle fade-in" >
+            ～ 世界に広がる<tspan class="highlight">ドラゴンボール</tspan>現象 ～
+        </text>
+    </g>
+
+    <!-- 中央：地球のイメージ -->
+    <g transform="translate(640, 360)" class="fade-in" >
+        <circle r="80" fill="#4caf50" filter="url(#world-glow)" class="world-rotate"/>
+        <ellipse cx="-30" cy="-20" rx="20" ry="15" fill="#2196f3" opacity="0.8"/>
+        <ellipse cx="25" cy="15" rx="25" ry="18" fill="#2196f3" opacity="0.8"/>
+        <ellipse cx="-10" cy="40" rx="15" ry="10" fill="#2196f3" opacity="0.8"/>
+        <text y="110" text-anchor="middle" class="impact-title">世界規模の文化現象</text>
+    </g>
+
+    <!-- 影響分野の表示 -->
+    
+    <!-- アニメ・漫画業界への影響 -->
+    <g transform="translate(200, 250)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >📚 アニメ・漫画</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >バトル漫画の原型確立</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >アニメ演出技法の革新</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >世界的アニメブームの先駆け</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >業界基準</text>
+    </g>
+
+    <!-- ゲーム業界への影響 -->
+    <g transform="translate(480, 200)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >🎮 ゲーム業界</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >格闘ゲームジャンル確立</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >RPGキャラクター設計</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >ゲーム演出・エフェクト</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >50作品以上</text>
+    </g>
+
+    <!-- スポーツ界への影響 -->
+    <g transform="translate(800, 200)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >⚽ スポーツ界</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >選手のパフォーマンス</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >「超サイヤ人」表現</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >限界突破のメタファー</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >世界共通語</text>
+    </g>
+
+    <!-- インターネット文化への影響 -->
+    <g transform="translate(1080, 250)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >🌐 ネット文化</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >ミーム・ネタ文化</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >SNSでの引用・パロディ</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >世代を超えた共通言語</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >無限拡散</text>
+    </g>
+
+    <!-- 教育・自己啓発への影響 -->
+    <g transform="translate(200, 500)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >📖 教育分野</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >成長マインドセット</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >努力・友情・勝利</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >自己啓発書での引用</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >人生哲学</text>
+    </g>
+
+    <!-- 国際交流への影響 -->
+    <g transform="translate(1080, 500)">
+        <rect x="-90" y="-40" width="180" height="120" fill="rgba(0,0,0,0.6)" rx="15" class="fade-in" />
+        <text y="-20" text-anchor="middle" class="impact-title fade-in" >🤝 国際交流</text>
+        <text y="0" text-anchor="middle" class="impact-description fade-in" >日本文化の象徴</text>
+        <text y="20" text-anchor="middle" class="impact-description fade-in" >言語の壁を越える</text>
+        <text y="40" text-anchor="middle" class="impact-description fade-in" >世界共通の話題</text>
+        <text y="60" text-anchor="middle" class="statistic fade-in" >文化大使</text>
+    </g>
+
+    <!-- 底部まとめメッセージ -->
+    <g transform="translate(640, 650)" text-anchor="middle">
+        <rect x="-580" y="-40" width="1160" height="80" fill="rgba(0,0,0,0.8)" rx="20" class="fade-in" />
+        
+        <text y="-15" class="global-text fade-in" >
+            <tspan class="highlight">ドラゴンボール</tspan>は単なる娯楽を超えて
+        </text>
+        <text y="15" class="global-text fade-in" >
+            世界中の人々の<tspan class="highlight">心</tspan>と<tspan class="highlight">文化</tspan>に影響を与え続ける<tspan class="highlight">文化現象</tspan> 🌟
+        </text>
+    </g>
+
+    <!-- 世界各地への広がりを示すライン -->
+    <g class="mobile-hide">
+        <path d="M 640 360 L 200 280" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+        <path d="M 640 360 L 480 200" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+        <path d="M 640 360 L 800 200" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+        <path d="M 640 360 L 1080 280" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+        <path d="M 640 360 L 200 500" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+        <path d="M 640 360 L 1080 500" stroke="rgba(66,165,245,0.6)" stroke-width="2" class="fade-in wave" />
+    </g>
+
+</svg>

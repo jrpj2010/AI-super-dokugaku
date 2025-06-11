@@ -90,25 +90,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onApiKey
           </button>
         </div>
 
-        <div className="mb-6 p-3 bg-red-900 bg-opacity-30 border border-red-700 rounded-md text-red-200">
-          <div className="flex items-start">
-            <ExclamationTriangleIcon className="w-6 h-6 mr-3 mt-0.5 flex-shrink-0 text-red-400" />
-            <div>
-              <h4 className="font-semibold text-red-300">セキュリティ警告 (Security Warning)</h4>
-              <p className="text-sm leading-relaxed mt-1">
-                APIキーはブラウザのローカルストレージに保存されます。これはセキュリティリスクを伴います。
-                本番環境では、APIキーをバックエンドサーバーで管理することを強く推奨します。
-              </p>
-              <p className="text-xs text-gray-400 mt-2">
-                (The API key will be stored in browser's localStorage. This poses security risks. In production, it's strongly recommended to manage API keys on a backend server.)
-              </p>
-            </div>
-          </div>
-        </div>
-
+        {/* API Key Input Section */}
         <div className="mb-6">
           <label htmlFor="api-key-input" className="block text-sm font-medium text-gray-300 mb-2">
-            YouTube Data API v3 キー (YouTube Data API v3 Key)
+            YouTube Data API v3 キー (YouTube Data API v3 Key) <span className="text-red-400">*</span>
           </label>
           <div className="relative">
             <input
@@ -134,9 +119,25 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onApiKey
           </div>
           <p className="text-xs text-gray-400 mt-1">
             Google Cloud Consoleでプロジェクトを作成し、YouTube Data API v3を有効化してAPIキーを取得してください。
-            (Create a project in Google Cloud Console, enable YouTube Data API v3, and obtain an API key.)
           </p>
         </div>
+
+        <div className="mb-6 p-3 bg-red-900 bg-opacity-30 border border-red-700 rounded-md text-red-200">
+          <div className="flex items-start">
+            <ExclamationTriangleIcon className="w-6 h-6 mr-3 mt-0.5 flex-shrink-0 text-red-400" />
+            <div>
+              <h4 className="font-semibold text-red-300">セキュリティ警告 (Security Warning)</h4>
+              <p className="text-sm leading-relaxed mt-1">
+                APIキーはブラウザのローカルストレージに保存されます。これはセキュリティリスクを伴います。
+                本番環境では、APIキーをバックエンドサーバーで管理することを強く推奨します。
+              </p>
+              <p className="text-xs text-gray-400 mt-2">
+                (The API key will be stored in browser's localStorage. This poses security risks. In production, it's strongly recommended to manage API keys on a backend server.)
+              </p>
+            </div>
+          </div>
+        </div>
+
 
         <div className="mb-6 p-3 bg-blue-900 bg-opacity-30 border border-blue-700 rounded-md text-blue-200">
           <div className="flex items-start">

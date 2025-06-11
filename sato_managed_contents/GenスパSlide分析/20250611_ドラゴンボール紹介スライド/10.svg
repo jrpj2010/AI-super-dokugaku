@@ -1,0 +1,223 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="finale-bg" cx="50%" cy="50%">
+            <stop offset="0%" style="stop-color:#ff6b35;" />
+            <stop offset="30%" style="stop-color:#f7931e;" />
+            <stop offset="70%" style="stop-color:#2c1810;" />
+            <stop offset="100%" style="stop-color:#1a1a1a;" />
+        </radialGradient>
+        
+        <linearGradient id="finale-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffb300;" />
+            <stop offset="50%" style="stop-color:#ff8f00;" />
+            <stop offset="100%" style="stop-color:#e65100;" />
+        </linearGradient>
+
+        <filter id="finale-glow">
+            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="adventure-glow">
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 72px; 
+            font-weight: bold; 
+            fill: url(#finale-gradient);
+            filter: url(#finale-glow);
+        }
+        .subtitle { 
+            font-size: 36px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .invitation-text {
+            font-size: 28px;
+            fill: #fff3e0;
+        }
+        .cta-text {
+            font-size: 32px;
+            font-weight: bold;
+            fill: #ffcc02;
+        }
+        .recommendation {
+            font-size: 20px;
+            fill: #ffcc80;
+        }
+        .sparkle-text {
+            font-size: 48px;
+            fill: #ffeb3b;
+        }
+
+            25% { opacity: 0.8; transform: scale(1.05) rotate(2deg); }
+        }
+        
+            33% { opacity: 1; transform: translateY(-15px) scale(1.2); }
+            66% { opacity: 0.8; transform: translateY(-5px) scale(0.9); }
+        }
+        
+        
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            
+        }
+        
+        .celebration {
+            
+        }
+        
+        .sparkle {
+            
+        }
+        
+        .invitation {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 28px !important; }
+            .invitation-text { font-size: 22px !important; }
+            .cta-text { font-size: 26px !important; }
+            .recommendation { font-size: 18px !important; }
+            .sparkle-text { font-size: 36px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#finale-bg)" />
+
+    <!-- 祝祭的な光の輪 -->
+    <circle cx="640" cy="360" r="350" fill="none" stroke="rgba(255,179,0,0.3)" stroke-width="3" 
+            class="celebration mobile-hide" />
+    <circle cx="640" cy="360" r="280" fill="none" stroke="rgba(255,204,2,0.4)" stroke-width="2" 
+            class="celebration mobile-hide"  />
+    <circle cx="640" cy="360" r="210" fill="none" stroke="rgba(255,235,59,0.5)" stroke-width="2" 
+            class="celebration mobile-hide"  />
+
+    <!-- スパークル装飾 -->
+    <text x="150" y="150" class="sparkle-text sparkle" >✨</text>
+    <text x="1100" y="180" class="sparkle-text sparkle" >⭐</text>
+    <text x="200" y="550" class="sparkle-text sparkle" >💫</text>
+    <text x="1050" y="580" class="sparkle-text sparkle" >🌟</text>
+    <text x="100" y="350" class="sparkle-text sparkle" >✨</text>
+    <text x="1180" y="380" class="sparkle-text sparkle" >⭐</text>
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 100)" text-anchor="middle">
+        <text y="0" class="title fade-in celebration">
+            まとめ
+        </text>
+        <text y="70" class="subtitle fade-in" >
+            ～ <tspan class="highlight">終わらない冒険</tspan>への招待 ～
+        </text>
+    </g>
+
+    <!-- 中央メッセージエリア -->
+    <g transform="translate(640, 280)" text-anchor="middle">
+        <rect x="-550" y="-60" width="1100" height="240" fill="rgba(0,0,0,0.6)" rx="25" class="fade-in invitation" />
+        
+        <text y="-30" class="invitation-text fade-in" >
+            <tspan class="highlight">ドラゴンボール</tspan>は単なる漫画・アニメではありません
+        </text>
+        
+        <text y="10" class="invitation-text fade-in" >
+            それは<tspan class="highlight">成長</tspan>、<tspan class="highlight">友情</tspan>、<tspan class="highlight">挑戦</tspan>、<tspan class="highlight">希望</tspan>の物語
+        </text>
+        
+        <text y="50" class="invitation-text fade-in" >
+            どんな困難も乗り越えられる<tspan class="highlight">力</tspan>と<tspan class="highlight">勇気</tspan>をくれる
+        </text>
+        
+        <text y="90" class="cta-text fade-in invitation" >
+            あなたも今日から<tspan class="highlight">冒険</tspan>を始めませんか？
+        </text>
+        
+        <text y="130" class="invitation-text fade-in" >
+            <tspan class="highlight">限界</tspan>なんてない。<tspan class="highlight">可能性</tspan>は無限大 ∞
+        </text>
+    </g>
+
+    <!-- おすすめアクション -->
+    <g transform="translate(320, 550)">
+        <rect x="-250" y="-50" width="500" height="120" fill="rgba(255,179,0,0.2)" rx="20" class="fade-in invitation" />
+        
+        <text y="-25" text-anchor="middle" class="cta-text fade-in" >🎬 今すぐ始めよう！</text>
+        <text y="0" text-anchor="middle" class="recommendation fade-in" >📖 漫画を読む</text>
+        <text y="25" text-anchor="middle" class="recommendation fade-in" >📺 アニメを観る</text>
+        <text y="50" text-anchor="middle" class="recommendation fade-in" >🎮 ゲームをプレイ</text>
+    </g>
+
+    <g transform="translate(960, 550)">
+        <rect x="-250" y="-50" width="500" height="120" fill="rgba(255,179,0,0.2)" rx="20" class="fade-in invitation" />
+        
+        <text y="-25" text-anchor="middle" class="cta-text fade-in" >🌟 つながろう！</text>
+        <text y="0" text-anchor="middle" class="recommendation fade-in" style="animation-delay": 2.8s;">👥 ファンコミュニティ参加</text>
+        <text y="25" text-anchor="middle" class="recommendation fade-in" >💬 感想をシェア</text>
+        <text y="50" text-anchor="middle" class="recommendation fade-in" >🎉 イベントに参加</text>
+    </g>
+
+    <!-- 最終メッセージ -->
+    <g transform="translate(640, 680)" text-anchor="middle">
+        <text y="0" class="invitation-text fade-in celebration" >
+            <tspan class="highlight">ドラゴンボール</tspan>の世界で、新たな<tspan class="highlight">自分</tspan>を発見しよう！ 🐉⚡
+        </text>
+    </g>
+
+    <!-- フィナーレ用ドラゴンボール装飾 -->
+    <g transform="translate(100, 200)" class="fade-in sparkle" >
+        <circle r="20" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="6" style="font-size: 18px; font-weight: bold; fill: #d84315;">★</text>
+    </g>
+    
+    <g transform="translate(200, 150)" class="fade-in sparkle" >
+        <circle r="18" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="5" style="font-size: 16px; font-weight: bold; fill: #d84315;">★★</text>
+    </g>
+    
+    <g transform="translate(1180, 200)" class="fade-in sparkle" >
+        <circle r="20" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="6" style="font-size: 18px; font-weight: bold; fill: #d84315;">★★★</text>
+    </g>
+    
+    <g transform="translate(1080, 150)" class="fade-in sparkle" >
+        <circle r="22" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="6" style="font-size: 16px; font-weight: bold; fill: #d84315;">★★★★</text>
+    </g>
+    
+    <g transform="translate(150, 550)" class="fade-in sparkle" >
+        <circle r="18" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="4" style="font-size: 14px; font-weight: bold; fill: #d84315;">★★★★★</text>
+    </g>
+    
+    <g transform="translate(1150, 550)" class="fade-in sparkle" >
+        <circle r="20" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="4" style="font-size: 12px; font-weight: bold; fill: #d84315;">★★★★★★</text>
+    </g>
+    
+    <g transform="translate(640, 180)" class="fade-in sparkle" >
+        <circle r="25" fill="#ffcc02" filter="url(#adventure-glow)" />
+        <text text-anchor="middle" y="4" style="font-size: 10px; font-weight: bold; fill: #d84315;">★★★★★★★</text>
+    </g>
+
+</svg>

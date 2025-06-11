@@ -1,0 +1,191 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="space-bg" cx="50%" cy="40%">
+            <stop offset="0%" style="stop-color:#4a148c;" />
+            <stop offset="30%" style="stop-color:#1a237e;" />
+            <stop offset="70%" style="stop-color:#0d1421;" />
+            <stop offset="100%" style="stop-color:#000000;" />
+        </radialGradient>
+        
+        <linearGradient id="title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#64b5f6;" />
+            <stop offset="50%" style="stop-color:#42a5f5;" />
+            <stop offset="100%" style="stop-color:#1e88e5;" />
+        </linearGradient>
+
+        <radialGradient id="planet-gradient" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#81c784;" />
+            <stop offset="50%" style="stop-color:#4caf50;" />
+            <stop offset="100%" style="stop-color:#2e7d32;" />
+        </radialGradient>
+
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="planet-glow">
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 68px; 
+            font-weight: bold; 
+            fill: url(#title-gradient);
+            filter: url(#glow);
+        }
+        .subtitle { 
+            font-size: 32px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .location-text {
+            font-size: 24px;
+            fill: #e1f5fe;
+        }
+        .world-title {
+            font-size: 28px;
+            font-weight: bold;
+            fill: #ffcc02;
+        }
+
+        
+            to { transform: rotate(360deg); }
+        }
+        
+        
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            
+        }
+        
+        .floating {
+            
+        }
+        
+        .rotating {
+            
+        }
+        
+        .star {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 24px !important; }
+            .location-text { font-size: 18px !important; }
+            .world-title { font-size: 22px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#space-bg)" />
+
+    <!-- 星空 -->
+    <circle cx="100" cy="80" r="1" fill="white" class="star"  />
+    <circle cx="200" cy="150" r="1.5" fill="#ffcc02" class="star"  />
+    <circle cx="350" cy="100" r="1" fill="white" class="star"  />
+    <circle cx="500" cy="180" r="1" fill="#64b5f6" class="star"  />
+    <circle cx="700" cy="120" r="1.5" fill="white" class="star"  />
+    <circle cx="900" cy="200" r="1" fill="#ffcc02" class="star"  />
+    <circle cx="1100" cy="90" r="1" fill="white" class="star"  />
+    <circle cx="1200" cy="160" r="1.5" fill="#64b5f6" class="star"  />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 100)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            世界観
+        </text>
+        <text y="70" class="subtitle fade-in" >
+            ～ <tspan class="highlight">地球</tspan>から<tspan class="highlight">宇宙</tspan>へ広がる冒険の舞台 ～
+        </text>
+    </g>
+
+    <!-- 地球 -->
+    <g transform="translate(200, 350)" class="floating fade-in" >
+        <circle r="80" fill="url(#planet-gradient)" filter="url(#planet-glow)" />
+        <ellipse cx="-20" cy="-30" rx="25" ry="15" fill="#2196f3" opacity="0.8"/>
+        <ellipse cx="30" cy="20" rx="20" ry="12" fill="#2196f3" opacity="0.8"/>
+        <text y="120" text-anchor="middle" class="world-title">地球</text>
+        <text y="150" text-anchor="middle" class="location-text">物語の出発点</text>
+    </g>
+
+    <!-- ナメック星 -->
+    <g transform="translate(480, 280)" class="floating fade-in" >
+        <circle r="60" fill="#81c784" filter="url(#planet-glow)" />
+        <circle cx="-15" cy="-20" r="8" fill="#4caf50" />
+        <circle cx="20" cy="15" r="6" fill="#4caf50" />
+        <text y="100" text-anchor="middle" class="world-title">ナメック星</text>
+        <text y="125" text-anchor="middle" class="location-text">ドラゴンボール発祥の地</text>
+    </g>
+
+    <!-- 惑星ベジータ -->
+    <g transform="translate(800, 400)" class="floating fade-in" >
+        <circle r="50" fill="#8d6e63" filter="url(#planet-glow)" />
+        <circle cx="-12" cy="-18" r="5" fill="#5d4037" />
+        <circle cx="18" cy="12" r="4" fill="#5d4037" />
+        <text y="85" text-anchor="middle" class="world-title">惑星ベジータ</text>
+        <text y="110" text-anchor="middle" class="location-text">サイヤ人の故郷</text>
+    </g>
+
+    <!-- 神の神殿/天界 -->
+    <g transform="translate(1000, 250)" class="floating fade-in" >
+        <circle r="45" fill="#fff3e0" filter="url(#planet-glow)" />
+        <path d="M -20,-15 L 0,-35 L 20,-15 Z" fill="#ffcc02" />
+        <text y="80" text-anchor="middle" class="world-title">天界</text>
+        <text y="105" text-anchor="middle" class="location-text">神々の領域</text>
+    </g>
+
+    <!-- 世界の特徴リスト -->
+    <g transform="translate(80, 550)">
+        <rect x="0" y="0" width="1120" height="120" fill="rgba(0,0,0,0.4)" rx="15" class="fade-in" />
+        
+        <text x="30" y="40" class="location-text fade-in" >
+            🌍 <tspan class="highlight">多様な惑星</tspan>：それぞれ独自の文化と住民が存在
+        </text>
+        <text x="30" y="70" class="location-text fade-in" >
+            🚀 <tspan class="highlight">宇宙規模</tspan>：12の宇宙、数え切れない銀河系
+        </text>
+        <text x="30" y="100" class="location-text fade-in" >
+            ⚔️ <tspan class="highlight">無限の可能性</tspan>：新たな敵、新たな仲間との出会いが待つ冒険の世界
+        </text>
+        
+        <text x="750" y="40" class="location-text fade-in" >
+            👑 <tspan class="highlight">神々の階層</tspan>：界王、界王神、破壊神
+        </text>
+        <text x="750" y="70" class="location-text fade-in" >
+            🌟 <tspan class="highlight">異次元空間</tspan>：精神と時の部屋、あの世
+        </text>
+        <text x="750" y="100" class="location-text fade-in" >
+            🔮 <tspan class="highlight">時空を超えて</tspan>：未来、過去への時間旅行も
+        </text>
+    </g>
+
+    <!-- 接続線（惑星間の関係を示す） -->
+    <path d="M 280 350 Q 380 320 420 300" stroke="rgba(255,171,64,0.5)" stroke-width="2" fill="none" 
+          class="fade-in mobile-hide" />
+    <path d="M 540 300 Q 670 350 750 380" stroke="rgba(255,171,64,0.5)" stroke-width="2" fill="none" 
+          class="fade-in mobile-hide" />
+    <path d="M 850 370 Q 920 310 960 270" stroke="rgba(255,171,64,0.5)" stroke-width="2" fill="none" 
+          class="fade-in mobile-hide" />
+
+</svg>

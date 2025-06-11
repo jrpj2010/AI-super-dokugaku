@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドラゴンボール紹介プレゼンテーション - 管理ダッシュボード</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c1810 50%, #ff6b35 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,53,0.3);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffb300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #ffcc80;
+            margin-bottom: 20px;
+        }
+
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255,107,53,0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,107,53,0.4);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffb300;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ffcc80;
+        }
+
+        .main-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .action-card {
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,107,53,0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e, #ffb300);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,107,53,0.3);
+            border-color: rgba(255,107,53,0.6);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffb300;
+        }
+
+        .card-description {
+            margin-bottom: 20px;
+            color: #ffcc80;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .card-features li {
+            padding: 5px 0;
+            color: #fff3e0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .card-features li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Noto Sans JP', sans-serif;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+            background: linear-gradient(45deg, #f7931e, #ffb300);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .slides-grid {
+            margin-top: 50px;
+        }
+
+        .slides-grid h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #ffb300;
+        }
+
+        .slides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .slide-preview {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,107,53,0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .slide-preview:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255,107,53,0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .slide-preview object {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .slide-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffb300;
+        }
+
+        .slide-description {
+            font-size: 0.9rem;
+            color: #ffcc80;
+            margin-bottom: 15px;
+        }
+
+        .slide-number {
+            display: inline-block;
+            background: rgba(255,107,53,0.8);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255,107,53,0.2);
+        }
+
+        .footer p {
+            color: #ffcc80;
+            margin-bottom: 15px;
+        }
+
+        .footer .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer .links a {
+            color: #ffb300;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,179,0,0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .links a:hover {
+            background: rgba(255,179,0,0.2);
+            border-color: rgba(255,179,0,0.6);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .header .stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 10px 15px;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .main-actions {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .action-card {
+                padding: 20px;
+            }
+            
+            .card-icon {
+                font-size: 2rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .slides-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .footer .links {
+                gap: 10px;
+            }
+        }
+
+        /* アニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .action-card, .slide-preview {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .action-card:nth-child(1) { animation-delay: 0.1s; }
+        .action-card:nth-child(2) { animation-delay: 0.2s; }
+        .action-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .slide-preview:nth-child(1) { animation-delay: 0.1s; }
+        .slide-preview:nth-child(2) { animation-delay: 0.2s; }
+        .slide-preview:nth-child(3) { animation-delay: 0.3s; }
+        .slide-preview:nth-child(4) { animation-delay: 0.4s; }
+        .slide-preview:nth-child(5) { animation-delay: 0.5s; }
+        .slide-preview:nth-child(6) { animation-delay: 0.6s; }
+        .slide-preview:nth-child(7) { animation-delay: 0.7s; }
+        .slide-preview:nth-child(8) { animation-delay: 0.8s; }
+        .slide-preview:nth-child(9) { animation-delay: 0.9s; }
+        .slide-preview:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐉 ドラゴンボール紹介プレゼンテーション</h1>
+            <p>永遠の冒険が始まる - 世界中で愛される伝説の物語</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">スライド数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">プレゼン形式</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">SVG</span>
+                    <span class="stat-label">高品質ベクター</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">レスポンシブ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-actions">
+            <!-- 縦スクロール統合版 -->
+            <div class="action-card">
+                <span class="card-icon">📱</span>
+                <h3 class="card-title">縦スクロール統合版</h3>
+                <p class="card-description">
+                    モバイルファーストで設計された最新プレゼンテーション体験。全スライドを縦に繋げて、スムーズな閲覧を実現。
+                </p>
+                <ul class="card-features">
+                    <li>スマホ・タブレットに最適化</li>
+                    <li>連続閲覧で全体把握が容易</li>
+                    <li>進捗バー付きナビゲーション</li>
+                    <li>キーボード・タッチ操作対応</li>
+                    <li>高速読み込み・シェア簡単</li>
+                </ul>
+                <a href="unified_presentation.html" class="btn">🚀 統合版を開く</a>
+                <button class="btn btn-secondary" onclick="openNewTab('unified_presentation.html')">新規タブ</button>
+            </div>
+
+            <!-- インタラクティブプレゼンテーション -->
+            <div class="action-card">
+                <span class="card-icon">🎮</span>
+                <h3 class="card-title">インタラクティブプレゼンテーション</h3>
+                <p class="card-description">
+                    従来のスライド形式で、キーボード操作やクリックで自由にナビゲーション。プレゼンテーション用途に最適。
+                </p>
+                <ul class="card-features">
+                    <li>キーボード操作対応</li>
+                    <li>スライド切り替えアニメーション</li>
+                    <li>全画面表示モード</li>
+                    <li>進捗インジケーター</li>
+                    <li>ヘルプ機能付き</li>
+                </ul>
+                <a href="presentation.html" class="btn">🎯 プレゼンを開く</a>
+                <button class="btn btn-secondary" onclick="openNewTab('presentation.html')">新規タブ</button>
+            </div>
+
+            <!-- 設計ドキュメント -->
+            <div class="action-card">
+                <span class="card-icon">📋</span>
+                <h3 class="card-title">設計ドキュメント</h3>
+                <p class="card-description">
+                    プレゼンテーションの分析結果、構成設計、デザインコンセプトなど、制作過程の詳細な記録。
+                </p>
+                <ul class="card-features">
+                    <li>分析フェーズの詳細</li>
+                    <li>ストーリーライン設計</li>
+                    <li>デザインコンセプト</li>
+                    <li>レスポンシブ戦略</li>
+                    <li>実装技術解説</li>
+                </ul>
+                <a href="分析と構成設計.md" class="btn">📖 ドキュメント</a>
+                <button class="btn btn-secondary" onclick="downloadFile('分析と構成設計.md')">ダウンロード</button>
+            </div>
+        </div>
+
+        <div class="slides-grid">
+            <h2>📸 個別スライドプレビュー</h2>
+            <div class="slides-container">
+                <div class="slide-preview">
+                    <object data="1.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">タイトルスライド</div>
+                    <div class="slide-description">ドラゴンボール - 永遠の冒険が始まる</div>
+                    <span class="slide-number">スライド 1</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="2.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">作品概要</div>
+                    <div class="slide-description">鳥山明によるレジェンド作品</div>
+                    <span class="slide-number">スライド 2</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="3.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">主人公紹介</div>
+                    <div class="slide-description">孫悟空 - 無邪気な戦士の成長物語</div>
+                    <span class="slide-number">スライド 3</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="4.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">世界観</div>
+                    <div class="slide-description">地球から宇宙へ広がる冒険の舞台</div>
+                    <span class="slide-number">スライド 4</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="5.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">ドラゴンボール</div>
+                    <div class="slide-description">7つの球に込められた願いの力</div>
+                    <span class="slide-number">スライド 5</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="6.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">仲間たち</div>
+                    <div class="slide-description">友情で結ばれた個性豊かなキャラクター</div>
+                    <span class="slide-number">スライド 6</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="7.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">名バトル</div>
+                    <div class="slide-description">心に残る戦いと成長の瞬間</div>
+                    <span class="slide-number">スライド 7</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="8.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">変身進化</div>
+                    <div class="slide-description">超サイヤ人への覚醒と限界突破</div>
+                    <span class="slide-number">スライド 8</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="9.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">文化的影響</div>
+                    <div class="slide-description">世界に広がるドラゴンボール現象</div>
+                    <span class="slide-number">スライド 9</span>
+                </div>
+
+                <div class="slide-preview">
+                    <object data="10.svg" type="image/svg+xml"></object>
+                    <div class="slide-title">まとめ</div>
+                    <div class="slide-description">終わらない冒険への招待</div>
+                    <span class="slide-number">スライド 10</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎨 Gen-Spa 2.0 SVG システムによって生成されたプレゼンテーション</p>
+            <p>高品質なベクターグラフィックスで、あらゆるデバイスに対応</p>
+            <div class="links">
+                <a href="unified_presentation.html">統合版</a>
+                <a href="presentation.html">プレゼン版</a>
+                <a href="分析と構成設計.md">設計書</a>
+                <a href="#" onclick="downloadAll()">全ファイル取得</a>
+                <a href="#" onclick="showInfo()">技術情報</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNewTab(url) {
+            window.open(url, '_blank');
+        }
+
+        function downloadFile(filename) {
+            const link = document.createElement('a');
+            link.href = filename;
+            link.download = filename;
+            link.click();
+        }
+
+        function downloadAll() {
+            const files = [
+                '1.svg', '2.svg', '3.svg', '4.svg', '5.svg',
+                '6.svg', '7.svg', '8.svg', '9.svg', '10.svg',
+                'presentation.html', 'unified_presentation.html',
+                'index.html', '分析と構成設計.md'
+            ];
+            
+            alert('個別ファイルをダウンロードしてください:\n' + files.join('\n'));
+        }
+
+        function showInfo() {
+            const info = `
+🎯 技術仕様情報
+
+📱 対応デバイス:
+• デスクトップ (1280px以上)
+• タブレット (768px-1279px)  
+• モバイル (767px以下)
+
+🎨 技術スタック:
+• SVG ベクターグラフィックス
+• CSS3 アニメーション
+• JavaScript ES6+
+• レスポンシブデザイン
+
+⚡ パフォーマンス:
+• 軽量化SVGファイル
+• 段階的読み込み
+• スムーズアニメーション
+• 高速レンダリング
+
+🔧 機能:
+• キーボード操作対応
+• タッチ・スワイプ対応
+• 全画面表示モード
+• 進捗管理システム
+            `;
+            alert(info);
+        }
+
+        // スライドプレビューのクリックイベント
+        document.querySelectorAll('.slide-preview object').forEach((obj, index) => {
+            obj.addEventListener('click', function() {
+                // 個別SVGファイルを新しいタブで開く
+                window.open(`${index + 1}.svg`, '_blank');
+            });
+        });
+
+        // エラーハンドリング
+        document.querySelectorAll('object').forEach((obj, index) => {
+            obj.addEventListener('error', function() {
+                console.error(`スライド ${index + 1} の読み込みに失敗しました`);
+                this.style.background = 'rgba(255,107,53,0.1)';
+                this.style.border = '2px dashed rgba(255,107,53,0.5)';
+                
+                // エラー表示
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: #ff6b35;
+                    font-size: 12px;
+                    text-align: center;
+                `;
+                errorDiv.innerHTML = `⚠️<br>読み込みエラー<br>スライド ${index + 1}`;
+                this.parentElement.style.position = 'relative';
+                this.parentElement.appendChild(errorDiv);
+            });
+        });
+
+        // アニメーション効果
+        window.addEventListener('load', function() {
+            // ページ読み込み完了後のアニメーション
+            document.querySelector('.header').style.animation = 'fadeInUp 0.8s ease-out forwards';
+        });
+
+        // スクロール効果
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            document.body.style.background = `linear-gradient(135deg, 
+                hsl(${20 + scrolled * 20}, 10%, 10%) 0%, 
+                hsl(${20 + scrolled * 30}, 20%, 15%) 50%, 
+                hsl(${20 + scrolled * 40}, 60%, 35%) 100%)`;
+        });
+    </script>
+</body>
+</html>

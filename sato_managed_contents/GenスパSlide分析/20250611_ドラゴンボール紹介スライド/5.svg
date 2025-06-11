@@ -1,0 +1,196 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="mystical-bg" cx="50%" cy="50%">
+            <stop offset="0%" style="stop-color:#ff6f00;" />
+            <stop offset="30%" style="stop-color:#e65100;" />
+            <stop offset="70%" style="stop-color:#bf360c;" />
+            <stop offset="100%" style="stop-color:#1a1a1a;" />
+        </radialGradient>
+        
+        <linearGradient id="title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffb300;" />
+            <stop offset="50%" style="stop-color:#ff8f00;" />
+            <stop offset="100%" style="stop-color:#ff6f00;" />
+        </linearGradient>
+
+        <radialGradient id="dragon-ball-gradient" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#ffcc02;" />
+            <stop offset="70%" style="stop-color:#ff8f00;" />
+            <stop offset="100%" style="stop-color:#e65100;" />
+        </radialGradient>
+
+        <filter id="golden-glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="mystical-glow">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 72px; 
+            font-weight: bold; 
+            fill: url(#title-gradient);
+            filter: url(#golden-glow);
+        }
+        .subtitle { 
+            font-size: 36px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .description-text {
+            font-size: 22px;
+            fill: #fff3e0;
+        }
+        .ball-number {
+            font-size: 32px;
+            font-weight: bold;
+            fill: #d84315;
+        }
+        .mystical-text {
+            font-size: 28px;
+            fill: #ffcc02;
+            font-weight: bold;
+        }
+
+            to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+        
+        
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            
+        }
+        
+        .orbiting {
+            
+        }
+        
+        .mystical-pulse {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 28px !important; }
+            .description-text { font-size: 18px !important; }
+            .ball-number { font-size: 24px !important; }
+            .mystical-text { font-size: 22px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#mystical-bg)" />
+
+    <!-- 神秘的な光の輪 -->
+    <circle cx="640" cy="360" r="300" fill="none" stroke="rgba(255,204,2,0.3)" stroke-width="2" 
+            class="mystical-pulse mobile-hide" />
+    <circle cx="640" cy="360" r="250" fill="none" stroke="rgba(255,171,64,0.2)" stroke-width="1" 
+            class="mystical-pulse mobile-hide"  />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 100)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            ドラゴンボール
+        </text>
+        <text y="70" class="subtitle fade-in" >
+            ～ <tspan class="highlight">7つの球</tspan>に込められた<tspan class="highlight">願い</tspan>の力 ～
+        </text>
+    </g>
+
+    <!-- 中央：神龍召喚の説明 -->
+    <g transform="translate(640, 360)" text-anchor="middle">
+        <!-- 中央の光 -->
+        <circle r="50" fill="rgba(255,204,2,0.4)" class="mystical-pulse" />
+        <circle r="30" fill="rgba(255,171,64,0.6)" class="mystical-pulse"  />
+        
+        <text y="-10" class="mystical-text fade-in" >神龍召喚</text>
+        <text y="20" class="description-text fade-in" >7つ集めると何でも願いを叶える</text>
+    </g>
+
+    <!-- 7つのドラゴンボール（軌道配置） -->
+    <g transform="translate(640, 360)">
+        <!-- 1星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="8" class="ball-number">★</text>
+        </g>
+        
+        <!-- 2星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="8" class="ball-number">★★</text>
+        </g>
+        
+        <!-- 3星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="8" class="ball-number">★★★</text>
+        </g>
+        
+        <!-- 4星球（悟空の形見） -->
+        <g class="orbiting fade-in" >
+            <circle r="30" fill="url(#dragon-ball-gradient)" filter="url(#mystical-glow)" />
+            <text text-anchor="middle" y="8" class="ball-number" style="font-size: 28px;">★★★★</text>
+        </g>
+        
+        <!-- 5星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="4" class="ball-number" style="font-size: 24px;">★★★★★</text>
+        </g>
+        
+        <!-- 6星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="4" class="ball-number" style="font-size: 20px;">★★★★★★</text>
+        </g>
+        
+        <!-- 7星球 -->
+        <g class="orbiting fade-in" >
+            <circle r="25" fill="url(#dragon-ball-gradient)" filter="url(#golden-glow)" />
+            <text text-anchor="middle" y="2" class="ball-number" style="font-size: 18px;">★★★★★★★</text>
+        </g>
+    </g>
+
+    <!-- 底部：ドラゴンボールの意味 -->
+    <g transform="translate(640, 580)" text-anchor="middle">
+        <rect x="-550" y="-50" width="1100" height="120" fill="rgba(0,0,0,0.5)" rx="20" class="fade-in" />
+        
+        <text y="-20" class="description-text fade-in" >
+            <tspan class="highlight">「どんな願いも叶える」</tspan> ～ でも、それ以上に大切なのは...
+        </text>
+        <text y="10" class="description-text fade-in" >
+            🌟 冒険で得る<tspan class="highlight">仲間</tspan>　🌟 困難を乗り越える<tspan class="highlight">成長</tspan>　🌟 新たな世界への<tspan class="highlight">扉</tspan>
+        </text>
+        <text y="40" class="mystical-text fade-in" >
+            ドラゴンボールは、<tspan class="highlight">冒険</tspan>そのものなのだ
+        </text>
+    </g>
+
+    <!-- 神秘的なパーティクル -->
+    <circle cx="150" cy="200" r="2" fill="#ffcc02" class="mystical-pulse"  />
+    <circle cx="1100" cy="250" r="3" fill="#ff8f00" class="mystical-pulse"  />
+    <circle cx="200" cy="500" r="2.5" fill="#ffab40" class="mystical-pulse"  />
+    <circle cx="1150" cy="480" r="2" fill="#ffcc02" class="mystical-pulse"  />
+
+</svg>

@@ -1,0 +1,121 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="space-gradient" cx="50%" cy="30%">
+            <stop offset="0%" style="stop-color:#ff6b35;" />
+            <stop offset="30%" style="stop-color:#f7931e;" />
+            <stop offset="70%" style="stop-color:#2c1810;" />
+            <stop offset="100%" style="stop-color:#0a0a0a;" />
+        </radialGradient>
+        
+        <linearGradient id="title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffaa00;" />
+            <stop offset="50%" style="stop-color:#ff6600;" />
+            <stop offset="100%" style="stop-color:#cc3300;" />
+        </linearGradient>
+
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .main-title { 
+            font-size: 80px; 
+            font-weight: bold; 
+            fill: url(#title-gradient);
+            filter: url(#glow);
+        }
+        .subtitle { 
+            font-size: 36px; 
+            fill: #ffcc66; 
+        }
+        .accent-text { 
+            fill: #ff4081; 
+            font-weight: bold; 
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .sparkle {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 48px !important; }
+            .subtitle { font-size: 24px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#space-gradient)" />
+
+    <!-- 星空背景 -->
+    <circle cx="100" cy="80" r="1" fill="white" class="sparkle" />
+    <circle cx="200" cy="120" r="1.5" fill="#ffcc66" class="sparkle" />
+    <circle cx="300" cy="60" r="1" fill="white" class="sparkle" />
+    <circle cx="500" cy="100" r="1" fill="#ffcc66" class="sparkle" />
+    <circle cx="700" cy="90" r="1.5" fill="white" class="sparkle" />
+    <circle cx="900" cy="110" r="1" fill="#ffcc66" class="sparkle" />
+    <circle cx="1100" cy="70" r="1" fill="white" class="sparkle" />
+    <circle cx="1200" cy="130" r="1.5" fill="#ffcc66" class="sparkle" />
+
+    <!-- ドラゴンシルエット装飾 -->
+    <path d="M 50 500 Q 200 400 400 450 Q 600 500 800 420 Q 1000 350 1200 400" 
+          stroke="rgba(255,170,0,0.3)" stroke-width="3" fill="none" opacity="0.5" class="mobile-hide"/>
+
+    <!-- エネルギー波装飾 -->
+    <polygon points="0,600 200,580 400,620 600,590 800,610 1000,580 1200,600 1280,620 1280,720 0,720" 
+             fill="rgba(255,102,0,0.2)" opacity="0.7" />
+
+    <!-- メインコンテンツ -->
+    <g transform="translate(640, 280)" text-anchor="middle">
+        <text y="0" class="main-title fade-in">
+            DRAGON BALL
+        </text>
+        <text y="80" class="main-title fade-in">
+            ドラゴンボール
+        </text>
+    </g>
+
+    <g transform="translate(640, 420)" text-anchor="middle">
+        <text y="0" class="subtitle">
+            ～ <tspan class="accent-text">永遠</tspan>の冒険が始まる ～
+        </text>
+        <text y="50" class="subtitle" style="font-size: 28px;">
+            鳥山明が描く<tspan class="accent-text">伝説</tspan>の物語
+        </text>
+    </g>
+
+    <!-- ドラゴンボール装飾 -->
+    <g transform="translate(100, 550)">
+        <circle r="25" fill="#ffaa00" filter="url(#glow)" class="fade-in"/>
+        <text text-anchor="middle" y="8" style="font-size: 24px; font-weight: bold; fill: #cc3300;">★</text>
+    </g>
+    
+    <g transform="translate(200, 580)">
+        <circle r="20" fill="#ffaa00" filter="url(#glow)" class="fade-in"/>
+        <text text-anchor="middle" y="6" style="font-size: 20px; font-weight: bold; fill: #cc3300;">★★</text>
+    </g>
+    
+    <g transform="translate(1180, 550)">
+        <circle r="25" fill="#ffaa00" filter="url(#glow)" class="fade-in"/>
+        <text text-anchor="middle" y="8" style="font-size: 24px; font-weight: bold; fill: #cc3300;">★★★</text>
+    </g>
+    
+    <g transform="translate(1080, 580)">
+        <circle r="20" fill="#ffaa00" filter="url(#glow)" class="fade-in"/>
+        <text text-anchor="middle" y="6" style="font-size: 20px; font-weight: bold; fill: #cc3300;">★★★★</text>
+    </g>
+
+</svg>

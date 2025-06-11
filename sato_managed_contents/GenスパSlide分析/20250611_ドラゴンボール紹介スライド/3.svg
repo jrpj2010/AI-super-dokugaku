@@ -1,0 +1,158 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <radialGradient id="hero-gradient" cx="70%" cy="30%">
+            <stop offset="0%" style="stop-color:#ff8c00;" />
+            <stop offset="30%" style="stop-color:#ff6b35;" />
+            <stop offset="70%" style="stop-color:#1a1a2e;" />
+            <stop offset="100%" style="stop-color:#16213e;" />
+        </radialGradient>
+        
+        <linearGradient id="name-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffaa00;" />
+            <stop offset="50%" style="stop-color:#ff6600;" />
+            <stop offset="100%" style="stop-color:#cc3300;" />
+        </linearGradient>
+
+        <filter id="aura-glow">
+            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="energy-glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 72px; 
+            font-weight: bold; 
+            fill: url(#name-gradient);
+            filter: url(#aura-glow);
+        }
+        .subtitle { 
+            font-size: 36px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ff4081; 
+            font-weight: bold; 
+        }
+        .content-text {
+            font-size: 22px;
+            fill: #cccccc;
+        }
+        .trait-title {
+            font-size: 24px;
+            font-weight: bold;
+            fill: #ffaa00;
+        }
+
+        
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            
+        }
+        
+        .energy-aura {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 28px !important; }
+            .content-text { font-size: 18px !important; }
+            .trait-title { font-size: 20px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#hero-gradient)" />
+
+    <!-- エネルギーオーラ装飾 -->
+    <ellipse cx="640" cy="360" rx="600" ry="300" fill="rgba(255,140,0,0.1)" class="energy-aura mobile-hide"/>
+    <ellipse cx="640" cy="360" rx="400" ry="200" fill="rgba(255,170,0,0.15)" class="energy-aura mobile-hide" />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 100)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            孫悟空
+        </text>
+        <text y="80" class="subtitle fade-in" >
+            ～ <tspan class="highlight">無邪気</tspan>な戦士の成長物語 ～
+        </text>
+    </g>
+
+    <!-- キャラクター情報 -->
+    <g transform="translate(80, 250)">
+        <!-- 左側：基本情報 -->
+        <rect x="0" y="0" width="550" height="380" fill="rgba(0,0,0,0.4)" rx="20" class="fade-in" />
+        
+        <text x="30" y="50" class="trait-title fade-in" >✨ 基本プロフィール</text>
+        <text x="50" y="90" class="content-text fade-in" >
+            <tspan x="50" dy="0">🌟 本名：カカロット（サイヤ人名）</tspan>
+            <tspan x="50" dy="35">🏠 出身：惑星ベジータ</tspan>
+            <tspan x="50" dy="35">👨‍👩‍👦 家族：チチ（妻）、悟飯・悟天（息子）</tspan>
+            <tspan x="50" dy="35">🥋 師匠：亀仙人、界王様、ウイス</tspan>
+        </text>
+
+        <text x="30" y="260" class="trait-title fade-in" >💪 特徴・性格</text>
+        <text x="50" y="300" class="content-text fade-in" >
+            <tspan x="50" dy="0">😊 <tspan class="highlight">純粋無垢</tspan>で優しい心</tspan>
+            <tspan x="50" dy="35">⚡ 限界を超える<tspan class="highlight">向上心</tspan></tspan>
+            <tspan x="50" dy="35">🤝 敵をも<tspan class="highlight">仲間</tspan>にする魅力</tspan>
+        </text>
+    </g>
+
+    <!-- 右側：能力・変身 -->
+    <g transform="translate(680, 250)">
+        <rect x="0" y="0" width="520" height="380" fill="rgba(0,0,0,0.4)" rx="20" class="fade-in" />
+        
+        <text x="30" y="50" class="trait-title fade-in" >🔥 代表的な変身形態</text>
+        <text x="50" y="90" class="content-text fade-in" >
+            <tspan x="50" dy="0">🦍 大猿（オオザル）</tspan>
+            <tspan x="50" dy="35">⚡ <tspan class="highlight">超サイヤ人</tspan>（1〜3）</tspan>
+            <tspan x="50" dy="35">🌟 超サイヤ人ゴッド</tspan>
+            <tspan x="50" dy="35">💙 <tspan class="highlight">超サイヤ人ブルー</tspan></tspan>
+            <tspan x="50" dy="35">🔮 身勝手の極意</tspan>
+        </text>
+
+        <text x="30" y="260" class="trait-title fade-in" >🥊 必殺技</text>
+        <text x="50" y="300" class="content-text fade-in" >
+            <tspan x="50" dy="0">🔴 <tspan class="highlight">かめはめ波</tspan></tspan>
+            <tspan x="50" dy="35">⚡ 元気玉</tspan>
+            <tspan x="50" dy="35">🌟 瞬間移動</tspan>
+        </text>
+    </g>
+
+    <!-- 底部のキャッチフレーズ -->
+    <g transform="translate(640, 670)" text-anchor="middle">
+        <text y="0" class="content-text fade-in" >
+            「<tspan class="highlight">オッス！オラ悟空！</tspan>」 ～ みんなを笑顔にする<tspan class="highlight">永遠</tspan>のヒーロー ～
+        </text>
+    </g>
+
+    <!-- エネルギー球装飾 -->
+    <circle cx="1100" cy="150" r="8" fill="#ffaa00" filter="url(#energy-glow)" class="energy-aura"  />
+    <circle cx="1150" cy="180" r="6" fill="#ff6600" filter="url(#energy-glow)" class="energy-aura"  />
+    <circle cx="1200" cy="120" r="5" fill="#ffcc66" filter="url(#energy-glow)" class="energy-aura"  />
+
+    <!-- 気のオーラライン -->
+    <path d="M 100 600 Q 300 550 500 580 Q 700 620 900 570 Q 1100 520 1200 560" 
+          stroke="rgba(255,170,0,0.6)" stroke-width="2" fill="none" 
+          class="energy-aura mobile-hide" />
+
+</svg>

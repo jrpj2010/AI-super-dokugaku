@@ -1,0 +1,200 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <linearGradient id="friendship-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff7043;" />
+            <stop offset="30%" style="stop-color:#ff5722;" />
+            <stop offset="70%" style="stop-color:#e64a19;" />
+            <stop offset="100%" style="stop-color:#1a1a1a;" />
+        </linearGradient>
+        
+        <linearGradient id="title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffab40;" />
+            <stop offset="50%" style="stop-color:#ff9800;" />
+            <stop offset="100%" style="stop-color:#f57c00;" />
+        </linearGradient>
+
+        <filter id="warm-glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="character-glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 68px; 
+            font-weight: bold; 
+            fill: url(#title-gradient);
+            filter: url(#warm-glow);
+        }
+        .subtitle { 
+            font-size: 32px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ffab40; 
+            font-weight: bold; 
+        }
+        .character-name {
+            font-size: 22px;
+            font-weight: bold;
+            fill: #fff3e0;
+        }
+        .character-description {
+            font-size: 16px;
+            fill: #ffcc80;
+        }
+        .friendship-text {
+            font-size: 24px;
+            fill: #fff3e0;
+        }
+
+        
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        
+        .fade-in {
+            
+        }
+        
+        .group-animation {
+            
+        }
+        
+        .heart {
+            
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 48px !important; }
+            .subtitle { font-size: 24px !important; }
+            .character-name { font-size: 18px !important; }
+            .character-description { font-size: 14px !important; }
+            .friendship-text { font-size: 18px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#friendship-bg)" />
+
+    <!-- 友情の光の輪 -->
+    <circle cx="640" cy="360" r="280" fill="none" stroke="rgba(255,171,64,0.3)" stroke-width="3" 
+            class="group-animation mobile-hide" />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 90)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            仲間たち
+        </text>
+        <text y="60" class="subtitle fade-in" >
+            ～ <tspan class="highlight">友情</tspan>で結ばれた個性豊かなキャラクター ～
+        </text>
+    </g>
+
+    <!-- キャラクター配置（円形） -->
+    
+    <!-- クリリン -->
+    <g transform="translate(400, 250)" class="fade-in group-animation" >
+        <circle r="35" fill="#ffb74d" filter="url(#character-glow)" />
+        <circle cx="0" cy="-5" r="3" fill="#333" />
+        <circle cx="-8" cy="-5" r="3" fill="#333" />
+        <circle cx="8" cy="-5" r="3" fill="#333" />
+        <text y="55" text-anchor="middle" class="character-name">クリリン</text>
+        <text y="75" text-anchor="middle" class="character-description">悟空の親友・最強の地球人</text>
+    </g>
+
+    <!-- ピッコロ -->
+    <g transform="translate(880, 250)" class="fade-in group-animation" >
+        <ellipse rx="30" ry="45" fill="#4caf50" filter="url(#character-glow)" />
+        <circle cx="-8" cy="-10" r="3" fill="#000" />
+        <circle cx="8" cy="-10" r="3" fill="#000" />
+        <text y="70" text-anchor="middle" class="character-name">ピッコロ</text>
+        <text y="90" text-anchor="middle" class="character-description">元敵→師匠→仲間</text>
+    </g>
+
+    <!-- ベジータ -->
+    <g transform="translate(300, 450)" class="fade-in group-animation" >
+        <ellipse rx="35" ry="40" fill="#1976d2" filter="url(#character-glow)" />
+        <path d="M -15,-15 Q 0,-25 15,-15" stroke="#ffcc02" stroke-width="3" fill="none" />
+        <text y="65" text-anchor="middle" class="character-name">ベジータ</text>
+        <text y="85" text-anchor="middle" class="character-description">プライド高きサイヤ人の王子</text>
+    </g>
+
+    <!-- 悟飯 -->
+    <g transform="translate(980, 450)" class="fade-in group-animation" >
+        <circle r="30" fill="#ff8a65" filter="url(#character-glow)" />
+        <circle cx="-6" cy="-8" r="2" fill="#333" />
+        <circle cx="6" cy="-8" r="2" fill="#333" />
+        <text y="55" text-anchor="middle" class="character-name">悟飯</text>
+        <text y="75" text-anchor="middle" class="character-description">悟空の息子・天才少年</text>
+    </g>
+
+    <!-- ブルマ -->
+    <g transform="translate(180, 350)" class="fade-in group-animation" >
+        <circle r="32" fill="#e1bee7" filter="url(#character-glow)" />
+        <path d="M -20,-15 Q 0,-30 20,-15" stroke="#2196f3" stroke-width="2" fill="none" />
+        <text y="55" text-anchor="middle" class="character-name">ブルマ</text>
+        <text y="75" text-anchor="middle" class="character-description">天才科学者・冒険の始まり</text>
+    </g>
+
+    <!-- ヤムチャ -->
+    <g transform="translate(1100, 350)" class="fade-in group-animation" >
+        <circle r="28" fill="#8d6e63" filter="url(#character-glow)" />
+        <path d="M -15,8 Q 0,15 15,8" stroke="#fff" stroke-width="1" fill="none" />
+        <text y="50" text-anchor="middle" class="character-name">ヤムチャ</text>
+        <text y="70" text-anchor="middle" class="character-description">初期の重要メンバー</text>
+    </g>
+
+    <!-- 中央：悟空 -->
+    <g transform="translate(640, 350)" class="fade-in group-animation" >
+        <circle r="45" fill="#ff7043" filter="url(#warm-glow)" />
+        <circle cx="-10" cy="-10" r="4" fill="#333" />
+        <circle cx="10" cy="-10" r="4" fill="#333" />
+        <path d="M -15,10 Q 0,20 15,10" stroke="#fff" stroke-width="2" fill="none" />
+        <text y="70" text-anchor="middle" class="character-name" style="font-size: 26px;">悟空</text>
+        <text y="95" text-anchor="middle" class="character-description" style="font-size: 18px;">みんなを繋ぐ心の中心</text>
+    </g>
+
+    <!-- 友情の絆を示すライン -->
+    <g class="mobile-hide">
+        <path d="M 640,350 L 400,250" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+        <path d="M 640,350 L 880,250" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+        <path d="M 640,350 L 300,450" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+        <path d="M 640,350 L 980,450" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+        <path d="M 640,350 L 180,350" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+        <path d="M 640,350 L 1100,350" stroke="rgba(255,171,64,0.6)" stroke-width="2" class="fade-in" />
+    </g>
+
+    <!-- 底部メッセージ -->
+    <g transform="translate(640, 600)" text-anchor="middle">
+        <rect x="-500" y="-40" width="1000" height="80" fill="rgba(0,0,0,0.5)" rx="15" class="fade-in" />
+        
+        <text y="-10" class="friendship-text fade-in" >
+            <tspan class="highlight">元敵</tspan>も<tspan class="highlight">仲間</tspan>に、<tspan class="highlight">違い</tspan>を<tspan class="highlight">力</tspan>に変える
+        </text>
+        <text y="20" class="friendship-text fade-in" >
+            これこそが<tspan class="highlight">ドラゴンボール</tspan>の真の魅力 💫
+        </text>
+    </g>
+
+    <!-- ハートマーク装飾 -->
+    <g transform="translate(640, 180)" text-anchor="middle">
+        <text class="heart fade-in" style="font-size: 20px; fill: #ff4081; animation-delay: 3.6s;">💖</text>
+    </g>
+
+</svg>

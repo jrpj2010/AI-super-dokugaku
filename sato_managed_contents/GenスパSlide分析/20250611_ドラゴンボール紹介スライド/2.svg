@@ -1,0 +1,144 @@
+<svg width="100%" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="font-family: 'Noto Sans JP', sans-serif; background: #1a1a1a;">
+
+    <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1e3c72;" />
+            <stop offset="50%" style="stop-color:#2a5298;" />
+            <stop offset="100%" style="stop-color:#0f1419;" />
+        </linearGradient>
+        
+        <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffaa00;" />
+            <stop offset="100%" style="stop-color:#ff6600;" />
+        </linearGradient>
+
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <style>
+        .title { 
+            font-size: 64px; 
+            font-weight: bold; 
+            fill: url(#title-grad);
+            filter: url(#glow);
+        }
+        .subtitle { 
+            font-size: 32px; 
+            fill: #ffffff; 
+        }
+        .highlight { 
+            fill: #ff4081; 
+            font-weight: bold; 
+        }
+        .content-text {
+            font-size: 24px;
+            fill: #cccccc;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            fill: #ffaa00;
+        }
+        .stat-label {
+            font-size: 18px;
+            fill: #ffffff;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 42px !important; }
+            .subtitle { font-size: 24px !important; }
+            .content-text { font-size: 18px !important; }
+            .stat-number { font-size: 36px !important; }
+            .mobile-hide { display: none; }
+        }
+    </style>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="url(#bg-gradient)" />
+
+    <!-- 装飾要素 -->
+    <polygon points="0,0 1280,0 1280,120 0,80" fill="rgba(255,170,0,0.1)" />
+    <polygon points="0,600 1280,640 1280,720 0,720" fill="rgba(255,102,0,0.15)" />
+
+    <!-- メインタイトル -->
+    <g transform="translate(640, 100)" text-anchor="middle">
+        <text y="0" class="title fade-in">
+            作品概要
+        </text>
+    </g>
+
+    <!-- サブタイトル -->
+    <g transform="translate(640, 180)" text-anchor="middle">
+        <text y="0" class="subtitle fade-in" >
+            <tspan class="highlight">鳥山明</tspan>によるレジェンド作品
+        </text>
+    </g>
+
+    <!-- メインコンテンツエリア -->
+    <g transform="translate(80, 250)">
+        <!-- 左側：作品情報 -->
+        <rect x="0" y="0" width="500" height="350" fill="rgba(0,0,0,0.3)" rx="15" class="fade-in" />
+        
+        <text x="30" y="40" class="content-text fade-in" >
+            <tspan x="30" dy="0">📚 <tspan class="highlight">連載期間</tspan></tspan>
+            <tspan x="30" dy="40">   1984年〜1995年（11年間）</tspan>
+            
+            <tspan x="30" dy="80">📖 <tspan class="highlight">全巻数</tspan></tspan>
+            <tspan x="30" dy="40">   コミックス全42巻</tspan>
+            
+            <tspan x="30" dy="80">🌟 <tspan class="highlight">掲載誌</tspan></tspan>
+            <tspan x="30" dy="40">   週刊少年ジャンプ</tspan>
+            
+            <tspan x="30" dy="80">🎬 <tspan class="highlight">アニメ化</tspan></tspan>
+            <tspan x="30" dy="40">   ドラゴンボール（1986〜）</tspan>
+            <tspan x="30" dy="40">   ドラゴンボールZ（1989〜）</tspan>
+        </text>
+
+        <!-- 右側：実績数値 -->
+        <rect x="580" y="0" width="600" height="350" fill="rgba(0,0,0,0.3)" rx="15" class="fade-in" />
+        
+        <!-- 統計情報 -->
+        <g transform="translate(630, 60)">
+            <text x="0" y="0" class="stat-number fade-in" >2億6000万部</text>
+            <text x="0" y="30" class="stat-label fade-in" >世界累計発行部数</text>
+            
+            <text x="0" y="100" class="stat-number fade-in" >80カ国</text>
+            <text x="0" y="130" class="stat-label fade-in" >翻訳・販売国数</text>
+            
+            <text x="0" y="200" class="stat-number fade-in" >35年間</text>
+            <text x="0" y="230" class="stat-label fade-in" >愛され続ける年数</text>
+            
+            <text x="300" y="0" class="stat-number fade-in" >★★★★★</text>
+            <text x="300" y="30" class="stat-label fade-in" >文化的影響度</text>
+            
+            <text x="300" y="100" class="stat-number fade-in" >∞</text>
+            <text x="300" y="130" class="stat-label fade-in" >続編・関連作品</text>
+        </g>
+    </g>
+
+    <!-- 底部の特徴メッセージ -->
+    <g transform="translate(640, 650)" text-anchor="middle">
+        <text y="0" class="content-text fade-in" >
+            <tspan class="highlight">漫画界の金字塔</tspan> ～ 世界中で愛される永遠の名作 ～
+        </text>
+    </g>
+
+    <!-- 装飾的な星 -->
+    <circle cx="1200" cy="150" r="3" fill="#ffaa00" class="fade-in"  />
+    <circle cx="1220" cy="180" r="2" fill="#ff6600" class="fade-in"  />
+    <circle cx="1180" cy="200" r="2.5" fill="#ffcc66" class="fade-in"  />
+
+</svg>
