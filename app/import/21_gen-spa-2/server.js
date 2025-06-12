@@ -13,8 +13,17 @@ const PORT = process.env.PORT || 8080;
 // CORS設定
 app.use(cors());
 
-// JSON parser
-app.use(express.json({ limit: '10mb' }));
+// JSON parser with increased limits for large responses
+app.use(express.json({ 
+  limit: '50mb',
+  parameterLimit: 100000,
+  extended: true 
+}));
+app.use(express.urlencoded({ 
+  limit: '50mb',
+  parameterLimit: 100000,
+  extended: true 
+}));
 
 // API プロキシエンドポイント
 app.use('/api-proxy', async (req, res) => {
@@ -38,41 +47,63 @@ app.use('/api-proxy', async (req, res) => {
     console.log('Headers:', req.headers);
     console.log('Body:', JSON.stringify(req.body, null, 2));
 
-    // fetch を使用してリクエストをプロキシ
-    const response = await fetch(geminiUrl, {
-      method: req.method,
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Gen-Spa-2.0/1.0.0'
-      },
-      body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
-    });
-
-    const responseText = await response.text();
+    // fetch を使用してリクエストをプロキシ（タイムアウト設定追加）
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 300000); // 5分でタイムアウト
     
-    console.log('Gemini API Response Status:', response.status);
-    console.log('Gemini API Response:', responseText.substring(0, 500));
-
-    if (!response.ok) {
-      return res.status(response.status).json({
-        error: {
-          message: `Gemini API error: ${response.status} ${response.statusText}`,
-          details: responseText,
-          code: response.status
-        }
-      });
-    }
-
-    // Content-Type ヘッダーを設定
-    const contentType = response.headers.get('content-type') || 'application/json';
-    res.setHeader('Content-Type', contentType);
-    
-    // レスポンスを返す
     try {
-      const jsonResponse = JSON.parse(responseText);
-      res.json(jsonResponse);
-    } catch (e) {
-      res.send(responseText);
+      const response = await fetch(geminiUrl, {
+        method: req.method,
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'Gen-Spa-2.0/1.0.0'
+        },
+        body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+
+      const responseText = await response.text();
+      
+      console.log('Gemini API Response Status:', response.status);
+      console.log('Gemini API Response Size:', responseText.length, 'characters');
+      console.log('Gemini API Response Preview:', responseText.substring(0, 200));
+      console.log('Gemini API Response End:', responseText.substring(Math.max(0, responseText.length - 200)));
+
+      if (!response.ok) {
+        return res.status(response.status).json({
+          error: {
+            message: `Gemini API error: ${response.status} ${response.statusText}`,
+            details: responseText.substring(0, 1000), // エラー詳細も切り捨て制限
+            code: response.status
+          }
+        });
+      }
+
+      // Content-Type ヘッダーを設定
+      const contentType = response.headers.get('content-type') || 'application/json';
+      res.setHeader('Content-Type', contentType);
+      
+      // レスポンスを返す
+      try {
+        const jsonResponse = JSON.parse(responseText);
+        res.json(jsonResponse);
+      } catch (e) {
+        console.error('Failed to parse response as JSON:', e.message);
+        res.send(responseText);
+      }
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      if (fetchError.name === 'AbortError') {
+        return res.status(408).json({
+          error: {
+            message: 'Request timeout: Gemini API took too long to respond',
+            code: 408
+          }
+        });
+      }
+      throw fetchError;
     }
 
   } catch (error) {
