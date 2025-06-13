@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI超独学3.0 - 編集戦略の構造化分析</title>
+    <style>
+        /* リセットとベーススタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* プレゼンテーションコンテナ */
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* スライドベーススタイル */
+        .slide {
+            width: 100%;
+            max-width: calc(100vh * 16 / 9);
+            height: 100vh;
+            position: absolute;
+            display: none;
+            padding: 5vh 5vw;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        /* タイトルスライド */
+        .slide-title {
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .slide-title h1 {
+            font-size: 4.5vw;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .slide-title .subtitle {
+            font-size: 2.2vw;
+            color: #00ccff;
+            margin-top: 2vh;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* スライドヘッダー */
+        .slide-header {
+            font-size: 3.2vw;
+            color: #00ff88;
+            margin-bottom: 4vh;
+            padding-bottom: 2vh;
+            border-bottom: 2px solid #00ff88;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* コンテンツボックス */
+        .content-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 3vh 3vw;
+            margin-bottom: 2vh;
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        /* 構造図・フレームワーク */
+        .framework-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2vw;
+            margin: 3vh 0;
+        }
+
+        .framework-box {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 2vh 2vw;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.9s ease-out;
+        }
+
+        .framework-box:hover {
+            transform: scale(1.05);
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .framework-title {
+            font-size: 2.2vw;
+            color: #00ccff;
+            margin-bottom: 1.5vh;
+            font-weight: bold;
+        }
+
+        /* 比較表 */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1vw;
+            margin: 2vh 0;
+        }
+
+        .comparison-header {
+            background: rgba(0, 204, 255, 0.2);
+            padding: 1.5vh 1vw;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            font-size: 2vw;
+        }
+
+        .comparison-cell {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5vh 1vw;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.8vw;
+        }
+
+        /* 問題・解決構造 */
+        .problem-solution {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 3vh 0;
+        }
+
+        .problem-box {
+            background: rgba(255, 0, 110, 0.1);
+            border: 2px solid #ff006e;
+            flex: 1;
+            padding: 2vh 2vw;
+            margin-right: 2vw;
+            border-radius: 15px;
+        }
+
+        .solution-box {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            flex: 1;
+            padding: 2vh 2vw;
+            border-radius: 15px;
+        }
+
+        .arrow {
+            font-size: 3vw;
+            color: #00ccff;
+            margin: 0 2vw;
+        }
+
+        /* 重要ポイント */
+        .key-point {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 204, 255, 0.2));
+            border-left: 5px solid #00ff88;
+            padding: 2vh 2vw;
+            margin: 2vh 0;
+            font-size: 2.2vw;
+            font-weight: bold;
+        }
+
+        /* リスト */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            font-size: 2vw;
+            line-height: 1.8;
+            margin-bottom: 1.2vh;
+            padding-left: 2vw;
+            position: relative;
+        }
+
+        li:before {
+            content: "▶";
+            color: #00ff88;
+            position: absolute;
+            left: 0;
+        }
+
+        /* ハイライト */
+        .highlight {
+            color: #00ff88;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .emphasis {
+            color: #00ccff;
+            font-weight: bold;
+        }
+
+        /* ダイアグラム */
+        .diagram {
+            text-align: center;
+            margin: 3vh 0;
+        }
+
+        .diagram-circle {
+            display: inline-block;
+            width: 12vw;
+            height: 12vw;
+            border-radius: 50%;
+            background: rgba(0, 255, 136, 0.1);
+            border: 3px solid #00ff88;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 1vw;
+            font-size: 1.8vw;
+            font-weight: bold;
+        }
+
+        /* ナビゲーション */
+        .nav-controls {
+            position: fixed;
+            bottom: 3vh;
+            right: 3vw;
+            display: flex;
+            gap: 1vw;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(0, 255, 136, 0.2);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            padding: 1vh 2vw;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.5vw;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 255, 136, 0.4);
+            transform: scale(1.1);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 3vh;
+            right: 3vw;
+            font-size: 1.5vw;
+            color: #666;
+        }
+
+        /* アニメーション */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(0, 204, 255, 0.8);
+            }
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-aspect-ratio: 16/9) {
+            .slide {
+                max-width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- スライド1: タイトル -->
+        <div class="slide slide-title active">
+            <h1>AI超独学3.0<br>編集戦略の構造化分析</h1>
+            <p class="subtitle">小倉編集長の洞察から導く成功への道筋</p>
+        </div>
+
+        <!-- スライド2: 問題の核心 -->
+        <div class="slide">
+            <h2 class="slide-header">🎯 問題の核心構造</h2>
+            <div class="diagram">
+                <div class="diagram-circle">セミナー<br>体験</div>
+                <span class="arrow">≠</span>
+                <div class="diagram-circle">書籍<br>体験</div>
+            </div>
+            <div class="key-point">
+                メディアの違いは体験の違い<br>
+                同じアプローチでは機能しない
+            </div>
+        </div>
+
+        <!-- スライド3: 3つの根本的ギャップ -->
+        <div class="slide">
+            <h2 class="slide-header">🔍 3つの根本的ギャップ</h2>
+            <div class="framework-container">
+                <div class="framework-box">
+                    <div class="framework-title">体験のギャップ</div>
+                    <p>臨場感 vs 個人学習</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">読者層のギャップ</div>
+                    <p>初心者 vs 独学者</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">学習スタイルのギャップ</div>
+                    <p>集団型 vs 個人型</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">期待値のギャップ</div>
+                    <p>即効性 vs 深い理解</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド4: メディア特性の比較分析 -->
+        <div class="slide">
+            <h2 class="slide-header">📊 メディア特性の構造的比較</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">要素</div>
+                <div class="comparison-header">セミナー</div>
+                <div class="comparison-header">書籍</div>
+                
+                <div class="comparison-cell">時間軸</div>
+                <div class="comparison-cell">リアルタイム</div>
+                <div class="comparison-cell">非同期</div>
+                
+                <div class="comparison-cell">相互作用</div>
+                <div class="comparison-cell">双方向</div>
+                <div class="comparison-cell">一方向</div>
+                
+                <div class="comparison-cell">ペース</div>
+                <div class="comparison-cell">講師主導</div>
+                <div class="comparison-cell">読者主導</div>
+                
+                <div class="comparison-cell">反復性</div>
+                <div class="comparison-cell">一度きり</div>
+                <div class="comparison-cell">何度でも</div>
+            </div>
+        </div>
+
+        <!-- スライド5: 読者ペルソナの深層分析 -->
+        <div class="slide">
+            <h2 class="slide-header">👤 独学者ペルソナの深層構造</h2>
+            <div class="content-box">
+                <h3 style="color: #00ccff; font-size: 2.5vw; margin-bottom: 2vh;">内向的学習者の特性</h3>
+                <ul>
+                    <li><span class="highlight">静寂を好む</span> - 思考の深化には静けさが必要</li>
+                    <li><span class="highlight">自己ペース重視</span> - 他者に合わせることへの抵抗</li>
+                    <li><span class="highlight">熟考型</span> - 即座の反応より深い理解を求める</li>
+                    <li><span class="highlight">文字情報選好</span> - 音声より視覚的情報処理</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド6: 音声入力問題の本質 -->
+        <div class="slide">
+            <h2 class="slide-header">🎙️ 音声入力アプローチの構造的問題</h2>
+            <div class="problem-solution">
+                <div class="problem-box">
+                    <h3 style="color: #ff006e; margin-bottom: 1vh;">問題の本質</h3>
+                    <p style="font-size: 1.8vw;">「唯一解」として提示することの危険性</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="solution-box">
+                    <h3 style="color: #00ff88; margin-bottom: 1vh;">解決の方向性</h3>
+                    <p style="font-size: 1.8vw;">多様な選択肢の提示</p>
+                </div>
+            </div>
+            <div class="key-point">
+                押し付けではなく、選択の自由を
+            </div>
+        </div>
+
+        <!-- スライド7: 学習スタイルのマトリクス -->
+        <div class="slide">
+            <h2 class="slide-header">🧩 学習スタイルの多様性マトリクス</h2>
+            <div class="framework-container">
+                <div class="framework-box">
+                    <div class="framework-title">音声入力派</div>
+                    <ul style="text-align: left; font-size: 1.6vw;">
+                        <li>思考の流れを重視</li>
+                        <li>アイデア発散型</li>
+                        <li>速度優先</li>
+                    </ul>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">文章入力派</div>
+                    <ul style="text-align: left; font-size: 1.6vw;">
+                        <li>構造化思考</li>
+                        <li>推敲重視</li>
+                        <li>精度優先</li>
+                    </ul>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">ハイブリッド派</div>
+                    <ul style="text-align: left; font-size: 1.6vw;">
+                        <li>場面で使い分け</li>
+                        <li>柔軟な適応</li>
+                        <li>効率最適化</li>
+                    </ul>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">視覚思考派</div>
+                    <ul style="text-align: left; font-size: 1.6vw;">
+                        <li>図解・マインドマップ</li>
+                        <li>空間的理解</li>
+                        <li>全体俯瞰型</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド8: 脱落問題の構造分析 -->
+        <div class="slide">
+            <h2 class="slide-header">📉 読者脱落の構造的要因</h2>
+            <div class="content-box">
+                <h3 style="color: #ff006e; font-size: 2.5vw; margin-bottom: 2vh;">70%脱落の深層要因</h3>
+                <div class="diagram">
+                    <div style="display: flex; justify-content: space-around; align-items: center;">
+                        <div style="text-align: center;">
+                            <div class="diagram-circle" style="background: rgba(255, 0, 110, 0.2); border-color: #ff006e;">
+                                期待値<br>ミスマッチ
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="diagram-circle" style="background: rgba(255, 0, 110, 0.2); border-color: #ff006e;">
+                                難易度<br>急上昇
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="diagram-circle" style="background: rgba(255, 0, 110, 0.2); border-color: #ff006e;">
+                                動機の<br>持続困難
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド9: 脱落防止の戦略的アプローチ -->
+        <div class="slide">
+            <h2 class="slide-header">🛡️ 脱落防止の戦略的フレームワーク</h2>
+            <div class="content-box">
+                <h3 style="color: #00ff88; font-size: 2.5vw; margin-bottom: 2vh;">3層防御システム</h3>
+                <ul>
+                    <li><span class="highlight">第1層：構造的工夫</span><br>
+                        章末まとめ、チェックリスト、振り返りポイント</li>
+                    <li><span class="highlight">第2層：認知的工夫</span><br>
+                        たとえ話、図解、段階的説明</li>
+                    <li><span class="highlight">第3層：感情的工夫</span><br>
+                        成功体験の演出、面白いコラム、励まし</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド10: 書籍メディアの強み活用 -->
+        <div class="slide">
+            <h2 class="slide-header">📚 書籍メディアの戦略的活用</h2>
+            <div class="framework-container">
+                <div class="framework-box">
+                    <div class="framework-title">視覚的強み</div>
+                    <p>レイアウト・図解の自由度</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">時間的強み</div>
+                    <p>読者ペースでの深い理解</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">物理的強み</div>
+                    <p>書き込み・付箋・携帯性</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">心理的強み</div>
+                    <p>所有感・達成感の演出</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド11: ハイブリッド戦略 -->
+        <div class="slide">
+            <h2 class="slide-header">🔄 デジタル×アナログのハイブリッド戦略</h2>
+            <div class="content-box">
+                <h3 style="color: #00ccff; font-size: 2.5vw; margin-bottom: 2vh;">相互補完的アプローチ</h3>
+                <ul>
+                    <li><span class="emphasis">QRコード</span> → 動画解説で理解を補強</li>
+                    <li><span class="emphasis">音声コンテンツ</span> → 移動中の学習を可能に</li>
+                    <li><span class="emphasis">オンラインワークショップ</span> → 実践の場を提供</li>
+                    <li><span class="emphasis">コミュニティ</span> → 継続学習の動機づけ</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド12: 差別化戦略の構造 -->
+        <div class="slide">
+            <h2 class="slide-header">🎯 セミナー/書籍の戦略的差別化</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">価値提供</div>
+                <div class="comparison-header">セミナー</div>
+                <div class="comparison-header">書籍</div>
+                
+                <div class="comparison-cell">体験価値</div>
+                <div class="comparison-cell">ライブ感・一体感</div>
+                <div class="comparison-cell">深い理解・反復学習</div>
+                
+                <div class="comparison-cell">知識形態</div>
+                <div class="comparison-cell">暗黙知の伝達</div>
+                <div class="comparison-cell">形式知の体系化</div>
+                
+                <div class="comparison-cell">変革速度</div>
+                <div class="comparison-cell">即効性・気づき</div>
+                <div class="comparison-cell">持続的・根本的</div>
+            </div>
+        </div>
+
+        <!-- スライド13: 成功指標の再定義 -->
+        <div class="slide">
+            <h2 class="slide-header">📈 成功指標の多次元的設計</h2>
+            <div class="content-box">
+                <h3 style="color: #00ff88; font-size: 2.5vw; margin-bottom: 2vh;">従来指標から進化した指標へ</h3>
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h4>従来の指標</h4>
+                        <ul style="font-size: 1.6vw;">
+                            <li>販売部数</li>
+                            <li>完読率</li>
+                            <li>満足度</li>
+                        </ul>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="solution-box">
+                        <h4>新しい指標</h4>
+                        <ul style="font-size: 1.6vw;">
+                            <li>行動変容率</li>
+                            <li>実践継続率</li>
+                            <li>成果創出率</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド14: 編集方針の構造化 -->
+        <div class="slide">
+            <h2 class="slide-header">📝 編集方針の構造的整理</h2>
+            <div class="framework-container">
+                <div class="framework-box">
+                    <div class="framework-title">導入部設計</div>
+                    <p>共感→期待→約束</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">展開部設計</div>
+                    <p>理論→実践→応用</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">深化部設計</div>
+                    <p>基礎→発展→統合</p>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">完結部設計</div>
+                    <p>総括→展望→行動</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド15: リスクマネジメント -->
+        <div class="slide">
+            <h2 class="slide-header">⚠️ リスクの構造的マネジメント</h2>
+            <div class="content-box">
+                <h3 style="color: #ff006e; font-size: 2.5vw; margin-bottom: 2vh;">予測されるリスクと対策</h3>
+                <ul>
+                    <li><span class="highlight">期待値ギャップ</span><br>
+                        → 冒頭での明確な約束と範囲設定</li>
+                    <li><span class="highlight">難易度ギャップ</span><br>
+                        → 段階的難易度設計とエスケープルート</li>
+                    <li><span class="highlight">実践ギャップ</span><br>
+                        → 具体的アクションプランの提供</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド16: 実装ロードマップ -->
+        <div class="slide">
+            <h2 class="slide-header">🗺️ 実装への戦略的ロードマップ</h2>
+            <div class="content-box">
+                <h3 style="color: #00ccff; font-size: 2.5vw; margin-bottom: 2vh;">フェーズ別アプローチ</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="diagram-circle" style="width: 10vw; height: 10vw; font-size: 1.5vw;">
+                        Phase 1<br>分析
+                    </div>
+                    <span style="color: #00ccff; font-size: 2vw;">→</span>
+                    <div class="diagram-circle" style="width: 10vw; height: 10vw; font-size: 1.5vw;">
+                        Phase 2<br>設計
+                    </div>
+                    <span style="color: #00ccff; font-size: 2vw;">→</span>
+                    <div class="diagram-circle" style="width: 10vw; height: 10vw; font-size: 1.5vw;">
+                        Phase 3<br>実装
+                    </div>
+                    <span style="color: #00ccff; font-size: 2vw;">→</span>
+                    <div class="diagram-circle" style="width: 10vw; height: 10vw; font-size: 1.5vw;">
+                        Phase 4<br>検証
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド17: 独自価値の創出 -->
+        <div class="slide">
+            <h2 class="slide-header">💎 独自価値の戦略的創出</h2>
+            <div class="key-point">
+                AI超独学3.0が提供する唯一無二の価値
+            </div>
+            <div class="content-box">
+                <ul>
+                    <li><span class="highlight">体系的独学メソッド</span> - 散在する知識の統合</li>
+                    <li><span class="highlight">個別最適化アプローチ</span> - 読者タイプ別の道筋</li>
+                    <li><span class="highlight">持続可能な学習設計</span> - 挫折しない仕組み</li>
+                    <li><span class="highlight">実践と理論の融合</span> - 知識の実装方法</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド18: 成功への重要要因 -->
+        <div class="slide">
+            <h2 class="slide-header">🔑 成功への5つの重要要因</h2>
+            <div class="framework-container" style="grid-template-columns: repeat(1, 1fr);">
+                <div class="framework-box">
+                    <div class="framework-title">1. 読者理解の深化</div>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">2. メディア特性の最大活用</div>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">3. 多様性への配慮</div>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">4. 継続支援の仕組み</div>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">5. 価値の明確な差別化</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド19: アクションプラン -->
+        <div class="slide">
+            <h2 class="slide-header">🚀 具体的アクションプラン</h2>
+            <div class="content-box">
+                <h3 style="color: #00ff88; font-size: 2.5vw; margin-bottom: 2vh;">即実行すべき5つのアクション</h3>
+                <ul>
+                    <li><span class="emphasis">1週目：</span> 読者ペルソナの詳細化とセグメント分析</li>
+                    <li><span class="emphasis">2週目：</span> 章構成の難易度カーブ再設計</li>
+                    <li><span class="emphasis">3週目：</span> 学習スタイル別コンテンツの開発</li>
+                    <li><span class="emphasis">4週目：</span> デジタル連携コンテンツの企画</li>
+                    <li><span class="emphasis">5週目：</span> テスト読者によるフィードバック収集</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- スライド20: 結論 -->
+        <div class="slide">
+            <h2 class="slide-header">🎊 結論：新たな地平へ</h2>
+            <div class="key-point" style="font-size: 2.5vw; text-align: center; margin-bottom: 3vh;">
+                セミナーの成功体験を超えて<br>
+                書籍だからこそ実現できる価値創造へ
+            </div>
+            <div class="content-box">
+                <h3 style="color: #00ccff; font-size: 2.5vw; margin-bottom: 2vh; text-align: center;">
+                    AI超独学3.0が切り拓く未来
+                </h3>
+                <div style="text-align: center; font-size: 2.2vw; line-height: 2;">
+                    <p><span class="highlight">多様な学習者</span>が</p>
+                    <p><span class="highlight">それぞれの方法</span>で</p>
+                    <p><span class="highlight">持続的な成長</span>を実現する</p>
+                    <p style="margin-top: 2vh; font-size: 2.5vw;">
+                        <span class="emphasis">新しい独学の標準</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ナビゲーション -->
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="previousSlide()">◀ 前へ</button>
+            <button class="nav-btn" onclick="nextSlide()">次へ ▶</button>
+        </div>
+
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">20</span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // 初期設定
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(index) {
+            // 全スライドを非表示
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // 現在のスライドを表示
+            slides[index].classList.add('active');
+            
+            // カウンター更新
+            document.getElementById('current-slide').textContent = index + 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // タッチ/スワイプ対応
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+    </script>
+</body>
+</html>
