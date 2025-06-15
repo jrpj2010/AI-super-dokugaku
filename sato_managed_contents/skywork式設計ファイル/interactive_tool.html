@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メッセージ徹底解析 | 分析ツール</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">メッセージ徹底解析</h1>
+            <p class="site-description">メッセージを抽象化・構造化して効果を最大化するための分析サイト</p>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="message_analysis.html">メッセージ分析</a></li>
+                    <li><a href="structure_analysis.html">構造解析</a></li>
+                    <li><a href="practical_advice.html">実践アドバイス</a></li>
+                    <li><a href="interactive_tool.html" class="active">分析ツール</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>インタラクティブ分析ツール</h2>
+                <p>あなた自身のメッセージを分析し、即時フィードバックを受け取る</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="tool-container">
+                    <div class="tool-sidebar">
+                        <div class="tool-nav">
+                            <button class="tool-tab active" data-tab="message-analyzer">メッセージ分析</button>
+                            <button class="tool-tab" data-tab="structure-visualizer">構造可視化</button>
+                            <button class="tool-tab" data-tab="advice-generator">アドバイス生成</button>
+                        </div>
+                        
+                        <div class="sample-messages">
+                            <h4>サンプルメッセージ</h4>
+                            <div class="sample-list">
+                                <div class="sample-item" data-id="sample1">
+                                    <h5>書籍設計のアドバイス</h5>
+                                    <p>セミナーと書籍の特性に関する考察</p>
+                                </div>
+                                <div class="sample-item" data-id="sample2">
+                                    <h5>プレゼンテーション構成</h5>
+                                    <p>効果的なプレゼン構造に関するアドバイス</p>
+                                </div>
+                                <div class="sample-item" data-id="sample3">
+                                    <h5>ウェブコンテンツ設計</h5>
+                                    <p>ユーザー体験を向上させる構造設計</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-content">
+                        <div class="tool-panel active" id="message-analyzer">
+                            <h3>メッセージ分析ツール</h3>
+                            <p>テキストを入力して、主要テーマと問題意識を抽出します</p>
+                            
+                            <div class="analyzer-form">
+                                <div class="form-group">
+                                    <label for="messageInput">分析したいメッセージを入力</label>
+                                    <textarea id="messageInput" rows="10" placeholder="ここにメッセージを入力してください..."></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button id="loadSampleBtn" class="btn secondary">サンプルを読み込む</button>
+                                    <button id="analyzeBtn" class="btn primary">分析する</button>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-results" id="analysisResults" style="display: none;">
+                                <h4>分析結果</h4>
+                                <div class="results-tabs">
+                                    <button class="result-tab active" data-result="themes">主要テーマ</button>
+                                    <button class="result-tab" data-result="problems">問題意識</button>
+                                    <button class="result-tab" data-result="structure">論理構造</button>
+                                </div>
+                                
+                                <div class="result-content">
+                                    <div class="result-panel active" id="themes-panel">
+                                        <h5>抽出された主要テーマ</h5>
+                                        <div class="theme-bubbles" id="themeBubbles">
+                                            <!-- JavaScriptで動的に生成 -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="result-panel" id="problems-panel">
+                                        <h5>特定された問題意識</h5>
+                                        <div class="problem-list" id="problemList">
+                                            <!-- JavaScriptで動的に生成 -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="result-panel" id="structure-panel">
+                                        <h5>メッセージの論理構造</h5>
+                                        <div class="structure-preview" id="structurePreview">
+                                            <!-- JavaScriptで動的に生成 -->
+                                        </div>
+                                        <p class="panel-note">詳細な構造分析は「構造可視化」タブで確認できます</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-panel" id="structure-visualizer">
+                            <h3>構造可視化ツール</h3>
+                            <p>メッセージの論理構造を階層的に可視化します</p>
+                            
+                            <div class="visualizer-container">
+                                <div class="visualizer-controls">
+                                    <div class="control-group">
+                                        <label>表示モード</label>
+                                        <div class="button-group">
+                                            <button class="control-btn active" data-view="hierarchy">階層図</button>
+                                            <button class="control-btn" data-view="flow">フロー図</button>
+                                            <button class="control-btn" data-view="mind">マインドマップ</button>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>詳細レベル</label>
+                                        <div class="range-slider">
+                                            <input type="range" min="1" max="5" value="3" id="detailLevel">
+                                            <div class="range-labels">
+                                                <span>簡易</span>
+                                                <span>詳細</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="visualization-area" id="visualizationArea">
+                                    <div class="visualization-placeholder">
+                                        <p>先にメッセージを分析するか、サンプルを選択してください</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="visualizer-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color theme"></div>
+                                        <p>全体テーマ</p>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color main-point"></div>
+                                        <p>主要論点</p>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color sub-point"></div>
+                                        <p>補足要素</p>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color conclusion"></div>
+                                        <p>結論・提案</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-panel" id="advice-generator">
+                            <h3>アドバイス生成ツール</h3>
+                            <p>分析結果を基に、メッセージ改善のための実践的アドバイスを生成します</p>
+                            
+                            <div class="advice-form">
+                                <div class="form-group">
+                                    <label>アドバイスの焦点</label>
+                                    <div class="checkbox-group">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="focusStructure" checked>
+                                            <label for="focusStructure">構造改善</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="focusClarity" checked>
+                                            <label for="focusClarity">明確性向上</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="focusEngagement" checked>
+                                            <label for="focusEngagement">魅力付加</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="focusPractical" checked>
+                                            <label for="focusPractical">実践性強化</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>メディア種類</label>
+                                    <select id="mediaType">
+                                        <option value="book">書籍</option>
+                                        <option value="presentation">プレゼンテーション</option>
+                                        <option value="web">ウェブコンテンツ</option>
+                                        <option value="speech">スピーチ</option>
+                                        <option value="article">記事・レポート</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button id="generateAdviceBtn" class="btn primary">アドバイスを生成</button>
+                                </div>
+                            </div>
+                            
+                            <div class="advice-results" id="adviceResults" style="display: none;">
+                                <h4>実践的アドバイス</h4>
+                                <div class="advice-cards" id="adviceCards">
+                                    <!-- JavaScriptで動的に生成 -->
+                                </div>
+                                
+                                <div class="advice-summary">
+                                    <h5>総合評価</h5>
+                                    <div class="radar-chart" id="evaluationChart">
+                                        <!-- JavaScriptでレーダーチャートを生成 -->
+                                    </div>
+                                </div>
+                                
+                                <div class="action-plan">
+                                    <h5>アクションプラン</h5>
+                                    <ol class="action-steps" id="actionSteps">
+                                        <!-- JavaScriptで動的に生成 -->
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="save-results">
+            <div class="container">
+                <h3>分析結果を保存</h3>
+                <p>生成された分析結果をダウンロードして後で参照できます</p>
+                <div class="save-options">
+                    <button class="btn secondary" id="saveTextBtn">テキスト保存</button>
+                    <button class="btn secondary" id="savePdfBtn">PDF保存</button>
+                    <button class="btn secondary" id="shareBtn">共有</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>メッセージ徹底解析</h2>
+                    <p>効果的なコミュニケーションのための分析サイト</p>
+                </div>
+                <div class="footer-links">
+                    <h3>サイトマップ</h3>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="message_analysis.html">メッセージ分析</a></li>
+                        <li><a href="structure_analysis.html">構造解析</a></li>
+                        <li><a href="practical_advice.html">実践アドバイス</a></li>
+                        <li><a href="interactive_tool.html">分析ツール</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 メッセージ徹底解析サイト</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js" type="module"></script>
+    <script src="js/analyzer.js" type="module"></script>
+    <script src="js/visualizer.js" type="module"></script>
+    <script src="js/interactive-tool.js" type="module"></script>
+</body>
+</html>

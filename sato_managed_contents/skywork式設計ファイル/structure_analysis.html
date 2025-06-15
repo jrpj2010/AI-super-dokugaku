@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メッセージ徹底解析 | 構造解析</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">メッセージ徹底解析</h1>
+            <p class="site-description">メッセージを抽象化・構造化して効果を最大化するための分析サイト</p>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="message_analysis.html">メッセージ分析</a></li>
+                    <li><a href="structure_analysis.html" class="active">構造解析</a></li>
+                    <li><a href="practical_advice.html">実践アドバイス</a></li>
+                    <li><a href="interactive_tool.html">分析ツール</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>メッセージ構造解析</h2>
+                <p>メッセージの論理構造を可視化し、階層的に理解する</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-main">
+                        <h3>メッセージの構造を理解する</h3>
+                        <p>効果的なメッセージには、明確な構造があります。論点の階層関係、主張とその根拠の組み立て方、結論に至るまでの論理の流れなど、構造を理解することで、メッセージの骨格を把握できます。</p>
+
+                        <div class="structure-visualization">
+                            <h4>メッセージの階層構造</h4>
+                            <div class="structure-diagram" id="hierarchyDiagram">
+                                <!-- JavaScriptで階層構造図を生成 -->
+                            </div>
+                            <div class="structure-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color level1"></div>
+                                    <p>レベル1：全体テーマ</p>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color level2"></div>
+                                    <p>レベル2：主要視点</p>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color level3"></div>
+                                    <p>レベル3：構造要素</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="structure-details">
+                            <div class="structure-level">
+                                <h4>レベル1：全体テーマ</h4>
+                                <div class="level-content">
+                                    <p><strong>効果的な書籍設計のための考察と提案</strong></p>
+                                    <p>このメッセージは、書籍の効果的な設計に関する包括的な考察と具体的な提案を行っています。セミナーとの違い、適切な学習アプローチ、読者の継続支援など、多角的な視点から書籍設計の最適化を目指しています。</p>
+                                </div>
+                            </div>
+
+                            <div class="structure-level">
+                                <h4>レベル2：メディア特性に関する3つの主要視点</h4>
+                                <div class="level-content">
+                                    <ol>
+                                        <li>
+                                            <strong>メディア形態の違い - セミナーvs書籍</strong>
+                                            <p>セミナーと書籍という異なるメディア形態の特性を比較し、それぞれに適した内容設計について考察しています。</p>
+                                        </li>
+                                        <li>
+                                            <strong>情報入力方法の選択 - 音声入力vs文章入力</strong>
+                                            <p>書籍の内容を実践する際の方法論として、音声入力と文章入力の特性と適性について議論しています。</p>
+                                        </li>
+                                        <li>
+                                            <strong>学習継続性の確保 - 難易度設計と継続支援</strong>
+                                            <p>読者が学習を継続できるようにするための、難易度設計や支援要素の配置について提案しています。</p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="structure-level">
+                                <h4>レベル3：各視点における構造</h4>
+                                <div class="level-content">
+                                    <p>各視点は、以下の共通構造を持っています：</p>
+                                    <div class="common-structure">
+                                        <div class="structure-element">
+                                            <h5>問題提起</h5>
+                                            <p>現状の懸念点や課題を明確に示す</p>
+                                        </div>
+                                        <div class="structure-arrow">→</div>
+                                        <div class="structure-element">
+                                            <h5>背景分析</h5>
+                                            <p>なぜそれが問題となるのかを考察</p>
+                                        </div>
+                                        <div class="structure-arrow">→</div>
+                                        <div class="structure-element">
+                                            <h5>具体的提案</h5>
+                                            <p>改善のためのアイデアを提示</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>視点間の関連性</h3>
+                        <p>一見独立しているように見える3つの主要視点は、実は相互に関連し合っています。</p>
+
+                        <div class="relationship-diagram" id="relationshipDiagram">
+                            <!-- JavaScriptで関連性図を生成 -->
+                        </div>
+
+                        <div class="relationship-explanation">
+                            <h4>相互補完関係</h4>
+                            <p>3つの視点は独立しているように見えて、実は「読者の学習体験を最適化する」という共通目標に向けた相互補完的な要素です。メディア形態への配慮から始まり、入力方法の最適化を経て、継続性の確保へと至る流れで、読者の体験全体を設計しています。</p>
+                            
+                            <h4>優先順位と重要度</h4>
+                            <ol>
+                                <li><strong>メディア特性理解</strong>が最も根本的（基盤となる考え方）</li>
+                                <li><strong>入力方法の選択</strong>は実践的手法（具体的な実行方法）</li>
+                                <li><strong>継続性の確保</strong>は長期的成果（最終的な目標）</li>
+                            </ol>
+                        </div>
+
+                        <h3>書籍設計への応用モデル</h3>
+                        <p>メッセージの構造分析から、以下の書籍設計モデルを抽出できます。</p>
+
+                        <div class="application-model">
+                            <div class="model-section">
+                                <h4>4つの設計原則</h4>
+                                <div class="principle-cards">
+                                    <div class="principle-card">
+                                        <h5>読者中心設計</h5>
+                                        <p>ターゲット読者の特性理解を最優先する</p>
+                                    </div>
+                                    <div class="principle-card">
+                                        <h5>メディア適合性</h5>
+                                        <p>書籍形式の特性を最大限活用する</p>
+                                    </div>
+                                    <div class="principle-card">
+                                        <h5>選択肢提示</h5>
+                                        <p>多様な学習スタイルへ対応する</p>
+                                    </div>
+                                    <div class="principle-card">
+                                        <h5>継続的サポート</h5>
+                                        <p>難易度の段階設計と支援要素を配置する</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="model-section">
+                                <h4>実践的フレームワーク</h4>
+                                <div class="framework-diagram" id="frameworkDiagram">
+                                    <!-- JavaScriptでフレームワーク図を生成 -->
+                                </div>
+                                <div class="framework-steps">
+                                    <div class="framework-step">
+                                        <h5>診断</h5>
+                                        <p>読者層の特性と目標の明確化</p>
+                                    </div>
+                                    <div class="framework-step">
+                                        <h5>設計</h5>
+                                        <p>書籍ならではの強みを活かした構成</p>
+                                    </div>
+                                    <div class="framework-step">
+                                        <h5>提示</h5>
+                                        <p>多様な選択肢と実践方法の提案</p>
+                                    </div>
+                                    <div class="framework-step">
+                                        <h5>サポート</h5>
+                                        <p>つまずきポイントの予測と対策</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-sidebar">
+                        <div class="sidebar-module">
+                            <h4>構造分析のステップ</h4>
+                            <ol class="analysis-steps">
+                                <li>階層構造の特定</li>
+                                <li>論理の流れの可視化</li>
+                                <li>関係性のマッピング</li>
+                                <li>応用モデルの抽出</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="sidebar-module">
+                            <h4>構造パターン</h4>
+                            <div class="pattern-list">
+                                <div class="pattern">
+                                    <div class="pattern-icon linear"></div>
+                                    <div class="pattern-info">
+                                        <h5>直線型</h5>
+                                        <p>論点が順序立てて並ぶ</p>
+                                    </div>
+                                </div>
+                                <div class="pattern">
+                                    <div class="pattern-icon cyclic"></div>
+                                    <div class="pattern-info">
+                                        <h5>循環型</h5>
+                                        <p>主題に繰り返し立ち返る</p>
+                                    </div>
+                                </div>
+                                <div class="pattern">
+                                    <div class="pattern-icon radial"></div>
+                                    <div class="pattern-info">
+                                        <h5>放射型</h5>
+                                        <p>一つの中心から複数の話題</p>
+                                    </div>
+                                </div>
+                                <div class="pattern">
+                                    <div class="pattern-icon nested"></div>
+                                    <div class="pattern-info">
+                                        <h5>入れ子型</h5>
+                                        <p>概念が階層的に包含する</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-module">
+                            <h4>関連リソース</h4>
+                            <ul class="resource-links">
+                                <li><a href="message_analysis.html">メッセージの主要テーマ分析</a></li>
+                                <li><a href="practical_advice.html">効果的メッセージのためのアドバイス</a></li>
+                                <li><a href="interactive_tool.html">メッセージ構造分析ツール</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h3>自分のメッセージ構造を分析してみませんか？</h3>
+                <p>インタラクティブツールを使って、あなた自身のメッセージ構造を可視化できます</p>
+                <a href="interactive_tool.html" class="btn primary">構造分析ツールを使う</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>メッセージ徹底解析</h2>
+                    <p>効果的なコミュニケーションのための分析サイト</p>
+                </div>
+                <div class="footer-links">
+                    <h3>サイトマップ</h3>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="message_analysis.html">メッセージ分析</a></li>
+                        <li><a href="structure_analysis.html">構造解析</a></li>
+                        <li><a href="practical_advice.html">実践アドバイス</a></li>
+                        <li><a href="interactive_tool.html">分析ツール</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 メッセージ徹底解析サイト</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js" type="module"></script>
+    <script src="js/visualizer.js" type="module"></script>
+</body>
+</html>

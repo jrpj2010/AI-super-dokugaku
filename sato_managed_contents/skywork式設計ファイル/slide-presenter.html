@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スライドプレゼンター | メッセージ分析システム</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* スライドプレゼンター専用スタイル */
+        .presenter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .presenter-header {
+            background: linear-gradient(135deg, #2c6b97 0%, #4889b5 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .presenter-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .presenter-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .presenter-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .input-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c6b97;
+            margin-bottom: 20px;
+        }
+        
+        .message-textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid #e0e6ec;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        .message-textarea:focus {
+            outline: none;
+            border-color: #2c6b97;
+        }
+        
+        .sample-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .sample-btn {
+            padding: 8px 16px;
+            background: #f0f4f8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .sample-btn:hover {
+            background: #2c6b97;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .preview-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .preview-area {
+            background: #f8f9fa;
+            min-height: 400px;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.2em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-slide {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: none;
+        }
+        
+        .preview-slide.active {
+            display: block;
+        }
+        
+        .preview-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .preview-btn {
+            padding: 10px 20px;
+            background: #2c6b97;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .preview-btn:hover {
+            background: #1a4f79;
+            transform: translateY(-2px);
+        }
+        
+        .preview-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .action-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .generate-btn {
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #2c6b97 0%, #4889b5 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(44, 107, 151, 0.3);
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(44, 107, 151, 0.4);
+        }
+        
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .export-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .export-btn {
+            padding: 15px 40px;
+            background: #65a897;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .export-btn:hover {
+            background: #52917f;
+            transform: translateY(-2px);
+        }
+        
+        .export-btn.active {
+            display: inline-block;
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .status-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2c6b97;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .slide-count {
+            background: #e8f4fd;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #2c6b97;
+            font-weight: 600;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .presenter-main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presenter-container">
+        <header class="presenter-header">
+            <h1 class="presenter-title">スライドプレゼンター</h1>
+            <p class="presenter-subtitle">メッセージを分析し、重厚なプレゼンテーションスライドを自動生成</p>
+        </header>
+        
+        <main class="presenter-main">
+            <div class="input-panel">
+                <h2 class="panel-title">メッセージ入力</h2>
+                <textarea id="messageInput" class="message-textarea" placeholder="分析したいメッセージをここに入力してください..."></textarea>
+                <div class="sample-buttons">
+                    <button class="sample-btn" data-sample="1">サンプル1: 書籍設計</button>
+                    <button class="sample-btn" data-sample="2">サンプル2: プレゼン構成</button>
+                    <button class="sample-btn" data-sample="3">サンプル3: Web設計</button>
+                </div>
+            </div>
+            
+            <div class="preview-panel">
+                <h2 class="panel-title">プレビュー</h2>
+                <div id="previewArea" class="preview-area">
+                    <span>生成されたスライドがここに表示されます</span>
+                </div>
+                <div class="preview-controls">
+                    <button id="prevPreview" class="preview-btn" disabled>◀ 前</button>
+                    <button id="nextPreview" class="preview-btn" disabled>次 ▶</button>
+                </div>
+                <div id="slideCount" class="slide-count"></div>
+            </div>
+        </main>
+        
+        <div class="action-panel">
+            <button id="generateBtn" class="generate-btn">スライドを生成</button>
+            
+            <div class="export-options">
+                <button id="exportHtml" class="export-btn">HTMLでダウンロード</button>
+                <button id="openPresentation" class="export-btn">プレゼンテーションを開く</button>
+            </div>
+            
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+    </div>
+    
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>スライドを生成中...</p>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;">高度な分析処理を実行しています</p>
+        </div>
+    </div>
+    
+    <!-- サンプルメッセージ -->
+    <script>
+        const sampleMessages = {
+            1: `セミナーと書籍では、そもそも受講者とゴール設定が異なります。セミナーでは「その場で書き方を学び、実際に書いてみる」というゴールに対して、書籍では「独学で書き方を学び、自分で実践できるようになる」というゴールになります。
+
+セミナーで効果的だった手法が、そのまま書籍でも同様に効果的とは限りません。書籍という紙のメディアでは、セミナーのような動的なインタラクションがない分、「驚き」や「感動」をどう設計するかが重要です。
+
+また、「音声入力をおすすめする」というアプローチは、独学に関心のある読者層には逆効果かもしれません。じっくり考える、静かに思索を深めるというスタイルを好む読者には、文章で書くプロセスそのものに価値を見出す人も多いでしょう。
+
+「音声vs文章」を比較表にして、それぞれの特徴やメリット・デメリットを示した上で、読者が自分に合った方法を選べるようにするのはいかがでしょうか。
+
+さらに、「後半でついてこれなくなる」という懸念に対しては、各章ごとに「ここまでのまとめ」や「チェックリスト」を設けると効果的です。また、難しい概念はわかりやすいたとえ話を用いたり、要点を短くまとめたりすることで、読者が最後まで読み進められるよう工夫できます。`,
+            
+            2: `効果的なプレゼンテーションは、明確な構造を持っていることが不可欠です。まず冒頭で「なぜこの話が重要なのか」という文脈を提供し、聴衆の注意を引きつけましょう。
+
+内容の構成については、通常3〜5つの主要ポイントに絞るのが理想的です。人間の短期記憶の特性を考えると、これ以上の情報は記憶に残りにくくなります。
+
+各ポイントについては「主張→根拠→例示→応用」という流れで展開すると、論理的で説得力のあるプレゼンテーションになります。特に具体例は、抽象的な概念を理解しやすくするために非常に重要です。
+
+視覚資料については、テキスト情報を最小限に抑え、視覚的な要素（グラフ、図表、画像）を効果的に活用しましょう。人間の脳は、テキストよりも視覚情報を処理するのが得意です。
+
+最後に必ず「次のアクション」を明確に示すことで、プレゼンテーションの効果を最大化できます。聴衆が「何をすべきか」を明確に理解できるようにしましょう。`,
+            
+            3: `ウェブコンテンツ設計において最も重要なのは、ユーザーの目的と行動パターンを理解することです。多くのサイトが失敗するのは、自社視点でコンテンツを構成しているからです。
+
+情報アーキテクチャはユーザーの思考プロセスに沿って設計すべきです。「自分がこのサイトに来たら、どのような順序で情報を求めるだろうか」という視点でナビゲーション構造を考えましょう。
+
+コンテンツは「逆ピラミッド型」で構成するのが効果的です。最も重要な情報を先に提示し、徐々に詳細へと掘り下げていく構造です。ユーザーは最初の数秒でページの価値を判断するため、重要情報を上部に配置することが不可欠です。
+
+視覚的階層も重要です。フォントサイズ、色のコントラスト、余白などを使って、情報の重要度を視覚的に表現しましょう。これにより、ユーザーはページをスキャンするだけで重要なポイントを把握できます。
+
+最後に、モバイルファーストの原則に従い、小さな画面での表示を優先して設計することをおすすめします。画面サイズに関係なく、核となるメッセージが明確に伝わる構造を心がけましょう。`
+        };
+    </script>
+    
+    <!-- JavaScriptモジュール -->
+    <script type="module" src="slide-presenter.js"></script>
+</body>
+</html>
