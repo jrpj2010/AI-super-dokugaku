@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景装飾 -->
+  <g opacity="0.05">
+    <circle cx="960" cy="540" r="400" fill="url(#centerGradient)"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" fill-opacity="0.1"/>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="80" y="75">Day 1 | バイブコーディング入門</tspan></text>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="1670" y="75">まとめ</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="56" font-weight="bold" letter-spacing="0.02em"><tspan x="80" y="220">Day 1 まとめ</tspan></text>
+  
+  <!-- 装飾ライン -->
+  <path d="M80 250H400" stroke="url(#paint0_linear)" stroke-width="3"/>
+  
+  <!-- 学習内容の振り返り -->
+  <rect x="80" y="300" width="800" height="300" rx="20" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold"><tspan x="120" y="350">今日学んだこと</tspan></text>
+  
+  <g id="learned-items">
+    <circle cx="150" cy="400" r="5" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.01em"><tspan x="180" y="408">バイブコーディング = コードを書かない開発スタイル</tspan></text>
+    
+    <circle cx="150" cy="450" r="5" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.01em"><tspan x="180" y="458">Cursorの圧倒的な優位性（Composer Agent）</tspan></text>
+    
+    <circle cx="150" cy="500" r="5" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.01em"><tspan x="180" y="508">67分でSNSアプリが作れる時代の到来</tspan></text>
+    
+    <circle cx="150" cy="550" r="5" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.01em"><tspan x="180" y="558">エラーは友達 - AIに見せれば解決</tspan></text>
+  </g>
+  
+  <!-- 次回予告 -->
+  <rect x="920" y="300" width="800" height="300" rx="20" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold"><tspan x="960" y="350">次回予告: Day 2</tspan></text>
+  
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="960" y="420">Composerエージェント完全攻略</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="22" letter-spacing="0.01em">
+    <tspan x="960" y="470">• エージェントモードの詳細解説</tspan>
+    <tspan x="960" y="510">• 複数ファイル同時編集の極意</tspan>
+    <tspan x="960" y="550">• プロジェクト全体の自動生成</tspan>
+  </text>
+  
+  <!-- アクションアイテム -->
+  <rect x="80" y="640" width="1640" height="200" rx="30" fill="#FFEE00" fill-opacity="0.15" stroke="#FFEE00" stroke-width="3"/>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="36" font-weight="bold"><tspan x="120" y="700">今すぐ実践！</tspan></text>
+  
+  <g id="action-items">
+    <rect x="180" y="740" width="480" height="60" rx="10" fill="#B3322B" fill-opacity="0.2"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold"><tspan x="200" y="778">1. Cursorをインストール</tspan></text>
+    
+    <rect x="700" y="740" width="480" height="60" rx="10" fill="#653A5E" fill-opacity="0.2"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold"><tspan x="720" y="778">2. Claude 3.7設定</tspan></text>
+    
+    <rect x="1220" y="740" width="480" height="60" rx="10" fill="#B3322B" fill-opacity="0.2"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold"><tspan x="1240" y="778">3. アニメーション作成</tspan></text>
+  </g>
+  
+  <!-- インスピレーション -->
+  <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="42" font-weight="bold" text-anchor="middle"><tspan x="960" y="940">「話すだけで、アプリが生まれる時代へ」</tspan></text>
+  
+  <!-- フッター -->
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="80" y="1040">© 2025 TANREN Corporation | Cursor勉強会 Day 1</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" letter-spacing="0.02em" text-anchor="middle"><tspan x="960" y="1040">ご参加ありがとうございました！</tspan></text>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="1620" y="1040">Page 5</tspan></text>
+  
+  <!-- デフィニション -->
+  <defs>
+    <radialGradient id="centerGradient" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFEE00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFEE00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="paint0_linear" x1="80" y1="250" x2="400" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3322B"/>
+      <stop offset="1" stop-color="#653A5E"/>
+    </linearGradient>
+  </defs>
+</svg>

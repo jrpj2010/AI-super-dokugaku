@@ -1,0 +1,194 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c2c2c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="funnelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#653A5E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#B3322B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFEE00;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.2"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <pattern id="gridPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#F4F1EA" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <rect width="1920" height="1080" fill="url(#gridPattern)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" opacity="0.1"/>
+  <text x="960" y="70" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F4F1EA">コンテンツピラミッド戦略：1つのソースから無限の展開</text>
+  
+  <!-- Content Funnel -->
+  <g transform="translate(500, 150)">
+    <!-- Pillar Content -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="400" height="150" rx="15" fill="#653A5E" filter="url(#cardShadow)"/>
+      <text x="200" y="40" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F4F1EA">ピラーコンテンツ</text>
+      <text x="200" y="70" font-family="Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#FFEE00">ブログ記事（3000文字）</text>
+      <text x="200" y="100" font-family="Noto Sans JP, sans-serif" font-size="16" text-anchor="middle" fill="#F4F1EA" opacity="0.8">深い洞察・包括的な情報</text>
+      <text x="200" y="125" font-family="Noto Sans JP, sans-serif" font-size="16" text-anchor="middle" fill="#F4F1EA" opacity="0.8">SEO最適化・権威性確立</text>
+    </g>
+    
+    <!-- Arrows -->
+    <path d="M 200 150 L 100 200 L 100 250" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow1)"/>
+    <path d="M 200 150 L 200 200 L 200 250" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+    <path d="M 200 150 L 300 200 L 300 250" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow3)"/>
+    
+    <defs>
+      <marker id="arrow1" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+      <marker id="arrow2" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+      <marker id="arrow3" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+    </defs>
+    
+    <!-- Middle Content -->
+    <g transform="translate(-100, 250)">
+      <rect x="0" y="0" width="200" height="120" rx="10" fill="#B3322B" filter="url(#cardShadow)"/>
+      <text x="100" y="30" font-family="Noto Sans JP, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#F4F1EA">メルマガ版</text>
+      <text x="100" y="55" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">1500文字</text>
+      <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">要点整理</text>
+      <text x="100" y="95" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">CTA強化</text>
+    </g>
+    
+    <g transform="translate(100, 250)">
+      <rect x="0" y="0" width="200" height="120" rx="10" fill="#B3322B" filter="url(#cardShadow)"/>
+      <text x="100" y="30" font-family="Noto Sans JP, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#F4F1EA">LinkedIn記事</text>
+      <text x="100" y="55" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">1000文字</text>
+      <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">ビジネス視点</text>
+      <text x="100" y="95" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">専門性強調</text>
+    </g>
+    
+    <g transform="translate(300, 250)">
+      <rect x="0" y="0" width="200" height="120" rx="10" fill="#B3322B" filter="url(#cardShadow)"/>
+      <text x="100" y="30" font-family="Noto Sans JP, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#F4F1EA">YouTube台本</text>
+      <text x="100" y="55" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">5分版</text>
+      <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">視覚的説明</text>
+      <text x="100" y="95" font-family="Noto Sans JP, sans-serif" font-size="14" text-anchor="middle" fill="#F4F1EA" opacity="0.9">エンタメ要素</text>
+    </g>
+    
+    <!-- Micro Content Arrows -->
+    <path d="M 100 370 L 50 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    <path d="M 100 370 L 100 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    <path d="M 100 370 L 150 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    
+    <path d="M 200 370 L 200 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    
+    <path d="M 400 370 L 350 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    <path d="M 400 370 L 400 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    <path d="M 400 370 L 450 420" stroke="#FFEE00" stroke-width="2" fill="none"/>
+    
+    <!-- Micro Content -->
+    <g transform="translate(-50, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">Twitter</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">280文字</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">スレッド</text>
+    </g>
+    
+    <g transform="translate(50, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">Instagram</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">カルーセル</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">ビジュアル</text>
+    </g>
+    
+    <g transform="translate(150, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">TikTok</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">60秒</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">エンタメ</text>
+    </g>
+    
+    <g transform="translate(250, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">Quote</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">名言化</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">画像化</text>
+    </g>
+    
+    <g transform="translate(350, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">Podcast</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">音声版</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">10分</text>
+    </g>
+    
+    <g transform="translate(450, 420)">
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="#FFEE00" opacity="0.2"/>
+      <text x="50" y="25" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">Infographic</text>
+      <text x="50" y="45" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">図解</text>
+      <text x="50" y="65" font-family="Noto Sans JP, sans-serif" font-size="12" text-anchor="middle" fill="#F4F1EA">データ視覚化</text>
+    </g>
+  </g>
+  
+  <!-- SEO Performance Metrics -->
+  <g transform="translate(1100, 200)">
+    <rect x="0" y="0" width="700" height="600" rx="20" fill="#1a1a1a" filter="url(#cardShadow)"/>
+    <rect x="0" y="0" width="700" height="80" rx="20" fill="#653A5E" opacity="0.2"/>
+    <text x="350" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#F4F1EA">SEO量産システムの威力</text>
+    
+    <!-- Metrics -->
+    <g transform="translate(50, 120)">
+      <text x="0" y="0" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" fill="#FFEE00">月間コンテンツ生産量</text>
+      
+      <g transform="translate(0, 40)">
+        <rect x="0" y="0" width="600" height="40" rx="20" fill="#2c2c2c"/>
+        <rect x="0" y="0" width="540" height="40" rx="20" fill="#FFEE00" opacity="0.6"/>
+        <text x="300" y="25" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA">30本/月（従来比10倍）</text>
+      </g>
+      
+      <text x="0" y="120" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" fill="#B3322B">検索順位向上率</text>
+      
+      <g transform="translate(0, 160)">
+        <rect x="0" y="0" width="600" height="40" rx="20" fill="#2c2c2c"/>
+        <rect x="0" y="0" width="480" height="40" rx="20" fill="#B3322B" opacity="0.6"/>
+        <text x="300" y="25" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA">80%が1ページ目に表示</text>
+      </g>
+      
+      <text x="0" y="240" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" fill="#653A5E">トラフィック増加率</text>
+      
+      <g transform="translate(0, 280)">
+        <rect x="0" y="0" width="600" height="40" rx="20" fill="#2c2c2c"/>
+        <rect x="0" y="0" width="450" height="40" rx="20" fill="#653A5E" opacity="0.6"/>
+        <text x="300" y="25" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA">前年比250%増加</text>
+      </g>
+    </g>
+    
+    <!-- ROI -->
+    <g transform="translate(350, 480)">
+      <rect x="-200" y="-40" width="400" height="80" rx="40" fill="#FFEE00" opacity="0.2"/>
+      <text x="0" y="10" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFEE00">
+        コンテンツROI：320%向上
+      </text>
+    </g>
+  </g>
+  
+  <!-- Bottom Message -->
+  <g transform="translate(960, 950)">
+    <text x="0" y="0" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFEE00">
+      1つのアイデアから、10倍の価値を生み出す仕組みが完成
+    </text>
+  </g>
+</svg>

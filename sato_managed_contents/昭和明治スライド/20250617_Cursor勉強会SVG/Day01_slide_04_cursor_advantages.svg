@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景グラデーション効果 -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)" opacity="0.1"/>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" fill-opacity="0.1"/>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="80" y="75">Day 1 | バイブコーディング入門</tspan></text>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="1580" y="75">Cursorの優位性</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="56" font-weight="bold" letter-spacing="0.02em"><tspan x="80" y="220">なぜCursorが最強なのか？</tspan></text>
+  
+  <!-- 装飾ライン -->
+  <path d="M80 250H600" stroke="url(#paint0_linear)" stroke-width="3"/>
+  
+  <!-- 比較テーブル -->
+  <g id="comparison-table">
+    <!-- ヘッダー行 -->
+    <rect x="80" y="300" width="1720" height="80" fill="#653A5E" fill-opacity="0.2"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold">
+      <tspan x="120" y="350">ツール</tspan>
+      <tspan x="480" y="350">環境</tspan>
+      <tspan x="780" y="350">AIモデル</tspan>
+      <tspan x="1180" y="350">強み</tspan>
+      <tspan x="1580" y="350">制限</tspan>
+    </text>
+    
+    <!-- Cursor行 -->
+    <rect x="80" y="380" width="1720" height="100" fill="#B3322B" fill-opacity="0.1"/>
+    <circle cx="120" cy="430" r="25" fill="#FFEE00"/>
+    <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold"><tspan x="113" y="438">1</tspan></text>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold"><tspan x="160" y="438">Cursor</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="480" y="420">ローカル</tspan>
+      <tspan x="480" y="450">（最速）</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="780" y="420">Claude 3.7</tspan>
+      <tspan x="780" y="450">Sonnet思考版</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1180" y="420">Composer Agent</tspan>
+      <tspan x="1180" y="450">完全自動化</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1580" y="430">なし</tspan>
+    </text>
+    
+    <!-- VS Code行 -->
+    <rect x="80" y="480" width="1720" height="100" fill="#653A5E" fill-opacity="0.05"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24"><tspan x="160" y="538">VS Code</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="480" y="538">ローカル</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="780" y="538">Copilot（GPT-4）</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1180" y="538">補完機能のみ</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1580" y="538">自動化なし</tspan>
+    </text>
+    
+    <!-- Windsurf行 -->
+    <rect x="80" y="580" width="1720" height="100" fill="#653A5E" fill-opacity="0.05"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24"><tspan x="160" y="638">Windsurf</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="480" y="638">ローカル</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="780" y="638">複数モデル</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1180" y="638">Flow機能</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1580" y="638">Cursorより劣る</tspan>
+    </text>
+    
+    <!-- Bolt行 -->
+    <rect x="80" y="680" width="1720" height="100" fill="#653A5E" fill-opacity="0.05"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24"><tspan x="160" y="738">Bolt</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="480" y="738">Web（遅い）</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="780" y="738">Claude/GPT</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1180" y="738">簡単な操作</tspan>
+    </text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+      <tspan x="1580" y="738">機能制限多い</tspan>
+    </text>
+  </g>
+  
+  <!-- Cursorの3大優位性 -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="40" font-weight="bold"><tspan x="80" y="880">Cursorの決定的な3つの優位性</tspan></text>
+  
+  <g id="advantages">
+    <!-- 優位性1 -->
+    <rect x="80" y="920" width="520" height="120" rx="15" fill="#FFEE00" fill-opacity="0.15" stroke="#FFEE00" stroke-width="2"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="26" font-weight="bold"><tspan x="120" y="960">1. Composer Agent Mode</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="120" y="1000">ファイル作成・編集・削除を完全自動化</tspan></text>
+    
+    <!-- 優位性2 -->
+    <rect x="640" y="920" width="520" height="120" rx="15" fill="#B3322B" fill-opacity="0.15" stroke="#B3322B" stroke-width="2"/>
+    <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="26" font-weight="bold"><tspan x="680" y="960">2. Claude 3.7 Sonnet思考版</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="680" y="1000">最新AIモデルによる高精度な理解</tspan></text>
+    
+    <!-- 優位性3 -->
+    <rect x="1200" y="920" width="520" height="120" rx="15" fill="#653A5E" fill-opacity="0.15" stroke="#653A5E" stroke-width="2"/>
+    <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="26" font-weight="bold"><tspan x="1240" y="960">3. ローカル環境での高速処理</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="1240" y="1000">Web版の10倍以上の開発速度</tspan></text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="80" y="1040">© 2025 TANREN Corporation | Cursor勉強会 Day 1</tspan></text>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="1620" y="1040">Page 4</tspan></text>
+  
+  <!-- デフィニション -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B3322B"/>
+      <stop offset="100%" stop-color="#653A5E"/>
+    </linearGradient>
+    <linearGradient id="paint0_linear" x1="80" y1="250" x2="600" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3322B"/>
+      <stop offset="1" stop-color="#653A5E"/>
+    </linearGradient>
+  </defs>
+</svg>

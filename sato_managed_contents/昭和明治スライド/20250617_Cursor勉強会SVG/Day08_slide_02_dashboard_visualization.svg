@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素 -->
+  <circle cx="200" cy="200" r="150" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="1720" cy="880" r="180" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 8</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="180" y="60">データ分析とレポーティング</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">KPIダッシュボードの文章化技術</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">視覚データを経営報告に変換する</tspan></text>
+  
+  <!-- KPIダッシュボードのビジュアル表現 -->
+  <g transform="translate(80, 240)">
+    <!-- ダッシュボード枠 -->
+    <rect x="0" y="0" width="800" height="400" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="2"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">月次KPIダッシュボード</tspan></text>
+    
+    <!-- KPIカード1: 売上 -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="25">売上高</tspan></text>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold" letter-spacing="0em"><tspan x="10" y="60">¥5.2M</tspan></text>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="85">↑ 20%</tspan></text>
+    </g>
+    
+    <!-- KPIカード2: 顧客数 -->
+    <g transform="translate(220, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="25">新規顧客</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold" letter-spacing="0em"><tspan x="10" y="60">320</tspan></text>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="85">↓ 5%</tspan></text>
+    </g>
+    
+    <!-- KPIカード3: コンバージョン率 -->
+    <g transform="translate(420, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="25">CVR</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold" letter-spacing="0em"><tspan x="10" y="60">3.2%</tspan></text>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="10" y="85">↑ 0.5pt</tspan></text>
+    </g>
+    
+    <!-- グラフエリア -->
+    <g transform="translate(20, 180)">
+      <!-- 折れ線グラフ -->
+      <path d="M0 120L100 100L200 90L300 60L400 50L500 20L600 30L700 0" stroke="#FFEE00" stroke-width="3" fill="none"/>
+      <circle cx="0" cy="120" r="4" fill="#FFEE00"/>
+      <circle cx="100" cy="100" r="4" fill="#FFEE00"/>
+      <circle cx="200" cy="90" r="4" fill="#FFEE00"/>
+      <circle cx="300" cy="60" r="4" fill="#FFEE00"/>
+      <circle cx="400" cy="50" r="4" fill="#FFEE00"/>
+      <circle cx="500" cy="20" r="4" fill="#FFEE00"/>
+      <circle cx="600" cy="30" r="4" fill="#FFEE00"/>
+      <circle cx="700" cy="0" r="4" fill="#FFEE00"/>
+      
+      <!-- X軸ラベル -->
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em" opacity="0.6">
+        <tspan x="0" y="160">1月</tspan>
+        <tspan x="100" y="160">2月</tspan>
+        <tspan x="200" y="160">3月</tspan>
+        <tspan x="300" y="160">4月</tspan>
+        <tspan x="400" y="160">5月</tspan>
+        <tspan x="500" y="160">6月</tspan>
+        <tspan x="600" y="160">7月</tspan>
+        <tspan x="700" y="160">8月</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- 文章化プロセス -->
+  <g transform="translate(960, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">ダッシュボードの文章化フレームワーク</tspan></text>
+    
+    <!-- フレームワーク要素 -->
+    <g transform="translate(0, 40)">
+      <!-- 1. 全体パフォーマンス -->
+      <rect x="0" y="0" width="360" height="120" rx="8" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">1. 全体パフォーマンス</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="55">「8月の全体業績は目標を上回り、</tspan>
+        <tspan x="15" y="75">売上高は前年同月比20%増の</tspan>
+        <tspan x="15" y="95">520万円を達成しました。」</tspan>
+      </text>
+      
+      <!-- 2. 各KPIの状況 -->
+      <g transform="translate(380, 0)">
+        <rect x="0" y="0" width="360" height="120" rx="8" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">2. 各KPIの状況</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">「新規顧客獲得は320件と</tspan>
+          <tspan x="15" y="75">前月比5%減少しましたが、</tspan>
+          <tspan x="15" y="95">CVRは0.5pt改善しています。」</tspan>
+        </text>
+      </g>
+      
+      <!-- 3. 注目すべき変化 -->
+      <g transform="translate(0, 140)">
+        <rect x="0" y="0" width="360" height="120" rx="8" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">3. 注目すべき変化</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">「6月以降の成長率が加速しており、</tspan>
+          <tspan x="15" y="75">マーケティング施策の効果が</tspan>
+          <tspan x="15" y="95">顕著に表れています。」</tspan>
+        </text>
+      </g>
+      
+      <!-- 4. 今後の見通し -->
+      <g transform="translate(380, 140)">
+        <rect x="0" y="0" width="360" height="120" rx="8" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">4. 今後の見通し</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">「現在のトレンドが継続すれば、</tspan>
+          <tspan x="15" y="75">年間目標の120%達成が</tspan>
+          <tspan x="15" y="95">見込まれます。」</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- アクションプラン提示の3段階 -->
+  <g transform="translate(80, 720)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">データ分析に基づくアクションプラン</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- 即座に実施 -->
+      <rect x="0" y="0" width="380" height="100" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">即座に実施（今週中）</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="55">● クイックウィン施策の実行</tspan>
+        <tspan x="15" y="75">● コストゼロの改善策導入</tspan>
+      </text>
+      
+      <!-- 短期施策 -->
+      <g transform="translate(400, 0)">
+        <rect x="0" y="0" width="380" height="100" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">短期施策（1-3ヶ月）</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● プロセス改善の実施</tspan>
+          <tspan x="15" y="75">● リソース最適化の推進</tspan>
+        </text>
+      </g>
+      
+      <!-- 中長期施策 -->
+      <g transform="translate(800, 0)">
+        <rect x="0" y="0" width="380" height="100" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">中長期施策（6-12ヶ月）</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 戦略的投資の検討</tspan>
+          <tspan x="15" y="75">● 新規事業開発の推進</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 880)">
+    <rect x="0" y="0" width="1200" height="120" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下のKPIダッシュボードを経営報告用に文章化してください：[スクリーンショット]</tspan>
+      <tspan x="20" y="85">文章化のポイント：1.全体パフォーマンス 2.各KPIの状況 3.注目すべき変化 4.今後の見通し」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+</svg>

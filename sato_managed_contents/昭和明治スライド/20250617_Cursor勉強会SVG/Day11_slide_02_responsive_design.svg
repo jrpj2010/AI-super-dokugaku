@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素 -->
+  <circle cx="200" cy="200" r="150" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="1720" cy="880" r="180" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 11</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="200" y="60">LP・Webページ制作入門</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">レスポンシブデザインの実装</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">全デバイスで最適な表示を実現する</tspan></text>
+  
+  <!-- モバイルファーストのコンセプト -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">モバイルファーストの設計思想</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- モバイル → タブレット → デスクトップの流れ -->
+      
+      <!-- モバイル -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="160" height="280" rx="15" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+        <rect x="10" y="10" width="140" height="240" rx="10" fill="#2c2c2c" opacity="0.5"/>
+        <circle cx="80" cy="260" r="10" stroke="#FFEE00" stroke-width="1" fill="none" opacity="0.5"/>
+        
+        <!-- コンテンツ表現 -->
+        <rect x="20" y="20" width="120" height="40" rx="5" fill="#B3322B" fill-opacity="0.3"/>
+        <rect x="20" y="70" width="120" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="20" y="140" width="120" height="30" rx="15" fill="#FFEE00" fill-opacity="0.5"/>
+        <rect x="20" y="180" width="120" height="40" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="45" y="310">Mobile First</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="35" y="330">&lt; 768px</tspan></text>
+      </g>
+      
+      <!-- 矢印 -->
+      <path d="M180 140L220 140" stroke="#F4F1EA" stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- タブレット -->
+      <g transform="translate(240, 0)">
+        <rect x="0" y="0" width="280" height="200" rx="15" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <rect x="10" y="10" width="260" height="180" rx="10" fill="#2c2c2c" opacity="0.5"/>
+        
+        <!-- コンテンツ表現（2カラム） -->
+        <rect x="20" y="20" width="240" height="30" rx="5" fill="#B3322B" fill-opacity="0.3"/>
+        <rect x="20" y="60" width="115" height="50" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="145" y="60" width="115" height="50" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="20" y="120" width="240" height="25" rx="12" fill="#FFEE00" fill-opacity="0.5"/>
+        <rect x="20" y="155" width="115" height="25" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        <rect x="145" y="155" width="115" height="25" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="105" y="230">Tablet</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="75" y="250">768px - 1024px</tspan></text>
+      </g>
+      
+      <!-- 矢印 -->
+      <path d="M540 140L580 140" stroke="#F4F1EA" stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- デスクトップ -->
+      <g transform="translate(600, 0)">
+        <rect x="0" y="0" width="400" height="280" rx="15" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <rect x="10" y="10" width="380" height="260" rx="10" fill="#2c2c2c" opacity="0.5"/>
+        
+        <!-- コンテンツ表現（3カラム） -->
+        <rect x="20" y="20" width="360" height="40" rx="5" fill="#B3322B" fill-opacity="0.3"/>
+        <rect x="20" y="70" width="110" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="140" y="70" width="110" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="260" y="70" width="110" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1"/>
+        <rect x="20" y="140" width="360" height="30" rx="15" fill="#FFEE00" fill-opacity="0.5"/>
+        <rect x="20" y="180" width="170" height="40" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        <rect x="200" y="180" width="170" height="40" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        <rect x="20" y="230" width="360" height="20" rx="5" fill="#F4F1EA" fill-opacity="0.05"/>
+        
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="165" y="310">Desktop</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="160" y="330">&gt; 1024px</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- レスポンシブ設計のポイント -->
+  <g transform="translate(1120, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">レスポンシブ最適化のポイント</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- タップターゲット -->
+      <rect x="0" y="0" width="520" height="100" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">1. タップターゲット</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="55">● ボタン：最低44px × 44px</tspan>
+        <tspan x="15" y="75">● リンク間隔：適切な余白確保</tspan>
+      </text>
+      
+      <!-- タップエリアの図解 -->
+      <rect x="300" y="20" width="60" height="60" rx="8" fill="#B3322B" fill-opacity="0.5" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em"><tspan x="370" y="55">44px</tspan></text>
+      
+      <!-- 読みやすいフォント -->
+      <g transform="translate(0, 120)">
+        <rect x="0" y="0" width="520" height="100" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">2. 読みやすいフォント</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 本文：16px以上</tspan>
+          <tspan x="15" y="75">● 行間：1.5以上</tspan>
+        </text>
+        
+        <!-- フォントサイズ例 -->
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="300" y="45">Aa 16px</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.6"><tspan x="300" y="70">Aa 14px</tspan></text>
+      </g>
+      
+      <!-- パフォーマンス -->
+      <g transform="translate(0, 240)">
+        <rect x="0" y="0" width="520" height="100" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">3. パフォーマンス最適化</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 画像最適化（WebP形式）</tspan>
+          <tspan x="15" y="75">● 遅延読み込み（lazy loading）</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- コード指示の例 -->
+  <g transform="translate(80, 640)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">AIへの指示方法</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="1080" height="200" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- フレームワーク選択 -->
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">フレームワーク選択の指示</tspan></text>
+      
+      <g transform="translate(20, 50)">
+        <!-- Tailwind CSS -->
+        <rect x="0" y="0" width="320" height="50" rx="8" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="1"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">Tailwind CSS</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em"><tspan x="130" y="32">「Tailwind CSSを使って」</tspan></text>
+        
+        <!-- Bootstrap -->
+        <g transform="translate(340, 0)">
+          <rect x="0" y="0" width="320" height="50" rx="8" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="1"/>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">Bootstrap 5</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em"><tspan x="130" y="32">「Bootstrap 5を使って」</tspan></text>
+        </g>
+        
+        <!-- バニラCSS -->
+        <g transform="translate(680, 0)">
+          <rect x="0" y="0" width="320" height="50" rx="8" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="1"/>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">バニラCSS</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em"><tspan x="130" y="32">「シンプルなCSSで」</tspan></text>
+        </g>
+      </g>
+      
+      <!-- 段階的な作成 -->
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="20" y="140">段階的な作成プロセス</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="20" y="165">1. まず基本構造 → 2. 次にデザイン調整 → 3. 最後に細部仕上げ</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- パフォーマンス指標 -->
+  <g transform="translate(1220, 640)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">目指すべき指標</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="420" height="200" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- 速度指標 -->
+      <g transform="translate(20, 20)">
+        <circle cx="40" cy="40" r="35" stroke="#FFEE00" stroke-width="3" fill="none"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="20" y="48">3秒</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="90" y="35">ページ読み込み</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="90" y="55">3秒以内を目標</tspan></text>
+      </g>
+      
+      <!-- Lighthouseスコア -->
+      <g transform="translate(20, 100)">
+        <circle cx="40" cy="40" r="35" stroke="#B3322B" stroke-width="3" fill="none"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="26" y="48">90</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="90" y="35">Lighthouseスコア</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="90" y="55">90以上を維持</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 880)">
+    <rect x="0" y="0" width="1560" height="120" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「モバイルファーストでLPを作成してください。ブレイクポイント：モバイル&lt;768px、タブレット768-1024px、デスクトップ&gt;1024px</tspan>
+      <tspan x="20" y="85">モバイル最適化：タップターゲット最低44px、本文16px以上、行間1.5、単一カラム、画像最適化、loading="lazy"属性」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+  </defs>
+</svg>

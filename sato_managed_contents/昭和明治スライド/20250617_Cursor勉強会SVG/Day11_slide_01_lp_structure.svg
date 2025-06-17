@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素（装飾円） -->
+  <circle cx="1600" cy="300" r="200" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="320" cy="780" r="150" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 11</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="200" y="60">LP・Webページ制作入門</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">高コンバージョンLPの構成要素</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">訪問者を顧客に変える8つの必須セクション</tspan></text>
+  
+  <!-- LP構成の縦フロー -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">ランディングページの黄金構成</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- 1. ヘッダー -->
+      <rect x="0" y="0" width="600" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">1. ヘッダー</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">ロゴ + 電話番号/CTAボタン</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="150" y="40">信頼性の演出・即座のコンバージョン機会</tspan></text>
+      
+      <!-- 矢印 -->
+      <path d="M300 65L300 85" stroke="#FFEE00" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- 2. ファーストビュー -->
+      <g transform="translate(0, 90)">
+        <rect x="0" y="0" width="600" height="80" rx="5" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">2. ファーストビュー</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="150" y="20">キャッチコピー（問題提起）</tspan>
+          <tspan x="150" y="40">サブコピー（解決策提示）</tspan>
+          <tspan x="150" y="60">ヒーロー画像/動画 + CTAボタン</tspan>
+        </text>
+      </g>
+      
+      <!-- 矢印 -->
+      <path d="M300 175L300 195" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- 3. 問題提起 -->
+      <g transform="translate(0, 200)">
+        <rect x="0" y="0" width="600" height="60" rx="5" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">3. 問題提起セクション</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">「こんなお悩みありませんか？」</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="150" y="40">共感を得て興味を引く</tspan></text>
+      </g>
+      
+      <!-- 矢印 -->
+      <path d="M300 265L300 285" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- 4. 解決策提示 -->
+      <g transform="translate(0, 290)">
+        <rect x="0" y="0" width="600" height="60" rx="5" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">4. 解決策提示</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">商品/サービスの紹介</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="150" y="40">3つの特徴とベネフィット</tspan></text>
+      </g>
+      
+      <!-- 矢印 -->
+      <path d="M300 355L300 375" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- 5. 社会的証明 -->
+      <g transform="translate(0, 380)">
+        <rect x="0" y="0" width="600" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="1"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">5. 社会的証明</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">お客様の声・実績・メディア掲載</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="150" y="40">信頼性を高める</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- CTAの最適化 -->
+  <g transform="translate(720, 280)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">効果的なCTAボタン設計</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="400" height="300" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- CTAテキストの例 -->
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">CTAテキストパターン</tspan></text>
+      
+      <!-- CTAボタン例1 -->
+      <rect x="20" y="60" width="360" height="50" rx="25" fill="#B3322B"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="125" y="90">今すぐ無料で試す</tspan></text>
+      
+      <!-- CTAボタン例2 -->
+      <rect x="20" y="130" width="360" height="50" rx="25" fill="#FFEE00"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="115" y="160">30秒で簡単申込み</tspan></text>
+      
+      <!-- CTAボタン例3 -->
+      <rect x="20" y="200" width="360" height="50" rx="25" fill="#653A5E"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="110" y="230">限定価格で購入する</tspan></text>
+      
+      <!-- マイクロコピー -->
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em" opacity="0.8">
+        <tspan x="130" y="270">※ クレジットカード不要</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- コピーライティングのパターン -->
+  <g transform="translate(1180, 280)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">キャッチコピーの型</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="460" height="300" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- 問題提起型 -->
+      <g transform="translate(20, 20)">
+        <rect x="0" y="0" width="420" height="70" rx="8" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="1"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">1. 問題提起型</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="50">「まだ手作業で時間を無駄にしていませんか？」</tspan></text>
+      </g>
+      
+      <!-- ベネフィット型 -->
+      <g transform="translate(20, 100)">
+        <rect x="0" y="0" width="420" height="70" rx="8" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="1"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">2. ベネフィット型</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="50">「3ヶ月で売上を2倍に増やす方法」</tspan></text>
+      </g>
+      
+      <!-- 緊急性型 -->
+      <g transform="translate(20, 180)">
+        <rect x="0" y="0" width="420" height="70" rx="8" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="1"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">3. 緊急性型</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="50">「今だけ！初月無料キャンペーン実施中」</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- LPの続き（下部） -->
+  <g transform="translate(80, 760)">
+    <!-- 6. オファー -->
+    <rect x="0" y="0" width="600" height="60" rx="5" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="25">6. オファー</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">価格/特典・限定性/緊急性</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="150" y="40">最後の一押し + CTAボタン</tspan></text>
+    
+    <!-- 7&8 -->
+    <g transform="translate(620, 0)">
+      <rect x="0" y="0" width="280" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">7. FAQ</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="15" y="45">不安や疑問を解消</tspan></text>
+    </g>
+    
+    <g transform="translate(920, 0)">
+      <rect x="0" y="0" width="280" height="60" rx="5" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">8. フッター</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.7"><tspan x="15" y="45">会社情報・規約</tspan></text>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 880)">
+    <rect x="0" y="0" width="1560" height="120" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下の要件でランディングページを作成してください：商品[オンライン英会話]、ターゲット[30-40代ビジネスパーソン]、</tspan>
+      <tspan x="20" y="85">目的[無料体験申込]、含める要素：1.キャッチコピー 2.3つの特徴 3.お客様の声 4.料金プラン 5.申込フォーム</tspan>
+      <tspan x="20" y="105">デザイン：モダンで信頼感のある、メインカラー[ネイビー]、アクセントカラー[オレンジ]」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+  </defs>
+</svg>

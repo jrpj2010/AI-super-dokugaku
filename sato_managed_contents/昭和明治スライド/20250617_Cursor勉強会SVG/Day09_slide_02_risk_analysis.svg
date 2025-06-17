@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素 -->
+  <circle cx="200" cy="200" r="150" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="1720" cy="880" r="180" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 9</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="180" y="60">契約書・法務文書の効率化</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">リスク条項のチェックと修正提案</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">契約書の潜在リスクを特定し、対策を講じる</tspan></text>
+  
+  <!-- リスクチェック4つのポイント -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">契約書リスクチェックの4つのポイント</tspan></text>
+    
+    <!-- ポイント1: 一方的な条項 -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="360" height="180" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="40" rx="10 10 0 0" fill="#B3322B" fill-opacity="0.3"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="27">1. 一方的な条項</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="65">● 解除権の不均衡</tspan>
+        <tspan x="15" y="90">● 責任の偏り</tspan>
+        <tspan x="15" y="115">● 不当な免責</tspan>
+      </text>
+      <rect x="15" y="135" width="100" height="30" rx="15" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="1"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" font-weight="bold" letter-spacing="0em"><tspan x="35" y="153">高リスク</tspan></text>
+    </g>
+    
+    <!-- ポイント2: 曖昧な表現 -->
+    <g transform="translate(380, 40)">
+      <rect x="0" y="0" width="360" height="180" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="40" rx="10 10 0 0" fill="#653A5E" fill-opacity="0.3"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="27">2. 曖昧な表現</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="65">● 定義の不明確</tspan>
+        <tspan x="15" y="90">● 解釈の余地</tspan>
+        <tspan x="15" y="115">● 測定不可能な基準</tspan>
+      </text>
+      <rect x="15" y="135" width="100" height="30" rx="15" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="1"/>
+      <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" font-weight="bold" letter-spacing="0em"><tspan x="35" y="153">中リスク</tspan></text>
+    </g>
+    
+    <!-- ポイント3: 欠落条項 -->
+    <g transform="translate(760, 40)">
+      <rect x="0" y="0" width="360" height="180" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="40" rx="10 10 0 0" fill="#FFEE00" fill-opacity="0.3"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="27">3. 欠落条項</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="65">● 必須条項の不足</tspan>
+        <tspan x="15" y="90">● 保護条項の欠如</tspan>
+        <tspan x="15" y="115">● 紛争解決手段</tspan>
+      </text>
+      <rect x="15" y="135" width="100" height="30" rx="15" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="1"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" font-weight="bold" letter-spacing="0em"><tspan x="35" y="153">要注意</tspan></text>
+    </g>
+    
+    <!-- ポイント4: 過度な負担 -->
+    <g transform="translate(1140, 40)">
+      <rect x="0" y="0" width="360" height="180" rx="10" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="40" rx="10 10 0 0" fill="#F4F1EA" fill-opacity="0.3"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="27">4. 過度な負担</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="65">● 不合理な義務</tspan>
+        <tspan x="15" y="90">● 過大な損害賠償</tspan>
+        <tspan x="15" y="115">● 無制限の保証</tspan>
+      </text>
+      <rect x="15" y="135" width="100" height="30" rx="15" fill="#F4F1EA" fill-opacity="0.2" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" font-weight="bold" letter-spacing="0em"><tspan x="35" y="153">要確認</tspan></text>
+    </g>
+  </g>
+  
+  <!-- 修正提案のフレームワーク -->
+  <g transform="translate(80, 480)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">リスク条項の修正提案フレームワーク</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="900" height="280" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- フレームワークのステップ -->
+      <g transform="translate(30, 30)">
+        <!-- Step 1 -->
+        <g transform="translate(0, 0)">
+          <circle cx="15" cy="15" r="15" fill="#FFEE00"/>
+          <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="10" y="20">1</tspan></text>
+          <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="40" y="20">現状の条項</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">問題のある条文を抽出</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M15 40L15 65" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 2 -->
+        <g transform="translate(0, 50)">
+          <circle cx="15" cy="15" r="15" fill="#B3322B"/>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="10" y="20">2</tspan></text>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="40" y="20">問題点の指摘</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">具体的なリスクと影響を明確化</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M15 90L15 115" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 3 -->
+        <g transform="translate(0, 100)">
+          <circle cx="15" cy="15" r="15" fill="#653A5E"/>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="10" y="20">3</tspan></text>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="40" y="20">修正案</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">バランスの取れた代替条文を提示</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M15 140L15 165" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 4 -->
+        <g transform="translate(0, 150)">
+          <circle cx="15" cy="15" r="15" fill="#F4F1EA"/>
+          <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="10" y="20">4</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="40" y="20">修正理由</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">法的根拠と業界慣行を説明</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M15 190L15 215" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 5 -->
+        <g transform="translate(0, 200)">
+          <circle cx="15" cy="15" r="15" fill="#FFEE00"/>
+          <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="10" y="20">5</tspan></text>
+          <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="40" y="20">交渉ポイント</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="150" y="20">優先度と譲歩可能範囲を設定</tspan></text>
+        </g>
+      </g>
+      
+      <!-- 具体例 -->
+      <g transform="translate(400, 30)">
+        <rect x="0" y="0" width="460" height="220" rx="8" fill="#B3322B" fill-opacity="0.05" stroke="#B3322B" stroke-width="1"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">修正例：損害賠償条項</tspan></text>
+        
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="13" letter-spacing="0em">
+          <tspan x="15" y="55">【問題のある条文】</tspan>
+          <tspan x="15" y="75">「乙は甲に生じた一切の損害を賠償する」</tspan>
+        </text>
+        
+        <path d="M230 90L230 110" stroke="#B3322B" stroke-width="2" marker-end="url(#arrowhead-red)"/>
+        
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="13" letter-spacing="0em">
+          <tspan x="15" y="135">【修正案】</tspan>
+          <tspan x="15" y="155">「乙は、自己の故意または重過失により甲に生じた</tspan>
+          <tspan x="15" y="175">直接損害に限り、契約金額を上限として賠償する」</tspan>
+        </text>
+        
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="12" letter-spacing="0em">
+          <tspan x="15" y="205">✓ 責任範囲を明確化 ✓ 上限設定でリスク管理</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 交渉の優先順位 -->
+  <g transform="translate(1020, 480)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">交渉の優先順位設定</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="600" height="280" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- Must Have -->
+      <g transform="translate(20, 20)">
+        <rect x="0" y="0" width="560" height="70" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">Must Have（譲歩不可）</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="55">● 責任制限条項 ● 秘密保持義務 ● 知的財産権の帰属</tspan></text>
+      </g>
+      
+      <!-- Nice to Have -->
+      <g transform="translate(20, 100)">
+        <rect x="0" y="0" width="560" height="70" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">Nice to Have（交渉可能）</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="55">● 支払条件の調整 ● 納期の柔軟性 ● 検収期間</tspan></text>
+      </g>
+      
+      <!-- 譲歩可能範囲 -->
+      <g transform="translate(20, 180)">
+        <rect x="0" y="0" width="560" height="70" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">譲歩可能範囲</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="55">● 細かい文言調整 ● 手続き的事項 ● 形式的要件</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 800)">
+    <rect x="0" y="0" width="1540" height="140" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下の契約書のリスクを分析してください：[契約書の内容を貼り付け]</tspan>
+      <tspan x="20" y="85">チェック項目：1.一方的な条項 2.曖昧な表現 3.欠落条項 4.過度な負担</tspan>
+      <tspan x="20" y="105">各リスクに対して：現状の条項、問題点の指摘、修正案、修正理由、交渉ポイントを提示してください。」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#B3322B"/>
+    </marker>
+  </defs>
+</svg>

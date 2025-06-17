@@ -1,0 +1,96 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c2c2c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#653A5E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5580;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="decorationLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#653A5E;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#653A5E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#653A5E;stop-opacity:0" />
+    </linearGradient>
+
+    <pattern id="gridPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#F4F1EA" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+
+    <radialGradient id="glowCircle1" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFEE00;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#FFEE00;stop-opacity:0" />
+    </radialGradient>
+
+    <radialGradient id="glowCircle2" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#653A5E;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#653A5E;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <rect width="1920" height="1080" fill="url(#gridPattern)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="1600" cy="200" r="300" fill="url(#glowCircle1)" opacity="0.05"/>
+  <circle cx="320" cy="880" r="250" fill="url(#glowCircle2)" opacity="0.05"/>
+  
+  <!-- Header area -->
+  <rect x="0" y="0" width="1920" height="250" fill="#653A5E" opacity="0.1"/>
+  
+  <!-- Day number badge -->
+  <g transform="translate(960, 180)">
+    <rect x="-60" y="-40" width="120" height="80" rx="40" fill="url(#purpleGradient)"/>
+    <text x="0" y="10" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F4F1EA">DAY 7</text>
+  </g>
+  
+  <!-- Main title -->
+  <text x="960" y="350" font-family="Noto Serif JP, serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#F4F1EA">コンテンツマーケティング</text>
+  <text x="960" y="420" font-family="Noto Serif JP, serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#F4F1EA">戦略</text>
+  
+  <!-- Decoration line -->
+  <rect x="560" y="450" width="800" height="3" fill="url(#decorationLine)"/>
+  
+  <!-- Subtitle -->
+  <text x="960" y="510" font-family="Noto Sans JP, sans-serif" font-size="32" text-anchor="middle" fill="#F4F1EA" opacity="0.9">ワンソースから無限の価値を生み出す</text>
+  
+  <!-- Key points -->
+  <g transform="translate(960, 660)">
+    <!-- Point 1 -->
+    <g transform="translate(-400, 0)">
+      <circle cx="0" cy="0" r="80" fill="#653A5E" opacity="0.2"/>
+      <text x="0" y="8" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#FFEE00">🎯</text>
+      <text x="0" y="140" font-family="Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#F4F1EA">マルチ展開</text>
+      <text x="0" y="165" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA" opacity="0.7">1→10コンテンツ</text>
+    </g>
+    
+    <!-- Point 2 -->
+    <g transform="translate(0, 0)">
+      <circle cx="0" cy="0" r="80" fill="#653A5E" opacity="0.2"/>
+      <text x="0" y="8" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#FFEE00">🚀</text>
+      <text x="0" y="140" font-family="Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#F4F1EA">SEO最適化</text>
+      <text x="0" y="165" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA" opacity="0.7">月30本量産</text>
+    </g>
+    
+    <!-- Point 3 -->
+    <g transform="translate(400, 0)">
+      <circle cx="0" cy="0" r="80" fill="#653A5E" opacity="0.2"/>
+      <text x="0" y="8" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#FFEE00">📅</text>
+      <text x="0" y="140" font-family="Noto Sans JP, sans-serif" font-size="24" text-anchor="middle" fill="#F4F1EA">自動計画</text>
+      <text x="0" y="165" font-family="Noto Sans JP, sans-serif" font-size="18" text-anchor="middle" fill="#F4F1EA" opacity="0.7">年間カレンダー</text>
+    </g>
+  </g>
+  
+  <!-- Learning time -->
+  <g transform="translate(960, 920)">
+    <rect x="-150" y="-35" width="300" height="70" rx="35" fill="#B3322B" opacity="0.2"/>
+    <text x="0" y="8" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="300" text-anchor="middle" fill="#F4F1EA">学習時間：60分</text>
+  </g>
+  
+  <!-- Course name -->
+  <text x="960" y="1020" font-family="Noto Sans JP, sans-serif" font-size="20" text-anchor="middle" fill="#F4F1EA" opacity="0.6">昭和・明治イノベーション　AI活用実践講座</text>
+</svg>

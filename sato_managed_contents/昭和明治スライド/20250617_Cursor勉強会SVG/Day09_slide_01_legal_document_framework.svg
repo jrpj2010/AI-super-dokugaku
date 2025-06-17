@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素（装飾円） -->
+  <circle cx="1600" cy="300" r="200" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="320" cy="780" r="150" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 9</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="180" y="60">契約書・法務文書の効率化</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">法務文書作成の基本フレームワーク</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">3つの原則と契約書の必須要素</tspan></text>
+  
+  <!-- 3つの原則 -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">法務文書作成の3原則</tspan></text>
+    
+    <!-- 原則1: 明確性 -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="480" height="120" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <circle cx="30" cy="30" r="20" fill="#B3322B"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="25" y="36">1</tspan></text>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="60" y="36">明確性の原則</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="65">● 曖昧な表現を避ける</tspan>
+        <tspan x="20" y="90">● 定義を明確にする</tspan>
+        <tspan x="240" y="65">● 数値や期限を具体的に</tspan>
+        <tspan x="240" y="90">● 専門用語には説明を付与</tspan>
+      </text>
+    </g>
+    
+    <!-- 原則2: 完全性 -->
+    <g transform="translate(520, 40)">
+      <rect x="0" y="0" width="480" height="120" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+      <circle cx="30" cy="30" r="20" fill="#653A5E"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="25" y="36">2</tspan></text>
+      <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="60" y="36">完全性の原則</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="65">● 必要な条項を漏らさない</tspan>
+        <tspan x="20" y="90">● 想定されるケースをカバー</tspan>
+        <tspan x="240" y="65">● 例外処理を明記</tspan>
+        <tspan x="240" y="90">● 紛争解決方法を規定</tspan>
+      </text>
+    </g>
+    
+    <!-- 原則3: 公平性 -->
+    <g transform="translate(1040, 40)">
+      <rect x="0" y="0" width="480" height="120" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <circle cx="30" cy="30" r="20" fill="#FFEE00"/>
+      <text fill="#2c2c2c" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="25" y="36">3</tspan></text>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="60" y="36">公平性の原則</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="65">● 双方の利益を考慮</tspan>
+        <tspan x="20" y="90">● 一方的な条項を避ける</tspan>
+        <tspan x="240" y="65">● バランスの取れた内容</tspan>
+        <tspan x="240" y="90">● Win-Winの関係構築</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- 契約書の必須8要素 -->
+  <g transform="translate(80, 460)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">業務委託契約書の必須8要素</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- 要素リスト -->
+      <rect x="0" y="0" width="720" height="320" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- 左列 -->
+      <g transform="translate(20, 20)">
+        <rect x="0" y="0" width="330" height="60" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="1"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">1. 業務の範囲と詳細</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">具体的な作業内容・スコープの明確化</tspan></text>
+        
+        <g transform="translate(0, 70)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="1"/>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">2. 納品物・成果物</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">納品形式・期限・検収条件の設定</tspan></text>
+        </g>
+        
+        <g transform="translate(0, 140)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="1"/>
+          <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">3. 報酬と支払条件</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">金額・支払時期・方法の明記</tspan></text>
+        </g>
+        
+        <g transform="translate(0, 210)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="1"/>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">4. 知的財産権の帰属</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">著作権・特許権等の権利関係整理</tspan></text>
+        </g>
+      </g>
+      
+      <!-- 右列 -->
+      <g transform="translate(370, 20)">
+        <rect x="0" y="0" width="330" height="60" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="1"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">5. 秘密保持義務</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">機密情報の定義・管理・返還義務</tspan></text>
+        
+        <g transform="translate(0, 70)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="1"/>
+          <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">6. 損害賠償</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">責任範囲・賠償上限・免責事項</tspan></text>
+        </g>
+        
+        <g transform="translate(0, 140)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="1"/>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">7. 契約解除条件</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">解除事由・手続き・効果の規定</tspan></text>
+        </g>
+        
+        <g transform="translate(0, 210)">
+          <rect x="0" y="0" width="330" height="60" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="1"/>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="25">8. 管轄裁判所</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="15" y="45">紛争発生時の解決方法・裁判管轄</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 推奨プロセス -->
+  <g transform="translate(840, 460)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">AI活用の推奨プロセス</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="560" height="320" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- プロセスフロー -->
+      <g transform="translate(40, 40)">
+        <!-- Step 1 -->
+        <circle cx="40" cy="40" r="30" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="33" y="47">1</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="90" y="35">AIでドラフト作成</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.8"><tspan x="90" y="55">基本テンプレートから効率的に作成</tspan></text>
+        
+        <!-- 矢印 -->
+        <path d="M40 80L40 120" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 2 -->
+        <g transform="translate(0, 80)">
+          <circle cx="40" cy="40" r="30" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="33" y="47">2</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="90" y="35">社内法務チェック</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.8"><tspan x="90" y="55">業界特性・社内規定との整合性確認</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M40 160L40 200" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 3 -->
+        <g transform="translate(0, 160)">
+          <circle cx="40" cy="40" r="30" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="33" y="47">3</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="90" y="35">必要に応じて外部弁護士確認</tspan></text>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em" opacity="0.8"><tspan x="90" y="55">重要案件・高額案件での最終確認</tspan></text>
+        </g>
+        
+        <!-- 矢印 -->
+        <path d="M280 240L320 240" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Step 4 -->
+        <g transform="translate(240, 200)">
+          <rect x="100" y="20" width="160" height="40" rx="20" fill="#FFEE00" fill-opacity="0.3" stroke="#FFEE00" stroke-width="2"/>
+          <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="130" y="45">最終化・締結</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 840)">
+    <rect x="0" y="0" width="1520" height="140" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下の条件で業務委託契約書を作成してください：</tspan>
+      <tspan x="20" y="85">基本情報：委託者[企業名]、受託者[企業名/個人名]、業務内容[具体的な業務]、契約期間[開始日〜終了日]、報酬[金額・支払条件]</tspan>
+      <tspan x="20" y="105">含むべき条項：1.業務の範囲 2.納品物 3.報酬 4.知的財産権 5.秘密保持 6.損害賠償 7.契約解除 8.管轄裁判所」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+  </defs>
+</svg>

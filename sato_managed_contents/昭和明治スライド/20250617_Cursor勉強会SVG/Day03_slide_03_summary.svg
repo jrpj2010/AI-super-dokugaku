@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景装飾 -->
+  <g opacity="0.05">
+    <circle cx="960" cy="540" r="400" fill="url(#centerGradient)"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" fill-opacity="0.1"/>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="80" y="75">Day 3 | 画像と音声で開発速度10倍</tspan></text>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="1670" y="75">まとめ</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="56" font-weight="bold" letter-spacing="0.02em"><tspan x="80" y="220">Day 3 まとめ</tspan></text>
+  
+  <!-- 装飾ライン -->
+  <path d="M80 250H400" stroke="url(#paint0_linear)" stroke-width="3"/>
+  
+  <!-- 学習内容の振り返り（3カラム） -->
+  <g id="learning-summary">
+    <!-- 画像からコード -->
+    <rect x="80" y="300" width="520" height="280" rx="20" fill="#B3322B" fill-opacity="0.15" stroke="#B3322B" stroke-width="2"/>
+    <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="120" y="340">画像→コード変換</tspan></text>
+    <g id="image-points">
+      <circle cx="140" cy="380" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="160" y="388">スクショ即座にUI化</tspan></text>
+      
+      <circle cx="140" cy="420" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="160" y="428">Figmaデザイン再現</tspan></text>
+      
+      <circle cx="140" cy="460" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="160" y="468">手書きスケッチ対応</tspan></text>
+      
+      <circle cx="140" cy="500" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="160" y="508">ピクセルパーフェクト</tspan></text>
+      
+      <circle cx="140" cy="540" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="160" y="548">5分でAirbnbクローン</tspan></text>
+    </g>
+    
+    <!-- 音声開発 -->
+    <rect x="640" y="300" width="520" height="280" rx="20" fill="#653A5E" fill-opacity="0.15" stroke="#653A5E" stroke-width="2"/>
+    <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="680" y="340">音声開発マスター</tspan></text>
+    <g id="voice-points">
+      <circle cx="700" cy="380" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="720" y="388">Whispr Flow活用</tspan></text>
+      
+      <circle cx="700" cy="420" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="720" y="428">ハンズフリー開発</tspan></text>
+      
+      <circle cx="700" cy="460" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="720" y="468">思考速度で実装</tspan></text>
+      
+      <circle cx="700" cy="500" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="720" y="508">2.7倍の入力速度</tspan></text>
+      
+      <circle cx="700" cy="540" r="5" fill="#FFEE00"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="720" y="548">具体的な指示が重要</tspan></text>
+    </g>
+    
+    <!-- 生産性向上 -->
+    <rect x="1200" y="300" width="520" height="280" rx="20" fill="#FFEE00" fill-opacity="0.15" stroke="#FFEE00" stroke-width="2"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="1240" y="340">効率化の成果</tspan></text>
+    <g id="productivity-points">
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold" text-anchor="middle"><tspan x="1460" y="420">開発速度</tspan></text>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="48" font-weight="bold" text-anchor="middle"><tspan x="1460" y="480">10倍</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" text-anchor="middle"><tspan x="1460" y="520">従来比</tspan></text>
+    </g>
+  </g>
+  
+  <!-- 実践例 -->
+  <rect x="80" y="620" width="1640" height="120" rx="20" fill="#B3322B" fill-opacity="0.1"/>
+  <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="120" y="665">本日の実践成果</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="22">
+    <tspan x="320" y="660">• Airbnbクローン（5分）</tspan>
+    <tspan x="720" y="660">• Notionクローン（6-7時間）</tspan>
+    <tspan x="1120" y="660">• 管理ダッシュボード（30分）</tspan>
+  </text>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18">
+    <tspan x="320" y="700">トップページ完成</tspan>
+    <tspan x="720" y="700">ドラッグ&ドロップ含む</tspan>
+    <tspan x="1120" y="700">グラフ・チャート完備</tspan>
+  </text>
+  
+  <!-- 次回予告 -->
+  <rect x="80" y="780" width="800" height="160" rx="30" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="3"/>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold"><tspan x="120" y="830">次回予告: Day 4</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="26" font-weight="bold"><tspan x="120" y="875">議事録・会議メモの革新</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20"><tspan x="120" y="910">音声録音→即座に構造化文書 / AIによる要点抽出 / アクションアイテム自動生成</tspan></text>
+  
+  <!-- 本日の宿題 -->
+  <rect x="920" y="780" width="800" height="160" rx="30" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="3"/>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold"><tspan x="960" y="830">本日の宿題</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+    <tspan x="960" y="875">① 好きなWebサイトをスクショしてクローン作成</tspan>
+    <tspan x="960" y="910">② 音声入力ツールをインストールして試用</tspan>
+  </text>
+  
+  <!-- インスピレーション -->
+  <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="42" font-weight="bold" text-anchor="middle"><tspan x="960" y="1000">「見せて、話すだけ。それがコードになる」</tspan></text>
+  
+  <!-- フッター -->
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="80" y="1040">© 2025 TANREN Corporation | Cursor勉強会 Day 3</tspan></text>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="1720" y="1040">Page 3</tspan></text>
+  
+  <!-- デフィニション -->
+  <defs>
+    <radialGradient id="centerGradient" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFEE00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFEE00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="paint0_linear" x1="80" y1="250" x2="400" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3322B"/>
+      <stop offset="1" stop-color="#653A5E"/>
+    </linearGradient>
+  </defs>
+</svg>

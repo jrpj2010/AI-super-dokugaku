@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素（装飾円） -->
+  <circle cx="1600" cy="300" r="200" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="320" cy="780" r="150" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 8</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="180" y="60">データ分析とレポーティング</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">データストーリーテリングのプロセス</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">数値を価値ある物語に変換する5ステップ</tspan></text>
+  
+  <!-- メインコンテンツ：5ステップフロー -->
+  <g transform="translate(80, 260)">
+    <!-- ステップ1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="320" height="160" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">STEP 1: 現状把握</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="70">● 何が起きているか</tspan>
+        <tspan x="20" y="95">● データの全体像</tspan>
+        <tspan x="20" y="120">● 主要指標の確認</tspan>
+        <tspan x="20" y="145">● 異常値の発見</tspan>
+      </text>
+    </g>
+    
+    <!-- 矢印1 -->
+    <path d="M340 80L380 80" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- ステップ2 -->
+    <g transform="translate(400, 0)">
+      <rect x="0" y="0" width="320" height="160" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">STEP 2: 原因分析</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="70">● なぜ起きているか</tspan>
+        <tspan x="20" y="95">● 相関関係の発見</tspan>
+        <tspan x="20" y="120">● 時系列パターン</tspan>
+        <tspan x="20" y="145">● セグメント分析</tspan>
+      </text>
+    </g>
+    
+    <!-- 矢印2 -->
+    <path d="M740 80L780 80" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- ステップ3 -->
+    <g transform="translate(800, 0)">
+      <rect x="0" y="0" width="320" height="160" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">STEP 3: 影響評価</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="70">● どの程度重要か</tspan>
+        <tspan x="20" y="95">● ビジネスインパクト</tspan>
+        <tspan x="20" y="120">● リスクと機会</tspan>
+        <tspan x="20" y="145">● 優先順位付け</tspan>
+      </text>
+    </g>
+    
+    <!-- 矢印3 -->
+    <path d="M1140 80L1180 80" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- ステップ4 -->
+    <g transform="translate(1200, 0)">
+      <rect x="0" y="0" width="320" height="160" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">STEP 4: 推奨アクション</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="70">● 何をすべきか</tspan>
+        <tspan x="20" y="95">● 具体的施策</tspan>
+        <tspan x="20" y="120">● 実行計画</tspan>
+        <tspan x="20" y="145">● 必要リソース</tspan>
+      </text>
+    </g>
+    
+    <!-- 矢印4（下向き） -->
+    <path d="M1360 180L1360 220" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- ステップ5 -->
+    <g transform="translate(1200, 240)">
+      <rect x="0" y="0" width="320" height="160" rx="10" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">STEP 5: 期待成果</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="70">● どうなるか</tspan>
+        <tspan x="20" y="95">● KPI改善予測</tspan>
+        <tspan x="20" y="120">● ROI試算</tspan>
+        <tspan x="20" y="145">● 成功指標設定</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- 実践例：数値の意味付け -->
+  <g transform="translate(80, 720)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">数値を身近な表現に変換する技術</tspan></text>
+    
+    <!-- 変換例 -->
+    <g transform="translate(0, 40)">
+      <!-- 例1 -->
+      <rect x="0" y="0" width="400" height="60" rx="8" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="15" y="25">前年比120%</tspan></text>
+      <path d="M180 30L220 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="240" y="25">去年より20%増加</tspan></text>
+      
+      <!-- 例2 -->
+      <g transform="translate(440, 0)">
+        <rect x="0" y="0" width="400" height="60" rx="8" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="15" y="25">100TB</tspan></text>
+        <path d="M180 30L220 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="240" y="25">DVD約2万枚分</tspan></text>
+      </g>
+      
+      <!-- 例3 -->
+      <g transform="translate(880, 0)">
+        <rect x="0" y="0" width="400" height="60" rx="8" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="15" y="25">CTR 2%向上</tspan></text>
+        <path d="M180 30L220 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="240" y="25">月間10万円の売上増</tspan></text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 880)">
+    <rect x="0" y="0" width="1280" height="120" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下のデータからストーリーを作成してください：[データ貼り付け]</tspan>
+      <tspan x="20" y="85">ストーリーの要素：1.現状の説明 2.原因の分析 3.影響の評価 4.推奨アクション 5.期待される成果」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1280 720" 
+     width="1280" 
+     height="720"
+     role="img" 
+     aria-labelledby="slide-title" 
+     aria-describedby="slide-desc">
+  
+  <title id="slide-title">スライド10: Next Action</title>
+  <desc id="slide-desc">Y Combinator参加に向けた具体的な行動計画。今すぐ始められる3段階アクションプラン。</desc>
+
+  <!-- グラデーション定義 -->
+  <defs>
+    <linearGradient id="hitachiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    
+    <linearGradient id="boxBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f8f9fa"/>
+    </linearGradient>
+    
+    <linearGradient id="ctaButton" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    
+    <!-- シャドウ効果 -->
+    <filter id="dropShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.15"/>
+    </filter>
+    
+    <!-- ボタンホバー効果 -->
+    <filter id="buttonHover">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff"/>
+  
+  <!-- 背景画像配置 -->
+  <!-- ロゴ（右上） -->
+  <image x="1050" y="30" width="200" height="60" 
+         href="https://tanren.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a%2F120b98bf-9f70-42a1-98ef-e7deb749811d%2Flogo.png?table=block&id=12031bbd-522c-80a2-9c04-c933dc1ce4fc&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&width=1420&userId=&cache=v2"/>
+  
+  <!-- humanIT（左下） -->
+  <image x="30" y="620" width="150" height="70" 
+         href="https://tanren.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a%2F9e520a5c-2771-4548-ac3c-0bb2aabede0f%2FhumanIT.png?table=block&id=12031bbd-522c-80dc-baa7-f3ee7b071e7a&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&width=1420&userId=&cache=v2"/>
+  
+  <!-- フッター（右下） -->
+  <image x="1080" y="650" width="170" height="50" 
+         href="https://tanren.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a%2F135f8281-8854-43aa-a03d-7e1a4448846b%2Ffooter.png?table=block&id=12031bbd-522c-80c2-8d35-e7e8f6559e6c&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&width=1420&userId=&cache=v2"/>
+
+  <!-- ボーダー（上部） -->
+  <image x="0" y="0" width="1280" height="40" 
+         href="https://tanren.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a%2F20677364-1d2f-4aad-9df5-15c3ba3ef700%2Fborder.png?table=block&id=12031bbd-522c-807f-99af-d52cd9564099&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&width=1420&userId=&cache=v2"/>
+
+  <!-- タイトル -->
+  <text x="60" y="120" 
+        font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+        font-size="32" font-weight="700" fill="#404040">
+    Next Action：今すぐ始める
+  </text>
+
+  <!-- 導入メッセージ -->
+  <g transform="translate(640, 170)">
+    <text x="0" y="0" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="20" font-weight="700" fill="#404040">
+      シリコンバレーのイノベーション革命は既に始まっています
+    </text>
+    <text x="0" y="30" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="18" font-weight="700" fill="#404040">
+      次のユニコーン企業になるための行動を今すぐ開始しましょう
+    </text>
+  </g>
+
+  <!-- 3段階アクションプラン（横並び） -->
+  
+  <!-- 1. 即座に開始 -->
+  <g transform="translate(60, 240)">
+    <rect width="320" height="220" rx="15" 
+          fill="url(#boxBg)" 
+          stroke="#667eea" stroke-width="3"
+          filter="url(#dropShadow)"/>
+    
+    <text x="160" y="40" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="18" font-weight="700" fill="#404040">
+      📞 即座に開始
+    </text>
+    
+    <text x="160" y="65" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="600" fill="#667eea">
+      まずはYCエコシステムを理解
+    </text>
+    
+    <g transform="translate(20, 90)">
+      <text x="0" y="20" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • YC公式サイト徹底研究
+      </text>
+      <text x="0" y="40" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        過去の卒業企業とSuccess Story分析
+      </text>
+      
+      <text x="0" y="65" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • Startup School無料受講
+      </text>
+      <text x="0" y="85" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        YCのノウハウを無料で学習
+      </text>
+      
+      <text x="0" y="110" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • アイデア検証開始
+      </text>
+      <text x="0" y="130" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        問題-解決フィットの確認
+      </text>
+    </g>
+  </g>
+
+  <!-- 2. 戦略的準備 -->
+  <g transform="translate(420, 240)">
+    <rect width="320" height="220" rx="15" 
+          fill="url(#boxBg)" 
+          stroke="#667eea" stroke-width="3"
+          filter="url(#dropShadow)"/>
+    
+    <text x="160" y="40" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="18" font-weight="700" fill="#404040">
+      🎯 戦略的準備
+    </text>
+    
+    <text x="160" y="65" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="600" fill="#667eea">
+      6ヶ月間の集中準備期間
+    </text>
+    
+    <g transform="translate(20, 90)">
+      <text x="0" y="20" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • MVP開発とトラクション構築
+      </text>
+      <text x="0" y="40" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        実際の顧客とフィードバック獲得
+      </text>
+      
+      <text x="0" y="65" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • 共同創業者チーム結成
+      </text>
+      <text x="0" y="85" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        技術・ビジネス・マーケの3領域
+      </text>
+      
+      <text x="0" y="110" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • YC卒業生ネットワーク構築
+      </text>
+      <text x="0" y="130" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        メンターシップとアドバイス獲得
+      </text>
+    </g>
+  </g>
+
+  <!-- 3. 本格申請 -->
+  <g transform="translate(780, 240)">
+    <rect width="320" height="220" rx="15" 
+          fill="url(#boxBg)" 
+          stroke="#667eea" stroke-width="3"
+          filter="url(#dropShadow)"/>
+    
+    <text x="160" y="40" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="18" font-weight="700" fill="#404040">
+      🚀 本格申請
+    </text>
+    
+    <text x="160" y="65" text-anchor="middle"
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="600" fill="#667eea">
+      運命を決める申請実行
+    </text>
+    
+    <g transform="translate(20, 90)">
+      <text x="0" y="20" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • 完璧な申請書作成
+      </text>
+      <text x="0" y="40" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        簡潔で印象的なストーリー構築
+      </text>
+      
+      <text x="0" y="65" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • 90秒デモビデオ制作
+      </text>
+      <text x="0" y="85" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        問題の深刻さと解決策の優秀さ
+      </text>
+      
+      <text x="0" y="110" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="13" font-weight="600" fill="#404040">
+        • 10分面接対策
+      </text>
+      <text x="0" y="130" 
+            font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+            font-size="12" font-weight="400" fill="#656d76">
+        あらゆる質問への完璧な準備
+      </text>
+    </g>
+  </g>
+
+  <!-- CTAボタン（横並び） -->
+  <g transform="translate(190, 480)">
+    <!-- YC申請ガイド -->
+    <rect width="200" height="50" rx="25" 
+          fill="url(#ctaButton)" 
+          filter="url(#buttonHover)"/>
+    <text x="100" y="32" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="700" fill="#ffffff">
+      YC申請ガイド取得
+    </text>
+  </g>
+
+  <g transform="translate(440, 480)">
+    <!-- メンタリング相談 -->
+    <rect width="200" height="50" rx="25" 
+          fill="url(#ctaButton)" 
+          filter="url(#buttonHover)"/>
+    <text x="100" y="32" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="700" fill="#ffffff">
+      メンタリング相談
+    </text>
+  </g>
+
+  <g transform="translate(690, 480)">
+    <!-- 無料戦略セッション -->
+    <rect width="200" height="50" rx="25" 
+          fill="url(#ctaButton)" 
+          filter="url(#buttonHover)"/>
+    <text x="100" y="32" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="700" fill="#ffffff">
+      無料戦略セッション
+    </text>
+  </g>
+
+  <!-- 緊急性メッセージ -->
+  <g transform="translate(640, 560)">
+    <rect width="600" height="80" rx="10" 
+          fill="rgba(102, 126, 234, 0.1)" 
+          stroke="#667eea" stroke-width="1"/>
+    
+    <text x="300" y="30" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="16" font-weight="700" fill="#667eea">
+      ⚡ 次回申請締切まで残り時間わずか
+    </text>
+    
+    <text x="300" y="55" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="400" fill="#656d76">
+      競合に先駆けて行動開始し、シリコンバレーの頂点を目指そう
+    </text>
+  </g>
+
+  <!-- 連絡先情報 -->
+  <g transform="translate(640, 660)">
+    <text x="0" y="0" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="600" fill="#656d76">
+      TANREN株式会社 スタートアップ支援事業部
+    </text>
+    <text x="0" y="20" text-anchor="middle" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="14" font-weight="400" fill="#656d76">
+      Email: startup@tanren.co.jp | Tel: 03-XXXX-XXXX | Web: www.tanren.co.jp/yc-support
+    </text>
+  </g>
+
+  <!-- インスピレーション引用 -->
+  <g transform="translate(60, 580)">
+    <text x="0" y="0" 
+          font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" 
+          font-size="12" font-weight="400" fill="#667eea" font-style="italic">
+      "The best time to plant a tree was 20 years ago. The second best time is now." - 今こそが行動の時
+    </text>
+  </g>
+
+</svg>

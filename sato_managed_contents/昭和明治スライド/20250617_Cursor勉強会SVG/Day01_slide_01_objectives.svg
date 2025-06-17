@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素 -->
+  <path opacity="0.03" d="M1600 200C1710.46 200 1800 110.457 1800 0C1800 -110.457 1710.46 -200 1600 -200C1489.54 -200 1400 -110.457 1400 0C1400 110.457 1489.54 200 1600 200Z" fill="url(#paint0_linear)"/>
+  <path opacity="0.03" d="M320 980C430.457 980 520 890.457 520 780C520 669.543 430.457 580 320 580C209.543 580 120 669.543 120 780C120 890.457 209.543 980 320 980Z" fill="url(#paint1_linear)"/>
+  
+  <!-- グリッドパターン -->
+  <g opacity="0.08">
+    <path d="M0 270H1920" stroke="#F4F1EA" stroke-width="0.5"/>
+    <path d="M0 540H1920" stroke="#F4F1EA" stroke-width="0.5"/>
+    <path d="M0 810H1920" stroke="#F4F1EA" stroke-width="0.5"/>
+    <path d="M480 0V1080" stroke="#F4F1EA" stroke-width="0.5"/>
+    <path d="M960 0V1080" stroke="#F4F1EA" stroke-width="0.5"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA" stroke-width="0.5"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" fill-opacity="0.1"/>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="80" y="75">Day 1 | バイブコーディング入門</tspan></text>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em"><tspan x="1620" y="75">学習目標</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="56" font-weight="bold" letter-spacing="0.02em"><tspan x="80" y="220">今日の学習目標</tspan></text>
+  
+  <!-- 装飾ライン -->
+  <path d="M80 250H600" stroke="url(#paint2_linear)" stroke-width="3"/>
+  
+  <!-- 3つの目標カード -->
+  <g id="goal1">
+    <rect x="80" y="320" width="520" height="200" rx="20" fill="#653A5E" fill-opacity="0.15" stroke="#653A5E" stroke-width="2"/>
+    <circle cx="130" cy="370" r="25" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="118" y="380">1</tspan></text>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="180" y="380">バイブコーディングとは？</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" letter-spacing="0.02em">
+      <tspan x="180" y="420">• 「雰囲気でコードを書く」新時代</tspan>
+      <tspan x="180" y="450">• コード未経験でもアプリ開発可能</tspan>
+      <tspan x="180" y="480">• AIとの対話だけで成果物を創出</tspan>
+    </text>
+  </g>
+  
+  <g id="goal2">
+    <rect x="640" y="320" width="520" height="200" rx="20" fill="#653A5E" fill-opacity="0.15" stroke="#653A5E" stroke-width="2"/>
+    <circle cx="690" cy="370" r="25" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="678" y="380">2</tspan></text>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="740" y="380">Cursorの優位性</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" letter-spacing="0.02em">
+      <tspan x="740" y="420">• ローカル環境の最強ツール</tspan>
+      <tspan x="740" y="450">• Claude 3.7 Sonnet思考モデル</tspan>
+      <tspan x="740" y="480">• VS Code/Windsurf/Boltとの違い</tspan>
+    </text>
+  </g>
+  
+  <g id="goal3">
+    <rect x="1200" y="320" width="520" height="200" rx="20" fill="#653A5E" fill-opacity="0.15" stroke="#653A5E" stroke-width="2"/>
+    <circle cx="1250" cy="370" r="25" fill="#B3322B"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="1238" y="380">3</tspan></text>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" font-weight="bold"><tspan x="1300" y="380">ビジネス応用</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" letter-spacing="0.02em">
+      <tspan x="1300" y="420">• 議事録・レポートの革命</tspan>
+      <tspan x="1300" y="450">• プレゼン資料の自動生成</tspan>
+      <tspan x="1300" y="480">• データ分析の瞬間作成</tspan>
+    </text>
+  </g>
+  
+  <!-- 実績データ -->
+  <rect x="80" y="580" width="1640" height="120" rx="20" fill="#B3322B" fill-opacity="0.1"/>
+  <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="32" font-weight="bold"><tspan x="120" y="650">実績</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0.02em">
+    <tspan x="240" y="645">67分でSNSアプリ</tspan>
+    <tspan x="540" y="645">33分でiOSアプリ</tspan>
+    <tspan x="820" y="645">19分でSaaSサイト</tspan>
+    <tspan x="1120" y="645">50日で未経験→開発者</tspan>
+  </text>
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20">
+    <tspan x="240" y="675">V0+Cursor+Claude</tspan>
+    <tspan x="540" y="675">Cursor+Xcode</tspan>
+    <tspan x="820" y="675">V0+Cursor+ChatGPT</tspan>
+    <tspan x="1120" y="675">Riley Brown事例</tspan>
+  </text>
+  
+  <!-- 本日のゴール -->
+  <rect x="80" y="740" width="1640" height="200" rx="30" fill="none" stroke="#FFEE00" stroke-width="3"/>
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="36" font-weight="bold"><tspan x="120" y="810">本日のゴール</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0.02em">
+    <tspan x="120" y="870">Cursorをインストールし、音声入力で「赤・青・緑のボールが跳ねるアニメーション」を</tspan>
+    <tspan x="120" y="910">実際に作成できるようになること。エラーを恐れず、AIと協働する感覚を体得する。</tspan>
+  </text>
+  
+  <!-- フッター -->
+  <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0.02em"><tspan x="80" y="1040">© 2025 TANREN Corporation | Cursor勉強会 Day 1</tspan></text>
+  
+  <!-- デフィニション -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="1400" y1="-200" x2="1800" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3322B"/>
+      <stop offset="1" stop-color="#653A5E"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="120" y1="580" x2="520" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#653A5E"/>
+      <stop offset="1" stop-color="#B3322B"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear" x1="80" y1="250" x2="600" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3322B"/>
+      <stop offset="1" stop-color="#653A5E"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,137 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c2c2c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="processGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#653A5E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#B3322B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFEE00;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.2"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <pattern id="gridPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#F4F1EA" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <rect width="1920" height="1080" fill="url(#gridPattern)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#653A5E" opacity="0.1"/>
+  <text x="960" y="70" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#F4F1EA">AIリサーチプロセス：情報収集から価値創造まで</text>
+  
+  <!-- Main Process Flow -->
+  <g transform="translate(960, 200)">
+    
+    <!-- PDF Analysis Section -->
+    <g transform="translate(-600, 0)">
+      <rect x="-150" y="0" width="300" height="200" rx="15" fill="#1a1a1a" filter="url(#cardShadow)"/>
+      <rect x="-150" y="0" width="300" height="50" rx="15" fill="#653A5E" opacity="0.3"/>
+      <text x="0" y="35" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F4F1EA">PDF・論文分析</text>
+      
+      <!-- Content -->
+      <text x="0" y="80" font-family="Noto Sans JP, sans-serif" font-size="16" text-anchor="middle" fill="#F4F1EA" opacity="0.9">取り込み方法</text>
+      <text x="-130" y="105" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• ドラッグ&ドロップ</text>
+      <text x="-130" y="125" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• Docs機能で登録</text>
+      <text x="-130" y="145" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• スクリーンショット</text>
+      
+      <rect x="-100" y="165" width="200" height="25" rx="12" fill="#FFEE00" opacity="0.2"/>
+      <text x="0" y="182" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">処理時間: 30秒</text>
+    </g>
+    
+    <!-- Competitive Analysis Section -->
+    <g transform="translate(0, 0)">
+      <rect x="-150" y="0" width="300" height="200" rx="15" fill="#1a1a1a" filter="url(#cardShadow)"/>
+      <rect x="-150" y="0" width="300" height="50" rx="15" fill="#653A5E" opacity="0.3"/>
+      <text x="0" y="35" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F4F1EA">競合分析</text>
+      
+      <!-- Content -->
+      <text x="0" y="80" font-family="Noto Sans JP, sans-serif" font-size="16" text-anchor="middle" fill="#F4F1EA" opacity="0.9">分析フレームワーク</text>
+      <text x="-130" y="105" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• SWOT分析</text>
+      <text x="-130" y="125" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• ベンチマーク</text>
+      <text x="-130" y="145" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• ポジショニング</text>
+      
+      <rect x="-100" y="165" width="200" height="25" rx="12" fill="#FFEE00" opacity="0.2"/>
+      <text x="0" y="182" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">処理時間: 2分</text>
+    </g>
+    
+    <!-- Market Data Section -->
+    <g transform="translate(600, 0)">
+      <rect x="-150" y="0" width="300" height="200" rx="15" fill="#1a1a1a" filter="url(#cardShadow)"/>
+      <rect x="-150" y="0" width="300" height="50" rx="15" fill="#653A5E" opacity="0.3"/>
+      <text x="0" y="35" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#F4F1EA">市場データ整理</text>
+      
+      <!-- Content -->
+      <text x="0" y="80" font-family="Noto Sans JP, sans-serif" font-size="16" text-anchor="middle" fill="#F4F1EA" opacity="0.9">データ処理</text>
+      <text x="-130" y="105" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• トレンド分析</text>
+      <text x="-130" y="125" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• 予測モデル</text>
+      <text x="-130" y="145" font-family="Noto Sans JP, sans-serif" font-size="14" fill="#F4F1EA" opacity="0.7">• インサイト抽出</text>
+      
+      <rect x="-100" y="165" width="200" height="25" rx="12" fill="#FFEE00" opacity="0.2"/>
+      <text x="0" y="182" font-family="Noto Sans JP, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFEE00">処理時間: 1分</text>
+    </g>
+  </g>
+  
+  <!-- Process Flow Arrows -->
+  <g transform="translate(960, 450)">
+    <path d="M -450 -50 L -450 0 L -150 0" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow1)"/>
+    <path d="M -150 0 L 150 0" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+    <path d="M 150 0 L 450 0 L 450 -50" stroke="#FFEE00" stroke-width="3" fill="none" marker-end="url(#arrow3)"/>
+    
+    <defs>
+      <marker id="arrow1" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+      <marker id="arrow2" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+      <marker id="arrow3" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+        <path d="M 0 0 L 15 7.5 L 0 15 L 5 7.5 Z" fill="#FFEE00"/>
+      </marker>
+    </defs>
+    
+    <text x="0" y="5" font-family="Noto Sans JP, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFEE00">統合分析</text>
+  </g>
+  
+  <!-- Output Section -->
+  <g transform="translate(960, 550)">
+    <rect x="-400" y="0" width="800" height="280" rx="20" fill="#1a1a1a" filter="url(#cardShadow)"/>
+    <rect x="-400" y="0" width="800" height="60" rx="20" fill="#B3322B" opacity="0.2"/>
+    <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#F4F1EA">アウトプット例：総合インサイトレポート</text>
+    
+    <!-- Sample Output -->
+    <g transform="translate(-350, 90)">
+      <text x="0" y="0" font-family="Noto Sans JP, sans-serif" font-size="18" fill="#FFEE00">主要な発見：</text>
+      <text x="20" y="30" font-family="Noto Sans JP, sans-serif" font-size="16" fill="#F4F1EA" opacity="0.9">1. 市場成長率は前年比15%増（競合平均8%）</text>
+      <text x="20" y="55" font-family="Noto Sans JP, sans-serif" font-size="16" fill="#F4F1EA" opacity="0.9">2. 顧客満足度で3社中1位（NPS: +45）</text>
+      <text x="20" y="80" font-family="Noto Sans JP, sans-serif" font-size="16" fill="#F4F1EA" opacity="0.9">3. 技術革新領域で差別化機会を発見</text>
+      
+      <text x="0" y="120" font-family="Noto Sans JP, sans-serif" font-size="18" fill="#FFEE00">推奨アクション：</text>
+      <text x="20" y="150" font-family="Noto Sans JP, sans-serif" font-size="16" fill="#F4F1EA" opacity="0.9">• 短期：新製品ラインの投入（Q2目標）</text>
+      <text x="20" y="175" font-family="Noto Sans JP, sans-serif" font-size="16" fill="#F4F1EA" opacity="0.9">• 中期：AI技術への投資強化（年間予算20%増）</text>
+    </g>
+  </g>
+  
+  <!-- ROI Indicator -->
+  <g transform="translate(960, 920)">
+    <rect x="-350" y="-40" width="700" height="80" rx="40" fill="#FFEE00" opacity="0.1"/>
+    <text x="0" y="10" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFEE00">
+      リサーチ時間削減率：80% = 週20時間の創出
+    </text>
+  </g>
+</svg>

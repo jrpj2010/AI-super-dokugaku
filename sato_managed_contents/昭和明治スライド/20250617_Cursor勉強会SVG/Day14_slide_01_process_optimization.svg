@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素（装飾円） -->
+  <circle cx="1600" cy="300" r="200" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="320" cy="780" r="150" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 14</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="200" y="60">ワークフロー自動化と連携</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">業務プロセスの可視化と最適化</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">現状分析からボトルネック改善まで</tspan></text>
+  
+  <!-- 現状フローと改善フロー -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">月次レポート作成の最適化</tspan></text>
+    
+    <!-- 現状フロー -->
+    <g transform="translate(0, 40)">
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">現状フロー（8時間）</tspan></text>
+      
+      <g transform="translate(0, 30)">
+        <!-- ステップ1 -->
+        <rect x="0" y="0" width="150" height="60" rx="5" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="10" y="25">データ収集</tspan>
+          <tspan x="10" y="45">2時間（手動）</tspan>
+        </text>
+        
+        <!-- ステップ2 -->
+        <rect x="180" y="0" width="150" height="60" rx="5" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="190" y="25">集計・分析</tspan>
+          <tspan x="190" y="45">3時間（Excel）</tspan>
+        </text>
+        
+        <!-- ステップ3 -->
+        <rect x="360" y="0" width="150" height="60" rx="5" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="370" y="25">レポート作成</tspan>
+          <tspan x="370" y="45">2時間（PPT）</tspan>
+        </text>
+        
+        <!-- ステップ4 -->
+        <rect x="540" y="0" width="150" height="60" rx="5" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="550" y="25">レビュー・承認</tspan>
+          <tspan x="550" y="45">1時間（メール）</tspan>
+        </text>
+        
+        <!-- 矢印 -->
+        <path d="M150 30L180 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M330 30L360 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M510 30L540 30" stroke="#F4F1EA" stroke-width="2" marker-end="url(#arrowhead)"/>
+      </g>
+    </g>
+    
+    <!-- ボトルネック分析 -->
+    <g transform="translate(720, 70)">
+      <rect x="0" y="0" width="400" height="150" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="30">ボトルネック分析</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="20" y="60">• データ収集：複数システムから手動コピー</tspan>
+        <tspan x="20" y="85">• 集計作業：Excel関数の複雑な組み合わせ</tspan>
+        <tspan x="20" y="110">• 承認待ち：メールでの非効率なやり取り</tspan>
+        <tspan x="20" y="135">• エラー率：手作業による転記ミス5%</tspan>
+      </text>
+    </g>
+    
+    <!-- 改善フロー -->
+    <g transform="translate(0, 180)">
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">改善フロー（1時間）</tspan></text>
+      
+      <g transform="translate(0, 30)">
+        <!-- 自動化ステップ1 -->
+        <rect x="0" y="0" width="200" height="80" rx="5" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="10" y="25">自動データ収集</tspan>
+          <tspan x="10" y="45">5分（API連携）</tspan>
+          <tspan x="10" y="65">✓ リアルタイム同期</tspan>
+        </text>
+        
+        <!-- 自動化ステップ2 -->
+        <rect x="230" y="0" width="200" height="80" rx="5" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="240" y="25">AI分析・レポート生成</tspan>
+          <tspan x="240" y="45">30分（Cursor活用）</tspan>
+          <tspan x="240" y="65">✓ インサイト自動抽出</tspan>
+        </text>
+        
+        <!-- 自動化ステップ3 -->
+        <rect x="460" y="0" width="200" height="80" rx="5" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="470" y="25">自動承認・配信</tspan>
+          <tspan x="470" y="45">25分（ワークフロー）</tspan>
+          <tspan x="470" y="65">✓ 条件付き自動承認</tspan>
+        </text>
+        
+        <!-- 矢印 -->
+        <path d="M200 40L230 40" stroke="#FFEE00" stroke-width="2" marker-end="url(#arrowhead_yellow)"/>
+        <path d="M430 40L460 40" stroke="#FFEE00" stroke-width="2" marker-end="url(#arrowhead_yellow)"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 改善効果サマリー -->
+  <g transform="translate(1150, 240)">
+    <rect x="0" y="0" width="500" height="320" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="20" y="40">改善効果</tspan></text>
+    
+    <!-- 時間削減 -->
+    <g transform="translate(20, 70)">
+      <circle cx="40" cy="40" r="35" stroke="#FFEE00" stroke-width="3" fill="none"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="20" y="48">87%</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0em"><tspan x="100" y="45">時間削減</tspan></text>
+    </g>
+    
+    <!-- エラー率 -->
+    <g transform="translate(260, 70)">
+      <circle cx="40" cy="40" r="35" stroke="#B3322B" stroke-width="3" fill="none"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="25" y="48">0%</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" letter-spacing="0em"><tspan x="100" y="45">エラー率</tspan></text>
+    </g>
+    
+    <!-- 実装工数 -->
+    <rect x="20" y="180" width="460" height="120" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="1"/>
+    <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="40" y="210">実装ステップ</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+      <tspan x="40" y="235">1. 現状フロー分析（1日）</tspan>
+      <tspan x="40" y="255">2. ツール選定・設定（2日）</tspan>
+      <tspan x="40" y="275">3. テスト運用・調整（3日）</tspan>
+      <tspan x="280" y="235">4. 本格運用開始</tspan>
+      <tspan x="280" y="255">5. 効果測定</tspan>
+      <tspan x="280" y="275">6. 継続改善</tspan>
+    </text>
+  </g>
+  
+  <!-- 業務フロー最適化のステップ -->
+  <g transform="translate(80, 600)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">最適化の3ステップ</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- ステップ1 -->
+      <rect x="0" y="0" width="500" height="100" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">1. 可視化</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+        <tspan x="20" y="60">• 業務フローの図解</tspan>
+        <tspan x="20" y="80">• 時間計測・記録</tspan>
+        <tspan x="260" y="60">• 関係者マッピング</tspan>
+        <tspan x="260" y="80">• データフロー整理</tspan>
+      </text>
+      
+      <!-- ステップ2 -->
+      <g transform="translate(520, 0)">
+        <rect x="0" y="0" width="500" height="100" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">2. 分析</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+          <tspan x="20" y="60">• ボトルネック特定</tspan>
+          <tspan x="20" y="80">• 原因分析（5W1H）</tspan>
+          <tspan x="260" y="60">• 影響度評価</tspan>
+          <tspan x="260" y="80">• 改善優先順位</tspan>
+        </text>
+      </g>
+      
+      <!-- ステップ3 -->
+      <g transform="translate(1040, 0)">
+        <rect x="0" y="0" width="500" height="100" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">3. 最適化</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+          <tspan x="20" y="60">• 自動化設計</tspan>
+          <tspan x="20" y="80">• ツール選定</tspan>
+          <tspan x="260" y="60">• 実装・テスト</tspan>
+          <tspan x="260" y="80">• 効果測定</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 760)">
+    <rect x="0" y="0" width="1600" height="140" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下の業務プロセスをフロー図とテキストで可視化してください：業務名：[例：月次レポート作成]</tspan>
+      <tspan x="20" y="85">現状のステップ：1.データ収集 2.集計・分析 3.レポート作成 4.レビュー・承認 5.配布</tspan>
+      <tspan x="20" y="105">可視化の要素：1.フロー図（各ステップの関係、分岐条件、担当者、所要時間）2.詳細説明 3.関係者マップ」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+  
+  <!-- デフィニション -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F4F1EA"/>
+    </marker>
+    <marker id="arrowhead_yellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FFEE00"/>
+    </marker>
+  </defs>
+</svg>

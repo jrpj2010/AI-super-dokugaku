@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素（装飾円） -->
+  <circle cx="1600" cy="300" r="200" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="320" cy="780" r="150" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 10</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="200" y="60">カスタマーサポート文書の最適化</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">効果的なFAQ・ヘルプドキュメントの構築</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">自己解決率を向上させる体系的な設計</tspan></text>
+  
+  <!-- FAQ構成の5つのカテゴリ -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">FAQカテゴリ分類</tspan></text>
+    
+    <!-- カテゴリ構造 -->
+    <g transform="translate(0, 40)">
+      <!-- 中心ノード -->
+      <circle cx="400" cy="150" r="60" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="3"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="373" y="157">FAQ</tspan></text>
+      
+      <!-- カテゴリ1: 始め方・基本操作 -->
+      <g transform="translate(-100, -100)">
+        <rect x="300" y="80" width="200" height="60" rx="30" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="335" y="115">始め方・基本操作</tspan></text>
+        <line x1="400" y1="140" x2="400" y2="200" stroke="#B3322B" stroke-width="2"/>
+      </g>
+      
+      <!-- カテゴリ2: 料金・支払い -->
+      <g transform="translate(200, -100)">
+        <rect x="300" y="80" width="200" height="60" rx="30" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="350" y="115">料金・支払い</tspan></text>
+        <line x1="400" y1="140" x2="400" y2="200" stroke="#653A5E" stroke-width="2"/>
+      </g>
+      
+      <!-- カテゴリ3: トラブルシューティング -->
+      <g transform="translate(-250, 100)">
+        <rect x="300" y="80" width="250" height="60" rx="30" fill="#F4F1EA" fill-opacity="0.2" stroke="#F4F1EA" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="320" y="115">トラブルシューティング</tspan></text>
+        <line x1="425" y1="80" x2="350" y2="130" stroke="#F4F1EA" stroke-width="2"/>
+      </g>
+      
+      <!-- カテゴリ4: アカウント管理 -->
+      <g transform="translate(50, 100)">
+        <rect x="300" y="80" width="200" height="60" rx="30" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="340" y="115">アカウント管理</tspan></text>
+        <line x1="375" y1="80" x2="450" y2="130" stroke="#B3322B" stroke-width="2"/>
+      </g>
+      
+      <!-- カテゴリ5: 機能・仕様 -->
+      <g transform="translate(350, 100)">
+        <rect x="300" y="80" width="200" height="60" rx="30" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em"><tspan x="355" y="115">機能・仕様</tspan></text>
+        <line x1="400" y1="80" x2="400" y2="130" stroke="#653A5E" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 検索性を高める4つの工夫 -->
+  <g transform="translate(900, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">検索性を高める工夫</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- 1. キーワード最適化 -->
+      <rect x="0" y="0" width="360" height="100" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">1. キーワード最適化</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="15" y="55">● 同義語・類義語の追加</tspan>
+        <tspan x="15" y="75">● 表記ゆれ・誤字対応</tspan>
+      </text>
+      
+      <!-- 2. タグ付け -->
+      <g transform="translate(380, 0)">
+        <rect x="0" y="0" width="360" height="100" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">2. タグ付け</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 機能別・属性別タグ</tspan>
+          <tspan x="15" y="75">● 難易度レベル表示</tspan>
+        </text>
+      </g>
+      
+      <!-- 3. 関連質問のリンク -->
+      <g transform="translate(0, 120)">
+        <rect x="0" y="0" width="360" height="100" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">3. 関連質問のリンク</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 「この質問もよくあります」</tspan>
+          <tspan x="15" y="75">● 次のステップへの誘導</tspan>
+        </text>
+      </g>
+      
+      <!-- 4. フィードバック機能 -->
+      <g transform="translate(380, 120)">
+        <rect x="0" y="0" width="360" height="100" rx="10" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="15" y="30">4. フィードバック機能</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="15" y="55">● 「役に立ちましたか？」</tspan>
+          <tspan x="15" y="75">● 改善提案の収集</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- FAQ回答フォーマット -->
+  <g transform="translate(80, 600)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">FAQ回答フォーマット</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="800" height="260" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <!-- サンプルFAQ -->
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">Q: ログインできません</tspan></text>
+      
+      <!-- 簡潔な回答 -->
+      <rect x="20" y="50" width="760" height="40" rx="5" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="1"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="30" y="75">簡潔な回答：パスワードリセットをお試しください</tspan></text>
+      
+      <!-- 詳細説明 -->
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="20" y="120">詳細説明：</tspan>
+        <tspan x="20" y="140">1. ログイン画面の「パスワードを忘れた方」をクリック</tspan>
+        <tspan x="20" y="160">2. 登録メールアドレスを入力し、送信ボタンをクリック</tspan>
+        <tspan x="20" y="180">3. メールに記載されたリンクから新しいパスワードを設定</tspan>
+      </text>
+      
+      <!-- 関連リンク -->
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="20" y="210">関連リンク：</tspan>
+        <tspan x="20" y="230">• アカウントのセキュリティ設定 • 二段階認証の設定方法</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- ヘルプドキュメント構成 -->
+  <g transform="translate(940, 600)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">ヘルプドキュメント構成</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="700" height="260" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      
+      <g transform="translate(20, 20)">
+        <!-- 1. クイックスタート -->
+        <rect x="0" y="0" width="320" height="50" rx="8" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="1"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">📚 クイックスタートガイド</tspan></text>
+        
+        <!-- 2. 機能別ガイド -->
+        <g transform="translate(340, 0)">
+          <rect x="0" y="0" width="320" height="50" rx="8" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="1"/>
+          <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">📖 機能別詳細ガイド</tspan></text>
+        </g>
+        
+        <!-- 3. トラブルシューティング -->
+        <g transform="translate(0, 70)">
+          <rect x="0" y="0" width="320" height="50" rx="8" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="1"/>
+          <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">🔧 トラブルシューティング</tspan></text>
+        </g>
+        
+        <!-- 4. 用語集 -->
+        <g transform="translate(340, 70)">
+          <rect x="0" y="0" width="320" height="50" rx="8" fill="#F4F1EA" fill-opacity="0.2" stroke="#F4F1EA" stroke-width="1"/>
+          <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="15" y="32">📝 用語集・グロッサリー</tspan></text>
+        </g>
+        
+        <!-- 特徴 -->
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="0" y="160">✓ 5分で始められる</tspan>
+          <tspan x="200" y="160">✓ ステップバイステップ</tspan>
+          <tspan x="400" y="160">✓ スクリーンショット付き</tspan>
+          <tspan x="0" y="185">✓ ベストプラクティス</tspan>
+          <tspan x="200" y="185">✓ チェックリスト形式</tspan>
+          <tspan x="400" y="185">✓ 専門用語の解説</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 920)">
+    <rect x="0" y="0" width="1600" height="100" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「以下の情報をもとに体系的なFAQを作成してください：サービス情報[名称/対象/機能]、問い合わせデータ[よくある質問リスト]</tspan>
+      <tspan x="20" y="85">FAQ構成：1.カテゴリ分類 2.回答フォーマット（簡潔な回答、詳細説明、関連リンク、画像・動画）」</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+</svg>

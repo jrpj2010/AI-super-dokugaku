@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#2c2c2c"/>
+  
+  <!-- 背景デザイン要素 -->
+  <circle cx="200" cy="200" r="150" fill="#B3322B" fill-opacity="0.05"/>
+  <circle cx="1720" cy="880" r="180" fill="#653A5E" fill-opacity="0.05"/>
+  
+  <!-- グリッド -->
+  <g opacity="0.05">
+    <path d="M0 270H1920" stroke="#F4F1EA"/>
+    <path d="M0 540H1920" stroke="#F4F1EA"/>
+    <path d="M0 810H1920" stroke="#F4F1EA"/>
+    <path d="M480 0V1080" stroke="#F4F1EA"/>
+    <path d="M960 0V1080" stroke="#F4F1EA"/>
+    <path d="M1440 0V1080" stroke="#F4F1EA"/>
+  </g>
+  
+  <!-- ヘッダー -->
+  <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="80" y="60">Day 14</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" letter-spacing="0em"><tspan x="200" y="60">ワークフロー自動化と連携</tspan></text>
+  
+  <!-- タイトル -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Serif JP" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="80" y="140">ツール間連携とAI活用</tspan></text>
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="28" letter-spacing="0em"><tspan x="80" y="190">情報の一元管理と自動化による生産性向上</tspan></text>
+  
+  <!-- ツール連携マップ -->
+  <g transform="translate(80, 240)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">ツール連携エコシステム</tspan></text>
+    
+    <g transform="translate(200, 80)">
+      <!-- 中央ハブ：Notion -->
+      <circle cx="200" cy="150" r="80" fill="#FFEE00" fill-opacity="0.2" stroke="#FFEE00" stroke-width="3"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="165" y="155">Notion</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em"><tspan x="145" y="175">情報管理ハブ</tspan></text>
+      
+      <!-- Slack -->
+      <circle cx="50" cy="50" r="50" fill="#B3322B" fill-opacity="0.2" stroke="#B3322B" stroke-width="2"/>
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="25" y="55">Slack</tspan></text>
+      
+      <!-- Google Workspace -->
+      <circle cx="350" cy="50" r="50" fill="#653A5E" fill-opacity="0.2" stroke="#653A5E" stroke-width="2"/>
+      <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="315" y="55">Google</tspan></text>
+      
+      <!-- Cursor -->
+      <circle cx="350" cy="250" r="50" fill="#F4F1EA" fill-opacity="0.1" stroke="#F4F1EA" stroke-width="2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="320" y="255">Cursor</tspan></text>
+      
+      <!-- Zoom -->
+      <circle cx="50" cy="250" r="50" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="25" y="255">Zoom</tspan></text>
+      
+      <!-- 連携線 -->
+      <path d="M90 80L140 120" stroke="#F4F1EA" stroke-width="2" stroke-dasharray="5,5"/>
+      <path d="M310 80L260 120" stroke="#F4F1EA" stroke-width="2" stroke-dasharray="5,5"/>
+      <path d="M310 220L260 180" stroke="#F4F1EA" stroke-width="2" stroke-dasharray="5,5"/>
+      <path d="M90 220L140 180" stroke="#F4F1EA" stroke-width="2" stroke-dasharray="5,5"/>
+    </g>
+    
+    <!-- ワークフロー例 -->
+    <g transform="translate(600, 40)">
+      <rect x="0" y="0" width="500" height="280" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">自動化ワークフロー例</tspan></text>
+      
+      <!-- フロー1 -->
+      <g transform="translate(20, 60)">
+        <circle cx="15" cy="15" r="5" fill="#FFEE00"/>
+        <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="35" y="20">議事録作成フロー</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="35" y="45">Zoom録画 → Cursor文字起こし</tspan>
+          <tspan x="35" y="65">→ Notion保存 → Slack通知</tspan>
+        </text>
+      </g>
+      
+      <!-- フロー2 -->
+      <g transform="translate(20, 140)">
+        <circle cx="15" cy="15" r="5" fill="#B3322B"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="35" y="20">レポート生成フロー</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="35" y="45">Googleスプレッド → Cursor分析</tspan>
+          <tspan x="35" y="65">→ レポート生成 → 自動配信</tspan>
+        </text>
+      </g>
+      
+      <!-- フロー3 -->
+      <g transform="translate(20, 220)">
+        <circle cx="15" cy="15" r="5" fill="#653A5E"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="35" y="20">タスク管理フロー</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="35" y="45">Slackメッセージ → タスク抽出</tspan>
+          <tspan x="35" y="65">→ Notion登録 → リマインダー</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- データフォーマット統一 -->
+  <g transform="translate(1150, 240)">
+    <rect x="0" y="0" width="500" height="320" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="20" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">標準データフォーマット</tspan></text>
+    
+    <!-- 命名規則 -->
+    <g transform="translate(20, 60)">
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">命名規則</tspan></text>
+      <rect x="0" y="10" width="460" height="60" rx="5" fill="#FFEE00" fill-opacity="0.1"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+        <tspan x="10" y="35">ファイル: [YYYY-MM-DD]_[種類]_[内容]</tspan>
+        <tspan x="10" y="55">例: 2025-06-17_議事録_経営会議</tspan>
+      </text>
+    </g>
+    
+    <!-- データ形式 -->
+    <g transform="translate(20, 150)">
+      <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">データ形式</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="0" y="25">• 日付: YYYY-MM-DD</tspan>
+        <tspan x="0" y="45">• 時刻: HH:MM (24時間)</tspan>
+        <tspan x="230" y="25">• 金額: 半角数字（カンマ区切り）</tspan>
+        <tspan x="230" y="45">• 文字: UTF-8エンコード</tspan>
+      </text>
+    </g>
+    
+    <!-- メタデータ -->
+    <g transform="translate(20, 230)">
+      <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">必須メタデータ</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="0" y="25">作成者 / 更新日時 / バージョン / ステータス</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- AI活用による生産性向上 -->
+  <g transform="translate(80, 600)">
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="0">AI活用による自動化の実例</tspan></text>
+    
+    <g transform="translate(0, 40)">
+      <!-- メール自動化 -->
+      <rect x="0" y="0" width="350" height="200" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+      <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">メール対応の自動化</tspan></text>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="20" y="65">Before: 100件/日を2時間で処理</tspan>
+        <tspan x="20" y="90">After: AI分類・自動返信で15分</tspan>
+      </text>
+      <rect x="20" y="110" width="310" height="70" rx="5" fill="#FFEE00" fill-opacity="0.2"/>
+      <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+        <tspan x="30" y="135">• 問い合わせ分類: 95%精度</tspan>
+        <tspan x="30" y="155">• 定型回答生成: 80%自動化</tspan>
+        <tspan x="30" y="175">• エスカレーション: 適切判断</tspan>
+      </text>
+      
+      <!-- レポート自動化 -->
+      <g transform="translate(370, 0)">
+        <rect x="0" y="0" width="350" height="200" rx="10" fill="#B3322B" fill-opacity="0.1" stroke="#B3322B" stroke-width="2"/>
+        <text fill="#B3322B" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">レポート作成の効率化</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="20" y="65">Before: 週8時間のレポート作成</tspan>
+          <tspan x="20" y="90">After: AI分析で1時間に短縮</tspan>
+        </text>
+        <rect x="20" y="110" width="310" height="70" rx="5" fill="#B3322B" fill-opacity="0.2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="30" y="135">• データ収集: 完全自動化</tspan>
+          <tspan x="30" y="155">• トレンド分析: AI洞察</tspan>
+          <tspan x="30" y="175">• 配信: 対象別カスタマイズ</tspan>
+        </text>
+      </g>
+      
+      <!-- 意思決定支援 -->
+      <g transform="translate(740, 0)">
+        <rect x="0" y="0" width="350" height="200" rx="10" fill="#653A5E" fill-opacity="0.1" stroke="#653A5E" stroke-width="2"/>
+        <text fill="#653A5E" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">意思決定支援システム</tspan></text>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="20" y="65">Before: 勘と経験による判断</tspan>
+          <tspan x="20" y="90">After: データドリブンな意思決定</tspan>
+        </text>
+        <rect x="20" y="110" width="310" height="70" rx="5" fill="#653A5E" fill-opacity="0.2"/>
+        <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="14" letter-spacing="0em">
+          <tspan x="30" y="135">• リアルタイム分析</tspan>
+          <tspan x="30" y="155">• シナリオシミュレーション</tspan>
+          <tspan x="30" y="175">• リスク予測・アラート</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 実践的プロンプト例 -->
+  <g transform="translate(80, 840)">
+    <rect x="0" y="0" width="1100" height="120" rx="10" fill="#F4F1EA" fill-opacity="0.05" stroke="#F4F1EA" stroke-width="1"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">実践プロンプト</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="monospace" font-size="14" letter-spacing="0em">
+      <tspan x="20" y="65">「社内で使用しているツールの連携案を作成してください：</tspan>
+      <tspan x="20" y="85">使用ツール：Slack、Google Workspace、Notion、Zoom、Cursor</tspan>
+      <tspan x="20" y="105">連携パターン：1.情報の一元管理 2.ワークフローの自動化 3.レポーティングの効率化」</tspan>
+    </text>
+  </g>
+  
+  <!-- ROI指標 -->
+  <g transform="translate(1220, 840)">
+    <rect x="0" y="0" width="420" height="120" rx="10" fill="#FFEE00" fill-opacity="0.1" stroke="#FFEE00" stroke-width="2"/>
+    <text fill="#FFEE00" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="18" font-weight="bold" letter-spacing="0em"><tspan x="20" y="35">投資効果（ROI）</tspan></text>
+    <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em">
+      <tspan x="20" y="65">初期投資: 約20万円（ツール・設定）</tspan>
+      <tspan x="20" y="90">月間削減時間: 160時間 × 5,000円 = 80万円</tspan>
+      <tspan x="20" y="110">投資回収期間: 約2週間</tspan>
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text fill="#F4F1EA" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="16" letter-spacing="0em" opacity="0.6"><tspan x="80" y="1040">© 2025 TANREN Corporation - AI Academia</tspan></text>
+</svg>
