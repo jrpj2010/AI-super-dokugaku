@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIを活用した高度なワークフロー自動化</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide {
+            position: absolute;
+            width: min(90vw, calc(90vh * 16 / 9));
+            height: min(90vh, calc(90vw * 9 / 16));
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+            border: 2px solid #00ff88;
+            border-radius: 20px;
+            padding: 5%;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .main-title {
+            font-size: 4vw;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2vh;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.3); }
+        }
+        
+        .subtitle {
+            font-size: 2vw;
+            color: #00ccff;
+            margin-bottom: 4vh;
+        }
+        
+        .date {
+            font-size: 1.5vw;
+            color: #888;
+        }
+        
+        .slide-header {
+            font-size: 2.5vw;
+            color: #00ff88;
+            margin-bottom: 3vh;
+            padding-bottom: 1vh;
+            border-bottom: 2px solid #00ff88;
+        }
+        
+        .content-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3%;
+            margin-bottom: 2vh;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .highlight {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3%;
+            height: 100%;
+        }
+        
+        .grid-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2%;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        ul li {
+            margin-bottom: 1.5vh;
+            padding-left: 2em;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+        }
+        
+        .code-block {
+            background: #000;
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 2%;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2vw;
+            overflow-x: auto;
+            margin: 2vh 0;
+        }
+        
+        .icon-large {
+            font-size: 6vw;
+            margin: 2vh 0;
+        }
+        
+        .nav-controls {
+            position: fixed;
+            bottom: 3vh;
+            right: 3vw;
+            display: flex;
+            gap: 1vw;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: rgba(0, 255, 136, 0.2);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            padding: 1vh 2vw;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2vw;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(0, 255, 136, 0.4);
+            transform: scale(1.05);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #00ff88, #00ccff);
+            transition: width 0.3s;
+            z-index: 1000;
+        }
+        
+        .visual-element {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8vw;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 3vh 0;
+        }
+        
+        .flow-item {
+            text-align: center;
+            padding: 2vh 2vw;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 1vw;
+        }
+        
+        .arrow {
+            color: #00ccff;
+            font-size: 2vw;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2vw;
+            margin: 3vh 0;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 2vh;
+            background: rgba(0, 204, 255, 0.1);
+            border: 2px solid #00ccff;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 3vw;
+            color: #00ccff;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 1.2vw;
+            color: #888;
+            margin-top: 1vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="progress-bar" id="progressBar"></div>
+        
+        <!-- スライド1: タイトル -->
+        <div class="slide slide-title active">
+            <h1 class="main-title">AIを活用した高度なワークフロー自動化</h1>
+            <p class="subtitle">〜 Notion × Cursor × ClaudeCode による究極の効率化 〜</p>
+            <p class="date">2025年6月18日 / 生成AI飲み会</p>
+        </div>
+        
+        <!-- スライド2: アジェンダ -->
+        <div class="slide">
+            <h2 class="slide-header">🎯 本日のアジェンダ</h2>
+            <div class="grid-2col">
+                <div class="content-box">
+                    <h3 class="highlight">Part 1: 基盤構築</h3>
+                    <ul>
+                        <li>Notionによる情報集約</li>
+                        <li>文字起こしデータのクレンジング</li>
+                        <li>置換マスターの活用</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">Part 2: 実践応用</h3>
+                    <ul>
+                        <li>Cursorによる開発効率化</li>
+                        <li>AIエージェントの並列活用</li>
+                        <li>プレゼン自動生成の実演</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド3: 現状の課題 -->
+        <div class="slide">
+            <h2 class="slide-header">🚨 現状の課題</h2>
+            <div class="content-box">
+                <div class="visual-element">😤</div>
+                <ul>
+                    <li><span class="highlight">議事録作成に膨大な時間</span>がかかる</li>
+                    <li>文字起こしの<span class="highlight">精度が低い</span>（固有名詞・専門用語）</li>
+                    <li>情報が<span class="highlight">分散</span>して一元管理できない</li>
+                    <li>プレゼン資料作成が<span class="highlight">属人化</span>している</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- スライド4: ソリューション概要 -->
+        <div class="slide">
+            <h2 class="slide-header">💡 統合ソリューションの全体像</h2>
+            <div class="flow-diagram">
+                <div class="flow-item">
+                    <div class="icon-large">🎙️</div>
+                    <p>音声収録</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <div class="icon-large">📝</div>
+                    <p>文字起こし</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <div class="icon-large">🧹</div>
+                    <p>クレンジング</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <div class="icon-large">🤖</div>
+                    <p>AI処理</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <div class="icon-large">📊</div>
+                    <p>成果物生成</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド5: Notionの活用 -->
+        <div class="slide">
+            <h2 class="slide-header">📚 Notion: 情報管理の中核</h2>
+            <div class="grid-2col">
+                <div class="content-box">
+                    <h3 class="highlight">利用方針</h3>
+                    <ul>
+                        <li>エディタとして純粋に活用</li>
+                        <li>検索機能には依存しない</li>
+                        <li>Markdown形式でローカル管理</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">管理対象</h3>
+                    <ul>
+                        <li>開発会議の議事録</li>
+                        <li>商談記録</li>
+                        <li>プロジェクト文書</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="code-block">
+                # エクスポート時の設定
+                - サブページも含める ✓
+                - 画像は除外 ✓
+                - Markdown形式 ✓
+            </div>
+        </div>
+        
+        <!-- スライド6: 文字起こしの課題 -->
+        <div class="slide">
+            <h2 class="slide-header">🎯 AI文字起こしの精度問題</h2>
+            <div class="content-box">
+                <h3 class="highlight">典型的な誤認識パターン</h3>
+                <div class="grid-3col">
+                    <div class="stat-box">
+                        <p class="stat-number">AI → ai</p>
+                        <p class="stat-label">大文字・小文字</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-number">はいはいはい</p>
+                        <p class="stat-label">フィラーの重複</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-number">ありがとうござ。</p>
+                        <p class="stat-label">句読点エラー</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-box">
+                <p>⚠️ <span class="highlight">同じ箇所で同じように間違える</span>という特性を逆手に取る！</p>
+            </div>
+        </div>
+        
+        <!-- スライド7: 置換マスター -->
+        <div class="slide">
+            <h2 class="slide-header">🛠️ 置換マスター Ultra Max</h2>
+            <div class="grid-2col">
+                <div class="content-box">
+                    <h3 class="highlight">主要機能</h3>
+                    <ul>
+                        <li>誤字脱字の一括修正</li>
+                        <li>クラウド辞書で学習・共有</li>
+                        <li>継続利用で精度向上</li>
+                    </ul>
+                </div>
+                <div class="visual-element">🔄</div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p class="stat-number">2週間</p>
+                    <p class="stat-label">学習期間</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">200+</p>
+                    <p class="stat-label">辞書登録数</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">18件</p>
+                    <p class="stat-label">一括修正実績</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド8: 辞書の仕組み -->
+        <div class="slide">
+            <h2 class="slide-header">📖 クラウド辞書の威力</h2>
+            <div class="content-box">
+                <h3 class="highlight">登録例</h3>
+                <div class="code-block">
+                    Before → After
+                    ━━━━━━━━━━━━━━━
+                    ai → AI
+                    3件 → 3件
+                    オープンai → OpenAI
+                    ビッグローブ → BIGLOBE
+                    きだちゃん → 木田ちゃん
+                </div>
+            </div>
+            <div class="content-box">
+                <p>💡 <span class="highlight">使えば使うほど賢くなる</span>仕組み</p>
+            </div>
+        </div>
+        
+        <!-- スライド9: Cursor概要 -->
+        <div class="slide">
+            <h2 class="slide-header">🚀 Cursor: 統合開発環境の革命</h2>
+            <div class="grid-2col">
+                <div class="content-box">
+                    <h3 class="highlight">特徴</h3>
+                    <ul>
+                        <li>IDE内にターミナル統合</li>
+                        <li>複数AIモデルの切り替え</li>
+                        <li>フォルダパス指定で一括認識</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">対応AI</h3>
+                    <ul>
+                        <li>Claude（Opus/Sonnet）</li>
+                        <li>Gemini 2.5 Pro</li>
+                        <li>GPT-4o (omni)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド10: Cursor Rules -->
+        <div class="slide">
+            <h2 class="slide-header">📋 Cursor Rules: 指示の定型化</h2>
+            <div class="content-box">
+                <h3 class="highlight">ルールファイルの構造</h3>
+                <div class="code-block">
+                    .crules/
+                    ├── 経営会議分析.crules
+                    ├── プレゼン生成.crules
+                    └── 開発ルール.crules
+                </div>
+            </div>
+            <div class="content-box">
+                <p>✨ <span class="highlight">非エンジニアでも専門的なAI処理が可能に</span></p>
+            </div>
+        </div>
+        
+        <!-- スライド11: ClaudeCode -->
+        <div class="slide">
+            <h2 class="slide-header">🤖 ClaudeCode: 最強のエージェント</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p class="stat-number">$200</p>
+                    <p class="stat-label">月額使い放題</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">16体</p>
+                    <p class="stat-label">並列実行可能</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">無制限</p>
+                    <p class="stat-label">API呼び出し</p>
+                </div>
+            </div>
+            <div class="content-box">
+                <p>🔥 <span class="highlight">上級エンジニアは16体同時に動かす</span></p>
+            </div>
+        </div>
+        
+        <!-- スライド12: プレゼン自動生成 -->
+        <div class="slide">
+            <h2 class="slide-header">✨ プレゼン自動生成の仕組み</h2>
+            <div class="flow-diagram">
+                <div class="flow-item">
+                    <p class="highlight">INPUT</p>
+                    <p>議事録SRT</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <p class="highlight">RULE</p>
+                    <p>生成プロンプト</p>
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-item">
+                    <p class="highlight">OUTPUT</p>
+                    <p>HTMLスライド</p>
+                </div>
+            </div>
+            <div class="content-box">
+                <p>⏱️ <span class="highlight">30分の会議から数分で10枚のスライド生成</span></p>
+            </div>
+        </div>
+        
+        <!-- スライド13: ハッキング手法 -->
+        <div class="slide">
+            <h2 class="slide-header">🔍 有料サービスの解析手法</h2>
+            <div class="content-box">
+                <h3 class="highlight">リバースエンジニアリング</h3>
+                <ol>
+                    <li>GenSpark/Manusで資料生成</li>
+                    <li>生成されたHTML/CSSを取得</li>
+                    <li>AIにシステムプロンプトを推測させる</li>
+                    <li>独自プロンプトとして最適化</li>
+                </ol>
+            </div>
+            <div class="content-box">
+                <p>💰 <span class="highlight">有料サービス不要で同等品質を実現</span></p>
+            </div>
+        </div>
+        
+        <!-- スライド14: 実装例 -->
+        <div class="slide">
+            <h2 class="slide-header">💻 実装コード例</h2>
+            <div class="code-block">
+# ClaudeCodeでの実行例
+claude "
+システムプロンプト: 竹森メソッド.md
+インプット: ./生成AI飲み会/録音.srt
+アウトプット: ./output/
+スライド枚数: 10枚
+"
+            </div>
+            <div class="content-box">
+                <p>👨‍💻 <span class="highlight">誰でも簡単に実行可能</span></p>
+            </div>
+        </div>
+        
+        <!-- スライド15: AI比較 -->
+        <div class="slide">
+            <h2 class="slide-header">⚔️ AIの特性比較（北斗の拳風）</h2>
+            <div class="grid-3col">
+                <div class="content-box">
+                    <h3 class="highlight">Gemini</h3>
+                    <p class="icon-large">💪</p>
+                    <p>最強（ラオウ）</p>
+                    <ul>
+                        <li>圧倒的パワー</li>
+                        <li>大量データ処理</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">Claude</h3>
+                    <p class="icon-large">🎨</p>
+                    <p>最高（ジュウザ）</p>
+                    <ul>
+                        <li>創造的思考</li>
+                        <li>自由な発想</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">OpenAI</h3>
+                    <p class="icon-large">⚖️</p>
+                    <p>最適（ケンシロウ）</p>
+                    <ul>
+                        <li>バランス重視</li>
+                        <li>安定性</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド16: 導入効果 -->
+        <div class="slide">
+            <h2 class="slide-header">📈 導入効果と実績</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p class="stat-number">90%</p>
+                    <p class="stat-label">議事録作成時間削減</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">95%</p>
+                    <p class="stat-label">文字起こし精度</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-number">5分</p>
+                    <p class="stat-label">プレゼン生成時間</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド17: 実践のポイント -->
+        <div class="slide">
+            <h2 class="slide-header">🎯 実践のポイント</h2>
+            <div class="grid-2col">
+                <div class="content-box">
+                    <h3 class="highlight">DO</h3>
+                    <ul>
+                        <li>辞書を継続的に育てる</li>
+                        <li>タスクに応じてAIを使い分ける</li>
+                        <li>ルールファイルを整備する</li>
+                        <li>並列処理を活用する</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 class="highlight">DON'T</h3>
+                    <ul>
+                        <li>一つのAIに固執しない</li>
+                        <li>手動作業に戻らない</li>
+                        <li>セキュリティを軽視しない</li>
+                        <li>学習を止めない</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- スライド18: 今後の展望 -->
+        <div class="slide">
+            <h2 class="slide-header">🚀 今後の展望</h2>
+            <div class="content-box">
+                <h3 class="highlight">次のステップ</h3>
+                <ul>
+                    <li>全社員への<span class="highlight">Cursor展開</span></li>
+                    <li>業務別の<span class="highlight">ルールライブラリ構築</span></li>
+                    <li>API連携による<span class="highlight">完全自動化</span></li>
+                    <li>他部署への<span class="highlight">横展開</span></li>
+                </ul>
+            </div>
+            <div class="visual-element">🌟</div>
+        </div>
+        
+        <!-- スライド19: まとめ -->
+        <div class="slide">
+            <h2 class="slide-header">📝 まとめ</h2>
+            <div class="content-box">
+                <h3 class="highlight">3つの重要ポイント</h3>
+                <ol>
+                    <li><span class="highlight">文字起こしの精度</span>がすべての基盤</li>
+                    <li><span class="highlight">適材適所のAI活用</span>で効率最大化</li>
+                    <li><span class="highlight">非エンジニアも使える仕組み</span>が鍵</li>
+                </ol>
+            </div>
+            <div class="content-box">
+                <p>🎯 <span class="highlight">「誰でも」「簡単に」「高品質な成果物」</span>を生成できる世界へ</p>
+            </div>
+        </div>
+        
+        <!-- スライド20: Thank You -->
+        <div class="slide slide-title">
+            <h1 class="main-title">ご清聴ありがとうございました</h1>
+            <p class="subtitle">〜 AIと共に創る、新しい働き方 〜</p>
+            <div class="visual-element">🙏</div>
+            <p class="date">TANREN株式会社 / 佐藤勝彦</p>
+        </div>
+        
+        <!-- ナビゲーション -->
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">◀ 前へ</button>
+            <span id="slideNumber" style="color: #00ff88; margin: 0 2vw;">1 / 20</span>
+            <button class="nav-btn" onclick="nextSlide()">次へ ▶</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateSlideNumber();
+            updateProgressBar();
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        function updateSlideNumber() {
+            document.getElementById('slideNumber').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+        
+        // キーボードナビゲーション
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // タッチ/スワイプ対応
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        }
+        
+        // 初期化
+        updateSlideNumber();
+        updateProgressBar();
+    </script>
+</body>
+</html>
