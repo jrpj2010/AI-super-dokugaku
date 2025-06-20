@@ -223,6 +223,7 @@ button:disabled {
 .waveform-bar {
     display: flex;
     align-items: center;
+    gap: 12px;
     padding: 0 16px;
     height: 96px; /* waveform_bar_height */
     background-color: #121417; /* bg_primary */
@@ -257,6 +258,41 @@ button:disabled {
     cursor: not-allowed;
 }
 
+/* Upload button */
+.upload-button {
+    padding: 10px 16px;
+    background-color: #2a2d31;
+    color: #e9ecef;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+
+.upload-button:hover:not(:disabled) {
+    background-color: #3a3d41;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upload-button:disabled {
+    background-color: #1f2226 !important;
+    color: #707070 !important;
+    cursor: not-allowed;
+}
+
+/* Uploaded file name display */
+.uploaded-file-name {
+    color: #a6a9ad;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
 .waveform-display {
     flex-grow: 1;
     height: 64px;
@@ -268,8 +304,11 @@ button:disabled {
 }
 
 .waveform-canvas {
-    width: 100%;
-    height: 100%;
+    flex-grow: 1;
+    height: 70px;
+    background-color: #1c1f23;
+    border-radius: 4px;
+    margin-left: 8px;
 }
 
 /* Loading States */

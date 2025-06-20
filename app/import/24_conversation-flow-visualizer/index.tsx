@@ -12,6 +12,7 @@ import type { NodePosition } from './types/UI';
 const API_KEY = 'AIzaSyDvZa5QTmqdAB0do_K3W5NAeW6di69_3BI';  // Temporarily hardcoded
 const MODEL_NAME = 'gemini-2.5-flash'; // Updated from preview model
 const NODE_BREAK_DELIMITER = "---NODE_BREAK---";
+const STREAMING_CHUNK_SIZE = 1000; // 1秒ごとのチャンク
 
 const MIN_SCALE = 0.1;
 const MAX_SCALE = 2.0;
@@ -38,10 +39,15 @@ const App: React.FC = () => {
     const [showDependencies, setShowDependencies] = useState<boolean>(true);
     const [nodePositions, setNodePositions] = useState<Map<string, NodePosition>>(new Map());
     const [hoveredEdgeId, setHoveredEdgeId] = useState<string | null>(null);
+    const [uploadedFileName, setUploadedFileName] = useState<string>("");
+    const [isProcessingFile, setIsProcessingFile] = useState<boolean>(false);
     
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
     const aiRef = useRef<GoogleGenAI | null>(null);
+    const streamingIntervalRef = useRef<NodeJS.Timer | null>(null);
+    const lastProcessedChunkRef = useRef<number>(0);
     const audioContextRef = useRef<AudioContext | null>(null);
     const analyserRef = useRef<AnalyserNode | null>(null);
     const microphoneSourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
@@ -66,6 +72,67 @@ const App: React.FC = () => {
         }
     }, []);
 
+    // リアルタイムストリーミング処理
+    const processStreamingChunk = useCallback(async () => {
+        if (!aiRef.current || audioChunksRef.current.length === 0) return;
+        
+        // 新しいチャンクがない場合はスキップ
+        if (lastProcessedChunkRef.current >= audioChunksRef.current.length) return;
+        
+        try {
+            // 現在までの音声データを結合
+            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+            const base64Audio = await blobToBase64(audioBlob);
+            
+            const audioPart = {
+                inlineData: {
+                    mimeType: 'audio/webm',
+                    data: base64Audio,
+                },
+            };
+            const textPart = {
+                text: `この音声を文字起こししてください。会話の各発言や重要なポイントを特定し、それぞれを "${NODE_BREAK_DELIMITER}" という文字列で区切って、明確に提示してください。`,
+            };
+            
+            const streamResponse = await aiRef.current.models.generateContentStream({
+                model: MODEL_NAME,
+                contents: { parts: [textPart, audioPart] },
+            });
+            
+            let currentFullText = "";
+            for await (const chunk of streamResponse) {
+                const chunkText = chunk && chunk.text ? chunk.text : "";
+                currentFullText += chunkText;
+            }
+            
+            // ノードを生成
+            const rawNodesTexts = currentFullText.split(NODE_BREAK_DELIMITER);
+            const newNodes: Node[] = rawNodesTexts
+                .map(text => text.trim())
+                .filter(text => text.length > 0)
+                .map((text, index) => {
+                    const node: Node = {
+                        id: `node-${Date.now()}-${index}`,
+                        text: text,
+                    };
+                    // アイコン追加
+                    if (text.toLowerCase().includes("重要") || text.toLowerCase().includes("ポイント")) {
+                        node.icons = ['exclamation'];
+                    }
+                    return node;
+                });
+            
+            if (newNodes.length > 0) {
+                setNodes(newNodes);
+                setTranscribedText(currentFullText);
+            }
+            
+            lastProcessedChunkRef.current = audioChunksRef.current.length;
+        } catch (error) {
+            console.error("ストリーミング処理エラー:", error);
+        }
+    }, []);
+
     const blobToBase64 = (blob: Blob): Promise<string> => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -80,6 +147,104 @@ const App: React.FC = () => {
             reader.readAsDataURL(blob);
         });
     };
+
+    // 音声ファイルアップロード処理
+    const handleFileUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        
+        // ファイル形式チェック
+        const validTypes = ['audio/mp3', 'audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/wav', 'audio/webm'];
+        if (!validTypes.includes(file.type)) {
+            setError('対応していないファイル形式です。MP3、M4A、WAV、WebMファイルをアップロードしてください。');
+            return;
+        }
+        
+        setUploadedFileName(file.name);
+        setIsProcessingFile(true);
+        setError(null);
+        setNodes([]);
+        setTranscribedText("");
+        
+        try {
+            // ファイルをBlobとして読み込み
+            const base64Audio = await blobToBase64(file);
+            
+            if (!aiRef.current) {
+                throw new Error("AI SDKが初期化されていません");
+            }
+            
+            const audioPart = {
+                inlineData: {
+                    mimeType: file.type,
+                    data: base64Audio,
+                },
+            };
+            
+            const textPart = {
+                text: `この音声ファイルを文字起こししてください。以下の指示に従ってください：
+1. 複数の話者がいる場合は、話者を識別して「話者1:」「話者2:」のように区別してください
+2. 営業トークや商談の場合は、重要なポイントや決定事項を識別してください
+3. 各発言や話題の転換点を "${NODE_BREAK_DELIMITER}" で区切ってください
+4. 話者が変わるごとに必ず区切ってください
+5. 重要な提案や決定事項には【重要】マークを付けてください`,
+            };
+            
+            setIsLoading(true);
+            const streamResponse = await aiRef.current.models.generateContentStream({
+                model: MODEL_NAME,
+                contents: { parts: [textPart, audioPart] },
+            });
+            
+            let currentFullText = "";
+            setTranscribedText("処理中...");
+            
+            for await (const chunk of streamResponse) {
+                const chunkText = chunk && chunk.text ? chunk.text : "";
+                currentFullText += chunkText;
+                setTranscribedText(currentFullText);
+            }
+            
+            // ノード生成（話者識別付き）
+            const rawNodesTexts = currentFullText.split(NODE_BREAK_DELIMITER);
+            const newNodes: Node[] = rawNodesTexts
+                .map(text => text.trim())
+                .filter(text => text.length > 0)
+                .map((text, index) => {
+                    const node: Node = {
+                        id: `node-${Date.now()}-${index}`,
+                        text: text,
+                    };
+                    
+                    // アイコン設定
+                    const icons: ('exclamation' | 'lightbulb')[] = [];
+                    if (text.includes("【重要】") || text.includes("決定") || text.includes("合意")) {
+                        icons.push('exclamation');
+                    }
+                    if (text.includes("提案") || text.includes("アイデア") || text.includes("検討")) {
+                        icons.push('lightbulb');
+                    }
+                    if (icons.length > 0) {
+                        node.icons = icons;
+                    }
+                    
+                    return node;
+                });
+            
+            if (newNodes.length > 0) {
+                setNodes(newNodes);
+            } else {
+                setError("音声の解析に失敗しました。");
+            }
+            
+        } catch (error: any) {
+            console.error("ファイル処理エラー:", error);
+            setError(`ファイル処理中にエラーが発生しました: ${error.message}`);
+        } finally {
+            setIsLoading(false);
+            setIsProcessingFile(false);
+        }
+    }, []);
 
     const visualizeWaveform = useCallback(() => {
         if (!analyserRef.current || !waveformCanvasRef.current || !audioContextRef.current) return;
@@ -129,7 +294,7 @@ const App: React.FC = () => {
     }, [isRecording]);
 
 
-    const handleStartRecording = async () => {
+    const handleStartRecording = useCallback(async () => {
         if (!aiRef.current && API_KEY) {
             setError("AI SDKが初期化されていません。録音を開始できません。");
             return;
@@ -172,6 +337,12 @@ const App: React.FC = () => {
             };
 
             mediaRecorderRef.current.onstop = async () => {
+                // ストリーミングで既に処理済みの場合はスキップ
+                if (nodes.length > 0) {
+                    setIsLoading(false);
+                    return;
+                }
+                
                 setIsLoading(true);
 
                 if (animationFrameIdRef.current) {
@@ -277,7 +448,13 @@ const App: React.FC = () => {
             mediaRecorderRef.current.start(1000);
             setIsRecording(true);
             setTranscribedText("");
-            visualizeWaveform(); 
+            visualizeWaveform();
+            
+            // リアルタイムストリーミング開始（2秒ごとに処理）
+            lastProcessedChunkRef.current = 0;
+            streamingIntervalRef.current = setInterval(() => {
+                processStreamingChunk();
+            }, 2000); 
 
         } catch (err: any) {
             console.error("録音開始エラー:", err);
@@ -304,10 +481,16 @@ const App: React.FC = () => {
                 animationFrameIdRef.current = null;
             }
         }
-    };
+    }, [processStreamingChunk, visualizeWaveform]);
 
     const handleStopRecording = () => {
         if (mediaRecorderRef.current && isRecording) {
+            // ストリーミングインターバルをクリア
+            if (streamingIntervalRef.current) {
+                clearInterval(streamingIntervalRef.current);
+                streamingIntervalRef.current = null;
+            }
+            
             mediaRecorderRef.current.stop(); // This will trigger onstop
             setIsRecording(false);
             // Stream tracks are stopped in onstop
@@ -483,6 +666,9 @@ const App: React.FC = () => {
         const dependencies = analyzer.detectDependencies(nodes);
         
         console.log(`依存関係分析完了: ${dependencies.length}個のエッジを検出`);
+        if (dependencies.length > 0) {
+            console.log('検出されたエッジ:', dependencies);
+        }
         setDependencyEdges(dependencies);
     }, [nodes]);
 
@@ -551,13 +737,14 @@ const App: React.FC = () => {
 
                     {!isLoading && nodes.length === 0 && !error && (
                         <div className="placeholder-text">
-                            マイクボタンをクリックして録音を開始してください。文字起こしされた内容はここに表示されます。
+                            マイクボタンをクリックして録音を開始するか、音声ファイルをアップロードしてください。<br/>
+                            対応形式：MP3、M4A、WAV、WebM（最大8分程度の音声を推奨）
                         </div>
                     )}
                     {/* 依存関係エッジを表示 */}
                     {showDependencies && dependencyEdges.length > 0 && (
                         <div className="edge-container dependency-edge-group">
-                            <svg width="3000" height="2000" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
+                            <svg width="3000" height="2000" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'auto' }}>
                                 {dependencyEdges.map(edge => {
                                     const sourcePos = nodePositions.get(edge.sourceNodeId);
                                     const targetPos = nodePositions.get(edge.targetNodeId);
@@ -628,10 +815,36 @@ const App: React.FC = () => {
                     onClick={toggleRecording}
                     aria-label={isRecording ? "録音停止" : "録音開始"}
                     aria-pressed={isRecording}
-                    disabled={isLoading || (!aiRef.current && !!API_KEY)} 
+                    disabled={isLoading || isProcessingFile || (!aiRef.current && !!API_KEY)} 
                 >
-                    {isRecording ? '停止' : '録音'}
+                    {isRecording ? '⏹️' : '🎤'}
                 </button>
+                
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="audio/mp3,audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/webm"
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
+                />
+                
+                <button
+                    className="upload-button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isRecording || isLoading || isProcessingFile}
+                    aria-label="音声ファイルをアップロード"
+                    title="音声ファイルをアップロード"
+                >
+                    📁 ファイル選択
+                </button>
+                
+                {uploadedFileName && (
+                    <span className="uploaded-file-name">
+                        {isProcessingFile ? '処理中: ' : ''}
+                        {uploadedFileName}
+                    </span>
+                )}
+                
                 <canvas ref={waveformCanvasRef} className="waveform-canvas" width="300" height="70"></canvas>
             </div>
 
