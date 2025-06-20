@@ -1,0 +1,126 @@
+apiVersion: haconiwa.dev/v1
+kind: Organization
+metadata:
+  name: conversation-flow-org
+spec:
+  companyName: "会話フロービジュアライザー開発チーム"
+  industry: "AI開発ツール"
+  basePath: "./conversation-flow-company"
+  hierarchy:
+    departments:
+    - id: "executive"
+      name: "プロジェクト管理"
+      description: "全体管理と意思決定"
+      roles:
+      - roleType: "management"
+        title: "プロジェクトマネージャー"
+        agentId: "pm-sato"
+        responsibilities:
+          - "全体進捗管理"
+          - "最終承認"
+    - id: "development"
+      name: "開発チーム"
+      description: "実装とテスト"
+      roles:
+      - roleType: "engineering"
+        title: "フロントエンド開発"
+        agentId: "frontend-dev"
+        responsibilities:
+          - "React実装"
+          - "UI/UX改善"
+      - roleType: "engineering"
+        title: "エラーハンドリング実装"
+        agentId: "error-handler"
+        responsibilities:
+          - "エラーバウンダリー実装"
+          - "例外処理"
+      - roleType: "quality"
+        title: "テスト担当"
+        agentId: "qa-tester"
+        responsibilities:
+          - "動作確認"
+          - "品質保証"
+
+---
+apiVersion: haconiwa.dev/v1
+kind: Space
+metadata:
+  name: conversation-flow-world
+spec:
+  nations:
+  - id: jp
+    name: Japan
+    cities:
+    - id: tokyo
+      name: Tokyo
+      villages:
+      - id: dev-village
+        name: "Development Village"
+        companies:
+        - name: conversation-flow-company
+          grid: "2x2"
+          basePath: "./conversation-flow-world"
+          organizationRef: "conversation-flow-org"
+          gitRepo:
+            url: "https://github.com/jrpj2010/vibe-coding.git"
+            defaultBranch: "main"
+            auth: "https"
+          buildings:
+          - id: "hq"
+            name: "Headquarters"
+            floors:
+            - id: "dev-floor"
+              name: "Development Floor"
+              rooms:
+              - id: room-main
+                name: "Main Development Room"
+                description: "メイン開発ルーム"
+
+---
+apiVersion: haconiwa.dev/v1
+kind: Task
+metadata:
+  name: task-error-boundary
+spec:
+  taskId: task-error-boundary
+  title: "エラーバウンダリー実装"
+  description: |
+    ## エラーバウンダリーの実装
+    
+    React 19対応のエラーバウンダリーを実装し、
+    アプリケーション全体のエラーハンドリングを改善する。
+    
+    ### 要件:
+    - グローバルエラーバウンダリー
+    - 個別コンポーネントのエラーハンドリング
+    - ユーザーフレンドリーなエラー表示
+    - エラーログ機能
+  assignee: "error-handler"
+  spaceRef: "conversation-flow-company"
+  priority: "high"
+  worktree: false
+  branch: "feature/error-boundary"
+
+---
+apiVersion: haconiwa.dev/v1
+kind: Task
+metadata:
+  name: task-final-test
+spec:
+  taskId: task-final-test
+  title: "最終テストと品質確認"
+  description: |
+    ## 最終テストと品質確認
+    
+    全機能の動作確認とパフォーマンステストを実施。
+    
+    ### テスト項目:
+    - 録音・文字起こし機能
+    - TF-IDF依存関係検出
+    - エラーハンドリング
+    - パフォーマンス（600ノード）
+  assignee: "qa-tester"
+  spaceRef: "conversation-flow-company"
+  priority: "high"
+  worktree: false
+  branch: "test/final-qa"

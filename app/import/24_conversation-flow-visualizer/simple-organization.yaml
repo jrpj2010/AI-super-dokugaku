@@ -1,0 +1,54 @@
+apiVersion: haconiwa.dev/v1
+kind: Organization
+metadata:
+  name: simple-flow-org
+spec:
+  companyName: "シンプル開発チーム"
+  description: "会話フロービジュアライザー開発（5人体制）"
+  
+  teams:
+    - name: "経営チーム"
+      description: "全体指揮"
+      repository:
+        url: "https://github.com/jrpj2010/vibe-coding.git"
+        branch: "main"
+        path: "app/import/24_conversation-flow-visualizer"
+      agents:
+        - name: "社長"
+          role: "CEO"
+          skills: ["全体戦略", "意思決定", "リソース配分"]
+          currentTask: "プロジェクト全体の進捗管理と意思決定"
+    
+    - name: "管理チーム"
+      description: "実務管理"
+      repository:
+        url: "https://github.com/jrpj2010/vibe-coding.git"
+        branch: "main"
+        path: "app/import/24_conversation-flow-visualizer"
+      agents:
+        - name: "開発マネージャー"
+          role: "開発管理職"
+          skills: ["タスク分配", "進捗管理", "品質管理"]
+          currentTask: "開発タスクの割り振りと進捗確認"
+    
+    - name: "開発チーム"
+      description: "実装作業"
+      repository:
+        url: "https://github.com/jrpj2010/vibe-coding.git"
+        branch: "main"
+        path: "app/import/24_conversation-flow-visualizer"
+      agents:
+        - name: "フロントエンド開発者"
+          role: "UI実装担当"
+          skills: ["React", "TypeScript", "CSS"]
+          currentTask: "UI機能の実装とスタイリング"
+        
+        - name: "AI機能開発者"
+          role: "AI/ML実装担当"
+          skills: ["Gemini API", "TF-IDF", "自然言語処理"]
+          currentTask: "TF-IDF分析と依存関係検出の実装"
+        
+        - name: "テスト担当者"
+          role: "品質保証"
+          skills: ["テスト", "デバッグ", "パフォーマンス測定"]
+          currentTask: "機能テストとパフォーマンス検証"

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会話フロービジュアライザー (静的プレビュー)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root-preview">
+        <div class="app-container">
+            <div class="top-bar">
+                <button 
+                    class="hamburger-menu-button" 
+                    aria-label="メニューを開く" 
+                    title="メニュー (未実装)"
+                >
+                    ☰
+                </button>
+                <span class="top-bar-title">トランスクリプト</span>
+                <div class="top-bar-spacer"></div>
+                <div class="zoom-controls">
+                    <button 
+                        aria-label="ズームアウト" 
+                        title="ズームアウト"
+                    >-</button>
+                    <button 
+                        aria-label="ズームイン" 
+                        title="ズームイン"
+                    >+</button>
+                </div>
+            </div>
+
+            <div 
+                class="graph-canvas-viewport" 
+                aria-live="polite"
+            >
+                <div 
+                    class="graph-canvas-content"
+                    style="transform: translateX(0px) translateY(0px) scale(1);"
+                >
+                    <!-- 初期状態のプレースホルダーテキスト -->
+                    <!-- 
+                    <div class="placeholder-text">
+                        マイクボタンをクリックして録音を開始してください。文字起こしされた内容はここに表示されます。
+                    </div>
+                    -->
+                    
+                    <!-- エラーメッセージの例 -->
+                    <!--
+                    <div class="error-message" role="alert">エラー: APIキーが設定されていません。</div>
+                    -->
+
+                    <!-- ローディングメッセージの例 -->
+                    <!--
+                    <div class="loading-message node">音声処理中...</div>
+                    -->
+
+                    <!-- ストリーミング中ノードの例 -->
+                    <!--
+                    <div class="node streaming-node" role="article">
+                        これはストリーミング中のテキストです...
+                        <span class="streaming-cursor"></span>
+                    </div>
+                    -->
+
+                    <!-- 通常ノードの例 (複数) -->
+                    <div class="node" role="article" tabindex="0">
+                        <div class="node-icon-container">
+                            <span class="node-icon" role="img" aria-label="アイデア・提案">💡</span>
+                        </div>
+                        <span class="node-text">これは最初のノードのサンプルテキストです。ある程度の長さがあるとこのように表示されます。</span>
+                        <button 
+                            class="play-button"
+                            aria-label="音声「node-sample-1」を再生"
+                            title="再生"
+                        >
+                            ▶️
+                        </button>
+                    </div>
+
+                    <div class="node selected" role="article" tabindex="0">
+                        <!-- アイコンなしの例 -->
+                        <span class="node-text">これは選択された状態のノードです。少し長めのテキストで、どのように折り返されるかを確認できます。キーワードとして「重要」な情報が含まれているかもしれません。</span>
+                        <button 
+                            class="play-button playing"
+                            aria-label="音声「node-sample-2」を停止"
+                            title="停止"
+                        >
+                            ⏹️
+                        </button>
+                    </div>
+                    
+                    <div class="node" role="article" tabindex="0">
+                        <div class="node-icon-container">
+                             <span class="node-icon" role="img" aria-label="重要ポイント">❗</span>
+                        </div>
+                        <span class="node-text">3つ目のノード。これは重要ポイントです。</span>
+                        <button 
+                            class="play-button"
+                            aria-label="音声「node-sample-3」を再生"
+                            title="再生"
+                        >
+                            ▶️
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="waveform-bar">
+                <button
+                    id="mic_toggle_preview"
+                    class="mic-button"
+                    aria-label="録音開始"
+                    aria-pressed="false"
+                >
+                    録音
+                </button>
+                <!-- <button
+                    id="mic_toggle_preview_active"
+                    class="mic-button active"
+                    aria-label="録音停止"
+                    aria-pressed="true"
+                >
+                    停止
+                </button> -->
+                <canvas class="waveform-canvas" width="300" height="70" style="background-color: #121417; border-radius: 4px;"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- ツールチップのHTML構造 (通常はJavaScriptで動的に表示) -->
+    <!-- 
+    <div class="tooltip" style="visibility: hidden; position: absolute; top: 100px; left: 100px; opacity: 0; transform: scale(0.95);">
+        ツールチップのサンプルコンテンツです。
+        <div class="tooltip-pointer"></div>
+    </div>
+    -->
+</body>
+</html>

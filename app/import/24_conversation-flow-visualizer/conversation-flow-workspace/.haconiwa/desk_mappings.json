@@ -1,0 +1,290 @@
+[
+  {
+    "desk_id": "desk-room-frontend-00",
+    "agent_id": "exec-01",
+    "org_id": "org-01",
+    "role": "pm",
+    "room_id": "room-frontend",
+    "directory_name": "exec-01",
+    "title": "Executive Team - Executive 1 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-01",
+    "agent_id": "exec-02",
+    "org_id": "org-01",
+    "role": "wk-a",
+    "room_id": "room-frontend",
+    "directory_name": "exec-02",
+    "title": "Executive Team - Executive 2 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-02",
+    "agent_id": "exec-03",
+    "org_id": "org-01",
+    "role": "wk-b",
+    "room_id": "room-frontend",
+    "directory_name": "exec-03",
+    "title": "Executive Team - Executive 3 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-03",
+    "agent_id": "exec-04",
+    "org_id": "org-01",
+    "role": "wk-c",
+    "room_id": "room-frontend",
+    "directory_name": "exec-04",
+    "title": "Executive Team - Executive 4 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-04",
+    "agent_id": "exec-05",
+    "org_id": "org-01",
+    "role": "wk-d",
+    "room_id": "room-frontend",
+    "directory_name": "exec-05",
+    "title": "Executive Team - Executive 5 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-05",
+    "agent_id": "exec-06",
+    "org_id": "org-01",
+    "role": "wk-e",
+    "room_id": "room-frontend",
+    "directory_name": "exec-06",
+    "title": "Executive Team - Executive 6 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-06",
+    "agent_id": "exec-07",
+    "org_id": "org-01",
+    "role": "wk-f",
+    "room_id": "room-frontend",
+    "directory_name": "exec-07",
+    "title": "Executive Team - Executive 7 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-07",
+    "agent_id": "exec-08",
+    "org_id": "org-01",
+    "role": "wk-g",
+    "room_id": "room-frontend",
+    "directory_name": "exec-08",
+    "title": "Executive Team - Executive 8 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-08",
+    "agent_id": "exec-09",
+    "org_id": "org-01",
+    "role": "wk-h",
+    "room_id": "room-frontend",
+    "directory_name": "exec-09",
+    "title": "Executive Team - Executive 9 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-09",
+    "agent_id": "exec-10",
+    "org_id": "org-01",
+    "role": "wk-i",
+    "room_id": "room-frontend",
+    "directory_name": "exec-10",
+    "title": "Executive Team - Executive 10 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-10",
+    "agent_id": "exec-11",
+    "org_id": "org-01",
+    "role": "wk-j",
+    "room_id": "room-frontend",
+    "directory_name": "exec-11",
+    "title": "Executive Team - Executive 11 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-11",
+    "agent_id": "exec-12",
+    "org_id": "org-01",
+    "role": "wk-k",
+    "room_id": "room-frontend",
+    "directory_name": "exec-12",
+    "title": "Executive Team - Executive 12 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-12",
+    "agent_id": "exec-13",
+    "org_id": "org-01",
+    "role": "wk-l",
+    "room_id": "room-frontend",
+    "directory_name": "exec-13",
+    "title": "Executive Team - Executive 13 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-13",
+    "agent_id": "exec-14",
+    "org_id": "org-01",
+    "role": "wk-m",
+    "room_id": "room-frontend",
+    "directory_name": "exec-14",
+    "title": "Executive Team - Executive 14 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-14",
+    "agent_id": "exec-15",
+    "org_id": "org-01",
+    "role": "wk-n",
+    "room_id": "room-frontend",
+    "directory_name": "exec-15",
+    "title": "Executive Team - Executive 15 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-frontend-15",
+    "agent_id": "exec-16",
+    "org_id": "org-01",
+    "role": "wk-o",
+    "room_id": "room-frontend",
+    "directory_name": "exec-16",
+    "title": "Executive Team - Executive 16 - Frontend Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-00",
+    "agent_id": "standby-dev-01",
+    "org_id": "org-02",
+    "role": "pm",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-01",
+    "title": "Standby Team - Standby Developer 01 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-01",
+    "agent_id": "standby-dev-02",
+    "org_id": "org-02",
+    "role": "wk-a",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-02",
+    "title": "Standby Team - Standby Developer 02 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-02",
+    "agent_id": "standby-dev-03",
+    "org_id": "org-02",
+    "role": "wk-b",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-03",
+    "title": "Standby Team - Standby Developer 03 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-03",
+    "agent_id": "standby-dev-04",
+    "org_id": "org-02",
+    "role": "wk-c",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-04",
+    "title": "Standby Team - Standby Developer 04 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-04",
+    "agent_id": "standby-dev-05",
+    "org_id": "org-02",
+    "role": "wk-d",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-05",
+    "title": "Standby Team - Standby Developer 05 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-05",
+    "agent_id": "standby-dev-06",
+    "org_id": "org-02",
+    "role": "wk-e",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-06",
+    "title": "Standby Team - Standby Developer 06 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-06",
+    "agent_id": "standby-dev-07",
+    "org_id": "org-02",
+    "role": "wk-f",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-07",
+    "title": "Standby Team - Standby Developer 07 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-07",
+    "agent_id": "standby-dev-08",
+    "org_id": "org-02",
+    "role": "wk-g",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-08",
+    "title": "Standby Team - Standby Developer 08 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-08",
+    "agent_id": "standby-dev-09",
+    "org_id": "org-02",
+    "role": "wk-h",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-09",
+    "title": "Standby Team - Standby Developer 09 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-09",
+    "agent_id": "standby-dev-10",
+    "org_id": "org-02",
+    "role": "wk-i",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-10",
+    "title": "Standby Team - Standby Developer 10 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-10",
+    "agent_id": "standby-dev-11",
+    "org_id": "org-02",
+    "role": "wk-j",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-11",
+    "title": "Standby Team - Standby Developer 11 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-11",
+    "agent_id": "standby-dev-12",
+    "org_id": "org-02",
+    "role": "wk-k",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-12",
+    "title": "Standby Team - Standby Developer 12 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-12",
+    "agent_id": "standby-dev-13",
+    "org_id": "org-02",
+    "role": "wk-l",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-13",
+    "title": "Standby Team - Standby Developer 13 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-13",
+    "agent_id": "standby-dev-14",
+    "org_id": "org-02",
+    "role": "wk-m",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-14",
+    "title": "Standby Team - Standby Developer 14 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-14",
+    "agent_id": "standby-dev-15",
+    "org_id": "org-02",
+    "role": "wk-n",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-15",
+    "title": "Standby Team - Standby Developer 15 - AI/ML Room"
+  },
+  {
+    "desk_id": "desk-room-ai-ml-15",
+    "agent_id": "standby-dev-16",
+    "org_id": "org-02",
+    "role": "wk-o",
+    "room_id": "room-ai-ml",
+    "directory_name": "stan-16",
+    "title": "Standby Team - Standby Developer 16 - AI/ML Room"
+  }
+]

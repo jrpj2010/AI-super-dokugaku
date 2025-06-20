@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パフォーマンステスト - 会話フロービジュアライザー</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #121417;
+            color: #e9ecef;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #3a8cff;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background-color: #1c1f23;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section h2 {
+            margin-top: 0;
+            color: #e9ecef;
+        }
+        
+        button {
+            background-color: #3a8cff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        button:hover {
+            background-color: #2b7dff;
+        }
+        
+        button:disabled {
+            background-color: #404040;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            background-color: #2a2d31;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            color: #a6a9ad;
+        }
+        
+        .metric-value {
+            color: #3a8cff;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #ffc107;
+        }
+        
+        .error {
+            color: #dc3545;
+        }
+        
+        .success {
+            color: #28a745;
+        }
+        
+        #status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #2a2d31;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>パフォーマンステスト - 会話フロービジュアライザー</h1>
+        
+        <div class="test-section">
+            <h2>TF-IDF 分析パフォーマンステスト</h2>
+            <p>大量のノードでTF-IDF分析のパフォーマンスを測定します。</p>
+            
+            <button onclick="testTFIDFPerformance(10)">10ノード</button>
+            <button onclick="testTFIDFPerformance(50)">50ノード</button>
+            <button onclick="testTFIDFPerformance(100)">100ノード</button>
+            <button onclick="testTFIDFPerformance(300)">300ノード</button>
+            <button onclick="testTFIDFPerformance(600)">600ノード</button>
+            
+            <div id="tfidf-results" class="results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>依存関係エッジ検出テスト</h2>
+            <p>ノード間の依存関係検出のパフォーマンスを測定します。</p>
+            
+            <button onclick="testDependencyDetection(10)">10ノード</button>
+            <button onclick="testDependencyDetection(50)">50ノード</button>
+            <button onclick="testDependencyDetection(100)">100ノード</button>
+            <button onclick="testDependencyDetection(300)">300ノード</button>
+            
+            <div id="dependency-results" class="results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>レンダリングパフォーマンステスト</h2>
+            <p>大量のノードとエッジのレンダリング性能を測定します。</p>
+            
+            <button onclick="testRenderingPerformance(100)">100ノード</button>
+            <button onclick="testRenderingPerformance(300)">300ノード</button>
+            <button onclick="testRenderingPerformance(600)">600ノード</button>
+            
+            <div id="rendering-results" class="results"></div>
+        </div>
+        
+        <div id="status"></div>
+    </div>
+    
+    <script type="module">
+        import { TFIDFAnalyzer } from '../lib/tfidf.js';
+        import { DependencyAnalyzer } from '../lib/dependencyAnalyzer.js';
+        
+        // サンプルテキストのテンプレート
+        const sampleTexts = [
+            "新しいプロジェクトの提案について説明します",
+            "開発チームのリソース配分を検討する必要があります",
+            "マーケティング戦略の見直しを行いましょう",
+            "予算の確保と承認プロセスについて",
+            "技術的な課題と解決策の提案",
+            "プロジェクトのスケジュール調整が必要です",
+            "品質管理プロセスの改善案",
+            "顧客からのフィードバックを反映させる",
+            "セキュリティ対策の強化について",
+            "パフォーマンス最適化の実装方針"
+        ];
+        
+        // ランダムなノードを生成
+        function generateNodes(count) {
+            const nodes = [];
+            for (let i = 0; i < count; i++) {
+                const baseText = sampleTexts[i % sampleTexts.length];
+                const variation = Math.floor(i / sampleTexts.length);
+                nodes.push({
+                    id: `node-${i}`,
+                    text: `${baseText} (バリエーション${variation + 1})`
+                });
+            }
+            return nodes;
+        }
+        
+        // パフォーマンス測定ユーティリティ
+        function measurePerformance(fn, name) {
+            const start = performance.now();
+            const result = fn();
+            const end = performance.now();
+            return {
+                name,
+                duration: end - start,
+                result
+            };
+        }
+        
+        // TF-IDFパフォーマンステスト
+        window.testTFIDFPerformance = function(nodeCount) {
+            const resultsDiv = document.getElementById('tfidf-results');
+            const statusDiv = document.getElementById('status');
+            
+            statusDiv.innerHTML = '<span class="warning">テスト実行中...</span>';
+            resultsDiv.innerHTML = '';
+            
+            setTimeout(() => {
+                try {
+                    const nodes = generateNodes(nodeCount);
+                    
+                    // TF-IDF分析器の初期化
+                    const initPerf = measurePerformance(() => {
+                        const analyzer = new TFIDFAnalyzer();
+                        nodes.forEach(node => {
+                            analyzer.addDocument(node.id, node.text);
+                        });
+                        return analyzer;
+                    }, 'TF-IDF初期化');
+                    
+                    // キーワード抽出
+                    const extractPerf = measurePerformance(() => {
+                        return initPerf.result.extractKeywords(5);
+                    }, 'キーワード抽出');
+                    
+                    // 結果表示
+                    resultsDiv.innerHTML = `
+                        <h3>${nodeCount}ノードのテスト結果</h3>
+                        <div class="metric">
+                            <span class="metric-label">TF-IDF初期化時間:</span>
+                            <span class="metric-value">${initPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">キーワード抽出時間:</span>
+                            <span class="metric-value">${extractPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">合計処理時間:</span>
+                            <span class="metric-value ${(initPerf.duration + extractPerf.duration) > 1000 ? 'warning' : ''}">
+                                ${(initPerf.duration + extractPerf.duration).toFixed(2)}ms
+                            </span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">抽出されたキーワード数:</span>
+                            <span class="metric-value">${extractPerf.result.size}セット</span>
+                        </div>
+                    `;
+                    
+                    statusDiv.innerHTML = '<span class="success">テスト完了</span>';
+                } catch (error) {
+                    resultsDiv.innerHTML = `<span class="error">エラー: ${error.message}</span>`;
+                    statusDiv.innerHTML = '<span class="error">テスト失敗</span>';
+                }
+            }, 100);
+        };
+        
+        // 依存関係検出テスト
+        window.testDependencyDetection = function(nodeCount) {
+            const resultsDiv = document.getElementById('dependency-results');
+            const statusDiv = document.getElementById('status');
+            
+            statusDiv.innerHTML = '<span class="warning">テスト実行中...</span>';
+            resultsDiv.innerHTML = '';
+            
+            setTimeout(() => {
+                try {
+                    const nodes = generateNodes(nodeCount);
+                    
+                    // 依存関係分析
+                    const analysisPerf = measurePerformance(() => {
+                        const analyzer = new DependencyAnalyzer(nodes);
+                        return analyzer.detectDependencies(nodes);
+                    }, '依存関係分析');
+                    
+                    // エッジ数の計算
+                    const maxPossibleEdges = (nodeCount * (nodeCount - 1)) / 2;
+                    const detectedEdges = analysisPerf.result.length;
+                    const edgeRatio = (detectedEdges / maxPossibleEdges * 100).toFixed(1);
+                    
+                    // 結果表示
+                    resultsDiv.innerHTML = `
+                        <h3>${nodeCount}ノードのテスト結果</h3>
+                        <div class="metric">
+                            <span class="metric-label">分析時間:</span>
+                            <span class="metric-value ${analysisPerf.duration > 1000 ? 'warning' : ''}">${analysisPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">検出されたエッジ数:</span>
+                            <span class="metric-value">${detectedEdges}個</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">可能な最大エッジ数:</span>
+                            <span class="metric-value">${maxPossibleEdges}個</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">エッジ密度:</span>
+                            <span class="metric-value">${edgeRatio}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">ノードあたりの処理時間:</span>
+                            <span class="metric-value">${(analysisPerf.duration / nodeCount).toFixed(3)}ms</span>
+                        </div>
+                    `;
+                    
+                    statusDiv.innerHTML = '<span class="success">テスト完了</span>';
+                } catch (error) {
+                    resultsDiv.innerHTML = `<span class="error">エラー: ${error.message}</span>`;
+                    statusDiv.innerHTML = '<span class="error">テスト失敗</span>';
+                }
+            }, 100);
+        };
+        
+        // レンダリングパフォーマンステスト
+        window.testRenderingPerformance = function(nodeCount) {
+            const resultsDiv = document.getElementById('rendering-results');
+            const statusDiv = document.getElementById('status');
+            
+            statusDiv.innerHTML = '<span class="warning">テスト実行中...</span>';
+            resultsDiv.innerHTML = '';
+            
+            setTimeout(() => {
+                try {
+                    // テスト用のコンテナを作成
+                    const testContainer = document.createElement('div');
+                    testContainer.style.position = 'absolute';
+                    testContainer.style.left = '-9999px';
+                    testContainer.style.width = '3000px';
+                    testContainer.style.height = '2000px';
+                    document.body.appendChild(testContainer);
+                    
+                    // ノード作成とレンダリング
+                    const nodeRenderPerf = measurePerformance(() => {
+                        for (let i = 0; i < nodeCount; i++) {
+                            const node = document.createElement('div');
+                            node.className = 'node';
+                            node.style.position = 'absolute';
+                            node.style.left = `${(i % 20) * 150}px`;
+                            node.style.top = `${Math.floor(i / 20) * 80}px`;
+                            node.style.width = '120px';
+                            node.style.height = '60px';
+                            node.style.backgroundColor = '#2a2d31';
+                            node.style.padding = '8px';
+                            node.textContent = `ノード ${i + 1}`;
+                            testContainer.appendChild(node);
+                        }
+                    }, 'ノードレンダリング');
+                    
+                    // SVGエッジの作成
+                    const edgeCount = Math.min(nodeCount * 2, 500); // 制限付き
+                    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    svg.style.position = 'absolute';
+                    svg.style.width = '3000px';
+                    svg.style.height = '2000px';
+                    
+                    const edgeRenderPerf = measurePerformance(() => {
+                        for (let i = 0; i < edgeCount; i++) {
+                            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                            const x1 = (i % 20) * 150 + 60;
+                            const y1 = Math.floor(i / 20) * 80 + 30;
+                            const x2 = ((i + 5) % 20) * 150 + 60;
+                            const y2 = Math.floor((i + 5) / 20) * 80 + 30;
+                            
+                            line.setAttribute('x1', x1);
+                            line.setAttribute('y1', y1);
+                            line.setAttribute('x2', x2);
+                            line.setAttribute('y2', y2);
+                            line.setAttribute('stroke', '#5c6b7a');
+                            line.setAttribute('stroke-width', '2');
+                            svg.appendChild(line);
+                        }
+                    }, 'エッジレンダリング');
+                    
+                    testContainer.appendChild(svg);
+                    
+                    // リフローの測定
+                    const reflowPerf = measurePerformance(() => {
+                        // 強制的にリフローを発生させる
+                        const height = testContainer.offsetHeight;
+                    }, 'リフロー計算');
+                    
+                    // クリーンアップ
+                    document.body.removeChild(testContainer);
+                    
+                    // 結果表示
+                    resultsDiv.innerHTML = `
+                        <h3>${nodeCount}ノードのレンダリングテスト結果</h3>
+                        <div class="metric">
+                            <span class="metric-label">ノードレンダリング時間:</span>
+                            <span class="metric-value ${nodeRenderPerf.duration > 100 ? 'warning' : ''}">${nodeRenderPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">エッジレンダリング時間 (${edgeCount}本):</span>
+                            <span class="metric-value ${edgeRenderPerf.duration > 100 ? 'warning' : ''}">${edgeRenderPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">リフロー計算時間:</span>
+                            <span class="metric-value">${reflowPerf.duration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">合計時間:</span>
+                            <span class="metric-value ${(nodeRenderPerf.duration + edgeRenderPerf.duration + reflowPerf.duration) > 300 ? 'warning' : ''}>
+                                ${(nodeRenderPerf.duration + edgeRenderPerf.duration + reflowPerf.duration).toFixed(2)}ms
+                            </span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">推奨事項:</span>
+                            <span class="metric-value">
+                                ${nodeCount > 300 ? 'Web Workerの使用を推奨' : 'パフォーマンス良好'}
+                            </span>
+                        </div>
+                    `;
+                    
+                    statusDiv.innerHTML = '<span class="success">テスト完了</span>';
+                } catch (error) {
+                    resultsDiv.innerHTML = `<span class="error">エラー: ${error.message}</span>`;
+                    statusDiv.innerHTML = '<span class="error">テスト失敗</span>';
+                }
+            }, 100);
+        };
+    </script>
+</body>
+</html>
