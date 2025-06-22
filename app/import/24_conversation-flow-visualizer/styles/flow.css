@@ -1,0 +1,360 @@
+/* v0.1.0 - フロー表示用スタイル */
+
+/* メインコンテナ */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+/* フローコンテナ */
+.flow-container {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+/* フローキャンバス */
+.flow-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+/* エッジ用SVG */
+.edges-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* フローノード */
+.flow-node {
+    position: absolute;
+    background: #ffffff;
+    border: 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flow-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.flow-node.selected {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.flow-node.expanded {
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.flow-node.dragging {
+    opacity: 0.8;
+    cursor: grabbing;
+}
+
+.node-header {
+    padding: 8px 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.node-phase {
+    margin: 0;
+    font-size: 14px;
+}
+
+.node-content {
+    padding: 12px;
+}
+
+.node-summary {
+    font-size: 12px;
+    color: #374151;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.node-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.keyword-tag {
+    font-size: 11px;
+    padding: 2px 6px;
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    border-radius: 4px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.node-speaker {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.keyword-more {
+    font-size: 11px;
+    padding: 2px 6px;
+    background: rgba(156, 163, 175, 0.2);
+    color: #9ca3af;
+    border-radius: 4px;
+}
+
+/* 展開時の詳細コンテンツ */
+.node-expanded-content {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.node-details h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.node-details h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 8px 0;
+}
+
+.node-full-content {
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+    white-space: pre-wrap;
+}
+
+.node-all-keywords {
+    margin-top: 12px;
+}
+
+.node-all-keywords .node-keywords {
+    margin-top: 4px;
+}
+
+/* コントロールパネル */
+.flow-control-panel {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 280px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.control-section {
+    margin-bottom: 20px;
+}
+
+.control-section:last-child {
+    margin-bottom: 0;
+}
+
+.control-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 12px 0;
+}
+
+/* ズームコントロール */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.zoom-button {
+    width: 32px;
+    height: 32px;
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.zoom-button:hover {
+    background: #e5e7eb;
+    border-color: #d1d5db;
+}
+
+.zoom-level {
+    font-size: 14px;
+    color: #374151;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* チェックボックス */
+.control-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+}
+
+.control-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* テーマリスト */
+.theme-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.theme-item {
+    padding: 8px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.theme-item:last-child {
+    margin-bottom: 0;
+}
+
+.theme-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 4px 0;
+}
+
+.theme-description {
+    font-size: 11px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* リセットボタン */
+.reset-button {
+    width: 100%;
+    padding: 8px 16px;
+    background: #ef4444;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.reset-button:hover {
+    background: #dc2626;
+}
+
+/* ヘッダーのサブタイトル */
+.header-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-left: 16px;
+}
+
+/* 階層コントロール */
+.hierarchy-controls {
+    margin-top: 12px;
+}
+
+.hierarchy-slider {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.hierarchy-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #6366f1;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hierarchy-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #6366f1;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hierarchy-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.hierarchy-labels span {
+    transition: all 0.2s ease;
+}
+
+.hierarchy-labels span.active {
+    color: #6366f1;
+    font-weight: 600;
+}
+
+/* ノードヘッダーのドラッグカーソル */
+.node-header {
+    cursor: grab;
+}
+
+.node-header:active {
+    cursor: grabbing;
+}

@@ -1,5 +1,4 @@
-// TF-IDF Analyzer for Japanese text
-// Based on DEVELOPMENT_PLAN.md Section 3.1
+// 軽量TF-IDF分析器（パフォーマンス重視）
 
 export interface TFIDFResult {
   term: string;
@@ -7,134 +6,91 @@ export interface TFIDFResult {
   nodeId: string;
 }
 
-export interface KeywordInfo {
-  keyword: string;
-  score: number;
-  nodeIds: string[];
-}
-
 export class TFIDFAnalyzer {
   private documents: Map<string, string[]> = new Map();
   private documentFrequency: Map<string, number> = new Map();
   private totalDocuments: number = 0;
 
-  // 日本語テキストの単語分割（簡易版）
+  constructor(nodes: Array<{ id: string; text: string }>) {
+    // ドキュメントを登録
+    nodes.forEach(node => {
+      const terms = this.tokenize(node.text);
+      this.documents.set(node.id, terms);
+    });
+    this.totalDocuments = nodes.length;
+    
+    // ドキュメント頻度を計算
+    this.calculateDocumentFrequency();
+  }
+
   private tokenize(text: string): string[] {
-    // 基本的な処理: 句読点で分割、助詞を除外
-    const stopWords = ['の', 'に', 'は', 'を', 'が', 'で', 'と', 'から', 'まで', 'より', 'へ', 'や', 'も', 'だ', 'です', 'ます'];
+    // 話者マーカーを削除
+    const cleanText = text.replace(/話者\d+[：:]\s*/, '');
     
-    // 句読点とスペースで分割
-    const tokens = text
-      .replace(/[。、！？\s]+/g, ' ')
-      .split(' ')
-      .filter(token => token.length > 1)
-      .filter(token => !stopWords.includes(token))
-      // カタカナ、ひらがな、漢字、英数字を含む単語のみ抽出
-      .filter(token => /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\w]+/.test(token));
+    // 日本語の重要語を抽出（2文字以上）
+    const words = cleanText.match(/[ぁ-んァ-ヶー一-龯０-９a-zA-Z]{2,}/g) || [];
     
-    return tokens;
+    // ストップワードを除外
+    const stopWords = new Set([
+      'です', 'ます', 'ました', 'でした', 'ですね', 'ですが',
+      'から', 'けど', 'けれど', 'でも', 'しかし', 'ので', 'のに',
+      'よう', 'こと', 'もの', 'それ', 'これ', 'あれ', 'その', 'この',
+      'という', 'といった', 'として', 'とても', 'すごく',
+      'はい', 'ええ', 'うん', 'いいえ', 'ちょっと'
+    ]);
+    
+    return words.filter(word => !stopWords.has(word));
   }
 
-  // ドキュメント（ノード）を追加
-  addDocument(nodeId: string, text: string): void {
-    const tokens = this.tokenize(text.toLowerCase());
-    this.documents.set(nodeId, tokens);
-    this.totalDocuments++;
-    
-    // ドキュメント頻度を更新
-    const uniqueTokens = new Set(tokens);
-    uniqueTokens.forEach(token => {
-      this.documentFrequency.set(
-        token, 
-        (this.documentFrequency.get(token) || 0) + 1
-      );
-    });
-  }
-
-  // TF（Term Frequency）を計算
-  private calculateTF(term: string, document: string[]): number {
-    const termCount = document.filter(token => token === term).length;
-    return termCount / document.length;
-  }
-
-  // IDF（Inverse Document Frequency）を計算
-  private calculateIDF(term: string): number {
-    const df = this.documentFrequency.get(term) || 0;
-    if (df === 0) return 0;
-    return Math.log(this.totalDocuments / df);
-  }
-
-  // TF-IDFスコアを計算
-  calculateTFIDF(nodeId: string): TFIDFResult[] {
-    const document = this.documents.get(nodeId);
-    if (!document) return [];
-
-    const tfidfScores: TFIDFResult[] = [];
-    const uniqueTerms = new Set(document);
-
-    uniqueTerms.forEach(term => {
-      const tf = this.calculateTF(term, document);
-      const idf = this.calculateIDF(term);
-      const tfidf = tf * idf;
-      
-      if (tfidf > 0) {
-        tfidfScores.push({ term, tfidf, nodeId });
-      }
-    });
-
-    // スコアの高い順にソート
-    return tfidfScores.sort((a, b) => b.tfidf - a.tfidf);
-  }
-
-  // 全ノードのキーワードを抽出（上位N個）
-  extractKeywords(topN: number = 5): Map<string, TFIDFResult[]> {
-    const keywordsByNode = new Map<string, TFIDFResult[]>();
-    
-    this.documents.forEach((_, nodeId) => {
-      const keywords = this.calculateTFIDF(nodeId).slice(0, topN);
-      keywordsByNode.set(nodeId, keywords);
-    });
-    
-    return keywordsByNode;
-  }
-
-  // 全文書から重要キーワードを集計
-  getGlobalKeywords(topN: number = 10): KeywordInfo[] {
-    const keywordMap = new Map<string, { score: number; nodeIds: Set<string> }>();
-    
-    this.documents.forEach((_, nodeId) => {
-      const keywords = this.calculateTFIDF(nodeId);
-      keywords.forEach(({ term, tfidf }) => {
-        if (!keywordMap.has(term)) {
-          keywordMap.set(term, { score: 0, nodeIds: new Set() });
-        }
-        const info = keywordMap.get(term)!;
-        info.score += tfidf;
-        info.nodeIds.add(nodeId);
+  private calculateDocumentFrequency(): void {
+    this.documents.forEach(terms => {
+      const uniqueTerms = new Set(terms);
+      uniqueTerms.forEach(term => {
+        this.documentFrequency.set(term, (this.documentFrequency.get(term) || 0) + 1);
       });
     });
-    
-    // スコア順にソートして返す
-    return Array.from(keywordMap.entries())
-      .map(([keyword, { score, nodeIds }]) => ({
-        keyword,
-        score,
-        nodeIds: Array.from(nodeIds)
-      }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, topN);
   }
 
-  // デバッグ用: 分析結果を表示
-  debugPrint(): void {
-    console.log('=== TF-IDF Analysis Debug ===');
-    console.log(`Total documents: ${this.totalDocuments}`);
-    console.log(`Unique terms: ${this.documentFrequency.size}`);
+  // 各ノードのキーワードを抽出
+  extractKeywords(topN: number = 5): Map<string, TFIDFResult[]> {
+    const result = new Map<string, TFIDFResult[]>();
     
-    const globalKeywords = this.getGlobalKeywords(5);
-    console.log('\nTop 5 global keywords:');
-    globalKeywords.forEach(({ keyword, score, nodeIds }) => {
-      console.log(`  ${keyword}: ${score.toFixed(3)} (in ${nodeIds.length} nodes)`);
+    this.documents.forEach((terms, nodeId) => {
+      const tfidfScores: TFIDFResult[] = [];
+      const termFrequency = new Map<string, number>();
+      
+      // 語頻度を計算
+      terms.forEach(term => {
+        termFrequency.set(term, (termFrequency.get(term) || 0) + 1);
+      });
+      
+      // TF-IDFスコアを計算
+      termFrequency.forEach((tf, term) => {
+        const df = this.documentFrequency.get(term) || 0;
+        const idf = Math.log(this.totalDocuments / (1 + df));
+        const tfidf = (tf / terms.length) * idf;
+        
+        tfidfScores.push({ term, tfidf, nodeId });
+      });
+      
+      // スコアでソートしてトップNを取得
+      tfidfScores.sort((a, b) => b.tfidf - a.tfidf);
+      result.set(nodeId, tfidfScores.slice(0, topN));
     });
+    
+    return result;
+  }
+
+  // 2つのノード間の類似度を計算
+  calculateSimilarity(nodeId1: string, nodeId2: string): number {
+    const terms1 = new Set(this.documents.get(nodeId1) || []);
+    const terms2 = new Set(this.documents.get(nodeId2) || []);
+    
+    if (terms1.size === 0 || terms2.size === 0) return 0;
+    
+    const intersection = new Set([...terms1].filter(t => terms2.has(t)));
+    const union = new Set([...terms1, ...terms2]);
+    
+    return intersection.size / union.size;
   }
 }
