@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- メタデータ -->
+  <title>世紀末覇者への道から学ぶ「目標設定」</title>
+  <desc>ラオウの野望から学ぶ壮大なビジョンの立て方</desc>
+  
+  <!-- 定義 -->
+  <defs>
+    <!-- 背景グラデーション -->
+    <radialGradient id="visionGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFE5E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="url(#visionGradient)"/>
+  
+  <!-- 日立ロゴ（右上） -->
+  <g transform="translate(1100, 30)">
+    <rect x="0" y="0" width="100" height="40" fill="white" stroke="#FA000F" stroke-width="2" rx="3"/>
+    <text x="50" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FA000F">HITACHI</text>
+  </g>
+  
+  <!-- セクション番号 -->
+  <text x="60" y="80" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="90" font-weight="300" fill="#CCCCCC">07</text>
+  
+  <!-- タイトル -->
+  <text x="60" y="140" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="36" font-weight="700" fill="#333333">
+    世紀末覇者への道から学ぶ「目標設定」
+  </text>
+  
+  <!-- タイトル下線 -->
+  <line x1="60" y1="155" x2="700" y2="155" stroke="#FA000F" stroke-width="2"/>
+  
+  <!-- ピラミッド型の目標階層 -->
+  <g transform="translate(640, 450)">
+    <!-- ピラミッドの各層 -->
+    <!-- 頂点：究極の目標 -->
+    <g transform="translate(0, -200)">
+      <polygon points="0,-40 -60,0 60,0" fill="#FA000F" opacity="0.9"/>
+      <text x="0" y="-10" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="white">
+        世紀末覇者
+      </text>
+    </g>
+    
+    <!-- 第2層：長期目標 -->
+    <g transform="translate(0, -140)">
+      <polygon points="-60,0 -120,40 120,40 60,0" fill="#FA000F" opacity="0.7"/>
+      <text x="0" y="25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="white">
+        全土統一
+      </text>
+    </g>
+    
+    <!-- 第3層：中期目標 -->
+    <g transform="translate(0, -60)">
+      <polygon points="-120,0 -180,40 180,40 120,0" fill="#FA000F" opacity="0.5"/>
+      <text x="0" y="25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="white">
+        拳王軍の拡大
+      </text>
+    </g>
+    
+    <!-- 基底：短期目標 -->
+    <g transform="translate(0, 20)">
+      <polygon points="-180,0 -240,40 240,40 180,0" fill="#FA000F" opacity="0.3"/>
+      <text x="0" y="25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#333333">
+        日々の鍛錬・部下の統率
+      </text>
+    </g>
+  </g>
+  
+  <!-- 左側：ラオウの目標設定法 -->
+  <g transform="translate(60, 240)">
+    <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="22" font-weight="700" fill="#FA000F">
+      ラオウの目標設定法
+    </text>
+    
+    <g transform="translate(20, 40)">
+      <g transform="translate(0, 0)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          1. 壮大なビジョン
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          「天に帰る」という究極の目標
+        </text>
+      </g>
+      
+      <g transform="translate(0, 60)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          2. 段階的計画
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          一歩ずつ覇道を進む
+        </text>
+      </g>
+      
+      <g transform="translate(0, 120)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          3. 揺るぎない信念
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          「我が生涯に一片の悔いなし」
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 右側：現代的目標設定 -->
+  <g transform="translate(900, 240)">
+    <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="22" font-weight="700" fill="#FA000F">
+      ビジネス目標設定術
+    </text>
+    
+    <g transform="translate(20, 40)">
+      <g transform="translate(0, 0)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          1. BHAG設定
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          大胆で野心的な長期目標
+        </text>
+      </g>
+      
+      <g transform="translate(0, 60)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          2. OKR展開
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          目標と主要成果の連鎖
+        </text>
+      </g>
+      
+      <g transform="translate(0, 120)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#333333">
+          3. ミッション浸透
+        </text>
+        <text x="15" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+          組織全体への価値観共有
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 下部の引用 -->
+  <g transform="translate(60, 620)">
+    <rect x="0" y="0" width="1160" height="60" fill="#333333" rx="5"/>
+    <text x="580" y="35" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="22" font-style="italic" text-anchor="middle" fill="white">
+      「この拳王は誰の指図も受けぬ！天すらも！」- 自らの運命を切り開く決意
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text x="60" y="690" font-family="Arial, sans-serif" font-size="12" fill="#888888">©Hitachi Systems, Ltd. 2025. All rights reserved</text>
+  <text x="1220" y="690" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="#888888">9</text>
+</svg>

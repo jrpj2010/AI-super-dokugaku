@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- メタデータ -->
+  <title>まとめ：北斗の拳が示す人生の羅針盤</title>
+  <desc>北斗の拳から学んだ10の教訓の総括</desc>
+  
+  <!-- 定義 -->
+  <defs>
+    <!-- 背景グラデーション -->
+    <linearGradient id="summaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFE0E0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 星のフィルター -->
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="url(#summaryGradient)"/>
+  
+  <!-- 日立ロゴ（右上） -->
+  <g transform="translate(1100, 30)">
+    <rect x="0" y="0" width="100" height="40" fill="white" stroke="#FA000F" stroke-width="2" rx="3"/>
+    <text x="50" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FA000F">HITACHI</text>
+  </g>
+  
+  <!-- タイトル -->
+  <text x="60" y="100" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="42" font-weight="700" fill="#FA000F">
+    まとめ：北斗の拳が示す人生の羅針盤
+  </text>
+  
+  <!-- タイトル下線 -->
+  <line x1="60" y1="115" x2="800" y2="115" stroke="#FA000F" stroke-width="3"/>
+  
+  <!-- 中央の北斗七星 -->
+  <g transform="translate(640, 360)" filter="url(#starGlow)">
+    <!-- 北斗七星の配置 -->
+    <g>
+      <!-- 星座の線 -->
+      <path d="M-150,-50 L-100,-70 L-50,-60 L0,-80 L50,-90 L100,-70 L150,-100" 
+            stroke="#FA000F" stroke-width="2" fill="none" opacity="0.5"/>
+      
+      <!-- 各星と教訓 -->
+      <!-- 1つ目の星 -->
+      <g transform="translate(-150, -50)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          危機管理
+        </text>
+      </g>
+      
+      <!-- 2つ目の星 -->
+      <g transform="translate(-100, -70)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          決断力
+        </text>
+      </g>
+      
+      <!-- 3つ目の星 -->
+      <g transform="translate(-50, -60)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          継続力
+        </text>
+      </g>
+      
+      <!-- 4つ目の星 -->
+      <g transform="translate(0, -80)">
+        <circle cx="0" cy="0" r="10" fill="#FA000F"/>
+        <text x="0" y="-25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#333333">
+          リーダーシップ
+        </text>
+      </g>
+      
+      <!-- 5つ目の星 -->
+      <g transform="translate(50, -90)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          切磋琢磨
+        </text>
+      </g>
+      
+      <!-- 6つ目の星 -->
+      <g transform="translate(100, -70)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          感情管理
+        </text>
+      </g>
+      
+      <!-- 7つ目の星 -->
+      <g transform="translate(150, -100)">
+        <circle cx="0" cy="0" r="8" fill="#FA000F"/>
+        <text x="0" y="-20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#333333">
+          目標設定
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 10の教訓リスト（2カラム） -->
+  <g transform="translate(100, 200)">
+    <!-- 左カラム -->
+    <g>
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        1. 危機管理能力を磨く
+      </text>
+      <text x="0" y="30" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        2. 瞬時の決断力を養う
+      </text>
+      <text x="0" y="60" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        3. 継続的な努力を重ねる
+      </text>
+      <text x="0" y="90" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        4. 真のリーダーシップを発揮
+      </text>
+      <text x="0" y="120" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        5. ライバルと共に成長する
+      </text>
+    </g>
+    
+    <!-- 右カラム -->
+    <g transform="translate(600, 0)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        6. 感情を力に変える
+      </text>
+      <text x="0" y="30" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        7. 壮大な目標を掲げる
+      </text>
+      <text x="0" y="60" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        8. 専門スキルを極める
+      </text>
+      <text x="0" y="90" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        9. 信念を貫き通す
+      </text>
+      <text x="0" y="120" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+        10. 人生に悔いを残さない
+      </text>
+    </g>
+  </g>
+  
+  <!-- 結論メッセージ -->
+  <g transform="translate(640, 520)">
+    <rect x="-400" y="-40" width="800" height="100" fill="white" stroke="#FA000F" stroke-width="2" rx="10"/>
+    
+    <text x="0" y="-10" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="#FA000F">
+      北斗の拳は単なる格闘漫画ではない
+    </text>
+    <text x="0" y="20" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="20" text-anchor="middle" fill="#333333">
+      それは、激動の時代を生き抜くための「人生の教科書」である
+    </text>
+  </g>
+  
+  <!-- 最後の名言 -->
+  <g transform="translate(640, 640)">
+    <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="18" font-style="italic" text-anchor="middle" fill="#FA000F">
+      「お前の命は、あと3秒」- 限られた時間を最大限に生きよ
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text x="60" y="690" font-family="Arial, sans-serif" font-size="12" fill="#888888">©Hitachi Systems, Ltd. 2025. All rights reserved</text>
+  <text x="1220" y="690" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="#888888">12</text>
+</svg>

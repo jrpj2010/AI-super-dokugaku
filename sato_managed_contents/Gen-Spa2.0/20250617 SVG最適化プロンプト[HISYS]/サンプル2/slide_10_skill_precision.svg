@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- メタデータ -->
+  <title>秘孔を突く精密さが示す「スキルの重要性」</title>
+  <desc>708の秘孔から学ぶ専門性と精度の価値</desc>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  
+  <!-- 日立ロゴ（右上） -->
+  <g transform="translate(1100, 30)">
+    <rect x="0" y="0" width="100" height="40" fill="white" stroke="#FA000F" stroke-width="2" rx="3"/>
+    <text x="50" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FA000F">HITACHI</text>
+  </g>
+  
+  <!-- セクション番号 -->
+  <text x="60" y="80" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="90" font-weight="300" fill="#CCCCCC">08</text>
+  
+  <!-- タイトル -->
+  <text x="60" y="140" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="36" font-weight="700" fill="#333333">
+    秘孔を突く精密さが示す「スキルの重要性」
+  </text>
+  
+  <!-- タイトル下線 -->
+  <line x1="60" y1="155" x2="750" y2="155" stroke="#FA000F" stroke-width="2"/>
+  
+  <!-- メインビジュアル：人体図と秘孔 -->
+  <g transform="translate(300, 400)">
+    <!-- 人体シルエット -->
+    <ellipse cx="0" cy="-50" rx="40" ry="50" fill="#F0F0F0" stroke="#333333" stroke-width="2"/>
+    <rect x="-50" y="0" width="100" height="150" fill="#F0F0F0" stroke="#333333" stroke-width="2" rx="10"/>
+    
+    <!-- 主要な秘孔ポイント -->
+    <g>
+      <!-- 頭部の秘孔 -->
+      <circle cx="0" cy="-80" r="5" fill="#FA000F"/>
+      <text x="20" y="-75" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" fill="#FA000F">百会</text>
+      
+      <!-- 胸部の秘孔 -->
+      <circle cx="0" cy="30" r="5" fill="#FA000F"/>
+      <text x="20" y="35" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" fill="#FA000F">膻中</text>
+      
+      <!-- 腹部の秘孔 -->
+      <circle cx="0" cy="80" r="5" fill="#FA000F"/>
+      <text x="20" y="85" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" fill="#FA000F">丹田</text>
+      
+      <!-- 肩の秘孔 -->
+      <circle cx="-30" cy="10" r="5" fill="#FA000F"/>
+      <text x="-70" y="15" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" fill="#FA000F">肩井</text>
+      
+      <circle cx="30" cy="10" r="5" fill="#FA000F"/>
+    </g>
+    
+    <!-- 秘孔の説明 -->
+    <text x="-100" y="-120" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="18" font-weight="700" fill="#FA000F">
+      708の秘孔
+    </text>
+    <text x="-100" y="-95" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#666666">
+      人体に存在する経絡秘孔
+    </text>
+  </g>
+  
+  <!-- 右側：スキルマップ -->
+  <g transform="translate(700, 250)">
+    <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">
+      精密スキルの要素
+    </text>
+    
+    <!-- レーダーチャート風の表現 -->
+    <g transform="translate(150, 150)">
+      <!-- 背景の五角形 -->
+      <polygon points="0,-80 76,-24 47,65 -47,65 -76,-24" fill="#F8F8F8" stroke="#CCCCCC" stroke-width="1"/>
+      <polygon points="0,-60 57,-18 35,48 -35,48 -57,-18" fill="#FFF0F0" stroke="#CCCCCC" stroke-width="1"/>
+      <polygon points="0,-40 38,-12 23,32 -23,32 -38,-12" fill="#FFE0E0" stroke="#CCCCCC" stroke-width="1"/>
+      
+      <!-- 実際の値 -->
+      <polygon points="0,-70 65,-20 40,55 -40,55 -65,-20" fill="#FA000F" opacity="0.3" stroke="#FA000F" stroke-width="2"/>
+      
+      <!-- ラベル -->
+      <text x="0" y="-95" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" text-anchor="middle" fill="#333333">知識</text>
+      <text x="90" y="-25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">精度</text>
+      <text x="60" y="85" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">速度</text>
+      <text x="-60" y="85" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">判断力</text>
+      <text x="-100" y="-25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">経験</text>
+    </g>
+  </g>
+  
+  <!-- 下部：ビジネスへの応用 -->
+  <g transform="translate(60, 540)">
+    <rect x="0" y="0" width="1160" height="130" fill="#F8F8F8" stroke="#CCCCCC" stroke-width="1" rx="5"/>
+    
+    <text x="20" y="30" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="20" font-weight="700" fill="#FA000F">
+      専門スキルがもたらすビジネス価値
+    </text>
+    
+    <g transform="translate(40, 60)">
+      <!-- 左列 -->
+      <g>
+        <circle cx="0" cy="-3" r="3" fill="#FA000F"/>
+        <text x="10" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+          深い専門知識 = 問題の本質を見抜く力
+        </text>
+      </g>
+      
+      <g transform="translate(0, 30)">
+        <circle cx="0" cy="-3" r="3" fill="#FA000F"/>
+        <text x="10" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+          高い精度 = ミスの最小化と信頼性向上
+        </text>
+      </g>
+      
+      <!-- 右列 -->
+      <g transform="translate(580, -30)">
+        <circle cx="0" cy="-3" r="3" fill="#FA000F"/>
+        <text x="10" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+          素早い判断 = 競争優位性の確立
+        </text>
+      </g>
+      
+      <g transform="translate(580, 0)">
+        <circle cx="0" cy="-3" r="3" fill="#FA000F"/>
+        <text x="10" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" fill="#333333">
+          豊富な経験 = 未知の課題への対応力
+        </text>
+      </g>
+    </g>
+    
+    <!-- 中央の格言 -->
+    <text x="580" y="105" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-style="italic" text-anchor="middle" fill="#FA000F">
+      「一撃必殺」の技術は、日々の鍛錬から生まれる
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text x="60" y="690" font-family="Arial, sans-serif" font-size="12" fill="#888888">©Hitachi Systems, Ltd. 2025. All rights reserved</text>
+  <text x="1220" y="690" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="#888888">10</text>
+</svg>
