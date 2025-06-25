@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    演習①: グループ共有
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 目的 -->
+    <g>
+      <rect x="0" y="0" width="1620" height="120" fill="#FFE5E5" rx="15" />
+      <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+        fill="#FA000F">目的:</text>
+      <text x="140" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">
+        他者の視点を取り入れ、自分の思考を客観視する。
+      </text>
+    </g>
+
+    <!-- 方法 -->
+    <g transform="translate(0, 150)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">方法:</text>
+      <text x="100" y="40" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#666">
+        3〜4人のグループに分かれ、各自が作成したシートを発表してください。
+      </text>
+
+      <rect x="100" y="60" width="250" height="50" fill="#0066CC" rx="25" />
+      <text x="225" y="92" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+        fill="white">
+        グループワーク 20分
+      </text>
+    </g>
+
+    <!-- お約束 -->
+    <g transform="translate(0, 300)">
+      <rect x="0" y="0" width="1620" height="350" fill="#E6F4FF" rx="15" />
+
+      <g transform="translate(40, 30)">
+        <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+          fill="#0066CC">お約束:</text>
+
+        <!-- お約束の内容 -->
+        <g transform="translate(50, 80)">
+          <g transform="translate(0, 0)">
+            <circle cx="15" cy="15" r="8" fill="#0066CC" />
+            <text x="40" y="20" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              発表者は、正直に自分の悩みを話してみましょう。
+            </text>
+          </g>
+
+          <g transform="translate(0, 60)">
+            <circle cx="15" cy="15" r="8" fill="#0066CC" />
+            <text x="40" y="20" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              聞き手は、<tspan font-weight="700" fill="#FA000F">絶対に否定しないこと</tspan>。
+            </text>
+          </g>
+
+          <g transform="translate(0, 120)">
+            <circle cx="15" cy="15" r="8" fill="#0066CC" />
+            <text x="40" y="20" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              「なぜそう考えたのですか？」「もっと具体的に言うと？」など、
+            </text>
+            <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              思考を深掘りする<tspan font-weight="700" fill="#FA000F">良い質問</tspan>でサポートし合いましょう。
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">11</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

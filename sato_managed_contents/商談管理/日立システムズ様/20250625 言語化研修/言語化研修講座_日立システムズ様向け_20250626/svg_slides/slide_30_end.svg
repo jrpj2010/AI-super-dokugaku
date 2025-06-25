@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280"
+  height="720">
+  <title>スライド30: エンディング</title>
+
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff" />
+
+  <!-- 中央のロゴ -->
+  <image
+    xlink:href="https://tanren.notion.site/image/attachment%3Ac2ac09bc-73d0-4226-a76a-63497ea27002%3A%E5%9B%B33.svg?table=block&id=21b31bbd-522c-806d-9ab5-fe379b86bfdd&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2"
+    x="490" y="260" width="300" height="300" />
+
+  <!-- メッセージ -->
+  <text x="640" y="200" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="36"
+    fill="#FA000F" font-weight="700">
+    ご清聴ありがとうございました
+  </text>
+
+  <!-- サブメッセージ -->
+  <text x="640" y="580" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+    fill="#666666" font-weight="400">
+    言語化力で、AIと共に未来を創造しましょう
+  </text>
+</svg>

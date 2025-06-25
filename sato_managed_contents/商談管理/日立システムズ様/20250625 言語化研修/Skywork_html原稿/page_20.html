@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>継続的なスキルアップのために</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 866px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 866px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .step-card {
+      transition: all 0.3s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-40"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mb-40 opacity-40"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">継続的なスキルアップのために</h1>
+<!-- Main Content -->
+<div class="flex mt-6 space-x-8">
+<!-- Left Column: Daily Practice Points -->
+<div class="w-1/2">
+<h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+<i class="fa-solid fa-calendar-check text-2xl accent-blue mr-3"></i>
+          日常的な実践のポイント
+        </h2>
+<div class="space-y-5">
+<div class="step-card bg-gray-50 p-5 rounded-lg border-l-4 border-[#0078D4]">
+<div class="flex items-start">
+<div class="bg-[#0078D4] rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">1</div>
+<div>
+<h3 class="text-xl font-bold mb-2">小さな業務から始める</h3>
+<p class="text-gray-700">メールの件名作成、文章の要約、定型報告書のドラフト作成など、小さなタスクからAI活用を始めましょう。小さな成功体験が次のステップへの自信になります。</p>
+</div>
+</div>
+</div>
+<div class="step-card bg-gray-50 p-5 rounded-lg border-l-4 border-[#7FBA00]">
+<div class="flex items-start">
+<div class="bg-[#7FBA00] rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">2</div>
+<div>
+<h3 class="text-xl font-bold mb-2">プロンプトをテンプレート化して蓄積</h3>
+<p class="text-gray-700">期待通りの成果が得られたプロンプトや、汎用性の高いプロンプトの「型」を再利用可能なテンプレートとして保存・整理しましょう。</p>
+</div>
+</div>
+</div>
+<div class="step-card bg-gray-50 p-5 rounded-lg border-l-4 border-[#00B294]">
+<div class="flex items-start">
+<div class="bg-[#00B294] rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">3</div>
+<div>
+<h3 class="text-xl font-bold mb-2">成功・失敗事例を記録し共有</h3>
+<p class="text-gray-700">どのようなプロンプトで期待通りの結果が得られたか（または得られなかったか）を記録し、チーム内や組織全体で共有することで集合知として活用できます。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Next Steps -->
+<div class="w-1/2">
+<h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+<i class="fa-solid fa-stairs text-2xl accent-green mr-3"></i>
+          次のステップ
+        </h2>
+<div class="relative">
+<!-- Growth path visual -->
+<div class="absolute left-12 top-0 h-full w-1 bg-gradient-to-b from-[#0078D4] via-[#7FBA00] to-[#FA000F] rounded-full"></div>
+<div class="space-y-8 relative">
+<div class="flex items-center ml-4">
+<div class="absolute -left-4 w-8 h-8 bg-[#0078D4] rounded-full flex items-center justify-center z-10">
+<i class="fa-solid fa-bullseye text-white"></i>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg ml-8 w-full">
+<h3 class="text-xl font-bold mb-2 accent-blue">特定業務に特化したプロンプト開発</h3>
+<p class="text-gray-700">自身の担当業務や専門分野の知識を活かし、より高度でカスタマイズされたプロンプトを開発しましょう。例えば、業界レポートの分析、専門文書の作成支援、契約書のレビュー補助などに特化したプロンプトを追求します。</p>
+</div>
+</div>
+<div class="flex items-center ml-4">
+<div class="absolute -left-4 w-8 h-8 bg-[#7FBA00] rounded-full flex items-center justify-center z-10">
+<i class="fa-solid fa-users text-white"></i>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg ml-8 w-full">
+<h3 class="text-xl font-bold mb-2 accent-green">チーム内でのノウハウ共有と勉強会</h3>
+<p class="text-gray-700">定期的な情報交換会や勉強会をチーム内で開催し、各自が得た新しい知識、効果的なプロンプトのテクニック、AI活用の成功事例などを共有する場を設けましょう。個人の学びがチーム全体の力になります。</p>
+</div>
+</div>
+<div class="flex items-center ml-4">
+<div class="absolute -left-4 w-8 h-8 bg-[#FA000F] rounded-full flex items-center justify-center z-10">
+<i class="fa-solid fa-rocket text-white"></i>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg ml-8 w-full">
+<h3 class="text-xl font-bold mb-2 hitachi-red">最新のプロンプト技術やAIトレンドのキャッチアップ</h3>
+<p class="text-gray-700">AI技術、特に大規模言語モデルやプロンプトエンジニアリングの分野は日進月歩で進化しています。関連ニュースのチェック、専門家のブログや論文の購読、オンラインコミュニティへの参加などを通じて、自身の知識とスキルを常にアップデートしましょう。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quote at the bottom -->
+<div class="absolute bottom-20 left-0 right-0 text-center">
+<p class="text-xl font-semibold text-gray-700">
+        「AIとの協業は一朝一夕に完成するものではありません。<br/>
+<span class="hitachi-red">日々の実践と試行錯誤、そして学び続ける意欲</span>こそが、AIを真の思考パートナーとして活用するための鍵です。」
+      </p>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

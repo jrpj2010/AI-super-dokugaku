@@ -1,0 +1,277 @@
+<html lang="ja"><head></head><body>
+
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>対象者プロフィールと全体構成</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+  </style>
+
+
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mt-40 opacity-50"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-gray-50 rounded-full -mr-48 -mb-48 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">対象者プロフィールと全体構成</h1>
+<!-- Main Content -->
+<div class="flex flex-col h-[540px]">
+<!-- Top Section: Participant Profiles -->
+<div class="flex-1 mb-6">
+<h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+<i class="fa-solid fa-users mr-2 accent-blue"></i>受講者プロフィール
+        </h2>
+<div class="flex justify-between gap-4 h-[220px]">
+<!-- AI Skill Level -->
+<div class="flex-1 bg-gray-50 p-4 rounded-lg border-t-4 border-[#0078D4]">
+<h3 class="text-xl font-semibold mb-3 accent-blue">
+<i class="fa-solid fa-gauge-high mr-2"></i>AIスキルレベル
+            </h3>
+<div class="h-[140px]" id="skill-chart"></div>
+<p class="text-center text-gray-600 text-sm">初級〜中級レベルが中心</p>
+</div>
+<!-- Usage Frequency -->
+<div class="flex-1 bg-gray-50 p-4 rounded-lg border-t-4 border-[#7FBA00]">
+<h3 class="text-xl font-semibold mb-3 accent-green">
+<i class="fa-solid fa-calendar-check mr-2"></i>AI活用頻度
+            </h3>
+<div class="h-[140px]" id="frequency-chart"></div>
+<p class="text-center text-gray-600 text-sm">「毎日」「定期的」に活用している方が大半</p>
+</div>
+<!-- Background -->
+<div class="flex-1 bg-gray-50 p-4 rounded-lg border-t-4 border-[#00B294]">
+<h3 class="text-xl font-semibold mb-3 accent-turquoise">
+<i class="fa-solid fa-briefcase mr-2"></i>背景
+            </h3>
+<ul class="list-none space-y-3 pl-2">
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle mr-2 mt-1 accent-turquoise"></i>
+<span>多くの受講者が所属部署のAI活用WG（ワーキンググループ）に参加</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle mr-2 mt-1 accent-turquoise"></i>
+<span>Microsoft Copilotを主に活用</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle mr-2 mt-1 accent-turquoise"></i>
+<span>「言語化の難しさ」と「プロンプト技術の不足」が共通課題</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Training Structure -->
+<div class="flex-1">
+<h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+<i class="fa-solid fa-calendar-days mr-2 hitachi-red"></i>2日間の研修構成
+        </h2>
+<div class="flex gap-6 h-[220px]">
+<!-- Day 1 -->
+<div class="flex-1 border border-gray-200 rounded-lg overflow-hidden">
+<div class="bg-[#0078D4] text-white p-3">
+<h3 class="text-xl font-semibold">1日目：基礎編 - AIとの対話の第一歩</h3>
+</div>
+<div class="p-4">
+<ul class="list-none space-y-3">
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-blue"></i>
+<span>プロンプトの基本原則と基礎技術</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-blue"></i>
+<span>良いプロンプトの3要素（指示、文脈、例）</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-blue"></i>
+<span>Zero-shotとFew-shotプロンプティング</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-blue"></i>
+<span>AIに役割を与える「深津式プロンプト」</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-hands-holding-circle mr-2 mt-1 accent-green"></i>
+<span>演習を通じた実践的な学習</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Day 2 -->
+<div class="flex-1 border border-gray-200 rounded-lg overflow-hidden">
+<div class="bg-[#7FBA00] text-white p-3">
+<h3 class="text-xl font-semibold">2日目：実践編 - AIを思考のパートナーにする</h3>
+</div>
+<div class="p-4">
+<ul class="list-none space-y-3">
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-green"></i>
+<span>高度なプロンプト技術</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-green"></i>
+<span>思考を整理するプロンプト術（Chain-of-Thought、Goal Seek）</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-green"></i>
+<span>アウトプットの質を高める応用テクニック（Tree of Thoughts、ReAct）</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-dot mr-2 mt-1 accent-green"></i>
+<span>AIとの効果的な協業スタイルの確立</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-hands-holding-circle mr-2 mt-1 accent-blue"></i>
+<span>複合的な演習でスキルを定着</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+<script>
+    // Simple D3.js charts for visualization
+    // Skill Level Chart
+    const skillData = [
+      { label: "初級", value: 45 },
+      { label: "中級", value: 40 },
+      { label: "上級", value: 15 }
+    ];
+    
+    const skillSvg = d3.select("#skill-chart")
+      .append("svg")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 200 120");
+    
+    const skillColors = ["#0078D4", "#00B294", "#7FBA00"];
+    
+    skillSvg.selectAll("rect")
+      .data(skillData)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => 20 + i * 60)
+      .attr("y", d => 100 - d.value)
+      .attr("width", 40)
+      .attr("height", d => d.value)
+      .attr("fill", (d, i) => skillColors[i])
+      .attr("rx", 4);
+    
+    skillSvg.selectAll("text.value")
+      .data(skillData)
+      .enter()
+      .append("text")
+      .attr("class", "value")
+      .attr("x", (d, i) => 40 + i * 60)
+      .attr("y", d => 95 - d.value)
+      .attr("text-anchor", "middle")
+      .text(d => d.value + "%")
+      .attr("fill", "#333")
+      .attr("font-size", "12px");
+    
+    skillSvg.selectAll("text.label")
+      .data(skillData)
+      .enter()
+      .append("text")
+      .attr("class", "label")
+      .attr("x", (d, i) => 40 + i * 60)
+      .attr("y", 115)
+      .attr("text-anchor", "middle")
+      .text(d => d.label)
+      .attr("fill", "#666")
+      .attr("font-size", "12px");
+    
+    // Frequency Chart
+    const frequencyData = [
+      { label: "毎日", value: 35 },
+      { label: "定期的", value: 45 },
+      { label: "たまに", value: 15 },
+      { label: "ほとんど使用せず", value: 5 }
+    ];
+    
+    const freqSvg = d3.select("#frequency-chart")
+      .append("svg")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 200 120");
+    
+    const freqColors = ["#7FBA00", "#00B294", "#0078D4", "#999999"];
+    
+    freqSvg.selectAll("rect")
+      .data(frequencyData)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => 10 + i * 50)
+      .attr("y", d => 100 - d.value * 2)
+      .attr("width", 30)
+      .attr("height", d => d.value * 2)
+      .attr("fill", (d, i) => freqColors[i])
+      .attr("rx", 4);
+    
+    freqSvg.selectAll("text.value")
+      .data(frequencyData)
+      .enter()
+      .append("text")
+      .attr("class", "value")
+      .attr("x", (d, i) => 25 + i * 50)
+      .attr("y", d => 95 - d.value * 2)
+      .attr("text-anchor", "middle")
+      .text(d => d.value + "%")
+      .attr("fill", "#333")
+      .attr("font-size", "12px");
+    
+    freqSvg.selectAll("text.label")
+      .data(frequencyData)
+      .enter()
+      .append("text")
+      .attr("class", "label")
+      .attr("x", (d, i) => 25 + i * 50)
+      .attr("y", 115)
+      .attr("text-anchor", "middle")
+      .text(d => d.label.length > 4 ? d.label.substring(0, 4) + "..." : d.label)
+      .attr("fill", "#666")
+      .attr("font-size", "10px");
+  </script>
+
+</body></html>

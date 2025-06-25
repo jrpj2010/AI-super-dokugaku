@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>プロンプトのコツ、初心者から中級者になるために</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-gradient-to-br from-white to-gray-100 relative overflow-hidden">
+<!-- Geometric abstract shapes for visual interest -->
+<div class="geometric-shape bg-hitachi-red rounded-full w-96 h-96 -left-20 -top-20 transform rotate-45"></div>
+<div class="geometric-shape bg-[#0078D4] w-64 h-64 right-20 bottom-40 transform rotate-12"></div>
+<div class="geometric-shape bg-[#00B294] w-80 h-80 left-40 bottom-0 transform -rotate-12"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12 z-10">
+<div class="text-2xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Main Content Container -->
+<div class="absolute inset-0 flex flex-col items-center justify-center z-10 px-24">
+<!-- Title -->
+<h1 class="text-6xl font-bold hitachi-red mb-8 text-center leading-tight">
+        プロンプトのコツ、初心者から中級者になるために
+      </h1>
+<!-- Subtitle -->
+<p class="text-3xl text-gray-700 mb-16 text-center">
+        AIとの対話をデザインする
+      </p>
+<!-- Divider -->
+<div class="w-24 h-1 bg-hitachi-red mb-16"></div>
+<!-- AI and Prompt Engineering Icons -->
+<div class="flex justify-center space-x-20 mb-16">
+<div class="flex flex-col items-center">
+<i class="fa-solid fa-robot text-5xl accent-blue mb-4"></i>
+<p class="text-gray-600">生成AI活用</p>
+</div>
+<div class="flex flex-col items-center">
+<i class="fa-solid fa-comment-dots text-5xl accent-green mb-4"></i>
+<p class="text-gray-600">言語化能力</p>
+</div>
+<div class="flex flex-col items-center">
+<i class="fa-solid fa-code text-5xl accent-turquoise mb-4"></i>
+<p class="text-gray-600">プロンプト技術</p>
+</div>
+</div>
+<!-- Date and Author -->
+<div class="text-gray-600 text-xl">
+        作成日: 2025年6月24日 | 作成者: Manus AI
+      </div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-8 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

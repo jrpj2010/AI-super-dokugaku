@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>2日間の総括とクロージング</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 750px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 750px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .action-item {
+      transition: all 0.3s ease;
+    }
+    .action-item:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FA000F] via-[#0078D4] to-[#7FBA00]"></div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7FBA00] via-[#0078D4] to-[#FA000F]"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">2日間の総括とクロージング</h1>
+<!-- Main Content - Two Column Layout -->
+<div class="flex mt-6">
+<!-- Left Column: What We Learned -->
+<div class="w-1/2 pr-8">
+<h2 class="text-2xl font-bold mb-4 text-gray-800">
+<i class="fa-solid fa-graduation-cap mr-2 accent-blue"></i>この2日間で学んだこと
+        </h2>
+<div class="mb-6 bg-gray-50 p-5 rounded-lg shadow-sm">
+<h3 class="text-xl font-semibold mb-3 hitachi-red">
+<i class="fa-solid fa-book mr-2"></i>プロンプトの基本と応用
+          </h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-700">
+<li>良いプロンプトの3要素（明確な指示、十分な文脈、適切な例示）</li>
+<li>Zero-shotとFew-shotプロンプティングの使い分け</li>
+<li>深津式プロンプトによる役割設定の効果</li>
+<li>思考を整理・深める応用技術（Chain-of-Thought、Tree of Thoughts、ReActなど）</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg shadow-sm">
+<h3 class="text-xl font-semibold mb-3 hitachi-red">
+<i class="fa-solid fa-handshake mr-2"></i>AIとの効果的な協業スタイル
+          </h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-700">
+<li>AIを単なるツールではなく「思考のパートナー」として活用する視点</li>
+<li>AIとの対話を通じて思考を整理し、アウトプットの質を高める方法</li>
+<li>様々なプロンプト技術を状況に応じて使い分ける実践力</li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Action Plans -->
+<div class="w-1/2 pl-8 border-l border-gray-200">
+<h2 class="text-2xl font-bold mb-4 text-gray-800">
+<i class="fa-solid fa-rocket mr-2 accent-green"></i>今後のアクションプラン
+        </h2>
+<div class="space-y-4">
+<div class="action-item bg-white p-4 rounded-lg border-l-4 border-[#0078D4] shadow-sm">
+<div class="flex items-start">
+<div class="bg-[#0078D4] rounded-full w-8 h-8 flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-1"></i>
+</div>
+<div>
+<h4 class="font-bold text-lg">実務への適用</h4>
+<p class="text-gray-600">明日から早速、学んだテクニックを一つでも業務で試し、その効果を体感してください。小さな業務から始めて、徐々に活用範囲を広げていきましょう。</p>
+</div>
+</div>
+</div>
+<div class="action-item bg-white p-4 rounded-lg border-l-4 border-[#7FBA00] shadow-sm">
+<div class="flex items-start">
+<div class="bg-[#7FBA00] rounded-full w-8 h-8 flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-2"></i>
+</div>
+<div>
+<h4 class="font-bold text-lg">知見の共有</h4>
+<p class="text-gray-600">成功事例や効果的なプロンプトを記録・共有し、チーム全体のAIリテラシー向上に貢献しましょう。プロンプトをテンプレート化して蓄積することも効果的です。</p>
+</div>
+</div>
+</div>
+<div class="action-item bg-white p-4 rounded-lg border-l-4 border-[#00B294] shadow-sm">
+<div class="flex items-start">
+<div class="bg-[#00B294] rounded-full w-8 h-8 flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-3"></i>
+</div>
+<div>
+<h4 class="font-bold text-lg">継続的な学習</h4>
+<p class="text-gray-600">定例会やコミュニティに積極的に参加し、最新のプロンプト技術やAIトレンドをキャッチアップして、継続的にスキルをアップデートしていきましょう。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Closing Message -->
+<div class="mt-8 text-center">
+<div class="inline-block bg-gray-50 px-10 py-4 rounded-lg shadow-sm">
+<p class="text-2xl font-bold text-gray-700">皆様の今後のご活躍を期待しております。ご質問はございますか？</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+<!-- Page Number -->
+<div class="absolute bottom-6 right-12 text-sm text-gray-500">
+      21 / 21
+    </div>
+</div>
+
+</body></html>

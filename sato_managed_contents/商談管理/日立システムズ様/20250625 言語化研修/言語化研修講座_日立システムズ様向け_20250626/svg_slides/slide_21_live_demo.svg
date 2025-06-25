@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280"
+  height="720">
+  <title>スライド21: LIVE DEMO: 指示の仕方で世界は変わる</title>
+
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+    </style>
+    <linearGradient id="badGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffebee" />
+      <stop offset="100%" style="stop-color:#ffcdd2" />
+    </linearGradient>
+    <linearGradient id="goodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9" />
+      <stop offset="100%" style="stop-color:#c8e6c9" />
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff" />
+
+  <!-- ロゴ -->
+  <image
+    xlink:href="https://tanren.notion.site/image/attachment%3Acb1d3d60-1a74-482c-9977-d59f70bd6027%3A%E5%9B%B31.svg?table=block&id=21b31bbd-522c-806c-9314-fa7bdaf959df&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2"
+    x="1140" y="30" width="100" height="100" />
+
+  <!-- タイトル -->
+  <g>
+    <text x="60" y="90" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="37" fill="#000000"
+      font-weight="700">
+      LIVE DEMO: 指示の仕方で世界は変わる
+    </text>
+    <line x1="60" y1="110" x2="600" y2="110" stroke="#FA000F" stroke-width="2" />
+  </g>
+
+  <text x="60" y="160" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="20" fill="#333333">
+    同じ依頼でも、「思考の設計図」に基づいた指示（プロンプト）を出すことで、Copilotの回答は劇的に変わります。
+  </text>
+
+  <!-- 2カラムレイアウト -->
+  <g transform="translate(60, 200)">
+    <!-- 悪い指示 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="540" height="400" rx="8" fill="url(#badGrad)" stroke="#d32f2f" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+        fill="#d32f2f" font-weight="700">
+        悪い指示
+      </text>
+
+      <!-- プロンプト -->
+      <rect x="20" y="70" width="500" height="60" rx="5" fill="#ffffff" stroke="#d32f2f" stroke-width="1" />
+      <text x="270" y="105" text-anchor="middle" font-family="'Source Code Pro', monospace" font-size="18"
+        fill="#333333">
+        日立システムズの強みと弱みを教えて
+      </text>
+
+      <!-- 結果 -->
+      <text x="20" y="170" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="16" fill="#666666">
+        → 当たり障りのない、どこかで見たような
+      </text>
+      <text x="40" y="200" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="16" fill="#666666">
+        一般的な文章が出力される。
+      </text>
+
+      <!-- 図解 -->
+      <g transform="translate(170, 250)">
+        <rect x="0" y="0" width="200" height="100" rx="5" fill="#ffffff" stroke="#cccccc" stroke-width="1"
+          stroke-dasharray="5,5" />
+        <text x="100" y="55" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14"
+          fill="#999999">
+          ありきたりな回答...
+        </text>
+      </g>
+    </g>
+
+    <!-- 良い指示 -->
+    <g transform="translate(580, 0)">
+      <rect x="0" y="0" width="540" height="400" rx="8" fill="url(#goodGrad)" stroke="#388e3c" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+        fill="#388e3c" font-weight="700">
+        良い指示
+      </text>
+
+      <!-- プロンプト -->
+      <rect x="20" y="70" width="500" height="200" rx="5" fill="#ffffff" stroke="#388e3c" stroke-width="1" />
+      <text x="30" y="95" font-family="'Source Code Pro', monospace" font-size="14" fill="#333333">
+        <tspan x="30" dy="0">#役割</tspan>
+        <tspan x="30" dy="20">あなたは一流の経営戦略コンサルタントです。</tspan>
+        <tspan x="30" dy="30">#命令書</tspan>
+        <tspan x="30" dy="20">日立システムズのSWOT分析を、具体的な根拠と</tspan>
+        <tspan x="30" dy="20">共に表形式で作成してください。</tspan>
+        <tspan x="30" dy="30">#制約条件</tspan>
+        <tspan x="30" dy="20">- Web上の客観情報のみを参考にしてください</tspan>
+        <tspan x="30" dy="20">- 各項目は100文字以内で記述してください</tspan>
+      </text>
+
+      <!-- 結果 -->
+      <text x="20" y="300" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="16" fill="#666666">
+        → 構造化され、具体的な情報が出力される。
+      </text>
+
+      <!-- 図解 -->
+      <g transform="translate(170, 330)">
+        <rect x="0" y="0" width="200" height="50" rx="5" fill="#388e3c" opacity="0.2" stroke="#388e3c"
+          stroke-width="1" />
+        <text x="100" y="30" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" fill="#388e3c"
+          font-weight="700">
+          実用的な分析結果
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- フッター -->
+  <text x="60" y="695" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="11" fill="#888888">
+    ©Hitachi Systems, Ltd. 2025. All rights reserved.
+  </text>
+</svg>

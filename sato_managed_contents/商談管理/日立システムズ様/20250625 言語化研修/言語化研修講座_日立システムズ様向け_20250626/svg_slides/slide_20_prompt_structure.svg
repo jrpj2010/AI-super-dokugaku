@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280"
+  height="720">
+  <title>スライド20: 良いプロンプトの構造 ＝ 思考の設計図</title>
+
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+    </style>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f9f9f9" />
+      <stop offset="100%" style="stop-color:#f5f5f5" />
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff" />
+
+  <!-- ロゴ -->
+  <image
+    xlink:href="https://tanren.notion.site/image/attachment%3Acb1d3d60-1a74-482c-9977-d59f70bd6027%3A%E5%9B%B31.svg?table=block&id=21b31bbd-522c-806c-9314-fa7bdaf959df&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2"
+    x="1140" y="30" width="100" height="100" />
+
+  <!-- タイトル -->
+  <g>
+    <text x="60" y="90" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="37" fill="#000000"
+      font-weight="700">
+      良いプロンプトの構造 ＝ 思考の設計図
+    </text>
+    <line x1="60" y1="110" x2="600" y2="110" stroke="#FA000F" stroke-width="2" />
+  </g>
+
+  <text x="60" y="160" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="20" fill="#333333">
+    良いプロンプトは、昨日作成した「思考整理シート」の要素とほぼ同じです。
+  </text>
+
+  <!-- 2カラムレイアウト -->
+  <g transform="translate(60, 200)">
+    <!-- 左カラム：プロンプトの5大要素 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="540" height="380" rx="8" fill="url(#boxGrad)" stroke="#FA000F" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+        fill="#FA000F" font-weight="700">
+        プロンプトの5大要素
+      </text>
+
+      <g transform="translate(30, 80)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">#命令書 (Instruction):</tspan> 何をさせたいか
+        </text>
+        <text x="0" y="50" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">#役割 (Role):</tspan> どんな専門家になってほしいか
+        </text>
+        <text x="0" y="100" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">#成果物 (Output):</tspan> どんな形式で欲しいか
+        </text>
+        <text x="0" y="150" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">#制約条件 (Constraints):</tspan> 守ってほしいルール
+        </text>
+        <text x="0" y="200" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">#入力情報 (Input):</tspan> 元になる情報や文章
+        </text>
+      </g>
+    </g>
+
+    <!-- 右カラム：指示のポイント -->
+    <g transform="translate(580, 0)">
+      <rect x="0" y="0" width="540" height="380" rx="8" fill="url(#boxGrad)" stroke="#FA000F" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+        fill="#FA000F" font-weight="700">
+        指示のポイント
+      </text>
+
+      <g transform="translate(30, 80)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • 最初に<tspan font-weight="700">結論（命令）</tspan>を伝える
+        </text>
+        <text x="0" y="50" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • AIに<tspan font-weight="700">役割を与える</tspan>と視点が定まる
+        </text>
+        <text x="0" y="100" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">出力形式を指定</tspan>すると後が楽になる
+        </text>
+        <text x="0" y="150" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • <tspan font-weight="700">制約（縛り）</tspan>で出力をコントロールする
+        </text>
+        <text x="0" y="200" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          • 一発で終わらせず<tspan font-weight="700">「対話」で育てる</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- フッター -->
+  <text x="60" y="695" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="11" fill="#888888">
+    ©Hitachi Systems, Ltd. 2025. All rights reserved.
+  </text>
+</svg>

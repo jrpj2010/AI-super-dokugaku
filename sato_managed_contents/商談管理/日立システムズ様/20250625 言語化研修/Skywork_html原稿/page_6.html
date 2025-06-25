@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>なぜ今、言語化とプロンプトが重要なのか？</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 left-0 w-72 h-72 bg-gray-50 rounded-full -ml-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-gray-50 rounded-full -mr-40 -mb-40 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">なぜ今、言語化とプロンプトが重要なのか？</h1>
+<!-- Main Content -->
+<div class="grid grid-cols-12 gap-6 mt-4">
+<!-- Left Section: Survey Results -->
+<div class="col-span-5 bg-gray-50 p-6 rounded-lg">
+<h2 class="text-2xl font-bold mb-4 flex items-center">
+<i class="fa-solid fa-chart-bar accent-blue mr-3"></i>
+<span>事前アンケートの結果</span>
+</h2>
+<div class="space-y-4">
+<div class="bg-white p-4 rounded-lg border-l-4 border-[#0078D4]">
+<p class="font-bold mb-1">言語化の課題</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-[#0078D4] flex items-center justify-center text-white font-bold">
+                72%
+              </div>
+<p class="ml-3">&#34;自分の考えをうまく言語化できない&#34;</p>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg border-l-4 border-[#7FBA00]">
+<p class="font-bold mb-1">プロンプトの課題</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-[#7FBA00] flex items-center justify-center text-white font-bold">
+                78%
+              </div>
+<p class="ml-3">&#34;AIに意図が正確に伝わらない&#34;</p>
+</div>
+</div>
+<p class="text-center font-bold text-gray-700 mt-4">
+            これらは単なるスキル不足ではなく<br/>
+            AI時代の本質的なコミュニケーション課題です
+          </p>
+</div>
+</div>
+<!-- Right Section: Communication Changes -->
+<div class="col-span-7">
+<h2 class="text-2xl font-bold mb-4 flex items-center">
+<i class="fa-solid fa-comments accent-turquoise mr-3"></i>
+<span>AI時代のコミュニケーション変化</span>
+</h2>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="font-bold text-xl mb-2 flex items-center">
+<i class="fa-solid fa-user-group text-gray-700 mr-2"></i>人間同士
+            </h3>
+<ul class="space-y-2 pl-6">
+<li class="flex items-start">
+<i class="fa-solid fa-check accent-green mr-2 mt-1"></i>
+<span>曖昧さを許容</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check accent-green mr-2 mt-1"></i>
+<span>文脈や背景を共有</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check accent-green mr-2 mt-1"></i>
+<span>非言語情報も活用</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check accent-green mr-2 mt-1"></i>
+<span>質問や確認で調整</span>
+</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="font-bold text-xl mb-2 flex items-center">
+<i class="fa-solid fa-robot text-gray-700 mr-2"></i>AIとの対話
+            </h3>
+<ul class="space-y-2 pl-6">
+<li class="flex items-start">
+<i class="fa-solid fa-check hitachi-red mr-2 mt-1"></i>
+<span>明確な指示が必要</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check hitachi-red mr-2 mt-1"></i>
+<span>文脈を明示的に提供</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check hitachi-red mr-2 mt-1"></i>
+<span>言語のみで伝える</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check hitachi-red mr-2 mt-1"></i>
+<span>構造化された入力</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Impact of Prompts -->
+<div class="bg-[#0078D4] bg-opacity-10 p-5 rounded-lg">
+<h3 class="font-bold text-xl mb-3 flex items-center">
+<i class="fa-solid fa-key accent-blue mr-2"></i>
+<span>プロンプトがAIの能力を引き出す鍵</span>
+</h3>
+<div class="flex items-center justify-center">
+<div class="text-center px-4">
+<div class="mb-2">
+<i class="fa-solid fa-triangle-exclamation text-3xl text-gray-400"></i>
+</div>
+<p class="text-sm">曖昧なプロンプト</p>
+</div>
+<div class="w-24 h-1 bg-gradient-to-r from-gray-300 to-[#0078D4]"></div>
+<div class="text-center px-4">
+<div class="mb-2">
+<i class="fa-solid fa-lightbulb text-3xl accent-blue"></i>
+</div>
+<p class="text-sm">良質なプロンプト</p>
+</div>
+<div class="w-6 text-center">→</div>
+<div class="text-center px-4">
+<div class="mb-2">
+<i class="fa-solid fa-star text-3xl text-yellow-500"></i>
+</div>
+<p class="text-sm">質の高いアウトプット</p>
+</div>
+</div>
+<p class="text-center mt-3">
+<span class="font-bold">同じAIでも、プロンプト次第で出力品質が大きく変わる</span><br/>
+            プロンプトスキルは「AI活用リテラシー」の中核
+          </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

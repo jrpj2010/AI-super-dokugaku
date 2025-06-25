@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>演習1：Copilotで試す基本プロンプト</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 766px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 766px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #0078D4;
+      color: white;
+      font-weight: bold;
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-gray-50 relative overflow-hidden p-12">
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2">演習1：Copilotで試す基本プロンプト</h1>
+<!-- Exercise Info Box -->
+<div class="bg-white rounded-lg p-4 shadow-sm mb-6 flex items-center">
+<div class="mr-4">
+<i class="fa-solid fa-clipboard-list text-4xl accent-blue"></i>
+</div>
+<div class="flex-1">
+<h2 class="text-xl font-bold">課題：会議の議事録を要約する</h2>
+<p class="text-gray-600">基本的なプロンプトと改善したプロンプトを比較し、その効果を体験します</p>
+</div>
+<div class="bg-[#0078D4] text-white px-4 py-2 rounded-lg flex items-center">
+<i class="fa-regular fa-clock mr-2"></i>
+<span class="font-bold">所要時間：10分</span>
+</div>
+</div>
+<!-- Main Content - Two Column Layout -->
+<div class="flex space-x-6">
+<!-- Left Column: Exercise Steps -->
+<div class="w-1/2 bg-white rounded-lg p-5 shadow-sm">
+<h3 class="text-xl font-bold mb-4 text-gray-800">演習の手順</h3>
+<div class="flex items-start mb-4">
+<div class="step-number">1</div>
+<div>
+<p class="font-bold">基本的なプロンプトを試す</p>
+<p class="text-gray-600 text-sm">例：「この会議議事録を要約してください」</p>
+</div>
+</div>
+<div class="flex items-start mb-4">
+<div class="step-number">2</div>
+<div>
+<p class="font-bold">3要素を意識して改善する</p>
+<p class="text-gray-600 text-sm">
+              ・明確な指示：要約の長さや形式を指定<br/>
+              ・十分な文脈：目的や背景を追加<br/>
+              ・適切な例示：期待する出力例を示す
+            </p>
+</div>
+</div>
+<div class="flex items-start mb-4">
+<div class="step-number">3</div>
+<div>
+<p class="font-bold">結果を比較する</p>
+<p class="text-gray-600 text-sm">基本プロンプトと改善プロンプトの結果の違いを確認し、メモしてください</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="step-number">4</div>
+<div>
+<p class="font-bold">グループで共有する</p>
+<p class="text-gray-600 text-sm">効果的だった改善点や気づきを共有しましょう</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Examples -->
+<div class="w-1/2">
+<!-- Sample Meeting Minutes -->
+<div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+<h3 class="text-lg font-bold mb-2 flex items-center">
+<i class="fa-solid fa-file-lines mr-2 accent-turquoise"></i>サンプル会議議事録
+          </h3>
+<div class="bg-gray-50 p-3 rounded text-sm h-24 overflow-y-auto">
+<p>日時：2025年6月20日 14:00-15:30<br/>
+            議題：新製品開発プロジェクトの進捗報告<br/>
+            参加者：佐藤、田中、鈴木、山田<br/>
+            主な議論：<br/>
+            1. 市場調査の結果共有（担当：佐藤）<br/>
+            2. 技術的課題の検討（担当：田中）<br/>
+            3. スケジュール調整（担当：鈴木）<br/>
+            4. 予算見直し（担当：山田）</p>
+</div>
+</div>
+<!-- Before/After Prompts -->
+<div class="flex space-x-4">
+<!-- Before -->
+<div class="flex-1 bg-white rounded-lg p-4 shadow-sm">
+<h3 class="text-lg font-bold mb-2 hitachi-red">改善前</h3>
+<div class="bg-gray-50 p-3 rounded text-sm">
+<p>この会議議事録を要約してください。</p>
+</div>
+<div class="flex items-center mt-3 text-orange-500">
+<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+<p class="text-xs">曖昧で具体性に欠ける</p>
+</div>
+</div>
+<!-- After -->
+<div class="flex-1 bg-white rounded-lg p-4 shadow-sm">
+<h3 class="text-lg font-bold mb-2 hitachi-red">改善後</h3>
+<div class="bg-gray-50 p-3 rounded text-sm">
+<p>以下の会議議事録から主要な決定事項を3点、各決定事項に対する担当者と期限を箇条書きでまとめてください。報告書形式で、丁寧な言葉遣いでお願いします。</p>
+</div>
+<div class="flex items-center mt-3 text-green-600">
+<i class="fa-solid fa-check-circle mr-2"></i>
+<p class="text-xs">具体的な指示と出力形式の指定あり</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tips Box -->
+<div class="mt-4 bg-[#00B294] bg-opacity-10 p-3 rounded-lg flex items-center">
+<i class="fa-solid fa-lightbulb text-2xl mr-3 text-yellow-500"></i>
+<p class="text-gray-700"><span class="font-bold">ポイント：</span>プロンプトの違いによる出力の変化に注目しましょう。特に「具体的な指示」と「出力形式の指定」がどのように結果に影響するかを観察してください。</p>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

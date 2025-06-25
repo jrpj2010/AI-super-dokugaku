@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReActプロンプト：推論と行動を組み合わせる</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 822px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 822px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .bg-accent-green {
+      background-color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .bg-accent-turquoise {
+      background-color: #00B294;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background element -->
+<div class="absolute top-0 right-0 w-72 h-72 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 w-full">ReActプロンプト：推論と行動を組み合わせる</h1>
+<!-- Main Content -->
+<div class="flex mt-4">
+<!-- Left Column: Concept and Definition -->
+<div class="w-1/2 pr-8">
+<div class="mb-6">
+<h2 class="text-2xl font-bold mb-3 text-gray-800">ReActプロンプティングとは</h2>
+<p class="mb-4">「Reasoning（推論）」と「Action（行動）」という2つの要素をAIに交互に実行させることで、複雑なタスクを段階的かつ効果的に解決するための手法です。</p>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-xl font-semibold mb-2 hitachi-red">基本サイクル</h3>
+<div class="flex items-start mb-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-blue flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-brain"></i>
+</div>
+<div>
+<p class="font-bold">Thought（思考・推論）</p>
+<p class="text-sm">現状の理解、課題の特定、次のステップの計画</p>
+</div>
+</div>
+<div class="flex items-start mb-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-green flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-play"></i>
+</div>
+<div>
+<p class="font-bold">Action（行動）</p>
+<p class="text-sm">具体的な行動の実行（情報検索、計算、APIの呼び出し）</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-turquoise flex items-center justify-center text-white mr-3">
+<i class="fa-solid fa-eye"></i>
+</div>
+<div>
+<p class="font-bold">Observation（観察）</p>
+<p class="text-sm">行動の結果として得られた情報や状況変化の観察</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<h3 class="text-xl font-semibold mb-2 text-gray-800">ReActの特徴</h3>
+<ul class="list-disc pl-6 space-y-2">
+<li>AIの思考プロセスが明示的に可視化される</li>
+<li>ユーザーがAIの判断根拠を理解しやすい</li>
+<li>必要に応じて介入や修正がしやすい</li>
+<li>複雑なタスクを段階的に解決できる</li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Business Applications -->
+<div class="w-1/2 pl-8 border-l border-gray-200">
+<h2 class="text-2xl font-bold mb-3 text-gray-800">ビジネスでの適用例</h2>
+<div class="mb-5 bg-gray-50 p-4 rounded-lg border-l-4 border-accent-blue">
+<h3 class="text-xl font-semibold mb-2">
+<i class="fa-solid fa-magnifying-glass-chart mr-2 accent-blue"></i>段階的な問題解決
+          </h3>
+<p class="mb-2 text-sm">顧客からの問い合わせ対応やシステムトラブルの原因究明など</p>
+<div class="bg-white p-3 rounded border border-gray-200 text-sm">
+<p class="font-bold mb-1">プロンプト例：</p>
+<p>「この顧客の問い合わせに対応するプロセスを、思考と行動のステップで示してください。まず顧客の要求を正確に把握し（Thought）、関連情報をデータベースで検索し（Action）、得られた情報に基づいて回答案を作成してください（Observation &amp; Thought）。」</p>
+</div>
+</div>
+<div class="mb-5 bg-gray-50 p-4 rounded-lg border-l-4 border-accent-green">
+<h3 class="text-xl font-semibold mb-2">
+<i class="fa-solid fa-diagram-project mr-2 accent-green"></i>プロジェクト計画の立案
+          </h3>
+<p class="mb-2 text-sm">新規プロジェクトの立ち上げや、イベントの企画・実行など</p>
+<div class="bg-white p-3 rounded border border-gray-200 text-sm">
+<p class="font-bold mb-1">プロンプト例：</p>
+<p>「新しいウェブサイトの立ち上げ計画を立ててください。各ステップで考え（Thought）、具体的なタスク（Action）、そしてそのタスク完了時の確認事項（Observation）を示してください。」</p>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg border-l-4 border-accent-turquoise">
+<h3 class="text-xl font-semibold mb-2">
+<i class="fa-solid fa-gears mr-2 accent-turquoise"></i>複雑なプロセスの設計
+          </h3>
+<p class="mb-2 text-sm">新しい業務フローの設計や、既存プロセスの改善提案など</p>
+<p class="text-sm italic">AIは単に情報を提供するだけでなく、具体的な行動計画を伴った、より実践的なアウトプットを生成します</p>
+</div>
+</div>
+</div>
+<!-- ReAct Cycle Visualization -->
+<div class="absolute bottom-16 left-1/2 transform -translate-x-1/2" id="react-cycle"></div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+<script>
+    // Simple D3.js visualization for the ReAct cycle
+    document.addEventListener('DOMContentLoaded', function() {
+      const width = 500;
+      const height = 80;
+      const svg = d3.select("#react-cycle")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+      
+      // Define the steps
+      const steps = [
+        { id: 1, name: "Thought", color: "#0078D4", icon: "fa-brain" },
+        { id: 2, name: "Action", color: "#7FBA00", icon: "fa-play" },
+        { id: 3, name: "Observation", color: "#00B294", icon: "fa-eye" },
+        { id: 4, name: "Thought", color: "#0078D4", icon: "fa-brain" }
+      ];
+      
+      // Draw the cycle
+      const stepWidth = 100;
+      const stepSpacing = 40;
+      const startX = (width - (steps.length * stepWidth + (steps.length - 1) * stepSpacing)) / 2;
+      
+      // Create groups for each step
+      const stepGroups = svg.selectAll("g")
+        .data(steps)
+        .enter()
+        .append("g")
+        .attr("transform", (d, i) => `translate(${startX + i * (stepWidth + stepSpacing)}, 10)`);
+      
+      // Add circles
+      stepGroups.append("circle")
+        .attr("cx", stepWidth / 2)
+        .attr("cy", 20)
+        .attr("r", 20)
+        .attr("fill", d => d.color);
+      
+      // Add icons
+      stepGroups.append("text")
+        .attr("x", stepWidth / 2)
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "central")
+        .attr("fill", "white")
+        .attr("font-family", "FontAwesome")
+        .attr("font-size", "14px")
+        .text(d => {
+          if (d.icon === "fa-brain") return "\uf5dc";
+          if (d.icon === "fa-play") return "\uf04b";
+          if (d.icon === "fa-eye") return "\uf06e";
+          return "";
+        });
+      
+      // Add step names
+      stepGroups.append("text")
+        .attr("x", stepWidth / 2)
+        .attr("y", 50)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#333")
+        .attr("font-size", "12px")
+        .text(d => d.name);
+      
+      // Add arrows between steps
+      for (let i = 0; i < steps.length - 1; i++) {
+        svg.append("path")
+          .attr("d", `M${startX + (i + 1) * stepWidth + i * stepSpacing}, 30 L${startX + (i + 1) * stepWidth + (i + 1) * stepSpacing}, 30`)
+          .attr("stroke", "#666")
+          .attr("stroke-width", 2)
+          .attr("marker-end", "url(#arrow)");
+          
+        // Draw arrowhead
+        svg.append("polygon")
+          .attr("points", `${startX + (i + 1) * stepWidth + (i + 1) * stepSpacing - 5},25 ${startX + (i + 1) * stepWidth + (i + 1) * stepSpacing + 5},30 ${startX + (i + 1) * stepWidth + (i + 1) * stepSpacing - 5},35`)
+          .attr("fill", "#666");
+      }
+      
+      // Add a curved arrow from last to first to complete the cycle
+      const lastX = startX + (steps.length - 1) * (stepWidth + stepSpacing) + stepWidth / 2;
+      const firstX = startX + stepWidth / 2;
+      
+      svg.append("path")
+        .attr("d", `M${lastX + 30}, 30 Q${(lastX + firstX) / 2}, -20 ${firstX - 30}, 30`)
+        .attr("fill", "none")
+        .attr("stroke", "#666")
+        .attr("stroke-width", 2)
+        .attr("stroke-dasharray", "5,3");
+        
+      // Add arrowhead for the curved path
+      svg.append("polygon")
+        .attr("points", `${firstX - 35},25 ${firstX - 25},30 ${firstX - 35},35`)
+        .attr("fill", "#666");
+        
+      // Add "繰り返す" text near the curved arrow
+      svg.append("text")
+        .attr("x", (lastX + firstX) / 2)
+        .attr("y", 0)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#666")
+        .attr("font-size", "12px")
+        .text("サイクルを繰り返す");
+    });
+  </script>
+
+</body></html>

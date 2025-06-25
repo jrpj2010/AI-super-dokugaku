@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zero-shotとFew-shotプロンプティング</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 940px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 940px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .bg-accent-green {
+      background-color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .code-block {
+      background-color: #f8f8f8;
+      border-left: 4px solid #ddd;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 14px;
+      
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mb-40 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 w-full">Zero-shotとFew-shotプロンプティング</h1>
+<!-- Main Content - Two Column Layout -->
+<div class="flex mt-4 gap-8">
+<!-- Left Column: Zero-shot -->
+<div class="w-1/2 bg-gray-50 rounded-lg p-6 shadow-sm border border-gray-200 flex flex-col">
+<h2 class="text-2xl font-bold mb-3 flex items-center">
+<i class="fa-solid fa-bolt accent-blue mr-3"></i>
+<span>Zero-shotプロンプティング</span>
+</h2>
+<p class="mb-4 font-bold text-gray-700">AIに対して、具体的な出力例を示さずに、タスクの指示のみを与える方法</p>
+<div class="mb-4">
+<h3 class="text-lg font-semibold mb-2 accent-blue">特徴</h3>
+<ul class="list-disc pl-5 space-y-1">
+<li>シンプルで手軽に利用できる</li>
+<li>AIが持つ汎用的な知識や能力に基づいて回答を生成</li>
+<li>一般的な質問応答、文章の要約、翻訳など比較的単純なタスクに適している</li>
+</ul>
+</div>
+<div class="code-block mb-4 text-sm">
+          「地球温暖化の原因を3つ挙げてください。」<br/><br/>
+          「以下の英文を日本語に翻訳してください：[英文]」
+        </div>
+<div class="mt-auto">
+<h3 class="text-lg font-semibold mb-2 accent-blue">メリット・デメリット</h3>
+<div class="flex items-start mb-2">
+<i class="fa-solid fa-circle-check text-green-600 mt-1 mr-2"></i>
+<p>プロンプトの準備が容易で、迅速に結果を得られる</p>
+</div>
+<div class="flex items-start">
+<i class="fa-solid fa-circle-xmark text-red-600 mt-1 mr-2"></i>
+<p>AIの解釈に依存するため、期待通りの出力が得られない場合がある</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Few-shot -->
+<div class="w-1/2 bg-gray-50 rounded-lg p-6 shadow-sm border border-gray-200 flex flex-col">
+<h2 class="text-2xl font-bold mb-3 flex items-center">
+<i class="fa-solid fa-list-ol accent-green mr-3"></i>
+<span>Few-shotプロンプティング</span>
+</h2>
+<p class="mb-4 font-bold text-gray-700">AIに対して、タスクの指示とともに、1つまたは複数の出力例（ショット）を提示する方法</p>
+<div class="mb-4">
+<h3 class="text-lg font-semibold mb-2 accent-green">特徴</h3>
+<ul class="list-disc pl-5 space-y-1">
+<li>AIに期待する出力のパターンやスタイルを学習させることができる</li>
+<li>特定のフォーマットでの出力、複雑な指示、ニュアンスの理解が求められるタスクに適している</li>
+<li>例の質と量が、出力の精度に影響を与える傾向がある</li>
+</ul>
+</div>
+<div class="code-block mb-4 text-sm">
+          文章: この映画は本当に素晴らしかった。俳優たちの演技も最高だ。<br/>
+          感情: ポジティブ<br/><br/>
+          文章: 残念ながら、期待していたほどの内容ではなかった。<br/>
+          感情: ネガティブ<br/><br/>
+          文章: ストーリー展開が斬新で、最後まで目が離せなかった。<br/>
+          感情:
+        </div>
+<div class="mt-auto">
+<h3 class="text-lg font-semibold mb-2 accent-green">メリット・デメリット</h3>
+<div class="flex items-start mb-2">
+<i class="fa-solid fa-circle-check text-green-600 mt-1 mr-2"></i>
+<p>特定のタスクに対するAIの応答精度を高められる</p>
+</div>
+<div class="flex items-start">
+<i class="fa-solid fa-circle-xmark text-red-600 mt-1 mr-2"></i>
+<p>適切な例を選ぶ必要があり、例の質が低いと逆効果になることも</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Box -->
+<div class="bg-gray-100 p-4 rounded-lg mt-6 border-l-4 border-[#00B294]">
+<h3 class="text-lg font-bold mb-2 accent-turquoise flex items-center">
+<i class="fa-solid fa-lightbulb mr-2"></i>使い分けのポイント
+      </h3>
+<p>タスクの性質や求める出力の具体性に応じて、Zero-shotとFew-shotを使い分けることが重要です。単純なタスクや一般的な知識で対応できる場合はZero-shotで十分ですが、より専門的な内容や特定の形式を求める場合はFew-shotが効果的です。まずはZero-shotで試し、期待通りの結果が得られない場合にFew-shotを検討するという進め方が一般的です。</p>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

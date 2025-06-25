@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1280 720" 
+     width="1280" height="720"
+     role="img" aria-labelledby="slide-title-03" aria-describedby="slide-desc-03">
+  
+  <title id="slide-title-03">スライド3: ブリッジ - 前回の振り返り</title>
+  <desc id="slide-desc-03">セクション1への導入。前回の振り返り：SVG手法とその課題</desc>
+  
+  <!-- 背景（白） -->
+  <rect width="1280" height="720" fill="#ffffff"/>
+  
+  <!-- 背景ロゴ（右上） -->
+  <image xlink:href="https://tanren.notion.site/image/attachment%3Acb1d3d60-1a74-482c-9977-d59f70bd6027%3A%E5%9B%B31.svg?table=block&id=21b31bbd-522c-806c-9314-fa7bdaf959df&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2" 
+         x="1140" y="30" width="100" height="100"
+         preserveAspectRatio="xMidYMid meet"/>
+  
+  <!-- セクション番号（大きな数字） -->
+  <text x="640" y="300" 
+        text-anchor="middle"
+        font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif"
+        font-size="120" fill="#cccccc" font-weight="400">
+    01
+  </text>
+  
+  <!-- セクションタイトル -->
+  <text x="640" y="400" 
+        text-anchor="middle"
+        font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif"
+        font-size="53" fill="#FA000F" font-weight="700">
+    前回の振り返り：SVG手法とその課題
+  </text>
+  
+  <!-- フッター -->
+  <g transform="translate(0, 695)">
+    <text x="60" y="0" 
+          font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif"
+          font-size="11" fill="#888888">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved.
+    </text>
+  </g>
+</svg>

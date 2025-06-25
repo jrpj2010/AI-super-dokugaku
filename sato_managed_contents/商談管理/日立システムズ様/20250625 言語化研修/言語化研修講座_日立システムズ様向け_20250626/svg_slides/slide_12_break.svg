@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+
+  <!-- Center Content -->
+  <g transform="translate(960, 540)">
+    <!-- Coffee Icon -->
+    <text x="0" y="-80" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="120"
+      fill="#FA000F">☕</text>
+
+    <!-- Break Text -->
+    <text x="0" y="40" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="72" font-weight="700"
+      fill="#333">休憩</text>
+
+    <!-- Duration -->
+    <rect x="-100" y="80" width="200" height="80" fill="#FA000F" rx="40" />
+    <text x="0" y="130" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="600"
+      fill="white">10分</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">12</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Goal Seekプロンプト：AIに質問させる</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 810px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 810px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .chat-bubble {
+      position: relative;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .chat-bubble::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+    }
+    .user-bubble {
+      background-color: #E4F6FF;
+      margin-left: 40px;
+    }
+    .user-bubble::after {
+      border-right-color: #E4F6FF;
+      left: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .ai-bubble {
+      background-color: #F0F0F0;
+      margin-right: 40px;
+    }
+    .ai-bubble::after {
+      border-left-color: #F0F0F0;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mb-40 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">Goal Seekプロンプト：AIに質問させる</h1>
+<!-- Main Content -->
+<div class="grid grid-cols-2 gap-8">
+<!-- Left Column: Definition and Process -->
+<div>
+<div class="mb-6">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-circle-question text-[#00B294] mr-3"></i>Goal Seekプロンプトとは
+          </h2>
+<div class="bg-gray-50 p-4 rounded-lg">
+<p class="mb-2">ユーザーが<span class="font-bold">明確なゴールを持っていない</span>、あるいは<span class="font-bold">ゴールが曖昧な場合</span>に有効な対話型の手法</p>
+<p>AIに質問をさせるように促し、その<span class="font-bold">対話を通じて思考を整理</span>し、最終的な目標を具体化していきます</p>
+</div>
+</div>
+<div class="mb-6">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-diagram-project text-[#0078D4] mr-3"></i>基本プロセス
+          </h2>
+<div class="bg-gray-50 p-4 rounded-lg">
+<ol class="list-decimal pl-5 space-y-2">
+<li><span class="font-bold">曖昧なゴールの提示</span>：大まかな目標をAIに伝える</li>
+<li><span class="font-bold">AIへの質問の要求</span>：「この目標を達成するために必要な情報を質問してください」と指示</li>
+<li><span class="font-bold">対話による目標の具体化</span>：AIの質問に答えることで要件が整理される</li>
+<li><span class="font-bold">精度の高い出力</span>：必要な情報が揃った段階でアウトプットを生成</li>
+</ol>
+</div>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-lightbulb text-[#7FBA00] mr-3"></i>効果
+          </h2>
+<div class="bg-gray-50 p-4 rounded-lg">
+<ul class="list-disc pl-5 space-y-1">
+<li>自分では気づいていなかった論点の発見</li>
+<li>思考の整理と深化</li>
+<li>AIを「壁打ち相手」として活用</li>
+<li>必要な情報を効率的に収集</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Right Column: Example -->
+<div>
+<h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+<i class="fa-solid fa-comment-dots text-[#FA000F] mr-3"></i>Goal Seekプロンプトの例
+        </h2>
+<div class="bg-gray-100 p-4 rounded-lg mb-4">
+<p class="font-bold mb-2">プロンプト例：</p>
+<div class="bg-white p-3 rounded border border-gray-300">
+            「業務効率化のための新しい企画を考えたいです。この目標を達成するために、私にどのような情報が必要ですか？質問をしてください」
+          </div>
+</div>
+<div class="relative border-l-2 border-gray-300 pl-6 ml-4">
+<!-- AI Icon -->
+<div class="absolute -left-7 top-0 bg-white rounded-full p-1">
+<i class="fa-solid fa-robot text-xl accent-blue"></i>
+</div>
+<div class="chat-bubble ai-bubble">
+<p class="font-bold">対象となる業務範囲は何ですか？</p>
+</div>
+<!-- User Icon -->
+<div class="absolute -left-7 top-[90px] bg-white rounded-full p-1">
+<i class="fa-solid fa-user text-xl text-gray-600"></i>
+</div>
+<div class="chat-bubble user-bubble">
+<p>マーケティング部門の資料作成プロセスです</p>
+</div>
+<!-- AI Icon -->
+<div class="absolute -left-7 top-[180px] bg-white rounded-full p-1">
+<i class="fa-solid fa-robot text-xl accent-blue"></i>
+</div>
+<div class="chat-bubble ai-bubble">
+<p class="font-bold">現在の課題は具体的に何ですか？</p>
+</div>
+<!-- User Icon -->
+<div class="absolute -left-7 top-[270px] bg-white rounded-full p-1">
+<i class="fa-solid fa-user text-xl text-gray-600"></i>
+</div>
+<div class="chat-bubble user-bubble">
+<p>資料作成に時間がかかり、修正も多発しています</p>
+</div>
+<!-- AI Icon -->
+<div class="absolute -left-7 top-[360px] bg-white rounded-full p-1">
+<i class="fa-solid fa-robot text-xl accent-blue"></i>
+</div>
+<div class="chat-bubble ai-bubble">
+<p class="font-bold">予算や導入期間の制約はありますか？</p>
+</div>
+</div>
+<div class="mt-4 bg-[#00B294] bg-opacity-10 p-3 rounded-lg text-center">
+<p class="font-bold">対話を通じて、漠然としていた目標が<br/>明確な要件へと整理されていく</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

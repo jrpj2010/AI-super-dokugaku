@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chain-of-Thought：複雑な問題を分解する</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 766px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 766px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mb-40 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 w-full">Chain-of-Thought：複雑な問題を分解する</h1>
+<!-- Main Content -->
+<div class="mt-6">
+<!-- Definition and Explanation -->
+<div class="mb-6">
+<h2 class="text-2xl font-bold mb-3 text-gray-800">
+<i class="fa-solid fa-lightbulb accent-blue mr-2"></i>
+          Chain-of-Thought（CoT）プロンプティングとは
+        </h2>
+<p class="ml-8 text-lg">
+          AIに単に答えを出させるのではなく、<span class="font-bold">「思考の連鎖」</span>、つまり結論に至るまでの中間的な思考プロセスを段階的に記述させる手法です。
+        </p>
+</div>
+<!-- Visual Chain Representation -->
+<div class="flex justify-center my-6" id="chain-visualization">
+<div class="flex items-center">
+<div class="w-48 py-3 px-4 rounded-lg bg-gray-100 border border-gray-300 text-center">
+<i class="fa-solid fa-question text-2xl accent-blue mb-1"></i>
+<div>複雑な問題</div>
+</div>
+<i class="fa-solid fa-arrow-right mx-4 text-gray-500"></i>
+<div class="w-48 py-3 px-4 rounded-lg bg-[#0078D4] bg-opacity-10 border border-[#0078D4] text-center">
+<i class="fa-solid fa-list-ol text-2xl accent-blue mb-1"></i>
+<div>ステップ１</div>
+</div>
+<i class="fa-solid fa-arrow-right mx-4 text-gray-500"></i>
+<div class="w-48 py-3 px-4 rounded-lg bg-[#0078D4] bg-opacity-10 border border-[#0078D4] text-center">
+<i class="fa-solid fa-list-ol text-2xl accent-blue mb-1"></i>
+<div>ステップ２</div>
+</div>
+<i class="fa-solid fa-arrow-right mx-4 text-gray-500"></i>
+<div class="w-48 py-3 px-4 rounded-lg bg-[#7FBA00] bg-opacity-10 border border-[#7FBA00] text-center">
+<i class="fa-solid fa-check-double text-2xl accent-green mb-1"></i>
+<div>最終結論</div>
+</div>
+</div>
+</div>
+<!-- Key Trigger Phrases -->
+<div class="mb-6 bg-gray-50 p-4 rounded-lg">
+<h3 class="text-xl font-semibold mb-2 text-gray-800">
+<i class="fa-solid fa-key accent-turquoise mr-2"></i>
+          CoTを促す主なフレーズ
+        </h3>
+<div class="flex justify-around">
+<div class="bg-white p-3 rounded border border-gray-200">
+            「ステップバイステップで考えてください」
+          </div>
+<div class="bg-white p-3 rounded border border-gray-200">
+            「理由も含めて説明してください」
+          </div>
+</div>
+</div>
+<!-- Benefits and Use Cases in Two Columns -->
+<div class="flex mt-4">
+<!-- Left Column: Benefits -->
+<div class="w-1/2 pr-6">
+<h3 class="text-xl font-semibold mb-3 hitachi-red">
+<i class="fa-solid fa-star mr-2"></i>
+            CoTの効果
+          </h3>
+<ul class="list-none space-y-2">
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-blue mr-2 mt-1.5"></i>
+<span>問題の分解：複雑な課題をより小さく管理しやすいステップに分解</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-blue mr-2 mt-1.5"></i>
+<span>推論の可視化：各ステップでの推論過程が明示され、回答の信頼性を検証しやすい</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-blue mr-2 mt-1.5"></i>
+<span>精度の向上：段階的な思考により、最終的なアウトプットの論理的な一貫性と精度が向上</span>
+</li>
+</ul>
+</div>
+<!-- Right Column: Use Cases -->
+<div class="w-1/2 pl-6 border-l border-gray-200">
+<h3 class="text-xl font-semibold mb-3 hitachi-red">
+<i class="fa-solid fa-briefcase mr-2"></i>
+            ビジネス場面での活用例
+          </h3>
+<ul class="list-none space-y-2">
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-green mr-2 mt-1.5"></i>
+<span><b>複雑な意思決定：</b>「A案とB案のメリット・デメリットを比較し、どちらを採用すべきか提案してください。評価基準、各案の分析、最終結論の順に、ステップバイステップで考えてください。」</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-green mr-2 mt-1.5"></i>
+<span><b>多角的な分析：</b>「添付の顧客アンケート結果から読み取れる主要な課題を3つ挙げ、それぞれの原因と対策を段階的に分析してください。」</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-circle-check text-sm accent-green mr-2 mt-1.5"></i>
+<span><b>論理的な説明資料：</b>「この新機能がもたらす顧客への提供価値について、背景、機能詳細、期待される効果の順で、理由も含めて説明する文章を作成してください。」</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

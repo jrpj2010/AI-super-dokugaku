@@ -1,0 +1,116 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    「言語化」とは何か？
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 中央の図 -->
+    <g transform="translate(680, 0)">
+      <!-- 分解のイメージ -->
+      <g transform="translate(-400, 0)">
+        <rect x="0" y="0" width="300" height="150" fill="#E0E0E0" rx="20" />
+        <text x="150" y="85" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="32"
+          font-weight="500" fill="#333">大きな塊</text>
+      </g>
+
+      <!-- 矢印1 -->
+      <g transform="translate(-80, 75)">
+        <path d="M0,0 L60,0" stroke="#FA000F" stroke-width="4" marker-end="url(#arrowhead)" />
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#FA000F" />
+          </marker>
+        </defs>
+      </g>
+
+      <!-- Step 1: 分解 -->
+      <g transform="translate(0, 0)">
+        <rect x="-150" y="20" width="300" height="110" fill="#FFE5E5" rx="15" stroke="#FA000F" stroke-width="2" />
+        <text x="0" y="55" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="600"
+          fill="#FA000F">Step 1: 分解</text>
+        <text x="0" y="95" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="20"
+          fill="#666">小さなパーツに分ける</text>
+      </g>
+
+      <!-- 矢印2 -->
+      <g transform="translate(170, 75)">
+        <path d="M0,0 L60,0" stroke="#FA000F" stroke-width="4" marker-end="url(#arrowhead2)" />
+        <defs>
+          <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#FA000F" />
+          </marker>
+        </defs>
+      </g>
+
+      <!-- Step 2: 構造化 -->
+      <g transform="translate(400, 0)">
+        <rect x="-150" y="20" width="300" height="110" fill="#FFE5E5" rx="15" stroke="#FA000F" stroke-width="2" />
+        <text x="0" y="55" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="600"
+          fill="#FA000F">Step 2: 構造化</text>
+        <text x="0" y="95" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="20"
+          fill="#666">論理的に並べ替える</text>
+      </g>
+    </g>
+
+    <!-- 区切り線 -->
+    <line x1="150" y1="220" x2="1470" y2="220" stroke="#DDD" stroke-width="2" />
+
+    <!-- 悪い例 -->
+    <g transform="translate(0, 280)">
+      <rect x="0" y="0" width="50" height="50" fill="#FF6B6B" rx="10" />
+      <text x="25" y="35" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+        fill="white">✗</text>
+      <text x="70" y="35" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="600"
+        fill="#333">悪い例:</text>
+      <text x="200" y="35" font-family="Noto Sans JP, sans-serif" font-size="24"
+        fill="#666">「来週の会議の資料、いい感じに作っておいて」</text>
+    </g>
+
+    <!-- 良い例 -->
+    <g transform="translate(0, 380)">
+      <rect x="0" y="0" width="50" height="50" fill="#4CAF50" rx="10" />
+      <text x="25" y="35" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+        fill="white">✓</text>
+      <text x="70" y="35" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="600"
+        fill="#333">良い例:</text>
+
+      <!-- 良い例の詳細 -->
+      <g transform="translate(200, 10)">
+        <g transform="translate(0, 0)">
+          <circle cx="10" cy="25" r="3" fill="#FA000F" />
+          <text x="30" y="30" font-family="Noto Sans JP, sans-serif" font-size="22" font-weight="500"
+            fill="#333">目的:</text>
+          <text x="90" y="30" font-family="Noto Sans JP, sans-serif" font-size="20"
+            fill="#666">〇〇の課題について、A案とB案のメリット・デメリットを比較検討し、次のアクションを決定する</text>
+        </g>
+
+        <g transform="translate(0, 50)">
+          <circle cx="10" cy="25" r="3" fill="#FA000F" />
+          <text x="30" y="30" font-family="Noto Sans JP, sans-serif" font-size="22" font-weight="500"
+            fill="#333">要素:</text>
+          <text x="90" y="30" font-family="Noto Sans JP, sans-serif" font-size="20"
+            fill="#666">課題の背景、A案概要、B案概要、比較表（コスト、期間、リスク）、結論、ネクストステップ</text>
+        </g>
+
+        <g transform="translate(0, 100)">
+          <circle cx="10" cy="25" r="3" fill="#FA000F" />
+          <text x="30" y="30" font-family="Noto Sans JP, sans-serif" font-size="22" font-weight="500"
+            fill="#333">構成:</text>
+          <text x="90" y="30" font-family="Noto Sans JP, sans-serif" font-size="20"
+            fill="#666">この順番で10枚のスライドにまとめてほしい</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">4</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor勉強会 第2回: AIアシスタントを"育てる"実践編</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --theme-primary: #2563eb;
+      /* blue-600 */
+      --theme-secondary: #4b5563;
+      /* gray-600 */
+      --theme-text: #1f2937;
+      /* gray-800 */
+      --theme-bg: #f9fafb;
+      /* gray-50 */
+      --theme-light-gray: #f3f4f6;
+      /* gray-100 */
+      --theme-white: #ffffff;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #e5e7eb;
+      /* gray-200 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .presentation-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      background: var(--theme-white);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 50px 60px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--theme-text);
+      background-color: var(--theme-bg);
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 30px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #9ca3af;
+      /* gray-400 */
+    }
+
+    .slide-footer .page-number::after {
+      content: " / 30";
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      padding: 0;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 3.75rem;
+      /* 60px */
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      /* 36px */
+    }
+
+    h3 {
+      font-size: 1.875rem;
+      /* 30px */
+    }
+
+    /* Slide specific styles */
+    .title-slide h1 {
+      color: var(--theme-primary);
+    }
+
+    .section-title-slide {
+      background-color: var(--theme-primary);
+      color: var(--theme-white);
+    }
+
+    .section-title-slide h2 {
+      font-size: 3rem;
+    }
+
+    .section-title-slide p {
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .nav-button {
+      background: var(--theme-primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .nav-button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .nav-button:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 1rem;
+      color: var(--theme-text);
+      font-weight: 600;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .presentation-container {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+        margin: 0;
+      }
+
+      .slide {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex !important;
+        page-break-after: always;
+      }
+
+      .nav-controls {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="presentation-container">
+    <!-- スライドはJSでここに挿入されます -->
+  </div>
+
+  <div class="nav-controls">
+    <button class="nav-button" id="prevBtn">← 前へ</button>
+    <div class="slide-counter">
+      <span id="currentSlideNum">1</span> / 30
+    </div>
+    <button class="nav-button" id="nextBtn">次へ →</button>
+  </div>
+
+  <script>
+    const slidesData = [
+      {
+        type: 'title-slide',
+        content: `
+      <div class="absolute top-8 left-8 text-gray-500 font-bold">Cursor 勉強会</div>
+      <h1 class="text-6xl font-extrabold text-gray-800 tracking-tight">AIアシスタントを"育てる"実践編</h1>
+      <p class="mt-4 text-2xl text-gray-600">Cursor勉強会 第2回</p>
+      <div class="absolute bottom-8 right-8 text-gray-500 font-bold">TANREN.inc</div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold text-blue-700">本日のゴール</h2>
+      <p class="mt-8 text-2xl text-gray-700">
+        Cursorを「便利なツール」から、<br>
+        <span class="font-bold text-blue-600 text-3xl">「あなたの業務に特化した"最強の相棒"」</span>へ進化させる。
+      </p>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold mb-8">前回の復習 (1/2)</h2>
+      <div class="w-full grid grid-cols-2 gap-8 text-left text-xl">
+        <div class="bg-gray-100 p-6 rounded-lg">
+          <h3 class="text-2xl font-bold mb-2"><i class="fas fa-code-branch mr-2"></i>Git連携</h3>
+          <p>AIとの対話（自然言語）で、ファイルの変更履歴を記録（コミット）できることを学びました。</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg">
+          <h3 class="text-2xl font-bold mb-2"><i class="fas fa-plug mr-2"></i>RooCode & OpenRouter</h3>
+          <p>安価なAPIで多様なAIモデルを使いこなし、コストを意識した最適なAI活用法を習得しました。</p>
+        </div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold mb-8">前回の復習 (2/2)</h2>
+      <div class="bg-blue-50 p-8 rounded-xl shadow-lg w-3/4">
+        <h3 class="text-3xl font-bold text-blue-800"><i class="fas fa-book-open-reader mr-2"></i>キラー機能: Docs (RAG)</h3>
+        <p class="mt-4 text-2xl">指定したWebサイトを丸ごとAIに学習させ、<br>「あなた専用の物知り博士」を創り出せることを体感しました。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Day1の結論</h2>
+      <div class="mt-8 text-3xl leading-relaxed">
+        <i class="fas fa-brain text-6xl text-gray-400"></i>
+        <p class="mt-4">地頭にインストールする時代は終わった。<br>AIを <span class="font-bold text-blue-600">「第二の脳（外部脳）」</span>として活用する。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">では、今日は何を？</h2>
+      <div class="mt-12 flex items-center justify-center text-3xl w-full">
+        <div class="text-center">
+          <p>第二の脳</p>
+          <i class="fas fa-brain text-6xl text-gray-500 mt-2"></i>
+        </div>
+        <i class="fas fa-arrow-right-long text-6xl text-blue-500 mx-16"></i>
+        <div class="text-center">
+          <p class="font-bold text-blue-600">業務特化アシスタント</p>
+          <i class="fas fa-user-tie text-6xl text-blue-600 mt-2"></i>
+        </div>
+      </div>
+    `
+      },
+      {
+        type: 'section-title-slide',
+        content: `
+      <h2 class="text-5xl font-bold text-white">Part 1</h2>
+      <p class="mt-4 text-3xl text-gray-200">知識ベースの深化：ローカルファイルとの融合</p>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Docs機能の限界</h2>
+      <p class="text-2xl mt-4">Webサイトの情報だけでは、あなたの業務の<span class="font-bold">半分</span>しかカバーできない。</p>
+      <div class="mt-8 w-full max-w-md">
+        <canvas id="knowledgeChart"></canvas>
+      </div>
+    `,
+        script: `
+      new Chart(document.getElementById('knowledgeChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['公開情報 (Web / Docs)', '非公開情報 (ローカルファイル)'],
+          datasets: [{
+            data: [50, 50],
+            backgroundColor: ['rgb(59, 130, 246)', 'rgb(209, 213, 219)'],
+          }]
+        },
+        options: { plugins: { legend: { position: 'top' } } }
+      });
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">真のパーソナライズへ</h2>
+      <p class="mt-4 text-2xl">外部知識と内部知識を組み合わせ、AIに完全なコンテキストを与える</p>
+      <div class="mermaid mt-8 text-xl">
+        graph TD
+          A["<i class='fas fa-globe mr-2'></i> 外部知識<br>(Webサイト via Docs)"] --> C{AIへのインプット};
+          B["<i class='fas fa-folder-open mr-2'></i> 内部知識<br>(ローカルファイル)"] --> C;
+          C --> D["<i class='fas fa-user-tie mr-2'></i> 最強のAIアシスタント"];
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">How-to: 複数Docsの活用</h2>
+      <p class="mt-4 text-2xl">\`@\`を複数指定するだけで、情報の掛け合わせ分析が可能に。</p>
+      <div class="mt-8 bg-gray-800 text-white p-6 rounded-lg font-mono text-xl text-left w-2/3">
+        <p><span class="text-purple-400">@TANREN</span> <span class="text-purple-400">@競合サイト</span></p>
+        <p class="mt-4">両社のサービスを比較し、TANRENが優位な点を3つ挙げてください。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold"><i class="fas fa-desktop mr-3"></i>Live Demo: 競合分析</h2>
+      <p class="text-2xl mt-4">@TANREN vs @競合 で市場分析を実行</p>
+      <table class="w-3/4 text-xl mt-6 border-collapse">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border p-3">分析項目</th>
+            <th class="border p-3 text-blue-600 font-bold">TANREN</th>
+            <th class="border p-3">競合A</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="border p-3 font-bold text-left">コア機能</td><td class="border p-3">AIによる個別フィードバック</td><td class="border p-3">動画コンテンツ配信</td></tr>
+          <tr><td class="border p-3 font-bold text-left">価格設定</td><td class="border p-3">成果ベースの柔軟なプラン</td><td class="border p-3">固定の月額プラン</td></tr>
+          <tr><td class="border p-3 font-bold text-left">ターゲット</td><td class="border p-3">営業・接客のロールプレイ</td><td class="border p-3">全社的な知識共有</td></tr>
+        </tbody>
+      </table>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">次のレベル: ローカルファイルの参照</h2>
+      <p class="mt-4 text-2xl">あなたのPCにある、Webに存在しない「生きた情報」をAIに与える。</p>
+      <div class="mt-8 flex justify-around w-full max-w-3xl">
+        <div class="text-center"><i class="fas fa-file-alt text-6xl text-blue-500"></i><p class="mt-4 font-bold text-3xl">@file</p><p class="text-xl">特定のファイルを参照</p></div>
+        <div class="text-center"><i class="fas fa-folder-tree text-6xl text-blue-500"></i><p class="mt-4 font-bold text-3xl">@dir</p><p class="text-xl">フォルダ丸ごと参照</p></div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">なぜローカルファイルが重要か？</h2>
+      <div class="mt-12 grid grid-cols-3 gap-10 text-xl w-full max-w-5xl">
+        <div class="flex flex-col items-center"><i class="fas fa-lock text-5xl text-green-500"></i><h3 class="font-bold mt-4 text-2xl">機密性</h3><p>非公開の顧客情報や<br>内部資料を扱える</p></div>
+        <div class="flex flex-col items-center"><i class="fas fa-crosshairs text-5xl text-green-500"></i><h3 class="font-bold mt-4 text-2xl">即時性</h3><p>たった今作成した議事録も<br>即座にインプット可能</p></div>
+        <div class="flex flex-col items-center"><i class="fas fa-user-check text-5xl text-green-500"></i><h3 class="font-bold mt-4 text-2xl">個別性</h3><p>あなただけの文脈や<br>プロジェクト情報を反映</p></div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold"><i class="fas fa-desktop mr-3"></i>Live Demo: ローカル議事録の要約</h2>
+      <p class="mt-4 text-2xl">@dirでsato_managed_contents/内の複数ドキュメントを瞬時に要約</p>
+      <div class="mt-8 bg-gray-800 text-white p-6 rounded-lg font-mono text-xl text-left w-3/4">
+        <p><span class="text-purple-400">@dir:sato_managed_contents/Gen-Spa2.0/</span></p>
+        <p class="mt-4">このフォルダ内の資料群から、Gen-Spa2.0プロジェクトの目的と主要な提供価値を3点にまとめてください。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Part 1 まとめ</h2>
+      <p class="mt-8 text-3xl leading-relaxed">
+        <i class="fas fa-lightbulb text-yellow-400 text-6xl"></i><br><br>
+        あなたは今、<span class="font-bold">あらゆる情報</span>を<br>AIアシスタントの知識として授ける術を身につけました。
+      </p>
+    `
+      },
+      {
+        type: 'section-title-slide',
+        content: `
+      <h2 class="text-5xl font-bold text-white">Part 2</h2>
+      <p class="mt-4 text-3xl text-gray-200">実践ワークフロー：定型業務の完全自動化</p>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">私たちの身近な「課題」</h2>
+      <p class="mt-8 text-9xl">😩</p>
+      <p class="mt-8 text-3xl">毎週・毎日の報告書づくり、<br>正直、面倒ではありませんか？</p>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">本日のゴール</h2>
+      <p class="text-2xl mt-4">この面倒な「週報作成」を<span class="font-bold text-red-600">ワンプロンプト</span>で終わらせる</p>
+      <div class="mt-6 p-6 border-4 border-dashed border-gray-400 rounded-lg bg-white text-left w-3/4">
+        <h3 class="font-bold text-xl">週次活動報告書</h3>
+        <p><strong>期間:</strong> 2025/06/17 ~ 2025/06/24</p>
+        <p><strong>ハイライト:</strong><br> - Cursor勉強会 Vol.1を実施し、高評価を獲得。</p>
+        <p><strong>来週の計画:</strong><br> - 第2回勉強会のスライドを完成させる。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">自動化の「材料」</h2>
+      <div class="mt-12 flex items-center justify-center text-3xl space-x-16">
+        <div class="text-center">
+          <i class="fas fa-file-word text-6xl text-blue-500"></i>
+          <p class="mt-2">活動メモ<br>(ローカルファイル)</p>
+        </div>
+        <p class="text-6xl font-thin">+</p>
+        <div class="text-center">
+          <i class="fas fa-globe text-6xl text-green-500"></i>
+          <p class="mt-2">会社の最新情報<br>(Docs)</p>
+        </div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">"マスタープロンプト"の設計</h2>
+      <div class="mt-8 bg-gray-800 text-white p-6 rounded-lg font-mono text-lg text-left w-3/4">
+        <p><span class="text-yellow-300">#命令書</span><br>あなたは私の優秀なアシスタントです。</p>
+        <p class="mt-4"><span class="text-yellow-300">#コンテキスト</span><br><span class="text-purple-400">@dir:path/to/memos</span> <span class="text-purple-400">@TANREN</span></p>
+        <p class="mt-4"><span class="text-yellow-300">#タスク</span><br>添付の活動記録と会社の最新情報を元に、週報を作成してください。</p>
+        <p class="mt-4"><span class="text-yellow-300">#出力形式</span><br>- ハイライト<br>- 課題と対策<br>- 来週の計画</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold"><i class="fas fa-desktop mr-3"></i>Live Demo: 週報自動生成</h2>
+      <p class="text-2xl mt-4">マスタープロンプト一発で、どれだけのものが出来るかご覧ください。</p>
+      <div class="mt-8 text-left p-6 bg-gray-100 rounded-lg w-3/4">
+        <p class="text-gray-500 text-sm">// AIによる生成がここに表示されます...</p>
+        <div class="mt-4 animate-pulse">
+          <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+          <div class="h-4 bg-gray-300 rounded w-1/2 mt-2"></div>
+          <div class="h-4 bg-gray-300 rounded w-5/6 mt-2"></div>
+        </div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">応用例：議事録からマニュアル作成</h2>
+      <div class="mt-8 flex items-center justify-center text-3xl space-x-8 w-full">
+        <div class="text-center p-6 bg-red-50 rounded-lg">
+          <i class="fas fa-file-audio text-6xl text-red-500"></i>
+          <p class="mt-2">議事録ファイル<br>(Vol.0001.md)</p>
+        </div>
+        <i class="fas fa-arrow-right-long text-6xl text-gray-500 mx-8"></i>
+        <div class="text-center p-6 bg-green-50 rounded-lg">
+          <i class="fas fa-book text-6xl text-green-500"></i>
+          <p class="mt-2">新人向け<br>セットアップマニュアル</p>
+        </div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">仕上げは「インライン編集」</h2>
+      <p class="text-2xl mt-4">AIの出力はあくまでドラフト。最後の仕上げはあなたの仕事。</p>
+      <div class="mt-8 text-2xl">
+        <p>AIの出力した文章を選択し、<br><kbd class="px-4 py-2 text-xl font-sans font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg shadow-sm">Cmd + K</kbd> or <kbd class="px-4 py-2 text-xl font-sans font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg shadow-sm">Ctrl + K</kbd><br>で、意図通りに微修正。</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Part 2 まとめ</h2>
+      <p class="mt-8 text-3xl leading-relaxed">
+        <i class="fas fa-rocket text-red-500 text-6xl"></i><br><br>
+        あなたは今、複数の情報を組み合わせ<br>
+        <span class="font-bold">複雑な定型業務を自動化する力</span>を手に入れました。
+      </p>
+    `
+      },
+      {
+        type: 'section-title-slide',
+        content: `
+      <h2 class="text-5xl font-bold text-white">Part 3</h2>
+      <p class="mt-4 text-3xl text-gray-200">Workshop: あなただけのアシスタントを創る</p>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">YOUR MISSION</h2>
+      <p class="text-2xl mt-4">あなたの業務の中で、<br>毎週・毎日繰り返している「面倒な作業」を一つ、特定してください。</p>
+      <div class="mt-8 p-6 bg-yellow-50 border-2 border-yellow-300 rounded-lg text-left w-3/4">
+        <ul class="list-disc list-inside text-xl space-y-2">
+          <li>日報・週報・月報の作成</li>
+          <li>顧客への定型メールの作成</li>
+          <li>会議のアジェンダ作成</li>
+          <li>etc...</li>
+        </ul>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Step 1: 材料集め</h2>
+      <p class="text-2xl mt-4">その作業を自動化するために、AIに読み込ませるべき「知識」は何ですか？</p>
+      <div class="mt-8 flex justify-around w-full text-xl max-w-5xl">
+        <div class="w-2/5 text-left p-4 bg-gray-100 rounded-lg">
+          <h3 class="font-bold text-2xl mb-2"><i class="fas fa-globe"></i> Webサイト (Docs)</h3>
+          <ul class="list-disc list-inside space-y-1"><li>会社のHP</li><li>製品・サービスサイト</li><li>よく使うツールのヘルプ</li></ul>
+        </div>
+        <div class="w-2/5 text-left p-4 bg-gray-100 rounded-lg">
+          <h3 class="font-bold text-2xl mb-2"><i class="fas fa-folder-open"></i> ローカルファイル</h3>
+          <ul class="list-disc list-inside space-y-1"><li>過去の報告書フォルダ</li><li>議事録フォルダ</li><li>顧客とのやり取りメモ</li></ul>
+        </div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Step 2: プロンプト設計</h2>
+      <p class="text-2xl mt-4">マスタープロンプトの設計図を元に、<br>あなたのタスク用のプロンプトを組み立ててみましょう。</p>
+      <div class="mt-8 bg-gray-800 text-white p-6 rounded-lg font-mono text-lg text-left w-3/4">
+        <p><span class="text-yellow-300">#命令書:</span> [あなたのアシスタントとして振る舞ってください]</p>
+        <p><span class="text-yellow-300">#コンテキスト:</span> <span class="text-purple-400">[@あなたのDocs]</span> <span class="text-purple-400">[@dir:あなたのフォルダ]</span></p>
+        <p><span class="text-yellow-300">#タスク:</span> [あなたの自動化したい作業]</p>
+        <p><span class="text-yellow-300">#出力形式:</span> [欲しいアウトプットの形式]</p>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold text-blue-700">本日のまとめ</h2>
+      <div class="mt-12 grid grid-cols-3 gap-10 text-xl w-full max-w-5xl">
+        <div class="flex flex-col items-center"><i class="fas fa-lightbulb text-5xl text-blue-500"></i><h3 class="font-bold mt-4 text-2xl">KNOW (知る)</h3><p>複数ソースを組み合わせて<br>複雑な業務を自動化できる</p></div>
+        <div class="flex flex-col items-center"><i class="fas fa-heart text-5xl text-red-500"></i><h3 class="font-bold mt-4 text-2xl">FEEL (感じる)</h3><p>自分の仕事に合わせて<br>AIを育てられる！</p></div>
+        <div class="flex flex-col items-center"><i class="fas fa-play text-5xl text-green-500"></i><h3 class="font-bold mt-4 text-2xl">DO (行動する)</h3><p>自分の定型業務を<br>自動化するプロンプトを作る</p></div>
+      </div>
+    `
+      },
+      {
+        content: `
+      <h2 class="text-4xl font-bold">Next Action & Q&A</h2>
+      <div class="mt-8 text-left text-2xl space-y-4 w-full max-w-4xl">
+        <p><i class="fas fa-home mr-2 text-blue-500"></i><span class="font-bold">宿題:</span></p>
+        <ul class="list-disc list-inside ml-8">
+          <li>あなたの業務でよく使うサイトやフォルダをDocsに登録する。</li>
+          <li>今日設計したプロンプトを実際に試し、自分だけのワークフローを構築してみる。</li>
+        </ul>
+        <p class="mt-8"><i class="fas fa-question-circle mr-2 text-green-500"></i><span class="font-bold">Q&A</span></p>
+      </div>
+    `
+      }
+    ];
+
+    class PresentationController {
+      constructor(slides) {
+        this.slidesData = slides;
+        this.currentSlide = 0;
+        this.container = document.querySelector('.presentation-container');
+        this.init();
+      }
+
+      init() {
+        this.renderSlide(this.currentSlide);
+        this.setupControls();
+        this.updateCounter();
+      }
+
+      renderSlide(index) {
+        this.container.innerHTML = '';
+        const slideData = this.slidesData[index];
+        const slideEl = document.createElement('div');
+        slideEl.className = `slide ${slideData.type || ''}`;
+        slideEl.innerHTML = `
+      ${slideData.content}
+      <div class="slide-footer">
+        <span class="company-name">TANREN.inc</span>
+        <span class="page-number">${index + 1}</span>
+      </div>
+    `;
+        this.container.appendChild(slideEl);
+
+        // Execute script if it exists
+        if (slideData.script) {
+          const scriptEl = document.createElement('script');
+          scriptEl.textContent = slideData.script;
+          this.container.appendChild(scriptEl);
+        }
+
+        // Re-initialize mermaid if needed
+        if (slideEl.querySelector('.mermaid')) {
+          mermaid.run();
+        }
+      }
+
+      setupControls() {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.addEventListener('click', () => this.prev());
+        nextBtn.addEventListener('click', () => this.next());
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') this.next();
+          if (e.key === 'ArrowLeft') this.prev();
+        });
+      }
+
+      updateCounter() {
+        document.getElementById('currentSlideNum').textContent = this.currentSlide + 1;
+        document.getElementById('prevBtn').disabled = this.currentSlide === 0;
+        document.getElementById('nextBtn').disabled = this.currentSlide === this.slidesData.length - 1;
+      }
+
+      next() {
+        if (this.currentSlide < this.slidesData.length - 1) {
+          this.currentSlide++;
+          this.renderSlide(this.currentSlide);
+          this.updateCounter();
+        }
+      }
+
+      prev() {
+        if (this.currentSlide > 0) {
+          this.currentSlide--;
+          this.renderSlide(this.currentSlide);
+          this.updateCounter();
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+      new PresentationController(slidesData);
+    });
+
+  </script>
+</body>
+
+</html>

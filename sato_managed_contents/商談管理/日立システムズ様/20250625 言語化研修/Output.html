@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI時代の超言語化能力習得研修 - Day1</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+    :root {
+      --hitachi-red: #FA000F;
+      --base-font-size: 26pt;
+      --base-padding: 60px;
+      --bg-fallback-dark: #333;
+      --bg-fallback-light: #f5f5f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .presentation-container {
+      width: min(95vw, 1280px);
+      height: min(80vh, 720px);
+      position: relative;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 50px var(--base-padding);
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      font-family: "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      font-size: var(--base-font-size);
+      color: #333;
+      background-color: #fff;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .slide.prev {
+      transform: translateX(-30px);
+    }
+
+    .slide footer {
+      font-size: 10pt;
+      color: #666;
+      position: absolute;
+      bottom: 25px;
+      left: var(--base-padding);
+      right: var(--base-padding);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .slide h1 {
+      font-size: 42pt;
+      color: var(--hitachi-red);
+      margin-bottom: 30px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .slide h2 {
+      font-size: 32pt;
+      color: #000;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--hitachi-red);
+      font-weight: 700;
+      width: 100%;
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    .slide h3 {
+      font-size: 24pt;
+      color: var(--hitachi-red);
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .slide ul,
+    .slide ol {
+      line-height: 1.8;
+      text-align: left;
+      width: 100%;
+      padding-left: 40px;
+    }
+
+    .slide li {
+      margin-bottom: 1em;
+      font-size: 24pt;
+      line-height: 1.6;
+    }
+
+    .slide.title {
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--hitachi-red) 0%, #8B0000 100%);
+      color: #fff;
+    }
+
+    .slide.title h1 {
+      font-size: 52pt;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .slide.title h3 {
+      font-size: 28pt;
+      color: #fff;
+      border: none;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .slide.title footer {
+      display: none;
+    }
+
+    .slide.section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+    }
+
+    .slide.section h1 {
+      font-size: 80pt;
+      color: #e0e0e0;
+      margin: 0;
+    }
+
+    .slide.section h2 {
+      font-size: 40pt;
+      color: var(--hitachi-red);
+      border: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .comparison > div {
+      padding: 30px;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+
+    .comparison .bad {
+      border-left: 5px solid #ff4444;
+    }
+
+    .comparison .good {
+      border-left: 5px solid #44ff44;
+    }
+
+    .prompt-box {
+      background-color: #f5f5f5;
+      border-left: 5px solid var(--hitachi-red);
+      padding: 25px;
+      margin: 20px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18pt;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      border-radius: 5px;
+    }
+
+    .technique-box {
+      background: linear-gradient(to right, rgba(250, 0, 15, 0.05), rgba(250, 0, 15, 0));
+      border-left: 4px solid var(--hitachi-red);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .exercise-box {
+      background: #fff3cd;
+      border: 2px solid #ffeaa7;
+      padding: 30px;
+      margin: 20px 0;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .exercise-box h3 {
+      color: #856404;
+      margin-top: 0;
+    }
+
+    .timer {
+      font-size: 48pt;
+      color: var(--hitachi-red);
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    .step-list {
+      text-align: left;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .icon {
+      font-size: 72pt;
+      color: var(--hitachi-red);
+      margin: 20px 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .summary-grid > div {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border-top: 4px solid var(--hitachi-red);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 30px;
+      margin-top: 20px;
+    }
+
+    .nav-button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: var(--hitachi-red);
+    }
+
+    .nav-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--hitachi-red);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    
+    .fullscreen-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+    
+    .fullscreen-btn:hover {
+      background: var(--hitachi-red);
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      .slide h1 { font-size: 32pt; }
+      .slide h2 { font-size: 24pt; }
+      .slide h3 { font-size: 20pt; }
+      .slide li { font-size: 18pt; }
+      .comparison { grid-template-columns: 1fr; }
+    }
+    
+    /* 印刷用スタイル */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      
+      .presentation-container {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+      }
+      
+      .slide {
+        position: relative;
+        page-break-after: always;
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+        height: 100vh;
+      }
+      
+      .nav-controls,
+      .progress-bar,
+      .fullscreen-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  
+  <div class="presentation-container" id="presentationContainer">
+    <button class="fullscreen-btn" id="fullscreenBtn">フルスクリーン</button>
+
+    <!-- スライド 1: タイトル -->
+    <div class="slide title active">
+      <h1>AI時代の超言語化能力習得研修</h1>
+      <h3>〜思考を言語化し、AIを最強の相棒にする技術〜</h3>
+      <h3 style="margin-top: 40px; font-size: 20pt;">Day 1: 基礎編</h3>
+      <footer></footer>
+    </div>
+
+    <!-- スライド 2: なぜ今、言語化能力なのか -->
+    <div class="slide">
+      <h2>なぜ今、言語化能力が最重要スキルなのか？</h2>
+      <div style="text-align: center; margin-top: 60px;">
+        <h3 style="font-size: 36pt; color: #000; margin-bottom: 40px;">
+          AIの性能は、<br>
+          あなたの言語化能力で決まる
+        </h3>
+        <div style="font-size: 24pt; line-height: 2;">
+          曖昧な指示 → 曖昧な結果<br>
+          明確な言語化 → 期待以上の成果
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 3: AIを使いこなせない本当の理由 -->
+    <div class="slide">
+      <h2>多くの人がAIを使いこなせない本当の理由</h2>
+      <div class="comparison">
+        <div class="bad">
+          <h3>❌ AIを使いこなせない人</h3>
+          <ul>
+            <li>「要約して」「まとめて」だけ</li>
+            <li>自分の役割を伝えない</li>
+            <li>求める形式を指定しない</li>
+          </ul>
+        </div>
+        <div class="good">
+          <h3>✅ AIを使いこなせる人</h3>
+          <ul>
+            <li>具体的な文脈を提供</li>
+            <li>明確な役割設定</li>
+            <li>詳細な出力指定</li>
+          </ul>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- セクション1: 言語化の基礎力 -->
+    <div class="slide section">
+      <h1>01</h1>
+      <h2>言語化の基礎力</h2>
+      <h3 style="color: #666; font-size: 24pt; margin-top: 20px;">
+        頭の中のモヤモヤを明確な言葉に変える技術
+      </h3>
+      <footer></footer>
+    </div>
+
+    <!-- スライド 5: ダラダラ話し言語化法 -->
+    <div class="slide">
+      <h2>言語化テクニック①：ダラダラ話し言語化法</h2>
+      <div class="technique-box">
+        <h3>【やり方】</h3>
+        <p>頭の中のごちゃごちゃを10分間、AIに向かって話し続ける</p>
+        <h3>【効果】</h3>
+        <ul>
+          <li>思考整理時間が90%削減</li>
+          <li>優先順位が自動的に明確化</li>
+          <li>隠れた課題の発見</li>
+        </ul>
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <div class="icon">🎤</div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 6: 思考整理の魔法のプロンプト -->
+    <div class="slide">
+      <h2>実践プロンプト：思考整理の魔法の型</h2>
+      <div class="prompt-box">「あなたは優秀な秘書です。
+私がこれから話す内容を聞いて、以下の形式で整理してください：
+1. タスクの抽出と分類（業務別）
+2. 緊急度×重要度マトリクス
+3. 各タスクの推定所要時間
+4. 今日中にやるべきTop3
+5. 委任可能なタスクの特定
+
+では、聞いてください。今、頭の中にあることは...」</div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 7: 要するに星人法 -->
+    <div class="slide">
+      <h2>言語化テクニック②：要するに星人法</h2>
+      <div class="technique-box">
+        <h3>【トレーニング】</h3>
+        <p>どんな複雑な説明も「要するに〜」の一文にまとめる</p>
+      </div>
+      <div style="margin-top: 40px;">
+        <h3>実例：</h3>
+        <ul>
+          <li>長い会議の結論 → 要するに「来月までに3案作成」</li>
+          <li>複雑な技術説明 → 要するに「処理速度が2倍」</li>
+          <li>顧客からの要望 → 要するに「納期の前倒し」</li>
+        </ul>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 8: 5W1H展開法 -->
+    <div class="slide">
+      <h2>言語化テクニック③：5W1H展開法</h2>
+      <div style="background: #f9f9f9; padding: 40px; border-radius: 10px; margin-top: 30px;">
+        <h3 style="text-align: center; margin-bottom: 30px;">曖昧な依頼を具体化する最強フレームワーク</h3>
+        <ul style="font-size: 26pt; line-height: 2;">
+          <li><strong>Who</strong>：誰が/誰に</li>
+          <li><strong>What</strong>：何を</li>
+          <li><strong>When</strong>：いつまでに</li>
+          <li><strong>Where</strong>：どこで/どの範囲で</li>
+          <li><strong>Why</strong>：なぜ/何のために</li>
+          <li><strong>How</strong>：どのように/どんな形式で</li>
+        </ul>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 9: 実践演習① -->
+    <div class="slide">
+      <h2>実践演習①：モヤモヤ言語化ワーク</h2>
+      <div class="exercise-box">
+        <h3>お題：今、仕事で抱えている「モヤモヤ」を言語化する</h3>
+        <div class="timer">10:00</div>
+        <div class="step-list">
+          <ol>
+            <li><strong>Step1（3分）</strong>：頭の中のモヤモヤをAIに話す</li>
+            <li><strong>Step2（3分）</strong>：AIの整理結果を確認</li>
+            <li><strong>Step3（4分）</strong>：「要するに」でまとめ直す</li>
+          </ol>
+        </div>
+        <p style="font-size: 20pt; color: var(--hitachi-red);">
+          使用プロンプト：スライド6の魔法のプロンプト
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 10: 演習結果の共有 -->
+    <div class="slide">
+      <h2>体験共有タイム</h2>
+      <div style="text-align: center; margin-top: 50px;">
+        <h3 style="font-size: 32pt; margin-bottom: 40px;">どんな発見がありましたか？</h3>
+        <div style="background: #f9f9f9; padding: 40px; border-radius: 10px;">
+          <h3>よくある発見</h3>
+          <ul style="text-align: left; display: inline-block;">
+            <li>優先順位が逆だった</li>
+            <li>実は大した問題じゃなかった</li>
+            <li>具体的なNext Actionが見えた</li>
+            <li>自分の思考の癖に気づいた</li>
+          </ul>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 11: 現場での実践アクション -->
+    <div class="slide">
+      <h2>明日から実践する3つの言語化習慣</h2>
+      <div style="margin-top: 50px;">
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>1. 朝一番の「ダラダラ話し」（5分）</h3>
+          <p>→ 1日の優先順位を明確化</p>
+        </div>
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>2. 会議後の「要するに」まとめ（3分）</h3>
+          <p>→ 議事録作成時間を75%削減</p>
+        </div>
+        <div class="technique-box">
+          <h3>3. 依頼時の「5W1H」チェック（1分）</h3>
+          <p>→ 手戻りを90%削減</p>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- セクション2: プロンプトエンジニアリング -->
+    <div class="slide section">
+      <h1>02</h1>
+      <h2>プロンプトエンジニアリング</h2>
+      <h3 style="color: #666; font-size: 24pt; margin-top: 20px;">
+        AIの能力を最大化する指示の技術
+      </h3>
+      <footer></footer>
+    </div>
+
+    <!-- スライド 13: プロンプトとは何か -->
+    <div class="slide">
+      <h2>プロンプト = AIへの指示書</h2>
+      <div class="comparison">
+        <div class="bad">
+          <h3>悪いプロンプト</h3>
+          <p style="font-size: 28pt; text-align: center; margin: 30px 0;">
+            「まとめて」
+          </p>
+          <p>→ AIも困る、結果もイマイチ</p>
+        </div>
+        <div class="good">
+          <h3>良いプロンプト</h3>
+          <p style="font-size: 24pt; text-align: center; margin: 30px 0;">
+            役割＋背景＋指示＋形式
+          </p>
+          <p>→ AIが本領発揮、期待以上の結果</p>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 14: メガプロンプトの基本構造 -->
+    <div class="slide">
+      <h2>メガプロンプト5層構造</h2>
+      <div style="background: #f9f9f9; padding: 40px; border-radius: 10px; margin-top: 30px;">
+        <ol style="font-size: 26pt; line-height: 2.2;">
+          <li><strong>役割設定</strong>「あなたは○○の専門家です」</li>
+          <li><strong>背景情報</strong>「現在の状況は〜」</li>
+          <li><strong>具体的指示</strong>「以下について〜してください」</li>
+          <li><strong>出力形式</strong>「箇条書きで5つ」</li>
+          <li><strong>制約条件</strong>「ただし〜は除く」</li>
+        </ol>
+        <p style="text-align: center; margin-top: 30px; font-size: 28pt; color: var(--hitachi-red);">
+          この構造で、AIの回答精度が10倍向上
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 15: 実践プロンプト集：営業編 -->
+    <div class="slide">
+      <h2>実践プロンプト集：営業編</h2>
+      <div class="prompt-box">あなたは日立システムズのトップ営業担当者です。
+
+当社の強み：
+- システム開発30年の実績
+- 24時間365日のサポート体制
+- 業界トップクラスのセキュリティ
+
+以下の情報から、製造業A社向けの提案資料の構成を作成してください：
+- 顧客の課題：生産管理システムの老朽化
+- 予算規模：5000万円
+- 決裁者：情報システム部長（技術志向）
+
+A4で3ページ、図表を含む構成案をお願いします。</div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 16: 実践プロンプト集：管理職編 -->
+    <div class="slide">
+      <h2>実践プロンプト集：管理職編</h2>
+      <div class="prompt-box">あなたは人材育成のプロフェッショナルです。
+
+以下の状況で、部下に建設的なフィードバックをする文面を作成してください：
+- 部下：入社3年目、やる気はあるが詰めが甘い
+- 状況：顧客向け資料に単純ミスが3箇所
+- 目的：改善を促しつつ、モチベーション維持
+
+以下の要素を含めてください：
+1. 良かった点の認識
+2. 具体的な改善点
+3. 改善のための具体的方法
+4. 期待と励まし</div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 17: 段階的プロンプト設計 -->
+    <div class="slide">
+      <h2>プロンプトも段階的にレベルアップ</h2>
+      <div style="margin-top: 40px;">
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>【初級】単純な指示</h3>
+          <p style="font-family: monospace;">「議事録をまとめて」</p>
+        </div>
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>【中級】構造化した指示</h3>
+          <p style="font-family: monospace;">「会議の要点を3つ、決定事項、宿題事項に分けて」</p>
+        </div>
+        <div class="technique-box">
+          <h3>【上級】戦略的な指示</h3>
+          <p style="font-family: monospace;">「経営層向けに、戦略的含意を含めた議事サマリーをPREP法で作成し、次回アクションを提案して」</p>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 18: 実践演習② -->
+    <div class="slide">
+      <h2>実践演習②：メガプロンプト作成</h2>
+      <div class="exercise-box">
+        <h3>お題：明日の業務で使えるプロンプトを1つ作る</h3>
+        <div class="timer">10:00</div>
+        <div style="background: white; padding: 30px; border-radius: 10px; margin-top: 20px;">
+          <h3 style="color: #333;">テンプレート：</h3>
+          <ol style="text-align: left; font-size: 22pt;">
+            <li>役割：「あなたは＿＿＿です」</li>
+            <li>背景：「現在＿＿＿という状況で」</li>
+            <li>指示：「＿＿＿を作成/分析してください」</li>
+            <li>形式：「＿＿＿形式で」</li>
+            <li>制約：「ただし＿＿＿」</li>
+          </ol>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 19: プロンプトライブラリの構築 -->
+    <div class="slide">
+      <h2>成功プロンプトは資産化する</h2>
+      <div style="background: #f9f9f9; padding: 40px; border-radius: 10px; margin-top: 40px;">
+        <h3>プロンプトライブラリの作り方</h3>
+        <div style="font-family: monospace; font-size: 22pt; line-height: 2;">
+          📁 営業活動<br>
+          &nbsp;&nbsp;└ 提案書作成.txt<br>
+          &nbsp;&nbsp;└ 競合分析.txt<br>
+          📁 会議関連<br>
+          &nbsp;&nbsp;└ アジェンダ作成.txt<br>
+          &nbsp;&nbsp;└ 議事録要約.txt<br>
+          📁 部下指導<br>
+          &nbsp;&nbsp;└ 1on1準備.txt<br>
+          &nbsp;&nbsp;└ フィードバック.txt
+        </div>
+        <p style="text-align: center; margin-top: 30px; font-size: 26pt; color: var(--hitachi-red);">
+          良いプロンプトは、チーム全体の資産
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- セクション3: 思考の構造化 -->
+    <div class="slide section">
+      <h1>03</h1>
+      <h2>思考の構造化</h2>
+      <h3 style="color: #666; font-size: 24pt; margin-top: 20px;">
+        複雑な情報を整理し、価値ある知識に変換する技術
+      </h3>
+      <footer></footer>
+    </div>
+
+    <!-- スライド 21: なぜ構造化が必要なのか -->
+    <div class="slide">
+      <h2>情報の海で溺れる時代は終わり</h2>
+      <div class="comparison">
+        <div class="bad">
+          <h3>構造化できない人</h3>
+          <ul>
+            <li>情報収集で終わる</li>
+            <li>→ 知識にならない</li>
+            <li>→ 行動につながらない</li>
+          </ul>
+        </div>
+        <div class="good">
+          <h3>構造化できる人</h3>
+          <ul>
+            <li>情報を体系化する</li>
+            <li>→ 知識として定着</li>
+            <li>→ 即座に行動できる</li>
+          </ul>
+        </div>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 22: 散らかった情報の体系化 -->
+    <div class="slide">
+      <h2>構造化テクニック①：散らかった情報の体系化</h2>
+      <div class="prompt-box">「以下の情報を体系的に整理してください：
+1. 大カテゴリ（3-5個）に分類
+2. 各カテゴリを中カテゴリに細分化
+3. 関連性の高い情報をグルーピング
+4. 重要度でランク付け
+5. 不足している情報を指摘」</div>
+      <p style="text-align: center; font-size: 32pt; margin-top: 40px; color: var(--hitachi-red);">
+        100個の情報も、5分で整理完了
+      </p>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 23: 論点の階層化 -->
+    <div class="slide">
+      <h2>構造化テクニック②：論点の階層化</h2>
+      <div style="background: #f9f9f9; padding: 40px; border-radius: 10px; margin-top: 30px;">
+        <h3 style="text-align: center;">複雑な問題をシンプルに分解</h3>
+        <pre style="font-size: 22pt; line-height: 1.8;">
+メイン論点
+├─ サブ論点1
+│  ├─ 具体例A
+│  └─ 具体例B
+├─ サブ論点2
+│  ├─ 具体例C
+│  └─ 具体例D
+└─ サブ論点3
+   ├─ 具体例E
+   └─ 具体例F
+        </pre>
+        <p style="text-align: center; margin-top: 30px; font-size: 24pt;">
+          「なぜ？」「それで？」「例えば？」で深掘り
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 24: 感情を建設的に翻訳 -->
+    <div class="slide">
+      <h2>構造化テクニック③：感情を建設的に翻訳</h2>
+      <div class="prompt-box">「以下の感情的な言葉を、建設的な提案に翻訳してください：
+
+入力：『なんでいつも私ばっかり残業なの！』
+↓
+出力：『業務負荷の偏りを解消するため、
+      タスクの可視化と再配分を提案します』」</div>
+      <div style="text-align: center; margin-top: 40px;">
+        <p style="font-size: 28pt;">批判→提案、不満→改善案、怒り→課題解決</p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 25: 実践演習③ -->
+    <div class="slide">
+      <h2>実践演習③：会議メモの構造化</h2>
+      <div class="exercise-box">
+        <h3>お題：バラバラな会議メモを構造化</h3>
+        <div class="timer">10:00</div>
+        <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+          <p style="font-style: italic; font-size: 20pt;">
+            「新商品について...コストが...納期は来月...<br>
+            でも品質が...競合は既に...予算オーバー...<br>
+            社長は推進派...現場は慎重...」
+          </p>
+        </div>
+        <h3>AIに構造化させて：</h3>
+        <ol style="text-align: left; display: inline-block;">
+          <li>論点整理</li>
+          <li>賛成/反対意見の整理</li>
+          <li>未決事項の抽出</li>
+          <li>Next Actionの提案</li>
+        </ol>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 26: 構造化の応用 -->
+    <div class="slide">
+      <h2>構造化で組織の知識資産を構築</h2>
+      <div style="text-align: center; margin-top: 50px;">
+        <div style="background: #f9f9f9; padding: 40px; border-radius: 10px;">
+          <h3>【個人】経験や気づきをAIで構造化</h3>
+          <p style="font-size: 36pt; margin: 20px 0;">↓</p>
+          <h3>【チーム】構造化された知識を共有</h3>
+          <p style="font-size: 36pt; margin: 20px 0;">↓</p>
+          <h3>【組織】体系的なナレッジベース完成</h3>
+        </div>
+        <p style="font-size: 28pt; margin-top: 40px; color: var(--hitachi-red);">
+          暗黙知→形式知への変換が自動化
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 27: よくある構造化の失敗 -->
+    <div class="slide">
+      <h2>構造化でやりがちな失敗</h2>
+      <div style="margin-top: 40px;">
+        <div class="comparison">
+          <div class="bad">
+            <h3>❌ 失敗パターン</h3>
+            <ul>
+              <li>細かすぎる分類（20カテゴリ）</li>
+              <li>並列なのに階層にする</li>
+              <li>抽象度がバラバラ</li>
+            </ul>
+          </div>
+          <div class="good">
+            <h3>⭕ 成功パターン</h3>
+            <ul>
+              <li>大きく3-5つでまず分ける</li>
+              <li>同じレベルは同じ階層に</li>
+              <li>同じ階層は同じ抽象度で統一</li>
+            </ul>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 40px; font-size: 24pt;">
+          人間が把握できるのは7±2が限界
+        </p>
+      </div>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 28: 明日から始める構造化習慣 -->
+    <div class="slide">
+      <h2>1日3回の構造化習慣</h2>
+      <div style="margin-top: 40px;">
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>朝：タスクの構造化（優先順位）</h3>
+          <p>「今日のタスクを緊急度×重要度で整理」</p>
+        </div>
+        <div class="technique-box" style="margin-bottom: 30px;">
+          <h3>昼：情報の構造化（インプット整理）</h3>
+          <p>「午前中に得た情報を3つのカテゴリに」</p>
+        </div>
+        <div class="technique-box">
+          <h3>夕：学びの構造化（知識の定着）</h3>
+          <p>「今日の気づきを体系化して保存」</p>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 28pt; margin-top: 40px; color: var(--hitachi-red);">
+        3週間で思考の質が劇的に向上
+      </p>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 29: Day1総まとめ -->
+    <div class="slide">
+      <h2>Day1で身につけた超言語化能力</h2>
+      <div class="summary-grid">
+        <div>
+          <h3>言語化の基礎力</h3>
+          <p>思考を明確な言葉に</p>
+          <ul style="font-size: 18pt; text-align: left;">
+            <li>ダラダラ話し法</li>
+            <li>要するに星人法</li>
+            <li>5W1H展開法</li>
+          </ul>
+        </div>
+        <div>
+          <h3>プロンプトエンジニアリング</h3>
+          <p>AIの能力を最大化</p>
+          <ul style="font-size: 18pt; text-align: left;">
+            <li>メガプロンプト構造</li>
+            <li>段階的設計</li>
+            <li>ライブラリ化</li>
+          </ul>
+        </div>
+        <div>
+          <h3>思考の構造化</h3>
+          <p>情報を知識に変換</p>
+          <ul style="font-size: 18pt; text-align: left;">
+            <li>情報の体系化</li>
+            <li>論点の階層化</li>
+            <li>感情の翻訳</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 32pt; margin-top: 40px; color: var(--hitachi-red);">
+        この3つで、あなたの知的生産性は10倍になる
+      </p>
+      <footer>TANREN inc.</footer>
+    </div>
+
+    <!-- スライド 30: Day2予告 -->
+    <div class="slide section">
+      <h1 style="font-size: 60pt;">Day2予告</h1>
+      <h2 style="margin-top: 40px;">この力を組織全体に展開する</h2>
+      <div style="margin-top: 40px; font-size: 24pt; line-height: 2;">
+        <p>✓ チームでの言語化文化の醸成</p>
+        <p>✓ AI活用の組織的展開</p>
+        <p>✓ 知識資産の構築と活用</p>
+      </div>
+      <footer></footer>
+    </div>
+
+  </div>
+
+  <div class="nav-controls">
+    <button class="nav-button" id="prevBtn">← 前へ</button>
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides"></span>
+    </div>
+    <button class="nav-button" id="nextBtn">次へ →</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const totalSlidesElem = document.getElementById('totalSlides');
+      const currentSlideElem = document.getElementById('currentSlide');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const progressFill = document.getElementById('progressFill');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      const presentationContainer = document.getElementById('presentationContainer');
+      let currentSlide = 0;
+
+      totalSlidesElem.textContent = slides.length;
+
+      function updateProgress() {
+        const progress = ((currentSlide + 1) / slides.length) * 100;
+        progressFill.style.width = progress + '%';
+      }
+
+      function showSlide(index, direction = 'next') {
+        // 前のスライドを非アクティブに
+        slides[currentSlide].classList.remove('active');
+        if (direction === 'prev') {
+          slides[currentSlide].classList.add('prev');
+        } else {
+          slides[currentSlide].classList.remove('prev');
+        }
+
+        // 新しいスライドをアクティブに
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        if (direction === 'prev') {
+          slides[currentSlide].classList.add('prev');
+          setTimeout(() => slides[currentSlide].classList.remove('prev'), 10);
+        }
+
+        currentSlideElem.textContent = index + 1;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length - 1;
+        updateProgress();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < slides.length - 1) {
+          showSlide(currentSlide + 1, 'next');
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          showSlide(currentSlide - 1, 'prev');
+        }
+      });
+
+      // フルスクリーン機能
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          presentationContainer.requestFullscreen().catch(err => {
+            console.error('フルスクリーンエラー:', err);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      // フルスクリーン変更イベント
+      document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+          fullscreenBtn.textContent = '終了';
+          presentationContainer.style.width = '100vw';
+          presentationContainer.style.height = '100vh';
+        } else {
+          fullscreenBtn.textContent = 'フルスクリーン';
+          presentationContainer.style.width = 'min(95vw, 1280px)';
+          presentationContainer.style.height = 'min(80vh, 720px)';
+        }
+      });
+
+      // キーボードショートカット
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          nextBtn.click();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevBtn.click();
+        } else if (e.key === 'f' || e.key === 'F') {
+          e.preventDefault();
+          fullscreenBtn.click();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          showSlide(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          showSlide(slides.length - 1);
+        }
+      });
+
+      // 初期化
+      showSlide(currentSlide);
+      
+      // ショートカットヘルプ
+      console.log(`
+🎯 キーボードショートカット:
+→ / Space: 次のスライド
+←: 前のスライド
+F: フルスクリーン切り替え
+Home: 最初のスライド
+End: 最後のスライド
+Esc: フルスクリーン終了
+      `);
+    });
+  </script>
+</body>
+</html>

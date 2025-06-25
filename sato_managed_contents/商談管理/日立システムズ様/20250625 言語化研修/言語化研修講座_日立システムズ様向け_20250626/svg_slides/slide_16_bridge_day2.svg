@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280"
+  height="720">
+  <title>スライド16: Day 2 - AIと共に思考を加速する「対話」の技術</title>
+
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff" />
+
+  <!-- 装飾的な背景要素 -->
+  <circle cx="640" cy="360" r="300" fill="#FA000F" opacity="0.05" />
+  <circle cx="640" cy="360" r="200" fill="#FA000F" opacity="0.05" />
+
+  <!-- Day番号 -->
+  <text x="640" y="280" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="90"
+    fill="#cccccc" font-weight="400">
+    Day 2
+  </text>
+
+  <!-- メインタイトル -->
+  <text x="640" y="380" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="40"
+    fill="#FA000F" font-weight="700">
+    AIと共に思考を加速する「対話」の技術
+  </text>
+
+  <!-- サブタイトル -->
+  <text x="640" y="440" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="24"
+    fill="#666666" font-weight="400">
+    ～Copilotを最高の思考パートナーにする～
+  </text>
+</svg>

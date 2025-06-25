@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>演習2：専門家になりきってもらう</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 794px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 794px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .exercise-bg {
+      background-color: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+<div class="slide exercise-bg relative overflow-hidden p-12">
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Exercise Badge -->
+<div class="absolute top-24 right-12 bg-hitachi-red text-white px-4 py-2 rounded-full font-bold">
+      演習
+    </div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-4 border-b-2 border-hitachi-red pb-2 w-full">演習2：専門家になりきってもらう</h1>
+<!-- Exercise Overview -->
+<div class="mt-6 mb-8 bg-white p-4 rounded-lg shadow-sm">
+<h2 class="text-2xl font-bold accent-blue mb-2">
+<i class="fa-solid fa-bullseye mr-2"></i>課題
+      </h2>
+<p class="text-lg">新しい企画のフィードバックをもらうために、AIに適切な専門家の役割を与えます</p>
+</div>
+<!-- Main Content -->
+<div class="grid grid-cols-2 gap-8">
+<!-- Left Column: Instructions -->
+<div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">
+<i class="fa-solid fa-list-ol mr-2 accent-turquoise"></i>手順
+        </h3>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="bg-hitachi-red text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 flex-shrink-0">1</div>
+<p>企画の概要を簡潔に書き出す（例：新しいオンライン研修サービス、業務効率化ツールなど）</p>
+</div>
+<div class="flex items-start">
+<div class="bg-hitachi-red text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 flex-shrink-0">2</div>
+<p>AIに適切な専門家の役割を与える（例：マーケティングの専門家、UXデザイナー、財務アナリストなど）</p>
+</div>
+<div class="flex items-start">
+<div class="bg-hitachi-red text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 flex-shrink-0">3</div>
+<p>役割に応じたフィードバックを求める質問を明確に指定する</p>
+</div>
+<div class="flex items-start">
+<div class="bg-hitachi-red text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 flex-shrink-0">4</div>
+<p>得られたフィードバックを元に企画を改善する</p>
+</div>
+</div>
+<div class="mt-8 bg-white p-4 rounded-lg shadow-sm">
+<h3 class="text-xl font-bold text-gray-800 mb-3">
+<i class="fa-regular fa-clock mr-2 accent-green"></i>時間
+          </h3>
+<p class="text-lg">10分</p>
+</div>
+</div>
+<!-- Right Column: Example and Tips -->
+<div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">
+<i class="fa-solid fa-code mr-2 accent-blue"></i>プロンプト例
+        </h3>
+<div class="bg-white p-4 rounded-lg shadow-sm mb-6 font-mono text-sm">
+<p class="mb-2"><span class="text-purple-600">あなたは</span>経験豊富なマーケティング戦略の専門家です。</p>
+<p class="mb-2"><span class="text-green-600">#依頼:</span></p>
+<p class="mb-2">以下の新サービス企画について、マーケティングの観点から評価し、</p>
+<p class="mb-2">改善点を3つ提案してください。</p>
+<p class="mb-2"><span class="text-green-600">#制約条件:</span></p>
+<p class="mb-2">- 市場性、差別化ポイント、ターゲット設定の観点を含めること</p>
+<p class="mb-2">- 具体的かつ実行可能な提案であること</p>
+<p class="mb-2"><span class="text-green-600">#企画概要:</span></p>
+<p>[ここに企画の概要を記入]</p>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">
+<i class="fa-solid fa-lightbulb mr-2 accent-turquoise"></i>効果的な役割設定のポイント
+        </h3>
+<ul class="list-disc pl-5 space-y-2">
+<li>「専門家」のような曖昧な役割ではなく、具体的な専門領域を指定する</li>
+<li>企画の性質に合わせて適切な専門家を選ぶ（技術的な企画には技術専門家、マーケティング施策にはマーケティング専門家など）</li>
+<li>複数の視点が欲しい場合は、複数回のプロンプトで異なる専門家に質問する</li>
+</ul>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

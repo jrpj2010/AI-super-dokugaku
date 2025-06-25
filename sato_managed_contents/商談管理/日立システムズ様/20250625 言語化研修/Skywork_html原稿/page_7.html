@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>良いプロンプトの3要素</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .bg-accent-green {
+      background-color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .bg-accent-turquoise {
+      background-color: #00B294;
+    }
+    .element-card {
+      height: 450px;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -mr-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-gray-50 rounded-full -ml-40 -mb-40 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-8 border-b-2 border-hitachi-red pb-2 w-full">良いプロンプトの3要素</h1>
+<!-- Introduction text -->
+<p class="text-lg mb-6">質の高いプロンプトは、以下の3つの要素をバランス良く含めることで、AIはユーザーの意図を正確に理解し、期待に近い回答を生成しやすくなります。</p>
+<!-- Three Elements Cards -->
+<div class="flex space-x-6">
+<!-- Element 1: Clear Instructions -->
+<div class="w-1/3 bg-gray-50 rounded-lg p-5 element-card flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-accent-blue"></div>
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-accent-blue bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+<i class="fa-solid fa-bullseye text-2xl accent-blue"></i>
+</div>
+<h2 class="text-2xl font-bold">明確な指示</h2>
+</div>
+<p class="mb-3">AIに何をしてほしいのかを具体的かつ明確に伝えます。</p>
+<ul class="list-disc pl-6 mb-4 text-sm">
+<li>曖昧な表現を避け、タスクの内容、範囲、目的を具体的に記述</li>
+<li>出力形式（リスト形式、表形式、特定の文体など）を指定</li>
+<li>長さ（300字以内、5つのポイントなど）を明示</li>
+<li>トーン（フォーマル、フレンドリーなど）を指定</li>
+</ul>
+<div class="mt-auto">
+<p class="text-sm font-bold mb-1">具体例：</p>
+<div class="bg-white p-3 rounded border border-gray-200 text-sm">
+<p class="text-red-500 mb-2">❌ 悪い例：「この文章をまとめて。」</p>
+<p class="text-green-600">✅ 良い例：「以下の会議議事録を読み、主要な決定事項を3点、各決定事項に対する担当者と期限を箇条書きでまとめてください。報告書形式で、丁寧な言葉遣いでお願いします。」</p>
+</div>
+</div>
+</div>
+<!-- Element 2: Sufficient Context -->
+<div class="w-1/3 bg-gray-50 rounded-lg p-5 element-card flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-accent-green"></div>
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-accent-green bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+<i class="fa-solid fa-sitemap text-2xl accent-green"></i>
+</div>
+<h2 class="text-2xl font-bold">十分な文脈</h2>
+</div>
+<p class="mb-3">AIがタスクを理解し、適切な回答を生成するために必要な背景情報や前提条件を提供します。</p>
+<ul class="list-disc pl-6 mb-4 text-sm">
+<li>誰に向けた情報か（対象者）を明示</li>
+<li>どのような状況で使用されるのか（シチュエーション）を伝える</li>
+<li>関連する過去の経緯など背景情報を提供</li>
+<li>制約条件や考慮すべき点を明記</li>
+</ul>
+<div class="mt-auto">
+<p class="text-sm font-bold mb-1">具体例：</p>
+<div class="bg-white p-3 rounded border border-gray-200 text-sm">
+<p class="text-red-500 mb-2">❌ 悪い例：「新製品のアイデアを出して。」</p>
+<p class="text-green-600">✅ 良い例：「当社は健康志向の20代女性をターゲットにした新しい飲料を開発中です。既存製品との差別化を図り、SNSでの拡散を狙えるような、斬新な製品コンセプトのアイデアを5つ提案してください。予算の制約は特にありません。」</p>
+</div>
+</div>
+</div>
+<!-- Element 3: Appropriate Examples -->
+<div class="w-1/3 bg-gray-50 rounded-lg p-5 element-card flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-accent-turquoise"></div>
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-accent-turquoise bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+<i class="fa-solid fa-list-check text-2xl accent-turquoise"></i>
+</div>
+<h2 class="text-2xl font-bold">適切な例示</h2>
+</div>
+<p class="mb-3">期待する出力の具体的な例を示すことで、AIは出力のスタイル、フォーマット、内容の方向性を学習します。</p>
+<ul class="list-disc pl-6 mb-4 text-sm">
+<li>特に複雑なタスクや特定の形式での出力を求める場合に有効</li>
+<li>1つまたは複数の例（Few-shotプロンプティング）を提供</li>
+<li>例の質がAIの出力の質に直結するため、良質な例を用意</li>
+<li>一貫性のある複数の例でパターンを理解させる</li>
+</ul>
+<div class="mt-auto">
+<p class="text-sm font-bold mb-1">具体例：顧客からの問い合わせメールに対する返信文作成</p>
+<div class="bg-white p-3 rounded border border-gray-200 text-sm">
+<p class="text-gray-600 italic">問い合わせ例1: 「製品Aの在庫はありますか？」<br/>
+            返信例1: 「お問い合わせありがとうございます。製品Aの在庫はございます。ご注文はこちらのリンクから可能です。[リンク]」</p>
+<p class="text-gray-600 italic mt-1">問い合わせ例2: 「製品Bの使い方がわかりません。」<br/>
+            返信例2: 「お問い合わせありがとうございます。製品Bの詳しい使い方は、こちらのFAQページに記載がございます。[リンク]」</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

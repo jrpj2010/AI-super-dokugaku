@@ -1,0 +1,103 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    良いプロンプト ＝ 昨日の「思考整理シート」そのもの
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 180)">
+    <!-- Table Header -->
+    <rect x="0" y="0" width="750" height="60" fill="#FFE5E5" stroke="#FA000F" stroke-width="2" />
+    <text x="375" y="40" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="700"
+      fill="#FA000F">
+      思考整理シート
+    </text>
+
+    <rect x="870" y="0" width="750" height="60" fill="#E6F4FF" stroke="#0066CC" stroke-width="2" />
+    <text x="1245" y="40" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="700"
+      fill="#0066CC">
+      プロンプトの構成要素
+    </text>
+
+    <!-- Row 1: 課題テーマ/ゴール → 命令書 -->
+    <rect x="0" y="60" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="20" y="110" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+      課題テーマ/ゴール
+    </text>
+
+    <rect x="870" y="60" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="890" y="100" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+      fill="#FA000F">#命令書:</text>
+    <text x="1000" y="100" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666">(何をさせたいか)</text>
+
+    <!-- Row 2: 役割 -->
+    <rect x="0" y="160" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="20" y="210" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">
+      (あなたの役割)
+    </text>
+
+    <rect x="870" y="160" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="890" y="200" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+      fill="#0066CC">#役割:</text>
+    <text x="980" y="200" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666">(どんな立場で考えてほしいか)</text>
+
+    <!-- Row 3: 成果物/具体化 → 成果物 -->
+    <rect x="0" y="260" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="20" y="310" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+      成果物/具体化
+    </text>
+
+    <rect x="870" y="260" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="890" y="300" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+      fill="#4CAF50">#成果物:</text>
+    <text x="1000" y="300" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666">(どんな形式で欲しいか)</text>
+
+    <!-- Row 4: 背景/制約条件 -->
+    <rect x="0" y="360" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="20" y="410" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">
+      (背景/制約条件)
+    </text>
+
+    <rect x="870" y="360" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="890" y="400" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+      fill="#FF9800">#制約条件:</text>
+    <text x="1020" y="400" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666">(守ってほしいルール)</text>
+
+    <!-- Row 5: ゴールシーク化 → ステップ -->
+    <rect x="0" y="460" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="20" y="510" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+      ゴールシーク化
+    </text>
+
+    <rect x="870" y="460" width="750" height="100" fill="white" stroke="#DDD" stroke-width="1" />
+    <text x="890" y="500" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+      fill="#9C27B0">#ステップ:</text>
+    <text x="1000" y="500" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666">(どんな手順で考えてほしいか)</text>
+
+    <!-- Arrow -->
+    <g transform="translate(750, 310)">
+      <path d="M0,0 L100,0" stroke="#FA000F" stroke-width="6" marker-end="url(#arrowhead)" />
+      <defs>
+        <marker id="arrowhead" markerWidth="15" markerHeight="15" refX="15" refY="4.5" orient="auto">
+          <polygon points="0 0, 15 4.5, 0 9" fill="#FA000F" />
+        </marker>
+      </defs>
+    </g>
+  </g>
+
+  <!-- Bottom Note -->
+  <rect x="150" y="800" width="1620" height="120" fill="#FFF9E5" rx="15" />
+  <text x="960" y="860" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="28" font-weight="600"
+    fill="#333">
+    💡 思考整理の各項目が、そのままプロンプトの構成要素に直接対応している！
+  </text>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">19</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

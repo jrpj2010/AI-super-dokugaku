@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280"
+  height="720">
+  <title>スライド2: 研修の全体像</title>
+
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+    </style>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f9f9f9" />
+      <stop offset="100%" style="stop-color:#f5f5f5" />
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#ffffff" />
+
+  <!-- ロゴ -->
+  <image
+    xlink:href="https://tanren.notion.site/image/attachment%3Acb1d3d60-1a74-482c-9977-d59f70bd6027%3A%E5%9B%B31.svg?table=block&id=21b31bbd-522c-806c-9314-fa7bdaf959df&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2"
+    x="1140" y="30" width="100" height="100" />
+
+  <!-- タイトル -->
+  <g>
+    <text x="60" y="90" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="48" fill="#000000"
+      font-weight="700">
+      研修の全体像
+    </text>
+    <line x1="60" y1="110" x2="320" y2="110" stroke="#FA000F" stroke-width="2" />
+  </g>
+
+  <!-- 2カラムレイアウト -->
+  <g transform="translate(60, 160)">
+    <!-- Day 1 カラム -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="540" height="450" rx="8" fill="url(#boxGrad)" stroke="#FA000F" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="28"
+        fill="#FA000F" font-weight="700">
+        Day 1
+      </text>
+
+      <text x="270" y="80" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="20"
+        fill="#000000" font-weight="700">
+        思考を構造化する「言語化」の技術
+      </text>
+
+      <text x="270" y="110" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="16"
+        fill="#666666">
+        ～AIなしで問題の本質を捉える～
+      </text>
+
+      <!-- リスト項目 -->
+      <g transform="translate(30, 150)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">1. </tspan>
+          <tspan>なぜ今、「言語化」が最強の武器なのか？</tspan>
+        </text>
+        <text x="0" y="60" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">2. </tspan>
+          <tspan>思考を劇的にクリアにする「5つの型」</tspan>
+        </text>
+        <text x="0" y="120" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">3. </tspan>
+          <tspan>演習①：あなたの「モヤモヤ」を言語化する</tspan>
+        </text>
+        <text x="0" y="180" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">4. </tspan>
+          <tspan>演習②：他者の「曖昧な指示」を構造化する</tspan>
+        </text>
+      </g>
+    </g>
+
+    <!-- Day 2 カラム -->
+    <g transform="translate(580, 0)">
+      <rect x="0" y="0" width="540" height="450" rx="8" fill="url(#boxGrad)" stroke="#FA000F" stroke-width="2" />
+
+      <text x="270" y="40" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="28"
+        fill="#FA000F" font-weight="700">
+        Day 2
+      </text>
+
+      <text x="270" y="80" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="20"
+        fill="#000000" font-weight="700">
+        AIと共に思考を加速する「対話」の技術
+      </text>
+
+      <text x="270" y="110" text-anchor="middle" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="16"
+        fill="#666666">
+        ～Copilotを最高の思考パートナーにする～
+      </text>
+
+      <!-- リスト項目 -->
+      <g transform="translate(30, 150)">
+        <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">1. </tspan>
+          <tspan>「思考の設計図」を「プロンプト」に変換する</tspan>
+        </text>
+        <text x="0" y="60" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">2. </tspan>
+          <tspan>演習③：Copilotとの対話で回答を育てる</tspan>
+        </text>
+        <text x="0" y="120" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">3. </tspan>
+          <tspan>演習④：明日から使える「マイ・プロンプト」作成</tspan>
+        </text>
+        <text x="0" y="180" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="18" fill="#333333">
+          <tspan fill="#FA000F" font-weight="700">4. </tspan>
+          <tspan>まとめ：AIを使いこなす側の人材になる</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- フッター -->
+  <text x="60" y="695" font-family="'Noto Sans JP', 'Yu Gothic UI', sans-serif" font-size="11" fill="#888888">
+    ©Hitachi Systems, Ltd. 2025. All rights reserved.
+  </text>
+</svg>

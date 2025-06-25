@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    演習③: 「思考の設計図」を「プロンプト」に変換しよう
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 目的 -->
+    <g>
+      <rect x="0" y="0" width="1620" height="120" fill="#FFE5E5" rx="15" />
+      <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+        fill="#FA000F">目的:</text>
+      <text x="140" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">
+        昨日作成した思考整理シートを、実践的なプロンプトに変換する。
+      </text>
+    </g>
+
+    <!-- お題 -->
+    <g transform="translate(0, 150)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">お題:</text>
+      <text x="0" y="85" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#666">
+        昨日、演習①で作成した「思考整理シート」の内容を基に、
+      </text>
+      <text x="0" y="125" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#666">
+        Copilotへのプロンプトを作成してください。
+      </text>
+    </g>
+
+    <!-- 方法 -->
+    <g transform="translate(0, 320)">
+      <rect x="0" y="0" width="1620" height="280" fill="#E6F4FF" rx="15" />
+      <g transform="translate(40, 30)">
+        <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+          fill="#0066CC">方法:</text>
+
+        <g transform="translate(50, 70)">
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="50" height="50" fill="#0066CC" rx="25" />
+            <text x="25" y="35" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24"
+              font-weight="600" fill="white">1</text>
+            <text x="70" y="35" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              プロンプトの5要素（命令,役割,成果物,制約,ステップ）を意識して、
+            </text>
+          </g>
+
+          <g transform="translate(0, 50)">
+            <text x="70" y="20" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              テキストエディタにプロンプトを記述する。
+            </text>
+            <rect x="70" y="30" width="200" height="50" fill="#0066CC" rx="25" />
+            <text x="170" y="62" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="22"
+              font-weight="600" fill="white">
+              個人ワーク 15分
+            </text>
+          </g>
+
+          <g transform="translate(0, 120)">
+            <rect x="0" y="0" width="50" height="50" fill="#0066CC" rx="25" />
+            <text x="25" y="35" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24"
+              font-weight="600" fill="white">2</text>
+            <text x="70" y="35" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+              実際にCopilotに投げてみて、返ってきた回答を確認する。
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">24</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

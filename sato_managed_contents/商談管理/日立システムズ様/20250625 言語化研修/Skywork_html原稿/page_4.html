@@ -1,0 +1,175 @@
+<html lang="ja"><head></head><body>
+
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>アジェンダ：1日目（基礎編）</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 946px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 946px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: #e5e7eb;
+      z-index: 1;
+    }
+    .timeline-item:last-child::before {
+      height: 50%;
+    }
+    .timeline-dot {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+
+
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 left-0 w-64 h-64 bg-gray-50 rounded-full -ml-20 -mt-20 opacity-50"></div>
+<div class="absolute bottom-0 right-0 w-72 h-72 bg-gray-50 rounded-full -mr-20 -mb-20 opacity-50"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 w-full">アジェンダ：1日目（基礎編）</h1>
+<!-- Subtitle -->
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-700">
+<i class="fa-solid fa-graduation-cap mr-2 text-[#0078D4]"></i>
+        AIとの対話の第一歩
+      </h2>
+</div>
+<!-- Timeline Agenda -->
+<div class="ml-8">
+<!-- Item 1 -->
+<div class="timeline-item pl-10 pb-6">
+<div class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-[#0078D4] flex items-center justify-center">
+<span class="text-white font-bold">1</span>
+</div>
+<div class="flex items-center mb-2">
+<h3 class="text-xl font-bold text-gray-800">オープニング</h3>
+<span class="ml-4 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">5分</span>
+</div>
+<div class="flex items-start">
+<div class="bg-gray-50 p-3 rounded-lg w-full">
+<ul class="list-inside space-y-1">
+<li><i class="fa-solid fa-check text-[#7FBA00] mr-2"></i>研修の目的とゴール共有</li>
+<li><i class="fa-solid fa-check text-[#7FBA00] mr-2"></i>自己紹介とアイスブレイク</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="timeline-item pl-10 pb-6">
+<div class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-[#0078D4] flex items-center justify-center">
+<span class="text-white font-bold">2</span>
+</div>
+<div class="flex items-center mb-2">
+<h3 class="text-xl font-bold text-gray-800">なぜ今、言語化とプロンプトが重要なのか？</h3>
+<span class="ml-4 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">25分</span>
+</div>
+<div class="flex items-start">
+<div class="bg-gray-50 p-3 rounded-lg w-full">
+<ul class="list-inside space-y-1">
+<li><i class="fa-solid fa-chart-line text-[#00B294] mr-2"></i>アンケート結果から見る共通の課題</li>
+<li><i class="fa-solid fa-comments text-[#00B294] mr-2"></i>AI時代のコミュニケーションの変化</li>
+<li><i class="fa-solid fa-key text-[#00B294] mr-2"></i>プロンプトがAIの能力を最大限に引き出す鍵</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="timeline-item pl-10 pb-6">
+<div class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-[#0078D4] flex items-center justify-center">
+<span class="text-white font-bold">3</span>
+</div>
+<div class="flex items-center mb-2">
+<h3 class="text-xl font-bold text-gray-800">プロンプトの基本原則</h3>
+<span class="ml-4 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">40分</span>
+</div>
+<div class="flex items-start">
+<div class="bg-gray-50 p-3 rounded-lg w-full">
+<ul class="list-inside space-y-1">
+<li><i class="fa-solid fa-puzzle-piece text-[#FA000F] mr-2"></i>良いプロンプトの3要素（指示、文脈、例）</li>
+<li><i class="fa-solid fa-code-compare text-[#FA000F] mr-2"></i>Zero-shot vs Few-shotプロンプティング</li>
+<li><i class="fa-solid fa-laptop-code text-[#FA000F] mr-2"></i><span class="font-semibold">【演習1】</span>Copilotで試す基本プロンプト</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="timeline-item pl-10 pb-6">
+<div class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-[#0078D4] flex items-center justify-center">
+<span class="text-white font-bold">4</span>
+</div>
+<div class="flex items-center mb-2">
+<h3 class="text-xl font-bold text-gray-800">AIに役割を与える「深津式プロンプト」</h3>
+<span class="ml-4 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">20分</span>
+</div>
+<div class="flex items-start">
+<div class="bg-gray-50 p-3 rounded-lg w-full">
+<ul class="list-inside space-y-1">
+<li><i class="fa-solid fa-user-tie text-[#7FBA00] mr-2"></i>役割設定の効果と具体例</li>
+<li><i class="fa-solid fa-people-group text-[#7FBA00] mr-2"></i><span class="font-semibold">【演習2】</span>専門家になりきってもらう</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="timeline-item pl-10">
+<div class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-[#0078D4] flex items-center justify-center">
+<span class="text-white font-bold">5</span>
+</div>
+<div class="flex items-center mb-2">
+<h3 class="text-xl font-bold text-gray-800">1日目のまとめと質疑応答</h3>
+<span class="ml-4 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">5分</span>
+</div>
+<div class="flex items-start">
+<div class="bg-gray-50 p-3 rounded-lg w-full">
+<ul class="list-inside space-y-1">
+<li><i class="fa-solid fa-check-double text-[#00B294] mr-2"></i>学習ポイントの整理</li>
+<li><i class="fa-solid fa-question-circle text-[#00B294] mr-2"></i>質問への回答</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Learning Goals -->
+<div class="absolute bottom-20 right-12 bg-[#0078D4] bg-opacity-10 p-4 rounded-lg max-w-md">
+<h3 class="font-bold text-lg text-[#0078D4] mb-2">
+<i class="fa-solid fa-bullseye mr-2"></i>1日目の学習目標
+      </h3>
+<p class="text-gray-700">プロンプトエンジニアリングの基本原則と基礎技術を理解し、実践できるようになる</p>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

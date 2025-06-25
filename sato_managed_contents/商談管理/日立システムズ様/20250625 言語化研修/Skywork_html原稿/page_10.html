@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIに役割を与える「深津式プロンプト」</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 934px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 934px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .prompt-structure {
+      border-left: 4px solid #0078D4;
+      background-color: rgba(0, 120, 212, 0.05);
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 left-0 w-96 h-96 bg-gray-50 rounded-full -ml-48 -mt-48 opacity-30"></div>
+<div class="absolute bottom-0 right-0 w-80 h-80 bg-gray-50 rounded-full -mr-20 -mb-20 opacity-30"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 w-full">AIに役割を与える「深津式プロンプト」</h1>
+<!-- Main Content -->
+<div class="flex mt-4">
+<!-- Left Column: Explanation and Structure -->
+<div class="w-1/2 pr-6">
+<!-- Basic Explanation -->
+<div class="mb-5">
+<p class="text-lg">AIに特定の<span class="font-bold">専門家やキャラクター</span>としての「<span class="hitachi-red font-bold">役割（ペルソナ）</span>」を与えることで、その役割に応じた質の高い、一貫性のあるアウトプットを引き出す手法</p>
+</div>
+<!-- Basic Structure -->
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-layer-group accent-blue mr-2"></i>基本構造
+        </h2>
+<div class="space-y-3 mb-6">
+<div class="prompt-structure p-3 rounded-md">
+<p class="font-bold text-lg mb-1">1. 役割設定</p>
+<p class="pl-2"><i class="fa-solid fa-user-tie mr-2 accent-blue"></i>「あなたは経験豊富なマーケティングアナリストです。」</p>
+</div>
+<div class="prompt-structure p-3 rounded-md">
+<p class="font-bold text-lg mb-1">2. 指示・命令</p>
+<p class="pl-2"><i class="fa-solid fa-list-check mr-2 accent-green"></i>「以下の製品データに基づいて、効果的なアプローチ方法を3つ提案してください。」</p>
+</div>
+<div class="prompt-structure p-3 rounded-md">
+<p class="font-bold text-lg mb-1">3. 制約条件・コンテキスト</p>
+<p class="pl-2"><i class="fa-solid fa-filter mr-2 accent-turquoise"></i>「#制約条件: 各提案は200字以内。専門用語は避け、平易な言葉で説明すること。」</p>
+</div>
+<div class="prompt-structure p-3 rounded-md">
+<p class="font-bold text-lg mb-1">4. 入力情報</p>
+<p class="pl-2"><i class="fa-solid fa-database mr-2 hitachi-red"></i>「製品データ: [製品名、特徴、価格などの情報]」</p>
+</div>
+</div>
+<p class="text-sm italic text-gray-600 mb-4">※区切り文字（例: # や ---）を使用して、各セクションを明確に区切ることが推奨されます。</p>
+</div>
+<!-- Right Column: Effects and Examples -->
+<div class="w-1/2 pl-6">
+<!-- Effects and Benefits -->
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-chart-line accent-green mr-2"></i>効果とメリット
+        </h2>
+<div class="grid grid-cols-2 gap-3 mb-6">
+<div class="bg-gray-50 p-3 rounded-md">
+<p class="font-bold mb-1 hitachi-red">専門性の向上</p>
+<p class="text-sm">特定の専門家として振る舞わせることで、より専門的で深い回答が得られる</p>
+</div>
+<div class="bg-gray-50 p-3 rounded-md">
+<p class="font-bold mb-1 hitachi-red">出力の一貫性</p>
+<p class="text-sm">役割が固定されることで、AIの回答のトーンやスタイルに一貫性が生まれる</p>
+</div>
+<div class="bg-gray-50 p-3 rounded-md">
+<p class="font-bold mb-1 hitachi-red">文脈理解の促進</p>
+<p class="text-sm">AIが自身の役割を認識することで、指示の文脈をより深く理解する</p>
+</div>
+<div class="bg-gray-50 p-3 rounded-md">
+<p class="font-bold mb-1 hitachi-red">思考の枠組み提供</p>
+<p class="text-sm">特定の思考の枠組みを与えることで、構造化されたアウトプットを引き出す</p>
+</div>
+</div>
+<!-- Practical Examples -->
+<h2 class="text-2xl font-bold mb-3 text-gray-800 flex items-center">
+<i class="fa-solid fa-lightbulb accent-turquoise mr-2"></i>活用例
+        </h2>
+<div class="bg-gray-50 p-4 rounded-md mb-3">
+<p class="font-bold mb-2">ビジネス戦略立案</p>
+<div class="text-sm bg-white p-2 rounded border border-gray-200">
+<p><span class="font-bold">役割:</span> 経営コンサルタント</p>
+<p><span class="font-bold">タスク:</span> 売上低迷の課題を踏まえた3年間の成長戦略の提案</p>
+<p><span class="font-bold">制約:</span> 実行可能性を重視、効果とリスクの併記</p>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-md">
+<p class="font-bold mb-2">文章作成・校正</p>
+<div class="text-sm bg-white p-2 rounded border border-gray-200">
+<p><span class="font-bold">役割:</span> プロのコピーライター</p>
+<p><span class="font-bold">タスク:</span> 製品説明文を若者向けにキャッチーに書き換え</p>
+<p><span class="font-bold">制約:</span> 親しみやすい言葉遣い、150字以内</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Role Setting Points -->
+<div class="mt-4 bg-[#0078D4] bg-opacity-10 p-4 rounded-lg">
+<h3 class="text-xl font-bold mb-2 accent-blue">役割設定のポイント</h3>
+<div class="flex justify-between">
+<div class="flex items-start">
+<i class="fa-solid fa-bullseye text-xl hitachi-red mr-2 mt-1"></i>
+<p><span class="font-bold">具体性:</span> 「専門家」ではなく「財務分析の専門家」のように具体的に</p>
+</div>
+<div class="flex items-start">
+<i class="fa-solid fa-check-double text-xl hitachi-red mr-2 mt-1"></i>
+<p><span class="font-bold">目的適合性:</span> タスクや求めるアウトプットに合った役割を選ぶ</p>
+</div>
+<div class="flex items-start">
+<i class="fa-solid fa-brain text-xl hitachi-red mr-2 mt-1"></i>
+<p><span class="font-bold">必要な知識・スキル:</span> その役割が持つべき知識やスキルを暗に伝える</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

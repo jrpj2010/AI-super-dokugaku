@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tree of Thoughts：多様な視点を引き出す</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .bg-accent-blue {
+      background-color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .bg-accent-green {
+      background-color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .bg-accent-turquoise {
+      background-color: #00B294;
+    }
+  </style>
+</head>
+<body>
+<div class="slide bg-white relative overflow-hidden p-12">
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6 border-b-2 border-hitachi-red pb-2 flex items-center">
+<i class="fa-solid fa-sitemap mr-3"></i>
+      Tree of Thoughts：多様な視点を引き出す
+    </h1>
+<!-- Main Content -->
+<div class="grid grid-cols-5 gap-4 mt-8 h-[500px]">
+<!-- Left Column: Definition and Structure -->
+<div class="col-span-2">
+<div class="bg-gray-50 p-5 rounded-lg mb-6 h-[220px]">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 border-l-4 pl-3 border-[#0078D4]">
+            ToTプロンプティングとは
+          </h2>
+<p class="mb-4">AIに<span class="font-bold">複数の思考経路</span>を探索させ、あたかも「思考の木」が枝分かれするように多角的な検討を行わせる手法。</p>
+<p>単一の思考プロセスでは見逃す可能性のある視点やアイデアを発見し、より網羅的で質の高い結論や最適解を導き出すことを目指します。</p>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg h-[220px]">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 border-l-4 pl-3 border-[#00B294]">
+            基本構造
+          </h2>
+<ol class="list-decimal pl-5 space-y-2">
+<li><span class="font-bold">複数の視点や仮説の提示</span>：検討すべき複数の異なる視点やアプローチを与える</li>
+<li><span class="font-bold">各視点からの分析促進</span>：それぞれの視点に基づいて独立した思考や分析を行わせる</li>
+<li><span class="font-bold">思考の分岐と評価</span>：各思考経路を評価し、有望なものをさらに探求</li>
+<li><span class="font-bold">最終的な統合または選択</span>：複数の思考経路の結果を比較検討し、最適な解決策を選択</li>
+</ol>
+</div>
+</div>
+<!-- Middle Column: Tree Visualization -->
+<div class="col-span-1 flex justify-center items-center">
+<div class="relative h-full w-full" id="tree-visualization">
+<!-- Tree trunk -->
+<div class="absolute h-[300px] w-4 bg-gray-600 left-1/2 transform -translate-x-1/2 top-[170px]"></div>
+<!-- Tree branches -->
+<div class="absolute h-3 w-[120px] bg-[#0078D4] left-1/2 transform -translate-x-[120px] rotate-[-30deg] top-[170px]"></div>
+<div class="absolute h-3 w-[120px] bg-[#7FBA00] left-1/2 transform -translate-x-0 rotate-[0deg] top-[130px]"></div>
+<div class="absolute h-3 w-[120px] bg-[#00B294] left-1/2 transform rotate-[30deg] top-[170px]"></div>
+<!-- Branch nodes -->
+<div class="absolute h-12 w-12 rounded-full bg-[#0078D4] flex items-center justify-center text-white font-bold left-1/2 transform -translate-x-[120px] -translate-y-1/2 top-[170px]">視点A</div>
+<div class="absolute h-12 w-12 rounded-full bg-[#7FBA00] flex items-center justify-center text-white font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-[130px]">視点B</div>
+<div class="absolute h-12 w-12 rounded-full bg-[#00B294] flex items-center justify-center text-white font-bold left-1/2 transform translate-x-[70px] -translate-y-1/2 top-[170px]">視点C</div>
+<!-- Sub-branches -->
+<div class="absolute h-2 w-[60px] bg-[#0078D4] opacity-70 left-1/2 transform -translate-x-[180px] rotate-[-60deg] top-[140px]"></div>
+<div class="absolute h-2 w-[60px] bg-[#0078D4] opacity-70 left-1/2 transform -translate-x-[160px] rotate-[-15deg] top-[150px]"></div>
+<div class="absolute h-2 w-[60px] bg-[#7FBA00] opacity-70 left-1/2 transform -translate-x-[30px] rotate-[-45deg] top-[100px]"></div>
+<div class="absolute h-2 w-[60px] bg-[#7FBA00] opacity-70 left-1/2 transform -translate-x-0 rotate-[45deg] top-[100px]"></div>
+<div class="absolute h-2 w-[60px] bg-[#00B294] opacity-70 left-1/2 transform translate-x-[100px] rotate-[15deg] top-[150px]"></div>
+<div class="absolute h-2 w-[60px] bg-[#00B294] opacity-70 left-1/2 transform translate-x-[120px] rotate-[60deg] top-[140px]"></div>
+<!-- Solution node -->
+<div class="absolute h-16 w-16 rounded-full bg-hitachi-red flex items-center justify-center text-white font-bold left-1/2 transform -translate-x-1/2 top-[450px]">最適解</div>
+</div>
+</div>
+<!-- Right Column: Use Cases and Examples -->
+<div class="col-span-2">
+<div class="bg-gray-50 p-5 rounded-lg mb-6 h-[220px]">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 border-l-4 pl-3 border-[#7FBA00]">
+            効果的な活用シーン
+          </h2>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="fa-solid fa-lightbulb text-xl accent-blue mr-3 mt-1"></i>
+<div>
+<p class="font-bold">創造的なアイデア出し</p>
+<p class="text-sm">新規事業のコンセプト立案や、既存製品の改善案など</p>
+</div>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-scale-balanced text-xl accent-green mr-3 mt-1"></i>
+<div>
+<p class="font-bold">複数の選択肢の比較検討</p>
+<p class="text-sm">複数の戦略オプションや投資先の評価など</p>
+</div>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-glasses text-xl accent-turquoise mr-3 mt-1"></i>
+<div>
+<p class="font-bold">多角的な視点が必要な分析</p>
+<p class="text-sm">複雑な社会問題の分析や市場トレンドの予測など</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-5 rounded-lg h-[220px] overflow-y-auto">
+<h2 class="text-2xl font-bold mb-3 text-gray-800 border-l-4 pl-3 border-hitachi-red">
+            プロンプト例
+          </h2>
+<div class="bg-gray-100 p-3 rounded text-sm mb-4">
+<p class="font-bold mb-1">例1: 新商品のコンセプト立案</p>
+<p class="text-xs italic bg-white p-2 rounded">「新商品のコンセプトを3つの異なる方向性（例：低価格志向、高機能志向、環境配慮志向）で考え、それぞれの長所と短所を分析し、最も有望なものを選んでください。」</p>
+</div>
+<div class="bg-gray-100 p-3 rounded text-sm">
+<p class="font-bold mb-1">例2: 問題への多角的アプローチ</p>
+<p class="text-xs italic bg-white p-2 rounded">「この問題に対して、楽観的、悲観的、現実的の3つの視点からアプローチを考えてください。それぞれの視点での主要な論点と、それに基づく具体的な行動計画を提案してください。」</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Summary -->
+<div class="absolute bottom-16 left-0 right-0 mx-12">
+<div class="bg-[#0078D4] bg-opacity-10 p-3 rounded-lg">
+<p class="text-center font-bold">ToTプロンプトを活用することで、AIはより創造的で、網羅的な問題解決能力を発揮することが期待できます。</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

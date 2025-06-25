@@ -11,7 +11,7 @@
 2. **Cursor vs VS Code/Windsurf/Bolt の違い**
    - なぜローカル環境のCursorが最強なのか
    - Webベースツール（Bolt等）の限界
-   - Claude 3.7 Sonnet思考モデルの威力
+   - Claude Sonnet 4 思考モデルの威力
    - 最終目標：Claude Code/Claude Maxへの道筋
 
 3. **ビジネス文書作成への応用**
@@ -72,12 +72,12 @@
   - ファイルエクスプローラー（左側）
   - エディター（中央）
   - AIパネル（右側）
-- 重要：Claude 3.7 Sonnet思考モデルの設定
+- 重要：Claude Sonnet 4思考モデルの設定
 
 **Step 3: AIモデルの選択と設定（5分）**
 - 無料枠と有料プランの違い
-- 推奨：Claude 3.7 Sonnet思考版の設定方法
-  - Settings → Models → Claude 3.7 Sonnet Thinking
+- 推奨：Claude Sonnet 4思考版の設定方法
+  - Settings → Models → Claude Sonnet 4 Thinking
 - 使用制限の理解（500リクエスト/月）
 - Pro版のメリット（無制限使用）
 - カスタムモデルの追加方法（OpenAI API形式）

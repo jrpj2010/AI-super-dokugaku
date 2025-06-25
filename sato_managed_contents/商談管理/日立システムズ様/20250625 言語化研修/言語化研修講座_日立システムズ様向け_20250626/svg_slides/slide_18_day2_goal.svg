@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    本日のゴール
+  </text>
+
+  <!-- Main Title -->
+  <g transform="translate(960, 300)">
+    <rect x="-500" y="-80" width="1000" height="160" fill="#FFE5E5" rx="20" />
+    <text x="0" y="20" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="60" font-weight="700"
+      fill="#FA000F">
+      Copilotを「最高の思考パートナー」にする
+    </text>
+  </g>
+
+  <!-- Content -->
+  <g transform="translate(200, 500)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="80" height="80" fill="#FA000F" rx="40" />
+      <text x="40" y="50" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="700"
+        fill="white">1</text>
+
+      <text x="120" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" fill="#333">
+        構造化した思考を、効果的な「プロンプト」に変換する技術を学ぶ。
+      </text>
+    </g>
+
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="80" height="80" fill="#0066CC" rx="40" />
+      <text x="40" y="50" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="700"
+        fill="white">2</text>
+
+      <text x="120" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" fill="#333">
+        Copilotの回答の質を劇的に向上させる「対話の型」を習得する。
+      </text>
+    </g>
+
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="80" height="80" fill="#4CAF50" rx="40" />
+      <text x="40" y="50" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="36" font-weight="700"
+        fill="white">3</text>
+
+      <text x="120" y="30" font-family="Noto Sans JP, sans-serif" font-size="32" fill="#333">
+        業務で使える具体的なプロンプトを持ち帰り、
+      </text>
+      <text x="120" y="70" font-family="Noto Sans JP, sans-serif" font-size="32" fill="#333">
+        明日から実践できる状態になる。
+      </text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">18</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

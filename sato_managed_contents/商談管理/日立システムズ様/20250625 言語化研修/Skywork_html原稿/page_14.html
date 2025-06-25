@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>演習3：長文メールの要点整理と返信案作成</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>
+    body {width: 1280px; height: 720px; font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;}
+    .slide {
+      width: 1280px;
+      min-height: 720px;
+    }
+    .hitachi-red {
+      color: #FA000F;
+    }
+    .bg-hitachi-red {
+      background-color: #FA000F;
+    }
+    .accent-blue {
+      color: #0078D4;
+    }
+    .accent-green {
+      color: #7FBA00;
+    }
+    .accent-turquoise {
+      color: #00B294;
+    }
+    .exercise-bg {
+      background-color: #f0f7ff;
+    }
+    .step-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #0078D4;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="slide exercise-bg relative overflow-hidden p-12">
+<!-- Subtle background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-20 -mt-20 opacity-30"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 opacity-30"></div>
+<!-- Hitachi Systems Logo -->
+<div class="absolute top-8 right-12">
+<div class="text-xl font-bold hitachi-red">
+<i class="fa-solid fa-cube mr-2"></i>Hitachi Systems
+      </div>
+</div>
+<!-- Exercise Label -->
+<div class="bg-[#0078D4] text-white px-4 py-1 rounded-md inline-block mb-2">
+<i class="fa-solid fa-dumbbell mr-2"></i>演習
+    </div>
+<!-- Title -->
+<h1 class="text-4xl font-bold hitachi-red mb-6">演習3：長文メールの要点整理と返信案作成</h1>
+<!-- Exercise Objective -->
+<div class="bg-white rounded-lg p-4 mb-6 shadow-sm">
+<div class="flex items-start">
+<i class="fa-solid fa-bullseye text-2xl accent-blue mr-3 mt-1"></i>
+<div>
+<h2 class="text-xl font-bold mb-2">演習の目的</h2>
+<p>Chain-of-Thoughtプロンプトを活用して、複雑な内容を含む長文メールから要点を整理し、適切な返信案を作成する力を身につけます。</p>
+</div>
+</div>
+</div>
+<!-- Main Content - Two Column Layout -->
+<div class="flex gap-6">
+<!-- Left Column: Steps -->
+<div class="w-1/2">
+<h2 class="text-xl font-bold mb-4 text-gray-800">演習の手順</h2>
+<div class="space-y-4">
+<!-- Step 1 -->
+<div class="flex items-start">
+<div class="step-number mr-3">1</div>
+<div>
+<h3 class="font-bold">サンプルの長文メールを確認</h3>
+<p class="text-gray-600">複数の論点や依頼が混在する長文メールを読み、内容を把握します。</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start">
+<div class="step-number mr-3">2</div>
+<div>
+<h3 class="font-bold">Chain-of-Thoughtプロンプトを作成</h3>
+<p class="text-gray-600">段階的に思考を進めるようAIに指示するプロンプトを作成します。</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start">
+<div class="step-number mr-3">3</div>
+<div>
+<h3 class="font-bold">メールの要点整理と分析</h3>
+<p class="text-gray-600">AIに要点を抽出させ、各論点に対する対応方針を検討します。</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start">
+<div class="step-number mr-3">4</div>
+<div>
+<h3 class="font-bold">返信メールの作成</h3>
+<p class="text-gray-600">整理された要点に基づいて、丁寧で漏れのない返信メールを作成します。</p>
+</div>
+</div>
+</div>
+<!-- Time and Tool -->
+<div class="mt-6 flex items-center space-x-6">
+<div class="flex items-center">
+<i class="fa-regular fa-clock text-xl accent-blue mr-2"></i>
+<span class="font-bold">所要時間: 15分</span>
+</div>
+<div class="flex items-center">
+<i class="fa-solid fa-desktop text-xl accent-green mr-2"></i>
+<span class="font-bold">使用ツール: Microsoft Copilot</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Example Prompt -->
+<div class="w-1/2">
+<h2 class="text-xl font-bold mb-4 text-gray-800">効果的なプロンプト例</h2>
+<div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#00B294] font-mono text-sm mb-5 shadow-sm">
+<p class="mb-2">以下の長文メールを分析してください。</p>
+<p class="mb-2">1. まず、メールの主要な論点を3つに整理</p>
+<p class="mb-2">2. 次に、各論点に対する自分の見解を簡潔に記述</p>
+<p class="mb-2">3. 最後に、これらを踏まえた丁寧な返信メールを作成</p>
+<p class="text-gray-500">[長文メール]</p>
+</div>
+<h2 class="text-xl font-bold mb-3 text-gray-800">ポイント</h2>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-[#7FBA00] mr-2 mt-1"></i>
+<span>明確なステップを指示することで、AIの思考プロセスを段階的に進行させる</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-[#7FBA00] mr-2 mt-1"></i>
+<span>具体的な出力形式（要点数、構成）を指定する</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-[#7FBA00] mr-2 mt-1"></i>
+<span>文脈（メール全文）を提供し、AIが内容を理解できるようにする</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-lightbulb text-amber-500 mr-2 mt-1"></i>
+<span>複雑なメールほど、Chain-of-Thoughtの効果が高くなる</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 text-sm text-gray-500">
+      ©Hitachi Systems, Ltd. 2025. All rights reserved
+    </div>
+</div>
+
+</body></html>

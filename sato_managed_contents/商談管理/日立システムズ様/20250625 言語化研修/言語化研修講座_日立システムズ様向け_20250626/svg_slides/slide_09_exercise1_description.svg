@@ -1,0 +1,83 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    演習①: あなたの「モヤモヤ」を言語化してみよう
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 目的 -->
+    <g>
+      <rect x="0" y="0" width="1620" height="120" fill="#FFE5E5" rx="15" />
+      <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+        fill="#FA000F">目的:</text>
+      <text x="140" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">
+        思考整理フレームワークを使い、自分自身の課題を分解・構造化する体験をする。
+      </text>
+    </g>
+
+    <!-- お題 -->
+    <g transform="translate(0, 150)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">お題:</text>
+      <text x="100" y="40" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#666">
+        あなたが今、仕事で感じている「うまく言語化できなくて困っていること」を一つ選んでください。
+      </text>
+
+      <!-- 例 -->
+      <g transform="translate(100, 80)">
+        <g transform="translate(0, 0)">
+          <rect x="0" y="0" width="40" height="40" fill="#FA000F" opacity="0.1" rx="8" />
+          <text x="20" y="28" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="20"
+            font-weight="600" fill="#FA000F">例</text>
+          <text x="60" y="28" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#666">
+            「上司への進捗報告が、いつも長くなってしまう」
+          </text>
+        </g>
+
+        <g transform="translate(0, 60)">
+          <rect x="0" y="0" width="40" height="40" fill="#FA000F" opacity="0.1" rx="8" />
+          <text x="20" y="28" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="20"
+            font-weight="600" fill="#FA000F">例</text>
+          <text x="60" y="28" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#666">
+            「お客様へのメールの文章が、堅苦しくなっていないか不安」
+          </text>
+        </g>
+
+        <g transform="translate(0, 120)">
+          <rect x="0" y="0" width="40" height="40" fill="#FA000F" opacity="0.1" rx="8" />
+          <text x="20" y="28" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="20"
+            font-weight="600" fill="#FA000F">例</text>
+          <text x="60" y="28" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#666">
+            「会議でとっさに意見を求められても、うまく話せない」
+          </text>
+        </g>
+      </g>
+    </g>
+
+    <!-- 方法 -->
+    <g transform="translate(0, 500)">
+      <rect x="0" y="0" width="1620" height="150" fill="#E6F4FF" rx="15" />
+      <g transform="translate(40, 30)">
+        <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+          fill="#0066CC">方法:</text>
+        <text x="100" y="40" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">
+          配布する「思考整理シート」の項目を埋めてください。
+        </text>
+        <rect x="100" y="60" width="200" height="50" fill="#0066CC" rx="25" />
+        <text x="200" y="92" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24"
+          font-weight="600" fill="white">
+          個人ワーク 15分
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">9</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

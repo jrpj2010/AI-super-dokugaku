@@ -1,0 +1,85 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    演習④: 明日から使える「マイ・プロンプト」を作ろう
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 目的 -->
+    <g>
+      <rect x="0" y="0" width="1620" height="80" fill="#FFE5E5" rx="15" />
+      <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+        fill="#FA000F">目的:</text>
+      <text x="140" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">研修の学びを、具体的な業務成果に繋げる。</text>
+    </g>
+
+    <!-- お題 -->
+    <g transform="translate(0, 110)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">お題:</text>
+      <text x="0" y="85" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#666">
+        あなたの実際の業務の中で、最も時間を使っている、あるいは、最も苦手な
+      </text>
+      <text x="0" y="125" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#666">
+        「言語化」に関わるタスクを一つ選び、それを自動化・効率化するための
+      </text>
+      <text x="0" y="165" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#666">
+        プロンプトを作成してください。
+      </text>
+    </g>
+
+    <!-- 例 -->
+    <g transform="translate(0, 310)">
+      <rect x="0" y="0" width="1620" height="200" fill="#E6F4FF" rx="15" />
+      <g transform="translate(40, 30)">
+        <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+          fill="#0066CC">例:</text>
+
+        <g transform="translate(50, 70)">
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="8" height="8" fill="#0066CC" rx="2" />
+            <text x="20" y="10" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+              定例会議の議事録作成プロンプト
+            </text>
+          </g>
+
+          <g transform="translate(0, 35)">
+            <rect x="0" y="0" width="8" height="8" fill="#0066CC" rx="2" />
+            <text x="20" y="10" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+              お客様へのアポイント依頼メール作成プロンプト
+            </text>
+          </g>
+
+          <g transform="translate(0, 70)">
+            <rect x="0" y="0" width="8" height="8" fill="#0066CC" rx="2" />
+            <text x="20" y="10" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#333">
+              新製品のプレスリリース骨子作成プロンプト
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- 方法 -->
+    <g transform="translate(0, 540)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">方法:</text>
+      <text x="0" y="85" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#666">
+        本日学んだ全てを総動員して、最高のプロンプトを完成させてください。
+      </text>
+      <rect x="50" y="100" width="200" height="50" fill="#FA000F" rx="25" />
+      <text x="150" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="22" font-weight="600"
+        fill="white">
+        個人ワーク 20分
+      </text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">28</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

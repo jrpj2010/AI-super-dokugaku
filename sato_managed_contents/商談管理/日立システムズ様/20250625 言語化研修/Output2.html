@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI時代の超言語化能力習得研修 - Day2</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+    :root {
+      --hitachi-red: #FA000F;
+      --base-font-size: 26pt;
+      --base-padding: 60px;
+      --bg-fallback-dark: #333;
+      --bg-fallback-light: #f5f5f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .presentation-container {
+      width: min(95vw, 1280px);
+      height: min(80vh, 720px);
+      position: relative;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 50px var(--base-padding);
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      font-family: "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      font-size: var(--base-font-size);
+      color: #333;
+      background-color: #fff;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .slide.prev {
+      transform: translateX(-30px);
+    }
+
+    .slide footer {
+      font-size: 10pt;
+      color: #666;
+      position: absolute;
+      bottom: 25px;
+      left: var(--base-padding);
+      right: var(--base-padding);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .slide h1 {
+      font-size: 42pt;
+      color: var(--hitachi-red);
+      margin-bottom: 30px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .slide h2 {
+      font-size: 32pt;
+      color: #000;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--hitachi-red);
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .slide h3 {
+      font-size: 28pt;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .slide p {
+      font-size: var(--base-font-size);
+      line-height: 1.8;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .slide ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .slide ul li {
+      font-size: var(--base-font-size);
+      margin-bottom: 15px;
+      padding-left: 30px;
+      position: relative;
+      color: #333;
+    }
+
+    .slide ul li:before {
+      content: "▶";
+      position: absolute;
+      left: 0;
+      color: var(--hitachi-red);
+    }
+
+    .controls {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      padding: 15px 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .controls button {
+      background: var(--hitachi-red);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 14pt;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .controls button:hover {
+      background: #e60000;
+      transform: translateY(-2px);
+    }
+
+    .controls button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-counter {
+      font-size: 14pt;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .highlight {
+      background-color: #FFEB3B;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .emphasis {
+      color: var(--hitachi-red);
+      font-weight: 700;
+      font-size: 110%;
+    }
+
+    .code-block {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 25px;
+      margin: 30px 0;
+      font-family: 'Noto Sans JP', monospace;
+      font-size: calc(var(--base-font-size) * 0.85);
+      white-space: pre-wrap;
+      overflow-x: auto;
+      color: #333;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-box {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      border-left: 5px solid var(--hitachi-red);
+      padding: 20px 30px;
+      margin: 25px 0;
+      border-radius: 0 5px 5px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-box h4 {
+      color: var(--hitachi-red);
+      font-size: calc(var(--base-font-size) * 1.1);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .matrix-cell {
+      background: #f9f9f9;
+      border: 2px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .matrix-cell:hover {
+      background: #fff;
+      border-color: var(--hitachi-red);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: var(--hitachi-red);
+      transition: width 0.4s ease;
+      z-index: 10;
+    }
+
+    .fullscreen-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 12pt;
+      transition: background 0.3s ease;
+    }
+
+    .fullscreen-btn:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .presentation-container:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .icon-item {
+      text-align: center;
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .icon-item:hover {
+      background: #fff;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+      margin: 30px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--hitachi-red);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin: 20px 0;
+      padding: 20px;
+      width: calc(50% - 30px);
+      background: #f5f5f5;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: calc(50% + 30px);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: calc(var(--base-font-size) * 0.9);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .comparison-table th {
+      background: var(--hitachi-red);
+      color: white;
+      font-weight: 700;
+    }
+
+    .comparison-table tr:hover {
+      background: #f5f5f5;
+    }
+
+    .action-box {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border: 2px solid #ff9800;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 30px 0;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(255, 152, 0, 0.2);
+    }
+
+    .action-box h3 {
+      color: #e65100;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --base-font-size: 18pt;
+        --base-padding: 30px;
+      }
+      
+      .slide h1 {
+        font-size: 28pt;
+      }
+      
+      .slide h2 {
+        font-size: 24pt;
+      }
+      
+      .matrix-grid,
+      .icon-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-item {
+        width: calc(100% - 50px);
+        left: 50px !important;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: slideIn 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="presentation-container">
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">全画面</button>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- スライド1: Day2オープニング -->
+    <div class="slide active">
+      <h1>AI時代の超言語化能力習得研修<br>Day2</h1>
+      <div style="margin: 50px 0;">
+        <h2 style="border: none; text-align: center; color: #333;">個人の力を組織の競争力に変える実践技術</h2>
+      </div>
+      <div class="code-block" style="text-align: center; font-size: 30pt; line-height: 1.8;">
+        Day1で手に入れた力を
+        組織全体の競争力に変える
+
+        一人の変化が、チームを変え、
+        チームの変化が、組織を変える
+
+        今日は、その起爆剤になる日
+      </div>
+      <footer>
+        <span>AI時代の超言語化能力習得研修 Day2</span>
+        <span>1 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド2: なぜ組織的な言語化が必要なのか -->
+    <div class="slide">
+      <h2>なぜ組織的な言語化が必要なのか</h2>
+      <div class="comparison-table" style="font-size: 24pt;">
+        <tr>
+          <td style="width: 50%; padding: 30px; vertical-align: top;">
+            <h3 style="color: #666;">【個人の言語化力】</h3>
+            <p>生産性2倍 × 10人 = <span class="emphasis">20倍</span>の効果</p>
+          </td>
+          <td style="width: 50%; padding: 30px; vertical-align: top; background: #fff3e0;">
+            <h3 style="color: var(--hitachi-red);">【組織の言語化力】</h3>
+            <p>生産性2倍 × 10人 × 相乗効果 = <span class="emphasis" style="font-size: 130%;">100倍</span>の効果</p>
+          </td>
+        </tr>
+      </div>
+      <div class="step-box" style="margin-top: 50px;">
+        <h4>相乗効果の源泉</h4>
+        <ul>
+          <li>知識の共有</li>
+          <li>相互学習</li>
+          <li>標準化</li>
+        </ul>
+        <p style="margin-top: 20px; text-align: center; font-weight: 700;">
+          これがAI時代の組織の生存戦略
+        </p>
+      </div>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>2 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド3: 言語化文化醸成の3ステップ -->
+    <div class="slide">
+      <h2>言語化文化醸成の3ステップ</h2>
+      <div class="timeline" style="margin-top: 40px;">
+        <div class="timeline-item">
+          <h3 style="color: var(--hitachi-red);">STEP1：見える化（1-2週目）</h3>
+          <p>→ 成功事例の共有ボード設置</p>
+        </div>
+        <div class="timeline-item">
+          <h3 style="color: var(--hitachi-red);">STEP2：巻き込み（3-4週目）</h3>
+          <p>→ AIお悩み相談会の開催</p>
+        </div>
+        <div class="timeline-item">
+          <h3 style="color: var(--hitachi-red);">STEP3：定着化（5週目以降）</h3>
+          <p>→ 言語化コンテストの実施</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700;">
+        戦略的アプローチで、確実に文化を変える
+      </p>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>3 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド4: 実践手法①：AI活用事例の見える化ボード -->
+    <div class="slide">
+      <h2>実践手法①：AI活用事例の見える化ボード</h2>
+      <div class="code-block">
+        【投稿テンプレート】
+        タイトル：○○を○分で完成！
+        Before：従来2時間かかっていた○○作成
+        After：AIで15分に短縮
+
+        使用プロンプト：
+        「あなたは...（実際のプロンプトを共有）」
+
+        効果：時間削減1時間45分
+      </div>
+      <div class="step-box">
+        <h4>成功のポイント</h4>
+        <ul>
+          <li>具体的なプロンプトまで共有</li>
+          <li>数値で効果を明示</li>
+          <li>誰でも真似できる内容</li>
+        </ul>
+      </div>
+      <p style="text-align: center; margin-top: 30px;">
+        <span class="highlight">「へぇ、こんな使い方があるのか」</span>という発見が、次の挑戦者を生み出す
+      </p>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>4 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド5: 実践手法②：週次AIお悩み相談会 -->
+    <div class="slide">
+      <h2>実践手法②：週次AIお悩み相談会</h2>
+      <div class="step-box" style="background: #e8f5e9;">
+        <h4>相談会の進め方（30分）</h4>
+        <ol style="list-style: decimal; padding-left: 30px;">
+          <li style="margin-bottom: 20px;">
+            <strong>成功事例シェア（10分）</strong><br>
+            - 今週のベストプラクティス賞
+          </li>
+          <li style="margin-bottom: 20px;">
+            <strong>お悩み相談（15分）</strong><br>
+            - 「こんな時、どうすれば？」
+          </li>
+          <li>
+            <strong>実演デモ（5分）</strong><br>
+            - その場で解決策を実演
+          </li>
+        </ol>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>驚きの効果</h3>
+        <p style="font-size: 32pt; margin: 0;">参加者の<span class="emphasis">96%</span>が「役立った」と回答</p>
+      </div>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>5 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド6: 実践手法③：失敗シェア会で心理的安全性向上 -->
+    <div class="slide">
+      <h2>実践手法③：失敗シェア会で心理的安全性向上</h2>
+      <div class="step-box" style="background: #fff3e0;">
+        <h4>失敗シェア会のルール</h4>
+        <ol style="list-style: decimal; padding-left: 30px;">
+          <li>月1回、各自が失敗を1つ発表</li>
+          <li><span class="emphasis">批判・非難は絶対禁止</span></li>
+          <li>「で、どうする？」を全員で考える</li>
+          <li>AIで失敗パターンを分析</li>
+        </ol>
+      </div>
+      <div class="matrix-grid" style="margin-top: 40px;">
+        <div class="matrix-cell">
+          <h3 style="color: var(--hitachi-red);">効果①</h3>
+          <p style="font-size: 24pt; font-weight: 700;">心理的安全性スコア<br><span class="emphasis">40%向上</span></p>
+        </div>
+        <div class="matrix-cell">
+          <h3 style="color: var(--hitachi-red);">効果②</h3>
+          <p style="font-size: 24pt; font-weight: 700;">挑戦意欲が<br><span class="emphasis">2.5倍</span>に</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 30px; font-weight: 700;">
+        失敗が許される文化があってこそ、真の挑戦が生まれる
+      </p>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>6 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド7: 実践演習④：成功事例の言語化 -->
+    <div class="slide">
+      <h2>実践演習④：成功事例の言語化</h2>
+      <div class="action-box">
+        <h3>【実践演習】自分の成功事例を共有形式に</h3>
+      </div>
+      <div class="step-box" style="margin-top: 30px;">
+        <ol style="list-style: decimal; padding-left: 30px; font-size: 24pt;">
+          <li style="margin-bottom: 15px;">最近AIを使って効率化した業務は？</li>
+          <li style="margin-bottom: 15px;">Before/Afterを数値で表現</li>
+          <li style="margin-bottom: 15px;">使用したプロンプトを正確に記録</li>
+          <li>他のメンバーが真似できるポイントは？</li>
+        </ol>
+      </div>
+      <div style="background: #e3f2fd; padding: 30px; border-radius: 10px; margin-top: 30px; text-align: center;">
+        <p style="font-size: 28pt; margin-bottom: 20px;">制限時間：<span class="emphasis">10分</span></p>
+        <p style="font-size: 24pt;">完成したら、隣の人とシェア！</p>
+      </div>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>7 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド8: 組織の知識資産を構築する仕組み -->
+    <div class="slide">
+      <h2>組織の知識資産を構築する仕組み</h2>
+      <p style="text-align: center; font-size: 28pt; margin-bottom: 30px;">
+        個人の成功 → チームの資産 → 組織の財産
+      </p>
+      <div class="code-block">
+        【プロンプトライブラリ構築】
+        部門別・業務別に整理
+        ├─ 営業部門
+        │  ├─ 提案書作成プロンプト集
+        │  └─ 顧客分析プロンプト集
+        ├─ 企画部門
+        │  ├─ 市場調査プロンプト集
+        │  └─ 企画書作成プロンプト集
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3 style="font-size: 32pt; margin-bottom: 0;">1人の発見が、100人の生産性を上げる</h3>
+      </div>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>8 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド9: 言語化KPIの設定と測定 -->
+    <div class="slide">
+      <h2>言語化KPIの設定と測定</h2>
+      <div class="icon-grid">
+        <div class="icon-item">
+          <h3 style="color: var(--hitachi-red);">AI利用率</h3>
+          <p style="font-size: 20pt;">目標：3ヶ月で<br><span class="emphasis" style="font-size: 28pt;">80%以上</span></p>
+        </div>
+        <div class="icon-item">
+          <h3 style="color: var(--hitachi-red);">時間削減効果</h3>
+          <p style="font-size: 20pt;">目標：月間<br><span class="emphasis" style="font-size: 28pt;">100時間以上</span></p>
+        </div>
+        <div class="icon-item">
+          <h3 style="color: var(--hitachi-red);">プロンプト共有数</h3>
+          <p style="font-size: 20pt;">目標：週<br><span class="emphasis" style="font-size: 28pt;">10件以上</span></p>
+        </div>
+        <div class="icon-item">
+          <h3 style="color: var(--hitachi-red);">相談会参加率</h3>
+          <p style="font-size: 20pt;">目標：<br><span class="emphasis" style="font-size: 28pt;">70%以上</span></p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 50px; font-size: 32pt; font-weight: 700; color: var(--hitachi-red);">
+        測定なくして、改善なし
+      </p>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>9 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド10: テーマ4まとめ -->
+    <div class="slide">
+      <h2>テーマ4まとめ：文化は一日にして成らず</h2>
+      <div style="background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); padding: 40px; border-radius: 10px;">
+        <h3 style="text-align: center; margin-bottom: 30px;">言語化文化醸成のポイント</h3>
+        <ul style="font-size: 28pt;">
+          <li>✓ 小さな成功を見える化</li>
+          <li>✓ 仲間を巻き込む仕組み</li>
+          <li>✓ 失敗を許容する風土</li>
+          <li>✓ 知識を資産化する仕組み</li>
+          <li>✓ 継続的な測定と改善</li>
+        </ul>
+      </div>
+      <p style="text-align: center; margin-top: 50px; font-size: 32pt; font-weight: 700; color: var(--hitachi-red);">
+        3ヶ月後、組織は別物になっている
+      </p>
+      <footer>
+        <span>テーマ4：組織での言語化文化醸成</span>
+        <span>10 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド11: 高度な言語化技術への挑戦 -->
+    <div class="slide">
+      <h2>高度な言語化技術への挑戦</h2>
+      <div class="timeline" style="margin: 40px 0;">
+        <div class="timeline-item" style="width: 80%; left: 10%;">
+          <p style="text-align: center; font-size: 24pt;">基礎的な言語化</p>
+          <p style="text-align: center; font-size: 32pt; margin: 10px 0;">↓</p>
+          <p style="text-align: center; font-size: 24pt;">組織での共有・展開</p>
+          <p style="text-align: center; font-size: 32pt; margin: 10px 0;">↓</p>
+          <p style="text-align: center; font-size: 28pt; font-weight: 700; color: var(--hitachi-red);">【ここから】高度な言語化技術</p>
+        </div>
+      </div>
+      <div class="icon-grid" style="margin-top: 40px;">
+        <div class="icon-item">
+          <h3>批判的思考の言語化</h3>
+        </div>
+        <div class="icon-item">
+          <h3>感情を動かすストーリーテリング</h3>
+        </div>
+        <div class="icon-item">
+          <h3>戦略的な影響力の行使</h3>
+        </div>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>11 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド12: 批判的思考の言語化：最強のアンチ召喚法 -->
+    <div class="slide">
+      <h2>批判的思考の言語化：最強のアンチ召喚法</h2>
+      <div class="code-block">
+        最強のアンチ召喚プロンプト
+
+        「あなたは、私の提案に対する最も厳しい批判者です。
+        以下の企画について、容赦なく問題点を指摘してください：
+        1. 論理的な矛盾や飛躍
+        2. 実現可能性の問題
+        3. 見落としているリスク
+        4. 競合との差別化不足
+        5. ROIの妥当性」
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700;">
+        自分の死角を、AIが容赦なく突く
+      </p>
+      <div class="step-box" style="margin-top: 30px;">
+        <h4>効果</h4>
+        <p>この批判に耐えた企画は、<span class="emphasis">誰にも論破されない</span></p>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>12 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド13: 批判を建設的提案に変換する技術 -->
+    <div class="slide">
+      <h2>批判を建設的提案に変換する技術</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">批判の建設的変換プロンプト</h3>
+      <div style="display: flex; align-items: center; justify-content: center; margin: 40px 0;">
+        <div class="step-box" style="flex: 1; margin-right: 20px;">
+          <h4>入力</h4>
+          <p>「この企画は現実的じゃない」</p>
+        </div>
+        <div style="font-size: 40pt; color: var(--hitachi-red);">↓</div>
+        <div class="step-box" style="flex: 1; margin-left: 20px; background: #e8f5e9;">
+          <h4>出力</h4>
+          <p>「実現可能性を高めるために、以下の3つのステップを提案します：</p>
+          <ol style="list-style: decimal; padding-left: 20px; font-size: 20pt;">
+            <li>パイロット版での小規模検証</li>
+            <li>段階的な展開計画</li>
+            <li>リスクヘッジ策の事前準備」</li>
+          </ol>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700; color: var(--hitachi-red);">
+        批判を、前進のエネルギーに変える
+      </p>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>13 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド14: ストーリーテリング：データを物語に変える -->
+    <div class="slide">
+      <h2>ストーリーテリング：データを物語に変える</h2>
+      <div class="code-block">
+        データストーリー変換プロンプト
+
+        「以下の売上データを、全社会議で発表する
+        3分間のストーリーに変換してください：
+        - 主人公：現場の営業チーム
+        - 困難：コロナ禍での苦境
+        - 転機：新戦略の導入
+        - 成果：V字回復の達成
+        - 教訓：チームワークの重要性」
+      </div>
+      <div class="matrix-grid" style="margin-top: 40px;">
+        <div class="matrix-cell">
+          <h3>Before</h3>
+          <p>売上が20%上昇</p>
+          <p style="color: #666; font-size: 20pt;">（無機質なデータ）</p>
+        </div>
+        <div class="matrix-cell" style="background: #fff3e0;">
+          <h3>After</h3>
+          <p>苦境の中、チームが一丸となって新しい挑戦をし、ついに光が見えた</p>
+          <p style="color: var(--hitachi-red); font-size: 20pt;">（心を動かす物語）</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 30px; font-size: 28pt; font-weight: 700;">
+        数字に、魂を吹き込む
+      </p>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>14 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド15: エモーショナル・ストーリー生成の実践 -->
+    <div class="slide">
+      <h2>エモーショナル・ストーリー生成の実践</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">心を動かすストーリーの型</h3>
+      <div class="timeline" style="margin: 30px 0;">
+        <div class="timeline-item" style="width: 80%; left: 10%;">
+          <ol style="list-style: decimal; padding-left: 30px; font-size: 24pt;">
+            <li style="margin-bottom: 15px;"><strong>共感</strong>：読み手が自分事と感じる導入</li>
+            <li style="margin-bottom: 15px;"><strong>葛藤</strong>：主人公が直面する困難</li>
+            <li style="margin-bottom: 15px;"><strong>転機</strong>：変化のきっかけ</li>
+            <li style="margin-bottom: 15px;"><strong>行動</strong>：具体的な取り組み</li>
+            <li style="margin-bottom: 15px;"><strong>成果</strong>：努力の結実</li>
+            <li><strong>教訓</strong>：普遍的なメッセージ</li>
+          </ol>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>この型で、誰もが語り部になれる</h3>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>15 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド16: 実践演習⑤：批判をチャンスに変える -->
+    <div class="slide">
+      <h2>実践演習⑤：批判をチャンスに変える</h2>
+      <div class="action-box">
+        <h3>【実践演習】批判的思考の実践</h3>
+        <p style="font-size: 24pt;">お題：あなたが今温めている企画やアイデア</p>
+      </div>
+      <div class="step-box" style="margin-top: 30px;">
+        <h4>演習の流れ</h4>
+        <ul>
+          <li><strong>Step1（5分）</strong>：企画の概要をAIに説明</li>
+          <li><strong>Step2（3分）</strong>：最強のアンチに批判してもらう</li>
+          <li><strong>Step3（5分）</strong>：批判を建設的提案に変換</li>
+          <li><strong>Step4（2分）</strong>：改善版の企画を作成</li>
+        </ul>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700; color: var(--hitachi-red);">
+        合計15分で、企画の質が劇的向上
+      </p>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>16 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド17: 影響力を行使する言語化 -->
+    <div class="slide">
+      <h2>影響力を行使する言語化</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">階層別コミュニケーション戦略</h3>
+      <div class="icon-grid">
+        <div class="icon-item" style="background: #e3f2fd;">
+          <h3>【上司向け】</h3>
+          <p>データ＋ストーリー＋提案</p>
+        </div>
+        <div class="icon-item" style="background: #f3e5f5;">
+          <h3>【同僚向け】</h3>
+          <p>共感＋メリット＋協力依頼</p>
+        </div>
+        <div class="icon-item" style="background: #e8f5e9;">
+          <h3>【部下向け】</h3>
+          <p>ビジョン＋具体的指示＋サポート</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700;">
+        相手に応じて、言語化を使い分ける
+      </p>
+      <div class="step-box" style="margin-top: 30px;">
+        <h4>これが真のリーダーシップ</h4>
+        <p>AIを使って、相手に応じた最適なコミュニケーションを設計する</p>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>17 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド18: プロトタイプ思考で素早く改善 -->
+    <div class="slide">
+      <h2>プロトタイプ思考で素早く改善</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">言語化のプロトタイプ思考</h3>
+      <div class="timeline" style="margin: 40px 0;">
+        <div class="timeline-item" style="width: 30%; left: 5%;">
+          <h4 style="color: var(--hitachi-red);">Ver1.0</h4>
+          <p>まず60点で出す</p>
+        </div>
+        <div class="timeline-item" style="width: 30%; left: 35%;">
+          <h4 style="color: var(--hitachi-red);">Ver2.0</h4>
+          <p>80点に改善</p>
+          <p style="font-size: 18pt; color: #666;">（フィードバック後）</p>
+        </div>
+        <div class="timeline-item" style="width: 30%; left: 65%;">
+          <h4 style="color: var(--hitachi-red);">Ver3.0</h4>
+          <p>95点に最適化</p>
+          <p style="font-size: 18pt; color: #666;">（実践投入後）</p>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>完璧を求めず、素早く改善</h3>
+        <p style="font-size: 28pt;">1週間で3回転すれば、別物になる</p>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>18 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド19: AIとの高度な対話術 -->
+    <div class="slide">
+      <h2>AIとの高度な対話術</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">思考を深める段階的対話</h3>
+      <div class="step-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+        <ol style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 20px; font-size: 24pt;">
+            <span class="emphasis">第1問：</span>「この問題の本質は何？」
+          </li>
+          <li style="margin-bottom: 20px; font-size: 24pt;">
+            <span class="emphasis">第2問：</span>「なぜそれが本質なの？」
+          </li>
+          <li style="margin-bottom: 20px; font-size: 24pt;">
+            <span class="emphasis">第3問：</span>「他の視点から見たら？」
+          </li>
+          <li style="margin-bottom: 20px; font-size: 24pt;">
+            <span class="emphasis">第4問：</span>「極論を言えば？」
+          </li>
+          <li style="font-size: 24pt;">
+            <span class="emphasis">第5問：</span>「結局、何をすべき？」
+          </li>
+        </ol>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700; color: var(--hitachi-red);">
+        5回の問いで、思考は研ぎ澄まされる
+      </p>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>19 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド20: テーマ5まとめ：言語化の達人への道 -->
+    <div class="slide">
+      <h2>テーマ5まとめ：言語化の達人への道</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">言語化レベルの進化</h3>
+      <div class="timeline" style="margin: 40px 0;">
+        <div class="timeline-item" style="width: 20%; left: 5%;">
+          <h4>初級</h4>
+          <p style="font-size: 20pt;">AIで作業効率化</p>
+        </div>
+        <div class="timeline-item" style="width: 20%; left: 27%;">
+          <h4>中級</h4>
+          <p style="font-size: 20pt;">チームで知識共有</p>
+        </div>
+        <div class="timeline-item" style="width: 20%; left: 49%;">
+          <h4 style="color: var(--hitachi-red);">上級</h4>
+          <p style="font-size: 20pt;">批判的思考と物語化</p>
+        </div>
+        <div class="timeline-item" style="width: 20%; left: 71%;">
+          <h4>達人</h4>
+          <p style="font-size: 20pt;">組織を動かす影響力</p>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>今日学んだ技術で、あなたは上級者の仲間入り</h3>
+      </div>
+      <footer>
+        <span>テーマ5：高度な言語化技術</span>
+        <span>20 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド21: 学びを実践に変える瞬間 -->
+    <div class="slide">
+      <h2>学びを実践に変える瞬間</h2>
+      <div style="text-align: center; margin: 80px 0;">
+        <h1 style="font-size: 48pt; margin-bottom: 40px;">知識 × 行動 = 成果</h1>
+        <div class="step-box" style="max-width: 600px; margin: 0 auto;">
+          <p style="font-size: 28pt; line-height: 1.8;">
+            知識だけでは、価値ゼロ<br>
+            行動して初めて、価値が生まれる
+          </p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 60px; font-size: 32pt; font-weight: 700; color: var(--hitachi-red);">
+        今この瞬間から、<br>あなたの実践が始まる
+      </p>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>21 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド22: 30日間実践プロジェクトの設計 -->
+    <div class="slide">
+      <h2>30日間実践プロジェクトの設計</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">30日間で組織を変える</h3>
+      <div class="timeline" style="margin: 40px 0;">
+        <div class="timeline-item" style="width: 22%; left: 2%;">
+          <h4 style="color: var(--hitachi-red);">Week1</h4>
+          <p style="font-size: 20pt;"><strong>個人実践期間</strong></p>
+          <p style="font-size: 18pt;">毎日1つ、新しい言語化技術を試す</p>
+        </div>
+        <div class="timeline-item" style="width: 22%; left: 26%;">
+          <h4 style="color: var(--hitachi-red);">Week2</h4>
+          <p style="font-size: 20pt;"><strong>チーム展開期間</strong></p>
+          <p style="font-size: 18pt;">成功事例を3つ共有<br>仲間を2人巻き込む</p>
+        </div>
+        <div class="timeline-item" style="width: 22%; left: 50%;">
+          <h4 style="color: var(--hitachi-red);">Week3</h4>
+          <p style="font-size: 20pt;"><strong>仕組み化期間</strong></p>
+          <p style="font-size: 18pt;">プロンプトライブラリ作成<br>定例会の設置</p>
+        </div>
+        <div class="timeline-item" style="width: 22%; left: 74%;">
+          <h4 style="color: var(--hitachi-red);">Week4</h4>
+          <p style="font-size: 20pt;"><strong>文化定着期間</strong></p>
+          <p style="font-size: 18pt;">KPI測定開始<br>成果発表会</p>
+        </div>
+      </div>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>22 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド23: Quick Win（即効性のある施策）リスト -->
+    <div class="slide">
+      <h2>Quick Win（即効性のある施策）リスト</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">明日からできる10のQuick Win</h3>
+      <div class="matrix-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px; font-size: 22pt;">
+        <div class="matrix-cell">
+          <p>1. 朝会の議事録をAIで自動化</p>
+        </div>
+        <div class="matrix-cell">
+          <p>2. メール返信の下書きをAI作成</p>
+        </div>
+        <div class="matrix-cell">
+          <p>3. 会議アジェンダをAIで構造化</p>
+        </div>
+        <div class="matrix-cell">
+          <p>4. 週報をAIでまとめる</p>
+        </div>
+        <div class="matrix-cell">
+          <p>5. 企画書の叩き台をAI作成</p>
+        </div>
+        <div class="matrix-cell">
+          <p>6. 競合情報をAIで要約</p>
+        </div>
+        <div class="matrix-cell">
+          <p>7. 顧客の声をAIで分析</p>
+        </div>
+        <div class="matrix-cell">
+          <p>8. プレゼン資料の構成をAI提案</p>
+        </div>
+        <div class="matrix-cell">
+          <p>9. FAQ集をAIで自動生成</p>
+        </div>
+        <div class="matrix-cell">
+          <p>10. 日報から気づきをAI抽出</p>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top: 30px;">
+        <h3>1つ選んで、明日実行！</h3>
+      </div>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>23 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド24: 実践演習⑥：私のアクションプラン作成 -->
+    <div class="slide">
+      <h2>実践演習⑥：私のアクションプラン作成</h2>
+      <div class="action-box">
+        <h3>【最終演習】30日間アクションプラン</h3>
+      </div>
+      <div class="step-box" style="margin-top: 30px; font-size: 24pt;">
+        <ol style="list-style: decimal; padding-left: 30px;">
+          <li style="margin-bottom: 20px;">
+            私が解決したい課題：<br>
+            ＿＿＿＿＿＿＿＿＿＿
+          </li>
+          <li style="margin-bottom: 20px;">
+            明日実行するQuick Win：<br>
+            ＿＿＿＿＿＿＿＿＿＿
+          </li>
+          <li style="margin-bottom: 20px;">
+            1週間後の目標：<br>
+            ＿＿＿＿＿＿＿＿＿＿
+          </li>
+          <li style="margin-bottom: 20px;">
+            巻き込みたい仲間：<br>
+            ＿＿＿＿＿＿＿＿＿＿
+          </li>
+          <li>
+            30日後の成功イメージ：<br>
+            ＿＿＿＿＿＿＿＿＿＿
+          </li>
+        </ol>
+      </div>
+      <p style="text-align: center; margin-top: 30px; font-size: 28pt; font-weight: 700;">
+        制限時間：<span class="emphasis">10分</span>
+      </p>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>24 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド25: 成功を加速する5つの習慣 -->
+    <div class="slide">
+      <h2>成功を加速する5つの習慣</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">言語化マスターの5つの習慣</h3>
+      <div class="icon-grid" style="grid-template-columns: repeat(5, 1fr); gap: 15px;">
+        <div class="icon-item">
+          <h4 style="color: var(--hitachi-red); font-size: 20pt;">習慣1</h4>
+          <p style="font-size: 18pt;">朝5分の<br>「ダラダラ話し」</p>
+        </div>
+        <div class="icon-item">
+          <h4 style="color: var(--hitachi-red); font-size: 20pt;">習慣2</h4>
+          <p style="font-size: 18pt;">会議後の<br>「要するに」まとめ</p>
+        </div>
+        <div class="icon-item">
+          <h4 style="color: var(--hitachi-red); font-size: 20pt;">習慣3</h4>
+          <p style="font-size: 18pt;">週1回の<br>成功事例共有</p>
+        </div>
+        <div class="icon-item">
+          <h4 style="color: var(--hitachi-red); font-size: 20pt;">習慣4</h4>
+          <p style="font-size: 18pt;">月1回の<br>失敗シェア会</p>
+        </div>
+        <div class="icon-item">
+          <h4 style="color: var(--hitachi-red); font-size: 20pt;">習慣5</h4>
+          <p style="font-size: 18pt;">四半期ごとの<br>プロンプト棚卸し</p>
+        </div>
+      </div>
+      <div class="step-box" style="margin-top: 40px;">
+        <h4>習慣化すれば、意識せずとも上達する</h4>
+        <p>特別なことではなく、毎日の小さな積み重ね。それが最強の武器になります。</p>
+      </div>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>25 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド26: 仲間と共に進化する仕組み -->
+    <div class="slide">
+      <h2>仲間と共に進化する仕組み</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">一人より、みんなで</h3>
+      <div class="matrix-grid">
+        <div class="matrix-cell" style="background: #e3f2fd;">
+          <h3>【社内コミュニティ】</h3>
+          <ul style="text-align: left; font-size: 22pt;">
+            <li>Slackチャンネル開設</li>
+            <li>週次勉強会</li>
+            <li>月次成果発表会</li>
+          </ul>
+        </div>
+        <div class="matrix-cell" style="background: #f3e5f5;">
+          <h3>【社外ネットワーク】</h3>
+          <ul style="text-align: left; font-size: 22pt;">
+            <li>AI活用コミュニティ参加</li>
+            <li>他社との情報交換</li>
+            <li>カンファレンス登壇</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 28pt; font-weight: 700; color: var(--hitachi-red);">
+        孤独な戦いにしない
+      </p>
+      <p style="text-align: center; margin-top: 20px; font-size: 24pt;">
+        今日この場にいる皆さんも、素晴らしい仲間です
+      </p>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>26 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド27: ROIを可視化して経営にアピール -->
+    <div class="slide">
+      <h2>ROIを可視化して経営にアピール</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">言語化投資のROI</h3>
+      <div class="comparison-table" style="width: 100%; font-size: 22pt;">
+        <tr>
+          <td style="background: #fee; padding: 30px; width: 50%;">
+            <h4 style="color: #d32f2f;">【投資】</h4>
+            <ul>
+              <li>研修時間：3時間×参加者</li>
+              <li>実践時間：30分/日×30日</li>
+            </ul>
+          </td>
+          <td style="background: #efe; padding: 30px; width: 50%;">
+            <h4 style="color: #388e3c;">【リターン】</h4>
+            <ul>
+              <li>時間削減：2時間/日×参加者</li>
+              <li>品質向上：ミス率50%削減</li>
+              <li>創造時間：1時間/日の創出</li>
+            </ul>
+          </td>
+        </tr>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>投資回収期間：<span class="emphasis">2週間</span></h3>
+        <p style="font-size: 28pt;">年間効果：<span class="emphasis">500時間/人</span>の創出</p>
+      </div>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>27 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド28: アクションプラン発表 -->
+    <div class="slide">
+      <h2>アクションプラン発表</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">私たちの約束</h3>
+      <div class="step-box" style="background: #f5f5f5; padding: 40px;">
+        <p style="font-size: 24pt; margin-bottom: 20px;">
+          参加者A：「明日から議事録をAI化します」
+        </p>
+        <p style="font-size: 24pt; margin-bottom: 20px;">
+          参加者B：「週次相談会を立ち上げます」
+        </p>
+        <p style="font-size: 24pt; margin-bottom: 20px;">
+          参加者C：「プロンプトライブラリを作ります」
+        </p>
+      </div>
+      <div class="action-box" style="margin-top: 40px;">
+        <h3>宣言することで、実現確率は3倍に</h3>
+        <p style="font-size: 28pt; margin-top: 20px;">皆さんの宣言をお聞かせください</p>
+      </div>
+      <footer>
+        <span>テーマ6：実践プロジェクトとアクションプラン</span>
+        <span>28 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド29: Day2総まとめ -->
+    <div class="slide">
+      <h2>Day2総まとめ：あなたは変革者になった</h2>
+      <h3 style="text-align: center; margin-bottom: 30px;">2日間で手に入れたもの</h3>
+      <div class="matrix-grid">
+        <div class="matrix-cell" style="background: #e3f2fd;">
+          <h3>Day1：個人の超言語化能力</h3>
+          <ul style="text-align: left; font-size: 20pt;">
+            <li>思考の言語化</li>
+            <li>プロンプトエンジニアリング</li>
+            <li>情報の構造化</li>
+          </ul>
+        </div>
+        <div class="matrix-cell" style="background: #fff3e0;">
+          <h3>Day2：組織変革の実践技術</h3>
+          <ul style="text-align: left; font-size: 20pt;">
+            <li>文化醸成の方法論</li>
+            <li>高度な言語化技術</li>
+            <li>具体的なアクションプラン</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 40px; font-size: 32pt; font-weight: 700; color: var(--hitachi-red);">
+        あなたはもう、組織を変える力を持っている
+      </p>
+      <footer>
+        <span>AI時代の超言語化能力習得研修 Day2</span>
+        <span>29 / 30</span>
+      </footer>
+    </div>
+
+    <!-- スライド30: 最後のメッセージ -->
+    <div class="slide">
+      <h1 style="font-size: 36pt;">最後のメッセージ：未来は言語化から始まる</h1>
+      <div class="code-block" style="text-align: center; font-size: 28pt; line-height: 2; margin-top: 50px;">
+        言語化は、思考を形にする技術
+        AIは、その思考を増幅する相棒
+
+        あなたの言葉が、チームを動かし
+        チームの変化が、組織を変え
+        組織の進化が、社会を変える
+
+        すべては、あなたの第一歩から始まる
+      </div>
+      <p style="text-align: center; margin-top: 50px; font-size: 36pt; font-weight: 700; color: var(--hitachi-red);">
+        さあ、未来を言語化しよう
+      </p>
+      <footer>
+        <span>AI時代の超言語化能力習得研修 Day2</span>
+        <span>30 / 30</span>
+      </footer>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn" onclick="changeSlide(-1)">前へ</button>
+    <span class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">30</span>
+    </span>
+    <button id="nextBtn" onclick="changeSlide(1)">次へ</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    
+    // 総スライド数を表示
+    document.getElementById('totalSlides').textContent = totalSlides;
+    
+    function showSlide(n) {
+      // 前のスライドをprevクラスに
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.add('prev');
+      
+      // スライド番号の調整
+      if (n >= totalSlides) { currentSlide = totalSlides - 1; }
+      else if (n < 0) { currentSlide = 0; }
+      else { currentSlide = n; }
+      
+      // prevクラスをリセット（アニメーション後）
+      setTimeout(() => {
+        slides.forEach(slide => slide.classList.remove('prev'));
+      }, 400);
+      
+      // 新しいスライドを表示
+      slides[currentSlide].classList.add('active');
+      
+      // スライド番号を更新
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      
+      // ボタンの有効/無効を更新
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+      
+      // プログレスバーを更新
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+    
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+    
+    // キーボードナビゲーション
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    });
+    
+    // 全画面切り替え
+    function toggleFullscreen() {
+      const container = document.querySelector('.presentation-container');
+      if (!document.fullscreenElement) {
+        container.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    // タッチ対応（スワイプ）
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeSlide(1);  // 左スワイプで次へ
+      if (touchEndX > touchStartX + 50) changeSlide(-1); // 右スワイプで前へ
+    }
+    
+    // 初期表示
+    showSlide(0);
+  </script>
+</body>
+</html>

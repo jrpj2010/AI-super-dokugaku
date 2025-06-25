@@ -1,0 +1,48 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    困ったらこの「型」を使おう！(コピー＆ペースト用)
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(300, 180)">
+    <!-- Template Box -->
+    <rect x="0" y="0" width="1320" height="500" fill="#F5F5F5" rx="15" stroke="#DDD" stroke-width="2" />
+
+    <!-- Template Content -->
+    <g transform="translate(40, 40)">
+      <text x="0" y="30" font-family="monospace" font-size="28" font-weight="600" fill="#FA000F"># 命令書</text>
+      <text x="0" y="70" font-family="monospace" font-size="24" fill="#666">(ここにかく)</text>
+
+      <text x="0" y="130" font-family="monospace" font-size="28" font-weight="600" fill="#0066CC"># 役割</text>
+      <text x="0" y="170" font-family="monospace" font-size="24" fill="#666">(ここにかく)</text>
+
+      <text x="0" y="230" font-family="monospace" font-size="28" font-weight="600" fill="#4CAF50"># 成果物</text>
+      <text x="0" y="270" font-family="monospace" font-size="24" fill="#666">(ここにかく)</text>
+
+      <text x="0" y="330" font-family="monospace" font-size="28" font-weight="600" fill="#FF9800"># 制約条件</text>
+      <text x="0" y="370" font-family="monospace" font-size="24" fill="#666">(ここにかく)</text>
+
+      <text x="0" y="430" font-family="monospace" font-size="28" font-weight="600" fill="#9C27B0"># 入力情報</text>
+      <text x="0" y="470" font-family="monospace" font-size="24" fill="#666">(ここに背景情報や元となる文章などを貼り付ける)</text>
+    </g>
+  </g>
+
+  <!-- Point Box -->
+  <rect x="300" y="720" width="1320" height="150" fill="#FFF9E5" rx="15" />
+  <g transform="translate(340, 750)">
+    <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="700" fill="#333">ポイント:</text>
+    <text x="0" y="85" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#666">
+      <tspan font-family="monospace" font-weight="600">#</tspan> (シャープ) をつけると、AIが構造を認識しやすくなります。
+    </text>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">25</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA" />
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="120" fill="#FA000F" />
+  <text x="100" y="75" font-family="Noto Sans JP, sans-serif" font-size="48" font-weight="700" fill="white">
+    演習②: 他者の「モヤモヤ」を言語化する
+  </text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(150, 200)">
+    <!-- 目的 -->
+    <g>
+      <rect x="0" y="0" width="1620" height="120" fill="#FFE5E5" rx="15" />
+      <text x="40" y="50" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+        fill="#FA000F">目的:</text>
+      <text x="140" y="50" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#333">
+        相手の意図を汲み取り、構造化して返す「言語化の壁打ち」スキルを養う。
+      </text>
+    </g>
+
+    <!-- お題 -->
+    <g transform="translate(0, 150)">
+      <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600" fill="#333">お題:</text>
+      <text x="100" y="40" font-family="Noto Sans JP, sans-serif" font-size="28" fill="#666">
+        グループの誰か一人が、「曖昧な指示を出す上司役」になってください。
+      </text>
+
+      <!-- 例 -->
+      <g transform="translate(100, 80)">
+        <rect x="0" y="0" width="1420" height="120" fill="#F5F5F5" rx="10" />
+        <g transform="translate(30, 20)">
+          <text x="0" y="30" font-family="Noto Sans JP, sans-serif" font-size="24" font-weight="600"
+            fill="#FA000F">例:</text>
+          <text x="0" y="65" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666"
+            style="font-style: italic">
+            「この間の会議で話した件、いい感じに資料まとめといて。
+          </text>
+          <text x="0" y="95" font-family="Noto Sans JP, sans-serif" font-size="22" fill="#666"
+            style="font-style: italic">
+            なんかこう、経営層にもウケる感じでさ。よろしく！」
+          </text>
+        </g>
+      </g>
+    </g>
+
+    <!-- 方法 -->
+    <g transform="translate(0, 400)">
+      <rect x="0" y="0" width="1620" height="200" fill="#E6F4FF" rx="15" />
+      <g transform="translate(40, 30)">
+        <text x="0" y="40" font-family="Noto Sans JP, sans-serif" font-size="32" font-weight="600"
+          fill="#0066CC">方法:</text>
+        <text x="0" y="85" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+          他のメンバーは、その上司に対して「思考整理シート」の項目を使って質問し、
+        </text>
+        <text x="0" y="120" font-family="Noto Sans JP, sans-serif" font-size="26" fill="#333">
+          指示の内容を言語化（構造化）してあげてください。
+        </text>
+
+        <rect x="0" y="140" width="250" height="50" fill="#0066CC" rx="25" />
+        <text x="125" y="172" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="24"
+          font-weight="600" fill="white">
+          グループワーク 20分
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="100" y="1040" font-family="Noto Sans JP, sans-serif" font-size="24" fill="#999">13</text>
+  <text x="1820" y="1040" text-anchor="end" font-family="Noto Sans JP, sans-serif" font-size="20"
+    fill="#999">生成AI時代の言語化強化研修 | 日立システムズ様</text>
+</svg>
