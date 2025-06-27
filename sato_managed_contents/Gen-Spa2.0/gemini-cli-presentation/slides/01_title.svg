@@ -1,0 +1,56 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        /* @theme hitachi-2025-master-v2 */
+        @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+        :root {
+          --hitachi-red: #FA000F;
+          --base-font-size: 18pt;
+          --base-padding: 60px;
+        }
+        section {
+          font-family: "Noto Sans JP", "Yu Gothic UI", sans-serif;
+          font-size: var(--base-font-size);
+          color: #333;
+          padding: 50px var(--base-padding);
+          background-color: #fff;
+          background-image: url("https://tanren.notion.site/image/attachment%3Acb1d3d60-1a74-482c-9977-d59f70bd6027%3A%E5%9B%B31.svg?table=block&id=21b31bbd-522c-806c-9314-fa7bdaf959df&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2");
+          background-position: top 30px right 40px;
+          background-repeat: no-repeat;
+          background-size: 100px;
+          width: 1280px;
+          height: 720px;
+          box-sizing: border-box;
+        }
+        section.title {
+          color: #fff;
+          background-image: url("https://tanren.notion.site/image/attachment%3A812981ac-53df-4c90-9c50-76b318c91422%3A%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-06-24_0.38.04.png?table=block&id=21b31bbd-522c-8066-93ed-fac44611e2eb&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&width=2000&userId=&cache=v2"), url("https://tanren.notion.site/image/attachment%3Ae24fc73e-77c9-48b8-9a78-a82440ba13e1%3A%E5%9B%B32.svg?table=block&id=21b31bbd-522c-80a5-8ee0-d4fd53eb9ee7&spaceId=5bbf9b8e-3573-405c-a212-b5bd3d2b1e5a&userId=&cache=v2");
+          background-position: center center, top 50px left 60px;
+          background-size: cover, 180px;
+          padding: var(--base-padding);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+        section.title h1 {
+          font-size: 80pt;
+          color: #fff;
+          border: none;
+        }
+        section.title h2 {
+          font-size: 30pt;
+          color: #fff;
+          border: none;
+          padding-top: 10px;
+        }
+      </style>
+      <section class="title">
+        <h1>Gemini CLI</h1>
+        <h2>AI-Powered Development on the Command Line</h2>
+      </section>
+    </div>
+  </foreignObject>
+</svg>

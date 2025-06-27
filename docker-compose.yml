@@ -34,6 +34,22 @@ services:
       # <--- この conversation-analysis-system サービスにも networks を追加
       - app-network
 
+  deep-research-app:
+    build:
+      context: ./apps/deep-research-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./apps/deep-research-app:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge

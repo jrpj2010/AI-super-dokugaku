@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini CLI Presentation</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f2f5;
+      font-family: sans-serif;
+    }
+    #viewer {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #slide-counter {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewer">
+    <!-- Slides will be loaded here -->
+  </div>
+
+  <div id="controls">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+  </div>
+
+  <div id="slide-counter"></div>
+
+  <script>
+    const viewer = document.getElementById('viewer');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const slideCounter = document.getElementById('slide-counter');
+
+    const slideCount = 10;
+    let currentSlide = 1;
+
+    const slides = [];
+
+    for (let i = 1; i <= slideCount; i++) {
+      const slideNumber = i.toString().padStart(2, '0');
+      const slideName = getSlideName(i);
+      const slide = document.createElement('div');
+      slide.className = 'slide';
+      slide.innerHTML = `<img src="./slides/${slideNumber}_${slideName}.svg" alt="Slide ${i}">`;
+      viewer.appendChild(slide);
+      slides.push(slide);
+    }
+
+    function getSlideName(index) {
+      const names = ['title', 'agenda', 'what_is_gemini_cli', 'key_features', 'installation', 'basic_usage', 'advanced_usage', 'real_world_use_cases', 'summary', 'end'];
+      return names[index - 1];
+    }
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index - 1);
+      });
+      slideCounter.textContent = `${index} / ${slideCount}`;
+      prevBtn.disabled = index === 1;
+      nextBtn.disabled = index === slideCount;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slideCount) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    });
+
+    showSlide(currentSlide);
+  </script>
+
+</body>
+</html>
