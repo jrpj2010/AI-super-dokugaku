@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "gemini-image-generator": {
+      "command": "uv",
+      "args": [
+        "run",
+        "mcp-server-gemini-image-generator"
+      ],
+      "cwd": "/Users/jrpj2010/vibe-coding/mcp-server-gemini-image-generator",
+      "env": {
+        "GEMINI_API_KEY": "AIzaSyDvZa5QTmqdAB0do_K3W5NAeW6di69_3BI"
+      }
+    }
+  }
+}
