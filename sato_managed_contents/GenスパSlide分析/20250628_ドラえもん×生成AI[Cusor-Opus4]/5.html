@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>暗記パン = Claude</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #2c003e 0%, #6b3aa0 50%, #9d4edd 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+
+      .memory-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #FFD700;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(255, 215, 0, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 215, 0, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(157, 78, 221, 0.1);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bread-icon {
+      font-size: 5rem;
+      color: #FFB347;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .memory-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .memory-box:hover {
+      transform: scale(1.02);
+      border-color: rgba(255, 215, 0, 0.6);
+    }
+
+    .big-number {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #32CD32;
+      line-height: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <div class="mb-8 fade-in-up">
+        <i class="fas fa-bread-slice bread-icon"></i>
+      </div>
+
+      <h1 class="title text-5xl text-white mb-4 fade-in-up">
+        <span class="highlight">暗記パン</span> = Claude
+      </h1>
+
+      <p class="text-xl text-gray-100 mb-12 fade-in-up-delay-1">
+        大量の情報を瞬時に理解・記憶・活用
+      </p>
+
+      <div class="memory-grid">
+        <div class="memory-box fade-in-up-delay-1">
+          <i class="fas fa-book-open text-4xl text-orange-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-4">
+            コンテキストウィンドウ
+          </h3>
+          <p class="big-number mb-2">200K</p>
+          <p class="text-gray-200">
+            トークン<br>
+            <span class="text-yellow-300">本一冊分を一度に理解</span>
+          </p>
+        </div>
+
+        <div class="memory-box fade-in-up-delay-1">
+          <i class="fas fa-brain text-4xl text-pink-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-4">
+            文脈理解力
+          </h3>
+          <p class="text-gray-200 text-lg">
+            複雑な関係性も<br>
+            <span class="text-green-400">98.5%の精度</span>で把握
+          </p>
+        </div>
+
+        <div class="memory-box fade-in-up-delay-2">
+          <i class="fas fa-code text-4xl text-blue-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-4">
+            コード理解
+          </h3>
+          <p class="text-gray-200 text-lg">
+            100以上の言語で<br>
+            <span class="text-cyan-400">即座にデバッグ</span>
+          </p>
+        </div>
+
+        <div class="memory-box fade-in-up-delay-2">
+          <i class="fas fa-file-alt text-4xl text-green-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-4">
+            文書生成
+          </h3>
+          <p class="text-gray-200 text-lg">
+            契約書から小説まで<br>
+            <span class="text-red-400">プロ級の品質</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 fade-in-up-delay-2">
+        <p class="text-xl text-white bg-white bg-opacity-10 rounded-lg p-4 backdrop-filter blur-lg">
+          もう「覚えられない」なんて言わせない！
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

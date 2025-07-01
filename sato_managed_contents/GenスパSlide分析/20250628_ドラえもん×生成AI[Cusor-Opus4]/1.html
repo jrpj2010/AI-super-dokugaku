@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AIという名の四次元ポケット</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #001a33 0%, #0066CC 50%, #00a6ff 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #FFD700;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(255, 215, 0, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 107, 107, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 215, 0, 0.1);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pocket-icon {
+      font-size: 8rem;
+      color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(-50%) rotate(15deg);
+      }
+
+      50% {
+        transform: translateY(-60%) rotate(20deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+    <i class="fas fa-briefcase pocket-icon"></i>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <h1 class="title text-6xl text-white mb-8 fade-in-up">
+        生成AIという名の<br>
+        <span class="highlight">四次元ポケット</span>
+      </h1>
+
+      <p class="text-2xl text-gray-100 mb-12 fade-in-up-delay-1">
+        〜 ドラえもんの秘密道具が、ついに現実のビジネスツールに 〜
+      </p>
+
+      <div class="flex justify-center space-x-8 fade-in-up-delay-2">
+        <div class="text-center">
+          <i class="fas fa-robot text-5xl text-yellow-300 mb-3"></i>
+          <p class="text-white text-lg">AI革命</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-magic text-5xl text-red-400 mb-3"></i>
+          <p class="text-white text-lg">秘密道具</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-rocket text-5xl text-green-400 mb-3"></i>
+          <p class="text-white text-lg">未来創造</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

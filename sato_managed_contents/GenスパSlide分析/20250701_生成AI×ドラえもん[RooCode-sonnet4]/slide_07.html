@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>実装事例 - 生成AI × ドラえもん</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      background: linear-gradient(135deg, #0c1426 0%, #1e3a8a 50%, #3730a3 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .door-animation {
+      animation: doorOpen 4s ease-in-out infinite;
+    }
+
+    @keyframes doorOpen {
+
+      0%,
+      100% {
+        transform: perspective(1000px) rotateY(0deg);
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      }
+
+      50% {
+        transform: perspective(1000px) rotateY(-45deg);
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+      }
+    }
+
+    .global-connection {
+      animation: globalPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes globalPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    .case-study-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.5s ease;
+    }
+
+    .case-study-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(59, 130, 246, 0.4);
+    }
+
+    .connection-line {
+      animation: connectionFlow 3s ease-in-out infinite;
+    }
+
+    @keyframes connectionFlow {
+
+      0%,
+      100% {
+        stroke-dashoffset: 100;
+        opacity: 0.5;
+      }
+
+      50% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    .success-metric {
+      animation: metricGrow 2s ease-out forwards;
+      transform-origin: bottom;
+    }
+
+    @keyframes metricGrow {
+      from {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    .world-map-dot {
+      animation: worldDot 2s ease-in-out infinite;
+    }
+
+    @keyframes worldDot {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 1;
+      }
+    }
+
+    .teleport-effect {
+      animation: teleport 4s ease-in-out infinite;
+    }
+
+    @keyframes teleport {
+
+      0%,
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+
+      25% {
+        transform: translateX(20px) scale(0.8);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translateX(40px) scale(0.6);
+        opacity: 0.3;
+      }
+
+      75% {
+        transform: translateX(60px) scale(0.8);
+        opacity: 0.7;
+      }
+    }
+
+    .floating-globe {
+      animation: floatGlobe 4s ease-in-out infinite;
+    }
+
+    @keyframes floatGlobe {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-8">
+    <!-- ヘッダー -->
+    <div class="text-center mb-10">
+      <h1 class="text-5xl font-black text-white mb-4">
+        <i class="fas fa-door-open door-animation text-blue-400 mr-4"></i>
+        『どこでもドア』で世界とつながる企業たち
+      </h1>
+      <p class="text-xl text-blue-300 font-medium">
+        AIが実現するグローバル展開の成功事例
+      </p>
+    </div>
+
+    <!-- メインコンテンツ：3カラムレイアウト -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+      <!-- 左カラム：グローバル企業A社 -->
+      <div class="case-study-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="floating-globe text-6xl text-blue-400 mb-4">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">グローバル企業A社</h3>
+          <p class="text-blue-300 text-sm">多言語カスタマーサポートの革命</p>
+        </div>
+
+        <!-- 課題と解決策 -->
+        <div class="space-y-4">
+          <div class="bg-red-900/30 rounded-lg p-4 border border-red-500/30">
+            <h4 class="text-red-300 font-semibold mb-2">
+              <i class="fas fa-exclamation-triangle mr-2"></i>課題
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• 24時間365日の多言語対応</li>
+              <li>• 50カ国以上での同時サポート</li>
+              <li>• 人材確保とコスト増大</li>
+            </ul>
+          </div>
+
+          <div class="teleport-effect flex justify-center">
+            <i class="fas fa-arrow-right text-blue-400 text-2xl"></i>
+          </div>
+
+          <div class="bg-green-900/30 rounded-lg p-4 border border-green-500/30">
+            <h4 class="text-green-300 font-semibold mb-2">
+              <i class="fas fa-lightbulb mr-2"></i>AI解決策
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• リアルタイム翻訳AI</li>
+              <li>• 感情認識チャットボット</li>
+              <li>• 文化適応型応答システム</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 成果指標 -->
+        <div class="mt-6 space-y-3">
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">応答時間短縮</span>
+              <span class="text-green-400 font-bold">85%</span>
+            </div>
+            <div class="success-metric bg-green-500 h-2 rounded-full mt-2" style="animation-delay: 0.5s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">顧客満足度向上</span>
+              <span class="text-blue-400 font-bold">40%</span>
+            </div>
+            <div class="success-metric bg-blue-500 h-2 rounded-full mt-2" style="animation-delay: 1s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">運営コスト削減</span>
+              <span class="text-yellow-400 font-bold">60%</span>
+            </div>
+            <div class="success-metric bg-yellow-500 h-2 rounded-full mt-2" style="animation-delay: 1.5s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中央カラム：テック企業B社 -->
+      <div class="case-study-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="global-connection text-6xl text-purple-400 mb-4">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">テック企業B社</h3>
+          <p class="text-purple-300 text-sm">グローバル開発チームの統合</p>
+        </div>
+
+        <!-- 課題と解決策 -->
+        <div class="space-y-4">
+          <div class="bg-red-900/30 rounded-lg p-4 border border-red-500/30">
+            <h4 class="text-red-300 font-semibold mb-2">
+              <i class="fas fa-exclamation-triangle mr-2"></i>課題
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• 時差による開発遅延</li>
+              <li>• 言語・文化の壁</li>
+              <li>• コードレビューの非効率</li>
+            </ul>
+          </div>
+
+          <div class="teleport-effect flex justify-center">
+            <i class="fas fa-arrow-right text-purple-400 text-2xl"></i>
+          </div>
+
+          <div class="bg-green-900/30 rounded-lg p-4 border border-green-500/30">
+            <h4 class="text-green-300 font-semibold mb-2">
+              <i class="fas fa-lightbulb mr-2"></i>AI解決策
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• AI駆動コードレビュー</li>
+              <li>• 自動翻訳ドキュメント</li>
+              <li>• 予測的プロジェクト管理</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 成果指標 -->
+        <div class="mt-6 space-y-3">
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">開発速度向上</span>
+              <span class="text-green-400 font-bold">70%</span>
+            </div>
+            <div class="success-metric bg-green-500 h-2 rounded-full mt-2" style="animation-delay: 0.5s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">バグ検出率向上</span>
+              <span class="text-purple-400 font-bold">90%</span>
+            </div>
+            <div class="success-metric bg-purple-500 h-2 rounded-full mt-2" style="animation-delay: 1s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">チーム連携改善</span>
+              <span class="text-blue-400 font-bold">80%</span>
+            </div>
+            <div class="success-metric bg-blue-500 h-2 rounded-full mt-2" style="animation-delay: 1.5s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右カラム：製造業C社 -->
+      <div class="case-study-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="floating-globe text-6xl text-green-400 mb-4" style="animation-delay: 1s;">
+            <i class="fas fa-industry"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">製造業C社</h3>
+          <p class="text-green-300 text-sm">スマートファクトリーの世界展開</p>
+        </div>
+
+        <!-- 課題と解決策 -->
+        <div class="space-y-4">
+          <div class="bg-red-900/30 rounded-lg p-4 border border-red-500/30">
+            <h4 class="text-red-300 font-semibold mb-2">
+              <i class="fas fa-exclamation-triangle mr-2"></i>課題
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• 各国工場の品質格差</li>
+              <li>• リアルタイム監視の困難</li>
+              <li>• 予防保全の遅れ</li>
+            </ul>
+          </div>
+
+          <div class="teleport-effect flex justify-center">
+            <i class="fas fa-arrow-right text-green-400 text-2xl"></i>
+          </div>
+
+          <div class="bg-green-900/30 rounded-lg p-4 border border-green-500/30">
+            <h4 class="text-green-300 font-semibold mb-2">
+              <i class="fas fa-lightbulb mr-2"></i>AI解決策
+            </h4>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• IoT×AI品質管理</li>
+              <li>• 予測保全システム</li>
+              <li>• グローバル最適化AI</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 成果指標 -->
+        <div class="mt-6 space-y-3">
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">品質向上</span>
+              <span class="text-green-400 font-bold">95%</span>
+            </div>
+            <div class="success-metric bg-green-500 h-2 rounded-full mt-2" style="animation-delay: 0.5s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">ダウンタイム削減</span>
+              <span class="text-yellow-400 font-bold">75%</span>
+            </div>
+            <div class="success-metric bg-yellow-500 h-2 rounded-full mt-2" style="animation-delay: 1s;"></div>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-sm">生産効率向上</span>
+              <span class="text-blue-400 font-bold">65%</span>
+            </div>
+            <div class="success-metric bg-blue-500 h-2 rounded-full mt-2" style="animation-delay: 1.5s;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下部：グローバル展開の成功要因 -->
+    <div class="mt-12 max-w-6xl mx-auto">
+      <div class="bg-gradient-to-r from-blue-900/60 to-indigo-900/60 rounded-2xl p-8 border border-blue-400/30">
+        <h3 class="text-3xl font-bold text-white text-center mb-8">
+          <i class="fas fa-door-open text-blue-400 mr-3"></i>
+          どこでもドア効果の成功要因
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div class="world-map-dot bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-language text-white text-xl"></i>
+            </div>
+            <h4 class="text-white font-semibold mb-2">言語の壁を突破</h4>
+            <p class="text-gray-300 text-sm">リアルタイム翻訳で瞬時にコミュニケーション</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="world-map-dot bg-purple-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+              style="animation-delay: 0.5s;">
+              <i class="fas fa-clock text-white text-xl"></i>
+            </div>
+            <h4 class="text-white font-semibold mb-2">時差を無効化</h4>
+            <p class="text-gray-300 text-sm">24時間稼働のAIが時差の制約を解消</p>
+          </div>
+
+          <div class="text-center">
+            <div class="world-map-dot bg-green-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+              style="animation-delay: 1s;">
+              <i class="fas fa-users text-white text-xl"></i>
+            </div>
+            <h4 class="text-white font-semibold mb-2">文化を理解</h4>
+            <p class="text-gray-300 text-sm">文化適応型AIで現地ニーズに対応</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="world-map-dot bg-yellow-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+              style="animation-delay: 1.5s;">
+              <i class="fas fa-chart-line text-white text-xl"></i>
+            </div>
+            <h4 class="text-white font-semibold mb-2">成果を最大化</h4>
+            <p class="text-gray-300 text-sm">データ駆動で継続的な改善を実現</p>
+          </div>
+        </div>
+
+        <!-- 世界地図風の接続線 -->
+        <div class="mt-8 flex justify-center">
+          <svg width="400" height="100" viewBox="0 0 400 100" class="opacity-60">
+            <path d="M50,50 Q200,20 350,50" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="10,5"
+              class="connection-line" />
+            <path d="M50,50 Q200,80 350,50" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-dasharray="10,5"
+              class="connection-line" style="animation-delay: 1s;" />
+            <circle cx="50" cy="50" r="4" fill="#3b82f6" class="world-map-dot" />
+            <circle cx="200" cy="35" r="4" fill="#8b5cf6" class="world-map-dot" style="animation-delay: 0.5s;" />
+            <circle cx="200" cy="65" r="4" fill="#10b981" class="world-map-dot" style="animation-delay: 1s;" />
+            <circle cx="350" cy="50" r="4" fill="#f59e0b" class="world-map-dot" style="animation-delay: 1.5s;" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- プレゼン用トークスクリプト -->
+  <!--
+    【トークスクリプト】
+    皆さん、ドラえもんの「どこでもドア」を覚えていますか？瞬時に世界中どこへでも移動できる魔法の扉でした。
+
+    AIは、まさにこのどこでもドアのように、企業のグローバル展開を瞬時に実現します。
+
+    左のグローバル企業A社では、多言語カスタマーサポートの革命を起こしました。リアルタイム翻訳AIと感情認識チャットボットにより、応答時間85%短縮、顧客満足度40%向上、運営コスト60%削減を実現しています。
+
+    中央のテック企業B社では、グローバル開発チームの統合に成功しました。AI駆動コードレビューと自動翻訳ドキュメントにより、開発速度70%向上、バグ検出率90%向上、チーム連携80%改善を達成しています。
+
+    右の製造業C社では、スマートファクトリーの世界展開を実現しました。IoT×AI品質管理と予測保全システムにより、品質95%向上、ダウンタイム75%削減、生産効率65%向上を実現しています。
+
+    成功要因は4つです。言語の壁を突破するリアルタイム翻訳、時差を無効化する24時間AI、文化を理解する適応型AI、そして成果を最大化するデータ駆動改善です。どこでもドア効果で、あなたの会社も瞬時にグローバル企業になれます。
+    -->
+
+  <!-- インフォグラフィック用プロンプト -->
+  <!--
+    【画像生成AI用プロンプト】
+    Create a global connectivity infographic showing the "Anywhere Door" effect from Doraemon. Central image: a magical blue door opening to reveal multiple global business scenes simultaneously. Around the door: floating world map with glowing connection lines between continents, representing real-time global business operations. Include case study panels showing different industries (customer service, tech development, manufacturing) with success metrics and improvement arrows. Color scheme: deep blue to indigo gradient background with bright blue door glow and golden connection lines across a stylized world map. Style: magical portal meets global business visualization, dynamic and professional with teleportation effects and international connectivity symbols.
+    -->
+</body>
+
+</html>

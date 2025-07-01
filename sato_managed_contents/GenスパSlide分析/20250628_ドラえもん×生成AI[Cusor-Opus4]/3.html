@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>もしも、秘密道具が現実にあったら</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #d2691e 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #32CD32;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(50, 205, 50, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 215, 0, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(50, 205, 50, 0.1);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .comparison-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .arrow-icon {
+      font-size: 3rem;
+      color: #FFD700;
+      margin: 2rem 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <h1 class="title text-5xl text-white mb-8 fade-in-up">
+        もしも、<span class="highlight">秘密道具</span>が<br>
+        現実にあったら
+      </h1>
+
+      <div class="comparison-grid">
+        <div class="comparison-box text-left fade-in-up-delay-1">
+          <h3 class="text-3xl text-yellow-300 mb-6 font-bold">
+            <i class="fas fa-box mr-3"></i>
+            ドラえもんの世界
+          </h3>
+          <ul class="text-white text-lg space-y-4">
+            <li><i class="fas fa-door-open mr-2 text-blue-300"></i> どこでもドア</li>
+            <li><i class="fas fa-clock mr-2 text-pink-300"></i> タイムマシン</li>
+            <li><i class="fas fa-bread-slice mr-2 text-orange-300"></i> 暗記パン</li>
+            <li><i class="fas fa-language mr-2 text-green-300"></i> 翻訳こんにゃく</li>
+          </ul>
+        </div>
+
+        <div class="comparison-box text-left fade-in-up-delay-2">
+          <h3 class="text-3xl text-green-400 mb-6 font-bold">
+            <i class="fas fa-robot mr-3"></i>
+            生成AIの現実
+          </h3>
+          <ul class="text-white text-lg space-y-4">
+            <li><i class="fas fa-search mr-2 text-blue-300"></i> 情報への瞬間アクセス</li>
+            <li><i class="fas fa-chart-line mr-2 text-pink-300"></i> 未来予測・分析</li>
+            <li><i class="fas fa-brain mr-2 text-orange-300"></i> 無限の記憶と理解</li>
+            <li><i class="fas fa-globe mr-2 text-green-300"></i> 言語の壁を越える</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-8 fade-in-up-delay-2">
+        <i class="fas fa-angle-double-down arrow-icon"></i>
+        <p class="text-2xl text-white font-bold">
+          夢が現実になる時代がやってきた！
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

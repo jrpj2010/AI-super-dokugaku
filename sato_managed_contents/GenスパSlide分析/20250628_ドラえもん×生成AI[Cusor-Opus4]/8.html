@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四次元ポケットの使い方マスター講座</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+
+      .roadmap-container {
+        padding: 10px;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #32CD32;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(50, 205, 50, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 175, 123, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(215, 109, 119, 0.1);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .roadmap-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      margin-top: 2rem;
+    }
+
+    .step-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .step-box:hover {
+      transform: translateX(10px);
+    }
+
+    .step-number {
+      background: rgba(255, 215, 0, 0.8);
+      color: #333;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+      text-align: left;
+    }
+
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.2);
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #32CD32 0%, #FFD700 100%);
+      height: 100%;
+      width: 0;
+      animation: progressFill 3s ease-out forwards;
+    }
+
+    @keyframes progressFill {
+      to {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <h1 class="title text-5xl text-white mb-4 fade-in-up">
+        四次元ポケットの<br>
+        <span class="highlight">使い方マスター講座</span>
+      </h1>
+
+      <p class="text-xl text-gray-100 mb-8 fade-in-up-delay-1">
+        段階的AI導入で、誰でも使える未来の道具に
+      </p>
+
+      <div class="roadmap-container fade-in-up-delay-1">
+        <div class="step-box">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="text-xl text-white font-bold mb-1">
+              <i class="fas fa-graduation-cap mr-2 text-yellow-300"></i>
+              基礎編（1ヶ月目）
+            </h3>
+            <p class="text-gray-200">ChatGPT・Claude基本操作、プロンプトの書き方</p>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="text-xl text-white font-bold mb-1">
+              <i class="fas fa-briefcase mr-2 text-blue-300"></i>
+              業務活用編（2-3ヶ月目）
+            </h3>
+            <p class="text-gray-200">メール作成、資料作成、データ分析の自動化</p>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="text-xl text-white font-bold mb-1">
+              <i class="fas fa-cogs mr-2 text-green-300"></i>
+              高度活用編（4-6ヶ月目）
+            </h3>
+            <p class="text-gray-200">API連携、カスタムツール開発、ワークフロー自動化</p>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3 class="text-xl text-white font-bold mb-1">
+              <i class="fas fa-rocket mr-2 text-red-300"></i>
+              革新編（6ヶ月目〜）
+            </h3>
+            <p class="text-gray-200">AI駆動型ビジネスモデル構築、新規事業創出</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 fade-in-up-delay-2">
+        <p class="text-lg text-white mb-3">導入成功率</p>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="text-2xl text-yellow-300 font-bold mt-2">94.5%</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翻訳こんにゃく = 多言語AI</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #134e5e 0%, #71b280 50%, #20bf6b 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+
+      .language-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #FFD700;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(255, 215, 0, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(32, 191, 107, 0.2);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .konnyaku-icon {
+      font-size: 5rem;
+      color: #87CEEB;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .language-box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .language-box:hover {
+      transform: scale(1.02);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .world-map {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 2rem;
+    }
+
+    .flag-icon {
+      font-size: 2rem;
+      margin: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <div class="mb-8 fade-in-up">
+        <i class="fas fa-language konnyaku-icon"></i>
+      </div>
+
+      <h1 class="title text-5xl text-white mb-4 fade-in-up">
+        <span class="highlight">翻訳こんにゃく</span> = 多言語AI
+      </h1>
+
+      <p class="text-xl text-gray-100 mb-12 fade-in-up-delay-1">
+        世界中の人々と、言葉の壁なく繋がる
+      </p>
+
+      <div class="language-grid">
+        <div class="language-box fade-in-up-delay-1">
+          <i class="fas fa-globe-americas text-4xl text-blue-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-3">
+            リアルタイム翻訳
+          </h3>
+          <p class="text-gray-100 text-lg">
+            <span class="text-3xl font-bold text-yellow-300">100+</span><br>
+            言語を瞬時に翻訳<br>
+            <span class="text-green-300">精度99.2%</span>
+          </p>
+        </div>
+
+        <div class="language-box fade-in-up-delay-1">
+          <i class="fas fa-comments text-4xl text-pink-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-3">
+            文脈理解
+          </h3>
+          <p class="text-gray-100 text-lg">
+            ビジネス用語から<br>
+            スラングまで<br>
+            <span class="text-cyan-300">完璧に把握</span>
+          </p>
+        </div>
+
+        <div class="language-box fade-in-up-delay-2">
+          <i class="fas fa-microphone text-4xl text-orange-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-3">
+            音声認識・合成
+          </h3>
+          <p class="text-gray-100 text-lg">
+            会議の同時通訳も<br>
+            <span class="text-red-300">AIが代行</span>
+          </p>
+        </div>
+
+        <div class="language-box fade-in-up-delay-2">
+          <i class="fas fa-file-alt text-4xl text-green-300 mb-4"></i>
+          <h3 class="text-2xl text-white font-bold mb-3">
+            文書翻訳
+          </h3>
+          <p class="text-gray-100 text-lg">
+            契約書・技術文書も<br>
+            <span class="text-purple-300">専門家レベル</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="world-map fade-in-up-delay-2">
+        <p class="text-lg text-white mb-3">グローバルビジネスの架け橋</p>
+        <div>
+          <span class="flag-icon">🇯🇵</span>
+          <i class="fas fa-arrows-alt-h text-yellow-300 mx-2"></i>
+          <span class="flag-icon">🇺🇸</span>
+          <span class="flag-icon">🇨🇳</span>
+          <span class="flag-icon">🇪🇺</span>
+          <span class="flag-icon">🇮🇳</span>
+          <span class="flag-icon">🇧🇷</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

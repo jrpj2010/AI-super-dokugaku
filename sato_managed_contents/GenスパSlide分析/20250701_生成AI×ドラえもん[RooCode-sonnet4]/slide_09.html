@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROI分析 - 生成AI × ドラえもん</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .treasure-map {
+      animation: treasureGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes treasureGlow {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 20px #fbbf24);
+      }
+
+      50% {
+        transform: scale(1.1) rotate(5deg);
+        filter: drop-shadow(0 0 40px #f59e0b);
+      }
+    }
+
+    .roi-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roi-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(251, 191, 36, 0.4);
+    }
+
+    .treasure-chest {
+      animation: chestOpen 3s ease-in-out infinite;
+    }
+
+    @keyframes chestOpen {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .value-counter {
+      animation: countUp 3s ease-out forwards;
+    }
+
+    @keyframes countUp {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .profit-flow {
+      animation: profitStream 4s ease-in-out infinite;
+    }
+
+    @keyframes profitStream {
+
+      0%,
+      100% {
+        stroke-dashoffset: 100;
+        opacity: 0.6;
+      }
+
+      50% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    .investment-bar {
+      animation: investmentGrow 2s ease-out forwards;
+      transform-origin: bottom;
+    }
+
+    @keyframes investmentGrow {
+      from {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    .treasure-sparkle {
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    .roi-chart {
+      animation: chartReveal 3s ease-out forwards;
+    }
+
+    @keyframes chartReveal {
+      from {
+        clip-path: circle(0% at 50% 50%);
+      }
+
+      to {
+        clip-path: circle(100% at 50% 50%);
+      }
+    }
+
+    .payback-timeline {
+      animation: timelineProgress 4s ease-in-out infinite;
+    }
+
+    @keyframes timelineProgress {
+
+      0%,
+      100% {
+        transform: translateX(0);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translateX(20px);
+        opacity: 1;
+      }
+    }
+
+    .treasure-hunt-path {
+      stroke-dasharray: 20 10;
+      animation: pathTrace 5s ease-in-out infinite;
+    }
+
+    @keyframes pathTrace {
+      0% {
+        stroke-dashoffset: 200;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .golden-glow {
+      animation: goldenPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes goldenPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(251, 191, 36, 0.6);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-8">
+    <!-- ヘッダー -->
+    <div class="text-center mb-10">
+      <h1 class="text-5xl font-black text-white mb-4">
+        <i class="fas fa-map-marked-alt treasure-map text-yellow-400 mr-4"></i>
+        『宝探し地図』で見つける価値
+      </h1>
+      <p class="text-xl text-yellow-300 font-medium">
+        AI投資のROI分析と価値創造
+      </p>
+    </div>
+
+    <!-- メインコンテンツ：3カラムレイアウト -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
+
+      <!-- 左カラム：投資コスト分析 -->
+      <div class="roi-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="treasure-chest text-6xl text-red-400 mb-4">
+            <i class="fas fa-coins"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">投資コスト</h3>
+          <p class="text-red-300 text-sm">初期投資と運用コスト</p>
+        </div>
+
+        <!-- コスト内訳 -->
+        <div class="space-y-4">
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-red-300 font-semibold mb-3">初期投資（18ヶ月）</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">AI技術導入</span>
+                <span class="text-white font-bold">¥5,000万</span>
+              </div>
+              <div class="investment-bar bg-red-500 h-2 rounded-full" style="animation-delay: 0.5s;"></div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">人材育成</span>
+                <span class="text-white font-bold">¥2,000万</span>
+              </div>
+              <div class="investment-bar bg-orange-500 h-2 rounded-full" style="animation-delay: 1s;"></div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">インフラ整備</span>
+                <span class="text-white font-bold">¥3,000万</span>
+              </div>
+              <div class="investment-bar bg-yellow-500 h-2 rounded-full" style="animation-delay: 1.5s;"></div>
+            </div>
+          </div>
+
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-orange-300 font-semibold mb-3">年間運用コスト</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">ライセンス費用</span>
+                <span class="text-orange-400 font-bold">¥1,200万</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">保守・運用</span>
+                <span class="text-orange-400 font-bold">¥800万</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="golden-glow bg-gradient-to-br from-red-900/60 to-orange-900/60 rounded-xl p-4 border border-red-400/30">
+            <div class="text-center">
+              <h5 class="text-white font-semibold mb-2">総投資額</h5>
+              <div class="value-counter text-3xl font-black text-red-400">¥1.2億</div>
+              <p class="text-gray-300 text-xs mt-1">（3年間）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中央カラム：収益効果分析 -->
+      <div class="roi-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="treasure-chest text-6xl text-green-400 mb-4" style="animation-delay: 0.5s;">
+            <i class="fas fa-gem"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">収益効果</h3>
+          <p class="text-green-300 text-sm">AI導入による価値創造</p>
+        </div>
+
+        <!-- 収益内訳 -->
+        <div class="space-y-4">
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-3">年間収益向上</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">生産性向上</span>
+                <span class="text-white font-bold">¥8,000万</span>
+              </div>
+              <div class="investment-bar bg-green-500 h-2 rounded-full" style="animation-delay: 0.5s;"></div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">コスト削減</span>
+                <span class="text-white font-bold">¥6,000万</span>
+              </div>
+              <div class="investment-bar bg-blue-500 h-2 rounded-full" style="animation-delay: 1s;"></div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">新規売上</span>
+                <span class="text-white font-bold">¥4,000万</span>
+              </div>
+              <div class="investment-bar bg-purple-500 h-2 rounded-full" style="animation-delay: 1.5s;"></div>
+            </div>
+          </div>
+
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-3">累積効果（3年間）</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">1年目効果</span>
+                <span class="text-blue-400 font-bold">¥9,000万</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">2年目効果</span>
+                <span class="text-blue-400 font-bold">¥1.8億</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">3年目効果</span>
+                <span class="text-blue-400 font-bold">¥1.8億</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="golden-glow bg-gradient-to-br from-green-900/60 to-teal-900/60 rounded-xl p-4 border border-green-400/30">
+            <div class="text-center">
+              <h5 class="text-white font-semibold mb-2">総収益効果</h5>
+              <div class="value-counter text-3xl font-black text-green-400" style="animation-delay: 0.5s;">¥4.5億</div>
+              <p class="text-gray-300 text-xs mt-1">（3年間）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右カラム：ROI計算結果 -->
+      <div class="roi-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="treasure-chest text-6xl text-yellow-400 mb-4" style="animation-delay: 1s;">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">ROI結果</h3>
+          <p class="text-yellow-300 text-sm">投資対効果の分析</p>
+        </div>
+
+        <!-- ROI指標 -->
+        <div class="space-y-4">
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-yellow-300 font-semibold mb-3">主要指標</h4>
+            <div class="space-y-4">
+              <div class="text-center">
+                <div class="text-4xl font-black text-yellow-400 mb-2 value-counter">275%</div>
+                <p class="text-gray-300 text-sm">ROI（3年間）</p>
+                <div class="investment-bar bg-yellow-500 h-3 rounded-full mt-2" style="animation-delay: 0.5s;"></div>
+              </div>
+
+              <div class="text-center">
+                <div class="text-3xl font-black text-green-400 mb-2 value-counter" style="animation-delay: 0.5s;">14ヶ月
+                </div>
+                <p class="text-gray-300 text-sm">投資回収期間</p>
+                <div class="investment-bar bg-green-500 h-3 rounded-full mt-2" style="animation-delay: 1s;"></div>
+              </div>
+
+              <div class="text-center">
+                <div class="text-3xl font-black text-blue-400 mb-2 value-counter" style="animation-delay: 1s;">¥3.3億
+                </div>
+                <p class="text-gray-300 text-sm">純利益（3年間）</p>
+                <div class="investment-bar bg-blue-500 h-3 rounded-full mt-2" style="animation-delay: 1.5s;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-800/50 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-3">リスク調整後ROI</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">楽観シナリオ</span>
+                <span class="text-green-400 font-bold">350%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">標準シナリオ</span>
+                <span class="text-yellow-400 font-bold">275%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-300 text-sm">保守シナリオ</span>
+                <span class="text-orange-400 font-bold">180%</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="golden-glow bg-gradient-to-br from-yellow-900/60 to-orange-900/60 rounded-xl p-4 border border-yellow-400/30">
+            <div class="text-center">
+              <h5 class="text-white font-semibold mb-2">投資判定</h5>
+              <div class="value-counter text-2xl font-black text-green-400" style="animation-delay: 1s;">強く推奨</div>
+              <div class="flex justify-center mt-2">
+                <i class="fas fa-star text-yellow-400 treasure-sparkle"></i>
+                <i class="fas fa-star text-yellow-400 treasure-sparkle" style="animation-delay: 0.2s;"></i>
+                <i class="fas fa-star text-yellow-400 treasure-sparkle" style="animation-delay: 0.4s;"></i>
+                <i class="fas fa-star text-yellow-400 treasure-sparkle" style="animation-delay: 0.6s;"></i>
+                <i class="fas fa-star text-yellow-400 treasure-sparkle" style="animation-delay: 0.8s;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下部：宝探し地図の総括 -->
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-gradient-to-r from-yellow-900/60 to-amber-900/60 rounded-2xl p-8 border border-yellow-400/30">
+        <h3 class="text-3xl font-bold text-white text-center mb-8">
+          <i class="fas fa-map-marked-alt treasure-map text-yellow-400 mr-3"></i>
+          宝探し地図が示す確実な価値
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 左側：ROIチャート -->
+          <div class="roi-chart">
+            <h4 class="text-xl font-semibold text-white mb-4 text-center">投資回収タイムライン</h4>
+            <div class="bg-gray-800/50 rounded-lg p-6">
+              <svg width="100%" height="200" viewBox="0 0 400 200" class="mb-4">
+                <!-- 投資ライン -->
+                <path d="M50,150 L150,150 L250,150 L350,150" stroke="#ef4444" stroke-width="3" stroke-dasharray="10,5"
+                  class="profit-flow" />
+                <!-- 収益ライン -->
+                <path d="M50,150 Q150,100 250,50 Q300,30 350,20" stroke="#10b981" stroke-width="4"
+                  class="treasure-hunt-path" />
+                <!-- 損益分岐点 -->
+                <circle cx="200" cy="100" r="8" fill="#fbbf24" class="treasure-sparkle" />
+                <text x="200" y="90" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">
+                  14ヶ月
+                </text>
+                <!-- 軸ラベル -->
+                <text x="50" y="180" fill="#9ca3af" font-size="12">0ヶ月</text>
+                <text x="150" y="180" fill="#9ca3af" font-size="12">12ヶ月</text>
+                <text x="250" y="180" fill="#9ca3af" font-size="12">24ヶ月</text>
+                <text x="350" y="180" fill="#9ca3af" font-size="12">36ヶ月</text>
+              </svg>
+              <div class="flex justify-between text-sm">
+                <span class="text-red-400">■ 累積投資</span>
+                <span class="text-green-400">■ 累積収益</span>
+                <span class="text-yellow-400">● 損益分岐点</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右側：価値創造要因 -->
+          <div>
+            <h4 class="text-xl font-semibold text-white mb-4 text-center">価値創造の4つの宝</h4>
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4">
+                <div class="payback-timeline bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center">
+                  <i class="fas fa-rocket text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-semibold">生産性の宝</h5>
+                  <p class="text-gray-300 text-sm">業務効率70%向上で年間8,000万円の価値創造</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="payback-timeline bg-green-500 rounded-full w-12 h-12 flex items-center justify-center"
+                  style="animation-delay: 0.5s;">
+                  <i class="fas fa-cut text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-semibold">コスト削減の宝</h5>
+                  <p class="text-gray-300 text-sm">運用コスト60%削減で年間6,000万円の節約</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="payback-timeline bg-purple-500 rounded-full w-12 h-12 flex items-center justify-center"
+                  style="animation-delay: 1s;">
+                  <i class="fas fa-chart-line text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-semibold">新規売上の宝</h5>
+                  <p class="text-gray-300 text-sm">AI新サービスで年間4,000万円の売上創出</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="payback-timeline bg-yellow-500 rounded-full w-12 h-12 flex items-center justify-center"
+                  style="animation-delay: 1.5s;">
+                  <i class="fas fa-crown text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-semibold">競争優位の宝</h5>
+                  <p class="text-gray-300 text-sm">市場リーダーシップで持続的な価値創造</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-2xl text-white font-semibold">
+            「宝探し地図は、確実に275%のROIを約束する」
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- プレゼン用トークスクリプト -->
+  <!--
+    【トークスクリプト】
+    ドラえもんの宝探し地図は、必ず宝物を見つけることができました。AIの投資も同じです。正確な分析により、確実にROIを実現できます。
+
+    左の投資コストでは、3年間で総額1.2億円の投資が必要です。AI技術導入5,000万円、人材育成2,000万円、インフラ整備3,000万円の初期投資に加え、年間2,000万円の運用コストがかかります。
+
+    中央の収益効果では、年間1.8億円の価値創造を実現します。生産性向上で8,000万円、コスト削減で6,000万円、新規売上で4,000万円の効果があり、3年間で総額4.5億円の収益効果を生み出します。
+
+    右のROI結果では、3年間で275%のROIを実現し、投資回収期間はわずか14ヶ月、純利益は3.3億円に達します。リスク調整後でも最低180%のROIを確保できます。
+
+    宝探し地図が示す4つの宝は、生産性の宝、コスト削減の宝、新規売上の宝、競争優位の宝です。投資回収タイムラインでは、14ヶ月で損益分岐点を迎え、その後は急激な利益成長を実現します。
+
+    宝探し地図は、確実に275%のROIを約束します。この投資は強く推奨される、5つ星の案件です。
+    -->
+
+  <!-- インフォグラフィック用プロンプト -->
+  <!--
+    【画像生成AI用プロンプト】
+    Create a treasure map infographic showing ROI analysis from Doraemon's treasure hunting map. Central image: an ancient-style treasure map with glowing golden paths leading to treasure chests representing different value sources. Include three main sections: investment costs (red treasure chest with coins), revenue benefits (green treasure chest with gems), and ROI results (golden trophy chest). Add a timeline chart showing investment recovery at 14 months with crossing lines of investment and revenue. Scatter golden sparkles and treasure markers throughout. Color scheme: deep navy background with golden treasure elements, red for costs, green for benefits, and yellow for ROI. Style: magical treasure map meets financial analysis, with pirate map aesthetics and professional business metrics.
+    -->
+</body>
+
+</html>

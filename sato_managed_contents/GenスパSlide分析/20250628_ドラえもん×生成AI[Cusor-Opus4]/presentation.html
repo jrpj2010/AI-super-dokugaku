@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI × ドラえもん - インタラクティブプレゼンテーション</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    #presentation-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #navigation {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 30px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button {
+      background: #0066CC;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: #0052a3;
+      transform: scale(1.05);
+    }
+
+    .nav-button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #slide-counter {
+      color: white;
+      font-weight: 700;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+    }
+
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0066CC 0%, #FFD700 100%);
+      transition: width 0.3s ease;
+    }
+
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid #FFD700;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .slide-indicator {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: white;
+      font-size: 14px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
+
+  <div id="presentation-container">
+    <iframe id="slide-frame" src="1.html"></iframe>
+    <div class="loading-overlay" id="loading">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <div id="navigation">
+    <button class="nav-button" id="prev-btn" disabled>
+      <i class="fas fa-chevron-left"></i> 前へ
+    </button>
+    <div id="slide-counter">1 / 10</div>
+    <button class="nav-button" id="next-btn">
+      次へ <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="slide-indicator">
+    <i class="fas fa-keyboard mr-2"></i>
+    ← → キーで操作
+  </div>
+
+  <script>
+    const totalSlides = 10;
+    let currentSlide = 1;
+
+    const slideFrame = document.getElementById('slide-frame');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const slideCounter = document.getElementById('slide-counter');
+    const progressFill = document.getElementById('progress-fill');
+    const loading = document.getElementById('loading');
+
+    function updateSlide(slideNumber) {
+      if (slideNumber < 1 || slideNumber > totalSlides) return;
+
+      loading.classList.add('active');
+
+      setTimeout(() => {
+        slideFrame.src = `${slideNumber}.html`;
+        currentSlide = slideNumber;
+        updateUI();
+
+        slideFrame.onload = () => {
+          loading.classList.remove('active');
+        };
+      }, 100);
+    }
+
+    function updateUI() {
+      slideCounter.textContent = `${currentSlide} / ${totalSlides}`;
+      progressFill.style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.disabled = currentSlide === totalSlides;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        updateSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        updateSlide(currentSlide - 1);
+      }
+    }
+
+    // ボタンイベント
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // キーボードイベント
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key >= '1' && e.key <= '9') {
+        const slideNum = parseInt(e.key);
+        if (slideNum <= totalSlides) {
+          updateSlide(slideNum);
+        }
+      } else if (e.key === '0' && totalSlides >= 10) {
+        updateSlide(10);
+      }
+    });
+
+    // タッチスワイプ対応
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // 初期UI更新
+    updateUI();
+  </script>
+</body>
+
+</html>

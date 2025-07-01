@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生産性革命 - 生成AI × ドラえもん</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shrink-effect {
+      animation: shrinkAndGrow 4s ease-in-out infinite;
+    }
+
+    @keyframes shrinkAndGrow {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(0.7);
+      }
+
+      50% {
+        transform: scale(0.5);
+      }
+
+      75% {
+        transform: scale(0.7);
+      }
+    }
+
+    .time-compression {
+      animation: timeCompress 3s ease-in-out infinite;
+    }
+
+    @keyframes timeCompress {
+
+      0%,
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+
+      50% {
+        width: 30%;
+        opacity: 0.7;
+      }
+    }
+
+    .productivity-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.5s ease;
+    }
+
+    .productivity-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(59, 130, 246, 0.3);
+    }
+
+    .efficiency-bar {
+      background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e);
+      animation: efficiencyGrow 2s ease-out forwards;
+      transform-origin: left;
+    }
+
+    @keyframes efficiencyGrow {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .small-light-beam {
+      background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.6), transparent);
+      animation: lightBeam 2s ease-in-out infinite;
+    }
+
+    @keyframes lightBeam {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(100%);
+      }
+    }
+
+    .task-shrink {
+      animation: taskShrink 3s ease-in-out infinite;
+    }
+
+    @keyframes taskShrink {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      33% {
+        transform: scale(0.8) rotate(-5deg);
+      }
+
+      66% {
+        transform: scale(0.6) rotate(5deg);
+      }
+    }
+
+    .number-counter {
+      animation: countUp 2s ease-out forwards;
+    }
+
+    @keyframes countUp {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .floating-icon {
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUpDown {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-8">
+    <!-- ヘッダー -->
+    <div class="text-center mb-10">
+      <h1 class="text-5xl font-black text-white mb-4">
+        <i class="fas fa-compress-alt shrink-effect text-blue-400 mr-4"></i>
+        『スモールライト』で作業時間を圧縮する
+      </h1>
+      <p class="text-xl text-blue-300 font-medium">
+        AIが実現する究極の生産性革命
+      </p>
+    </div>
+
+    <!-- メインコンテンツ：3カラムレイアウト -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+      <!-- 左カラム：時間圧縮の概念 -->
+      <div class="productivity-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="floating-icon text-6xl text-blue-400 mb-4">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">時間圧縮の魔法</h3>
+          <p class="text-blue-300 text-sm">スモールライトのように、作業を小さく効率化</p>
+        </div>
+
+        <!-- 時間圧縮ビジュアル -->
+        <div class="space-y-4">
+          <div class="bg-gray-800 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-white text-sm">従来の作業時間</span>
+              <span class="text-red-400 font-bold">8時間</span>
+            </div>
+            <div class="bg-red-500 h-3 rounded-full"></div>
+          </div>
+
+          <!-- 圧縮効果 -->
+          <div class="flex justify-center">
+            <div class="small-light-beam w-full h-1 rounded-full"></div>
+          </div>
+
+          <div class="bg-gray-800 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-white text-sm">AI活用後</span>
+              <span class="text-green-400 font-bold">2時間</span>
+            </div>
+            <div class="time-compression bg-green-500 h-3 rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- 効果指標 -->
+        <div class="mt-6 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-300 text-sm">時間削減率</span>
+            <span class="text-yellow-400 font-bold text-lg">75%</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-300 text-sm">生産性向上</span>
+            <span class="text-green-400 font-bold text-lg">400%</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-300 text-sm">エラー削減</span>
+            <span class="text-blue-400 font-bold text-lg">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中央カラム：具体的な活用例 -->
+      <div class="productivity-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="task-shrink text-6xl text-yellow-400 mb-4">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">作業の自動化</h3>
+          <p class="text-yellow-300 text-sm">複雑なタスクをシンプルに変換</p>
+        </div>
+
+        <!-- 作業例リスト -->
+        <div class="space-y-4">
+          <div class="bg-gradient-to-r from-purple-900/50 to-purple-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-center mb-2">
+              <i class="fas fa-file-alt text-purple-400 mr-3"></i>
+              <h4 class="text-white font-semibold">文書作成</h4>
+            </div>
+            <div class="text-sm text-gray-300 mb-2">従来：3時間 → AI活用：30分</div>
+            <div class="efficiency-bar h-2 rounded-full" style="animation-delay: 0.5s;"></div>
+          </div>
+
+          <div class="bg-gradient-to-r from-green-900/50 to-green-700/50 rounded-lg p-4 border border-green-500/30">
+            <div class="flex items-center mb-2">
+              <i class="fas fa-chart-bar text-green-400 mr-3"></i>
+              <h4 class="text-white font-semibold">データ分析</h4>
+            </div>
+            <div class="text-sm text-gray-300 mb-2">従来：5時間 → AI活用：45分</div>
+            <div class="efficiency-bar h-2 rounded-full" style="animation-delay: 1s;"></div>
+          </div>
+
+          <div class="bg-gradient-to-r from-blue-900/50 to-blue-700/50 rounded-lg p-4 border border-blue-500/30">
+            <div class="flex items-center mb-2">
+              <i class="fas fa-code text-blue-400 mr-3"></i>
+              <h4 class="text-white font-semibold">プログラミング</h4>
+            </div>
+            <div class="text-sm text-gray-300 mb-2">従来：8時間 → AI活用：2時間</div>
+            <div class="efficiency-bar h-2 rounded-full" style="animation-delay: 1.5s;"></div>
+          </div>
+
+          <div class="bg-gradient-to-r from-orange-900/50 to-orange-700/50 rounded-lg p-4 border border-orange-500/30">
+            <div class="flex items-center mb-2">
+              <i class="fas fa-paint-brush text-orange-400 mr-3"></i>
+              <h4 class="text-white font-semibold">デザイン制作</h4>
+            </div>
+            <div class="text-sm text-gray-300 mb-2">従来：6時間 → AI活用：1時間</div>
+            <div class="efficiency-bar h-2 rounded-full" style="animation-delay: 2s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右カラム：ROI計算 -->
+      <div class="productivity-card rounded-2xl p-6">
+        <div class="text-center mb-6">
+          <div class="floating-icon text-6xl text-green-400 mb-4" style="animation-delay: 1s;">
+            <i class="fas fa-yen-sign"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">投資対効果</h3>
+          <p class="text-green-300 text-sm">スモールライト効果の経済価値</p>
+        </div>
+
+        <!-- ROI計算 -->
+        <div class="space-y-6">
+          <!-- 月間削減時間 -->
+          <div class="bg-gray-800 rounded-lg p-4">
+            <div class="text-center">
+              <div class="number-counter text-4xl font-bold text-yellow-400 mb-2" style="animation-delay: 1s;">
+                160
+              </div>
+              <div class="text-white text-sm">月間削減時間（時間）</div>
+              <div class="text-gray-400 text-xs mt-1">従業員1人あたり</div>
+            </div>
+          </div>
+
+          <!-- コスト削減 -->
+          <div class="bg-gray-800 rounded-lg p-4">
+            <div class="text-center">
+              <div class="number-counter text-4xl font-bold text-green-400 mb-2" style="animation-delay: 1.5s;">
+                ¥480K
+              </div>
+              <div class="text-white text-sm">月間コスト削減</div>
+              <div class="text-gray-400 text-xs mt-1">時給3,000円換算</div>
+            </div>
+          </div>
+
+          <!-- 年間効果 -->
+          <div class="bg-gradient-to-r from-green-900/50 to-blue-900/50 rounded-lg p-4 border border-green-500/30">
+            <div class="text-center">
+              <div class="number-counter text-3xl font-bold text-white mb-2" style="animation-delay: 2s;">
+                ¥5.76M
+              </div>
+              <div class="text-green-300 text-sm">年間削減効果</div>
+              <div class="text-gray-400 text-xs mt-1">従業員1人あたり</div>
+            </div>
+          </div>
+
+          <!-- 追加メリット -->
+          <div class="space-y-2">
+            <div class="flex items-center text-white text-sm">
+              <i class="fas fa-plus text-green-400 text-xs mr-2"></i>
+              <span>品質向上による顧客満足度UP</span>
+            </div>
+            <div class="flex items-center text-white text-sm">
+              <i class="fas fa-plus text-green-400 text-xs mr-2"></i>
+              <span>従業員のストレス軽減</span>
+            </div>
+            <div class="flex items-center text-white text-sm">
+              <i class="fas fa-plus text-green-400 text-xs mr-2"></i>
+              <span>イノベーション創出時間確保</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下部：実装ステップ -->
+    <div class="mt-12 max-w-6xl mx-auto">
+      <div class="bg-gradient-to-r from-blue-900/60 to-purple-900/60 rounded-2xl p-8 border border-blue-400/30">
+        <h3 class="text-3xl font-bold text-white text-center mb-8">
+          <i class="fas fa-compress-alt text-blue-400 mr-3"></i>
+          スモールライト効果の実装ステップ
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div class="bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">1</span>
+            </div>
+            <h4 class="text-white font-semibold mb-2">現状分析</h4>
+            <p class="text-gray-300 text-sm">時間のかかる作業を特定</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-purple-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">2</span>
+            </div>
+            <h4 class="text-white font-semibold mb-2">AI選定</h4>
+            <p class="text-gray-300 text-sm">最適なAIツールを選択</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-green-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">3</span>
+            </div>
+            <h4 class="text-white font-semibold mb-2">導入・訓練</h4>
+            <p class="text-gray-300 text-sm">チームへの展開と教育</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-yellow-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">4</span>
+            </div>
+            <h4 class="text-white font-semibold mb-2">効果測定</h4>
+            <p class="text-gray-300 text-sm">継続的な改善と最適化</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- プレゼン用トークスクリプト -->
+  <!--
+    【トークスクリプト】
+    皆さん、ドラえもんのスモールライトを覚えていますか？大きなものを小さくして、扱いやすくする魔法の道具でした。
+
+    AIは、まさにこのスモールライトのように、複雑で時間のかかる作業を圧縮し、効率化します。
+
+    左の図をご覧ください。従来8時間かかっていた作業が、AI活用により2時間に短縮されます。これは75%の時間削減、つまり生産性が400%向上することを意味します。
+
+    中央では具体例をお示しします。文書作成は3時間から30分に、データ分析は5時間から45分に、プログラミングは8時間から2時間に短縮されます。まさにスモールライトで作業を小さく圧縮したような効果です。
+
+    右側の投資対効果をご覧ください。従業員1人あたり月間160時間の削減により、年間576万円のコスト削減効果があります。さらに品質向上、ストレス軽減、イノベーション創出時間の確保という付加価値も生まれます。
+
+    実装は4つのステップで進めます。現状分析、AI選定、導入・訓練、そして効果測定です。スモールライト効果で、あなたの会社も劇的な生産性革命を実現できます。
+    -->
+
+  <!-- インフォグラフィック用プロンプト -->
+  <!--
+    【画像生成AI用プロンプト】
+    Create a productivity transformation infographic showing the "Small Light" effect from Doraemon. Central image: a magical shrinking ray beam transforming large, complex work tasks into small, manageable ones. Left side: oversized work elements (documents, charts, code) in chaotic arrangement. Right side: same elements miniaturized and organized efficiently. Include time compression visualization with clock elements showing 8 hours shrinking to 2 hours. Color scheme: deep blue to purple gradient background with bright yellow/white shrinking beam effect. Add floating productivity metrics, ROI calculations, and efficiency bars. Style: magical realism meets business infographic, clean and professional with whimsical shrinking effects.
+    -->
+</body>
+
+</html>

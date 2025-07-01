@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイムマシン = 予測AI</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 2.5rem !important;
+      }
+
+      .prediction-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #00D4FF;
+      transform: rotate(-1deg);
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      right: -5px;
+      height: 8px;
+      background: rgba(0, 212, 255, 0.3);
+      transform: rotate(2deg);
+      z-index: -1;
+    }
+
+    .decoration-triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(0, 212, 255, 0.15);
+      clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    .decoration-triangle-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(138, 43, 226, 0.1);
+      clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-1 {
+      animation: fadeInUp 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in-up-delay-2 {
+      animation: fadeInUp 1.2s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .time-icon {
+      font-size: 5rem;
+      color: #00D4FF;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .prediction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .prediction-box {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .prediction-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+
+    .percentage {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #32CD32;
+    }
+
+    .timeline {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="decoration-triangle-1"></div>
+    <div class="decoration-triangle-2"></div>
+
+    <div class="text-center z-10 max-w-5xl px-8">
+      <div class="mb-8 fade-in-up">
+        <i class="fas fa-clock time-icon"></i>
+      </div>
+
+      <h1 class="title text-5xl text-white mb-4 fade-in-up">
+        <span class="highlight">タイムマシン</span> = 予測AI
+      </h1>
+
+      <p class="text-xl text-gray-100 mb-12 fade-in-up-delay-1">
+        未来を見通し、今すぐ行動を最適化
+      </p>
+
+      <div class="prediction-grid">
+        <div class="prediction-box fade-in-up-delay-1">
+          <i class="fas fa-chart-line text-3xl text-green-400 mb-3"></i>
+          <h3 class="text-lg text-white font-bold mb-2">売上予測</h3>
+          <p class="percentage">92%</p>
+          <p class="text-gray-300 text-sm">的中率</p>
+        </div>
+
+        <div class="prediction-box fade-in-up-delay-1">
+          <i class="fas fa-user-tie text-3xl text-blue-400 mb-3"></i>
+          <h3 class="text-lg text-white font-bold mb-2">顧客行動</h3>
+          <p class="percentage">88%</p>
+          <p class="text-gray-300 text-sm">予測精度</p>
+        </div>
+
+        <div class="prediction-box fade-in-up-delay-1">
+          <i class="fas fa-exclamation-triangle text-3xl text-red-400 mb-3"></i>
+          <h3 class="text-lg text-white font-bold mb-2">リスク検知</h3>
+          <p class="percentage">95%</p>
+          <p class="text-gray-300 text-sm">早期発見率</p>
+        </div>
+      </div>
+
+      <div class="timeline fade-in-up-delay-2">
+        <h3 class="text-2xl text-white font-bold mb-4">
+          <i class="fas fa-history mr-3 text-purple-400"></i>
+          AIが見せる未来のシナリオ
+        </h3>
+        <div class="flex justify-around items-center">
+          <div class="text-center">
+            <p class="text-yellow-300 font-bold">現在</p>
+            <i class="fas fa-circle text-yellow-300"></i>
+          </div>
+          <i class="fas fa-arrow-right text-gray-400 text-2xl"></i>
+          <div class="text-center">
+            <p class="text-blue-300 font-bold">3ヶ月後</p>
+            <i class="fas fa-circle text-blue-300"></i>
+          </div>
+          <i class="fas fa-arrow-right text-gray-400 text-2xl"></i>
+          <div class="text-center">
+            <p class="text-green-300 font-bold">1年後</p>
+            <i class="fas fa-circle text-green-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

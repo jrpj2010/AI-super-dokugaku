@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>現代ビジネスの課題 - 生成AI × ドラえもん</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-card {
+      background: linear-gradient(145deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+    }
+
+    .solution-hint {
+      background: linear-gradient(145deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
+      border: 1px solid rgba(0, 102, 204, 0.3);
+    }
+
+    .chart-bar {
+      background: linear-gradient(to top, #FF6B6B, #FF8E8E);
+      animation: growUp 1.5s ease-out forwards;
+      transform-origin: bottom;
+      transform: scaleY(0);
+    }
+
+    @keyframes growUp {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    .floating-icon {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-8">
+    <!-- ヘッダー -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-black text-white mb-4">
+        <i class="fas fa-exclamation-triangle text-red-400 mr-4"></i>
+        現代ビジネスの「困った」を解決したい
+      </h1>
+      <p class="text-xl text-blue-300 font-medium">
+        のび太くんのように、みんな困っています
+      </p>
+    </div>
+
+    <!-- メインコンテンツ：3カラムレイアウト -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+      <!-- 左カラム：人手不足問題 -->
+      <div class="problem-card rounded-2xl p-6 pulse-glow">
+        <div class="text-center mb-6">
+          <div class="floating-icon text-6xl text-red-400 mb-4">
+            <i class="fas fa-users-slash"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-2">人手不足の深刻化</h2>
+          <p class="text-red-300 text-sm">「人が足りない！」</p>
+        </div>
+
+        <!-- 統計グラフ -->
+        <div class="bg-gray-900/50 rounded-lg p-4 mb-4">
+          <h3 class="text-white font-semibold mb-3 text-center">労働力不足の現状</h3>
+          <div class="flex items-end justify-between h-32 space-x-2">
+            <div class="flex flex-col items-center">
+              <div class="chart-bar w-8 h-20 rounded-t" style="animation-delay: 0.2s;"></div>
+              <span class="text-xs text-gray-300 mt-1">2020</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="chart-bar w-8 h-24 rounded-t" style="animation-delay: 0.4s;"></div>
+              <span class="text-xs text-gray-300 mt-1">2022</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="chart-bar w-8 h-28 rounded-t" style="animation-delay: 0.6s;"></div>
+              <span class="text-xs text-gray-300 mt-1">2024</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="chart-bar w-8 h-32 rounded-t" style="animation-delay: 0.8s;"></div>
+              <span class="text-xs text-gray-300 mt-1">予測</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 具体的な課題 -->
+        <div class="space-y-3">
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-red-400 text-xs mr-3"></i>
+            <span class="text-sm">採用コスト年々上昇</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-red-400 text-xs mr-3"></i>
+            <span class="text-sm">既存社員の負担増大</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-red-400 text-xs mr-3"></i>
+            <span class="text-sm">業務品質の低下リスク</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中央カラム：生産性低下 -->
+      <div class="problem-card rounded-2xl p-6 pulse-glow" style="animation-delay: 0.3s;">
+        <div class="text-center mb-6">
+          <div class="floating-icon text-6xl text-orange-400 mb-4" style="animation-delay: 1s;">
+            <i class="fas fa-chart-line-down"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-2">生産性の伸び悩み</h2>
+          <p class="text-orange-300 text-sm">「効率が上がらない！」</p>
+        </div>
+
+        <!-- 比較チャート -->
+        <div class="bg-gray-900/50 rounded-lg p-4 mb-4">
+          <h3 class="text-white font-semibold mb-3 text-center">日本 vs 世界の生産性</h3>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <span class="text-xs text-gray-300 w-12">日本</span>
+              <div class="flex-1 bg-gray-700 rounded-full h-3 mx-2">
+                <div class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full chart-bar"
+                  style="width: 60%; animation-delay: 1s;"></div>
+              </div>
+              <span class="text-xs text-white">60%</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs text-gray-300 w-12">米国</span>
+              <div class="flex-1 bg-gray-700 rounded-full h-3 mx-2">
+                <div class="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full chart-bar"
+                  style="width: 100%; animation-delay: 1.2s;"></div>
+              </div>
+              <span class="text-xs text-white">100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 具体的な課題 -->
+        <div class="space-y-3">
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-orange-400 text-xs mr-3"></i>
+            <span class="text-sm">手作業による非効率</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-orange-400 text-xs mr-3"></i>
+            <span class="text-sm">情報共有の遅れ</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-orange-400 text-xs mr-3"></i>
+            <span class="text-sm">意思決定の遅延</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右カラム：競争激化 -->
+      <div class="problem-card rounded-2xl p-6 pulse-glow" style="animation-delay: 0.6s;">
+        <div class="text-center mb-6">
+          <div class="floating-icon text-6xl text-purple-400 mb-4" style="animation-delay: 2s;">
+            <i class="fas fa-sword-cross"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-2">グローバル競争激化</h2>
+          <p class="text-purple-300 text-sm">「ライバルが強すぎる！」</p>
+        </div>
+
+        <!-- 競争状況 -->
+        <div class="bg-gray-900/50 rounded-lg p-4 mb-4">
+          <h3 class="text-white font-semibold mb-3 text-center">市場シェア変化</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-center">
+              <div
+                class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mb-2">
+                <span class="text-white font-bold">-15%</span>
+              </div>
+              <span class="text-xs text-gray-300">従来企業</span>
+            </div>
+            <div class="text-center">
+              <div
+                class="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mb-2">
+                <span class="text-white font-bold">+25%</span>
+              </div>
+              <span class="text-xs text-gray-300">AI活用企業</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 具体的な課題 -->
+        <div class="space-y-3">
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-purple-400 text-xs mr-3"></i>
+            <span class="text-sm">新興企業の台頭</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-purple-400 text-xs mr-3"></i>
+            <span class="text-sm">技術革新の加速</span>
+          </div>
+          <div class="flex items-center text-white">
+            <i class="fas fa-circle text-purple-400 text-xs mr-3"></i>
+            <span class="text-sm">顧客期待値の上昇</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 解決への示唆 -->
+    <div class="solution-hint rounded-2xl p-6 mt-12 max-w-4xl mx-auto text-center">
+      <div class="flex items-center justify-center mb-4">
+        <i class="fas fa-lightbulb text-yellow-400 text-3xl mr-4"></i>
+        <h3 class="text-2xl font-bold text-white">でも、大丈夫！</h3>
+      </div>
+      <p class="text-blue-300 text-lg">
+        ドラえもんが秘密道具でのび太くんを助けるように、<br>
+        <span class="text-yellow-400 font-semibold">AIがあなたのビジネスの「困った」を解決します</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- プレゼン用トークスクリプト -->
+  <!--
+    【トークスクリプト】
+    皆さん、現代のビジネス環境を見てください。まるでのび太くんのように、多くの企業が「困った、困った」と言っています。
+
+    左を見てください。人手不足が深刻化しています。採用コストは年々上昇し、既存社員の負担は増大する一方です。
+
+    中央のグラフをご覧ください。日本の生産性は先進国の中でも低い水準にとどまっています。手作業による非効率、情報共有の遅れが原因です。
+
+    そして右側、グローバル競争は激化しています。AI活用企業が25%もシェアを伸ばす中、従来企業は15%も減少しています。
+
+    でも、大丈夫です！ドラえもんが秘密道具でのび太くんを助けるように、AIがあなたのビジネスの「困った」を解決します。
+    -->
+
+  <!-- インフォグラフィック用プロンプト -->
+  <!--
+    【画像生成AI用プロンプト】
+    Create a sophisticated business infographic showing three main business challenges in a modern, minimalist style. Left panel: declining workforce with silhouettes of people fading away, red color scheme. Center panel: productivity comparison chart between Japan and other countries, orange/yellow gradient. Right panel: competitive landscape with arrows showing market share changes, purple/blue gradient. Background should be dark navy with subtle geometric patterns. Include floating icons representing stress and problems. Style: clean, professional, data visualization, corporate presentation, high contrast, modern typography.
+    -->
+</body>
+
+</html>

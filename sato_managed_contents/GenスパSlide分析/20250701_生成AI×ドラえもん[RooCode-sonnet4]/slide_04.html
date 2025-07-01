@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>秘密道具とAIの比較 - 生成AI × ドラえもん</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-container {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparison-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.5s ease;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(0, 102, 204, 0.3);
+    }
+
+    .doraemon-side {
+      background: linear-gradient(145deg, rgba(0, 102, 204, 0.2), rgba(0, 102, 204, 0.1));
+      border-color: rgba(0, 102, 204, 0.4);
+    }
+
+    .ai-side {
+      background: linear-gradient(145deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1));
+      border-color: rgba(255, 193, 7, 0.4);
+    }
+
+    .magic-icon {
+      animation: magicFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes magicFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(-3deg);
+      }
+
+      75% {
+        transform: translateY(-8px) rotate(2deg);
+      }
+    }
+
+    .tech-icon {
+      animation: techPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes techPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    .connection-line {
+      background: linear-gradient(90deg, #0066CC, #FFC107);
+      animation: connectionFlow 3s ease-in-out infinite;
+    }
+
+    @keyframes connectionFlow {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .sparkle {
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .reveal-text {
+      animation: revealText 2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes revealText {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-8">
+    <!-- ヘッダー -->
+    <div class="text-center mb-10">
+      <h1 class="text-5xl font-black text-white mb-4">
+        <i class="fas fa-magic magic-icon text-yellow-400 mr-4"></i>
+        あの憧れの秘密道具が、今ここに
+      </h1>
+      <p class="text-xl text-blue-300 font-medium reveal-text" style="animation-delay: 0.5s;">
+        22世紀の夢が、21世紀の現実になりました
+      </p>
+    </div>
+
+    <!-- メインコンテンツ：3つの比較セット -->
+    <div class="space-y-8 max-w-7xl mx-auto">
+
+      <!-- 比較セット1：どこでもドア vs リモートワーク -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+        <!-- ドラえもん側 -->
+        <div class="comparison-card doraemon-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="magic-icon text-6xl text-blue-400 mb-4">
+              <i class="fas fa-door-open"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">どこでもドア</h3>
+            <p class="text-blue-300 text-sm mb-4">「どこにでも瞬間移動」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">距離の制約を無視</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">移動時間ゼロ</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">世界中どこでも</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 接続線 -->
+        <div class="flex justify-center items-center">
+          <div class="connection-line h-2 w-24 rounded-full relative">
+            <div class="sparkle absolute top-1/2 left-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 0.5s;">
+            </div>
+            <div class="sparkle absolute top-1/2 right-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 1s;">
+            </div>
+          </div>
+        </div>
+
+        <!-- AI側 -->
+        <div class="comparison-card ai-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="tech-icon text-6xl text-yellow-500 mb-4">
+              <i class="fas fa-video"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">リモートワークAI</h3>
+            <p class="text-yellow-300 text-sm mb-4">「世界中とリアルタイム協働」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">地理的制約を解消</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">通勤時間を削減</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">グローバルチーム</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 比較セット2：ほんやくコンニャク vs 翻訳AI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+        <!-- ドラえもん側 -->
+        <div class="comparison-card doraemon-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="magic-icon text-6xl text-blue-400 mb-4" style="animation-delay: 1s;">
+              <i class="fas fa-language"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">ほんやくコンニャク</h3>
+            <p class="text-blue-300 text-sm mb-4">「どんな言語も理解できる」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">言語の壁を消去</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">瞬間理解</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">全言語対応</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 接続線 -->
+        <div class="flex justify-center items-center">
+          <div class="connection-line h-2 w-24 rounded-full relative">
+            <div class="sparkle absolute top-1/2 left-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 1.5s;">
+            </div>
+            <div class="sparkle absolute top-1/2 right-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 2s;">
+            </div>
+          </div>
+        </div>
+
+        <!-- AI側 -->
+        <div class="comparison-card ai-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="tech-icon text-6xl text-yellow-500 mb-4" style="animation-delay: 1s;">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">多言語AI翻訳</h3>
+            <p class="text-yellow-300 text-sm mb-4">「100言語をリアルタイム翻訳」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">100+言語対応</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">文脈理解翻訳</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">音声・テキスト対応</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 比較セット3：暗記パン vs 学習AI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+        <!-- ドラえもん側 -->
+        <div class="comparison-card doraemon-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="magic-icon text-6xl text-blue-400 mb-4" style="animation-delay: 2s;">
+              <i class="fas fa-bread-slice"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">暗記パン</h3>
+            <p class="text-blue-300 text-sm mb-4">「食べるだけで知識習得」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">瞬間知識習得</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">努力不要</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-star text-yellow-400 text-xs mr-2"></i>
+                <span class="text-sm">完全記憶</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 接続線 -->
+        <div class="flex justify-center items-center">
+          <div class="connection-line h-2 w-24 rounded-full relative">
+            <div class="sparkle absolute top-1/2 left-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 2.5s;">
+            </div>
+            <div class="sparkle absolute top-1/2 right-1/4 w-2 h-2 bg-white rounded-full" style="animation-delay: 3s;">
+            </div>
+          </div>
+        </div>
+
+        <!-- AI側 -->
+        <div class="comparison-card ai-side rounded-2xl p-6">
+          <div class="text-center">
+            <div class="tech-icon text-6xl text-yellow-500 mb-4" style="animation-delay: 2s;">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">パーソナル学習AI</h3>
+            <p class="text-yellow-300 text-sm mb-4">「個別最適化された学習体験」</p>
+            <div class="space-y-2 text-left">
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">個人に最適化</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">24時間サポート</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-check text-green-400 text-xs mr-2"></i>
+                <span class="text-sm">進捗自動追跡</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結論メッセージ -->
+    <div class="mt-12 max-w-5xl mx-auto">
+      <div
+        class="bg-gradient-to-r from-blue-900/60 to-yellow-900/60 rounded-2xl p-8 text-center border border-yellow-400/30">
+        <div class="flex items-center justify-center mb-6">
+          <i class="fas fa-magic text-yellow-400 text-4xl mr-4"></i>
+          <h3 class="text-3xl font-bold text-white">夢の道具が現実に！</h3>
+          <i class="fas fa-robot text-blue-400 text-4xl ml-4"></i>
+        </div>
+        <p class="text-xl text-gray-300 mb-4">
+          ドラえもんの秘密道具で描かれた未来が、AIによって実現されています
+        </p>
+        <div class="text-lg text-yellow-300 font-semibold">
+          あなたも今すぐ「22世紀の力」を手に入れることができます
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- プレゼン用トークスクリプト -->
+  <!--
+    【トークスクリプト】
+    皆さん、子供の頃に憧れた秘密道具が、今ここに現実として存在しています。
+
+    まず「どこでもドア」を見てください。距離の制約を無視し、移動時間ゼロで世界中どこでも行けました。現在のリモートワークAIは、まさにこれを実現しています。地理的制約を解消し、通勤時間を削減し、グローバルチームでの協働を可能にしています。
+
+    次に「ほんやくコンニャク」です。どんな言語も瞬間理解できる夢の道具でした。今の多言語AI翻訳は、100以上の言語をリアルタイムで翻訳し、文脈まで理解します。音声でもテキストでも対応可能です。
+
+    そして「暗記パン」。食べるだけで知識を習得できる魔法のような道具でした。現在のパーソナル学習AIは、個人に最適化された学習体験を提供し、24時間サポートで進捗を自動追跡します。
+
+    夢の道具が現実になったのです！ドラえもんの秘密道具で描かれた未来が、AIによって実現されています。あなたも今すぐ「22世紀の力」を手に入れることができます。
+    -->
+
+  <!-- インフォグラフィック用プロンプト -->
+  <!--
+    【画像生成AI用プロンプト】
+    Create a magical comparison infographic showing Doraemon's gadgets transforming into modern AI tools. Three horizontal comparison sets: 1) Anywhere Door vs Remote Work AI (blue theme), 2) Translation Konjac vs Multilingual AI (green theme), 3) Memory Bread vs Learning AI (orange theme). Each comparison connected by flowing magical sparkles and transformation effects. Left side: retro-futuristic cartoon style gadgets with magical aura. Right side: sleek modern tech icons with digital glow. Background: gradient from deep blue to golden yellow with floating geometric shapes and light particles. Style: magical realism meets corporate presentation, high contrast, professional yet whimsical.
+    -->
+</body>
+
+</html>
