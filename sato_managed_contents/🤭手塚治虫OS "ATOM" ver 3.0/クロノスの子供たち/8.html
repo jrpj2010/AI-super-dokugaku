@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特筆すべきシーン演出 - クロノスの子供たち</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background-color: #0a1a2f;
+      color: white;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .city {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      background-color: #0c2849;
+      z-index: 2;
+      opacity: 0.3;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+      background-color: #183860;
+      z-index: 3;
+      opacity: 0.3;
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .gold-accent {
+      color: #f7d06b;
+    }
+
+    .scene-card {
+      background-color: rgba(24, 56, 96, 0.4);
+      border-left: 3px solid #f7d06b;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .scene-title {
+      color: #f7d06b;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .character-silhouette {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      opacity: 0.08;
+      width: 400px;
+      height: 500px;
+      z-index: 5;
+    }
+
+    .orbital-circle {
+      position: absolute;
+      border: 1px solid rgba(247, 208, 107, 0.2);
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .content-section {
+      max-width: 65%;
+    }
+
+    .tezuka-frame {
+      border: 2px solid #f7d06b;
+      padding: 8px;
+      background-color: rgba(247, 208, 107, 0.05);
+      border-radius: 5px;
+    }
+
+    .tank {
+      position: absolute;
+      width: 80px;
+      height: 150px;
+      background-color: rgba(24, 56, 96, 0.6);
+      border: 1px solid #f7d06b;
+      border-radius: 5px;
+      bottom: 100px;
+    }
+
+    .tank-bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
+
+    .bubble {
+      position: absolute;
+      background-color: rgba(247, 208, 107, 0.3);
+      border-radius: 50%;
+    }
+
+    .awakening-effect {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 2px dashed #f7d06b;
+      opacity: 0.5;
+      top: 400px;
+      right: 150px;
+      z-index: 6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <!-- Stars background -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Futuristic city silhouette (very faded) -->
+    <div class="city"></div>
+    <div class="building" style="height: 120px; width: 30px; left: 100px;"></div>
+    <div class="building" style="height: 150px; width: 40px; left: 160px;"></div>
+    <div class="building" style="height: 100px; width: 35px; left: 220px;"></div>
+    <div class="building" style="height: 170px; width: 45px; left: 280px;"></div>
+    <div class="building" style="height: 130px; width: 40px; left: 350px;"></div>
+
+    <!-- Decorative orbital circles -->
+    <div class="orbital-circle" style="width: 300px; height: 300px; right: 150px; top: 200px;"></div>
+    <div class="orbital-circle" style="width: 450px; height: 450px; right: 80px; top: 130px;"></div>
+
+    <!-- Special effect elements -->
+    <div class="awakening-effect"></div>
+    <div class="tank" style="right: 350px;"></div>
+    <div class="tank" style="right: 250px;"></div>
+    <div class="tank" style="right: 150px;"></div>
+
+    <!-- Tank bubbles -->
+    <div class="tank-bubbles" id="bubbleContainer"></div>
+
+    <!-- Character silhouette -->
+    <div class="character-silhouette">
+      <svg viewBox="0 0 250 500">
+        <path
+          d="M125,50 C160,50 190,80 190,120 C190,150 170,175 140,185 C140,185 150,195 155,210 C160,225 160,240 160,240 L90,240 C90,240 90,225 95,210 C100,195 110,185 110,185 C80,175 60,150 60,120 C60,80 90,50 125,50 Z"
+          fill="#FFFFFF" />
+        <circle cx="100" cy="110" r="15" fill="#000000" />
+        <circle cx="150" cy="110" r="15" fill="#000000" />
+        <circle cx="98" cy="108" r="5" fill="#FFFFFF" />
+        <circle cx="148" cy="108" r="5" fill="#FFFFFF" />
+        <path d="M125,140 C115,140 105,135 100,125 C110,130 140,130 150,125 C145,135 135,140 125,140 Z"
+          fill="#000000" />
+        <path
+          d="M70,85 C85,75 100,70 125,70 C150,70 165,75 180,85 C175,70 165,60 155,55 C175,45 175,30 165,20 C155,10 140,15 125,25 C110,15 95,10 85,20 C75,30 75,45 95,55 C85,60 75,70 70,85 Z"
+          fill="#000000" />
+        <rect x="90" y="240" width="70" height="120" fill="#000000" />
+        <rect x="90" y="360" width="30" height="100" fill="#000000" />
+        <rect x="130" y="360" width="30" height="100" fill="#000000" />
+      </svg>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-container flex flex-col h-full p-16">
+      <!-- Page header -->
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold">特筆すべきシーン演出</h1>
+        <div class="w-48 h-1 bg-yellow-400 mt-2"></div>
+      </div>
+
+      <!-- Main content area -->
+      <div class="content-section">
+        <!-- Scene 1: Cultivation Tank -->
+        <div class="scene-card mb-10">
+          <h2 class="scene-title text-2xl">クライマックス：培養槽シーン</h2>
+          <div class="flex space-x-4">
+            <div class="w-3/4">
+              <p class="mb-4">Dr.スケルトンの隠し部屋。壁一面に並ぶ培養槽の中に、<span class="gold-accent">ソラと同じ顔をした"失敗作"たち</span>。</p>
+              <div class="tezuka-frame p-3 mb-4">
+                <p class="italic">「ガラスに映る自分の顔と培養槽内の顔が<span class="gold-accent">重なる構図</span>で、アイデンティティの崩壊を視覚化」</p>
+              </div>
+              <p>→ 手塚作品『火の鳥』の「未来編」を彷彿とさせる演出で、人間の複製という<span class="gold-accent">生命倫理</span>の問題を投げかける</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 2: Power Awakening -->
+        <div class="scene-card">
+          <h2 class="scene-title text-2xl">力の覚醒：「僕はソラだ！」</h2>
+          <div class="flex space-x-4">
+            <div class="w-3/4">
+              <p class="mb-4"><span class="gold-accent">見開き大ゴマ</span>での力強い演出。全身から放たれる光（テクノパシーのオーラ）が周囲の機械を飲み込む。</p>
+              <div class="tezuka-frame p-3 mb-4">
+                <p class="italic">「<span class="gold-accent">涙を流しながらも</span>、強い意志で歯を食いしばる表情。集中線と効果線を多用し、読者の感情が最高潮に」</p>
+              </div>
+              <p>→ 『鉄腕アトム』のトビオが光になるシーンと『ブラック・ジャック』の感情爆発を融合させた<span class="gold-accent">手塚マイルストーン</span>ビジュアル</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom quote -->
+        <div class="mt-6 pl-4 border-l-4 border-yellow-400">
+          <p class="text-lg italic">「<span class="gold-accent">僕はコピーじゃない！</span> リクの悲しみも、父さんの後悔も、全部この僕が引き受ける！<span
+              class="gold-accent">僕はリクじゃない…僕はソラだッ！！</span>」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create stars in the background
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 0.5;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random() * 0.5 + 0.2;
+      starsContainer.appendChild(star);
+    }
+
+    // Create bubbles in tanks
+    const bubbleContainer = document.getElementById('bubbleContainer');
+    for (let i = 0; i < 30; i++) {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      const size = Math.random() * 5 + 2;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.right = `${150 + Math.random() * 280}px`;
+      bubble.style.bottom = `${100 + Math.random() * 150}px`;
+      bubble.style.opacity = Math.random() * 0.5 + 0.1;
+      bubbleContainer.appendChild(bubble);
+    }
+  </script>
+</body>
+
+</html>

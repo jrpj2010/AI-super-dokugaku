@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>目次 - クロノスの子供たち</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background-color: #0a1a2f;
+      color: white;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .city {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      background-color: #0c2849;
+      z-index: 2;
+      opacity: 0.5;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+      background-color: #183860;
+      z-index: 3;
+      opacity: 0.5;
+    }
+
+    .window {
+      position: absolute;
+      background-color: #f7d06b;
+      z-index: 4;
+      opacity: 0.5;
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .gold-accent {
+      color: #f7d06b;
+    }
+
+    .toc-item {
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+      cursor: default;
+      padding-left: 15px;
+      border-left: 3px solid transparent;
+    }
+
+    .toc-item:hover {
+      transform: translateX(5px);
+      border-left-color: #f7d06b;
+    }
+
+    .toc-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: rgba(247, 208, 107, 0.2);
+      color: #f7d06b;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .character-sketch {
+      position: absolute;
+      right: 120px;
+      bottom: 120px;
+      opacity: 0.1;
+      width: 300px;
+      height: 400px;
+    }
+
+    .orbital-circle {
+      position: absolute;
+      border: 1px solid rgba(247, 208, 107, 0.3);
+      border-radius: 50%;
+      z-index: 5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container flex flex-row">
+    <!-- Stars background -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Futuristic city silhouette (faded) -->
+    <div class="city"></div>
+    <div class="building" style="height: 150px; width: 40px; left: 100px;"></div>
+    <div class="building" style="height: 180px; width: 50px; left: 180px;"></div>
+    <div class="building" style="height: 130px; width: 45px; left: 250px;"></div>
+    <div class="building" style="height: 200px; width: 55px; left: 320px;"></div>
+    <div class="building" style="height: 120px; width: 60px; left: 400px;"></div>
+    <div class="building" style="height: 170px; width: 40px; left: 480px;"></div>
+
+    <!-- Decorative orbital circles -->
+    <div class="orbital-circle" style="width: 200px; height: 200px; right: 180px; top: 150px;"></div>
+    <div class="orbital-circle" style="width: 300px; height: 300px; right: 130px; top: 100px;"></div>
+    <div class="orbital-circle" style="width: 400px; height: 400px; right: 80px; top: 50px;"></div>
+
+    <!-- Character sketch background -->
+    <div class="character-sketch">
+      <svg viewBox="0 0 250 400">
+        <path
+          d="M125,50 C160,50 190,80 190,120 C190,150 170,175 140,185 C140,185 150,195 155,210 C160,225 160,240 160,240 L90,240 C90,240 90,225 95,210 C100,195 110,185 110,185 C80,175 60,150 60,120 C60,80 90,50 125,50 Z"
+          fill="#FFFFFF" />
+        <circle cx="100" cy="110" r="15" fill="#000000" />
+        <circle cx="150" cy="110" r="15" fill="#000000" />
+        <path d="M125,140 C115,140 105,135 100,125 C110,130 140,130 150,125 C145,135 135,140 125,140 Z"
+          fill="#000000" />
+        <path
+          d="M70,85 C85,75 100,70 125,70 C150,70 165,75 180,85 C175,70 165,60 155,55 C175,45 175,30 165,20 C155,10 140,15 125,25 C110,15 95,10 85,20 C75,30 75,45 95,55 C85,60 75,70 70,85 Z"
+          fill="#000000" />
+        <rect x="90" y="240" width="70" height="120" fill="#000000" />
+      </svg>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-container flex flex-col w-full p-16">
+      <h1 class="text-5xl font-bold mb-10">目次</h1>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="col-span-1">
+          <div class="toc-item">
+            <span class="toc-number">1</span>
+            <span class="text-xl">コンセプト概要</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">2</span>
+            <span class="text-xl">世界観・時代設定</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">3</span>
+            <span class="text-xl">物語あらすじ</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">4</span>
+            <span class="text-xl">キャラクター紹介</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">5</span>
+            <span class="text-xl">特筆すべきシーン</span>
+          </div>
+        </div>
+
+        <div class="col-span-1">
+          <div class="toc-item">
+            <span class="toc-number">6</span>
+            <span class="text-xl">技術的・哲学的背景</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">7</span>
+            <span class="text-xl">想定ターゲット・市場性</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">8</span>
+            <span class="text-xl">今後の展開/展開ビジョン</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">9</span>
+            <span class="text-xl">メッセージ・企画の強み</span>
+          </div>
+          <div class="toc-item">
+            <span class="toc-number">10</span>
+            <span class="text-xl">まとめ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-right">
+        <p class="text-lg gold-accent">「ぼくは誰かの夢のつづき？ それとも、ぼくだけの現実？」</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create stars in the background
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 0.5;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random() * 0.7 + 0.3;
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+
+</html>

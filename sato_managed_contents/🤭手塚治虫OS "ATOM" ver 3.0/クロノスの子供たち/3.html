@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コンセプト概要 - クロノスの子供たち</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background-color: #0a1a2f;
+      color: white;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .city {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      background-color: #0c2849;
+      z-index: 2;
+      opacity: 0.3;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+      background-color: #183860;
+      z-index: 3;
+      opacity: 0.3;
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .gold-accent {
+      color: #f7d06b;
+    }
+
+    .highlight-box {
+      background-color: rgba(247, 208, 107, 0.1);
+      border-left: 3px solid #f7d06b;
+      padding: 20px;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .character-silhouette {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      opacity: 0.08;
+      width: 400px;
+      height: 500px;
+      z-index: 5;
+    }
+
+    .orbital-circle {
+      position: absolute;
+      border: 1px solid rgba(247, 208, 107, 0.2);
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .content-section {
+      max-width: 65%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <!-- Stars background -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Futuristic city silhouette (very faded) -->
+    <div class="city"></div>
+    <div class="building" style="height: 120px; width: 30px; left: 100px;"></div>
+    <div class="building" style="height: 150px; width: 40px; left: 160px;"></div>
+    <div class="building" style="height: 100px; width: 35px; left: 220px;"></div>
+    <div class="building" style="height: 170px; width: 45px; left: 280px;"></div>
+    <div class="building" style="height: 130px; width: 40px; left: 350px;"></div>
+
+    <!-- Decorative orbital circles -->
+    <div class="orbital-circle" style="width: 300px; height: 300px; right: 150px; top: 200px;"></div>
+    <div class="orbital-circle" style="width: 450px; height: 450px; right: 80px; top: 130px;"></div>
+
+    <!-- Character silhouette -->
+    <div class="character-silhouette">
+      <svg viewBox="0 0 250 500">
+        <path
+          d="M125,50 C160,50 190,80 190,120 C190,150 170,175 140,185 C140,185 150,195 155,210 C160,225 160,240 160,240 L90,240 C90,240 90,225 95,210 C100,195 110,185 110,185 C80,175 60,150 60,120 C60,80 90,50 125,50 Z"
+          fill="#FFFFFF" />
+        <circle cx="100" cy="110" r="15" fill="#000000" />
+        <circle cx="150" cy="110" r="15" fill="#000000" />
+        <circle cx="98" cy="108" r="5" fill="#FFFFFF" />
+        <circle cx="148" cy="108" r="5" fill="#FFFFFF" />
+        <path d="M125,140 C115,140 105,135 100,125 C110,130 140,130 150,125 C145,135 135,140 125,140 Z"
+          fill="#000000" />
+        <path
+          d="M70,85 C85,75 100,70 125,70 C150,70 165,75 180,85 C175,70 165,60 155,55 C175,45 175,30 165,20 C155,10 140,15 125,25 C110,15 95,10 85,20 C75,30 75,45 95,55 C85,60 75,70 70,85 Z"
+          fill="#000000" />
+        <rect x="90" y="240" width="70" height="120" fill="#000000" />
+        <rect x="90" y="360" width="30" height="100" fill="#000000" />
+        <rect x="130" y="360" width="30" height="100" fill="#000000" />
+      </svg>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-container flex flex-col h-full p-16">
+      <!-- Page header -->
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold">コンセプト概要</h1>
+        <div class="w-32 h-1 bg-yellow-400 mt-2"></div>
+      </div>
+
+      <!-- Main content area -->
+      <div class="content-section">
+        <p class="text-xl leading-relaxed mb-10">
+          『クロノスの子供たち』は、22世紀のドーム都市を舞台に、最先端遺伝子技術と人間アイデンティティの深淵に迫るSFヒューマンドラマ。少年ソラを通して"自分らしさ"と親子の絆を問い直す物語。
+        </p>
+
+        <!-- Highlighted catchphrase -->
+        <div class="highlight-box mb-10">
+          <p class="text-2xl italic gold-accent">「ぼくは誰かの夢のつづき？ それとも、ぼくだけの現実？」</p>
+        </div>
+
+        <!-- Key points -->
+        <div class="mt-10">
+          <h3 class="text-xl font-medium mb-4 gold-accent">企画のポイント</h3>
+          <ul class="space-y-3 text-lg">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3"></div>
+              <span>クローン技術がもたらす<span class="gold-accent font-medium">アイデンティティの問い</span>と<span
+                  class="gold-accent font-medium">倫理的課題</span></span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3"></div>
+              <span>手塚治虫風デザインと現代的SFの<span class="gold-accent font-medium">融合</span></span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3"></div>
+              <span>失われた存在を<span class="gold-accent font-medium">複製</span>することの喜びと悲しみ</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3"></div>
+              <span>SF要素を背景に、<span class="gold-accent font-medium">普遍的な親子の絆</span>を描く</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create stars in the background
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 0.5;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random() * 0.5 + 0.2;
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+
+</html>

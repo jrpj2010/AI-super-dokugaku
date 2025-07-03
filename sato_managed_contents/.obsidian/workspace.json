@@ -11,14 +11,17 @@
             "id": "4d1f3ada42c36a96",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "商談管理/日立システムズ様/20250407 産業営定例会MT 1cf31bbd522c80a7bec8f11f2c84802a.md",
-                "mode": "source",
-                "source": false
+                "file": "無題のファイル 1.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
               },
-              "icon": "lucide-file",
-              "title": "20250407 産業営定例会MT 1cf31bbd522c80a7bec8f11f2c84802a"
+              "icon": "lucide-layout-dashboard",
+              "title": "無題のファイル 1"
             }
           }
         ]
@@ -53,7 +56,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "path:\"zettelkasten obsidian/\" ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -168,8 +171,13 @@
       "command-palette:コマンドパレットを開く": false
     }
   },
-  "active": "4d1f3ada42c36a96",
+  "active": "9180110570e3c2e1",
   "lastOpenFiles": [
+    "zettelkasten obsidian/2024-09-07_Как_начать_работать_с_Obsidian_ПРАВИЛЬНО_(Гайд_для_новичков).md",
+    "無題のファイル 1.canvas",
+    "zettelkasten obsidian/2024-08-23_What_Nobody_Tells_You_About_Organizing_Folders_in_Obsidian.md",
+    "商談管理/日立システムズ様/⭐️ライセンスガード拡販PJ a99edb5de274439ab60588c15301c7bf/2024 02 10 VoicePeak音声作成 5d52c78a93fb4dbba04ad12905a18ce2.md",
+    "商談管理/日立システムズ様/20250407 産業営定例会MT 1cf31bbd522c80a7bec8f11f2c84802a.md",
     "第33回八子クラウド座談会 生成系AIトレンド & 大LT大会！ 30a5221cf4af4e119b0761151c8e1f5e/Untitled 24.png.md",
     "第33回八子クラウド座談会 生成系AIトレンド & 大LT大会！ 30a5221cf4af4e119b0761151c8e1f5e",
     "2025-06-23.md",

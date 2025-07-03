@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クロノスの子供たち</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      position: relative;
+      background-color: #0a1a2f;
+      color: white;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .city {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 180px;
+      background-color: #0c2849;
+      z-index: 2;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+      background-color: #183860;
+      z-index: 3;
+    }
+
+    .window {
+      position: absolute;
+      background-color: #f7d06b;
+      z-index: 4;
+    }
+
+    .title-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .character {
+      position: absolute;
+      right: 80px;
+      bottom: 0;
+      height: 500px;
+      z-index: 15;
+    }
+
+    .subtitle {
+      color: #f7d06b;
+    }
+
+    .gold-accent {
+      color: #f7d06b;
+    }
+
+    .glow {
+      text-shadow: 0 0 10px rgba(247, 208, 107, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container flex flex-col items-start justify-center px-20">
+    <!-- Stars background -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Futuristic city silhouette -->
+    <div class="city"></div>
+    <div class="building" style="height: 220px; width: 60px; left: 100px;"></div>
+    <div class="building" style="height: 300px; width: 80px; left: 180px;"></div>
+    <div class="building" style="height: 250px; width: 70px; left: 280px;"></div>
+    <div class="building" style="height: 350px; width: 100px; left: 370px;"></div>
+    <div class="building" style="height: 200px; width: 90px; left: 490px;"></div>
+    <div class="building" style="height: 280px; width: 70px; left: 600px;"></div>
+    <div class="building" style="height: 330px; width: 85px; left: 690px;"></div>
+    <div class="building" style="height: 270px; width: 75px; left: 790px;"></div>
+    <div class="building" style="height: 310px; width: 90px; left: 880px;"></div>
+
+    <!-- Windows on buildings -->
+    <div class="window" style="width: 10px; height: 15px; left: 115px; bottom: 80px;"></div>
+    <div class="window" style="width: 10px; height: 15px; left: 115px; bottom: 120px;"></div>
+    <div class="window" style="width: 15px; height: 20px; left: 205px; bottom: 100px;"></div>
+    <div class="window" style="width: 15px; height: 20px; left: 205px; bottom: 150px;"></div>
+    <div class="window" style="width: 15px; height: 20px; left: 205px; bottom: 200px;"></div>
+    <div class="window" style="width: 12px; height: 18px; left: 305px; bottom: 90px;"></div>
+    <div class="window" style="width: 12px; height: 18px; left: 305px; bottom: 140px;"></div>
+    <div class="window" style="width: 18px; height: 25px; left: 405px; bottom: 120px;"></div>
+    <div class="window" style="width: 18px; height: 25px; left: 405px; bottom: 190px;"></div>
+    <div class="window" style="width: 18px; height: 25px; left: 405px; bottom: 260px;"></div>
+
+    <!-- Title and content -->
+    <div class="title-container mt-20 mb-4">
+      <h1 class="text-7xl font-bold glow mb-2">クロノスの子供たち</h1>
+      <p class="subtitle text-2xl mb-8">〜時空と記憶をめぐるSFヒューマンドラマ〜</p>
+
+      <div class="mt-16">
+        <p class="text-3xl mb-10">企画提案プレゼンテーション</p>
+
+        <div class="mt-4 text-xl">
+          <p class="mb-3"><span class="gold-accent font-bold">【ジャンル】</span>SFヒューマンドラマ</p>
+          <p class="mb-3"><span class="gold-accent font-bold">【コンセプト】</span>クローン技術と"アイデンティティ"の哲学的問い</p>
+          <p><span class="gold-accent font-bold">【ビジュアル】</span>手塚治虫風・未来都市</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Character illustration (representing Sora) -->
+    <div class="character">
+      <svg width="250" height="500" viewBox="0 0 250 500">
+        <path
+          d="M125,50 C160,50 190,80 190,120 C190,150 170,175 140,185 C140,185 150,195 155,210 C160,225 160,240 160,240 L90,240 C90,240 90,225 95,210 C100,195 110,185 110,185 C80,175 60,150 60,120 C60,80 90,50 125,50 Z"
+          fill="#FFFFFF" />
+        <circle cx="100" cy="110" r="15" fill="#000000" />
+        <circle cx="150" cy="110" r="15" fill="#000000" />
+        <circle cx="98" cy="108" r="5" fill="#FFFFFF" />
+        <circle cx="148" cy="108" r="5" fill="#FFFFFF" />
+        <path d="M125,140 C115,140 105,135 100,125 C110,130 140,130 150,125 C145,135 135,140 125,140 Z"
+          fill="#000000" />
+        <path
+          d="M70,85 C85,75 100,70 125,70 C150,70 165,75 180,85 C175,70 165,60 155,55 C175,45 175,30 165,20 C155,10 140,15 125,25 C110,15 95,10 85,20 C75,30 75,45 95,55 C85,60 75,70 70,85 Z"
+          fill="#000000" />
+        <rect x="90" y="240" width="70" height="120" fill="#000000" />
+        <rect x="90" y="360" width="30" height="100" fill="#000000" />
+        <rect x="130" y="360" width="30" height="100" fill="#000000" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    // Create stars in the background
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 3;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random() * 0.8 + 0.2;
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+
+</html>
