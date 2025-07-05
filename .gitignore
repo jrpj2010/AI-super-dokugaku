@@ -91,6 +91,15 @@ vibe-coding/
 vibecoding-site/
 # 昭和明治スライド/ (temporarily commented for slide creation)
 中小企業向け営業改革書籍作成プロジェクト/
+
+# SNS管理関連（個人データ）
+sato_managed_contents/SNS管理/
+sato_managed_contents/archives/
+sato_managed_contents/temp_html/
+
+# 大量ファイルを含むフォルダ
+sato_managed_contents/昭和明治スライド/
+sato_managed_contents/前田鎌利プレゼン書籍/
 # SpecStory explanation file
 .specstory/.what-is-this.md
 
@@ -109,6 +118,9 @@ backup/
 # Docker ignore files
 .dockerignore
 .gcloudignore
+
+# External repositories
+markitdown/
 
 # Test results and reports
 **/playwright-report/
