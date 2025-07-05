@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#FFFFFF"/>
-  <text x="640" y="300" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="150" font-weight="900" fill="#d90000">今日から</text>
-  <text x="640" y="500" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="150" font-weight="900" fill="#005bac">始めよう</text>
-  <circle cx="640" cy="600" r="15" fill="#000000"/>
-</svg>

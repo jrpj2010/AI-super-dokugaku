@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#FFFFFF"/>
-  <path d="M 200,500 Q 400,400 600,300 Q 800,200 1000,100" stroke="#005bac" stroke-width="12" fill="none"/>
-  <text x="640" y="400" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="100" font-weight="900" fill="#000000">人は必ず</text>
-  <text x="640" y="550" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="120" font-weight="900" fill="#005bac">成長できる</text>
-</svg>

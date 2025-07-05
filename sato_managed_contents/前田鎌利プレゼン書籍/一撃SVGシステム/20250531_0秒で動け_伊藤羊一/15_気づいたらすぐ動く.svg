@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#000000"/>
-  <text x="640" y="250" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="80" font-weight="900" fill="#FFFFFF">気づいたら</text>
-  <text x="640" y="450" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="200" font-weight="900" fill="#d90000">すぐ動く</text>
-  <path d="M 300,500 L 980,500 L 950,480 M 980,500 L 950,520" stroke="#d90000" stroke-width="12" fill="none"/>
-</svg>

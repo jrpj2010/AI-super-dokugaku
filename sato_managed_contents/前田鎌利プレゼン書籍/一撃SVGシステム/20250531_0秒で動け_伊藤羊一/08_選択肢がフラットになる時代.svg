@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#FFFFFF"/>
-  <rect x="200" y="300" width="150" height="150" fill="#005bac"/>
-  <rect x="400" y="300" width="150" height="150" fill="#005bac"/>
-  <rect x="600" y="300" width="150" height="150" fill="#005bac"/>
-  <rect x="800" y="300" width="150" height="150" fill="#005bac"/>
-  <text x="640" y="200" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="80" font-weight="900" fill="#000000">選択肢がフラット</text>
-  <text x="640" y="550" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="60" font-weight="bold" fill="#000000">すべてが平等</text>
-</svg>
