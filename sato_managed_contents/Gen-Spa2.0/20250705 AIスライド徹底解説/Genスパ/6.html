@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML型の導入効果と活用例</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .side-accent {
+      background-color: #006699;
+      width: 6px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #00447c;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 280px;
+      width: 100%;
+    }
+
+    .stat-card {
+      border-left: 4px solid #006699;
+      background-color: #f8f9fa;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #006699;
+    }
+
+    .case-study-card {
+      border-top: 3px solid #006699;
+      background-color: white;
+    }
+
+    .footer {
+      color: #666666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container bg-white flex">
+    <!-- Left Column - Title and Description -->
+    <div class="side-accent"></div>
+    <div class="w-2/5 p-10 flex flex-col">
+      <h2 class="section-title mb-6">HTML型の導入効果と活用例</h2>
+      <p class="text-lg mb-6">HTML型AIスライド生成ツールの導入により、業種別に異なる高い効率化効果が確認されています。</p>
+      <p class="mb-4">主な導入効果:</p>
+      <ul class="list-disc pl-6 space-y-3 text-gray-700">
+        <li>資料作成時間の<span class="font-bold text-blue-700">平均65%削減</span>（業種により40%～90%）</li>
+        <li>デザイン品質の向上と<span class="font-bold">社内ブランド統一性の確保</span></li>
+        <li>情報収集から構成、スライド化までのワンストップ完結</li>
+        <li>専門知識のない社員でも<span class="font-bold">高品質な資料作成が可能に</span></li>
+      </ul>
+      <div class="mt-auto">
+        <div class="stat-card p-4 mt-6">
+          <p class="text-sm text-gray-600">ROI (投資対効果)</p>
+          <p class="stat-number">約4.2倍</p>
+          <p class="text-sm mt-1">導入1年以内の平均値</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Charts and Data -->
+    <div class="w-3/5 bg-gray-50 p-10 flex flex-col">
+      <!-- Industry Time Saving Chart -->
+      <div class="mb-8">
+        <h3 class="font-bold text-lg mb-2">業種別の資料作成時間削減率</h3>
+        <div class="chart-container mb-2">
+          <canvas id="timeSavingChart"></canvas>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">出典: GenSpark・SkyWorks利用企業1,250社の分析データ (2025年4月)</p>
+      </div>
+
+      <!-- Case Studies -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="case-study-card p-4 rounded shadow-sm">
+          <p class="text-sm font-bold text-blue-700">金融機関事例</p>
+          <p class="text-sm mt-1">週次マーケットレポートの作成が<span
+              class="font-bold">4時間→40分に</span>。情報の正確性も向上し、約25%の追加情報を含めながらも時間短縮を実現。</p>
+        </div>
+        <div class="case-study-card p-4 rounded shadow-sm">
+          <p class="text-sm font-bold text-blue-700">製造業事例</p>
+          <p class="text-sm mt-1">技術説明資料の多言語展開が<span
+              class="font-bold">1言語あたり3日→4時間に</span>。用語の一貫性も向上し、海外拠点とのナレッジ共有効率が2.8倍に。</p>
+        </div>
+        <div class="case-study-card p-4 rounded shadow-sm">
+          <p class="text-sm font-bold text-blue-700">教育機関事例</p>
+          <p class="text-sm mt-1">授業資料作成の効率化で教員の<span class="font-bold">資料準備時間が週10時間から3時間に</span>。授業準備の質向上と教員満足度62%改善。
+          </p>
+        </div>
+        <div class="case-study-card p-4 rounded shadow-sm">
+          <p class="text-sm font-bold text-blue-700">コンサル企業事例</p>
+          <p class="text-sm mt-1">クライアント提案資料の基礎作成が<span class="font-bold">2日→3時間に</span>。データの視覚化品質向上により、提案採用率が従来比15%向上。
+          </p>
+        </div>
+      </div>
+
+      <!-- Source Citation -->
+      <div class="mt-auto">
+        <p class="text-sm text-gray-500">※調査方法: 2024年10月-2025年3月までの実導入企業インタビューおよびログ分析</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('timeSavingChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['金融機関', '製造業', 'コンサルティング', '教育機関', '小売業', 'IT・テクノロジー', '医療・ヘルスケア'],
+          datasets: [{
+            label: '資料作成時間削減率 (%)',
+            data: [83, 72, 65, 70, 58, 90, 52],
+            backgroundColor: [
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)',
+              'rgba(0, 102, 153, 0.7)'
+            ],
+            borderColor: [
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)',
+              'rgba(0, 102, 153, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 100,
+              title: {
+                display: true,
+                text: '削減率 (%)'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

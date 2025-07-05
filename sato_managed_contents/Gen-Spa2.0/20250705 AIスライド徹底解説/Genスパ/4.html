@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIスライド生成の進化</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .side-accent {
+      background-color: #006699;
+      width: 6px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #00447c;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 240px;
+      width: 100%;
+    }
+
+    .timeline-container {
+      position: relative;
+      height: 120px;
+      margin: 20px 0;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #e5e7eb;
+      transform: translateY(-50%);
+    }
+
+    .timeline-point {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background-color: #006699;
+      border-radius: 50%;
+    }
+
+    .timeline-label {
+      position: absolute;
+      top: 100%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #555555;
+      margin-top: 8px;
+      text-align: center;
+      width: 100px;
+    }
+
+    .timeline-event {
+      position: absolute;
+      bottom: 100%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #006699;
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-align: center;
+      width: 120px;
+    }
+
+    .stat-card {
+      border-left: 4px solid #006699;
+      background-color: #f8f9fa;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #006699;
+    }
+
+    .footer {
+      color: #666666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container bg-white flex">
+    <!-- Left Column - Title and Description -->
+    <div class="side-accent"></div>
+    <div class="w-2/5 p-10 flex flex-col">
+      <h2 class="section-title mb-6">AIスライド生成の進化</h2>
+      <p class="text-lg mb-6">過去5年のAI技術発展がもたらしたスライド生成能力の飛躍的向上。</p>
+      <p class="mb-4">主な技術進化:</p>
+      <ul class="list-disc pl-6 space-y-3 text-gray-700">
+        <li>大規模言語モデル（LLM）による自然な文章生成</li>
+        <li>マルチモーダルAIによる画像認識・生成能力</li>
+        <li>レイアウト理解能力とデザイン最適化</li>
+        <li>データ可視化と図表自動生成の高度化</li>
+      </ul>
+      <div class="mt-auto">
+        <div class="stat-card p-4 mt-6">
+          <p class="text-sm text-gray-600">AI生成スライドの品質向上</p>
+          <p class="stat-number">3.5倍</p>
+          <p class="text-sm mt-1">2020年比 (Plus AI評価指標)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Timeline and Charts -->
+    <div class="w-3/5 bg-gray-50 p-10 flex flex-col">
+      <!-- AI Evolution Timeline -->
+      <div class="mb-8">
+        <h3 class="font-bold text-lg mb-6">AI技術とスライド生成の進化タイムライン</h3>
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+
+          <div class="timeline-point" style="left: 0%;"></div>
+          <div class="timeline-label" style="left: 0%;">2020</div>
+          <div class="timeline-event" style="left: 0%;">GPT-3登場</div>
+
+          <div class="timeline-point" style="left: 25%;"></div>
+          <div class="timeline-label" style="left: 25%;">2021</div>
+          <div class="timeline-event" style="left: 25%;">DALL-E発表</div>
+
+          <div class="timeline-point" style="left: 50%;"></div>
+          <div class="timeline-label" style="left: 50%;">2023</div>
+          <div class="timeline-event" style="left: 50%;">GPT-4/Claude</div>
+
+          <div class="timeline-point" style="left: 75%;"></div>
+          <div class="timeline-label" style="left: 75%;">2024</div>
+          <div class="timeline-event" style="left: 75%;">マルチモーダルAI</div>
+
+          <div class="timeline-point" style="left: 100%;"></div>
+          <div class="timeline-label" style="left: 100%;">2025</div>
+          <div class="timeline-event" style="left: 100%;">特化型AI</div>
+        </div>
+      </div>
+
+      <!-- Capability Comparison Chart -->
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-2">AIスライド生成能力の進化</h3>
+        <div class="chart-container">
+          <canvas id="capabilityChart"></canvas>
+        </div>
+        <p class="text-sm text-gray-500 mt-2">0-100スケール評価 (出典: AIスライド研究所 2025)</p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600">一枚あたりの生成時間</p>
+          <p class="text-2xl font-bold text-blue-700">3.2秒</p>
+          <p class="text-xs">2020年比 85%短縮</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600">デザイン精度</p>
+          <p class="text-2xl font-bold text-blue-700">92%</p>
+          <p class="text-xs">プロデザイナー評価</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('capabilityChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['コンテンツ品質', 'デザイン洗練度', 'レイアウト最適化', '図表生成', 'データ分析', '画像選定'],
+          datasets: [{
+            label: '2020年',
+            data: [30, 20, 25, 15, 10, 20],
+            borderColor: '#cccccc',
+            backgroundColor: 'rgba(204, 204, 204, 0.2)',
+            borderWidth: 2,
+            pointBackgroundColor: '#cccccc'
+          }, {
+            label: '2025年',
+            data: [85, 90, 80, 75, 65, 90],
+            borderColor: '#006699',
+            backgroundColor: 'rgba(0, 102, 153, 0.2)',
+            borderWidth: 2,
+            pointBackgroundColor: '#006699'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                display: false
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

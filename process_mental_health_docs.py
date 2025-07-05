@@ -17,7 +17,7 @@ def classify_and_split_files():
     }
 
     source_dir = "sato_managed_contents/メンタル辞書"
-    original_files = [f for f in os.listdir(source_dir) if f.startswith('fix') and f.endswith('.md')]
+ふぁ    original_files = [f for f in os.listdir(source_dir) if f.startswith('fix') and f.endswith('.md')]
 
     # 出力ファイル用の準備
     output_files = {name: open(os.path.join(source_dir, f"{name}.md"), "w", encoding="utf-8") for name in genres.keys()}
