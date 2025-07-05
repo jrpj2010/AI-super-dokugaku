@@ -1,0 +1,335 @@
+/* Gen-Spa v2.0: AI Slide Generator Stylesheet */
+/* This file is auto-generated based on the analysis of 12 sample slides. */
+
+/* --- 1. BASE & TYPOGRAPHY --- */
+
+body {
+  /* Use Noto Sans JP as the primary font for readability. */
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Base font for code blocks, requires 'Source Code Pro' from Google Fonts. */
+.code-font {
+  font-family: 'Source Code Pro', monospace;
+}
+
+
+/* --- 2. LAYOUT & STRUCTURE --- */
+
+/* The main container for a slide, fixed to a 1280x720 aspect ratio. */
+.slide-container {
+  width: 1280px;
+  min-height: 720px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* A decorative accent bar, typically used on title slides. */
+.accent-bar {
+  background-color: #006699;
+  height: 8px;
+  width: 100px;
+}
+
+/* A vertical accent bar for 2-column layouts. */
+.side-accent {
+  background-color: #006699;
+  width: 6px;
+}
+
+/* A generic container for Chart.js graphs. Height should be set inline in the HTML for responsiveness. */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* A generic footer style. */
+.footer {
+  color: #666666;
+  font-size: 14px;
+}
+
+/* --- 3. TYPOGRAPHY & TEXT STYLES --- */
+
+/* Main title style, used on the cover slide. */
+.title {
+  font-size: 46px;
+  line-height: 1.2;
+  color: #00447c;
+  font-weight: 700;
+}
+
+/* Subtitle style, used on the cover slide. */
+.subtitle {
+  font-size: 24px;
+  color: #555555;
+  font-weight: 400;
+}
+
+/* Section title for content slides. */
+.section-title {
+  font-size: 36px;
+  color: #00447c;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Highlighted text within a paragraph. */
+.highlight-text {
+  color: #006699;
+  font-weight: 600;
+}
+
+
+/* --- 4. CARD COMPONENTS --- */
+
+/* Base style for statistic cards. */
+.stat-card {
+  border-left: 4px solid #006699;
+  background-color: #f8f9fa;
+}
+
+/* Style for the number inside a stat-card. */
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #006699;
+}
+
+/* A larger version for title slides. */
+.stat-number-lg {
+  font-size: 38px;
+  font-weight: 700;
+  color: #006699;
+}
+
+
+/* Card for case studies. */
+.case-study-card {
+  border-top: 3px solid #006699;
+  background-color: white;
+}
+
+/* Card for comparing tools/services. */
+.tool-card {
+  border-left: 4px solid #006699;
+  transition: transform 0.2s ease;
+}
+
+.tool-logo {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/* Card for key insights. */
+.insight-card {
+  border-left: 4px solid #006699;
+  background-color: #f8f9fa;
+}
+
+/* Card for future trends. */
+.trend-card {
+  border-left: 3px solid #006699;
+  transition: transform 0.2s ease;
+}
+
+/* Base card for showing different approaches/methods. */
+.approach-card {
+  border-top: 3px solid;
+  background-color: white;
+}
+
+/* Specific method cards with colored borders for comparison. */
+.method-card {
+  border-top: 3px solid;
+  background-color: white;
+}
+
+.method-card.html {
+  border-color: #4285F4;
+}
+
+.method-card.svg {
+  border-color: #34A853;
+}
+
+.method-card.marp {
+  border-color: #EA4335;
+}
+
+
+/* --- 5. LIST & TABLE COMPONENTS --- */
+
+/* Table of Contents Item */
+.toc-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.toc-number {
+  font-size: 22px;
+  font-weight: 700;
+  color: #006699;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #006699;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.toc-text {
+  font-size: 18px;
+  color: #333333;
+}
+
+/* Feature list item */
+.feature-item {
+  border-left: 3px solid #e5e7eb;
+  padding-left: 12px;
+  margin-bottom: 8px;
+}
+
+.feature-item.active {
+  border-left-color: #006699;
+}
+
+/* Comparison Table */
+.compare-table th {
+  background-color: #f0f4f8;
+  color: #00447c;
+  font-weight: 600;
+}
+
+.compare-table td,
+.compare-table th {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.compare-table tr:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+/* --- 6. VISUAL & GRAPHIC COMPONENTS --- */
+
+/* For displaying code examples. */
+.code-block {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 8px;
+  color: #333;
+  overflow: auto;
+  max-height: 120px;
+}
+
+.markdown-example {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 10px;
+  color: #333;
+  overflow: auto;
+  max-height: 160px;
+}
+
+/* Container for inline SVG examples. */
+.svg-example {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+}
+
+/* Timeline Components */
+.timeline-container {
+  position: relative;
+  height: 120px;
+  margin: 20px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #e5e7eb;
+  transform: translateY(-50%);
+}
+
+.timeline-point {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: #006699;
+  border-radius: 50%;
+}
+
+.timeline-label {
+  position: absolute;
+  top: 100%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #555555;
+  margin-top: 8px;
+  text-align: center;
+  width: 100px;
+}
+
+.timeline-event {
+  position: absolute;
+  bottom: 100%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #006699;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 120px;
+}
+
+/* Workflow Diagram Components */
+.workflow-step {
+  background-color: white;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Creates the arrow connector */
+.workflow-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  /* Adjust based on gap */
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  transform: translateY(-50%) rotate(45deg);
+  border-top: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  z-index: 1;
+}
+
+/* Small badge for stats or tags. */
+.stat-badge {
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+}
