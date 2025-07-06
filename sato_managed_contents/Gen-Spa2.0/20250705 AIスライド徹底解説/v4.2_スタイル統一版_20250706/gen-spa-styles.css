@@ -1,4 +1,4 @@
-/* Gen-Spa v4.0: AI Slide Generator Stylesheet (Vertical Scroll with Sidebar + Edit Features) */
+/* Gen-Spa v4.1: AI Slide Generator Stylesheet (Vertical Scroll with Sidebar + Style Consistency) */
 
 /* --- 1. BASE & TYPOGRAPHY --- */
 html {
@@ -86,54 +86,31 @@ body {
     color: #6b7280; /* text-gray-500 */
 }
 
-/* --- 7. v4.0 PRINT LAYOUT SUPPORT --- */
-
-/* Print wrapper for 16:9 slide + subtitle area = 4:3 total */
-.slide-content-wrapper {
-    /* This class is applied dynamically during print */
-}
-
-.subtitle-area {
-    /* Reserved for future .srt subtitle display */
-    min-height: 60px;
-    background-color: #f8f8f8;
-    border-top: 1px solid #e0e0e0;
-    padding: 10px 40px;
-    display: none; /* Hidden by default, shown when subtitles are enabled */
-}
-
-/* --- 8. EDITING MODE STYLES --- */
-
-/* Applied when content is being edited */
-.editable-element {
-    /* Styles are applied dynamically by JavaScript */
-}
-
-.editing-active {
-    /* Active editing state styles */
-}
-
 
 /* --- 3. TYPOGRAPHY & TEXT STYLES --- */
 
 .title {
-    font-size: 46px;
-    line-height: 1.2;
-    color: #00447c;
-    font-weight: 700;
+    font-size: 46px !important;
+    line-height: 1.2 !important;
+    color: #00447c !important;
+    font-weight: 700 !important;
+    margin-bottom: 32px !important;
 }
 
 .subtitle {
-    font-size: 24px;
-    color: #555555;
-    font-weight: 400;
+    font-size: 24px !important;
+    color: #555555 !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 20px !important;
 }
 
 .section-title {
-    font-size: 36px;
-    color: #00447c;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 36px !important;
+    color: #00447c !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 24px !important;
 }
 
 .highlight-text {
@@ -172,9 +149,49 @@ body {
 
 /* --- 5. CARD & LIST COMPONENTS (Existing styles remain largely the same) --- */
 
+/* テキスト要素の一貫性 */
+p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+    color: #333333 !important;
+}
+
+li {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 10px !important;
+    color: #333333 !important;
+}
+
+h3 {
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 16px !important;
+    color: #00447c !important;
+}
+
+/* セクション間の余白統一 */
+.slide-container {
+    margin-bottom: 48px !important;
+}
+
+/* グリッドの間隔統一 */
+.grid {
+    gap: 24px !important;
+}
+
+.flex > * + * {
+    margin-left: 24px;
+}
+
+/* --- 5. CARD & LIST COMPONENTS --- */
+
 .stat-card {
   border-left: 4px solid #006699;
   background-color: #f8f9fa;
+  padding: 24px !important;
 }
 
 .tool-card {
@@ -251,29 +268,4 @@ body {
   height: 16px;
   border-radius: 50%;
   border: 2px solid white;
-}
-
-/* --- 9. NOTIFICATION STYLES --- */
-
-.notification {
-    /* Notification popup styles */
-    max-width: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* --- 10. EXPORT CONTROLS --- */
-
-.edit-controls,
-.export-controls,
-.google-controls {
-    /* Control panel styles in navigation */
-}
-
-#google-progress {
-    /* Progress bar container for export */
-}
-
-#progress-bar {
-    /* Progress bar fill */
-    transition: width 0.3s ease;
 }

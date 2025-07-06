@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI超独学術 - 思考OSをアップデートし、人生のゲームルールを書き換える</title>
+    
+    <!-- 1. Tailwind CSS Framework -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- 2. Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <!-- 3. Google Fonts (Noto Sans JP is mandatory, Source Code Pro is for code) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- 4. Gen-Spa Custom Stylesheet -->
+    <link rel="stylesheet" href="./gen-spa-styles.css">
+
+    <!-- 5. Chart.js for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding-right: 280px; /* ナビゲーションバーの幅 + 余白 */
+        }
+        
+        .slide-wrapper {
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .slide-wrapper:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            background-color: #006699;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 102, 153, 0.3);
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .navigation-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            width: 260px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            border-left: 1px solid #e0e0e0;
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            border-radius: 0 5px 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            background-color: #f0f4f8;
+            border-left-color: #006699;
+            color: #006699;
+        }
+        
+        .nav-item.active {
+            background-color: #e6f2ff;
+            border-left-color: #006699;
+            color: #006699;
+            font-weight: bold;
+        }
+        
+        .slide-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Override Tailwind flex for 2-column layout */
+        .two-column-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+        
+        .left-column {
+            flex: 0 0 40%;
+        }
+        
+        .right-column {
+            flex: 0 0 55%;
+        }
+        
+        @media (max-width: 1024px) {
+            .two-column-layout {
+                flex-direction: column;
+            }
+            
+            .left-column,
+            .right-column {
+                flex: 1 1 100%;
+            }
+            
+            .content-area {
+                padding-right: 0;
+            }
+            
+            .navigation-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <!-- Content Area -->
+    <div class="content-area">
+
+        <!-- Slide 1: Title -->
+        <div id="slide1" class="slide-wrapper">
+            <div class="slide-number">1</div>
+            <div class="page-number">ページ 1 / 10</div>
+            <div class="slide-container">
+                <div class="accent-bar mb-6"></div>
+                <h1 class="title mb-4">AI超独学術</h1>
+                <p class="subtitle mb-8">思考OSをアップデートし、人生のゲームルールを書き換える。</p>
+                
+                <div class="text-center mb-8">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&q=80" 
+                         alt="AI Technology" 
+                         class="inline-block rounded-lg shadow-lg"
+                         style="max-width: 600px;">
+                </div>
+                
+                <div class="flex justify-between items-end">
+                    <div class="text-gray-600">
+                        <p class="footer">2025年1月5日</p>
+                        <p class="text-sm">TANREN株式会社 代表取締役社長 佐藤 勝彦</p>
+                    </div>
+                    
+                    <div class="flex gap-6">
+                        <div class="stat-box p-4 rounded">
+                            <p class="text-sm text-gray-600">想定読者層</p>
+                            <p class="stat-number-lg">30-50代</p>
+                            <p class="text-xs text-gray-500">ビジネスパーソン</p>
+                        </div>
+                        
+                        <div class="chart-container" style="height: 120px; width: 200px;">
+                            <canvas id="titleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Table of Contents -->
+        <div id="slide2" class="slide-wrapper">
+            <div class="slide-number">2</div>
+            <div class="page-number">ページ 2 / 10</div>
+            <div class="slide-container">
+                <div class="accent-bar mb-6"></div>
+                <h2 class="title mb-8">本日のアジェンダ</h2>
+                
+                <div class="flex gap-12">
+                    <div class="w-1/2">
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">1</div>
+                            <span class="toc-text">なぜ今、AI超独学術なのか</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">2</div>
+                            <span class="toc-text">本書のコンセプトと3つの柱</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">3</div>
+                            <span class="toc-text">想定読者とペルソナ</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">4</div>
+                            <span class="toc-text">第1部：超具体化の武器庫</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-1/2">
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">5</div>
+                            <span class="toc-text">第2部：物語で体験する変革</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">6</div>
+                            <span class="toc-text">第3部：実装プログラム</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">7</div>
+                            <span class="toc-text">本書の独自性と期待効果</span>
+                        </div>
+                        
+                        <div class="toc-item flex items-center">
+                            <div class="toc-number">8</div>
+                            <span class="toc-text">まとめと今後の展開</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Now? -->
+        <div id="slide3" class="slide-wrapper">
+            <div class="slide-number">3</div>
+            <div class="page-number">ページ 3 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">なぜ今、AI超独学術なのか</h2>
+                        
+                        <p class="text-lg mb-6">現代ビジネスパーソンが抱える<span class="highlight-text">3つの壁</span></p>
+                        
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>経験の壁</strong>
+                                    <p class="text-gray-600">長年の経験が「時代遅れ」と言われる恐怖</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>世代の壁</strong>
+                                    <p class="text-gray-600">データ重視の若手との価値観の断絶</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>変化の壁</strong>
+                                    <p class="text-gray-600">AIの重要性は分かるが、何から始めれば...</p>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="stat-card p-4 rounded">
+                            <p class="text-sm text-gray-600">AI活用に関する調査</p>
+                            <p class="stat-number">87%</p>
+                            <p class="text-sm">「AIは重要」と認識しながら実践できていない</p>
+                            <p class="text-xs text-gray-500 mt-2">(出典: 日経リサーチ, 2024)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-bold mb-4 text-blue-800">従来の独学 vs AI超独学術</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="border-l-4 border-gray-400 pl-4">
+                                    <h4 class="font-bold text-gray-700">従来の独学</h4>
+                                    <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                                        <li>• インプット中心</li>
+                                        <li>• 知識の蓄積が目的</li>
+                                        <li>• 個人完結型</li>
+                                        <li>• 時間がかかる</li>
+                                    </ul>
+                                </div>
+                                <div class="border-l-4 border-blue-600 pl-4">
+                                    <h4 class="font-bold text-blue-700">AI超独学術</h4>
+                                    <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                                        <li>• アウトプット起点</li>
+                                        <li>• 価値創造が目的</li>
+                                        <li>• AIとの共創型</li>
+                                        <li>• 即効性がある</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container bg-white p-6 rounded-lg shadow" style="height: 280px;">
+                            <canvas id="problemChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Concept -->
+        <div id="slide4" class="slide-wrapper">
+            <div class="slide-number">4</div>
+            <div class="page-number">ページ 4 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">本書のコンセプト</h2>
+                        
+                        <p class="text-lg mb-6">AI時代の思考OS<br><span class="highlight-text text-2xl">「超独学メソッド」</span></p>
+                        
+                        <p class="text-gray-700 mb-8">
+                            伊藤羊一氏の「1分で話せ」の<br>
+                            「結論・根拠・例えば」フレームワークを<br>
+                            AIの力で極限までブーストさせた<br>
+                            全く新しい思考の型
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="approach-card p-4 rounded border-blue-600">
+                                <h4 class="font-bold text-blue-700 mb-2">
+                                    <i class="fas fa-eye mr-2"></i>超具体化
+                                </h4>
+                                <p class="text-sm">AIに「神の目」を持たせる技術</p>
+                            </div>
+                            
+                            <div class="approach-card p-4 rounded border-green-600">
+                                <h4 class="font-bold text-green-700 mb-2">
+                                    <i class="fas fa-brain mr-2"></i>超抽象化
+                                </h4>
+                                <p class="text-sm">AIに「賢者の脳」を持たせる技術</p>
+                            </div>
+                            
+                            <div class="approach-card p-4 rounded border-red-600">
+                                <h4 class="font-bold text-red-700 mb-2">
+                                    <i class="fas fa-project-diagram mr-2"></i>超構造化
+                                </h4>
+                                <p class="text-sm">AIに「伝道師の口」を持たせる技術</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="bg-white p-6 rounded-lg shadow mb-6">
+                            <h3 class="text-xl font-bold mb-4">3つの柱の相乗効果</h3>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&q=80" 
+                                 alt="Data visualization" 
+                                 class="w-full rounded">
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="method-card html p-4 rounded text-center">
+                                <div class="text-3xl mb-2">📊</div>
+                                <h4 class="font-bold">第1部</h4>
+                                <p class="text-xs mt-1">即効性のある60の武器</p>
+                            </div>
+                            
+                            <div class="method-card svg p-4 rounded text-center">
+                                <div class="text-3xl mb-2">📖</div>
+                                <h4 class="font-bold">第2部</h4>
+                                <p class="text-xs mt-1">感情移入できる物語</p>
+                            </div>
+                            
+                            <div class="method-card marp p-4 rounded text-center">
+                                <div class="text-3xl mb-2">🚀</div>
+                                <h4 class="font-bold">第3部</h4>
+                                <p class="text-xs mt-1">実装ロードマップ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Persona -->
+        <div id="slide5" class="slide-wrapper">
+            <div class="slide-number">5</div>
+            <div class="page-number">ページ 5 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">想定読者ペルソナ</h2>
+                        
+                        <p class="text-lg mb-6">価値観の異なる<span class="highlight-text">2つのタイプ</span></p>
+                        
+                        <div class="stat-card p-4 rounded mb-4">
+                            <h4 class="font-bold text-blue-700 mb-2">タイプA：田中達也型</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• 47歳 営業部長</li>
+                                <li>• 経験と勘が武器</li>
+                                <li>• データ重視の若手に戸惑い</li>
+                                <li>• 「俺の時代は終わったのか...」</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded">
+                            <h4 class="font-bold text-green-700 mb-2">タイプB：阿部京子型</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• 22歳 新卒社員</li>
+                                <li>• データとロジックが全て</li>
+                                <li>• 正論が通じない組織に困惑</li>
+                                <li>• 「なぜ人は動いてくれない...」</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="case-study-card p-6 rounded bg-white shadow">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=200&q=80" 
+                                     alt="Business man" 
+                                     class="w-full rounded mb-4">
+                                <h4 class="font-bold mb-2">田中達也（47歳）</h4>
+                                <p class="text-sm text-gray-600">
+                                    「営業は足で稼ぐもの」が信条。
+                                    AIの重要性は分かるが、冷たい機械に
+                                    人の心は動かせないと思っている。
+                                </p>
+                            </div>
+                            
+                            <div class="case-study-card p-6 rounded bg-white shadow">
+                                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=200&q=80" 
+                                     alt="Business woman" 
+                                     class="w-full rounded mb-4">
+                                <h4 class="font-bold mb-2">阿部京子（22歳）</h4>
+                                <p class="text-sm text-gray-600">
+                                    AIネイティブ世代。完璧なデータで
+                                    提案するも「空気が読めない」と
+                                    陰で言われ、孤独を感じている。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card p-6 rounded">
+                            <h3 class="font-bold mb-3">共通する深層心理</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>✓ 根は真面目で、仕事に誠実でありたい</li>
+                                <li>✓ 「自分には特別な才能はない」という認識</li>
+                                <li>✓ 再現性のある方法論を求めている</li>
+                                <li>✓ <span class="highlight-text">人生このままで終わりたくない</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Part 1 Sample -->
+        <div id="slide6" class="slide-wrapper">
+            <div class="slide-number">6</div>
+            <div class="page-number">ページ 6 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">第1部：超具体化</h2>
+                        
+                        <p class="text-lg mb-6">明日から使える<br><span class="highlight-text">「60の武器庫」</span></p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold mb-3">見開き2ページ完結形式</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li>• 左ページ：ビジュアル（Before/After）</li>
+                                <li>• 右ページ：テキスト解説</li>
+                                <li>• 脳科学的に理解を促進</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded">
+                            <h4 class="font-bold mb-3">収録カテゴリー</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div>
+                                    <p class="font-semibold">個人編（20個）</p>
+                                    <ul class="text-xs text-gray-600">
+                                        <li>• 思考整理術</li>
+                                        <li>• ドキュメント作成</li>
+                                        <li>• スキルアップ</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">チーム編（20個）</p>
+                                    <ul class="text-xs text-gray-600">
+                                        <li>• コミュニケーション</li>
+                                        <li>• プロジェクト管理</li>
+                                        <li>• 人材育成</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold mb-4">Tip例：煮詰まった頭をリセットする「強制アイデア100本ノック」</h3>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-600 mb-2">Before</h4>
+                                    <div class="bg-gray-100 p-4 rounded text-center">
+                                        <i class="fas fa-user-slash text-6xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm text-gray-600">アイデアが出ない...</p>
+                                        <p class="text-xs text-gray-500">考えても考えても同じ発想</p>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-sm font-bold text-blue-600 mb-2">After</h4>
+                                    <div class="bg-blue-50 p-4 rounded text-center">
+                                        <i class="fas fa-lightbulb text-6xl text-blue-600 mb-2"></i>
+                                        <p class="text-sm text-blue-700 font-bold">100個のアイデア！</p>
+                                        <p class="text-xs text-blue-600">AIとの対話で発想が爆発</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 p-3 bg-gray-50 rounded">
+                                <p class="text-xs text-gray-600">
+                                    <strong>プロンプトの核心：</strong>
+                                    「○○について、とにかく100個アイデアを出して。質より量で、突飛なものも歓迎」
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-3 gap-3">
+                            <div class="tool-card p-3 rounded bg-white">
+                                <p class="text-xs font-bold">メール作成</p>
+                                <p class="text-xs text-gray-600">30分→3分に短縮</p>
+                            </div>
+                            <div class="tool-card p-3 rounded bg-white">
+                                <p class="text-xs font-bold">議事録作成</p>
+                                <p class="text-xs text-gray-600">音声メモから自動生成</p>
+                            </div>
+                            <div class="tool-card p-3 rounded bg-white">
+                                <p class="text-xs font-bold">プレゼン資料</p>
+                                <p class="text-xs text-gray-600">構成から自動作成</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Part 2 Story -->
+        <div id="slide7" class="slide-wrapper">
+            <div class="slide-number">7</div>
+            <div class="page-number">ページ 7 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">第2部：超抽象化</h2>
+                        
+                        <p class="text-lg mb-6">物語で体験する<br><span class="highlight-text">思考OSのアップデート</span></p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold mb-3">舞台設定</h4>
+                            <p class="text-sm text-gray-700 mb-2">
+                                広告代理店の営業部。<br>
+                                価値観の違う上司と部下が<br>
+                                AIを介して成長する物語。
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+                            <div class="timeline-point" style="left: 0%"></div>
+                            <div class="timeline-label" style="left: 0%">過去</div>
+                            <div class="timeline-event" style="left: 0%">すれ違い</div>
+                            
+                            <div class="timeline-point" style="left: 50%"></div>
+                            <div class="timeline-label" style="left: 50%">現在</div>
+                            <div class="timeline-event" style="left: 50%">共通言語</div>
+                            
+                            <div class="timeline-point" style="left: 100%"></div>
+                            <div class="timeline-label" style="left: 100%">未来</div>
+                            <div class="timeline-event" style="left: 100%">変革者へ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column space-y-4">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold mb-4">ストーリーハイライト</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-gray-400 pl-4">
+                                    <h4 class="font-bold text-gray-700">Scene 1：対立</h4>
+                                    <p class="text-sm text-gray-600">
+                                        「部長、その根拠となるデータはどこにありますか？」<br>
+                                        京子の冷静な問いに、達也は言葉を失う...
+                                    </p>
+                                </div>
+                                
+                                <div class="border-l-4 border-blue-600 pl-4">
+                                    <h4 class="font-bold text-blue-700">Scene 2：転機</h4>
+                                    <p class="text-sm text-gray-600">
+                                        造園会社からの無理難題。初めてAIに向き合った達也は<br>
+                                        自分の経験が「武器」に変わることを知る。
+                                    </p>
+                                </div>
+                                
+                                <div class="border-l-4 border-green-600 pl-4">
+                                    <h4 class="font-bold text-green-700">Scene 3：飛躍</h4>
+                                    <p class="text-sm text-gray-600">
+                                        二人が開発した「VibeCoding」システムが社長賞を獲得。<br>
+                                        会社に変革をもたらす存在へと成長する。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card p-4 rounded">
+                            <p class="text-sm font-bold mb-2">読者への効果</p>
+                            <p class="text-xs">
+                                自分と同じ悩みを抱えるキャラクターに感情移入しながら、
+                                「本質を見抜く力」を追体験できる構成
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Implementation -->
+        <div id="slide8" class="slide-wrapper">
+            <div class="slide-number">8</div>
+            <div class="page-number">ページ 8 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">第3部：超構造化</h2>
+                        
+                        <p class="text-lg mb-6">「作る側」になるための<br><span class="highlight-text">実装プログラム</span></p>
+                        
+                        <div class="space-y-4">
+                            <div class="feature-item active">
+                                <h4 class="font-bold">Level 1：個人が変わる</h4>
+                                <p class="text-sm text-gray-600">7日間集中プログラム</p>
+                            </div>
+                            
+                            <div class="feature-item active">
+                                <h4 class="font-bold">Level 2：チームを動かす</h4>
+                                <p class="text-sm text-gray-600">4週間変革ロードマップ</p>
+                            </div>
+                            
+                            <div class="feature-item active">
+                                <h4 class="font-bold">Level 3：社会に貢献する</h4>
+                                <p class="text-sm text-gray-600">AIエバンジェリストへの道</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded mt-6">
+                            <p class="text-sm text-gray-600">影響力の拡大</p>
+                            <p class="stat-number">1→10→100</p>
+                            <p class="text-sm">個人からチーム、そして組織へ</p>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="bg-white p-6 rounded-lg shadow mb-4">
+                            <h3 class="font-bold mb-4">7日間プログラムの構成</h3>
+                            <div class="grid grid-cols-7 gap-2">
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day1</p>
+                                    <p class="text-xs">思考の<br>棚卸し</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day2</p>
+                                    <p class="text-xs">超具体化<br>実践</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day3</p>
+                                    <p class="text-xs">インプット<br>革命</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day4</p>
+                                    <p class="text-xs">超抽象化<br>体験</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day5</p>
+                                    <p class="text-xs">超構造化<br>練習</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day6</p>
+                                    <p class="text-xs">発信の<br>習慣化</p>
+                                </div>
+                                <div class="workflow-step text-center">
+                                    <p class="text-xs font-bold">Day7</p>
+                                    <p class="text-xs">自分<br>マニュアル</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container bg-white p-6 rounded-lg shadow" style="height: 240px;">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Comparison Summary -->
+        <div id="slide9" class="slide-wrapper">
+            <div class="slide-number">9</div>
+            <div class="page-number">ページ 9 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">本書の独自性</h2>
+                        
+                        <p class="text-lg mb-6">隠された真のメソッド<br><span class="highlight-text">「思考の3D-XYZメソッド」</span></p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center">
+                                <span class="stat-badge bg-blue-100 text-blue-700 mr-3">X軸</span>
+                                <span class="text-sm">超具体化・超抽象化・超構造化</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="stat-badge bg-green-100 text-green-700 mr-3">Y軸</span>
+                                <span class="text-sm">過去・現在・未来のストーリー</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="stat-badge bg-red-100 text-red-700 mr-3">Z軸</span>
+                                <span class="text-sm">初級・中級・上級のレベル</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card p-4 rounded">
+                            <p class="text-sm">
+                                読者は本書を読み進めるだけで、
+                                無意識のうちに<strong>多角的・重層的に
+                                物事を捉える思考OS</strong>を
+                                インストールすることになる
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column space-y-4">
+                        <div class="chart-container bg-white p-6 rounded-lg shadow" style="height: 280px;">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                        
+                        <table class="compare-table w-full bg-white rounded-lg shadow overflow-hidden">
+                            <thead>
+                                <tr>
+                                    <th class="text-left p-3">項目</th>
+                                    <th class="text-center p-3">他のAI本</th>
+                                    <th class="text-center p-3">AI超独学術</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-3">アプローチ</td>
+                                    <td class="text-center p-3">テクニック集</td>
+                                    <td class="text-center p-3 font-bold text-blue-600">思考OS変革</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">構成</td>
+                                    <td class="text-center p-3">単一構造</td>
+                                    <td class="text-center p-3 font-bold text-blue-600">3D立体構造</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">効果</td>
+                                    <td class="text-center p-3">短期的</td>
+                                    <td class="text-center p-3 font-bold text-blue-600">永続的変化</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div id="slide10" class="slide-wrapper">
+            <div class="slide-number">10</div>
+            <div class="page-number">ページ 10 / 10</div>
+            <div class="slide-container">
+                <div class="side-accent"></div>
+                
+                <div class="two-column-layout">
+                    <div class="left-column">
+                        <h2 class="section-title mb-6">まとめ</h2>
+                        
+                        <p class="text-lg mb-6">『AI超独学術』は<br><span class="highlight-text">マインドセット変革の書</span></p>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="approach-card p-4 rounded border-blue-600">
+                                <h4 class="font-bold mb-2">単なるAI活用本ではない</h4>
+                                <p class="text-sm">読者の劣等感を最強の武器に変える</p>
+                            </div>
+                            
+                            <div class="approach-card p-4 rounded border-green-600">
+                                <h4 class="font-bold mb-2">三位一体の提供価値</h4>
+                                <p class="text-sm">具体的な武器×共感できる物語×実践的道しるべ</p>
+                            </div>
+                            
+                            <div class="approach-card p-4 rounded border-red-600">
+                                <h4 class="font-bold mb-2">人生のシナリオを書き換える</h4>
+                                <p class="text-sm">AIという革命的な力を触媒として</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded">
+                            <p class="text-sm text-gray-600">期待される効果</p>
+                            <p class="stat-number">必読書</p>
+                            <p class="text-sm">変化の時代を生き抜く全てのビジネスパーソンにとって</p>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="bg-white p-8 rounded-lg shadow text-center">
+                            <h3 class="text-2xl font-bold mb-4">次のステップ</h3>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div class="p-4 bg-blue-50 rounded">
+                                    <i class="fas fa-calendar-check text-3xl text-blue-600 mb-2"></i>
+                                    <p class="font-bold">出版スケジュール確定</p>
+                                    <p class="text-sm text-gray-600">2025年春〜夏予定</p>
+                                </div>
+                                
+                                <div class="p-4 bg-green-50 rounded">
+                                    <i class="fas fa-bullhorn text-3xl text-green-600 mb-2"></i>
+                                    <p class="font-bold">プロモーション戦略立案</p>
+                                    <p class="text-sm text-gray-600">先行予約キャンペーン準備</p>
+                                </div>
+                                
+                                <div class="p-4 bg-red-50 rounded">
+                                    <i class="fas fa-users text-3xl text-red-600 mb-2"></i>
+                                    <p class="font-bold">コミュニティ形成</p>
+                                    <p class="text-sm text-gray-600">読者との継続的な関係構築</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-lg font-bold highlight-text">
+                                さあ、世界をひっくり返しに行こう。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- End Content Area -->
+    
+    <!-- Navigation Sidebar -->
+    <div class="navigation-sidebar">
+        <h3 class="font-bold text-lg mb-4 text-gray-800">スライド一覧</h3>
+        <nav>
+            <a href="#slide1" class="nav-item">1. タイトル</a>
+            <a href="#slide2" class="nav-item">2. 目次</a>
+            <a href="#slide3" class="nav-item">3. なぜ今、AI超独学術なのか</a>
+            <a href="#slide4" class="nav-item">4. 本書のコンセプト</a>
+            <a href="#slide5" class="nav-item">5. 想定読者ペルソナ</a>
+            <a href="#slide6" class="nav-item">6. 第1部：超具体化</a>
+            <a href="#slide7" class="nav-item">7. 第2部：超抽象化</a>
+            <a href="#slide8" class="nav-item">8. 第3部：超構造化</a>
+            <a href="#slide9" class="nav-item">9. 本書の独自性</a>
+            <a href="#slide10" class="nav-item">10. まとめ</a>
+        </nav>
+    </div>
+    
+</div><!-- End Main Container -->
+
+<script>
+// Title Chart
+const titleCtx = document.getElementById('titleChart').getContext('2d');
+new Chart(titleCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['AI活用済み', '未活用'],
+        datasets: [{
+            data: [13, 87],
+            backgroundColor: ['#006699', '#e5e7eb']
+        }]
+    },
+    options: {
+        plugins: {
+            legend: { display: false }
+        }
+    }
+});
+
+// Problem Chart
+const problemCtx = document.getElementById('problemChart').getContext('2d');
+new Chart(problemCtx, {
+    type: 'bar',
+    data: {
+        labels: ['経験の壁', '世代の壁', '変化の壁'],
+        datasets: [{
+            label: '悩みを抱える割合(%)',
+            data: [78, 82, 87],
+            backgroundColor: '#006699'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+// Progress Chart
+const progressCtx = document.getElementById('progressChart').getContext('2d');
+new Chart(progressCtx, {
+    type: 'line',
+    data: {
+        labels: ['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7'],
+        datasets: [{
+            label: 'スキル習得度',
+            data: [10, 25, 40, 55, 70, 85, 100],
+            borderColor: '#006699',
+            backgroundColor: 'rgba(0, 102, 153, 0.1)',
+            tension: 0.4
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+// Comparison Chart (Radar)
+const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+new Chart(comparisonCtx, {
+    type: 'radar',
+    data: {
+        labels: ['即効性', '体系性', '実践性', '継続性', '変革力'],
+        datasets: [{
+            label: '他のAI本',
+            data: [80, 40, 60, 30, 40],
+            borderColor: '#999999',
+            backgroundColor: 'rgba(153, 153, 153, 0.2)'
+        }, {
+            label: 'AI超独学術',
+            data: [90, 95, 95, 90, 100],
+            borderColor: '#006699',
+            backgroundColor: 'rgba(0, 102, 153, 0.2)'
+        }]
+    },
+    options: {
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+// Navigation highlight on scroll
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.slide-wrapper');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#' + current) {
+            item.classList.add('active');
+        }
+    });
+});
+</script>
+
+</body>
+</html>

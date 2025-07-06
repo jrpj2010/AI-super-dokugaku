@@ -1,4 +1,4 @@
-/* Gen-Spa v4.0: AI Slide Generator Stylesheet (Vertical Scroll with Sidebar + Edit Features) */
+/* Gen-Spa v3.0: AI Slide Generator Stylesheet (Vertical Scroll with Sidebar) */
 
 /* --- 1. BASE & TYPOGRAPHY --- */
 html {
@@ -84,33 +84,6 @@ body {
 .page-number {
     font-size: 14px;
     color: #6b7280; /* text-gray-500 */
-}
-
-/* --- 7. v4.0 PRINT LAYOUT SUPPORT --- */
-
-/* Print wrapper for 16:9 slide + subtitle area = 4:3 total */
-.slide-content-wrapper {
-    /* This class is applied dynamically during print */
-}
-
-.subtitle-area {
-    /* Reserved for future .srt subtitle display */
-    min-height: 60px;
-    background-color: #f8f8f8;
-    border-top: 1px solid #e0e0e0;
-    padding: 10px 40px;
-    display: none; /* Hidden by default, shown when subtitles are enabled */
-}
-
-/* --- 8. EDITING MODE STYLES --- */
-
-/* Applied when content is being edited */
-.editable-element {
-    /* Styles are applied dynamically by JavaScript */
-}
-
-.editing-active {
-    /* Active editing state styles */
 }
 
 
@@ -251,29 +224,4 @@ body {
   height: 16px;
   border-radius: 50%;
   border: 2px solid white;
-}
-
-/* --- 9. NOTIFICATION STYLES --- */
-
-.notification {
-    /* Notification popup styles */
-    max-width: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* --- 10. EXPORT CONTROLS --- */
-
-.edit-controls,
-.export-controls,
-.google-controls {
-    /* Control panel styles in navigation */
-}
-
-#google-progress {
-    /* Progress bar container for export */
-}
-
-#progress-bar {
-    /* Progress bar fill */
-    transition: width 0.3s ease;
 }

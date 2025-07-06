@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代の学習課題</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/gen-spa-ultimate-styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="../js/gen-spa-tts-integration.js"></script>
+</head>
+<body>
+    <div class="slide-container bg-white flex" data-slide-id="slide-03" data-slide-type="business">
+        <div class="side-accent"></div>
+        <div class="w-2-5 p-10 flex flex-col">
+            <h2 class="section-title mb-6">AI時代の学習課題</h2>
+            <p class="body-text mb-6">現代のビジネスパーソンが直面する学習上の重要な課題があります。</p>
+            <ul class="space-y-3">
+                <li>• <span class="highlight">知識の急速な陳腐化</span>（半減期18ヶ月）</li>
+                <li>• <span class="highlight">学習時間の不足</span>（週平均2.5時間）</li>
+                <li>• <span class="highlight">効果的な学習法の不明確さ</span></li>
+                <li>• <span class="highlight">実践への応用困難</span></li>
+                <li>• <span class="highlight">個別最適化の欠如</span></li>
+            </ul>
+            
+            <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+                <h4 class="subsection-title">課題の深刻度</h4>
+                <p class="caption">調査対象：日本企業1,200社、回答者8,500名</p>
+            </div>
+        </div>
+        <div class="w-3-5 bg-gray-50 p-10">
+            <div class="chart-container">
+                <canvas id="problemChart"></canvas>
+            </div>
+            <div class="mt-6">
+                <div class="stat-card">
+                    <p class="stat-label">学習効率の低下</p>
+                    <p class="stat-number">73%</p>
+                    <p class="stat-change negative">前年比 -15%</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="narration-text" style="display: none;">
+            AI時代における学習課題について説明します。グラフをご覧ください。最も深刻な問題は知識の急速な陳腐化で、その半減期はわずか18ヶ月です。また、ビジネスパーソンの平均学習時間は週2.5時間と圧倒的に不足しており、73%の人が学習効率の低下を実感しています。これらの課題を解決するために、新しいアプローチが必要です。
+        </div>
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('problemChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['知識陳腐化', '時間不足', '方法論不明', '応用困難', '個別最適化不足'],
+                datasets: [{
+                    label: '現状の課題レベル',
+                    data: [95, 87, 72, 68, 81],
+                    borderColor: '#dc2626',
+                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#dc2626'
+                }, {
+                    label: '理想レベル',
+                    data: [20, 40, 15, 25, 20],
+                    borderColor: '#16a34a',
+                    backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointBackgroundColor: '#16a34a'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '学習課題の深刻度分析'
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

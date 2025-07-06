@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen-Spa Ultimate v5.0 - スライドテンプレート集</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/gen-spa-ultimate-styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+        .template-wrapper {
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .template-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00447c;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .slide-frame {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .code-preview {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .narration-box {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 16px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        .srt-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto max-w-6xl">
+        <h1 class="text-4xl font-bold text-center mb-10 text-gray-800">Gen-Spa Ultimate v5.0 - スライドテンプレート集</h1>
+        
+        <!-- テンプレート1: タイトルスライド -->
+        <div class="template-wrapper">
+            <h2 class="template-title">1. タイトルスライド</h2>
+            <div class="slide-frame">
+                <div class="slide-container bg-white p-16 flex flex-col justify-between">
+                    <div class="mb-12">
+                        <div class="accent-bar mb-6"></div>
+                        <h1 class="title mb-6">AI超独学術：2035年の未来を創る</h1>
+                        <p class="subtitle mt-4">最先端AI活用による自己成長と社会変革の実践ガイド</p>
+                    </div>
+                    <div class="flex items-center justify-center mb-6">
+                        <img src="https://via.placeholder.com/600x300/006699/ffffff?text=AI+Evolution" alt="AI Evolution" class="rounded-lg shadow-lg">
+                    </div>
+                    <div class="footer flex justify-between">
+                        <p>2025年1月5日</p>
+                        <p>TANREN株式会社 CEO 佐藤勝彦</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="narration-box">
+                <strong>🎙️ ナレーション（話者: Charon、感情: calm）</strong><br>
+                皆さん、こんにちは。TANREN株式会社の佐藤です。本日は、AI超独学術と題して、2035年の未来を創るための最先端AI活用法についてお話しします。
+            </div>
+            
+            <div class="srt-box">
+                <strong>📝 SRTファイル（1.srt）</strong><br>
+                1<br>
+                00:00:00,000 --> 00:00:05,500<br>
+                Charon: 皆さん、こんにちは。TANREN株式会社の佐藤です。<br><br>
+                2<br>
+                00:00:05,600 --> 00:00:11,000<br>
+                本日は、AI超独学術と題して、2035年の未来を創るための最先端AI活用法についてお話しします。
+            </div>
+        </div>
+        
+        <!-- テンプレート2: 目次スライド -->
+        <div class="template-wrapper">
+            <h2 class="template-title">2. 目次スライド</h2>
+            <div class="slide-frame">
+                <div class="slide-container bg-white p-16 flex flex-col">
+                    <div class="mb-10">
+                        <div class="accent-bar mb-6"></div>
+                        <h1 class="title">目次</h1>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="toc-item">
+                                <div class="toc-number">1</div>
+                                <div class="toc-text">AI時代の学習革命</div>
+                            </div>
+                            <div class="toc-item">
+                                <div class="toc-number">2</div>
+                                <div class="toc-text">実践的AI活用術</div>
+                            </div>
+                            <div class="toc-item">
+                                <div class="toc-number">3</div>
+                                <div class="toc-text">未来予測と戦略</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="toc-item">
+                                <div class="toc-number">4</div>
+                                <div class="toc-text">組織変革の実例</div>
+                            </div>
+                            <div class="toc-item">
+                                <div class="toc-number">5</div>
+                                <div class="toc-text">成功事例の分析</div>
+                            </div>
+                            <div class="toc-item">
+                                <div class="toc-number">6</div>
+                                <div class="toc-text">次のステップ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="narration-box">
+                <strong>🎙️ ナレーション（話者: Laomedeia、感情: neutral）</strong><br>
+                本日のアジェンダです。まずAI時代の学習革命について解説し、実践的なAI活用術をご紹介します。その後、未来予測と戦略、組織変革の実例、成功事例を通じて、皆様の次のステップをサポートします。
+            </div>
+        </div>
+        
+        <!-- テンプレート3: 2カラムコンテンツ -->
+        <div class="template-wrapper">
+            <h2 class="template-title">3. 2カラムコンテンツ</h2>
+            <div class="slide-frame">
+                <div class="slide-container bg-white flex">
+                    <div class="side-accent"></div>
+                    <div class="w-2-5 p-10 flex flex-col">
+                        <h2 class="section-title mb-6">AI時代の学習革命</h2>
+                        <p class="body-text mb-6">従来の学習方法は、もはや時代遅れです。AIを活用した新しい学習アプローチが必要です。</p>
+                        <ul class="space-y-3">
+                            <li>• パーソナライズド学習</li>
+                            <li>• リアルタイム分析</li>
+                            <li>• 継続的な最適化</li>
+                        </ul>
+                    </div>
+                    <div class="w-3-5 bg-gray-50 p-10">
+                        <div class="chart-container">
+                            <canvas id="learningChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="narration-box">
+                <strong>🎙️ ナレーション（話者: Puck、感情: excited）</strong><br>
+                AI時代の学習革命についてご説明します。グラフをご覧ください。AIを活用した学習は、従来の方法と比べて3倍以上の効率化を実現しています。
+            </div>
+        </div>
+        
+        <!-- テンプレート4: データビジュアライゼーション -->
+        <div class="template-wrapper">
+            <h2 class="template-title">4. データビジュアライゼーション</h2>
+            <div class="slide-frame">
+                <div class="slide-container bg-white p-16">
+                    <h2 class="section-title mb-8 text-center">AI導入による生産性向上</h2>
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="stat-card">
+                            <p class="stat-label">作業効率</p>
+                            <p class="stat-number">327%</p>
+                            <p class="stat-change positive">+227% 向上</p>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-label">コスト削減</p>
+                            <p class="stat-number">42%</p>
+                            <p class="stat-change positive">年間削減率</p>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-label">品質向上</p>
+                            <p class="stat-number">89%</p>
+                            <p class="stat-change positive">エラー減少</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="narration-box">
+                <strong>🎙️ ナレーション（話者: Kore、感情: happy）</strong><br>
+                AI導入の効果は驚異的です。作業効率は327%まで向上し、年間コストは42%削減、品質面では89%のエラー減少を達成しました。
+            </div>
+        </div>
+        
+        <!-- テンプレート5: まとめスライド -->
+        <div class="template-wrapper">
+            <h2 class="template-title">5. まとめスライド</h2>
+            <div class="slide-frame">
+                <div class="slide-container bg-white p-16">
+                    <h2 class="section-title mb-8 text-center">まとめ：AI超独学術の3つの柱</h2>
+                    <div class="grid grid-cols-3 gap-8 mb-8">
+                        <div class="approach-card primary">
+                            <i class="fas fa-brain text-4xl mb-4"></i>
+                            <h4 class="subsection-title">学習の革新</h4>
+                            <p class="body-text">AIとの対話を通じた深い理解と高速学習</p>
+                        </div>
+                        <div class="approach-card secondary">
+                            <i class="fas fa-rocket text-4xl mb-4"></i>
+                            <h4 class="subsection-title">実践の加速</h4>
+                            <p class="body-text">理論から実装まで最短距離で実現</p>
+                        </div>
+                        <div class="approach-card primary">
+                            <i class="fas fa-users text-4xl mb-4"></i>
+                            <h4 class="subsection-title">組織の変革</h4>
+                            <p class="body-text">個人の成長が組織全体を進化させる</p>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <p class="body-text">「AI超独学術」は単なる学習法ではありません。これは、2035年の未来を創造するための新しい生き方です。今こそ、AIと共に進化を始めましょう。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="narration-box">
+                <strong>🎙️ ナレーション（話者: Enceladus、感情: serious）</strong><br>
+                AI超独学術の3つの柱をご紹介しました。学習の革新、実践の加速、そして組織の変革。これらを実践することで、皆様も2035年の未来を創造する主役となれるでしょう。ご清聴ありがとうございました。
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Chart.js設定
+        const chartColors = {
+            primary: '#00447c',
+            secondary: '#006699',
+            accent: '#e5e7eb',
+            success: '#10b981',
+            warning: '#f59e0b'
+        };
+        
+        // 学習効率チャート（テンプレート3）
+        const learningCtx = document.getElementById('learningChart');
+        if (learningCtx) {
+            new Chart(learningCtx, {
+                type: 'line',
+                data: {
+                    labels: ['従来', '1ヶ月', '3ヶ月', '6ヶ月', '12ヶ月'],
+                    datasets: [{
+                        label: 'AI活用学習',
+                        data: [100, 180, 250, 320, 400],
+                        borderColor: chartColors.secondary,
+                        backgroundColor: 'rgba(0, 102, 153, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }, {
+                        label: '従来型学習',
+                        data: [100, 110, 120, 130, 140],
+                        borderColor: chartColors.accent,
+                        borderWidth: 2,
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: '学習効率の比較'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '効率指数'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 生産性向上チャート（テンプレート4）
+        const mainCtx = document.getElementById('mainChart');
+        if (mainCtx) {
+            new Chart(mainCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    datasets: [{
+                        label: '2024年',
+                        data: [100, 150, 220, 327],
+                        backgroundColor: chartColors.secondary,
+                        borderColor: chartColors.primary,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: '四半期別生産性指数'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '生産性指数 (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

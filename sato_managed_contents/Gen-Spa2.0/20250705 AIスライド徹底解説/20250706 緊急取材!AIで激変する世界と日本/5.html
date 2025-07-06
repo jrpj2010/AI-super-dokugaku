@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .workflow-step {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .workflow-step:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .arrow-right {
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #3498DB;
+      font-size: 24px;
+    }
+
+    .shock-badge {
+      background: #E74C3C;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .creator-worried {
+      color: #95A5A6;
+      font-style: italic;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">創造的破壊：10分でアニメーション制作</h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="mb-8">
+          <div class="flex items-center mb-6">
+            <h3 class="text-2xl font-bold">従来の制作フロー</h3>
+            <span class="shock-badge ml-4">崩壊</span>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="workflow-step">
+              <i class="fas fa-pencil-alt text-blue-500 mr-2"></i>
+              プレスリリース作成
+              <div class="arrow-right">→</div>
+            </div>
+            
+            <div class="workflow-step">
+              <i class="fas fa-paint-brush text-green-500 mr-2"></i>
+              イラストレーター依頼
+              <span class="text-red-500 line-through ml-2">（数日〜数週間）</span>
+              <div class="arrow-right">→</div>
+            </div>
+            
+            <div class="workflow-step">
+              <i class="fas fa-book-open text-purple-500 mr-2"></i>
+              漫画家に依頼
+              <span class="text-red-500 line-through ml-2">（数週間〜数ヶ月）</span>
+              <div class="arrow-right">→</div>
+            </div>
+            
+            <div class="workflow-step">
+              <i class="fas fa-film text-orange-500 mr-2"></i>
+              アニメーション制作
+              <span class="text-red-500 line-through ml-2">（数ヶ月）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 p-4 rounded-lg">
+          <p class="creator-worried">
+            <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+            「今日本中の漫画家とイラストレーターさんがゾッとしてると思いますよ」
+          </p>
+          <p class="text-right text-gray-600 mt-2">- 入山章栄氏</p>
+        </div>
+      </div>
+      
+      <div class="flex flex-col justify-center items-center">
+        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-8 rounded-xl shadow-2xl">
+          <h3 class="text-3xl font-bold mb-6 text-center">AIによる新フロー</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div class="bg-white text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">1</div>
+              <div>
+                <p class="font-bold">グラレコ風イラスト</p>
+                <p class="text-sm opacity-90">生成時間：<span class="highlight text-yellow-300">一瞬</span></p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="bg-white text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">2</div>
+              <div>
+                <p class="font-bold">6コマ漫画</p>
+                <p class="text-sm opacity-90">生成時間：<span class="highlight text-yellow-300">10分</span></p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="bg-white text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">3</div>
+              <div>
+                <p class="font-bold">アニメーション</p>
+                <p class="text-sm opacity-90">生成時間：<span class="highlight text-yellow-300">20-30秒</span></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 text-center">
+            <p class="text-2xl font-bold">
+              総制作時間：<span class="text-yellow-300">約15分</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-number">5 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='4.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='6.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

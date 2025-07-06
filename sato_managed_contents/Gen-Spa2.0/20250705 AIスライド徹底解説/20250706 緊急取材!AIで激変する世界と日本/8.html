@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .car-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .waymo-color { color: #4285F4; }
+    .tesla-color { color: #CC0000; }
+
+    .approach-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .rule-based { background: #3498DB; }
+    .ai-based { background: #E74C3C; }
+
+    .safety-meter {
+      width: 100%;
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .safety-fill {
+      height: 100%;
+      background: linear-gradient(to right, #2ECC71, #27AE60);
+      width: 95%;
+    }
+
+    .mystery-box {
+      background: #2D3E50;
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">自動運転革命：WaymoとTeslaの異なるアプローチ</h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="car-card mb-6">
+          <div class="approach-badge rule-based">ルールベース</div>
+          <h3 class="text-2xl font-bold waymo-color mb-3">
+            <i class="fas fa-car mr-2"></i>Waymo（Google系）
+          </h3>
+          <ul class="space-y-2">
+            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>センサーとレーダーで完全把握</li>
+            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>交通ルール厳守</li>
+            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>判断理由が明確</li>
+          </ul>
+          <div class="mt-4">
+            <p class="text-sm font-bold">安心感レベル</p>
+            <div class="safety-meter">
+              <div class="safety-fill"></div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            「圧倒的な安心感」- 豊島キャスター
+          </p>
+        </div>
+
+        <div class="car-card">
+          <div class="approach-badge ai-based">AI学習型</div>
+          <h3 class="text-2xl font-bold tesla-color mb-3">
+            <i class="fas fa-car-side mr-2"></i>Tesla
+          </h3>
+          <ul class="space-y-2">
+            <li><i class="fas fa-brain text-purple-500 mr-2"></i>ベテランドライバーの動きを学習</li>
+            <li><i class="fas fa-magic text-blue-500 mr-2"></i>人間を超える可能性</li>
+            <li><i class="fas fa-question-circle text-yellow-500 mr-2"></i>判断理由は不明</li>
+          </ul>
+          <div class="mystery-box mt-4">
+            <i class="fas fa-box mr-2"></i>
+            ブラックボックス
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col justify-center items-center">
+        <div class="mb-8">
+          <img src="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3Ctext x='200' y='150' text-anchor='middle' font-size='20' fill='%23666'%3E日本でのテスト走行開始%3C/text%3E%3C/svg%3E" alt="自動運転テスト" class="rounded-lg shadow-lg" />
+        </div>
+
+        <div class="bg-blue-50 p-6 rounded-lg text-center">
+          <p class="text-xl font-bold mb-2">
+            <i class="fas fa-flag-checkered mr-2"></i>
+            どちらが勝つか？
+          </p>
+          <p class="text-lg">
+            「ビジネスモデルが違うので<span class="highlight">共存する</span>」
+          </p>
+          <p class="text-sm text-gray-600 mt-2">
+            Waymo：無人タクシー / Tesla：個人所有車
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-number">8 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='7.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='9.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

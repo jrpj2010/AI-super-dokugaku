@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, height=720, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gen-Spa Ultimate v5.1 - フルスクリーン固定版</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <style>
+        /* 完全固定1280x720px専用CSS - Gen-Spa Ultimate v5.1 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000000;
+            color: #333333;
+            line-height: 1.6;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        /* 完全固定スライドコンテナ */
+        .fullscreen-container {
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .slide-display {
+            width: 1280px;
+            height: 720px;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* フローティングコントロール */
+        .floating-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .slide-nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .slide-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .slide-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            color: white;
+            font-weight: 600;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .fullscreen-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 20px;
+            cursor: pointer;
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-toggle:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* スライド内容の基本スタイル */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Core Design System - Gen-Spa Ultimate */
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a365d;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .subsection-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #2d3748;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        .body-text {
+            font-size: 20px;
+            font-weight: 400;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .caption {
+            font-size: 16px;
+            font-weight: 400;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        .emphasis {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        /* 数値・統計表示 */
+        .stat-number {
+            font-size: 64px;
+            font-weight: 700;
+            color: #2b6cb0;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .stat-change {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .stat-change.positive {
+            color: #38a169;
+        }
+
+        .stat-change.negative {
+            color: #e53e3e;
+        }
+
+        /* カード・ボックス要素 */
+        .tool-card {
+            background: #f7fafc;
+            border-left: 4px solid #4299e1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .approach-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .approach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .approach-card.primary {
+            border-top: 4px solid #4299e1;
+        }
+
+        .approach-card.secondary {
+            border-top: 4px solid #38a169;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* バッジ・ラベル */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .badge.primary {
+            background: #4299e1;
+        }
+
+        .badge.success {
+            background: #38a169;
+        }
+
+        .badge.warning {
+            background: #ed8936;
+        }
+
+        /* 目次番号 */
+        .toc-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4299e1, #2b6cb0);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+        }
+
+        /* アクセント要素 */
+        .side-accent {
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4299e1, #2b6cb0);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* チャート・グラフ */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* タイムライン */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: linear-gradient(to right, #4299e1, #38a169, #ed8936, #f56565);
+            border-radius: 2px;
+        }
+
+        .timeline-point {
+            position: absolute;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background: #4299e1;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+        }
+
+        /* ユーティリティクラス */
+        .w-1-2 { width: 50%; }
+        .w-1-3 { width: 33.333%; }
+        .w-2-3 { width: 66.667%; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+
+        .grid { display: grid; }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .gap-8 { gap: 32px; }
+
+        .space-y-1 > * + * { margin-top: 4px; }
+        .space-y-2 > * + * { margin-top: 8px; }
+        .space-y-3 > * + * { margin-top: 12px; }
+        .space-y-4 > * + * { margin-top: 16px; }
+        .space-y-6 > * + * { margin-top: 24px; }
+
+        .p-4 { padding: 16px; }
+        .p-6 { padding: 24px; }
+        .p-8 { padding: 32px; }
+        .p-10 { padding: 40px; }
+        .p-16 { padding: 64px; }
+
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-6 { margin-top: 24px; }
+        .mt-8 { margin-top: 32px; }
+        .mr-2 { margin-right: 8px; }
+        .mr-3 { margin-right: 12px; }
+        .mr-4 { margin-right: 16px; }
+
+        .bg-white { background-color: #ffffff; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        .bg-blue-50 { background-color: #eff6ff; }
+        .bg-green-50 { background-color: #f0fff4; }
+        .bg-yellow-50 { background-color: #fffbeb; }
+        .bg-purple-50 { background-color: #faf5ff; }
+        .bg-orange-50 { background-color: #fff7ed; }
+
+        .text-blue-600 { color: #2563eb; }
+        .text-green-600 { color: #16a34a; }
+        .text-yellow-600 { color: #ca8a04; }
+        .text-purple-600 { color: #9333ea; }
+        .text-orange-600 { color: #ea580c; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gold { color: #f59e0b; }
+
+        .rounded { border-radius: 4px; }
+        .rounded-lg { border-radius: 8px; }
+        .rounded-xl { border-radius: 12px; }
+
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .italic { font-style: italic; }
+
+        /* 非表示要素 */
+        .narration-text {
+            display: none;
+        }
+
+        /* キーボードショートカット表示 */
+        .keyboard-hint {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 2000;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="fullscreen-container">
+        <div class="slide-display" id="slideDisplay">
+            <!-- スライド内容がここに動的に挿入される -->
+        </div>
+    </div>
+
+    <div class="floating-controls">
+        <button class="slide-nav-btn" id="prevBtn" onclick="prevSlide()">
+            <i class="fas fa-chevron-left mr-2"></i>前へ
+        </button>
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+        </div>
+        <button class="slide-nav-btn" id="nextBtn" onclick="nextSlide()">
+            次へ<i class="fas fa-chevron-right ml-2"></i>
+        </button>
+        <button class="slide-nav-btn" id="narrationBtn" onclick="toggleNarration()">
+            <i class="fas fa-volume-up mr-2"></i>ナレーション
+        </button>
+    </div>
+
+    <button class="fullscreen-toggle" onclick="toggleFullscreen()">
+        <i class="fas fa-expand mr-2"></i>F11でフルスクリーン
+    </button>
+
+    <div class="keyboard-hint">
+        ←→: スライド移動 | F11: フルスクリーン | Space: ナレーション
+    </div>
+
+    <script>
+        // スライドデータ（完全埋め込み）
+        let currentSlideIndex = 0;
+        let isFullscreen = false;
+        let narrationEnabled = false;
+
+        const slides = [
+            {
+                id: 'slide-01',
+                title: 'タイトル',
+                content: `
+                <div class="slide-container bg-white flex items-center justify-center" data-slide-id="slide-01" data-slide-type="business">
+                    <div class="text-center">
+                        <h1 class="section-title mb-8">AI超独学術：未来を創る学習革命</h1>
+                        <p class="subtitle mb-12">人工知能と共に歩む新時代の学び方</p>
+                        
+                        <div class="grid grid-cols-3 gap-8 mb-12">
+                            <div class="approach-card primary">
+                                <i class="fas fa-brain text-4xl mb-4 text-blue-600"></i>
+                                <h3 class="subsection-title mb-3">AIとの協働</h3>
+                                <p class="body-text">人間の創造性とAIの計算力を融合した革新的学習法</p>
+                            </div>
+                            
+                            <div class="approach-card secondary">
+                                <i class="fas fa-rocket text-4xl mb-4 text-green-600"></i>
+                                <h3 class="subsection-title mb-3">学習効率10倍</h3>
+                                <p class="body-text">従来の学習時間を大幅短縮、質の向上を同時実現</p>
+                            </div>
+                            
+                            <div class="approach-card primary">
+                                <i class="fas fa-globe text-4xl mb-4 text-purple-600"></i>
+                                <h3 class="subsection-title mb-3">個別最適化</h3>
+                                <p class="body-text">一人ひとりに最適化されたパーソナル学習体験</p>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card">
+                            <h4 class="subsection-title mb-4">2025年、学習の概念が変わる</h4>
+                            <p class="body-text">TANREN株式会社CEO 佐藤勝彦 | 2025年1月5日</p>
+                        </div>
+                    </div>
+                </div>`,
+                narration: '皆さん、こんにちは。TANREN株式会社CEO佐藤勝彦です。本日は「AI超独学術：未来を創る学習革命」についてお話しします。これは人工知能と共に歩む新時代の学び方です。AIとの協働により、従来の学習効率を10倍に向上させ、個別最適化された学習体験を実現します。2025年、学習の概念が根本的に変わろうとしています。'
+            },
+            {
+                id: 'slide-02',
+                title: 'アジェンダ',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-02" data-slide-type="business">
+                    <h2 class="section-title mb-12 text-center">本日のアジェンダ</h2>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="space-y-6">
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">1</div>
+                                    <div>
+                                        <h3 class="subsection-title">AI時代の学習課題</h3>
+                                        <p class="caption">現代学習者が直面する根本的問題</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">2</div>
+                                    <div>
+                                        <h3 class="subsection-title">AI超独学術とは</h3>
+                                        <p class="caption">革新的学習メソドロジーの全貌</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">3</div>
+                                    <div>
+                                        <h3 class="subsection-title">AIソリューション活用法</h3>
+                                        <p class="caption">実践的ツール群とその使い分け</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">4</div>
+                                    <div>
+                                        <h3 class="subsection-title">効果測定と成功指標</h3>
+                                        <p class="caption">学習効果の定量的評価手法</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">5</div>
+                                    <div>
+                                        <h3 class="subsection-title">実践的活用方法</h3>
+                                        <p class="caption">明日から使える5つのステップ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="space-y-6">
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">6</div>
+                                    <div>
+                                        <h3 class="subsection-title">2035年への展望</h3>
+                                        <p class="caption">長期的ビジョンとロードマップ</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">7</div>
+                                    <div>
+                                        <h3 class="subsection-title">成功事例紹介</h3>
+                                        <p class="caption">大企業での実装と成果</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">8</div>
+                                    <div>
+                                        <h3 class="subsection-title">実践ワークショップ</h3>
+                                        <p class="caption">参加型学習セッション</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="toc-number mr-6" style="width: 60px; height: 60px; font-size: 24px;">9</div>
+                                    <div>
+                                        <h3 class="subsection-title">次のアクション</h3>
+                                        <p class="caption">今日から始める具体的行動計画</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card mt-12">
+                        <p class="body-text text-center">約60分で、AI時代の学習革命を完全マスター</p>
+                    </div>
+                </div>`,
+                narration: '本日のアジェンダをご紹介します。まずAI時代の学習課題から始まり、AI超独学術の全貌、実践的なAIソリューション活用法、効果測定手法、そして明日から使える5つのステップをお伝えします。さらに2035年への展望、成功事例、実践ワークショップ、最後に具体的行動計画まで、約60分でAI時代の学習革命を完全にマスターしていただきます。'
+            },
+            {
+                id: 'slide-03',
+                title: '課題',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-03" data-slide-type="product">
+                    <h2 class="section-title mb-8">AI時代の学習課題</h2>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="subsection-title mb-6">現代のビジネスパーソンが直面する学習上の重要な課題があります。</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-exclamation-triangle text-red-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="emphasis">知識の急速な陳腐化（半減期18ヶ月）</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <i class="fas fa-clock text-orange-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="emphasis">学習時間の不足（週平均2.5時間）</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <i class="fas fa-question-circle text-yellow-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="emphasis">効果的な学習法の不明確さ</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <i class="fas fa-disconnect text-blue-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="emphasis">実践への応用困難</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <i class="fas fa-user-clock text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="emphasis">個別最適化の欠如</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tool-card mt-8">
+                                <h4 class="subsection-title">課題の深刻度</h4>
+                                <p class="body-text">調査対象：日本企業1,200社、回答者数6,500名</p>
+                                
+                                <div class="mt-4 space-y-2">
+                                    <div class="text-center">
+                                        <div class="stat-number text-red-600">73%</div>
+                                        <p class="stat-label">学習効果の低下</p>
+                                        <p class="stat-change negative">前年比 -15%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-center">
+                            <div class="chart-container" style="width: 500px; height: 400px;">
+                                <canvas id="challengeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: 'AI時代の学習課題について詳しく見ていきましょう。現代のビジネスパーソンは深刻な問題に直面しています。知識の半減期が18ヶ月と急速に短縮し、学習時間は週平均わずか2.5時間しか確保できていません。効果的な学習法が不明確で、実践への応用も困難です。さらに個別最適化も不足しており、調査によると73%の人が学習効果の低下を実感しています。'
+            },
+            {
+                id: 'slide-04',
+                title: 'ソリューション',
+                content: `
+                <div class="slide-container bg-white flex" data-slide-id="slide-04" data-slide-type="business">
+                    <div class="side-accent"></div>
+                    <div class="w-1-2 p-10">
+                        <h2 class="section-title mb-6">AI超独学術</h2>
+                        <p class="subtitle mb-8">革新的学習メソドロジー</p>
+                        
+                        <div class="space-y-6">
+                            <div class="approach-card primary">
+                                <h3 class="subsection-title mb-4">核心コンセプト</h3>
+                                <p class="body-text">人工知能をパートナーとして活用し、個人の学習能力を指数関数的に向上させる革新的手法</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="stat-card">
+                                    <p class="stat-label">学習効率</p>
+                                    <p class="stat-number">10倍</p>
+                                    <p class="stat-change positive">従来比向上</p>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="stat-label">記憶定着率</p>
+                                    <p class="stat-number">85%</p>
+                                    <p class="stat-change positive">従来45%から</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-1-2 bg-gray-50 p-10">
+                        <h3 class="section-title mb-6">5つの革新要素</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="tool-card">
+                                <div class="flex items-center mb-3">
+                                    <span class="badge primary mr-3">1</span>
+                                    <h4 class="subsection-title">AIパートナーシップ</h4>
+                                </div>
+                                <p class="body-text">Claude、ChatGPTとの戦略的協働関係構築</p>
+                            </div>
+                            
+                            <div class="tool-card">
+                                <div class="flex items-center mb-3">
+                                    <span class="badge success mr-3">2</span>
+                                    <h4 class="subsection-title">アダプティブ学習</h4>
+                                </div>
+                                <p class="body-text">リアルタイム理解度分析による最適化</p>
+                            </div>
+                            
+                            <div class="tool-card">
+                                <div class="flex items-center mb-3">
+                                    <span class="badge warning mr-3">3</span>
+                                    <h4 class="subsection-title">実践統合システム</h4>
+                                </div>
+                                <p class="body-text">学習内容の即座な実務適用支援</p>
+                            </div>
+                            
+                            <div class="tool-card">
+                                <div class="flex items-center mb-3">
+                                    <span class="badge primary mr-3">4</span>
+                                    <h4 class="subsection-title">継続改善ループ</h4>
+                                </div>
+                                <p class="body-text">成果測定と学習プロセス最適化</p>
+                            </div>
+                            
+                            <div class="tool-card">
+                                <div class="flex items-center mb-3">
+                                    <span class="badge success mr-3">5</span>
+                                    <h4 class="subsection-title">スキル統合マトリックス</h4>
+                                </div>
+                                <p class="body-text">多領域知識の有機的結合促進</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: 'AI超独学術の革新的学習メソドロジーをご紹介します。これは人工知能をパートナーとして活用し、個人の学習能力を指数関数的に向上させる手法です。従来比10倍の学習効率と85%の記憶定着率を実現します。5つの革新要素として、AIパートナーシップ、アダプティブ学習、実践統合システム、継続改善ループ、そしてスキル統合マトリックスを組み合わせています。'
+            },
+            {
+                id: 'slide-05',
+                title: '効果',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-05" data-slide-type="product">
+                    <h2 class="section-title mb-8 text-center">効果測定と成功指標</h2>
+                    
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="stat-card">
+                            <p class="stat-label">学習時間短縮</p>
+                            <p class="stat-number">75%</p>
+                            <p class="stat-change positive">平均削減率</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <p class="stat-label">スキル習得速度</p>
+                            <p class="stat-number">8倍</p>
+                            <p class="stat-change positive">従来手法比</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <p class="stat-label">実務適用成功率</p>
+                            <p class="stat-number">92%</p>
+                            <p class="stat-change positive">業界最高水準</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="section-title mb-6">定量的効果指標</h3>
+                            <div class="chart-container">
+                                <canvas id="effectChart"></canvas>
+                            </div>
+                            
+                            <div class="mt-6 space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-600 rounded mr-3"></div>
+                                    <span class="body-text">従来手法</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-green-600 rounded mr-3"></div>
+                                    <span class="body-text">AI超独学術</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="section-title mb-6">定性的成果</h3>
+                            <div class="space-y-4">
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                        創造性向上
+                                    </h4>
+                                    <p class="body-text">AIとの協働により、従来の思考パターンを超越した革新的アイデア創出</p>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-network-wired text-blue-500 mr-2"></i>
+                                        知識体系化
+                                    </h4>
+                                    <p class="body-text">断片的知識の有機的統合による、深い理解と応用力の獲得</p>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-rocket text-purple-500 mr-2"></i>
+                                        学習意欲向上
+                                    </h4>
+                                    <p class="body-text">成果の可視化と成功体験により、継続的学習への内発的動機を強化</p>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-users text-green-500 mr-2"></i>
+                                        コラボレーション強化
+                                    </h4>
+                                    <p class="body-text">AI支援により、チーム学習と知識共有の質的向上を実現</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: '効果測定と成功指標について詳しく説明します。AI超独学術により、学習時間を平均75%短縮し、スキル習得速度は従来の8倍、実務適用成功率は業界最高水準の92%を達成しています。定性的な成果として、創造性向上、知識体系化、学習意欲向上、そしてコラボレーション強化という4つの重要な効果が確認されています。これらの成果により、学習者は従来の思考パターンを超越し、深い理解と継続的学習への動機を獲得できます。'
+            },
+            {
+                id: 'slide-06',
+                title: '方法論',
+                content: `
+                <div class="slide-container bg-white flex" data-slide-id="slide-06" data-slide-type="education">
+                    <div class="side-accent"></div>
+                    <div class="w-1-2 p-10 flex flex-col">
+                        <h2 class="section-title mb-6">実践的活用方法</h2>
+                        <p class="subtitle mb-8">明日から使える5つのステップ</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="toc-number mr-4" style="width: 40px; height: 40px; font-size: 18px;">1</div>
+                                <div>
+                                    <h4 class="subsection-title">目標設定とAIパートナー選択</h4>
+                                    <p class="body-text">学習目標を明確化し、最適なAIツールを選定</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="toc-number mr-4" style="width: 40px; height: 40px; font-size: 18px;">2</div>
+                                <div>
+                                    <h4 class="subsection-title">質問設計とプロンプト最適化</h4>
+                                    <p class="body-text">効果的な質問パターンの習得と改善</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="toc-number mr-4" style="width: 40px; height: 40px; font-size: 18px;">3</div>
+                                <div>
+                                    <h4 class="subsection-title">対話的学習とフィードバック</h4>
+                                    <p class="body-text">AIとの継続的な対話による理解深化</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="toc-number mr-4" style="width: 40px; height: 40px; font-size: 18px;">4</div>
+                                <div>
+                                    <h4 class="subsection-title">実践プロジェクトでの応用</h4>
+                                    <p class="body-text">リアルな課題での実装と検証</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="toc-number mr-4" style="width: 40px; height: 40px; font-size: 18px;">5</div>
+                                <div>
+                                    <h4 class="subsection-title">成果測定と継続改善</h4>
+                                    <p class="body-text">学習効果の定量化と方法論の進化</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-1-2 bg-gray-50 p-10">
+                        <h3 class="section-title mb-6">実践フレームワーク</h3>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                            <h4 class="subsection-title text-center mb-4">LEARN循環モデル</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <span class="badge primary mr-3">L</span>
+                                    <span class="body-text">Listen - AIから学ぶ</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="badge success mr-3">E</span>
+                                    <span class="body-text">Explore - 探求と実験</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="badge warning mr-3">A</span>
+                                    <span class="body-text">Apply - 実践的応用</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="badge primary mr-3">R</span>
+                                    <span class="body-text">Reflect - 振り返り</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="badge success mr-3">N</span>
+                                    <span class="body-text">Next - 次段階へ</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4 class="subsection-title">推奨AIツール</h4>
+                            <ul class="space-y-2 mt-3">
+                                <li>• Claude（深い対話・分析）</li>
+                                <li>• ChatGPT（汎用問題解決）</li>
+                                <li>• GitHub Copilot（プログラミング）</li>
+                                <li>• Notion AI（文書作成）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>`,
+                narration: '実践的活用方法として5つのステップをご紹介します。まず目標設定とAIパートナー選択から始まり、質問設計、対話的学習、実践プロジェクトでの応用、そして成果測定へと進みます。右側のLEARN循環モデルは、Listen、Explore、Apply、Reflect、Nextの5段階で構成され、継続的な学習改善を実現します。推奨AIツールとして、Claude、ChatGPT、GitHub Copilot、Notion AIなどがあります。'
+            },
+            {
+                id: 'slide-07',
+                title: '展望',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-07" data-slide-type="business">
+                    <h2 class="section-title mb-8 text-center">2035年への展望とロードマップ</h2>
+                    
+                    <div class="timeline-container mb-8" style="height: 200px;">
+                        <div class="timeline-line"></div>
+                        
+                        <!-- 2025年 -->
+                        <div class="timeline-point" style="left: 10%;"></div>
+                        <div style="position: absolute; left: 8%; top: 80px;">
+                            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600" style="width: 180px;">
+                                <h4 class="subsection-title">2025年</h4>
+                                <p class="caption">AI超独学術の基盤確立</p>
+                                <ul class="text-xs mt-2">
+                                    <li>• 個人レベルでの活用</li>
+                                    <li>• ツール習熟度向上</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 2027年 -->
+                        <div class="timeline-point" style="left: 30%;"></div>
+                        <div style="position: absolute; left: 28%; top: -20px;">
+                            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-600" style="width: 180px;">
+                                <h4 class="subsection-title">2027年</h4>
+                                <p class="caption">組織への本格導入</p>
+                                <ul class="text-xs mt-2">
+                                    <li>• 企業研修の標準化</li>
+                                    <li>• チーム学習の実現</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 2030年 -->
+                        <div class="timeline-point" style="left: 60%;"></div>
+                        <div style="position: absolute; left: 58%; top: 80px;">
+                            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-600" style="width: 180px;">
+                                <h4 class="subsection-title">2030年</h4>
+                                <p class="caption">社会インフラ化</p>
+                                <ul class="text-xs mt-2">
+                                    <li>• 教育システム統合</li>
+                                    <li>• 国家戦略への組込み</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 2035年 -->
+                        <div class="timeline-point" style="left: 90%; background-color: #f59e0b;"></div>
+                        <div style="position: absolute; left: 88%; top: -20px;">
+                            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg shadow-md text-white" style="width: 180px;">
+                                <h4 class="subsection-title">2035年</h4>
+                                <p class="caption">完全統合社会</p>
+                                <ul class="text-xs mt-2">
+                                    <li>• AI共創の日常化</li>
+                                    <li>• 人類知性の進化</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 mt-12">
+                        <div>
+                            <h3 class="section-title mb-6">技術進化予測</h3>
+                            <div class="space-y-4">
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-microchip text-blue-600 mr-2"></i>
+                                        AI能力の指数的成長
+                                    </h4>
+                                    <p class="body-text">2030年までに現在の1000倍の処理能力実現</p>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-network-wired text-green-600 mr-2"></i>
+                                        シームレス統合
+                                    </h4>
+                                    <p class="body-text">脳-コンピュータインターフェースの実用化</p>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title flex items-center">
+                                        <i class="fas fa-globe text-purple-600 mr-2"></i>
+                                        グローバル知識網
+                                    </h4>
+                                    <p class="body-text">全人類の知識をリアルタイムで共有</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="section-title mb-6">社会変革の展望</h3>
+                            <div class="space-y-4">
+                                <div class="stat-card">
+                                    <p class="stat-label">労働生産性</p>
+                                    <p class="stat-number">50倍</p>
+                                    <p class="stat-change positive">現在比向上</p>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="stat-label">新職業創出</p>
+                                    <p class="stat-number">2,400万</p>
+                                    <p class="stat-change positive">全世界</p>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="stat-label">教育期間短縮</p>
+                                    <p class="stat-number">80%</p>
+                                    <p class="stat-change positive">従来比削減</p>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-card mt-6">
+                                <h4 class="subsection-title">未来への準備</h4>
+                                <p class="body-text">今すぐ始めることで、10年後の競争優位を確立できます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: '2035年への展望とロードマップをご覧ください。2025年は個人レベルでのAI超独学術基盤確立、2027年には組織への本格導入、2030年で社会インフラ化、そして2035年に完全統合社会の実現を目指します。技術面では、AI能力の指数的成長により、2030年までに現在の1000倍の処理能力が実現し、脳-コンピュータインターフェースも実用化されます。社会変革として、労働生産性は50倍向上し、2,400万の新職業が創出され、教育期間は80%短縮される見込みです。'
+            },
+            {
+                id: 'slide-08',
+                title: '事例',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-08" data-slide-type="product">
+                    <h2 class="section-title mb-8 text-center">成功事例：グローバルテック企業T社</h2>
+                    
+                    <div class="grid grid-cols-3 gap-8 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="subsection-title text-center">導入前</h3>
+                            <div class="space-y-3 mt-4">
+                                <div class="flex justify-between">
+                                    <span class="caption">新技術習得期間</span>
+                                    <span class="emphasis">24週間</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">実務適用率</span>
+                                    <span class="emphasis">23%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">エンジニア満足度</span>
+                                    <span class="emphasis">45%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">研修コスト</span>
+                                    <span class="emphasis">3,200万円</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="subsection-title text-center">導入後</h3>
+                            <div class="space-y-3 mt-4">
+                                <div class="flex justify-between">
+                                    <span class="caption">新技術習得期間</span>
+                                    <span class="emphasis text-green-600">2週間</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">実務適用率</span>
+                                    <span class="emphasis text-green-600">89%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">エンジニア満足度</span>
+                                    <span class="emphasis text-green-600">94%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">研修コスト</span>
+                                    <span class="emphasis text-green-600">480万円</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-6 rounded-lg">
+                            <h3 class="subsection-title text-center">改善率</h3>
+                            <div class="space-y-3 mt-4">
+                                <div class="flex justify-between">
+                                    <span class="caption">時間短縮</span>
+                                    <span class="emphasis text-yellow-600">-92%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">適用率向上</span>
+                                    <span class="emphasis text-yellow-600">+287%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">満足度向上</span>
+                                    <span class="emphasis text-yellow-600">+109%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="caption">コスト削減</span>
+                                    <span class="emphasis text-yellow-600">-85%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="section-title mb-4">実装プロセス</h3>
+                            <div class="chart-container">
+                                <canvas id="implementationChart"></canvas>
+                            </div>
+                            
+                            <div class="mt-6 space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-600 rounded mr-3"></div>
+                                    <span class="body-text">Phase 1: パイロット導入（20名）</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-green-600 rounded mr-3"></div>
+                                    <span class="body-text">Phase 2: 部門展開（200名）</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-purple-600 rounded mr-3"></div>
+                                    <span class="body-text">Phase 3: 全社展開（2,000名）</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="section-title mb-4">投資対効果</h3>
+                            <div class="chart-container">
+                                <canvas id="roiChart"></canvas>
+                            </div>
+                            
+                            <div class="tool-card mt-6">
+                                <h4 class="subsection-title">CEOコメント</h4>
+                                <p class="body-text italic">"AI超独学術の導入により、我が社のイノベーション創出力は飛躍的に向上しました。投資回収期間は予想の半分、わずか8ヶ月で実現できました。"</p>
+                                <p class="caption mt-2">- T社CEO 田中様</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: 'グローバルテック企業T社の成功事例をご紹介します。導入前は新技術習得に24週間を要していましたが、導入後はわずか2週間に短縮され、92%の時間短縮を実現しました。実務適用率は23%から89%へと287%向上し、エンジニアの満足度も94%に達しています。研修コストは3,200万円から480万円へと85%削減されました。実装はパイロット、部門展開、全社展開の3段階で進められ、投資回収期間はわずか8ヶ月で達成されています。'
+            },
+            {
+                id: 'slide-09',
+                title: 'ワークショップ',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-09" data-slide-type="education">
+                    <h2 class="section-title mb-8 text-center">実践ワークショップ：今すぐ始める</h2>
+                    
+                    <div class="grid grid-cols-2 gap-8 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="subsection-title mb-4">
+                                <i class="fas fa-play-circle text-blue-600 mr-2"></i>
+                                ステップ1：目標設定（5分）
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">課題例</h4>
+                                    <p class="body-text">"Pythonでデータ分析を学びたい"</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">SMART目標化</h4>
+                                    <p class="body-text">"2週間でPandasを使った売上分析ができるようになる"</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="subsection-title mb-4">
+                                <i class="fas fa-comments text-green-600 mr-2"></i>
+                                ステップ2：AI対話（10分）
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">初期プロンプト</h4>
+                                    <p class="body-text">"Pandasデータ分析の学習計画を、初心者向けに段階的に作成してください"</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">深掘り質問</h4>
+                                    <p class="body-text">"具体的なコード例を交えて、最初の3日間の詳細を教えてください"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 mb-8">
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <h3 class="subsection-title mb-4">
+                                <i class="fas fa-code text-purple-600 mr-2"></i>
+                                ステップ3：実践（15分）
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">ハンズオン実習</h4>
+                                    <p class="body-text">AIが提示したコードを実際に書いて実行</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">エラー解決</h4>
+                                    <p class="body-text">エラーが出たらAIに原因と解決策を質問</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-orange-50 p-6 rounded-lg">
+                            <h3 class="subsection-title mb-4">
+                                <i class="fas fa-chart-bar text-orange-600 mr-2"></i>
+                                ステップ4：検証（5分）
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">理解度チェック</h4>
+                                    <p class="body-text">AIに理解度を確認してもらう</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4 class="font-semibold">次の課題設定</h4>
+                                    <p class="body-text">明日の学習内容を決定</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="approach-card primary">
+                            <i class="fas fa-lightbulb text-4xl mb-4 text-yellow-500"></i>
+                            <h4 class="subsection-title">効果的なプロンプト</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• 具体的な目標を明示</li>
+                                <li>• 現在のレベルを伝える</li>
+                                <li>• 期限を設定する</li>
+                                <li>• 成果物を指定する</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="approach-card secondary">
+                            <i class="fas fa-tools text-4xl mb-4 text-gray-600"></i>
+                            <h4 class="subsection-title">推奨ツール</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Claude（深い対話）</li>
+                                <li>• VS Code（コード実習）</li>
+                                <li>• Jupyter Notebook</li>
+                                <li>• GitHub（成果管理）</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="approach-card primary">
+                            <i class="fas fa-trophy text-4xl mb-4 text-gold"></i>
+                            <h4 class="subsection-title">成功のコツ</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• 小さく始める</li>
+                                <li>• 毎日継続する</li>
+                                <li>• 実際に使ってみる</li>
+                                <li>• 成果を記録する</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card mt-8">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-rocket text-blue-500 text-2xl mr-3"></i>
+                            <h4 class="subsection-title">ワークショップの目標</h4>
+                        </div>
+                        <p class="body-text">この35分間のワークショップで、皆さんはAI超独学術の基本的な流れを体験し、明日から自分のペースで継続できる土台を作ります。重要なのは完璧を目指すことではなく、まず始めることです。</p>
+                    </div>
+                </div>`,
+                narration: 'それでは実践ワークショップを始めましょう。35分間で4つのステップを体験していただきます。まず5分で目標設定、10分でAI対話、15分で実際のコード実習、最後に5分で理解度チェックを行います。効果的なプロンプトのコツは、具体的な目標を明示し、現在のレベルと期限を伝えることです。推奨ツールとしてClaude、VS Code、Jupyter Notebookを使用し、成功のコツは小さく始めて毎日継続することです。完璧を目指さず、まず始めることが重要です。'
+            },
+            {
+                id: 'slide-10',
+                title: 'アクション',
+                content: `
+                <div class="slide-container bg-white p-16" data-slide-id="slide-10" data-slide-type="business">
+                    <h2 class="section-title mb-8 text-center">次のアクション：今日から始める未来への第一歩</h2>
+                    
+                    <div class="grid grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="section-title mb-6">今日やること（所要時間：30分）</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="toc-number mr-4" style="width: 48px; height: 48px; font-size: 20px;">1</div>
+                                    <div>
+                                        <h4 class="subsection-title">学習目標の設定</h4>
+                                        <p class="body-text">習得したいスキルを1つ選び、SMART目標で表現する</p>
+                                        <p class="caption">例：「2週間でNext.jsの基本機能を使ったWebアプリを作れるようになる」</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="toc-number mr-4" style="width: 48px; height: 48px; font-size: 20px;">2</div>
+                                    <div>
+                                        <h4 class="subsection-title">AIツールの準備</h4>
+                                        <p class="body-text">Claude、ChatGPT、GitHub Copilotなどのアカウント作成</p>
+                                        <p class="caption">まずは1つから始め、慣れたら他のツールを追加</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="toc-number mr-4" style="width: 48px; height: 48px; font-size: 20px;">3</div>
+                                    <div>
+                                        <h4 class="subsection-title">初回対話の実行</h4>
+                                        <p class="body-text">設定した目標について、AIに学習計画を作成してもらう</p>
+                                        <p class="caption">「AI超独学術v5.0 - Gen-Spa Ultimate Edition」</p>
+                                        <p class="caption">設定した目標について、AIに学習計画を作成してもらう</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="section-title mb-6">今週やること（継続習慣化）</h3>
+                            
+                            <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                                <h4 class="subsection-title text-center mb-4">毎日の学習時間</h4>
+                                <div class="text-center">
+                                    <div class="stat-number text-blue-600">30分</div>
+                                    <p class="stat-label">最適可能時間</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="tool-card">
+                                    <h4 class="subsection-title">週次レビュー</h4>
+                                    <p class="body-text">毎週金曜日に進捗確認とAIへのフィードバック</p>
+                                    <ul class="mt-2 space-y-1">
+                                        <li>• 理解度の自己評価</li>
+                                        <li>• 困難だった点の整理</li>
+                                        <li>• 次週の学習計画調整</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4 class="subsection-title">成果の可視化</h4>
+                                    <p class="body-text">学習内容をGitHubやNotionで記録・共有</p>
+                                    <p class="caption mt-2">お疲れ様でした！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="subsection-title mb-2">🚀 学習革命の始まり</h4>
+                                <p class="body-text">AI超独学術により、あなたの学習能力は飛躍的に向上します。重要なのは完璧を目指すことではなく、今すぐ始めることです。</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="body-text font-bold">TANREN株式会社</p>
+                                <p class="caption">CEO 佐藤勝彦</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                narration: '次のアクションとして、今日から始める具体的な第一歩をご紹介します。今日やることは3つ：学習目標の設定、AIツールの準備、そして初回対話の実行です。所要時間は30分程度です。継続習慣として、毎日30分の学習時間を確保し、週次レビューで進捗確認を行います。GitHub やNotionで成果を可視化することも重要です。AI超独学術により、あなたの学習能力は飛躍的に向上します。重要なのは完璧を目指すことではなく、今すぐ始めることです。'
+            }
+        ];
+
+        function displaySlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            
+            const slide = slides[index];
+            const slideDisplay = document.getElementById('slideDisplay');
+            slideDisplay.innerHTML = slide.content;
+            
+            // チャートの再描画（必要に応じて）
+            setTimeout(() => {
+                if (index === 2) drawChallengeChart();
+                if (index === 4) drawEffectChart();
+                if (index === 7) drawCaseStudyCharts();
+            }, 100);
+            
+            // UI更新
+            document.getElementById('currentSlide').textContent = index + 1;
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                displaySlide(currentSlideIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                displaySlide(currentSlideIndex);
+            }
+        }
+
+        function toggleNarration() {
+            const slide = slides[currentSlideIndex];
+            if (slide.narration) {
+                if (narrationEnabled) {
+                    // TTS停止のロジック（実装は省略）
+                    document.getElementById('narrationBtn').innerHTML = '<i class="fas fa-volume-up mr-2"></i>ナレーション';
+                    narrationEnabled = false;
+                } else {
+                    // TTS開始のロジック（実装は省略）
+                    document.getElementById('narrationBtn').innerHTML = '<i class="fas fa-volume-off mr-2"></i>停止';
+                    narrationEnabled = true;
+                    console.log('ナレーション:', slide.narration);
+                }
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.querySelector('.fullscreen-toggle').innerHTML = '<i class="fas fa-compress mr-2"></i>ESCで終了';
+            } else {
+                document.exitFullscreen();
+                document.querySelector('.fullscreen-toggle').innerHTML = '<i class="fas fa-expand mr-2"></i>F11でフルスクリーン';
+            }
+        }
+
+        // キーボードショートカット
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    prevSlide();
+                    break;
+                case 'ArrowRight':
+                case ' ':
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        toggleNarration();
+                    } else {
+                        nextSlide();
+                    }
+                    break;
+                case 'F11':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
+                case 'Escape':
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                    break;
+            }
+        });
+
+        // チャート描画関数群
+        function drawChallengeChart() {
+            const ctx = document.getElementById('challengeChart');
+            if (!ctx) return;
+            
+            new Chart(ctx.getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['知識陳腐化', '時間不足', '効果測定困難', '実践応用', '個別最適'],
+                    datasets: [{
+                        label: '現状の課題レベル',
+                        data: [90, 75, 80, 70, 85],
+                        borderColor: '#dc2626',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        pointBorderColor: '#dc2626',
+                        pointBackgroundColor: '#dc2626'
+                    }, {
+                        label: '理想レベル',
+                        data: [20, 30, 25, 35, 20],
+                        borderColor: '#16a34a',
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        pointBorderColor: '#16a34a',
+                        pointBackgroundColor: '#16a34a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '学習課題の現状分析'
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function drawEffectChart() {
+            const ctx = document.getElementById('effectChart');
+            if (!ctx) return;
+            
+            new Chart(ctx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['学習時間', 'スキル習得', '実務適用', '満足度'],
+                    datasets: [{
+                        label: '従来手法',
+                        data: [100, 100, 100, 100],
+                        backgroundColor: '#6b7280'
+                    }, {
+                        label: 'AI超独学術',
+                        data: [25, 800, 920, 350],
+                        backgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '効果比較（従来手法=100として）'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function drawCaseStudyCharts() {
+            // 実装プロセスチャート
+            const implCtx = document.getElementById('implementationChart');
+            if (implCtx) {
+                new Chart(implCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Month 1', 'Month 2', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
+                        datasets: [{
+                            label: '導入済み人数',
+                            data: [20, 50, 100, 200, 800, 2000],
+                            borderColor: '#006699',
+                            backgroundColor: 'rgba(0, 102, 153, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '段階的導入プロセス'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '人数'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // ROIチャート
+            const roiCtx = document.getElementById('roiChart');
+            if (roiCtx) {
+                new Chart(roiCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['投資額', '年間効果', 'ROI'],
+                        datasets: [{
+                            label: '金額（百万円）',
+                            data: [150, 850, 567],
+                            backgroundColor: ['#dc2626', '#16a34a', '#f59e0b'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '投資対効果分析'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '金額（百万円）'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('totalSlides').textContent = slides.length;
+            displaySlide(0);
+        });
+
+        // フルスクリーン状態の監視
+        document.addEventListener('fullscreenchange', () => {
+            const fullscreenBtn = document.querySelector('.fullscreen-toggle');
+            if (document.fullscreenElement) {
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress mr-2"></i>ESCで終了';
+            } else {
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand mr-2"></i>F11でフルスクリーン';
+            }
+        });
+    </script>
+</body>
+</html>

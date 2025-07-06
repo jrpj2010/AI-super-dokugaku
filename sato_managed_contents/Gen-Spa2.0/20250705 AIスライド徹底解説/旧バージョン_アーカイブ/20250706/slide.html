@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI超独学術 ―思考OSをアップデートし、人生のゲームルールを書き換える。―</title>
+    
+    <!-- 外部リソース -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../gen-spa-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-200">
+
+    <div class="flex">
+        <!-- ① 左側：固定ナビゲーション -->
+        <nav class="w-64 h-screen bg-gray-800 text-white p-5 fixed top-0 left-0 overflow-y-auto">
+            <h2 class="text-xl font-bold mb-6 border-b border-gray-700 pb-4">スライド一覧</h2>
+            <ul id="slide-nav">
+                <!-- このリストはJavaScriptによって自動生成されます -->
+            </ul>
+        </nav>
+
+        <!-- ② 右側：スクロールするスライドコンテンツ -->
+        <main class="ml-64 p-10 w-full">
+            
+            <!-- スライド1: タイトル -->
+            <section id="slide-1" class="slide-container flex flex-col justify-center items-center text-center">
+                <div class="w-full">
+                    <h1 class="title">AI超独学術</h1>
+                    <p class="subtitle mt-4">思考OSをアップデートし、人生のゲームルールを書き換える。</p>
+                    <div class="my-8">
+                        <img src="https://images.unsplash.com/photo-1678483743916-b83c72573439?q=80&w=1280" alt="AI Brain" class="mx-auto rounded-lg shadow-2xl" style="max-width: 500px;">
+                    </div>
+                    <p class="text-xl text-gray-600">TANREN株式会社 代表取締役社長 佐藤 勝彦</p>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド2: この本が解決する課題 -->
+            <section id="slide-2" class="slide-container">
+                <h2 class="section-title mb-6">この本が解決する「3つの壁」</h2>
+                <div class="accent-bar mb-8"></div>
+                <div class="flex space-x-8 text-lg">
+                    <div class="w-1/3 p-6 bg-gray-50 rounded-lg shadow">
+                        <i class="fas fa-question-circle text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">「自分ごと」の壁</h3>
+                        <p>「AIがすごいのはわかる。でも、自分には関係ない」という諦め。</p>
+                    </div>
+                    <div class="w-1/3 p-6 bg-gray-50 rounded-lg shadow">
+                        <i class="fas fa-book-dead text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">「応用」の壁</h3>
+                        <p>「たくさんのAI本を読んだが、結局コピペで終わり、応用ができない」という停滞。</p>
+                    </div>
+                    <div class="w-1/3 p-6 bg-gray-50 rounded-lg shadow">
+                        <i class="fas fa-map-signs text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">「逆転」の壁</h3>
+                        <p>「今の仕事や人生に限界を感じているが、逆転の一手が見つからない」という閉塞感。</p>
+                    </div>
+                </div>
+                 <div class="mt-8 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="text-xl font-semibold">本書は、AIを単なる「便利な道具」から<span class="highlight-text">「自らの思考OSをアップデートし、人生の主導権を取り戻すための最強のパートナー」</span>へと変える、具体的かつ体系的なロードマップを提示します。</p>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド3: 本書の3つの柱 -->
+            <section id="slide-3" class="slide-container">
+                <h2 class="section-title mb-2">AI時代の思考OS「超独学メソッド」</h2>
+                <p class="subtitle mb-6">伊藤羊一氏『1分で話せ』の思考フレームをAIで極限までブーストさせる</p>
+                <div class="accent-bar mb-8"></div>
+                <div class="flex space-x-6">
+                    <div class="flex-1 approach-card p-6 border-blue-500">
+                        <h3 class="text-2xl font-bold mb-3 text-blue-700">1.【超具体化】</h3>
+                        <p class="text-lg">AIに「神の目」を持たせる。あらゆる事象の具体例、ファクト、証跡を瞬時に引き出し、行動の精度を極限まで高める。</p>
+                    </div>
+                    <div class="flex-1 approach-card p-6 border-green-500">
+                        <h3 class="text-2xl font-bold mb-3 text-green-700">2.【超抽象化】</h3>
+                        <p class="text-lg">AIに「賢者の���」を持たせる。無数の具体例から物事の「本質」「幹」「骨」を抜き出し、応用可能な「作る側の理論」を手に入れる。</p>
+                    </div>
+                    <div class="flex-1 approach-card p-6 border-purple-500">
+                        <h3 class="text-2xl font-bold mb-3 text-purple-700">3.【超構造化】</h3>
+                        <p class="text-lg">AIに「伝道師の口」を持たせる。掴んだ本質を体系化・ステップ化し、他者への影響力を拡大していく。</p>
+                    </div>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド4: 全体構成 -->
+            <section id="slide-4" class="slide-container">
+                <h2 class="section-title mb-6">書籍の全体構成（三部構成）</h2>
+                <div class="accent-bar mb-8"></div>
+                <div class="space-y-6">
+                    <div class="p-6 rounded-lg shadow-md bg-white border-l-4 border-gray-400">
+                        <h3 class="text-2xl font-bold text-gray-700">はじめに＆序章</h3>
+                        <p class="text-lg mt-2">なぜ、あなたの学びは過去のものになるのか？ 著者のV字回復体験を通じて、AIがもたらす「革命」を宣言し、読者の心を掴む。</p>
+                    </div>
+                    <div class="p-6 rounded-lg shadow-md bg-white border-l-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-700">第1部【超具体化】</h3>
+                        <p class="text-lg mt-2">明日、世界が変わる「AI活用100の武器庫」。読者が即座に成功体験を得るための実践パート。見開き2ページ完結でビジュアルとロジックを両立。</p>
+                    </div>
+                    <div class="p-6 rounded-lg shadow-md bg-white border-l-4 border-green-500">
+                        <h3 class="text-2xl font-bold text-green-700">第2部【超抽象化】</h3>
+                        <p class="text-lg mt-2">物語で体験する、思考OSのアップデート。広告代理店を舞台に、アナログ上司とAIネイティブ部下の成長物語を通じて「本質を見抜く力」を追体験。</p>
+                    </div>
+                    <div class="p-6 rounded-lg shadow-md bg-white border-l-4 border-purple-500">
+                        <h3 class="text-2xl font-bold text-purple-700">第3部【超構造化】</h3>
+                        <p class="text-lg mt-2">「作る側」になるための実装プログラム。「知っている」を「できる」「教えられる」に変えるための完全ロードマップを提示。</p>
+                    </div>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド5: ペルソナ紹介 -->
+            <section id="slide-5" class="slide-container">
+                <h2 class="section-title mb-6">本書が届ける2人の読者像</h2>
+                <div class="accent-bar mb-8"></div>
+                <div class="flex space-x-8">
+                    <!-- 田中達也 -->
+                    <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-center mb-4">【昭和気質の営業部長】田中達也 (47)</h3>
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600" class="rounded-full mx-auto w-48 h-48 object-cover mb-4">
+                        <p class="mb-2"><strong class="text-red-600">ペイン:</strong> 自分の経��則が通用しなくなり、若手から「それって感想ですよね？」と詰められ無力感を覚える。</p>
+                        <p><strong class="text-green-600">ゲイン:</strong> 長年の経験を「論理的な武器」に変え、もう一度チームから頼られる存在としての誇りを取り戻したい。</p>
+                    </div>
+                    <!-- 阿部京子 -->
+                    <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-center mb-4">【AIネイティブの新卒】阿部京子 (22)</h3>
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600" class="rounded-full mx-auto w-48 h-48 object-cover mb-4">
+                        <p class="mb-2"><strong class="text-red-600">ペイン:</strong> 完璧なデータとロジックで提案しても「正しさだけでは人は動かない」現実に直面し、孤立感を抱く。</p>
+                        <p><strong class="text-green-600">ゲイン:</strong> 自分の思考を「伝わる言葉」に変え、チームの一員として信頼され、応援される人間関係を築きたい。</p>
+                    </div>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド6: 思考のXYZ-3Dメソッド -->
+            <section id="slide-6" class="slide-container">
+                <h2 class="section-title mb-6">本書の隠された構造：思考のXYZ-3Dメソッド</h2>
+                <div class="accent-bar mb-8"></div>
+                <div class="flex">
+                    <div class="w-2/5 pr-8">
+                        <p class="text-lg">本書は「具体→抽象→構造」という流れの裏に、著者が提唱する**「3D思考メソッド」**が緻密に設計されています。</p>
+                        <p class="text-lg mt-4">読者は本書を読み進めるだけで、無意識のうちに**「多角的・重層的に物事を捉える思考OS」**そのものを再インストールすることになります。</p>
+                        <p class="text-lg mt-4 font-bold text-red-600">これが、他のAI本には決して真似のできない、本書だけの圧倒的な付加価値です。</p>
+                    </div>
+                    <div class="w-3/5">
+                        <div class="chart-container" style="height:400px;">
+                            <canvas id="xyzChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+            <!-- スライド7: 結論 -->
+            <section id="slide-7" class="slide-container flex flex-col justify-center items-center text-center">
+                <div class="w-full">
+                    <h2 class="section-title mb-6">結論：これは、あなたの「マインドセット変革の書」である</h2>
+                    <div class="accent-bar mx-auto mb-8"></div>
+                    <p class="text-2xl max-w-4xl mx-auto">
+                        『AI超独学術』は、単なるAI活用本ではありません。
+                        AIという革命的な力を触媒として、読者一人ひとりが自らの劣等感を最強の武器に変え、人生のシナリオを自らの手で書き換えるための招待状です。
+                    </p>
+                    <div class="mt-10 flex justify-center space-x-8 text-xl">
+                        <div class="stat-card p-4 rounded-lg">
+                            <i class="fas fa-tools text-3xl text-blue-500 mb-2"></i>
+                            <p>具体的な武器</p>
+                        </div>
+                        <div class="stat-card p-4 rounded-lg">
+                            <i class="fas fa-users text-3xl text-green-500 mb-2"></i>
+                            <p>共感できる物語</p>
+                        </div>
+                        <div class="stat-card p-4 rounded-lg">
+                            <i class="fas fa-road text-3xl text-purple-500 mb-2"></i>
+                            <p>実践的な道しるべ</p>
+                        </div>
+                    </div>
+                     <p class="text-2xl mt-8 font-bold">
+                        三位一体の提供価値で、変化の時代を生き抜く全てのビジネス���ーソンにとっての必読書となることを確信します。
+                    </p>
+                </div>
+                <div class="footer w-full flex justify-end items-center pt-4 mt-auto border-t">
+                    <span class="page-number"></span>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ③ ページ末尾：機能を実現するJavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('section.slide-container');
+            const nav = document.getElementById('slide-nav');
+            const totalSlides = slides.length;
+
+            // ナビゲーションを動的に生成し、ページ番号を付与
+            slides.forEach((slide, index) => {
+                const pageNum = index + 1;
+                let title = `スライド ${pageNum}`;
+                const titleElement = slide.querySelector('h1, h2');
+                if (titleElement) {
+                    title = titleElement.textContent.trim().substring(0, 25);
+                    if (titleElement.textContent.length > 25) title += '...';
+                }
+                
+                const pageNumberElement = slide.querySelector('.page-number');
+                if(pageNumberElement) {
+                    pageNumberElement.textContent = `${pageNum} / ${totalSlides}`;
+                }
+
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#${slide.id}" class="block py-2 px-3 rounded hover:bg-gray-700 transition-colors duration-200 text-sm">${pageNum}. ${title}</a>`;
+                nav.appendChild(li);
+            });
+
+            // Chart.jsのグラフを初期化
+            const xyzCtx = document.getElementById('xyzChart')?.getContext('2d');
+            if(xyzCtx) {
+                new Chart(xyzCtx, {
+                    type: 'bubble',
+                    data: {
+                        datasets: [{
+                            label: 'X軸: 思考の型',
+                            data: [{x: 1, y: 0, r: 15}],
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                        }, {
+                            label: 'Y軸: 時間軸',
+                            data: [{x: 0, y: 1, r: 15}],
+                            backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                        }, {
+                            label: 'Z軸: レベル軸',
+                            data: [{x: 0.5, y: 0.5, r: 15}],
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)'
+                        }, {
+                            label: '思考OS',
+                            data: [{x: 0.5, y: 0.5, r: 5}],
+                            backgroundColor: 'rgba(153, 102, 255, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '思考のXYZ-3Dメソッド'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'X: 思考の型 (具体/抽象/構造)' },
+                                min: -1, max: 2
+                            },
+                            y: {
+                                title: { display: true, text: 'Y: 時間軸 (過去/現在/未来)' },
+                                min: -1, max: 2
+                            }
+                        }
+                    }
+                });
+            }
+
+            // スクロールに応じてナビゲーションのハイライトを更新
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('#slide-nav a').forEach(a => {
+                            a.classList.remove('bg-blue-500', 'text-white');
+                            if (a.getAttribute('href') === `#${id}`) {
+                                a.classList.add('bg-blue-500', 'text-white');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            slides.forEach(slide => {
+                observer.observe(slide);
+            });
+        });
+    </script>
+
+</body>
+</html>

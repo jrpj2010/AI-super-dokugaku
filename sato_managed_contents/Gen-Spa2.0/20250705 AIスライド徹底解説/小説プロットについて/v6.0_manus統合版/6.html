@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, height=720, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>キャラクターアークの5要素 - Gen-Spa v6.0</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: #F8F9FA;
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+      overflow: hidden;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .element-box {
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border-left: 4px solid;
+      background-color: rgba(248, 249, 250, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .element-box:hover {
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .element-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: #3498DB;
+      transform: scale(1.2);
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #7f8c8d;
+      font-size: 16px;
+    }
+
+    .element-icon {
+      display: inline-block;
+      width: 40px;
+      text-align: center;
+      margin-right: 12px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <div class="slide-number">6 / 10</div>
+    <h1 class="title">キャラクターアークの5要素</h1>
+
+    <div class="flex flex-row space-x-8">
+      <div class="content w-1/2">
+        <p class="mb-4">感情に訴えるキャラクターアークは、以下の<span class="highlight">5つの要素</span>から構築されます：</p>
+
+        <div class="element-box" style="border-left-color: #95a5a6;">
+          <div>
+            <span class="element-icon">👻</span>
+            <span class="element-title" style="color: #2D3E50;">幽霊（Ghost）</span>
+          </div>
+          <p style="font-size: 18px;">主人公の過去のトラウマ。これが主人公に「嘘」を信じ込ませる原因となります。</p>
+        </div>
+
+        <div class="element-box" style="border-left-color: #E74C3C;">
+          <div>
+            <span class="element-icon">🎭</span>
+            <span class="element-title" style="color: #E74C3C;">嘘（Lie）</span>
+          </div>
+          <p style="font-size: 18px;">主人公が信じている誤った信念。彼らの行動を縛り、成長を妨げます。</p>
+        </div>
+
+        <div class="element-box" style="border-left-color: #f39c12;">
+          <div>
+            <span class="element-icon">🎯</span>
+            <span class="element-title" style="color: #f39c12;">願望（Want）</span>
+          </div>
+          <p style="font-size: 18px;">表面上達成しようとしている目標。「表ストーリー」の動機となります。</p>
+        </div>
+
+        <div class="element-box" style="border-left-color: #27ae60;">
+          <div>
+            <span class="element-icon">💎</span>
+            <span class="element-title" style="color: #27ae60;">ニーズ（Need）</span>
+          </div>
+          <p style="font-size: 18px;">本当に必要としているもの。「裏ストーリー」の核となる部分です。</p>
+        </div>
+
+        <div class="element-box" style="border-left-color: #3498DB;">
+          <div>
+            <span class="element-icon">✨</span>
+            <span class="element-title" style="color: #3498DB;">真実（Truth）</span>
+          </div>
+          <p style="font-size: 18px;">物語を通して発見する正しい認識。主人公は「嘘」を捨て去り、成長します。</p>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex flex-col justify-center items-center">
+        <div style="height: 400px; width: 500px;">
+          <canvas id="arcChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <div class="navigation">
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot active"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('arcChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+        labels: ['幽霊 (過去)', '嘘 (誤認)', '願望 (表面)', 'ニーズ (本質)', '真実 (成長)'],
+        datasets: [{
+          label: 'キャラクターアークの要素',
+          data: [60, 80, 70, 90, 100],
+          backgroundColor: [
+            'rgba(149, 165, 166, 0.6)',
+            'rgba(231, 76, 60, 0.6)',
+            'rgba(243, 156, 18, 0.6)',
+            'rgba(39, 174, 96, 0.6)',
+            'rgba(52, 152, 219, 0.6)'
+          ],
+          borderColor: [
+            'rgba(149, 165, 166, 1)',
+            'rgba(231, 76, 60, 1)',
+            'rgba(243, 156, 18, 1)',
+            'rgba(39, 174, 96, 1)',
+            'rgba(52, 152, 219, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'キャラクターアークにおける各要素の影響度',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+    // ナビゲーション
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        window.location.href = '7.html';
+      } else if (e.key === 'ArrowLeft') {
+        window.location.href = '5.html';
+      }
+    });
+
+    document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        window.location.href = `${index + 1}.html`;
+      });
+    });
+  </script>
+</body>
+
+</html>

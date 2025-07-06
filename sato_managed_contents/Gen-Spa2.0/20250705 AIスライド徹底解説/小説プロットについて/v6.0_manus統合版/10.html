@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, height=720, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>行動計画 - Gen-Spa v6.0</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: #F8F9FA;
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+      overflow: hidden;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .action-box {
+      background: linear-gradient(135deg, #3498DB 0%, #2980b9 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .action-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .step-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateX(8px);
+      border-color: #3498DB;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-number {
+      background: #3498DB;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: #3498DB;
+      transform: scale(1.2);
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #7f8c8d;
+      font-size: 16px;
+    }
+
+    .final-message {
+      background: linear-gradient(135deg, #E74C3C 0%, #c0392b 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <div class="slide-number">10 / 10</div>
+    <h1 class="title">今すぐ実践：執筆メソッド行動計画</h1>
+
+    <div class="flex flex-row space-x-8">
+      <div class="content w-1/2">
+        <div class="action-box">
+          <h2 class="action-title">💡 直感型プロッター必修4ステップ</h2>
+          <p style="font-size: 18px;">無名作家の壁を突破し、読者の心を掴む物語を創造する方法</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div>
+            <strong>主人公の「嘘」を特定</strong><br>
+            <span style="font-size: 18px; color: #718096;">何を間違って信じているか？</span>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div>
+            <strong>願望とニーズを分離</strong><br>
+            <span style="font-size: 18px; color: #718096;">欲しいもの vs 本当に必要なもの</span>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div>
+            <strong>表裏の相互作用設計</strong><br>
+            <span style="font-size: 18px; color: #718096;">外的戦いに内的意味を付与</span>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div>
+            <strong>W理論で感情設計</strong><br>
+            <span style="font-size: 18px; color: #718096;">読者の心を動かす感情曲線</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex flex-col justify-center">
+        <div style="height: 320px; width: 500px;">
+          <canvas id="successChart"></canvas>
+        </div>
+        
+        <div class="final-message">
+          <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">
+            🚀 無名作家の壁を突破する
+          </h3>
+          <p style="font-size: 18px;">
+            技術的に完璧な物語構造を身につけることで、<br>
+            「面白さ」を確実に担保し、読者の心を掴む作品を創造する
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <div class="navigation">
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot active"></div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('successChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['現在', '1ヶ月後', '3ヶ月後', '6ヶ月後', '1年後'],
+        datasets: [{
+          label: '技術習得度',
+          data: [20, 40, 60, 80, 95],
+          borderColor: 'rgba(52, 152, 219, 1)',
+          backgroundColor: 'rgba(52, 152, 219, 0.2)',
+          borderWidth: 3,
+          tension: 0.4
+        }, {
+          label: '読者満足度',
+          data: [30, 45, 65, 85, 98],
+          borderColor: 'rgba(231, 76, 60, 1)',
+          backgroundColor: 'rgba(231, 76, 60, 0.2)',
+          borderWidth: 3,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: '達成度（%）'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '実践期間'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: '執筆メソッド実践による成長曲線',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+
+    // ナビゲーション
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') {
+        window.location.href = '9.html';
+      }
+    });
+
+    document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        window.location.href = `${index + 1}.html`;
+      });
+    });
+
+    // 終了メッセージアニメーション
+    setTimeout(() => {
+      const message = document.querySelector('.final-message');
+      message.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        message.style.transform = 'scale(1)';
+      }, 300);
+    }, 1000);
+  </script>
+</body>
+
+</html>

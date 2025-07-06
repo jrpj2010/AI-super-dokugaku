@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .key-point {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-left: 4px solid #3498DB;
+      padding: 12px 16px;
+      margin: 16px 0;
+    }
+
+    .act-box {
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .act-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #2D3E50;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">第二幕：葛藤、試練、そして「ニーズ」の覚醒</h1>
+
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="grid grid-rows-3 gap-4">
+          <div class="act-box">
+            <h2 class="act-title"><i class="fas fa-fire mr-2"></i>ファニーゲーム（Fun and Games）</h2>
+            <p>物語の中心的な前提が展開される部分で、表ストーリーの「アクション」が高まります。主人公は自身のアイデンティティに関する葛藤を深め、多数派との違いや少数派グループとの対立が描かれます。</p>
+          </div>
+
+          <div class="act-box">
+            <h2 class="act-title"><i class="fas fa-lightbulb mr-2"></i>中間点（Midpoint）</h2>
+            <p>物語の真ん中に位置するターニングポイントです。「偽りの成功」や「偽りの敗北」が訪れ、主人公が自身の「嘘」や真の「<span
+                class="highlight">ニーズ</span>」について、決定的な「啓示」を得る瞬間です。</p>
+          </div>
+
+          <div class="act-box">
+            <h2 class="act-title"><i class="fas fa-moon mr-2"></i>魂の暗い夜（Dark Night of the Soul）</h2>
+            <p>物語の緊張が最高潮に達し、主人公がどん底に突き落とされる段階です。自己の存在意義が揺らぐ深い絶望の瞬間であり、その後の内省と変化を促す重要なポイントとなります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <div style="height: 380px; width: 500px;">
+          <canvas id="secondActChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('secondActChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['ファニーゲーム開始', '葛藤の深まり', '中間点', '悪者が迫る', '魂の暗い夜'],
+        datasets: [
+          {
+            label: '表ストーリー（外的行動）',
+            data: [60, 75, 50, 30, 15],
+            borderColor: 'rgba(52, 152, 219, 1)',
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: '裏ストーリー（内面の変化）',
+            data: [30, 45, 70, 85, 95],
+            borderColor: 'rgba(231, 76, 60, 1)',
+            backgroundColor: 'rgba(231, 76, 60, 0.2)',
+            tension: 0.4,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: '物語における重要度'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '第二幕の進行'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: '第二幕における表と裏の相互作用',
+            font: {
+              size: 18
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return context.dataset.label + ': ' + context.raw + '%';
+              }
+            }
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
