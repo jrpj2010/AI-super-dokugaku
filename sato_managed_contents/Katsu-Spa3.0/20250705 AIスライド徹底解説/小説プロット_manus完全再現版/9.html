@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .example-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-top: 4px solid;
+    }
+
+    .example-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .story-element {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .element-label {
+      font-weight: 600;
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .element-content {
+      flex: 1;
+      padding-left: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">実践例：「森のモンスター」で学ぶプロット作成</h1>
+
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="example-card" style="border-top-color: #3498DB;">
+          <h2 class="example-title" style="color: #3498DB;">表ストーリー（A Story）</h2>
+          <p class="mb-3">森でモンスターから逃げる冒険物語</p>
+          
+          <div class="story-element">
+            <span class="element-label">設定：</span>
+            <span class="element-content">主人公が森で迷子になる</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">対立：</span>
+            <span class="element-content">モンスターに追われ、生き残りをかけた戦い</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">解決：</span>
+            <span class="element-content">森から脱出し、安全な場所へ</span>
+          </div>
+        </div>
+
+        <div class="example-card" style="border-top-color: #E74C3C;">
+          <h2 class="example-title" style="color: #E74C3C;">裏ストーリー（B Story）</h2>
+          <p class="mb-3">主人公の<span class="highlight">内面の成長物語</span></p>
+          
+          <div class="story-element">
+            <span class="element-label">幽霊：</span>
+            <span class="element-content">過去の失敗による自信喪失</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">嘘：</span>
+            <span class="element-content">「自分は弱く、何もできない」</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">願望：</span>
+            <span class="element-content">安全に家に帰りたい</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">ニーズ：</span>
+            <span class="element-content">自分の強さを信じること</span>
+          </div>
+          <div class="story-element">
+            <span class="element-label">真実：</span>
+            <span class="element-content">「困難に立ち向かう勇気がある」</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <div style="height: 500px; width: 500px;">
+          <canvas id="plotChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('plotChart').getContext('2d');
+    
+    const chart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['外的行動', '内的葛藤', '感情の深さ', 'テーマ性', 'キャラクター成長', '読者共感'],
+        datasets: [{
+          label: '表ストーリーのみ',
+          data: [90, 20, 30, 25, 15, 35],
+          backgroundColor: 'rgba(52, 152, 219, 0.2)',
+          borderColor: 'rgba(52, 152, 219, 1)',
+          pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(52, 152, 219, 1)'
+        }, {
+          label: '表＋裏ストーリー',
+          data: [85, 90, 95, 88, 92, 90],
+          backgroundColor: 'rgba(231, 76, 60, 0.2)',
+          borderColor: 'rgba(231, 76, 60, 1)',
+          pointBackgroundColor: 'rgba(231, 76, 60, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 100,
+            ticks: {
+              stepSize: 20
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'プロット構成による物語要素の充実度',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 15,
+              font: {
+                size: 14
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

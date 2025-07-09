@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feloスライドビューアー - 生成AIのビジネス実装</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f0f0f0;
+        }
+        .viewer-container {
+            display: flex;
+            height: 100vh;
+        }
+        .slide-list {
+            width: 300px;
+            background: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        .slide-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .slide-item:hover {
+            background: #f5f5f5;
+        }
+        .slide-item.active {
+            background: #007BFF;
+            color: white;
+        }
+        .slide-viewer {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #e0e0e0;
+        }
+        .slide-frame {
+            width: 1280px;
+            height: 720px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: white;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .control-btn {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .control-btn:hover {
+            background: #0056b3;
+        }
+        .control-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .header {
+            background: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .slide-list {
+                display: none;
+            }
+            .slide-frame {
+                width: 100%;
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="viewer-container">
+        <div class="slide-list">
+            <div class="header">スライド一覧</div>
+            <div id="slideList"></div>
+        </div>
+        <div class="slide-viewer">
+            <iframe id="slideFrame" class="slide-frame"></iframe>
+        </div>
+    </div>
+    <div class="controls">
+        <button class="control-btn" id="prevBtn">◀ 前へ</button>
+        <span id="slideInfo" style="padding: 10px 20px; font-weight: bold;">1 / 20</span>
+        <button class="control-btn" id="nextBtn">次へ ▶</button>
+    </div>
+    
+    <script>
+        const slides = [
+            {file: 'slide-01-title.html', title: 'タイトルスライド', slideNumber: 1},
+            {file: 'slide-02.html', title: 'スライド 2', slideNumber: 2},
+            {file: 'slide-03.html', title: 'スライド 3', slideNumber: 3},
+            {file: 'slide-04.html', title: 'スライド 4', slideNumber: 4},
+            {file: 'slide-05.html', title: 'スライド 5', slideNumber: 5},
+            {file: 'slide-06.html', title: 'スライド 6', slideNumber: 6},
+            {file: 'slide-07.html', title: 'スライド 7', slideNumber: 7},
+            {file: 'slide-08.html', title: 'スライド 8', slideNumber: 8},
+            {file: 'slide-09.html', title: 'スライド 9', slideNumber: 9},
+            {file: 'slide-10.html', title: 'スライド 10', slideNumber: 10},
+            {file: 'slide-11.html', title: 'スライド 11', slideNumber: 11},
+            {file: 'slide-12.html', title: 'スライド 12', slideNumber: 12},
+            {file: 'slide-13.html', title: 'スライド 13', slideNumber: 13},
+            {file: 'slide-14.html', title: 'スライド 14', slideNumber: 14},
+            {file: 'slide-15.html', title: 'スライド 15', slideNumber: 15},
+            {file: 'slide-16.html', title: 'スライド 16', slideNumber: 16},
+            {file: 'slide-17.html', title: 'スライド 17', slideNumber: 17},
+            {file: 'slide-18.html', title: 'スライド 18', slideNumber: 18},
+            {file: 'slide-19.html', title: 'スライド 19', slideNumber: 19},
+            {file: 'slide-20-end.html', title: '最終スライド', slideNumber: 20}
+        ];
+        
+        let currentSlide = 0;
+        
+        const slideList = document.getElementById('slideList');
+        const slideFrame = document.getElementById('slideFrame');
+        const slideInfo = document.getElementById('slideInfo');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        // スライドリストを生成
+        slides.forEach((slide, index) => {
+            const item = document.createElement('div');
+            item.className = 'slide-item';
+            item.innerHTML = `
+                <div style="font-weight: bold; font-size: 16px;">スライド ${slide.slideNumber}</div>
+                <div style="font-size: 14px; margin-top: 5px; opacity: 0.8;">${slide.title}</div>
+            `;
+            item.onclick = () => loadSlide(index);
+            slideList.appendChild(item);
+        });
+        
+        // iframeの内容からタイトルを抽出して更新
+        function updateSlideTitle(index) {
+            slideFrame.onload = function() {
+                try {
+                    const doc = slideFrame.contentDocument || slideFrame.contentWindow.document;
+                    const h1 = doc.querySelector('h1');
+                    const h2 = doc.querySelector('h2');
+                    let title = '';
+                    
+                    if (h1) {
+                        title = h1.textContent.replace(/\s+/g, ' ').trim();
+                    } else if (h2) {
+                        title = h2.textContent.replace(/\s+/g, ' ').trim();
+                    }
+                    
+                    if (title) {
+                        slides[index].title = title;
+                        const items = document.querySelectorAll('.slide-item');
+                        if (items[index]) {
+                            items[index].querySelector('div:last-child').textContent = title;
+                        }
+                    }
+                } catch (e) {
+                    // クロスオリジンエラーの場合は無視
+                }
+            };
+        }
+        
+        function loadSlide(index) {
+            currentSlide = index;
+            slideFrame.src = slides[index].file;
+            slideInfo.textContent = `${index + 1} / ${slides.length}`;
+            
+            // アクティブクラスを更新
+            document.querySelectorAll('.slide-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
+            // ボタンの状態を更新
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+            
+            // タイトルを更新
+            updateSlideTitle(index);
+        }
+        
+        prevBtn.onclick = () => {
+            if (currentSlide > 0) loadSlide(currentSlide - 1);
+        };
+        
+        nextBtn.onclick = () => {
+            if (currentSlide < slides.length - 1) loadSlide(currentSlide + 1);
+        };
+        
+        // キーボードナビゲーション
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                loadSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                loadSlide(currentSlide + 1);
+            } else if (e.key === 'f' || e.key === 'F') {
+                // Fキーでフルスクリーン
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+        
+        // 初期ロード
+        loadSlide(0);
+        
+        // マウスホイールでのナビゲーション
+        slideFrame.addEventListener('wheel', (e) => {
+            if (e.deltaY > 0 && currentSlide < slides.length - 1) {
+                loadSlide(currentSlide + 1);
+            } else if (e.deltaY < 0 && currentSlide > 0) {
+                loadSlide(currentSlide - 1);
+            }
+        });
+    </script>
+</body>
+</html>

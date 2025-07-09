@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG型のビジュアル表現力比較</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .side-accent {
+      background-color: #006699;
+      width: 6px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #00447c;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+
+    .stat-card {
+      border-left: 4px solid #006699;
+      background-color: #f8f9fa;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #006699;
+    }
+
+    .footer {
+      color: #666666;
+      font-size: 14px;
+    }
+
+    .svg-example {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: white;
+    }
+
+    .compare-table th {
+      background-color: #f0f4f8;
+      color: #00447c;
+      font-weight: 600;
+    }
+
+    .compare-table td,
+    .compare-table th {
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .compare-table tr:nth-child(even) {
+      background-color: #f9fbfd;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container bg-white flex">
+    <!-- Left Column - Title and Description -->
+    <div class="side-accent"></div>
+    <div class="w-2/5 p-10 flex flex-col">
+      <h2 class="section-title mb-6">SVG型のビジュアル表現力比較</h2>
+      <p class="text-lg mb-6">ベクター形式のSVGは高解像度ビジュアルと柔軟な編集性を実現し、従来型との差別化を図る</p>
+
+      <div class="mb-6">
+        <h3 class="font-bold mb-3">SVG形式の主な利点</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>解像度に依存しないスケーラブルな表現</li>
+          <li>要素ごとに分解・編集可能</li>
+          <li>ファイルサイズが小さく、読み込みが高速</li>
+          <li>アニメーションや相互作用が組み込み可能</li>
+        </ul>
+      </div>
+
+      <div class="mt-auto">
+        <div class="stat-card p-4">
+          <p class="text-sm text-gray-600">ブランドガイドライン準拠度</p>
+          <p class="stat-number">94.6%</p>
+          <p class="text-sm mt-1">従来型は平均68.2%</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Comparison and Examples -->
+    <div class="w-3/5 bg-gray-50 p-10 flex flex-col">
+      <!-- SVG vs Traditional Format Comparison -->
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-3">SVG型 vs 従来型フォーマット比較</h3>
+        <table class="compare-table w-full text-sm">
+          <thead>
+            <tr>
+              <th>評価項目</th>
+              <th>SVG型</th>
+              <th>従来型 (PNG/JPEG)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>拡大縮小時の品質</td>
+              <td>高品質維持 ★★★★★</td>
+              <td>品質劣化 ★★☆☆☆</td>
+            </tr>
+            <tr>
+              <td>編集自由度</td>
+              <td>要素ごとに編集可能 ★★★★★</td>
+              <td>全体変更のみ ★☆☆☆☆</td>
+            </tr>
+            <tr>
+              <td>企業ブランド対応</td>
+              <td>色・フォント完全適用 ★★★★☆</td>
+              <td>限定的適用 ★★☆☆☆</td>
+            </tr>
+            <tr>
+              <td>生成AI適合性</td>
+              <td>高い構造化 ★★★★★</td>
+              <td>低い構造化 ★★☆☆☆</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Brand Guidelines Compliance Chart -->
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-2">ブランドガイドライン準拠度分析</h3>
+        <div class="chart-container">
+          <canvas id="brandComplianceChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Example SVG Output -->
+      <div class="flex justify-between items-center">
+        <div class="svg-example p-2 w-1/2">
+          <h4 class="text-xs text-center mb-1">SVGインフォグラフィック例 (Claude 3.5生成)</h4>
+          <div class="flex justify-center">
+            <svg width="220" height="120" viewBox="0 0 220 120">
+              <rect x="10" y="10" width="200" height="100" rx="10" fill="#f0f4f8" stroke="#006699" stroke-width="2" />
+              <circle cx="60" cy="60" r="30" fill="#006699" opacity="0.8" />
+              <rect x="110" y="30" width="80" height="60" fill="#00447c" opacity="0.8" />
+              <text x="60" y="65" text-anchor="middle" fill="white" font-size="12">SVG</text>
+              <text x="150" y="65" text-anchor="middle" fill="white" font-size="12">データ</text>
+              <line x1="90" y1="60" x2="110" y2="60" stroke="#333" stroke-width="2" stroke-dasharray="4" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-1/2 pl-4">
+          <div class="bg-white p-3 rounded shadow-sm mb-3">
+            <p class="text-sm text-gray-600">ビジュアル精度</p>
+            <p class="text-2xl font-bold text-blue-700">3.7倍</p>
+            <p class="text-xs">SVGはPNG比</p>
+          </div>
+          <div class="bg-white p-3 rounded shadow-sm">
+            <p class="text-sm text-gray-600">編集工数削減</p>
+            <p class="text-2xl font-bold text-green-600">68%減</p>
+            <p class="text-xs">企業ブランド適用時</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Source Citation -->
+      <div class="mt-auto pt-2">
+        <p class="text-xs text-gray-500">出典: VisualAI Consortium Report 2025, Anthropic Claude Performance Analysis</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('brandComplianceChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['カラーパレット', 'タイポグラフィ', 'ロゴ配置', 'スタイル一貫性', '視認性'],
+          datasets: [
+            {
+              label: 'SVG型',
+              data: [96, 98, 92, 95, 92],
+              backgroundColor: 'rgba(0, 102, 153, 0.7)'
+            },
+            {
+              label: '従来型 (PNG/JPEG)',
+              data: [72, 65, 60, 75, 69],
+              backgroundColor: 'rgba(192, 192, 192, 0.7)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              title: {
+                display: true,
+                text: '準拠度 (%)'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felo Advanced Editor - 完全編集システム</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --primary-hover: #0056b3;
+            --selection-color: rgba(0, 123, 255, 0.1);
+            --toolbar-height: 60px;
+            --side-panel-width: 60px;
+        }
+        
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            overflow: hidden;
+            user-select: none;
+        }
+        
+        /* ツールバー */
+        .toolbar {
+            height: var(--toolbar-height);
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .toolbar-divider {
+            width: 1px;
+            height: 30px;
+            background: #e0e0e0;
+            margin: 0 10px;
+        }
+        
+        /* ドロップダウンメニュー */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 180px;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-trigger:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0,123,255,0.1);
+        }
+        
+        .dropdown-trigger i {
+            margin-left: auto;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+        }
+        
+        .dropdown-item.selected {
+            background: var(--selection-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .dropdown-item-preview {
+            flex: 1;
+            text-align: right;
+            opacity: 0.6;
+        }
+        
+        /* フォントファミリープレビュー */
+        .font-preview-noto-sans-jp { font-family: 'Noto Sans JP', sans-serif; }
+        .font-preview-noto-serif-jp { font-family: 'Noto Serif JP', serif; }
+        .font-preview-noto-sans-kr { font-family: 'Noto Sans KR', sans-serif; }
+        .font-preview-arial { font-family: Arial, sans-serif; }
+        .font-preview-times { font-family: 'Times New Roman', serif; }
+        .font-preview-songti { font-family: 'STSong', '宋体', serif; }
+        .font-preview-heiti { font-family: 'STHeiti', '黑体', sans-serif; }
+        .font-preview-mincho { font-family: 'MS Mincho', '明朝', serif; }
+        .font-preview-gothic { font-family: 'MS Gothic', 'ゴシック', sans-serif; }
+        
+        /* アクションボタン */
+        .action-button {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .action-button:hover {
+            background: #f5f5f5;
+            border-color: var(--primary-color);
+        }
+        
+        .action-button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .action-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* メインコンテナ */
+        .main-container {
+            display: flex;
+            height: 100vh;
+            padding-top: var(--toolbar-height);
+        }
+        
+        /* スライドエリア */
+        .slide-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            overflow: auto;
+        }
+        
+        .slide-wrapper {
+            position: relative;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .slide-content {
+            width: 1280px;
+            height: 720px;
+            transform-origin: center center;
+            transition: transform 0.3s;
+        }
+        
+        /* 編集可能要素 */
+        .editable {
+            position: relative;
+            outline: none;
+            transition: all 0.2s;
+            user-select: text;
+            cursor: text;
+        }
+        
+        .editable:hover {
+            background: rgba(0, 123, 255, 0.05);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+        }
+        
+        .editable:focus {
+            background: rgba(0, 123, 255, 0.08);
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        
+        .editable.selected {
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        
+        /* サイドパネル */
+        .side-panel {
+            width: var(--side-panel-width);
+            background: white;
+            border-left: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            gap: 15px;
+            align-items: center;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.05);
+        }
+        
+        .panel-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+            position: relative;
+        }
+        
+        .panel-button:hover {
+            background: #f0f0f0;
+            color: var(--primary-color);
+        }
+        
+        .panel-button.active {
+            color: var(--primary-color);
+        }
+        
+        /* ツールチップ */
+        .tooltip {
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-right: 10px;
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        
+        .panel-button:hover .tooltip {
+            opacity: 1;
+        }
+        
+        /* ズームコントロール */
+        .zoom-control {
+            position: fixed;
+            bottom: 20px;
+            right: calc(var(--side-panel-width) + 20px);
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .zoom-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .zoom-button:hover {
+            background: #f0f0f0;
+        }
+        
+        .zoom-level {
+            min-width: 60px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* カラーピッカー */
+        .color-picker-wrapper {
+            position: relative;
+        }
+        
+        .color-preview {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+        
+        /* 履歴管理 */
+        .history-indicator {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .history-indicator.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- ツールバー -->
+    <div class="toolbar">
+        <!-- フォントファミリー -->
+        <div class="dropdown">
+            <div class="dropdown-trigger" id="fontDropdown">
+                <span>デフォルトフォント</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-menu" id="fontMenu">
+                <div class="dropdown-item" data-font="Noto Sans JP">
+                    <span>デフォルトフォント</span>
+                </div>
+                <div class="dropdown-item" data-font="Noto Sans Japanese">
+                    <span class="font-preview-noto-sans-jp">Noto Sans Japanese</span>
+                </div>
+                <div class="dropdown-item" data-font="Noto Serif Japanese">
+                    <span class="font-preview-noto-serif-jp">Noto Serif Japanese</span>
+                </div>
+                <div class="dropdown-item" data-font="Noto Sans Korean">
+                    <span class="font-preview-noto-sans-kr">Noto Sans Korean</span>
+                </div>
+                <div class="dropdown-item" data-font="Nanum Gothic">
+                    <span>나눔고딕 (Nanum Gothic)</span>
+                </div>
+                <div class="dropdown-item" data-font="Arial">
+                    <span class="font-preview-arial">Arial</span>
+                </div>
+                <div class="dropdown-item" data-font="Times New Roman">
+                    <span class="font-preview-times">Times New Roman</span>
+                </div>
+                <div class="dropdown-item" data-font="宋体">
+                    <span class="font-preview-songti">宋体</span>
+                </div>
+                <div class="dropdown-item" data-font="黑体">
+                    <span class="font-preview-heiti">黑体</span>
+                </div>
+                <div class="dropdown-item" data-font="正黑體">
+                    <span>正黑體</span>
+                </div>
+                <div class="dropdown-item" data-font="新細明體">
+                    <span>新細明體</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- フォントサイズ -->
+        <div class="dropdown">
+            <div class="dropdown-trigger" id="sizeDropdown">
+                <span>16</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-menu" id="sizeMenu">
+                <div class="dropdown-item" data-size="8">
+                    <span>8</span>
+                    <span class="dropdown-item-preview" style="font-size: 8px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="9">
+                    <span>9</span>
+                    <span class="dropdown-item-preview" style="font-size: 9px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="10">
+                    <span>10</span>
+                    <span class="dropdown-item-preview" style="font-size: 10px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="12">
+                    <span>12</span>
+                    <span class="dropdown-item-preview" style="font-size: 12px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="14">
+                    <span>14</span>
+                    <span class="dropdown-item-preview" style="font-size: 14px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item selected" data-size="16">
+                    <span>16</span>
+                    <span class="dropdown-item-preview" style="font-size: 16px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="18">
+                    <span>18</span>
+                    <span class="dropdown-item-preview" style="font-size: 18px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="20">
+                    <span>20</span>
+                    <span class="dropdown-item-preview" style="font-size: 20px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="24">
+                    <span>24</span>
+                    <span class="dropdown-item-preview" style="font-size: 24px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="28">
+                    <span>28</span>
+                    <span class="dropdown-item-preview" style="font-size: 28px;">プレビュー</span>
+                </div>
+                <div class="dropdown-item" data-size="30">
+                    <span>30</span>
+                    <span class="dropdown-item-preview" style="font-size: 30px;">プレビュー</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- テキストスタイル -->
+        <button class="action-button" id="boldBtn" title="太字 (Ctrl+B)">
+            <i class="fas fa-bold"></i>
+        </button>
+        <button class="action-button" id="italicBtn" title="斜体 (Ctrl+I)">
+            <i class="fas fa-italic"></i>
+        </button>
+        <button class="action-button" id="underlineBtn" title="下線 (Ctrl+U)">
+            <i class="fas fa-underline"></i>
+        </button>
+        <button class="action-button" id="strikeBtn" title="取り消し線">
+            <i class="fas fa-strikethrough"></i>
+        </button>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- テキスト配置 -->
+        <button class="action-button" id="alignLeftBtn" title="左揃え">
+            <i class="fas fa-align-left"></i>
+        </button>
+        <button class="action-button" id="alignCenterBtn" title="中央揃え">
+            <i class="fas fa-align-center"></i>
+        </button>
+        <button class="action-button" id="alignRightBtn" title="右揃え">
+            <i class="fas fa-align-right"></i>
+        </button>
+        <button class="action-button" id="alignJustifyBtn" title="両端揃え">
+            <i class="fas fa-align-justify"></i>
+        </button>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- リスト -->
+        <button class="action-button" id="bulletListBtn" title="箇条書き">
+            <i class="fas fa-list"></i>
+        </button>
+        <button class="action-button" id="numberListBtn" title="番号付きリスト">
+            <i class="fas fa-list-ol"></i>
+        </button>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- カラー -->
+        <div class="color-picker-wrapper">
+            <div class="color-preview" id="textColorPreview" style="background: #333333;"></div>
+        </div>
+        <div class="color-picker-wrapper">
+            <div class="color-preview" id="bgColorPreview" style="background: transparent;"></div>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- 削除 -->
+        <button class="action-button" id="deleteBtn" title="削除">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+    
+    <!-- メインコンテナ -->
+    <div class="main-container">
+        <!-- スライドエリア -->
+        <div class="slide-area">
+            <div class="slide-wrapper">
+                <div class="slide-content" id="slideContent">
+                    <!-- サンプルスライド -->
+                    <div class="w-full h-full p-16" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+                        <h1 class="text-6xl font-bold mb-8 editable" contenteditable="true" style="color: #007BFF;">
+                            生成AIのビジネス実装
+                        </h1>
+                        <h2 class="text-3xl text-gray-700 mb-12 editable" contenteditable="true">
+                            実践的活用法と未来のワークスタイル
+                        </h2>
+                        
+                        <div class="grid grid-cols-3 gap-8 mb-12">
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-xl font-bold mb-2 editable" contenteditable="true">核心的洞察</h3>
+                                <p class="text-gray-600 editable" contenteditable="true">全ての成果物の根源は「テキスト」である</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-xl font-bold mb-2 editable" contenteditable="true">革新的思考</h3>
+                                <p class="text-gray-600 editable" contenteditable="true">「超抽象化・超具体化・超構造化」</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-xl font-bold mb-2 editable" contenteditable="true">未来予測</h3>
+                                <p class="text-gray-600 editable" contenteditable="true">AI駆動開発がもたらす革命的な速度と可能性</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="text-2xl font-medium editable" contenteditable="true">講師: 佐藤 勝彦</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- サイドパネル -->
+        <div class="side-panel">
+            <div class="panel-button" id="undoBtn">
+                <i class="fas fa-undo"></i>
+                <span class="tooltip">元に戻す</span>
+            </div>
+            <div class="panel-button" id="redoBtn">
+                <i class="fas fa-redo"></i>
+                <span class="tooltip">やり直し</span>
+            </div>
+            <div class="panel-button" id="copyBtn">
+                <i class="fas fa-copy"></i>
+                <span class="tooltip">コピー</span>
+            </div>
+            <div class="panel-button" id="pasteBtn">
+                <i class="fas fa-paste"></i>
+                <span class="tooltip">貼り付け</span>
+            </div>
+            <div class="panel-button" id="shareBtn">
+                <i class="fas fa-share-alt"></i>
+                <span class="tooltip">共有する</span>
+            </div>
+            <div class="panel-button" id="likeBtn">
+                <i class="far fa-heart"></i>
+                <span class="tooltip">いいね</span>
+            </div>
+            <div class="panel-button" id="dislikeBtn">
+                <i class="far fa-thumbs-down"></i>
+                <span class="tooltip">よくない</span>
+            </div>
+            <div class="panel-button" id="satisfiedBtn">
+                <i class="far fa-thumbs-up"></i>
+                <span class="tooltip">満足</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ズームコントロール -->
+    <div class="zoom-control">
+        <div class="zoom-button" id="zoomOutBtn">
+            <i class="fas fa-minus"></i>
+        </div>
+        <div class="zoom-level" id="zoomLevel">100%</div>
+        <div class="zoom-button" id="zoomInBtn">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+    
+    <!-- 履歴インジケーター -->
+    <div class="history-indicator" id="historyIndicator"></div>
+    
+    <script>
+        // エディターの状態管理
+        const editorState = {
+            selectedElement: null,
+            history: [],
+            historyIndex: -1,
+            currentZoom: 1,
+            clipboard: null
+        };
+        
+        // 履歴管理
+        function saveState() {
+            const state = document.getElementById('slideContent').innerHTML;
+            editorState.history = editorState.history.slice(0, editorState.historyIndex + 1);
+            editorState.history.push(state);
+            editorState.historyIndex++;
+            
+            // 履歴の最大数を制限
+            if (editorState.history.length > 50) {
+                editorState.history.shift();
+                editorState.historyIndex--;
+            }
+        }
+        
+        function undo() {
+            if (editorState.historyIndex > 0) {
+                editorState.historyIndex--;
+                document.getElementById('slideContent').innerHTML = editorState.history[editorState.historyIndex];
+                showHistoryIndicator('元に戻しました');
+                setupEditableElements();
+            }
+        }
+        
+        function redo() {
+            if (editorState.historyIndex < editorState.history.length - 1) {
+                editorState.historyIndex++;
+                document.getElementById('slideContent').innerHTML = editorState.history[editorState.historyIndex];
+                showHistoryIndicator('やり直しました');
+                setupEditableElements();
+            }
+        }
+        
+        function showHistoryIndicator(message) {
+            const indicator = document.getElementById('historyIndicator');
+            indicator.textContent = message;
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+        
+        // ドロップダウンの管理
+        function setupDropdown(triggerId, menuId) {
+            const trigger = document.getElementById(triggerId);
+            const menu = document.getElementById(menuId);
+            
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // 他のドロップダウンを閉じる
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    if (m !== menu) m.classList.remove('show');
+                });
+                menu.classList.toggle('show');
+            });
+            
+            // メニュー項目のクリック処理
+            menu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const value = item.dataset.font || item.dataset.size;
+                    
+                    // 選択状態を更新
+                    menu.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    
+                    // トリガーのテキストを更新
+                    trigger.querySelector('span').textContent = value;
+                    
+                    // 選択された要素に適用
+                    if (editorState.selectedElement) {
+                        saveState();
+                        if (item.dataset.font) {
+                            applyFontFamily(item.dataset.font);
+                        } else if (item.dataset.size) {
+                            editorState.selectedElement.style.fontSize = `${value}px`;
+                        }
+                    }
+                    
+                    menu.classList.remove('show');
+                });
+            });
+        }
+        
+        // フォントファミリーの適用
+        function applyFontFamily(fontName) {
+            if (!editorState.selectedElement) return;
+            
+            const fontMap = {
+                'Noto Sans Japanese': "'Noto Sans JP', sans-serif",
+                'Noto Serif Japanese': "'Noto Serif JP', serif",
+                'Noto Sans Korean': "'Noto Sans KR', sans-serif",
+                'Nanum Gothic': "'Nanum Gothic', sans-serif",
+                'Arial': "Arial, sans-serif",
+                'Times New Roman': "'Times New Roman', serif",
+                '宋体': "'STSong', '宋体', serif",
+                '黑体': "'STHeiti', '黑体', sans-serif",
+                '正黑體': "'Microsoft JhengHei', '正黑體', sans-serif",
+                '新細明體': "'PMingLiU', '新細明體', serif"
+            };
+            
+            editorState.selectedElement.style.fontFamily = fontMap[fontName] || "'Noto Sans JP', sans-serif";
+        }
+        
+        // アクションボタンの設定
+        function setupActionButtons() {
+            // テキストスタイル
+            document.getElementById('boldBtn').addEventListener('click', () => {
+                if (editorState.selectedElement) {
+                    saveState();
+                    const isBold = window.getComputedStyle(editorState.selectedElement).fontWeight === '700';
+                    editorState.selectedElement.style.fontWeight = isBold ? 'normal' : 'bold';
+                    updateToolbarState();
+                }
+            });
+            
+            document.getElementById('italicBtn').addEventListener('click', () => {
+                if (editorState.selectedElement) {
+                    saveState();
+                    const isItalic = window.getComputedStyle(editorState.selectedElement).fontStyle === 'italic';
+                    editorState.selectedElement.style.fontStyle = isItalic ? 'normal' : 'italic';
+                    updateToolbarState();
+                }
+            });
+            
+            document.getElementById('underlineBtn').addEventListener('click', () => {
+                if (editorState.selectedElement) {
+                    saveState();
+                    const hasUnderline = editorState.selectedElement.style.textDecoration.includes('underline');
+                    editorState.selectedElement.style.textDecoration = hasUnderline ? 'none' : 'underline';
+                    updateToolbarState();
+                }
+            });
+            
+            // テキスト配置
+            ['Left', 'Center', 'Right', 'Justify'].forEach(align => {
+                document.getElementById(`align${align}Btn`).addEventListener('click', () => {
+                    if (editorState.selectedElement) {
+                        saveState();
+                        editorState.selectedElement.style.textAlign = align.toLowerCase();
+                        updateToolbarState();
+                    }
+                });
+            });
+            
+            // 削除
+            document.getElementById('deleteBtn').addEventListener('click', () => {
+                if (editorState.selectedElement) {
+                    saveState();
+                    editorState.selectedElement.remove();
+                    editorState.selectedElement = null;
+                    updateToolbarState();
+                }
+            });
+            
+            // 履歴
+            document.getElementById('undoBtn').addEventListener('click', undo);
+            document.getElementById('redoBtn').addEventListener('click', redo);
+            
+            // ズーム
+            document.getElementById('zoomInBtn').addEventListener('click', () => {
+                editorState.currentZoom = Math.min(editorState.currentZoom + 0.1, 2);
+                updateZoom();
+            });
+            
+            document.getElementById('zoomOutBtn').addEventListener('click', () => {
+                editorState.currentZoom = Math.max(editorState.currentZoom - 0.1, 0.5);
+                updateZoom();
+            });
+        }
+        
+        // ズーム更新
+        function updateZoom() {
+            document.getElementById('slideContent').style.transform = `scale(${editorState.currentZoom})`;
+            document.getElementById('zoomLevel').textContent = `${Math.round(editorState.currentZoom * 100)}%`;
+        }
+        
+        // ツールバーの状態更新
+        function updateToolbarState() {
+            if (!editorState.selectedElement) {
+                document.querySelectorAll('.action-button').forEach(btn => btn.classList.remove('active'));
+                return;
+            }
+            
+            const styles = window.getComputedStyle(editorState.selectedElement);
+            
+            // フォントスタイル
+            document.getElementById('boldBtn').classList.toggle('active', styles.fontWeight === '700' || styles.fontWeight === 'bold');
+            document.getElementById('italicBtn').classList.toggle('active', styles.fontStyle === 'italic');
+            document.getElementById('underlineBtn').classList.toggle('active', styles.textDecoration.includes('underline'));
+            
+            // テキスト配置
+            document.querySelectorAll('[id^="align"]').forEach(btn => btn.classList.remove('active'));
+            const align = styles.textAlign || 'left';
+            document.getElementById(`align${align.charAt(0).toUpperCase() + align.slice(1)}Btn`)?.classList.add('active');
+            
+            // フォントサイズ
+            const fontSize = parseInt(styles.fontSize);
+            document.getElementById('sizeDropdown').querySelector('span').textContent = fontSize;
+        }
+        
+        // 編集可能要素の設定
+        function setupEditableElements() {
+            document.querySelectorAll('.editable').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    selectElement(el);
+                });
+                
+                el.addEventListener('input', () => {
+                    // デバウンスで履歴を保存
+                    clearTimeout(el.saveTimeout);
+                    el.saveTimeout = setTimeout(() => {
+                        saveState();
+                    }, 1000);
+                });
+                
+                el.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const text = e.clipboardData.getData('text/plain');
+                    document.execCommand('insertText', false, text);
+                });
+            });
+        }
+        
+        // 要素の選択
+        function selectElement(element) {
+            // 以前の選択を解除
+            document.querySelectorAll('.editable').forEach(el => el.classList.remove('selected'));
+            
+            // 新しい要素を選択
+            editorState.selectedElement = element;
+            element.classList.add('selected');
+            element.focus();
+            
+            updateToolbarState();
+        }
+        
+        // グローバルクリックイベント
+        document.addEventListener('click', (e) => {
+            // ドロップダウンを閉じる
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+            
+            // 選択を解除
+            if (!e.target.closest('.editable') && !e.target.closest('.toolbar') && !e.target.closest('.side-panel')) {
+                document.querySelectorAll('.editable').forEach(el => el.classList.remove('selected'));
+                editorState.selectedElement = null;
+                updateToolbarState();
+            }
+        });
+        
+        // キーボードショートカット
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'z':
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            redo();
+                        } else {
+                            undo();
+                        }
+                        break;
+                    case 'y':
+                        e.preventDefault();
+                        redo();
+                        break;
+                    case 'b':
+                        e.preventDefault();
+                        document.getElementById('boldBtn').click();
+                        break;
+                    case 'i':
+                        e.preventDefault();
+                        document.getElementById('italicBtn').click();
+                        break;
+                    case 'u':
+                        e.preventDefault();
+                        document.getElementById('underlineBtn').click();
+                        break;
+                }
+            }
+        });
+        
+        // 初期化
+        function initialize() {
+            setupDropdown('fontDropdown', 'fontMenu');
+            setupDropdown('sizeDropdown', 'sizeMenu');
+            setupActionButtons();
+            setupEditableElements();
+            saveState(); // 初期状態を保存
+        }
+        
+        // ページ読み込み時に初期化
+        document.addEventListener('DOMContentLoaded', initialize);
+    </script>
+</body>
+</html>

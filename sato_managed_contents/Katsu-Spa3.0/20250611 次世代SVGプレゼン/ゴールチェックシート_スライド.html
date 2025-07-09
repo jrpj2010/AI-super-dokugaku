@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次世代SVGプレゼン講座 - ゴール達成チェックシート</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --tertiary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .slide-container {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-content {
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            overflow: auto;
+        }
+
+        .goal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .goal-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .journey-container {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 2rem;
+            height: calc(100% - 120px);
+        }
+
+        .level-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .level-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+            border-radius: 16px;
+            padding: 1.25rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .level-card.active {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .level-card.active::before {
+            opacity: 0.1;
+        }
+
+        .level-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .level-beginner .level-icon { background: var(--tertiary-gradient); }
+        .level-intermediate .level-icon { background: var(--secondary-gradient); }
+        .level-advanced .level-icon { background: var(--warning-gradient); }
+
+        .level-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .level-time {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .checklist-container {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .checklist-section {
+            margin-bottom: 2rem;
+        }
+
+        .checklist-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .section-beginner .section-icon { background: var(--tertiary-gradient); }
+        .section-intermediate .section-icon { background: var(--secondary-gradient); }
+        .section-advanced .section-icon { background: var(--warning-gradient); }
+
+        .section-title {
+            flex: 1;
+        }
+
+        .section-title h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .checklist-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checklist-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
+        }
+
+        .checklist-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--success-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .checklist-item.checked::after {
+            width: 100%;
+        }
+
+        .item-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkbox-wrapper {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .checkbox:checked {
+            background: var(--success-gradient);
+            border-color: transparent;
+        }
+
+        .checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .item-details {
+            margin-left: 2.25rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            margin-left: 2.25rem;
+        }
+
+        .skill-tag {
+            background: #f3f4f6;
+            color: #4b5563;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .progress-summary {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            border-radius: 16px;
+            padding: 1.25rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+        }
+
+        .progress-title {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success-gradient);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .goal-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+            }
+            .slide-container {
+                width: 297mm !important;
+                height: 210mm !important;
+                max-width: 297mm !important;
+                box-shadow: none !important;
+            }
+            .checklist-container {
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-content">
+            <div class="goal-badge">
+                <span class="material-symbols-outlined">flag</span>
+                <span>講座完了時の到達点</span>
+            </div>
+
+            <div class="goal-header">
+                <h1 class="goal-title">AI×SVGプレゼン作成マスターへの道</h1>
+                <p class="goal-subtitle">このチェックシートを完成させれば、あなたも資料作成の達人に！</p>
+            </div>
+
+            <div class="journey-container">
+                <div class="level-sidebar">
+                    <div class="level-card level-beginner active">
+                        <div class="level-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <div class="level-name">初級編</div>
+                        <div class="level-time">基礎習得 (30分)</div>
+                    </div>
+                    <div class="level-card level-intermediate">
+                        <div class="level-icon">
+                            <span class="material-symbols-outlined">rocket_launch</span>
+                        </div>
+                        <div class="level-name">中級編</div>
+                        <div class="level-time">実践活用 (60分)</div>
+                    </div>
+                    <div class="level-card level-advanced">
+                        <div class="level-icon">
+                            <span class="material-symbols-outlined">auto_awesome</span>
+                        </div>
+                        <div class="level-name">上級編</div>
+                        <div class="level-time">完全自動化 (30分)</div>
+                    </div>
+                </div>
+
+                <div class="checklist-container">
+                    <!-- 初級編セクション -->
+                    <div class="checklist-section section-beginner">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <span class="material-symbols-outlined">school</span>
+                            </div>
+                            <div class="section-title">
+                                <h3>初級編：基礎スキルの習得</h3>
+                                <p>SVGとAIツールの基本を理解し、簡単な資料を作成できるようになる</p>
+                            </div>
+                        </div>
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-1">
+                                    </div>
+                                    <label for="basic-1" class="item-title">SVGの概念を説明できる</label>
+                                </div>
+                                <div class="item-details">
+                                    ベクター画像の特徴、JPG/PNGとの違いを理解
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">概念理解</span>
+                                    <span class="skill-tag">ジャギーなし</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-2">
+                                    </div>
+                                    <label for="basic-2" class="item-title">Google AI Studioでプロンプト入力</label>
+                                </div>
+                                <div class="item-details">
+                                    基本的なプロンプトを書いてSVGコードを生成
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">プロンプト作成</span>
+                                    <span class="skill-tag">AI活用</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-3">
+                                    </div>
+                                    <label for="basic-3" class="item-title">SVGファイルの保存と管理</label>
+                                </div>
+                                <div class="item-details">
+                                    生成したコードを.svgファイルとして保存
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">ファイル操作</span>
+                                    <span class="skill-tag">拡張子変更</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-4">
+                                    </div>
+                                    <label for="basic-4" class="item-title">Figmaへのインポート成功</label>
+                                </div>
+                                <div class="item-details">
+                                    SVGファイルをドラッグ&ドロップで取り込み
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Figma基礎</span>
+                                    <span class="skill-tag">インポート</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-5">
+                                    </div>
+                                    <label for="basic-5" class="item-title">簡単な図形のSVG作成</label>
+                                </div>
+                                <div class="item-details">
+                                    ゴリラなどの単純な絵をAIで生成できる
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">実践演習</span>
+                                    <span class="skill-tag">成功体験</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="basic-6">
+                                    </div>
+                                    <label for="basic-6" class="item-title">エラー時の基本対処</label>
+                                </div>
+                                <div class="item-details">
+                                    表示エラーをスクショしてAIに修正依頼
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">トラブル対応</span>
+                                    <span class="skill-tag">問題解決</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 中級編セクション -->
+                    <div class="checklist-section section-intermediate">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <span class="material-symbols-outlined">rocket_launch</span>
+                            </div>
+                            <div class="section-title">
+                                <h3>中級編：実践的な活用スキル</h3>
+                                <p>システムプロンプトを使いこなし、業務レベルの資料を効率的に作成</p>
+                            </div>
+                        </div>
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-1">
+                                    </div>
+                                    <label for="inter-1" class="item-title">システムプロンプトの設計</label>
+                                </div>
+                                <div class="item-details">
+                                    デザインルールを定義して統一感のある資料生成
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">高度な設定</span>
+                                    <span class="skill-tag">品質向上</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-2">
+                                    </div>
+                                    <label for="inter-2" class="item-title">複数スライドの一括生成</label>
+                                </div>
+                                <div class="item-details">
+                                    プレゼン全体を一度のプロンプトで作成
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">効率化</span>
+                                    <span class="skill-tag">大量生成</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-3">
+                                    </div>
+                                    <label for="inter-3" class="item-title">Figmaでの編集マスター</label>
+                                </div>
+                                <div class="item-details">
+                                    テキスト編集、色変更、レイアウト調整が自在に
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">デザイン編集</span>
+                                    <span class="skill-tag">カスタマイズ</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-4">
+                                    </div>
+                                    <label for="inter-4" class="item-title">PowerPointへの変換</label>
+                                </div>
+                                <div class="item-details">
+                                    Figma SlidesからPPTX形式でエクスポート
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">形式変換</span>
+                                    <span class="skill-tag">互換性</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-5">
+                                    </div>
+                                    <label for="inter-5" class="item-title">ブランドガイドライン適用</label>
+                                </div>
+                                <div class="item-details">
+                                    企業カラーやフォントを統一して適用
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">ブランド統一</span>
+                                    <span class="skill-tag">プロ品質</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="inter-6">
+                                    </div>
+                                    <label for="inter-6" class="item-title">効果的なプロンプト作成</label>
+                                </div>
+                                <div class="item-details">
+                                    背景情報と出力形式を含む高品質プロンプト
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">プロンプト工学</span>
+                                    <span class="skill-tag">精度向上</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 上級編セクション -->
+                    <div class="checklist-section section-advanced">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <span class="material-symbols-outlined">auto_awesome</span>
+                            </div>
+                            <div class="section-title">
+                                <h3>上級編：完全自動化の実現</h3>
+                                <p>エージェントを活用した自動化で、手作業ゼロの資料作成を実現</p>
+                            </div>
+                        </div>
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-1">
+                                    </div>
+                                    <label for="adv-1" class="item-title">VSCodeエージェント設定</label>
+                                </div>
+                                <div class="item-details">
+                                    Copilotエージェントの環境構築と設定
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">自動化環境</span>
+                                    <span class="skill-tag">AI連携</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-2">
+                                    </div>
+                                    <label for="adv-2" class="item-title">ファイル操作の自動化</label>
+                                </div>
+                                <div class="item-details">
+                                    リネーム、フォルダ整理を全自動で実行
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">完全自動化</span>
+                                    <span class="skill-tag">効率最大化</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-3">
+                                    </div>
+                                    <label for="adv-3" class="item-title">並列処理での高速生成</label>
+                                </div>
+                                <div class="item-details">
+                                    複数エージェントで10枚を30秒で生成
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">並列処理</span>
+                                    <span class="skill-tag">超高速</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-4">
+                                    </div>
+                                    <label for="adv-4" class="item-title">Claude 3 Opus活用</label>
+                                </div>
+                                <div class="item-details">
+                                    最高品質AIモデルでプレミアム資料作成
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">最先端AI</span>
+                                    <span class="skill-tag">最高品質</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-5">
+                                    </div>
+                                    <label for="adv-5" class="item-title">チーム展開の実現</label>
+                                </div>
+                                <div class="item-details">
+                                    社内展開と標準化プロセスの確立
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">組織展開</span>
+                                    <span class="skill-tag">標準化</span>
+                                </div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" class="checkbox" id="adv-6">
+                                    </div>
+                                    <label for="adv-6" class="item-title">年間600時間の削減達成</label>
+                                </div>
+                                <div class="item-details">
+                                    定量的な効果測定と改善サイクル確立
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">ROI実現</span>
+                                    <span class="skill-tag">継続改善</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-summary">
+                <div class="progress-title">達成度</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">0 / 18</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // チェックボックスの状態管理
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const progressFill = document.querySelector('.progress-fill');
+        const progressText = document.querySelector('.progress-text');
+        const checkedItems = new Set();
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            const checked = checkedItems.size;
+            const percentage = (checked / total) * 100;
+            
+            progressFill.style.width = `${percentage}%`;
+            progressText.textContent = `${checked} / ${total}`;
+            
+            // レベルカードのアクティブ状態更新
+            updateLevelCards();
+        }
+
+        function updateLevelCards() {
+            const beginnerComplete = ['basic-1', 'basic-2', 'basic-3', 'basic-4', 'basic-5', 'basic-6']
+                .every(id => checkedItems.has(id));
+            const intermediateComplete = ['inter-1', 'inter-2', 'inter-3', 'inter-4', 'inter-5', 'inter-6']
+                .every(id => checkedItems.has(id));
+            
+            const levelCards = document.querySelectorAll('.level-card');
+            levelCards.forEach(card => card.classList.remove('active'));
+            
+            if (!beginnerComplete) {
+                document.querySelector('.level-beginner').classList.add('active');
+            } else if (!intermediateComplete) {
+                document.querySelector('.level-intermediate').classList.add('active');
+            } else {
+                document.querySelector('.level-advanced').classList.add('active');
+            }
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checklist-item');
+                
+                if (this.checked) {
+                    item.classList.add('checked');
+                    checkedItems.add(this.id);
+                } else {
+                    item.classList.remove('checked');
+                    checkedItems.delete(this.id);
+                }
+                
+                updateProgress();
+            });
+        });
+
+        // レベルカードのクリックでスクロール
+        document.querySelectorAll('.level-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const levelClass = this.classList[1]; // level-beginner, level-intermediate, level-advanced
+                const sectionClass = levelClass.replace('level-', 'section-');
+                const section = document.querySelector(`.${sectionClass}`);
+                
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // 初期状態の設定
+        updateProgress();
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- データカードコンポーネント -->
+<div class="data-card {{additional_classes}}">
+    {{#if icon}}
+    <div class="icon-bg w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-{{icon}} text-white text-3xl"></i>
+    </div>
+    {{/if}}
+    
+    <div class="data-value">{{value}}</div>
+    <div class="data-label">{{label}}</div>
+    
+    {{#if description}}
+    <p class="text-slate-500 text-sm mt-3">{{description}}</p>
+    {{/if}}
+    
+    {{#if trend}}
+    <div class="flex items-center justify-center mt-4">
+        {{#if (eq trend "up")}}
+        <i class="fa-solid fa-arrow-trend-up text-green-500 mr-2"></i>
+        <span class="text-green-600 font-medium">{{trend_value}}</span>
+        {{else if (eq trend "down")}}
+        <i class="fa-solid fa-arrow-trend-down text-red-500 mr-2"></i>
+        <span class="text-red-600 font-medium">{{trend_value}}</span>
+        {{else}}
+        <i class="fa-solid fa-minus text-gray-500 mr-2"></i>
+        <span class="text-gray-600 font-medium">{{trend_value}}</span>
+        {{/if}}
+    </div>
+    {{/if}}
+</div>

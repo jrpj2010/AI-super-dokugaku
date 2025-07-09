@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>質疑応答：プロンプトエンジニアリング</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            height: 720px;
+        }
+        
+        html {
+            height: 720px;
+        }
+        
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .slide--card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .question-badge {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .answer-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 18px;
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+        
+        .jp-flag {
+            background: linear-gradient(to bottom, #ff0000 0%, #ff0000 100%);
+            position: relative;
+        }
+        
+        .jp-flag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            border-radius: 2px;
+        }
+        
+        .jp-flag::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+        }
+        
+        .uk-flag {
+            background: linear-gradient(45deg, #012169 0%, #012169 100%);
+            position: relative;
+        }
+        
+        .uk-flag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #012169 20%, #ffffff 20%, #ffffff 25%, #ce1124 25%, #ce1124 30%, #ffffff 30%, #ffffff 70%, #ce1124 70%, #ce1124 75%, #ffffff 75%, #ffffff 80%, #012169 80%);
+            border-radius: 2px;
+        }
+        
+        .text-bar {
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+        
+        .short-text {
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            width: 30%;
+        }
+        
+        .long-text {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+            width: 80%;
+        }
+    </style>
+<style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;.slide { height: 720px;}}</style><script src="https://felo.ai/js/iframe.js?v=20250708"></script></head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-12 px-16">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-comments text-white text-xl"></i>
+                    </div>
+                    <div class="accent-line h-1 w-24 rounded-full"></div>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-600 text-lg font-medium">Professional Training Series</p>
+                    <p class="text-slate-500 text-sm">2025年度</p>
+                </div>
+            </div>
+            <h1 class="gradient-text text-5xl font-black mb-4">質疑応答：プロンプトエンジニアリング</h1>
+            <div class="accent-line h-2 w-24 rounded-full"></div>
+        </header>
+        
+        <main class="slide--main flex-1 px-16 py-8">
+            <div class="space-y-6">
+                <div class="slide--card rounded-3xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="question-badge">Q</div>
+                        <div class="flex-1">
+                            <h3 class="text-slate-800 text-2xl font-bold mb-4">システムプロンプトは日本語より英語の方が精度が高いか？</h3>
+                        </div>
+                        <div class="flex items-center space-x-3 ml-4">
+                            <div class="jp-flag flag-icon"></div>
+                            <span class="text-slate-600 text-lg">vs</span>
+                            <div class="uk-flag flag-icon"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="answer-badge">A</div>
+                        <div class="flex-1">
+                            <p class="text-slate-700 text-xl leading-relaxed">
+                                <span class="font-semibold text-slate-800">基本は英語の方が高精度。</span>しかし、日本独自の概念を扱う際は、英語を主軸にしつつ日本語を併記することでAIの誤解釈を防げる。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide--card rounded-3xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="question-badge">Q</div>
+                        <div class="flex-1">
+                            <h3 class="text-slate-800 text-2xl font-bold mb-4">プロンプトは長ければ長いほど良いのか？</h3>
+                        </div>
+                        <div class="flex flex-col space-y-2 ml-4">
+                            <div class="flex items-center">
+                                <span class="text-slate-600 text-sm mr-2">短文</span>
+                                <div class="text-bar short-text"></div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-slate-600 text-sm mr-2">長文</span>
+                                <div class="text-bar long-text"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="answer-badge">A</div>
+                        <div class="flex-1">
+                            <p class="text-slate-700 text-xl leading-relaxed">
+                                <span class="font-semibold text-slate-800">初学者は長文で多くの情報を与えることが有効。</span>しかし「作る側」は、冗長な口語体ではなく、インデックス化（構造化）された精緻な指示出し文章を目指すべき。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide--card rounded-3xl p-6 bg-blue-50">
+                    <div class="flex items-center justify-center space-x-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-lightbulb text-white text-lg"></i>
+                            </div>
+                            <span class="text-slate-700 text-lg font-medium">効率的なプロンプト設計</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-language text-white text-lg"></i>
+                            </div>
+                            <span class="text-slate-700 text-lg font-medium">言語選択の重要性</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-layer-group text-white text-lg"></i>
+                            </div>
+                            <span class="text-slate-700 text-lg font-medium">構造化された指示</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- リストアイテムコンポーネント -->
+<li class="flex items-start {{additional_classes}}">
+    {{#if bullet_type}}
+        {{#if (eq bullet_type "number")}}
+        <span class="text-blue-500 font-bold mr-4 mt-1 min-w-[2rem]">{{index}}.</span>
+        {{else if (eq bullet_type "check")}}
+        <span class="text-green-500 mr-4 mt-1">
+            <i class="fa-solid fa-check-circle"></i>
+        </span>
+        {{else if (eq bullet_type "arrow")}}
+        <span class="text-blue-500 mr-4 mt-1">
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        {{else}}
+        <span class="text-blue-500 font-bold mr-4 mt-1">•</span>
+        {{/if}}
+    {{else}}
+    <span class="text-blue-500 font-bold mr-4 mt-1">•</span>
+    {{/if}}
+    
+    <div class="flex-1">
+        {{#if title}}
+        <span class="font-bold text-slate-800">{{title}}</span>
+        {{#if content}}
+        <span class="text-slate-700">: {{content}}</span>
+        {{/if}}
+        {{else}}
+        <span class="text-slate-700">{{content}}</span>
+        {{/if}}
+        
+        {{#if sub_items}}
+        <ul class="mt-2 ml-4 space-y-1">
+            {{#each sub_items}}
+            <li class="flex items-start">
+                <span class="text-slate-400 mr-2">-</span>
+                <span class="text-slate-600 text-base">{{this}}</span>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+    </div>
+</li>

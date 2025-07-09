@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .china-flag {
+      background: #DE2910;
+      position: relative;
+      width: 120px;
+      height: 80px;
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    .shock-wave {
+      position: absolute;
+      border: 3px solid #E74C3C;
+      border-radius: 50%;
+      opacity: 0;
+      animation: shockwave 2s infinite;
+    }
+
+    @keyframes shockwave {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .comparison-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .vs-badge {
+      background: #E74C3C;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">中国の衝撃：DeepSeekが変えたゲームルール</h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="flex items-center mb-6">
+          <div class="china-flag"></div>
+          <div>
+            <h3 class="text-2xl font-bold">DeepSeekショック</h3>
+            <p class="text-lg text-gray-600">2025年1月 - 米国株式市場大幅下落</p>
+          </div>
+        </div>
+
+        <div class="comparison-card mb-6">
+          <h4 class="font-bold text-xl mb-4">コスト比較</h4>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span>アメリカ製AI</span>
+              <div class="bg-blue-500 text-white px-4 py-2 rounded">$100</div>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>中国製AI（DeepSeek）</span>
+              <div class="bg-red-500 text-white px-4 py-2 rounded">$10</div>
+            </div>
+          </div>
+          <p class="text-center mt-4">
+            <span class="vs-badge">1/10のコスト</span>
+          </p>
+        </div>
+
+        <div class="bg-yellow-50 p-4 rounded-lg">
+          <h4 class="font-bold mb-2">3ヶ月ルール</h4>
+          <p class="text-lg">
+            <i class="fas fa-clock text-yellow-600 mr-2"></i>
+            先行者の優位性は<span class="highlight">わずか3ヶ月</span>
+          </p>
+          <p class="text-sm text-gray-600 mt-2">
+            オープンソース化により、後発企業が格安で追いつく
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex flex-col justify-center items-center">
+        <div class="relative">
+          <div class="shock-wave"></div>
+          <div class="shock-wave" style="animation-delay: 0.5s;"></div>
+          <div class="shock-wave" style="animation-delay: 1s;"></div>
+          
+          <div style="height: 300px; width: 400px;">
+            <canvas id="costChart"></canvas>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-2xl font-bold text-gray-800">
+            「モデルの開発競争は<span class="highlight">もう終わった</span>」
+          </p>
+          <p class="text-lg text-gray-600 mt-2">
+            - 中山孝志氏
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('costChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['開発時', '1ヶ月後', '2ヶ月後', '3ヶ月後'],
+        datasets: [{
+          label: '性能差',
+          data: [100, 70, 30, 5],
+          borderColor: '#E74C3C',
+          backgroundColor: 'rgba(231, 76, 60, 0.1)',
+          tension: 0.4,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: '先行者と後発者の性能差推移',
+            font: { size: 16 }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+  <div class="slide-number">7 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='6.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='8.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

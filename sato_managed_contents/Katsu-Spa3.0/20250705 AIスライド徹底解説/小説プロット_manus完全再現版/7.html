@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .act-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-left: 4px solid;
+    }
+
+    .act-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">三幕構成：物語の黄金律</h1>
+
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <p class="mb-4">物語の構造として最も効果的な<span class="highlight">「三幕構成」</span>を理解し、活用します。</p>
+
+        <div class="act-card" style="border-left-color: #3498DB;">
+          <h2 class="act-title" style="color: #3498DB;">第一幕：設定（25%）</h2>
+          <ul class="list-disc pl-6">
+            <li>主人公と世界観の紹介</li>
+            <li>日常から非日常への転換点</li>
+            <li>物語の核となる問題の提示</li>
+          </ul>
+        </div>
+
+        <div class="act-card" style="border-left-color: #2D3E50;">
+          <h2 class="act-title" style="color: #2D3E50;">第二幕：対立（50%）</h2>
+          <ul class="list-disc pl-6">
+            <li>障害との遭遇と試練</li>
+            <li>主人公の成長と変化</li>
+            <li>ミッドポイントでの転換</li>
+          </ul>
+        </div>
+
+        <div class="act-card" style="border-left-color: #E74C3C;">
+          <h2 class="act-title" style="color: #E74C3C;">第三幕：解決（25%）</h2>
+          <ul class="list-disc pl-6">
+            <li>クライマックスへの突入</li>
+            <li>最終的な対決と解決</li>
+            <li>新しい日常への帰還</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <div style="height: 500px; width: 500px;">
+          <canvas id="structureChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('structureChart').getContext('2d');
+    
+    // カスタムプラグインで曲線を描画
+    const drawCurvePlugin = {
+      id: 'drawCurve',
+      afterDatasetsDraw: function(chart) {
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        
+        ctx.save();
+        ctx.strokeStyle = 'rgba(231, 76, 60, 0.8)';
+        ctx.lineWidth = 3;
+        ctx.setLineDash([5, 5]);
+        
+        // 物語の盛り上がり曲線を描画
+        ctx.beginPath();
+        const points = [
+          {x: meta.data[0].x, y: meta.data[0].y + 50},
+          {x: meta.data[2].x, y: meta.data[2].y - 30},
+          {x: meta.data[4].x, y: meta.data[4].y - 60},
+          {x: meta.data[6].x, y: meta.data[6].y - 80},
+          {x: meta.data[7].x, y: meta.data[7].y - 100}
+        ];
+        
+        ctx.moveTo(points[0].x, points[0].y);
+        for(let i = 1; i < points.length; i++) {
+          const cp1x = (points[i-1].x + points[i].x) / 2;
+          const cp1y = points[i-1].y;
+          const cp2x = (points[i-1].x + points[i].x) / 2;
+          const cp2y = points[i].y;
+          ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, points[i].x, points[i].y);
+        }
+        
+        ctx.stroke();
+        ctx.restore();
+      }
+    };
+    
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['導入', '転換点1', '試練開始', '偽の勝利', 'ミッドポイント', '最も暗い時', '転換点2', 'クライマックス', '解決'],
+        datasets: [{
+          label: '物語の強度',
+          data: [20, 35, 45, 40, 55, 25, 65, 85, 60],
+          backgroundColor: [
+            'rgba(52, 152, 219, 0.6)',
+            'rgba(52, 152, 219, 0.6)',
+            'rgba(45, 62, 80, 0.6)',
+            'rgba(45, 62, 80, 0.6)',
+            'rgba(45, 62, 80, 0.6)',
+            'rgba(45, 62, 80, 0.6)',
+            'rgba(45, 62, 80, 0.6)',
+            'rgba(231, 76, 60, 0.8)',
+            'rgba(231, 76, 60, 0.6)'
+          ],
+          borderColor: [
+            'rgba(52, 152, 219, 1)',
+            'rgba(52, 152, 219, 1)',
+            'rgba(45, 62, 80, 1)',
+            'rgba(45, 62, 80, 1)',
+            'rgba(45, 62, 80, 1)',
+            'rgba(45, 62, 80, 1)',
+            'rgba(45, 62, 80, 1)',
+            'rgba(231, 76, 60, 1)',
+            'rgba(231, 76, 60, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: '緊張度・感情の高まり'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '物語の進行'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: '三幕構成における物語の展開',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            display: false
+          },
+          annotation: {
+            annotations: {
+              act1: {
+                type: 'box',
+                xMin: -0.5,
+                xMax: 1.5,
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                borderWidth: 0
+              },
+              act2: {
+                type: 'box',
+                xMin: 1.5,
+                xMax: 6.5,
+                backgroundColor: 'rgba(45, 62, 80, 0.1)',
+                borderWidth: 0
+              },
+              act3: {
+                type: 'box',
+                xMin: 6.5,
+                xMax: 8.5,
+                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderWidth: 0
+              }
+            }
+          }
+        }
+      },
+      plugins: [drawCurvePlugin]
+    });
+  </script>
+</body>
+
+</html>

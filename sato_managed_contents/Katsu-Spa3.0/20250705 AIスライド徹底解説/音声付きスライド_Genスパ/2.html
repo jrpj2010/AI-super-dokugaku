@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>目次 - AIスライド生成の最新トレンド</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .accent-bar {
+      background-color: #006699;
+      height: 8px;
+      width: 100px;
+    }
+
+    .title {
+      font-size: 40px;
+      line-height: 1.2;
+      color: #00447c;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #006699;
+      font-weight: 600;
+    }
+
+    .toc-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .toc-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #006699;
+      width: 36px;
+      height: 36px;
+      border: 2px solid #006699;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+    }
+
+    .toc-text {
+      font-size: 18px;
+      color: #333333;
+    }
+
+    .progress-section {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 60%;
+      background-color: #e5e7eb;
+    }
+
+    .progress-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 8.33%;
+      /* 1/12 of items */
+      background-color: #006699;
+    }
+
+    .footer {
+      color: #666666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container bg-white p-16 flex flex-col">
+    <!-- Header with Title -->
+    <div class="mb-10">
+      <div class="accent-bar mb-6"></div>
+      <h1 class="title">目次</h1>
+    </div>
+
+    <!-- TOC Content -->
+    <div class="flex">
+      <!-- Left Column -->
+      <div class="w-1/2 pr-8">
+        <div class="toc-item flex items-center">
+          <div class="toc-number">1</div>
+          <div class="toc-text">市場概観・背景</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">2</div>
+          <div class="toc-text">AIスライド生成の進化</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">3</div>
+          <div class="toc-text">HTML型の特徴と代表サービス</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">4</div>
+          <div class="toc-text">HTML型の導入効果と活用例</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">5</div>
+          <div class="toc-text">SVG型の特徴と最新事例</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">6</div>
+          <div class="toc-text">SVG型のビジュアル表現力比較</div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="w-1/2 pl-8">
+        <div class="toc-item flex items-center">
+          <div class="toc-number">7</div>
+          <div class="toc-text">MARP型の特徴と活用パターン</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">8</div>
+          <div class="toc-text">主要3方式の機能・導入効果データ比較</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">9</div>
+          <div class="toc-text">今後の技術動向＆業界別展望</div>
+        </div>
+        <div class="toc-item flex items-center">
+          <div class="toc-number">10</div>
+          <div class="toc-text">まとめ／インサイト</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-auto pt-6">
+      <div class="footer flex justify-between">
+        <div>AIスライド生成の最新トレンド：HTML・SVG・MARPが拓く新時代</div>
+        <div>2025年7月</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

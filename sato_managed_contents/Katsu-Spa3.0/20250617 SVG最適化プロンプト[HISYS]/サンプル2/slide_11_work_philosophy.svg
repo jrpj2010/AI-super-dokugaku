@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- メタデータ -->
+  <title>「退かぬ！媚びぬ！省みぬ！」の仕事哲学</title>
+  <desc>サウザーの帝王学から学ぶプロフェッショナリズム</desc>
+  
+  <!-- 定義 -->
+  <defs>
+    <!-- 背景パターン -->
+    <pattern id="pyramidPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <polygon points="50,20 80,80 20,80" fill="#F0F0F0" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#FAFAFA"/>
+  <rect width="1280" height="720" fill="url(#pyramidPattern)"/>
+  
+  <!-- 日立ロゴ（右上） -->
+  <g transform="translate(1100, 30)">
+    <rect x="0" y="0" width="100" height="40" fill="white" stroke="#FA000F" stroke-width="2" rx="3"/>
+    <text x="50" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FA000F">HITACHI</text>
+  </g>
+  
+  <!-- セクション番号 -->
+  <text x="60" y="80" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="90" font-weight="300" fill="#CCCCCC">09</text>
+  
+  <!-- タイトル -->
+  <text x="60" y="140" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="36" font-weight="700" fill="#333333">
+    「退かぬ！媚びぬ！省みぬ！」の仕事哲学
+  </text>
+  
+  <!-- タイトル下線 -->
+  <line x1="60" y1="155" x2="800" y2="155" stroke="#FA000F" stroke-width="2"/>
+  
+  <!-- 3つの柱の視覚化 -->
+  <g transform="translate(640, 380)">
+    <!-- 中央のトライアングル -->
+    <polygon points="0,-120 -200,120 200,120" fill="none" stroke="#FA000F" stroke-width="3"/>
+    
+    <!-- 各頂点の哲学 -->
+    <!-- 1. 退かぬ -->
+    <g transform="translate(0, -150)">
+      <circle cx="0" cy="0" r="60" fill="#FA000F"/>
+      <text x="0" y="5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="white">
+        退かぬ！
+      </text>
+      
+      <!-- 説明 -->
+      <g transform="translate(0, -80)">
+        <rect x="-80" y="-25" width="160" height="50" fill="white" stroke="#FA000F" stroke-width="2" rx="5"/>
+        <text x="0" y="-5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#FA000F">
+          前進あるのみ
+        </text>
+        <text x="0" y="15" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#666666">
+          困難に直面しても逃げない
+        </text>
+      </g>
+    </g>
+    
+    <!-- 2. 媚びぬ -->
+    <g transform="translate(-230, 150)">
+      <circle cx="0" cy="0" r="60" fill="#FA000F"/>
+      <text x="0" y="5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="white">
+        媚びぬ！
+      </text>
+      
+      <!-- 説明 -->
+      <g transform="translate(0, 80)">
+        <rect x="-80" y="-25" width="160" height="50" fill="white" stroke="#FA000F" stroke-width="2" rx="5"/>
+        <text x="0" y="-5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#FA000F">
+          自分の信念を貫く
+        </text>
+        <text x="0" y="15" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#666666">
+          権力に屈しない独立心
+        </text>
+      </g>
+    </g>
+    
+    <!-- 3. 省みぬ -->
+    <g transform="translate(230, 150)">
+      <circle cx="0" cy="0" r="60" fill="#FA000F"/>
+      <text x="0" y="5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="white">
+        省みぬ！
+      </text>
+      
+      <!-- 説明 -->
+      <g transform="translate(0, 80)">
+        <rect x="-80" y="-25" width="160" height="50" fill="white" stroke="#FA000F" stroke-width="2" rx="5"/>
+        <text x="0" y="-5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#FA000F">
+          決断に迷いなし
+        </text>
+        <text x="0" y="15" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="12" text-anchor="middle" fill="#666666">
+          過去に囚われない前進
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- ビジネス応用の表 -->
+  <g transform="translate(60, 200)">
+    <rect x="0" y="0" width="500" height="150" fill="white" stroke="#CCCCCC" stroke-width="1" rx="5"/>
+    
+    <text x="20" y="30" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="18" font-weight="700" fill="#FA000F">
+      現代ビジネスへの応用
+    </text>
+    
+    <g transform="translate(30, 60)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">
+        <tspan font-weight="700">退かぬ</tspan> → イノベーションへの挑戦、失敗を恐れない文化
+      </text>
+      <text x="0" y="25" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">
+        <tspan font-weight="700">媚びぬ</tspan> → 顧客本位の価値提供、短期利益に惑わされない
+      </text>
+      <text x="0" y="50" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="14" fill="#333333">
+        <tspan font-weight="700">省みぬ</tspan> → アジャイルな意思決定、PDCAの高速回転
+      </text>
+    </g>
+  </g>
+  
+  <!-- 帝王の格言 -->
+  <g transform="translate(640, 620)">
+    <rect x="-400" y="-30" width="800" height="60" fill="#333333" rx="5"/>
+    <text x="0" y="5" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="20" font-style="italic" text-anchor="middle" fill="white">
+      「帝王に逃走はないのだ！」 - 責任から逃げないリーダーシップ
+    </text>
+  </g>
+  
+  <!-- フッター -->
+  <text x="60" y="690" font-family="Arial, sans-serif" font-size="12" fill="#888888">©Hitachi Systems, Ltd. 2025. All rights reserved</text>
+  <text x="1220" y="690" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="#888888">11</text>
+</svg>

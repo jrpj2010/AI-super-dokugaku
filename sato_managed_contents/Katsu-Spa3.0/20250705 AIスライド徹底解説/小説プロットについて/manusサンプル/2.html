@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .key-point {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-left: 4px solid #3498DB;
+      padding: 12px 16px;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">ストーリーの面白さの秘密</h1>
+
+    <div class="flex flex-row space-x-8">
+      <div class="content w-1/2">
+        <p class="mb-4">物語の面白さは、<span class="highlight">「表ストーリー」と「裏ストーリー」の相互作用</span>から生まれます。</p>
+
+        <div class="key-point">
+          <p>「表ストーリー」だけでは単なる出来事の羅列になり、読者は「意味」を感じられず退屈になります。</p>
+        </div>
+
+        <p class="mb-4">面白いストーリーには必ず「裏ストーリー」が隠されており、それが読者の感情に強く訴えかけます。</p>
+
+        <p class="mb-4">物語は「<span class="highlight">間違いが正される話</span>」であり、主人公の内面の変化が物語に深みを与えます。</p>
+
+        <p>この二つのストーリーが絡み合うことで、読者は物語に引き込まれ、感情的な共鳴と没入感を得られるのです。</p>
+      </div>
+
+      <div class="w-1/2 flex flex-col justify-center items-center">
+        <div style="height: 400px; width: 500px;">
+          <canvas id="storyChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('storyChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['表ストーリーのみ', '裏ストーリーのみ', '表と裏の相互作用'],
+        datasets: [{
+          label: 'ストーリーの面白さ指数',
+          data: [30, 45, 95],
+          backgroundColor: [
+            'rgba(52, 152, 219, 0.6)',
+            'rgba(231, 76, 60, 0.6)',
+            'rgba(45, 62, 80, 0.8)'
+          ],
+          borderColor: [
+            'rgba(52, 152, 219, 1)',
+            'rgba(231, 76, 60, 1)',
+            'rgba(45, 62, 80, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: '面白さ指数'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'ストーリーの構成'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'ストーリー構成による面白さの比較',
+            font: {
+              size: 18
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

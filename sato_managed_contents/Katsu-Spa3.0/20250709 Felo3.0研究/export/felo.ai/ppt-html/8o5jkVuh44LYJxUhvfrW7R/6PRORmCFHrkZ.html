@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIリーダブルな三大形式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            height: 720px;
+        }
+        
+        html {
+            height: 720px;
+        }
+        
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .slide--card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .format-icon {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .format-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .format-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .code-symbol {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+    </style>
+<style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;.slide { height: 720px;}}</style><script src="https://felo.ai/js/iframe.js?v=20250708"></script></head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-12 px-16">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-white text-xl"></i>
+                    </div>
+                    <div class="accent-line h-1 w-24 rounded-full"></div>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-600 text-lg font-medium">AI Communication Standards</p>
+                    <p class="text-slate-500 text-sm">2025年度</p>
+                </div>
+            </div>
+            <h1 class="gradient-text text-5xl font-black mb-4">AIリーダブルな三大形式</h1>
+            <div class="accent-line h-2 w-24 rounded-full"></div>
+        </header>
+        
+        <main class="slide--main flex-1 px-16 py-6">
+            <div class="mb-6">
+                <h2 class="text-slate-800 text-2xl font-bold text-center mb-8">AIリーダブルなテキストの三大形式</h2>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="slide--card format-card">
+                    <div class="format-icon mx-auto">
+                        <span class="text-4xl font-black">#</span>
+                    </div>
+                    <h3 class="text-slate-800 text-2xl font-bold mb-4">マークダウン形式</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-start text-slate-700 text-lg">
+                            <i class="fa-solid fa-circle text-blue-400 mr-3 text-xs mt-2"></i>
+                            <span>見出しやリストで文章を構造化</span>
+                        </div>
+                        <div class="flex items-start text-slate-700 text-lg">
+                            <i class="fa-solid fa-circle text-blue-400 mr-3 text-xs mt-2"></i>
+                            <span>AI時代の共通言語</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide--card format-card">
+                    <div class="format-icon mx-auto">
+                        <i class="fa-solid fa-table text-3xl"></i>
+                    </div>
+                    <h3 class="text-slate-800 text-2xl font-bold mb-4">テーブル（表）形式</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-start text-slate-700 text-lg">
+                            <i class="fa-solid fa-circle text-green-400 mr-3 text-xs mt-2"></i>
+                            <span>情報を整理し、比較・分析しやすい形でAIに与える</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide--card format-card">
+                    <div class="format-icon mx-auto">
+                        <span class="code-symbol text-3xl">&lt;&gt;</span>
+                    </div>
+                    <h3 class="text-slate-800 text-2xl font-bold mb-4">コードブロック形式</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-start text-slate-700 text-lg">
+                            <i class="fa-solid fa-circle text-purple-400 mr-3 text-xs mt-2"></i>
+                            <span>プログラムコードを他のテキストと明確に区別して記述</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="slide--card rounded-2xl p-6 max-w-4xl mx-auto">
+                    <p class="text-slate-600 text-xl font-medium">
+                        <i class="fa-solid fa-lightbulb text-yellow-500 mr-3"></i>
+                        これらの形式を使い分けることで、AIとの効果的なコミュニケーションが可能になります
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

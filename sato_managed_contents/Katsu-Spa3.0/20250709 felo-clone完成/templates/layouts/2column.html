@@ -1,0 +1,96 @@
+<!-- 2カラムレイアウト -->
+{{#if header}}
+<header class="slide--header flex-none pt-12 px-16 pb-8">
+    <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+        {{#if header_icon}}
+        <i class="fa-solid fa-{{header_icon}} text-blue-500 mr-4"></i>
+        {{/if}}
+        {{header_title}}
+    </h2>
+    {{#if header_subtitle}}
+    <p class="text-xl text-slate-600 mt-2">{{header_subtitle}}</p>
+    {{/if}}
+</header>
+{{/if}}
+
+<main class="slide--main flex-1 flex px-16 {{#if header}}pb-16{{else}}py-16{{/if}}">
+    <div class="w-1/2 pr-8 flex flex-col justify-center">
+        {{#if left_title}}
+        <h3 class="text-3xl font-bold text-slate-800 mb-6">{{left_title}}</h3>
+        {{/if}}
+        
+        {{#if left_content}}
+        <div class="space-y-4 text-lg text-slate-600">
+            {{{left_content}}}
+        </div>
+        {{/if}}
+        
+        {{#if left_list}}
+        <ul class="space-y-4 text-lg">
+            {{#each left_list}}
+            <li class="flex items-start">
+                <span class="text-blue-500 font-bold mr-3 mt-1">•</span>
+                <span class="text-slate-700">{{this}}</span>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        
+        {{#if left_cta}}
+        <div class="mt-8">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all">
+                {{left_cta}}
+            </button>
+        </div>
+        {{/if}}
+    </div>
+    
+    <div class="w-1/2 pl-8 flex items-center justify-center">
+        {{#if right_image}}
+        <img src="{{right_image}}" alt="{{right_image_alt}}" class="max-w-full max-h-full object-contain rounded-lg shadow-xl">
+        {{else if right_chart}}
+        <div id="chart-{{chart_id}}" class="w-full h-full"></div>
+        {{else if right_cards}}
+        <div class="space-y-4 w-full">
+            {{#each right_cards}}
+            <div class="floating-card rounded-xl p-6 hover-float">
+                {{#if icon}}
+                <div class="flex items-center mb-3">
+                    <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                        <i class="fa-solid fa-{{icon}} text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800">{{title}}</h4>
+                </div>
+                {{else}}
+                <h4 class="text-xl font-bold text-slate-800 mb-3">{{title}}</h4>
+                {{/if}}
+                <p class="text-slate-600">{{content}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{else if right_quote}}
+        <div class="quote-block">
+            <p class="text-2xl text-slate-700 font-medium italic">
+                "{{right_quote}}"
+            </p>
+            {{#if right_quote_author}}
+            <p class="text-right mt-4 text-slate-600 font-medium">
+                — {{right_quote_author}}
+            </p>
+            {{/if}}
+        </div>
+        {{else}}
+        <div class="floating-card rounded-2xl p-12 text-center">
+            <div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-{{right_icon}} text-white text-5xl"></i>
+            </div>
+            {{#if right_title}}
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">{{right_title}}</h3>
+            {{/if}}
+            {{#if right_content}}
+            <p class="text-lg text-slate-600">{{right_content}}</p>
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+</main>

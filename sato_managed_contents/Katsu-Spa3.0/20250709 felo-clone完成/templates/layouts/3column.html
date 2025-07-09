@@ -1,0 +1,70 @@
+<!-- 3カラムレイアウト -->
+<header class="slide--header flex-none pt-12 px-16 pb-8">
+    <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+        {{#if header_icon}}
+        <i class="fa-solid fa-{{header_icon}} text-blue-500 mr-4"></i>
+        {{/if}}
+        {{header_title}}
+    </h2>
+    {{#if header_subtitle}}
+    <p class="text-xl text-slate-600 mt-2">{{header_subtitle}}</p>
+    {{/if}}
+</header>
+
+<main class="slide--main flex-1 px-16 pb-16">
+    <div class="grid grid-cols-3 gap-8 h-full">
+        {{#each columns}}
+        <div class="floating-card rounded-2xl p-6 hover-float flex flex-col">
+            {{#if icon}}
+            <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-{{icon}} text-white text-2xl"></i>
+            </div>
+            {{/if}}
+            
+            {{#if number}}
+            <div class="text-6xl font-black gradient-text text-center mb-4">
+                {{number}}
+            </div>
+            {{/if}}
+            
+            <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">{{title}}</h3>
+            
+            {{#if description}}
+            <p class="text-slate-600 text-lg text-center flex-1">{{description}}</p>
+            {{/if}}
+            
+            {{#if items}}
+            <ul class="space-y-2 mt-4">
+                {{#each items}}
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span class="text-slate-600 text-sm">{{this}}</span>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+            
+            {{#if value}}
+            <div class="mt-4 text-center">
+                <p class="text-3xl font-bold gradient-text">{{value}}</p>
+                <p class="text-sm text-slate-500 mt-1">{{value_label}}</p>
+            </div>
+            {{/if}}
+            
+            {{#if badge}}
+            <div class="mt-4 text-center">
+                <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {{badge}}
+                </span>
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    
+    {{#if footer_note}}
+    <div class="mt-8 text-center">
+        <p class="text-slate-500 text-sm">{{footer_note}}</p>
+    </div>
+    {{/if}}
+</main>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サム・アルトマンが語るOpenAIの未来とAGIへの道のり</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    /* スライド基本スタイル */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    .slide.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide.prev {
+      transform: translateX(-100%);
+    }
+
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    /* ナビゲーション */
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    /* スライド番号表示 */
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+
+    /* 音声再生ボタン */
+    .audio-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(46, 204, 113, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    .audio-button:hover {
+      background: rgba(39, 174, 96, 0.9);
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .audio-button.playing {
+      background: rgba(231, 76, 60, 0.9);
+    }
+
+    .audio-button.playing:hover {
+      background: rgba(192, 57, 43, 0.9);
+    }
+
+    /* 字幕表示エリア */
+    .subtitle-container {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: center;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: opacity 0.3s ease;
+    }
+
+    .subtitle-speaker {
+      color: #3498DB;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    
+    .subtitle-progress {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      color: #95A5A6;
+      font-size: 14px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- スライド1：タイトル -->
+  <div class="slide active">
+    <div class="slide-container p-16" style="background: linear-gradient(135deg, #2D3E50 0%, #34495E 100%);">
+      <div class="flex flex-col justify-center items-center h-full text-center text-white">
+        <h1 class="text-6xl font-bold mb-8">サム・アルトマンが語る<br>OpenAIの未来とAGIへの道のり</h1>
+        <p class="text-3xl mb-12 opacity-90">Y Combinator AI Startup School 2025</p>
+        <div class="text-xl opacity-80">
+          <p>TANREN株式会社</p>
+          <p>2025年6月22日</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド2：OpenAI創業の決断 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">AGIという「狂った」夢への挑戦</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <p class="mb-4"><span class="highlight">「99%の人が私たちは狂っていると思った」</span> - これがOpenAI創業時の現実でした。</p>
+          <ul class="list-disc pl-6 space-y-2 mt-6">
+            <li>DeepMindが圧倒的に先行していた時代</li>
+            <li>AGIは単なる夢物語と見なされていた</li>
+            <li>それでも1%の優秀な人材が集まった</li>
+          </ul>
+          <p class="mt-6 text-xl italic">「疑念があるときこそ、前に進むべきだ」</p>
+        </div>
+        <div class="flex justify-center items-center">
+          <div style="height: 400px; width: 500px;">
+            <canvas id="chart1"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド3：初期の苦労 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">10年前のAI業界 - 想像を絶する困難</h1>
+      <div class="content">
+        <div class="grid grid-cols-3 gap-8 my-12">
+          <div class="text-center">
+            <p class="text-6xl font-bold text-blue-500">8人</p>
+            <p class="text-xl text-gray-600 mt-2">創業時のメンバー数</p>
+          </div>
+          <div class="text-center">
+            <p class="text-6xl font-bold text-green-500">$0</p>
+            <p class="text-xl text-gray-600 mt-2">収益の見込み</p>
+          </div>
+          <div class="text-center">
+            <p class="text-6xl font-bold text-red-500">0%</p>
+            <p class="text-xl text-gray-600 mt-2">イーロンが評価した成功確率</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-8 rounded-lg">
+          <p class="text-2xl text-center">「ビデオゲームをプレイするAI」「ルービックキューブを解くロボット」<br>ChatGPTなど想像もできない時代でした</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド4：転換点 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">スケーリング則の発見 - パラダイムシフト</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <p class="mb-6">当時の常識に反して、<span class="highlight">「モデルを大きくすれば性能が向上する」</span>という法則を発見。</p>
+          <div class="bg-blue-50 p-6 rounded-lg mb-6">
+            <h3 class="font-bold text-xl mb-3">重要な転換点：</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>GPT-1から始まった実験</li>
+              <li>周囲からの強い批判と懐疑</li>
+              <li>それでも信じ続けた小さなチーム</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div style="height: 400px; width: 500px;">
+            <canvas id="chart2"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド5：ChatGPTの爆発的成長 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">ChatGPT - 史上最速の成長</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-gray-100 rounded">
+              <span class="font-bold">存在しなかった</span>
+              <span class="text-2xl">→</span>
+              <span class="font-bold text-blue-500">世界5位のWebサイト</span>
+            </div>
+            <div class="text-center my-8">
+              <p class="text-5xl font-bold text-green-500">2.5年</p>
+              <p class="text-xl mt-2">という驚異的なスピード</p>
+            </div>
+            <p class="text-xl italic">"近い将来、世界3位、そしていつかは1位を目指す"</p>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div style="height: 400px; width: 500px;">
+            <canvas id="chart3"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド6：最新モデルの革新 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">o3モデル - 推論能力の革命</h1>
+      <div class="content">
+        <div class="mb-8">
+          <p class="text-2xl mb-6">現在、私たちは<span class="highlight">「製品開発の巨大な機会」</span>の時代にいます。</p>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="font-bold text-xl mb-3">革新的な進化：</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>推論モデルの登場</li>
+              <li>コストが1週間で<span class="highlight">5分の1</span>に</li>
+              <li>オープンソースモデルも間もなく公開</li>
+              <li>ローカル実行が現実的に</li>
+            </ul>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="font-bold text-xl mb-3">起業家への機会：</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>モデル能力と製品のギャップ</li>
+              <li>新しい相互作用モデル</li>
+              <li>まだ誰も作っていない製品</li>
+              <li>推論特化型アプリケーション</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド7：パーソナルAIの未来 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">「Her」の実現 - パーソナルAIコンパニオン</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <p class="mb-6"><span class="highlight">メモリー機能</span>は今年最も気に入っている機能です。</p>
+          <div class="space-y-4">
+            <div class="p-4 border-l-4 border-blue-500 bg-gray-50">
+              <p class="font-bold">実現される未来：</p>
+              <ul class="list-disc pl-5 mt-2 space-y-1">
+                <li>あなたを理解するAI</li>
+                <li>すべてのデータと接続</li>
+                <li>プロアクティブな支援</li>
+                <li>常に稼働するバックグラウンドAI</li>
+              </ul>
+            </div>
+            <p class="mt-6 italic">"これは単なる端末ではなく、真のAIコンパニオンになる"</p>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="text-center">
+            <i class="fas fa-brain text-9xl text-blue-500 mb-6"></i>
+            <p class="text-2xl">知能 + 記憶 + 統合 = Her</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド8：GPT-5とマルチモーダル -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">GPT-5への道 - 完全なマルチモーダルAI</h1>
+      <div class="flex justify-between items-center my-12">
+        <div class="text-center flex-1">
+          <div class="w-20 h-20 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+          <h3 class="text-xl font-bold mb-2">深い推論</h3>
+          <p class="text-gray-600">必要に応じて思考</p>
+        </div>
+        <i class="fas fa-arrow-right text-3xl text-gray-400"></i>
+        <div class="text-center flex-1">
+          <div class="w-20 h-20 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+          <h3 class="text-xl font-bold mb-2">リアルタイム生成</h3>
+          <p class="text-gray-600">動画・コード・アプリ</p>
+        </div>
+        <i class="fas fa-arrow-right text-3xl text-gray-400"></i>
+        <div class="text-center flex-1">
+          <div class="w-20 h-20 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+          <h3 class="text-xl font-bold mb-2">完全統合</h3>
+          <p class="text-gray-600">新しいコンピュータUI</p>
+        </div>
+      </div>
+      <div class="bg-gray-100 p-8 rounded-lg text-center">
+        <p class="text-2xl">"あなただけのためにその場でアプリを作成するAI"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド9：ロボットの時代 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">ヒューマノイドロボット - 次なるフロンティア</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <p class="mb-6 text-xl"><span class="highlight">"ChatGPTの最上位プランに加入すると、無料でヒューマノイドロボットが届く未来"</span></p>
+          <div class="space-y-4 mt-8">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+              <p>認知能力のAIは実現間近</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+              <p>機械工学の課題も解決へ</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+              <p>数年内に実用的なロボット</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div style="height: 400px; width: 500px;">
+            <canvas id="chart4"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド10：サプライチェーンの革命 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">製造業の再発明 - AIとロボットによる変革</h1>
+      <div class="content">
+        <div class="mb-8 text-center">
+          <p class="text-3xl font-bold mb-4">「100万台のロボットで全サプライチェーンを自動化できるか？」</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bg-blue-50 p-6 rounded-lg text-center">
+            <i class="fas fa-industry text-5xl text-blue-500 mb-4"></i>
+            <h3 class="font-bold mb-2">採掘・精製</h3>
+            <p>原材料の調達から</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg text-center">
+            <i class="fas fa-ship text-5xl text-green-500 mb-4"></i>
+            <h3 class="font-bold mb-2">輸送・物流</h3>
+            <p>グローバルな流通</p>
+          </div>
+          <div class="bg-purple-50 p-6 rounded-lg text-center">
+            <i class="fas fa-robot text-5xl text-purple-500 mb-4"></i>
+            <h3 class="font-bold mb-2">製造・組立</h3>
+            <p>新しいロボットの生産</p>
+          </div>
+        </div>
+        <p class="mt-8 text-xl text-center italic">「アメリカに製造業を取り戻す新しい可能性」</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド11：起業家へのアドバイス -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">ChatGPTを作るな - 誰も作っていないものを作れ</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <div class="bg-red-50 p-6 rounded-lg mb-6">
+            <p class="text-xl font-bold mb-3">⚠️ 避けるべきこと：</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>ChatGPTのクローン</li>
+              <li>みんなが作っているもの</li>
+              <li>トップ5のアイデア</li>
+            </ul>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <p class="text-xl font-bold mb-3">✅ 追求すべきこと：</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>誰も考えていないアイデア</li>
+              <li>推論モデル特化の新製品</li>
+              <li>真に革新的なインターフェース</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="text-center">
+            <p class="text-5xl font-bold text-blue-500 mb-4">OpenAIを超える</p>
+            <p class="text-2xl">そんな会社がこの部屋から生まれる</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド12：逆境への対処 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">批判に直面したとき - イーロンからの「0%」メール</h1>
+      <div class="content">
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-gray-100 p-8 rounded-lg mb-8">
+            <p class="text-xl italic mb-4">"お前たちの成功確率は0%だ。完全に失敗している。"</p>
+            <p class="text-right">- イーロン・マスク（GPT-1を見て）</p>
+          </div>
+          <div class="space-y-6">
+            <p class="text-xl">尊敬する人からの否定は本当に辛い。でも...</p>
+            <div class="border-l-4 border-blue-500 pl-6">
+              <p class="font-bold text-xl mb-2">重要な教訓：</p>
+              <ul class="list-disc pl-5 space-y-2">
+                <li>批判に直面するのは正常なこと</li>
+                <li>時間とともに確信は強くなる</li>
+                <li>最初の一歩が最も困難</li>
+                <li><span class="highlight">信念を持ち続けることが成功への鍵</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド13：防御可能性の構築 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">防御可能性は後から作る - まず唯一の製品を</h1>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="content">
+          <h3 class="text-2xl font-bold mb-6">OpenAIの防御可能性の進化</h3>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl font-bold text-blue-500">1.</span>
+              <div>
+                <p class="font-bold">初期：唯一の製品</p>
+                <p class="text-gray-600">市場に競合が存在しない</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl font-bold text-blue-500">2.</span>
+              <div>
+                <p class="font-bold">中期：ブランド確立</p>
+                <p class="text-gray-600">認知度と信頼の獲得</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl font-bold text-blue-500">3.</span>
+              <div>
+                <p class="font-bold">現在：エコシステム</p>
+                <p class="text-gray-600">メモリー、統合、プラットフォーム</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="bg-blue-50 p-8 rounded-lg text-center">
+            <i class="fas fa-lightbulb text-6xl text-yellow-500 mb-4"></i>
+            <p class="text-xl font-bold">まず作る、防御は後から</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド14：未来への投資 -->
+  <div class="slide">
+    <div class="slide-container p-16">
+      <h1 class="title">これからの10年 - 個人の影響力の時代</h1>
+      <div class="content">
+        <div class="text-center mb-12">
+          <p class="text-3xl font-bold"><span class="highlight">"テクノロジー史上最高の起業タイミング"</span></p>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+          <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4">なぜ今なのか？</h3>
+            <ul class="list-disc pl-5 space-y-3">
+              <li>AIモデルの劇的な進化</li>
+              <li>コストの急速な低下</li>
+              <li>オープンソースの充実</li>
+              <li>製品イノベーションの余地</li>
+            </ul>
+          </div>
+          <div class="bg-gradient-to-r from-green-50 to-green-100 p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4">個人ができること</h3>
+            <ul class="list-disc pl-5 space-y-3">
+              <li>一人でも世界規模のサービス</li>
+              <li>AIを活用した新しい科学</li>
+              <li>社会課題の解決</li>
+              <li>想像を超える創造</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド15：まとめ -->
+  <div class="slide">
+    <div class="slide-container p-16" style="background: linear-gradient(135deg, #2D3E50 0%, #34495E 100%);">
+      <div class="flex flex-col justify-center items-center h-full text-center text-white">
+        <h1 class="text-5xl font-bold mb-8">AGIへの道は始まったばかり</h1>
+        <div class="mb-12 max-w-3xl">
+          <p class="text-2xl mb-6">10〜20年後、私たちは想像を超える超知能を手にする</p>
+          <div class="space-y-4 text-xl">
+            <p>✨ 今こそ大胆なアイデアに挑戦する時</p>
+            <p>🚀 誰も作っていないものを作る勇気を</p>
+            <p>💡 あなたがOpenAIを超える会社を作るかもしれない</p>
+          </div>
+        </div>
+        <div class="bg-white bg-opacity-20 px-8 py-4 rounded-full">
+          <p class="text-2xl font-bold">The Future is What You Build</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="navigation">
+    <button class="nav-button" onclick="previousSubtitle()">← 戻る</button>
+    <button class="nav-button" onclick="nextSubtitle()">次へ →</button>
+  </div>
+
+  <!-- 音声再生ボタン -->
+  <button class="audio-button" id="audioButton" onclick="toggleAudio()">
+    <i class="fas fa-play"></i> 音声を再生
+  </button>
+
+  <!-- スライド番号表示 -->
+  <div class="slide-number" id="slideNumber">
+    <span id="slideInfo">スライド 1 / 15</span>
+    <span style="margin-left: 10px;">字幕 <span id="subtitleNumber">1</span> / 45</span>
+  </div>
+
+  <!-- 字幕表示エリア -->
+  <div class="subtitle-container" id="subtitleContainer">
+    <div class="subtitle-speaker">AI秘書 桜木美佳</div>
+    <div id="subtitleText"></div>
+    <div class="subtitle-progress" id="subtitleProgress"></div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let currentSubtitleIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let audio = null;
+    let isAudioPlaying = false;
+    
+    // 字幕データ（時間情報なし）
+    const srtSubtitles = [
+      { id: 1, text: "皆様、こんにちは。AI秘書の桜木美佳です。\n本日は、OpenAIのCEOサム・アルトマン氏が語る\nAGIへの道のりについてご紹介いたします。" },
+      { id: 2, text: "2025年6月、Y CombinatorのAI Startup Schoolで\n行われた対談から、最新の洞察をお届けします。" },
+      { id: 3, text: "まず、OpenAI創業時の驚くべき状況から\nお話を始めさせていただきます。" },
+      { id: 4, text: "「99%の人が私たちは狂っていると思った」\nこれがサム・アルトマン氏の言葉です。" },
+      { id: 5, text: "2015年、AGI（汎用人工知能）は\n単なる夢物語と考えられていました。" },
+      { id: 6, text: "DeepMindが圧倒的に先行し、\nOpenAIの成功は不可能に見えました。" },
+      { id: 7, text: "それでも1%の優秀な人材が\nこのビジョンに共鳴し、集まったのです。" },
+      { id: 8, text: "創業当初はわずか8人。\n収益の見込みはゼロでした。" },
+      { id: 9, text: "イーロン・マスク氏からは\n「成功確率0%」という厳しい評価も。" },
+      { id: 10, text: "当時のAIといえば、\nビデオゲームをプレイする程度でした。" },
+      { id: 11, text: "ChatGPTなど、\n想像すらできない時代だったのです。" },
+      { id: 12, text: "しかし、重要な転換点が訪れます。\nスケーリング則の発見です。" },
+      { id: 13, text: "「モデルを大きくすれば性能が向上する」\nこの単純な法則が、すべてを変えました。" },
+      { id: 14, text: "GPT-1から始まった実験は、\n周囲の強い批判にさらされました。" },
+      { id: 15, text: "それでも小さなチームは\nこの可能性を信じ続けたのです。" },
+      { id: 16, text: "そして今、ChatGPTは\n史上最速で成長したサービスとなりました。" },
+      { id: 17, text: "わずか2.5年で、存在しなかったサービスが\n世界5位のWebサイトに成長。" },
+      { id: 18, text: "アルトマン氏は語ります。\n「いつかは世界1位を目指す」と。" },
+      { id: 19, text: "現在、最新のo3モデルは\n推論能力において革命を起こしています。" },
+      { id: 20, text: "驚くべきことに、\nコストは1週間で5分の1に低下しました。" },
+      { id: 21, text: "さらに、強力なオープンソースモデルも\n間もなく公開予定とのことです。" },
+      { id: 22, text: "アルトマン氏が最も気に入っている機能、\nそれは「メモリー」機能です。" },
+      { id: 23, text: "AIがあなたを理解し、\nまるで親しい友人のように振る舞います。" },
+      { id: 24, text: "将来的には、バックグラウンドで常に稼働し、\nプロアクティブに支援するAIへと進化します。" },
+      { id: 25, text: "これが映画「Her」で描かれた\n真のAIコンパニオンの実現です。" },
+      { id: 26, text: "GPT-5では、完全なマルチモーダルAIを目指します。\n深い推論とリアルタイム生成の統合です。" },
+      { id: 27, text: "必要に応じて深く思考し、\n動画やアプリをその場で生成。" },
+      { id: 28, text: "これは新しいコンピュータインターフェースの\n誕生を意味します。" },
+      { id: 29, text: "さらに驚くべき未来が待っています。\nヒューマノイドロボットの時代です。" },
+      { id: 30, text: "「ChatGPTの最上位プランに加入すると\n無料でロボットが届く」" },
+      { id: 31, text: "これは冗談ではなく、\n数年内に実現可能な未来なのです。" },
+      { id: 32, text: "100万台のロボットで\n全サプライチェーンを自動化する構想も。" },
+      { id: 33, text: "採掘から製造、輸送まで、\nすべてをロボットが担う世界。" },
+      { id: 34, text: "これはアメリカに製造業を\n取り戻す新しい可能性でもあります。" },
+      { id: 35, text: "起業家の皆様への重要なアドバイス。\n「ChatGPTを作るな」とアルトマン氏は言います。" },
+      { id: 36, text: "誰もが考えているトップ5のアイデアではなく、\n誰も作っていないものを作るべきです。" },
+      { id: 37, text: "この会場から、OpenAIを超える会社が\n生まれるかもしれません。" },
+      { id: 38, text: "批判や否定に直面することもあるでしょう。\nイーロン・マスク氏の「0%」メールのように。" },
+      { id: 39, text: "しかし、それは正常なことです。\n信念を持ち続けることが成功への鍵なのです。" },
+      { id: 40, text: "防御可能性は後から構築できます。\nまず、唯一無二の製品を作ることです。" },
+      { id: 41, text: "OpenAIも最初は防御策がありませんでした。\n時間とともにエコシステムを構築したのです。" },
+      { id: 42, text: "今こそ、テクノロジー史上\n最高の起業タイミングです。" },
+      { id: 43, text: "個人でも世界規模のサービスを作れる時代。\nAIがそれを可能にします。" },
+      { id: 44, text: "10年後、20年後、私たちは\n想像を超える超知能を手にするでしょう。" },
+      { id: 45, text: "今こそ大胆なアイデアに挑戦する時です。\n未来はあなたが作るものです。\nご清聴ありがとうございました。" }
+    ];
+    
+    // 字幕番号とスライド番号のマッピング
+    const subtitleToSlide = {
+      1: 0, 2: 0, 3: 0,
+      4: 1, 5: 1, 6: 1, 7: 1,
+      8: 2, 9: 2, 10: 2, 11: 2,
+      12: 3, 13: 3, 14: 3, 15: 3,
+      16: 4, 17: 4, 18: 4,
+      19: 5, 20: 5, 21: 5,
+      22: 6, 23: 6, 24: 6, 25: 6,
+      26: 7, 27: 7, 28: 7,
+      29: 8, 30: 8, 31: 8,
+      32: 9, 33: 9, 34: 9,
+      35: 10, 36: 10, 37: 10,
+      38: 11, 39: 11,
+      40: 12, 41: 12,
+      42: 13, 43: 13,
+      44: 14, 45: 14
+    };
+    
+    // 各スライドの字幕数を計算
+    function getSubtitleCountBySlide() {
+      const slideSubtitleCount = {};
+      const slideSubtitles = {};
+      
+      // 各スライドに属する字幕を収集
+      Object.entries(subtitleToSlide).forEach(([subtitleId, slideId]) => {
+        if (!slideSubtitles[slideId]) {
+          slideSubtitles[slideId] = [];
+        }
+        slideSubtitles[slideId].push(parseInt(subtitleId));
+      });
+      
+      // 各スライドの字幕数をカウント
+      Object.entries(slideSubtitles).forEach(([slideId, subtitles]) => {
+        slideSubtitleCount[slideId] = subtitles.length;
+      });
+      
+      return { slideSubtitleCount, slideSubtitles };
+    }
+    
+    const { slideSubtitleCount, slideSubtitles } = getSubtitleCountBySlide();
+    
+    // 字幕を表示
+    function showSubtitle(index) {
+      if (index < 0 || index >= srtSubtitles.length) return;
+      
+      currentSubtitleIndex = index;
+      const subtitle = srtSubtitles[index];
+      
+      // 字幕テキストを表示（改行を<br>に変換）
+      document.getElementById('subtitleText').innerHTML = subtitle.text.replace(/\n/g, '<br>');
+      
+      // 字幕番号を更新
+      document.getElementById('subtitleNumber').textContent = subtitle.id;
+      
+      // 対応するスライドを表示
+      const targetSlide = subtitleToSlide[subtitle.id];
+      if (targetSlide !== undefined && targetSlide !== currentSlide) {
+        showSlide(targetSlide);
+      }
+      
+      // 現在のスライド内での字幕の進行状況を更新
+      const currentSlideSubtitles = slideSubtitles[targetSlide];
+      if (currentSlideSubtitles) {
+        const positionInSlide = currentSlideSubtitles.indexOf(subtitle.id) + 1;
+        const totalInSlide = currentSlideSubtitles.length;
+        
+        // 進行状況を表示（例: 1/3）
+        document.getElementById('subtitleProgress').textContent = `${positionInSlide}/${totalInSlide}`;
+      }
+    }
+    
+    // スライドを表示
+    function showSlide(n) {
+      if (n === currentSlide) return;
+      
+      // 前のスライドにprevクラスを追加
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.add('prev');
+      
+      currentSlide = n;
+      
+      // 新しいスライドを表示
+      setTimeout(() => {
+        slides.forEach(slide => slide.classList.remove('prev', 'active'));
+        slides[currentSlide].classList.add('active');
+      }, 50);
+      
+      // スライド番号を更新
+      document.getElementById('slideInfo').textContent = `スライド ${currentSlide + 1} / ${totalSlides}`;
+      
+      // チャートの初期化（必要に応じて）
+      setTimeout(initCharts, 100);
+    }
+    
+    // 次の字幕へ
+    function nextSubtitle() {
+      if (currentSubtitleIndex < srtSubtitles.length - 1) {
+        showSubtitle(currentSubtitleIndex + 1);
+      }
+    }
+    
+    // 前の字幕へ
+    function previousSubtitle() {
+      if (currentSubtitleIndex > 0) {
+        showSubtitle(currentSubtitleIndex - 1);
+      }
+    }
+    
+    // キーボードナビゲーション
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSubtitle();
+      if (e.key === 'ArrowLeft') previousSubtitle();
+      if (e.key === ' ') {
+        e.preventDefault();
+        toggleAudio();
+      }
+    });
+    
+    // 音声の再生/停止
+    function toggleAudio() {
+      const audioButton = document.getElementById('audioButton');
+      
+      if (!audio) {
+        // 音声ファイルの読み込みを試みる
+        loadAudio();
+        return;
+      }
+      
+      if (isAudioPlaying) {
+        // 停止
+        audio.pause();
+        isAudioPlaying = false;
+        audioButton.innerHTML = '<i class="fas fa-play"></i> 音声を再生';
+        audioButton.classList.remove('playing');
+      } else {
+        // 再生
+        audio.play().then(() => {
+          isAudioPlaying = true;
+          audioButton.innerHTML = '<i class="fas fa-pause"></i> 音声を停止';
+          audioButton.classList.add('playing');
+        }).catch(err => {
+          console.error('音声の再生に失敗しました:', err);
+          alert('音声ファイルが見つかりません。');
+        });
+      }
+    }
+    
+    // 音声ファイルの読み込み
+    function loadAudio() {
+      const audioButton = document.getElementById('audioButton');
+      
+      // まず.wavファイルを試す
+      audio = new Audio('./subtitles.wav');
+      
+      audio.addEventListener('loadedmetadata', () => {
+        console.log('音声ファイル（WAV）が読み込まれました');
+        toggleAudio(); // 読み込み後に再生
+      });
+      
+      audio.addEventListener('error', () => {
+        // .wavが失敗したら.mp3を試す
+        audio = new Audio('./subtitles.mp3');
+        
+        audio.addEventListener('loadedmetadata', () => {
+          console.log('音声ファイル（MP3）が読み込まれました');
+          toggleAudio(); // 読み込み後に再生
+        });
+        
+        audio.addEventListener('error', () => {
+          console.error('音声ファイルが見つかりません');
+          audioButton.disabled = true;
+          audioButton.innerHTML = '<i class="fas fa-times"></i> 音声なし';
+          audioButton.style.background = 'rgba(149, 165, 166, 0.9)';
+        });
+      });
+      
+      // 再生終了時の処理
+      audio.addEventListener('ended', () => {
+        isAudioPlaying = false;
+        audioButton.innerHTML = '<i class="fas fa-play"></i> 音声を再生';
+        audioButton.classList.remove('playing');
+      });
+    }
+    
+    // チャートの初期化
+    function initCharts() {
+      // Chart 1: 創業時の状況
+      const ctx1 = document.getElementById('chart1');
+      if (ctx1 && currentSlide === 1) {
+        new Chart(ctx1, {
+          type: 'doughnut',
+          data: {
+            labels: ['信じた人々', '懐疑的な人々'],
+            datasets: [{
+              data: [1, 99],
+              backgroundColor: [
+                'rgba(52, 152, 219, 0.8)',
+                'rgba(149, 165, 166, 0.8)'
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  font: { size: 16 }
+                }
+              }
+            }
+          }
+        });
+      }
+      
+      // Chart 2: スケーリング則
+      const ctx2 = document.getElementById('chart2');
+      if (ctx2 && currentSlide === 3) {
+        new Chart(ctx2, {
+          type: 'line',
+          data: {
+            labels: ['GPT-1', 'GPT-2', 'GPT-3', 'GPT-4'],
+            datasets: [{
+              label: 'モデルの性能',
+              data: [10, 50, 200, 1000],
+              borderColor: 'rgba(52, 152, 219, 1)',
+              backgroundColor: 'rgba(52, 152, 219, 0.1)',
+              tension: 0.4,
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                type: 'logarithmic',
+                beginAtZero: false
+              }
+            }
+          }
+        });
+      }
+      
+      // Chart 3: ChatGPTの成長
+      const ctx3 = document.getElementById('chart3');
+      if (ctx3 && currentSlide === 4) {
+        new Chart(ctx3, {
+          type: 'bar',
+          data: {
+            labels: ['1ヶ月', '6ヶ月', '1年', '2年', '2.5年'],
+            datasets: [{
+              label: 'ユーザー数（百万人）',
+              data: [1, 10, 50, 150, 300],
+              backgroundColor: 'rgba(46, 204, 113, 0.8)',
+              borderColor: 'rgba(46, 204, 113, 1)',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      }
+      
+      // Chart 4: ロボットの影響予測
+      const ctx4 = document.getElementById('chart4');
+      if (ctx4 && currentSlide === 8) {
+        new Chart(ctx4, {
+          type: 'radar',
+          data: {
+            labels: ['製造業', '物流', '農業', '建設', 'サービス業'],
+            datasets: [{
+              label: '自動化の可能性',
+              data: [85, 90, 75, 70, 60],
+              backgroundColor: 'rgba(155, 89, 182, 0.2)',
+              borderColor: 'rgba(155, 89, 182, 1)',
+              pointBackgroundColor: 'rgba(155, 89, 182, 1)'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100
+              }
+            }
+          }
+        });
+      }
+    }
+    
+    // 初期化
+    window.addEventListener('load', () => {
+      showSubtitle(0);
+      setTimeout(initCharts, 100);
+    });
+  </script>
+</body>
+</html>

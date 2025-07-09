@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .smile-curve {
+      position: relative;
+      height: 300px;
+      margin: 20px 0;
+    }
+
+    .curve-line {
+      stroke: #3498DB;
+      stroke-width: 4;
+      fill: none;
+    }
+
+    .job-level {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .job-level.high-value {
+      border-left: 4px solid #2ECC71;
+    }
+
+    .job-level.low-value {
+      border-left: 4px solid #E74C3C;
+      opacity: 0.8;
+    }
+
+    .job-level:hover {
+      transform: translateX(10px);
+    }
+
+    .warning-badge {
+      background: #E74C3C;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-block;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .future-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">仕事の未来：スマイルカーブと中間管理職の消滅</h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <h3 class="text-2xl font-bold mb-4">スマイルカーブ理論</h3>
+        
+        <div class="smile-curve">
+          <svg width="100%" height="100%" viewBox="0 0 400 300">
+            <path d="M 50 100 Q 200 250 350 100" class="curve-line"/>
+            <text x="50" y="80" text-anchor="middle" font-size="16" font-weight="bold">上流</text>
+            <text x="200" y="260" text-anchor="middle" font-size="16" font-weight="bold">中流</text>
+            <text x="350" y="80" text-anchor="middle" font-size="16" font-weight="bold">下流</text>
+          </svg>
+        </div>
+
+        <div class="space-y-3">
+          <div class="job-level high-value">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold">上流：経営・戦略</h4>
+                <p class="text-sm">答えのない中で決める仕事</p>
+              </div>
+              <i class="fas fa-arrow-up text-green-500 text-2xl"></i>
+            </div>
+          </div>
+
+          <div class="job-level low-value">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold">中流：中間管理職</h4>
+                <p class="text-sm">情報の整理・伝達</p>
+              </div>
+              <span class="warning-badge">消滅リスク</span>
+            </div>
+          </div>
+
+          <div class="job-level high-value">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold">下流：現場・実務</h4>
+                <p class="text-sm">リアルな顧客接点</p>
+              </div>
+              <i class="fas fa-arrow-up text-green-500 text-2xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col justify-center items-center">
+        <div class="bg-red-50 p-6 rounded-lg mb-6 text-center">
+          <i class="fas fa-exclamation-triangle text-red-500 future-icon"></i>
+          <h3 class="text-2xl font-bold mb-2">
+            最も価値がなくなる仕事
+          </h3>
+          <p class="text-3xl font-bold highlight">
+            部長・課長クラス
+          </p>
+          <p class="text-lg mt-2">
+            AIが最も得意とする<br/>「情報整理・伝達」業務
+          </p>
+        </div>
+
+        <div class="bg-blue-50 p-6 rounded-lg text-center">
+          <h4 class="text-xl font-bold mb-3">生き残る仕事の特徴</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <i class="fas fa-brain text-blue-500 future-icon"></i>
+              <p class="font-bold">決断と責任</p>
+              <p class="text-sm">AIには不可能</p>
+            </div>
+            <div>
+              <i class="fas fa-handshake text-green-500 future-icon"></i>
+              <p class="font-bold">人間的接触</p>
+              <p class="text-sm">現場の強み</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-number">12 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='11.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='13.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

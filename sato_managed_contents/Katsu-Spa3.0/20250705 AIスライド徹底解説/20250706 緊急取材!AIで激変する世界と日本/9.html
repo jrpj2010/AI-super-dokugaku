@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .device-icon {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+
+    .device-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .device-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .apple-gradient {
+      background: linear-gradient(135deg, #000000 0%, #434343 100%);
+      color: white;
+    }
+
+    .connection-line {
+      position: absolute;
+      height: 2px;
+      background: #3498DB;
+      transform-origin: left center;
+    }
+
+    .ecosystem-center {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      background: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 60px;
+    }
+
+    .genmoji-example {
+      display: inline-block;
+      font-size: 36px;
+      margin: 0 8px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">
+      <i class="fab fa-apple mr-3"></i>
+      Apple戦略：デバイス連携という勝ち筋
+    </h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="mb-6">
+          <h3 class="text-2xl font-bold mb-4">後発から巻き返す3つの戦略</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 flex-shrink-0">1</div>
+              <div>
+                <h4 class="font-bold">デバイス間シームレス連携</h4>
+                <p class="text-lg">iPhone、iPad、Mac、Apple Watchが<span class="highlight">一体化</span></p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 flex-shrink-0">2</div>
+              <div>
+                <h4 class="font-bold">他社技術の賢い活用</h4>
+                <p class="text-lg">SiriとChatGPTの連携で<span class="highlight">精度向上</span></p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 flex-shrink-0">3</div>
+              <div>
+                <h4 class="font-bold">日本市場への配慮</h4>
+                <p class="text-lg">ジェン文字（Genmoji）で<span class="highlight">コミュニケーション革新</span></p>
+                <div class="mt-2">
+                  <span class="genmoji-example">🎉</span>
+                  <span class="genmoji-example">🐕</span>
+                  <span class="genmoji-example">🏔️</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <p class="text-lg">
+            「モデルに価値がなくなってきている今、<span class="highlight">プラットフォームとの融合</span>が鍵」
+          </p>
+          <p class="text-right text-gray-600 mt-2">- 中山孝志氏</p>
+        </div>
+      </div>
+      
+      <div class="flex justify-center items-center">
+        <div class="relative">
+          <div class="ecosystem-center">
+            <i class="fab fa-apple"></i>
+          </div>
+          
+          <div class="absolute" style="top: -80px; left: 40px;">
+            <div class="device-card">
+              <i class="fas fa-mobile-alt device-icon"></i>
+              <p class="text-sm font-bold">iPhone</p>
+            </div>
+          </div>
+          
+          <div class="absolute" style="top: -20px; right: -120px;">
+            <div class="device-card">
+              <i class="fas fa-tablet-alt device-icon"></i>
+              <p class="text-sm font-bold">iPad</p>
+            </div>
+          </div>
+          
+          <div class="absolute" style="bottom: -80px; left: 40px;">
+            <div class="device-card">
+              <i class="fas fa-laptop device-icon"></i>
+              <p class="text-sm font-bold">Mac</p>
+            </div>
+          </div>
+          
+          <div class="absolute" style="top: -20px; left: -120px;">
+            <div class="device-card">
+              <i class="fas fa-clock device-icon"></i>
+              <p class="text-sm font-bold">Watch</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-number">9 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='8.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='10.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

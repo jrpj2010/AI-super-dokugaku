@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>質疑応答：業界動向と企業戦略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            height: 720px;
+        }
+        
+        html {
+            height: 720px;
+        }
+        
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .slide--card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .q-badge {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .a-badge {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .company-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .aws-icon { background: #ff9900; color: white; }
+        .azure-icon { background: #0078d4; color: white; }
+        .google-icon { background: #4285f4; color: white; }
+        .openai-icon { background: #412991; color: white; }
+        .anthropic-icon { background: #d2691e; color: white; }
+    </style>
+<style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;.slide { height: 720px;}}</style><script src="https://felo.ai/js/iframe.js?v=20250708"></script></head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-8 px-12">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-comments text-white text-xl"></i>
+                    </div>
+                    <div class="accent-line h-1 w-24 rounded-full"></div>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-600 text-lg font-medium">Professional Training Series</p>
+                    <p class="text-slate-500 text-sm">Q&A Session</p>
+                </div>
+            </div>
+            <h1 class="gradient-text text-4xl font-black mb-4">質疑応答：業界動向と企業戦略</h1>
+            <div class="accent-line h-2 w-24 rounded-full"></div>
+        </header>
+        
+        <main class="slide--main flex-1 px-12 py-6">
+            <div class="space-y-6">
+                <div class="slide--card rounded-3xl p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="q-badge">Q</div>
+                        <div class="flex-1">
+                            <h2 class="text-slate-800 text-xl font-bold">AWS+Anthropic vs Azure+OpenAIの今後の勢力図は？</h2>
+                        </div>
+                    </div>
+                    <div class="flex items-start ml-14">
+                        <div class="a-badge">A</div>
+                        <div class="flex-1">
+                            <p class="text-slate-700 text-lg mb-4">
+                                OpenAIがGoogleのサーバーを契約するなど、MicrosoftとOpenAIの関係に変化の兆し。GoogleがGeminiの圧倒的性能と合わせ、業界の覇権を握る可能性も。
+                            </p>
+                            <div class="flex items-center space-x-2 flex-wrap">
+                                <div class="company-icon aws-icon">
+                                    <i class="fa-brands fa-aws"></i>
+                                </div>
+                                <div class="company-icon anthropic-icon">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <span class="text-slate-600 text-sm font-medium">vs</span>
+                                <div class="company-icon azure-icon">
+                                    <i class="fa-brands fa-microsoft"></i>
+                                </div>
+                                <div class="company-icon openai-icon">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <span class="text-slate-600 text-sm font-medium">vs</span>
+                                <div class="company-icon google-icon">
+                                    <i class="fa-brands fa-google"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide--card rounded-3xl p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="q-badge">Q</div>
+                        <div class="flex-1">
+                            <h2 class="text-slate-800 text-xl font-bold">個人情報や社外秘情報がありAIを活用できない場合の対策は？</h2>
+                        </div>
+                    </div>
+                    <div class="flex items-start ml-14">
+                        <div class="a-badge">A</div>
+                        <div class="flex-1">
+                            <div class="space-y-3">
+                                <div class="bg-blue-50 rounded-xl p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa-solid fa-key text-blue-600 mr-2"></i>
+                                        <span class="text-blue-800 font-bold text-lg">重要原則</span>
+                                    </div>
+                                    <p class="text-blue-700 text-lg font-medium">
+                                        API経由の利用はAIの学習に使われない
+                                    </p>
+                                </div>
+                                <div class="bg-green-50 rounded-xl p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa-solid fa-shield-alt text-green-600 mr-2"></i>
+                                        <span class="text-green-800 font-bold text-lg">本質的解決策</span>
+                                    </div>
+                                    <p class="text-green-700 text-lg">
+                                        Microsoft CoPilotに依存せず、<strong>AI駆動開発で自社専用のセキュアなツールを内製化</strong>
+                                    </p>
+                                </div>
+                                <div class="bg-purple-50 rounded-xl p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa-solid fa-database text-purple-600 mr-2"></i>
+                                        <span class="text-purple-800 font-bold text-lg">データ戦略</span>
+                                    </div>
+                                    <p class="text-purple-700 text-lg">
+                                        データの持ち方自体もAIファーストで見直す必要あり
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script>
+// Felo風インライン編集機能
+(function() {
+    // エディターツールバーのHTML
+    const toolbarHTML = `
+    <div id="feloEditor" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        z-index: 10000;
+        font-family: 'Noto Sans JP', sans-serif;
+    ">
+        <!-- フォント選択 -->
+        <select id="fontSelector" style="
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+            min-width: 180px;
+            cursor: pointer;
+        ">
+            <option value="">デフォルトフォント</option>
+            <option value="'Noto Sans JP', sans-serif">Noto Sans Japanese</option>
+            <option value="'Noto Serif JP', serif">Noto Serif Japanese</option>
+            <option value="'Noto Sans KR', sans-serif">Noto Sans Korean</option>
+            <option value="'Nanum Gothic', sans-serif">나눔고딕 (Nanum Gothic)</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="'Times New Roman', serif">Times New Roman</option>
+            <option value="'STSong', '宋体', serif">宋体</option>
+            <option value="'STHeiti', '黑体', sans-serif">黑体</option>
+            <option value="'Microsoft JhengHei', sans-serif">正黑體</option>
+            <option value="'PMingLiU', serif">新細明體</option>
+        </select>
+        
+        <!-- フォントサイズ -->
+        <select id="sizeSelector" style="
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+            width: 80px;
+            cursor: pointer;
+        ">
+            <option value="">サイズ</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="24">24</option>
+            <option value="28">28</option>
+            <option value="30">30</option>
+            <option value="36">36</option>
+            <option value="48">48</option>
+            <option value="72">72</option>
+        </select>
+        
+        <div style="width: 1px; height: 30px; background: #e0e0e0;"></div>
+        
+        <!-- テキストスタイル -->
+        <button class="style-btn" data-action="bold" title="太字">
+            <i class="fas fa-bold"></i>
+        </button>
+        <button class="style-btn" data-action="italic" title="斜体">
+            <i class="fas fa-italic"></i>
+        </button>
+        <button class="style-btn" data-action="underline" title="下線">
+            <i class="fas fa-underline"></i>
+        </button>
+        
+        <div style="width: 1px; height: 30px; background: #e0e0e0;"></div>
+        
+        <!-- テキスト配置 -->
+        <button class="style-btn" data-action="alignLeft" title="左揃え">
+            <i class="fas fa-align-left"></i>
+        </button>
+        <button class="style-btn" data-action="alignCenter" title="中央揃え">
+            <i class="fas fa-align-center"></i>
+        </button>
+        <button class="style-btn" data-action="alignRight" title="右揃え">
+            <i class="fas fa-align-right"></i>
+        </button>
+        
+        <div style="width: 1px; height: 30px; background: #e0e0e0;"></div>
+        
+        <!-- その他 -->
+        <button class="style-btn" data-action="delete" title="削除">
+            <i class="fas fa-trash"></i>
+        </button>
+        
+        <!-- 閉じるボタン -->
+        <button id="closeEditor" style="
+            margin-left: auto;
+            padding: 6px 12px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        ">
+            エディターを閉じる
+        </button>
+    </div>
+    `;
+    
+    // スタイルを追加
+    const style = document.createElement('style');
+    style.textContent = `
+        .style-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            transition: all 0.2s;
+        }
+        
+        .style-btn:hover {
+            background: #f5f5f5;
+            border-color: #007BFF;
+        }
+        
+        .style-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        
+        .editable-hover {
+            outline: 2px dashed #007BFF !important;
+            outline-offset: 2px !important;
+            cursor: text !important;
+        }
+        
+        .editable-selected {
+            outline: 2px solid #007BFF !important;
+            outline-offset: 2px !important;
+            background: rgba(0, 123, 255, 0.05) !important;
+        }
+        
+        body.editor-mode {
+            padding-top: 60px !important;
+        }
+        
+        [contenteditable="true"]:focus {
+            outline: 2px solid #007BFF !important;
+            outline-offset: 2px !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    let selectedElement = null;
+    let editorEnabled = false;
+    
+    // エディター初期化
+    function initEditor() {
+        // ツールバーを追加
+        document.body.insertAdjacentHTML('afterbegin', toolbarHTML);
+        document.body.classList.add('editor-mode');
+        
+        // すべてのテキスト要素を編集可能にする
+        const editableSelectors = 'h1, h2, h3, h4, h5, h6, p, span, li, td, th, div:not(#feloEditor)';
+        document.querySelectorAll(editableSelectors).forEach(el => {
+            // 空の要素やスクリプトを含む要素は除外
+            if (el.textContent.trim() && !el.querySelector('script')) {
+                el.setAttribute('contenteditable', 'true');
+                el.classList.add('editable');
+                
+                // ホバー効果
+                el.addEventListener('mouseenter', () => {
+                    if (!el.classList.contains('editable-selected')) {
+                        el.classList.add('editable-hover');
+                    }
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    el.classList.remove('editable-hover');
+                });
+                
+                // クリックで選択
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    selectElement(el);
+                });
+                
+                // 編集時の処理
+                el.addEventListener('input', () => {
+                    console.log('Content changed:', el.textContent);
+                });
+            }
+        });
+        
+        // イベントリスナー設定
+        setupEventListeners();
+        editorEnabled = true;
+    }
+    
+    // 要素を選択
+    function selectElement(el) {
+        // 以前の選択を解除
+        document.querySelectorAll('.editable-selected').forEach(e => {
+            e.classList.remove('editable-selected');
+        });
+        
+        selectedElement = el;
+        el.classList.add('editable-selected');
+        el.focus();
+        
+        // 現在のスタイルを反映
+        updateToolbar();
+    }
+    
+    // ツールバーの状態を更新
+    function updateToolbar() {
+        if (!selectedElement) return;
+        
+        const styles = window.getComputedStyle(selectedElement);
+        
+        // フォントサイズ
+        const fontSize = parseInt(styles.fontSize);
+        document.getElementById('sizeSelector').value = fontSize || '';
+        
+        // スタイルボタンの状態
+        document.querySelector('[data-action="bold"]').classList.toggle('active', 
+            styles.fontWeight === '700' || styles.fontWeight === 'bold');
+        document.querySelector('[data-action="italic"]').classList.toggle('active', 
+            styles.fontStyle === 'italic');
+        document.querySelector('[data-action="underline"]').classList.toggle('active', 
+            styles.textDecoration.includes('underline'));
+    }
+    
+    // イベントリスナー設定
+    function setupEventListeners() {
+        // フォント変更
+        document.getElementById('fontSelector').addEventListener('change', (e) => {
+            if (selectedElement && e.target.value) {
+                selectedElement.style.fontFamily = e.target.value;
+            }
+        });
+        
+        // サイズ変更
+        document.getElementById('sizeSelector').addEventListener('change', (e) => {
+            if (selectedElement && e.target.value) {
+                selectedElement.style.fontSize = e.target.value + 'px';
+            }
+        });
+        
+        // スタイルボタン
+        document.querySelectorAll('.style-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+                if (!selectedElement) return;
+                
+                switch(action) {
+                    case 'bold':
+                        const isBold = window.getComputedStyle(selectedElement).fontWeight === '700';
+                        selectedElement.style.fontWeight = isBold ? 'normal' : 'bold';
+                        break;
+                    case 'italic':
+                        const isItalic = window.getComputedStyle(selectedElement).fontStyle === 'italic';
+                        selectedElement.style.fontStyle = isItalic ? 'normal' : 'italic';
+                        break;
+                    case 'underline':
+                        const hasUnderline = selectedElement.style.textDecoration.includes('underline');
+                        selectedElement.style.textDecoration = hasUnderline ? 'none' : 'underline';
+                        break;
+                    case 'alignLeft':
+                        selectedElement.style.textAlign = 'left';
+                        break;
+                    case 'alignCenter':
+                        selectedElement.style.textAlign = 'center';
+                        break;
+                    case 'alignRight':
+                        selectedElement.style.textAlign = 'right';
+                        break;
+                    case 'delete':
+                        if (confirm('この要素を削除しますか？')) {
+                            selectedElement.remove();
+                            selectedElement = null;
+                        }
+                        break;
+                }
+                updateToolbar();
+            });
+        });
+        
+        // エディターを閉じる
+        document.getElementById('closeEditor').addEventListener('click', () => {
+            if (confirm('編集内容を保存しますか？')) {
+                saveChanges();
+            }
+            closeEditor();
+        });
+        
+        // 背景クリックで選択解除
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.editable') && !e.target.closest('#feloEditor')) {
+                document.querySelectorAll('.editable-selected').forEach(el => {
+                    el.classList.remove('editable-selected');
+                });
+                selectedElement = null;
+            }
+        });
+        
+        // キーボードショートカット
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'b':
+                        e.preventDefault();
+                        document.querySelector('[data-action="bold"]').click();
+                        break;
+                    case 'i':
+                        e.preventDefault();
+                        document.querySelector('[data-action="italic"]').click();
+                        break;
+                    case 'u':
+                        e.preventDefault();
+                        document.querySelector('[data-action="underline"]').click();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        saveChanges();
+                        break;
+                }
+            }
+        });
+    }
+    
+    // 変更を保存
+    function saveChanges() {
+        const htmlContent = document.documentElement.outerHTML;
+        console.log('保存する内容:', htmlContent);
+        alert('変更を保存しました（コンソールログを確認）');
+    }
+    
+    // エディターを閉じる
+    function closeEditor() {
+        document.getElementById('feloEditor').remove();
+        document.body.classList.remove('editor-mode');
+        document.querySelectorAll('[contenteditable]').forEach(el => {
+            el.removeAttribute('contenteditable');
+            el.classList.remove('editable', 'editable-hover', 'editable-selected');
+        });
+        editorEnabled = false;
+    }
+    
+    // 編集モード切り替えボタンを追加
+    const toggleButton = document.createElement('button');
+    toggleButton.textContent = '編集モード';
+    toggleButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    `;
+    
+    toggleButton.addEventListener('click', () => {
+        if (editorEnabled) {
+            closeEditor();
+        } else {
+            initEditor();
+        }
+    });
+    
+    document.body.appendChild(toggleButton);
+})();
+</script>
+
+</body>
+</html>

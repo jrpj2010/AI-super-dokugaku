@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="corporate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI飲み会 - AIがもたらす創造的破壊と新たな可能性 | エグゼクティブプレゼンテーション</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Roboto+Mono&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --tertiary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--primary-gradient);
+            z-index: 1000;
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .slide-container {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            max-width: 100vw;
+            height: 56.25vw;
+            max-height: 100vh;
+            min-height: 0;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto 2rem auto;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            border-radius: 24px;
+            background: white;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide-container:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            border-radius: 24px;
+            padding: clamp(1.5rem, 3vw, 3rem);
+        }
+
+        /* 画面表示用のパターンB専用スタイル */
+        @media screen {
+            .pattern-b-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                min-height: 0;
+            }
+
+            .pattern-b-content-area {
+                flex: 1;
+                overflow-y: auto;
+                padding-right: 0.5rem;
+            }
+        }
+
+        /* A4横印刷完全対応CSS（Windows/Mac両対応強化版） */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+
+            body {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-family: 'Noto Sans JP', Arial, sans-serif !important;
+                width: 297mm !important;
+                height: 210mm !important;
+            }
+
+            .slide-container {
+                width: 297mm !important;
+                height: 210mm !important;
+                max-width: 297mm !important;
+                max-height: 210mm !important;
+                min-height: 210mm !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0 !important;
+                aspect-ratio: auto !important;
+                overflow: visible !important;
+                box-shadow: var(--card-shadow) !important;
+                transform: none !important;
+                border-radius: 24px !important;
+                background: white !important;
+                position: relative !important;
+                display: block !important;
+            }
+
+            .slide-container:last-child {
+                page-break-after: auto;
+            }
+
+            .slide-content {
+                width: 100% !important;
+                height: 100% !important;
+                padding: clamp(1.5rem, 3vw, 3rem) !important;
+                position: relative !important;
+                overflow: visible !important;
+                border-radius: 24px !important;
+                display: block !important;
+                box-sizing: border-box !important;
+            }
+
+            /* 特別なスライドの背景色を維持 */
+            #slide-cover .slide-content {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                color: white !important;
+            }
+
+            #slide-thanks .slide-content {
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+                color: white !important;
+            }
+
+            #slide-cover .page-number,
+            #slide-thanks .page-number {
+                background: rgba(255,255,255,0.1) !important;
+                color: white !important;
+            }
+
+            .page-number {
+                position: absolute !important;
+                bottom: 1.5rem !important;
+                right: 1.5rem !important;
+                background: rgba(0, 0, 0, 0.05) !important;
+                backdrop-filter: blur(10px) !important;
+                padding: 0.5rem 1rem !important;
+                border-radius: 50px !important;
+                font-size: 0.875rem !important;
+                font-weight: 500 !important;
+                color: rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .progress-bar {
+                display: none !important;
+            }
+        }
+
+        /* 共通スタイル */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .slide-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .icon-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge-modern {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .material-symbols-outlined {
+            font-size: 1.25rem;
+            vertical-align: middle;
+        }
+
+        /* チャート関連 */
+        .chart-container {
+            position: relative;
+            height: 250px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+        }
+
+        /* メトリック数値 */
+        .metric-number {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* 洞察カード */
+        .insight-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid transparent;
+            border-image: var(--primary-gradient) 1;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateX(8px);
+        }
+
+        /* Mermaid図専用スタイル */
+        .mermaid-container {
+            background: linear-gradient(to bottom right, #f8fafc, #e0e7ff);
+            border-radius: 16px;
+            padding: 2rem;
+            overflow: auto;
+        }
+
+        .mermaid {
+            font-family: 'Noto Sans JP', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+
+    <!-- スライド1: タイトルスライド -->
+    <div class="slide-container" id="slide-cover">
+        <div class="slide-content">
+            <div class="flex items-center justify-center h-full">
+                <div class="text-center max-w-5xl mx-auto">
+                    <div class="mb-8 floating-animation">
+                        <i class="material-symbols-outlined" style="font-size: 6rem; color: rgba(255,255,255,0.9);">smart_toy</i>
+                    </div>
+                    <h1 class="text-6xl font-bold mb-6 text-white">
+                        生成AI飲み会
+                    </h1>
+                    <h2 class="text-3xl mb-8 text-white/90">
+                        AIがもたらす創造的破壊と新たな可能性
+                    </h2>
+                    <div class="flex items-center justify-center gap-4 mb-12">
+                        <div class="badge-modern glass-effect">
+                            <i class="material-symbols-outlined">calendar_today</i>
+                            2025年6月16日
+                        </div>
+                        <div class="badge-modern glass-effect">
+                            <i class="material-symbols-outlined">groups</i>
+                            ライフテックコーディネーター向け
+                        </div>
+                    </div>
+                    <p class="text-xl text-white/80 leading-relaxed">
+                        生成AIの最新動向と、それがもたらす<br>
+                        ビジネス・キャリア・ライフスタイルの変革について
+                    </p>
+                </div>
+            </div>
+            <div class="page-number">01</div>
+        </div>
+    </div>
+
+    <!-- スライド2: 生成AI三国志 -->
+    <div class="slide-container" id="slide-detail-2">
+        <div class="slide-content bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="section-header flex-shrink-0">
+                <div class="section-icon"></div>
+                <h1 class="slide-title gradient-text flex-1">生成AI三国志</h1>
+                <div class="badge-modern">
+                    <i class="material-symbols-outlined">compare</i>
+                    AIツール比較
+                </div>
+            </div>
+
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 min-h-0">
+                <div class="modern-card p-6 flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center">
+                            <i class="material-symbols-outlined">psychology</i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Claude（クロード）</h3>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-700 mb-4">Anthropic社が開発。対話の自然さと倫理的配慮に優れる</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">長文理解・生成に強い</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">プログラミング支援が得意</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="badge-modern" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">最高品質</span>
+                    </div>
+                </div>
+
+                <div class="modern-card p-6 flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl flex items-center justify-center">
+                            <i class="material-symbols-outlined">chat</i>
+                        </div>
+                        <h3 class="text-xl font-semibold">GPT（ChatGPT）</h3>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-700 mb-4">OpenAI社の代表的AI。最も普及している生成AI</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">豊富なプラグイン</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">画像生成機能搭載</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="badge-modern" style="background: linear-gradient(135deg, #10b981, #047857);">最適バランス</span>
+                    </div>
+                </div>
+
+                <div class="modern-card p-6 flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl flex items-center justify-center">
+                            <i class="material-symbols-outlined">auto_awesome</i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Gemini（ジェミニ）</h3>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-700 mb-4">Google製の最新AI。統合力と処理速度に優れる</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Googleサービスと連携</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">無料で高性能版利用可</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="badge-modern" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">最強環境</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">02</div>
+    </div>
+
+    <!-- スライド3: Google AI Studioの衝撃 -->
+    <div class="slide-container pattern-b-slide" id="slide-detail-3">
+        <div class="slide-content bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="section-header flex-shrink-0">
+                <div class="section-icon"></div>
+                <h1 class="slide-title gradient-text flex-1">Google AI Studioの衝撃</h1>
+                <div class="badge-modern">
+                    <i class="material-symbols-outlined">bolt</i>
+                    最新動向
+                </div>
+            </div>
+
+            <div class="pattern-b-content">
+                <div class="modern-card p-8">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">無料で最強環境、ただし「ラオウ」に全データを捧げる覚悟</h2>
+
+                    <div class="pattern-b-content-area">
+                        <div class="prose max-w-none mb-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">Google AI Studioは、最強の生成AI環境を無料で提供。しかし、すべてのデータがGoogleに学習される「ラオウ」的な存在であることを理解する必要があります。</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-blue-50 p-6 rounded-2xl border-left-4 border-blue-500">
+                                <h4 class="font-semibold text-blue-800 mb-3">新機能：バイブコーディングツール</h4>
+                                <p class="text-blue-700">非エンジニアでもコーディングができる革新的な機能。Cloud Runへの一発デプロイも可能に。</p>
+                            </div>
+                            <div class="bg-green-50 p-6 rounded-2xl border-left-4 border-green-500">
+                                <h4 class="font-semibold text-green-800 mb-3">企業への警告</h4>
+                                <p class="text-green-700">機密データの取り扱いには要注意。個人利用や学習目的には最適だが、企業利用は慎重に。</p>
+                            </div>
+                        </div>
+
+                        <div class="prose max-w-none mb-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">「すべてのデータをGoogleに学習される」という条件を受け入れられるなら、これ以上の開発環境はありません。個人の創造性を最大限に引き出すツールです。</p>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-3">利用上の心構え</h4>
+                            <p class="text-purple-700">「最強の力には最大の代償」- データプライバシーと引き換えに、圧倒的な生産性と創造性を手に入れることができます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">03</div>
+    </div>
+
+    <!-- スライド4: スタートアップ殺しの現実 -->
+    <div class="slide-container" id="slide-detail-4">
+        <div class="slide-content bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="section-header flex-shrink-0">
+                <div class="section-icon"></div>
+                <h1 class="slide-title gradient-text flex-1">スタートアップ殺しの現実</h1>
+                <div class="badge-modern">
+                    <i class="material-symbols-outlined">warning</i>
+                    市場動向
+                </div>
+            </div>
+
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0">
+                <div class="flex flex-col min-h-0">
+                    <div class="modern-card p-6 flex-1 min-h-0">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">
+                                <i class="material-symbols-outlined icon-gradient mr-2">trending_down</i>
+                                危機に瀕するビジネスモデル
+                            </h3>
+                        </div>
+
+                        <div class="chart-container flex-1 min-h-0">
+                            <canvas id="detailChart4" style="max-height: 200px;"></canvas>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <span class="text-sm text-gray-600">ワンイッシュ型SaaSベンダーの生存率予測</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col min-h-0 space-y-4">
+                    <h2 class="text-2xl font-semibold">
+                        <i class="material-symbols-outlined icon-gradient mr-3">insights</i>
+                        大手プラットフォーマーの脅威
+                    </h2>
+
+                    <div class="flex-1 min-h-0 space-y-4 overflow-y-auto pr-2">
+                        <div class="modern-card p-4 border-l-4 border-red-500">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg flex items-center justify-center">
+                                    <i class="material-symbols-outlined text-sm">dangerous</i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-red-800 mb-2">既存サービスの模倣リスク</h4>
+                                    <p class="text-gray-700 text-sm">GoogleやMicrosoftが既存のSaaSサービスを簡単に再現できる時代。独自性のないサービスは淘汰される。</p>
+                                    <div class="mt-2">
+                                        <span class="badge-modern" style="background: linear-gradient(135deg, #ef4444, #dc2626); font-size: 0.75rem;">高リスク</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modern-card p-4 border-l-4 border-orange-500">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg flex items-center justify-center">
+                                    <i class="material-symbols-outlined text-sm">warning</i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-orange-800 mb-2">無料化の波</h4>
+                                    <p class="text-gray-700 text-sm">大手が無料で同等機能を提供開始。有料SaaSの価値提案が困難に。</p>
+                                    <div class="mt-2">
+                                        <span class="badge-modern" style="background: linear-gradient(135deg, #f59e0b, #d97706); font-size: 0.75rem;">要注意</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modern-card p-4 border-l-4 border-green-500">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg flex items-center justify-center">
+                                    <i class="material-symbols-outlined text-sm">lightbulb</i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-green-800 mb-2">生き残りの鍵</h4>
+                                    <p class="text-gray-700 text-sm">深い専門性、ニッチな市場、強固なコミュニティ、AIでは代替できない人的価値の提供。</p>
+                                    <div class="mt-2">
+                                        <span class="badge-modern" style="background: linear-gradient(135deg, #10b981, #047857); font-size: 0.75rem;">対策必須</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">04</div>
+    </div>
+
+    <!-- スライド5: 執筆3.0・読書3.0の世界 -->
+    <div class="slide-container" id="slide-detail-5">
+        <div class="slide-content bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="section-header flex-shrink-0">
+                <div class="section-icon"></div>
+                <h1 class="slide-title gradient-text flex-1">執筆3.0・読書3.0の世界</h1>
+                <div class="badge-modern">
+                    <i class="material-symbols-outlined">edit_note</i>
+                    革新的手法
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col gap-4 min-h-0">
+                <!-- 上部：フロー図 -->
+                <div class="modern-card p-4 flex flex-col" style="flex: 2; min-height: 0;">
+                    <h3 class="text-xl font-semibold mb-3">
+                        <i class="material-symbols-outlined icon-gradient mr-2">account_tree</i>
+                        AIを活用した知的生産プロセス
+                    </h3>
+
+                    <div class="mermaid-container bg-gradient-to-br from-slate-50 to-blue-50 rounded-lg p-3 flex-1 min-h-0"
+                         style="min-height: 120mm; max-height: 140mm; overflow: auto; width: 100%;">
+                        <div class="mermaid" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                            graph LR
+    A[アイデア発想] --> B[AI対話で構想]
+    B --> C[高速執筆<br/>15万字/晩]
+    C --> D[AI編集・推敲]
+    D --> E[完成原稿]
+    
+    F[書籍・文献] --> G[AI要約]
+    G --> H[対話的理解]
+    H --> I[知識の体系化]
+    I --> J[新たな創造]
+    
+    style A fill:#f9d71c
+    style E fill:#27ae60
+    style J fill:#3498db
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <span class="text-sm text-gray-600">従来の10倍速で知的生産が可能に</span>
+                    </div>
+                </div>
+
+                <!-- 下部：詳細説明 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" style="flex: 1; min-height: 0;">
+                    <div class="modern-card p-4">
+                        <h4 class="font-semibold text-blue-800 mb-3">
+                            <i class="material-symbols-outlined mr-2">edit</i>
+                            執筆3.0の特徴
+                        </h4>
+                        <div class="space-y-2">
+                            <p class="text-gray-700 text-sm">AIとの対話で構想を練り、一晩で15万字の執筆が可能。品質も従来以上。</p>
+                            <div class="bg-blue-50 p-2 rounded-lg">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                        <span class="text-xs text-blue-700">構想：AIブレインストーミング</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                        <span class="text-xs text-blue-700">執筆：音声入力＋AI変換</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modern-card p-4">
+                        <h4 class="font-semibold text-green-800 mb-3">
+                            <i class="material-symbols-outlined mr-2">auto_stories</i>
+                            読書3.0の特徴
+                        </h4>
+                        <div class="space-y-2">
+                            <p class="text-gray-700 text-sm">AIが書籍を要約・解説。対話形式で深い理解が可能。読書効率が飛躍的に向上。</p>
+                            <div class="bg-green-50 p-2 rounded-lg">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                                        <span class="text-xs text-green-700">要約：重要ポイント自動抽出</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                                        <span class="text-xs text-green-700">理解：対話的な知識深化</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">05</div>
+    </div>
+
+    <!-- スライド6: 就活生へのメッセージ -->
+    <div class="slide-container pattern-b-slide" id="slide-detail-6">
+        <div class="slide-content bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="section-header flex-shrink-0">
+                <div class="section-icon"></div>
+                <h1 class="slide-title gradient-text flex-1">就活生へのメッセージ</h1>
+                <div class="badge-modern">
+                    <i class="material-symbols-outlined">school</i>
+                    キャリア戦略
+                </div>
+            </div>
+
+            <div class="pattern-b-content">
+                <div class="modern-card p-8">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">AI環境で企業を選ぶ時代、起業という選択肢</h2>
+
+                    <div class="pattern-b-content-area">
+                        <div class="prose max-w-none mb-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">これからの就職活動では、「どんなAIを使えるか」が企業選びの重要な判断基準になります。AI活用を制限する企業は、あなたの成長を妨げる可能性があります。</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-blue-50 p-6 rounded-2xl border-left-4 border-blue-500">
+                                <h4 class="font-semibold text-blue-800 mb-3">企業選びの新基準</h4>
+                                <ul class="text-blue-700 space-y-2">
+                                    <li>• クロード、GPT、ジェミニをすべて使える環境か</li>
+                                    <li>• AI活用を推奨する文化があるか</li>
+                                    <li>• 最新技術への投資意欲があるか</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 p-6 rounded-2xl border-left-4 border-green-500">
+                                <h4 class="font-semibold text-green-800 mb-3">起業という選択肢</h4>
+                                <ul class="text-green-700 space-y-2">
+                                    <li>• AIツールで個人の生産性が企業レベルに</li>
+                                    <li>• 初期投資が劇的に低下</li>
+                                    <li>• 自分のペースでAIを最大活用可能</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="prose max-w-none mb-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">従来のキャリアパスにとらわれず、AIを味方につけて独自の道を切り開くことも可能です。料理人から携帯販売、そしてIT業界へ転身した経験者もいます。</p>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-3">未来への準備</h4>
+                            <p class="text-purple-700">AIを使いこなすスキルは、これからの時代の「読み書きそろばん」。今から積極的に学び、実践することで、どんなキャリアパスでも成功できる基盤を作れます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">06</div>
+    </div>
+
+    <!-- スライド7: 未来への提言 -->
+    <div class="slide-container" id="slide-thanks">
+        <div class="slide-content">
+            <div class="flex items-center justify-center h-full">
+                <div class="text-center max-w-4xl mx-auto">
+                    <div class="mb-8 pulse-animation">
+                        <i class="material-symbols-outlined" style="font-size: 5rem; color: white;">rocket_launch</i>
+                    </div>
+                    <h1 class="text-5xl font-bold mb-6 text-white">
+                        未来への提言
+                    </h1>
+                    <h2 class="text-2xl mb-8 text-white/90">
+                        AIと共存する新しい働き方とライフスタイル
+                    </h2>
+                    
+                    <div class="max-w-3xl mx-auto space-y-6 text-white/90 text-xl">
+                        <p class="leading-relaxed">
+                            生成AIは単なるツールではなく、<br>
+                            私たちの創造性を解放する<strong class="text-white">パートナー</strong>です。
+                        </p>
+                        
+                        <p class="leading-relaxed">
+                            データプライバシーと生産性のトレードオフを理解し、<br>
+                            <strong class="text-white">賢明な選択</strong>をすることが重要です。
+                        </p>
+                        
+                        <p class="leading-relaxed">
+                            AIを恐れるのではなく、<br>
+                            共に成長し、新たな価値を創造する時代へ。
+                        </p>
+                    </div>
+
+                    <div class="mt-12">
+                        <div class="badge-modern glass-effect" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                            <i class="material-symbols-outlined">favorite</i>
+                            ライフテックコーディネーターとして、AIと人間の架け橋に
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">07</div>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js グラフの初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // スライド4のチャート
+            const ctx4 = document.getElementById('detailChart4');
+            if (ctx4) {
+                new Chart(ctx4, {
+                    type: 'line',
+                    data: {
+                        labels: ['2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: 'ワンイッシュ型SaaS',
+                            data: [100, 75, 40, 20, 10],
+                            borderColor: 'rgb(239, 68, 68)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.3
+                        }, {
+                            label: '専門特化型SaaS',
+                            data: [100, 95, 85, 80, 75],
+                            borderColor: 'rgb(34, 197, 94)',
+                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Mermaid初期化
+            mermaid.initialize({ 
+                theme: 'default',
+                themeVariables: {
+                    primaryColor: '#667eea',
+                    primaryTextColor: '#fff',
+                    primaryBorderColor: '#764ba2',
+                    lineColor: '#5a67d8',
+                    secondaryColor: '#f093fb',
+                    tertiaryColor: '#4facfe'
+                }
+            });
+
+            // プログレスバーアニメーション
+            let progress = 0;
+            const progressBar = document.querySelector('.progress-bar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPosition = window.scrollY;
+                progress = (scrollPosition / scrollHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+        });
+    </script>
+</body>
+</html>

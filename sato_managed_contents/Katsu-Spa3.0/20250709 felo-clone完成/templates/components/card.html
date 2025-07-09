@@ -1,0 +1,27 @@
+<!-- カードコンポーネント -->
+<div class="floating-card rounded-2xl p-6 {{additional_classes}}">
+    {{#if icon}}
+    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-{{icon}} text-white text-2xl"></i>
+    </div>
+    {{/if}}
+    
+    {{#if title}}
+    <h3 class="text-slate-800 text-xl font-bold mb-2 text-center">{{title}}</h3>
+    {{/if}}
+    
+    {{#if content}}
+    <p class="text-slate-600 text-lg text-center">{{content}}</p>
+    {{/if}}
+    
+    {{#if list}}
+    <ul class="text-slate-600 text-lg space-y-2">
+        {{#each list}}
+        <li class="flex items-start">
+            <span class="text-blue-500 mr-2">•</span>
+            <span>{{this}}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 64px;
+      box-sizing: border-box;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .speed-meter {
+      background: linear-gradient(to right, #2ECC71 0%, #F39C12 50%, #E74C3C 100%);
+      height: 40px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speed-indicator {
+      position: absolute;
+      width: 4px;
+      height: 60px;
+      background: #2D3E50;
+      top: -10px;
+      animation: moveIndicator 3s ease-in-out infinite;
+    }
+
+    @keyframes moveIndicator {
+      0% { left: 10%; }
+      50% { left: 90%; }
+      100% { left: 10%; }
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: rgba(45, 62, 80, 0.9);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-button:hover {
+      background: rgba(52, 152, 219, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:disabled {
+      background: rgba(149, 165, 166, 0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(45, 62, 80, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">AI競争の現在地：週単位で変わる勢力図</h1>
+    
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold mb-4">
+            <i class="fas fa-tachometer-alt text-red-500 mr-2"></i>
+            開発速度の異常な加速
+          </h3>
+          
+          <div class="bg-gray-100 p-4 rounded-lg mb-6">
+            <p class="text-lg mb-2"><span class="highlight">2022年</span>：週1回のニュースチェックで十分</p>
+            <p class="text-lg mb-2"><span class="highlight">2024年</span>：毎日見ないと追いつけない</p>
+            <p class="text-lg"><span class="highlight">2025年</span>：毎週トップが入れ替わる</p>
+          </div>
+
+          <div class="mb-6">
+            <p class="text-lg mb-2">変化のスピードメーター</p>
+            <div class="speed-meter">
+              <div class="speed-indicator"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm">
+              <span>遅い</span>
+              <span>普通</span>
+              <span class="font-bold text-red-500">超高速</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-4 rounded-lg">
+          <p class="text-lg">
+            <i class="fas fa-quote-left text-yellow-600 mr-2"></i>
+            「先週言ったことが今週通用しないぐらい早い」
+            <i class="fas fa-quote-right text-yellow-600 ml-2"></i>
+          </p>
+          <p class="text-right text-gray-600 mt-2">- 中山孝志氏</p>
+        </div>
+      </div>
+      
+      <div class="flex justify-center items-center">
+        <div style="height: 400px; width: 100%;">
+          <canvas id="rankingChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('rankingChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['1月1週', '1月2週', '1月3週', '1月4週', '2月1週', '2月2週', '2月3週'],
+        datasets: [{
+          label: 'OpenAI',
+          data: [1, 1, 2, 1, 2, 3, 2],
+          borderColor: '#3498DB',
+          backgroundColor: 'rgba(52, 152, 219, 0.1)',
+          tension: 0.4
+        }, {
+          label: 'Google',
+          data: [2, 3, 1, 2, 1, 1, 3],
+          borderColor: '#2ECC71',
+          backgroundColor: 'rgba(46, 204, 113, 0.1)',
+          tension: 0.4
+        }, {
+          label: 'Meta',
+          data: [3, 2, 3, 3, 3, 2, 1],
+          borderColor: '#E74C3C',
+          backgroundColor: 'rgba(231, 76, 60, 0.1)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'AIモデルランキングの推移',
+            font: { size: 18 }
+          }
+        },
+        scales: {
+          y: {
+            reverse: true,
+            min: 0.5,
+            max: 3.5,
+            ticks: {
+              stepSize: 1,
+              callback: function(value) {
+                return value + '位';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+  <div class="slide-number">3 / 15</div>
+  
+  <div class="navigation">
+    <button class="nav-button" onclick="location.href='2.html'">← 戻る</button>
+    <button class="nav-button" onclick="location.href='4.html'">次へ →</button>
+  </div>
+</body>
+
+</html>

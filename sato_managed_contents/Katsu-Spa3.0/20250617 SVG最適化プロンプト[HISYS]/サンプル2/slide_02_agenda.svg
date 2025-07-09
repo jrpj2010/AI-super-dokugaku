@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- メタデータ -->
+  <title>アジェンダ - 北斗の拳から学ぶ10の教訓</title>
+  <desc>本プレゼンテーションの目次</desc>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  
+  <!-- 日立ロゴ（右上） -->
+  <g transform="translate(1100, 30)">
+    <rect x="0" y="0" width="100" height="40" fill="white" stroke="#FA000F" stroke-width="2" rx="3"/>
+    <text x="50" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FA000F">HITACHI</text>
+  </g>
+  
+  <!-- タイトル -->
+  <text x="60" y="100" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="48" font-weight="700" fill="#FA000F">
+    Agenda
+  </text>
+  
+  <!-- 装飾ライン -->
+  <line x1="60" y1="120" x2="400" y2="120" stroke="#FA000F" stroke-width="3"/>
+  
+  <!-- アジェンダリスト -->
+  <g transform="translate(100, 180)">
+    <!-- 1 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">1.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">核戦争後の世界観が教える「危機管理」</text>
+    </g>
+    
+    <!-- 2 -->
+    <g transform="translate(0, 50)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">2.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">「お前はもう死んでいる」から学ぶ決断力</text>
+    </g>
+    
+    <!-- 3 -->
+    <g transform="translate(0, 100)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">3.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">北斗神拳の修行に見る「継続は力なり」</text>
+    </g>
+    
+    <!-- 4 -->
+    <g transform="translate(0, 150)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">4.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">ケンシロウの生き様から学ぶリーダーシップ</text>
+    </g>
+    
+    <!-- 5 -->
+    <g transform="translate(0, 200)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">5.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">強敵（とも）との戦いが教える「切磋琢磨」</text>
+    </g>
+    
+    <!-- 6 -->
+    <g transform="translate(0, 250)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">6.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">愛と哀しみを背負う男の「感情管理術」</text>
+    </g>
+    
+    <!-- 7 -->
+    <g transform="translate(0, 300)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">7.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">世紀末覇者への道から学ぶ「目標設定」</text>
+    </g>
+    
+    <!-- 8 -->
+    <g transform="translate(0, 350)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">8.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">秘孔を突く精密さが示す「スキルの重要性」</text>
+    </g>
+    
+    <!-- 9 -->
+    <g transform="translate(0, 400)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">9.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">「退かぬ！媚びぬ！省みぬ！」の仕事哲学</text>
+    </g>
+    
+    <!-- 10 -->
+    <g transform="translate(0, 450)">
+      <text x="0" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" font-weight="700" fill="#FA000F">10.</text>
+      <text x="40" y="0" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" font-size="24" fill="#333333">まとめ：北斗の拳が示す人生の羅針盤</text>
+    </g>
+  </g>
+  
+  <!-- フッター -->
+  <text x="60" y="690" font-family="Arial, sans-serif" font-size="12" fill="#888888">©Hitachi Systems, Ltd. 2025. All rights reserved</text>
+</svg>

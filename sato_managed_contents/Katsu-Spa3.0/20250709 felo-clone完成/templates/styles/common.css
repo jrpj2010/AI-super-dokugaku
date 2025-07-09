@@ -1,0 +1,126 @@
+/* 共通スタイル定義 */
+
+/* グラデーションバリエーション */
+.gradient-blue {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+}
+
+.gradient-green {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+}
+
+.gradient-orange {
+    background: linear-gradient(135deg, #fd7e14 0%, #dc6100 100%);
+}
+
+.gradient-red {
+    background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%);
+}
+
+/* テキストサイズユーティリティ */
+.text-huge {
+    font-size: 5rem;
+    line-height: 1.1;
+}
+
+.text-display {
+    font-size: 3.5rem;
+    line-height: 1.2;
+}
+
+/* カード効果 */
+.hover-float {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-float:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.2);
+}
+
+/* 番号付きリスト */
+.numbered-list {
+    counter-reset: item;
+}
+
+.numbered-list li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.numbered-list li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background: #007BFF;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* 引用ブロック */
+.quote-block {
+    position: relative;
+    padding: 2rem 3rem;
+    background: rgba(0, 123, 255, 0.05);
+    border-left: 4px solid #007BFF;
+}
+
+.quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    font-size: 4rem;
+    color: #007BFF;
+    opacity: 0.3;
+}
+
+/* プログレスバー */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+    transition: width 0.3s ease;
+}
+
+/* データカード */
+.data-card {
+    background: white;
+    border: 2px solid #f0f0f0;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.data-card:hover {
+    border-color: #007BFF;
+    transform: scale(1.05);
+}
+
+.data-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.data-label {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}

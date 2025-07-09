@@ -1,0 +1,115 @@
+<!-- 比較レイアウト -->
+<header class="slide--header flex-none pt-12 px-16 pb-8">
+    <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+        {{#if header_icon}}
+        <i class="fa-solid fa-{{header_icon}} text-blue-500 mr-4"></i>
+        {{/if}}
+        {{header_title}}
+    </h2>
+    {{#if header_subtitle}}
+    <p class="text-xl text-slate-600 mt-2">{{header_subtitle}}</p>
+    {{/if}}
+</header>
+
+<main class="slide--main flex-1 px-16 pb-16">
+    <div class="grid grid-cols-{{items.length}} gap-6 h-full">
+        {{#each items}}
+        <div class="relative">
+            {{#if highlight}}
+            <div class="absolute -inset-2 bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl blur opacity-25"></div>
+            {{/if}}
+            
+            <div class="floating-card rounded-2xl p-6 h-full flex flex-col relative {{#if highlight}}border-2 border-blue-500{{/if}}">
+                {{#if badge}}
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold px-4 py-1 rounded-full">
+                        {{badge}}
+                    </span>
+                </div>
+                {{/if}}
+                
+                <div class="text-center mb-6">
+                    {{#if icon}}
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-{{icon}} text-white text-2xl"></i>
+                    </div>
+                    {{/if}}
+                    
+                    <h3 class="text-2xl font-bold text-slate-800">{{title}}</h3>
+                    
+                    {{#if subtitle}}
+                    <p class="text-slate-500 mt-2">{{subtitle}}</p>
+                    {{/if}}
+                </div>
+                
+                {{#if price}}
+                <div class="text-center mb-6">
+                    <p class="text-4xl font-bold gradient-text">{{price}}</p>
+                    <p class="text-slate-500">{{price_period}}</p>
+                </div>
+                {{/if}}
+                
+                <div class="flex-1">
+                    {{#if features}}
+                    <ul class="space-y-3">
+                        {{#each features}}
+                        <li class="flex items-start">
+                            {{#if included}}
+                            <i class="fa-solid fa-check-circle text-green-500 mr-3 mt-0.5"></i>
+                            <span class="text-slate-700">{{text}}</span>
+                            {{else}}
+                            <i class="fa-solid fa-times-circle text-gray-300 mr-3 mt-0.5"></i>
+                            <span class="text-gray-400 line-through">{{text}}</span>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                    
+                    {{#if pros}}
+                    <div class="space-y-2">
+                        <p class="font-bold text-green-600 text-sm uppercase tracking-wide">メリット</p>
+                        <ul class="space-y-2">
+                            {{#each pros}}
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-plus text-green-500 mr-2 mt-0.5 text-sm"></i>
+                                <span class="text-slate-700 text-sm">{{this}}</span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if cons}}
+                    <div class="space-y-2 mt-4">
+                        <p class="font-bold text-red-600 text-sm uppercase tracking-wide">デメリット</p>
+                        <ul class="space-y-2">
+                            {{#each cons}}
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-minus text-red-500 mr-2 mt-0.5 text-sm"></i>
+                                <span class="text-slate-700 text-sm">{{this}}</span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                </div>
+                
+                {{#if cta}}
+                <div class="mt-6">
+                    <button class="w-full {{#if highlight}}bg-blue-600 hover:bg-blue-700{{else}}bg-gray-600 hover:bg-gray-700{{/if}} text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        {{cta}}
+                    </button>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    
+    {{#if footer_note}}
+    <div class="mt-8 text-center">
+        <p class="text-slate-500 text-sm">{{footer_note}}</p>
+    </div>
+    {{/if}}
+</main>

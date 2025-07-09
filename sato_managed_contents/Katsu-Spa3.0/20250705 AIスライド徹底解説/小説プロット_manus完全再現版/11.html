@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #F8F9FA;
+      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+    }
+
+    .title {
+      color: #2D3E50;
+      font-size: 36px;
+      font-weight: bold;
+      border-bottom: 3px solid #3498DB;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .content {
+      color: #333333;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #E74C3C;
+      font-weight: 600;
+    }
+
+    .action-card {
+      background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-left: 5px solid;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: rgba(52, 152, 219, 0.05);
+      border-radius: 50%;
+      transform: translate(30px, -30px);
+    }
+
+    .action-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background: #3498DB;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: bold;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .action-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .action-content {
+      padding-left: 48px;
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 8px;
+    }
+
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #2ECC71;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container p-16">
+    <h1 class="title">今すぐ始める！プロット作成アクションプラン</h1>
+
+    <div class="grid grid-cols-2 gap-8">
+      <div class="content">
+        <p class="mb-6">あなたの物語を<span class="highlight">次のレベル</span>へ引き上げるための実践的なステップ</p>
+
+        <div class="action-card" style="border-left-color: #3498DB;">
+          <div class="action-title">
+            <span class="action-number">1</span>
+            基本構造の理解（今週）
+          </div>
+          <div class="action-content">
+            <ul class="checklist">
+              <li>表・裏ストーリーの概念を復習</li>
+              <li>好きな作品で構造を分析</li>
+              <li>簡単な物語で練習</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-card" style="border-left-color: #E74C3C;">
+          <div class="action-title">
+            <span class="action-number" style="background: #E74C3C;">2</span>
+            実践演習（2週目）
+          </div>
+          <div class="action-content">
+            <ul class="checklist">
+              <li>キャラクターアーク5要素の作成</li>
+              <li>三幕構成でプロット作成</li>
+              <li>Wの法則を意識した展開</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-card" style="border-left-color: #2ECC71;">
+          <div class="action-title">
+            <span class="action-number" style="background: #2ECC71;">3</span>
+            本格執筆開始（3週目〜）
+          </div>
+          <div class="action-content">
+            <ul class="checklist">
+              <li>完成したプロットを基に執筆</li>
+              <li>定期的な見直しと調整</li>
+              <li>フィードバックの収集と改善</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <div style="height: 400px; width: 500px;">
+          <canvas id="progressChart"></canvas>
+        </div>
+        
+        <div class="mt-8 text-center">
+          <p class="text-2xl font-bold text-gray-700 mb-2">あなたの物語が待っています</p>
+          <p class="text-lg text-gray-600">今日から始めましょう！</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['開始', '1週目', '2週目', '3週目', '1ヶ月後', '2ヶ月後', '3ヶ月後'],
+        datasets: [{
+          label: 'スキル習得度',
+          data: [0, 25, 45, 65, 75, 85, 95],
+          borderColor: 'rgba(52, 152, 219, 1)',
+          backgroundColor: 'rgba(52, 152, 219, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 6,
+          pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2
+        }, {
+          label: '執筆進捗',
+          data: [0, 5, 15, 30, 50, 70, 90],
+          borderColor: 'rgba(46, 204, 113, 1)',
+          backgroundColor: 'rgba(46, 204, 113, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 6,
+          pointBackgroundColor: 'rgba(46, 204, 113, 1)',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: '達成率 (%)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '時間経過'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: '予想される成長曲線',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 15,
+              font: {
+                size: 14
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

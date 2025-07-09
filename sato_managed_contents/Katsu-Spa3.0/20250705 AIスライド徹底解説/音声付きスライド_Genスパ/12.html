@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>まとめ／インサイト</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .side-accent {
+      background-color: #006699;
+      width: 6px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #00447c;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .insight-card {
+      border-left: 4px solid #006699;
+      background-color: #f8f9fa;
+    }
+
+    .highlight-text {
+      color: #006699;
+      font-weight: 600;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 230px;
+      width: 100%;
+    }
+
+    .approach-card {
+      border-top: 3px solid;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container bg-white flex">
+    <!-- Left Column - Title and Key Insights -->
+    <div class="side-accent"></div>
+    <div class="w-2/5 p-10 flex flex-col">
+      <h2 class="section-title mb-6">まとめ／インサイト</h2>
+      <p class="text-lg mb-6">AIスライド生成は効率・品質・差別化の戦略武器。自社に最適な方式選択と活用が競争優位性を生み出す。</p>
+
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-3">AIスライド生成の戦略的価値</h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-blue-700 mt-1 mr-2"></i>
+            <span>資料作成時間の<span class="highlight-text">最大90%削減</span>によるコア業務へのリソースシフト</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-blue-700 mt-1 mr-2"></i>
+            <span>データの<span class="highlight-text">可視化品質向上</span>による意思決定・提案力強化</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-blue-700 mt-1 mr-2"></i>
+            <span>企業ブランディングの<span class="highlight-text">一貫性確保</span>と顧客体験向上</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-blue-700 mt-1 mr-2"></i>
+            <span>専門知識がなくても<span class="highlight-text">高品質コンテンツ</span>を全社で展開可能に</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-auto">
+        <div class="insight-card p-4">
+          <p class="font-bold text-gray-700">今後の展望</p>
+          <p class="text-sm mt-1">2026年以降、AIスライド生成はさらに業界特化型へと進化。データ連携やカスタマイズ可能なテンプレートエコシステムの構築が競争の焦点に。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Visual Summary -->
+    <div class="w-3/5 bg-gray-50 p-10 flex flex-col">
+      <!-- Approaches Summary -->
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-4">3つのアプローチ - 最適な選択</h3>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="approach-card p-3 rounded shadow-sm" style="border-color: #3182CE">
+            <h4 class="font-bold text-blue-700">HTML型</h4>
+            <p class="text-xs mt-1">高い汎用性と手軽さ</p>
+            <p class="text-xs mt-2">最適な用途:</p>
+            <p class="text-xs">一般的なビジネス資料、汎用プレゼン、マーケット分析</p>
+          </div>
+          <div class="approach-card p-3 rounded shadow-sm" style="border-color: #805AD5">
+            <h4 class="font-bold text-purple-700">SVG型</h4>
+            <p class="text-xs mt-1">表現力と編集自由度</p>
+            <p class="text-xs mt-2">最適な用途:</p>
+            <p class="text-xs">ブランド重視、高品質デザイン、複雑なビジュアル</p>
+          </div>
+          <div class="approach-card p-3 rounded shadow-sm" style="border-color: #38A169">
+            <h4 class="font-bold text-green-700">MARP型</h4>
+            <p class="text-xs mt-1">ロジックと効率性</p>
+            <p class="text-xs mt-2">最適な用途:</p>
+            <p class="text-xs">技術プレゼン、開発者向け資料、ロジカルな説明</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Chart -->
+      <div class="mb-6">
+        <h3 class="font-bold text-lg mb-2">AIスライド活用の投資対効果 (導入後1年)</h3>
+        <div class="chart-container">
+          <canvas id="roiChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Bottom Insights -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h4 class="text-sm font-bold text-blue-700">人材育成への影響</h4>
+          <p class="text-sm mt-1">デザインスキルに依存せず、<span class="font-bold">コンテンツ価値</span>に集中したプレゼンスキルの育成が可能に</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h4 class="text-sm font-bold text-blue-700">組織導入のポイント</h4>
+          <p class="text-sm mt-1">業務特性や企業文化に合わせた<span class="font-bold">複数ツールの組み合わせ</span>が最も効果的</p>
+        </div>
+      </div>
+
+      <!-- Final Call to Action -->
+      <div class="bg-blue-50 p-4 rounded mt-auto">
+        <p class="text-sm font-bold text-center text-blue-800">アウトプットの質と効率を両立するAIスライド生成</p>
+        <p class="text-sm text-center mt-1">ツール自体ではなく、<span class="font-bold">何を伝えるか</span>に集中できる環境を整えることが企業競争力向上の鍵</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('roiChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['HTML型', 'SVG型', 'MARP型'],
+          datasets: [{
+            label: '導入コスト (相対値)',
+            data: [2, 3, 1],
+            backgroundColor: 'rgba(192, 192, 192, 0.7)'
+          }, {
+            label: '効果 (時間短縮・品質向上)',
+            data: [8, 10, 6],
+            backgroundColor: 'rgba(0, 102, 153, 0.7)'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 12,
+              title: {
+                display: true,
+                text: '相対値 (1-10)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
