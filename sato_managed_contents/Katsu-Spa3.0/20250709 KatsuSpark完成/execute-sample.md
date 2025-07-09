@@ -13,7 +13,7 @@ cd /Users/jrpj2010/vibe-coding/sato_managed_contents/Katsu-Spa3.0/20250709 Katsu
 ### 2. 出力ディレクトリの作成
 
 ```bash
-mkdir -p output/slides
+mkdir -p output/Claude-Opus4サンプル
 ```
 
 ### 3. [Claude Code][Gemini Code]でのスライド生成
@@ -44,14 +44,14 @@ output/analysis.jsonの解析結果から
 claude "prompts/generator.mdのプロンプトに従って、
 output/structure.jsonの設計情報から
 20枚のHTMLスライドを生成してください。
-各スライドをoutput/slides/slide-XX-[内容].htmlとして保存してください。
+各スライドをoutput/Claude-Opus4サンプル/slide-XX-[内容].htmlとして保存してください。
 templates/フォルダ内のテンプレートを活用してください。"
 ```
 
 #### Step 4: ビューワー作成
 
 ```bash
-claude "output/slides/内の全スライドを
+claude "output/Claude-Opus4サンプル/内の全スライドを
 ナビゲーション可能なビューワーページ(output/viewer.html)を
 作成してください。左右矢印キーでスライド切り替えができるようにしてください。"
 ```
@@ -63,7 +63,7 @@ output/
 ├── analysis.json         # Step 1の解析結果
 ├── structure.json        # Step 2の構造設計
 ├── viewer.html          # スライドビューワー
-└── slides/              # 生成されたスライド
+└── Claude-Opus4サンプル/       # 生成されたスライド
     ├── slide-01-title.html
     ├── slide-02-agenda.html
     ├── slide-03-background.html
@@ -81,7 +81,7 @@ claude "以下を順番に実行してください：
 2. prompts/analyzer.mdに従って内容を解析
 3. prompts/structurer.mdに従って20枚の構造を設計
 4. prompts/generator.mdとtemplates/を使用してHTMLを生成
-5. output/slides/にslide-01からslide-20まで保存
+5. output/Claude-Opus4サンプル/にslide-01からslide-20まで保存
 6. output/viewer.htmlを作成
 各ステップの結果を適切にログ出力してください。"
 ```

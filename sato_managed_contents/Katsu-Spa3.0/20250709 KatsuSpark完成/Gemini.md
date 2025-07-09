@@ -147,7 +147,7 @@
 
 3. **生成フェーズ**:
    - 各スライドのHTMLを生成
-   - output/slides/フォルダに保存
+   - output/Gemini2.5Proサンプル/フォルダに保存
    - viewer.htmlでプレビュー可能に
 
 ## 🚀 パフォーマンス最適化

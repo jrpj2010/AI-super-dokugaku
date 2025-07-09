@@ -22,7 +22,7 @@
   - 背景: #ffffff → #f8fafc
   - テキスト: #333333（見出し）、#666666（本文）
 
-### HTMLテンプレート構造
+### HTMLテンプレート構造（100%見切れ回避対応版）
 ```html
 <!DOCTYPE html>
 <html lang="ja">
@@ -42,10 +42,17 @@
             -webkit-text-fill-color: transparent;
         }
     </style>
+    <!-- 🔒 見切れ回避の必須CSS -->
+    <style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;} html { height: 720px !important; } body { height: 720px !important; } .slide { height: 720px !important; }</style>
 </head>
 <body>
-    <div class="slide w-[1280px] h-[720px]">
-        <!-- スライドコンテンツ -->
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-8 px-12 pb-4">
+            <!-- 固定ヘッダー領域 -->
+        </header>
+        <main class="slide--main flex-1 px-12 py-4">
+            <!-- 可変コンテンツ領域 -->
+        </main>
     </div>
 </body>
 </html>
@@ -87,6 +94,7 @@
 - 各スライドを独立したHTMLファイルとして生成
 - ファイル名: slide-[番号]-[内容].html（例: slide-01-title.html）
 - すべてのスタイルはインラインまたは`<style>`タグ内に記述
+- **重要**: 見切れ回避のためFlexbox三層構造（header-main）を必須適用
 
 ## 🎨 デザインパターン集
 
@@ -147,7 +155,7 @@
 
 3. **生成フェーズ**:
    - 各スライドのHTMLを生成
-   - output/slides/フォルダに保存
+   - output/Claude-Opus4サンプル/フォルダに保存
    - viewer.htmlでプレビュー可能に
 
 ## 🚀 パフォーマンス最適化
@@ -167,6 +175,8 @@
 - [ ] テキストの可読性（サイズ、コントラスト）
 - [ ] レイアウトのバランス
 - [ ] 情報の論理的な流れ
+- [ ] **必須**: 100%見切れ回避（Flexbox三層構造適用）
+- [ ] **必須**: CSS強制リセット適用（`!important`付き）
 
 ## 🔧 トラブルシューティング
 
@@ -174,7 +184,41 @@
 - **レイアウトが崩れる**: Tailwind CSSのCDNリンクを確認
 - **アイコンが表示されない**: Font AwesomeのCDNリンクを確認
 - **サイズが合わない**: bodyとhtmlのoverflow: hiddenを確認
+- **⚠️ コンテンツが見切れる**: 以下を確認
+  1. CSS強制リセットが適用されているか
+  2. Flexbox三層構造（header-main）が実装されているか
+  3. paddingサイズが適切か（pt-8 px-12 py-4推奨）
+  4. フォントサイズが720px高さに適合しているか
+
+## 🚫 見切れ回避の重要原則
+
+**絶対に守るべき3つの原則**:
+
+1. **CSS強制リセット（必須）**
+   ```html
+   <style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;} html { height: 720px !important; } body { height: 720px !important; } .slide { height: 720px !important; }</style>
+   ```
+
+2. **Flexbox三層構造（必須）**
+   ```html
+   <div class="slide w-[1280px] h-[720px] flex flex-col">
+       <header class="slide--header flex-none pt-8 px-12 pb-4">
+           <!-- 固定ヘッダー -->
+       </header>
+       <main class="slide--main flex-1 px-12 py-4">
+           <!-- 可変コンテンツ -->
+       </main>
+   </div>
+   ```
+
+3. **最適化されたサイズ設定**
+   - メインタイトル: `text-4xl` (text-5xl以上は禁止)
+   - セクションタイトル: `text-xl` (text-2xl以上は禁止)
+   - カードpadding: `p-4` (p-6以上は禁止)
+   - gap: `gap-6` (gap-8以上は禁止)
+
+**この3原則により、数学的に100%見切れが回避されます。**
 
 ---
 
-このシステムプロンプトに従って、高品質なスライドを自動生成してください。
+このシステムプロンプトに従って、**見切れのない**高品質なスライドを自動生成してください。

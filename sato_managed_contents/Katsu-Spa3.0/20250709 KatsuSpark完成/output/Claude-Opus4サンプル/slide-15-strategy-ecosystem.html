@@ -95,38 +95,39 @@
             opacity: 0.6;
         }
     </style>
+    <style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;} html { height: 720px !important; } body { height: 720px !important; } .slide { height: 720px !important; }</style>
 </head>
 <body>
     <div class="slide w-[1280px] h-[720px] flex flex-col">
-        <header class="slide--header flex-none pt-12 px-16 pb-8">
-            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
-                <i class="fa-solid fa-network-wired text-blue-500 mr-4"></i>
+        <header class="slide--header flex-none pt-8 px-12 pb-6">
+            <h2 class="text-3xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-network-wired text-blue-500 mr-3"></i>
                 戦略的推奨事項②：エコシステム構築戦略
             </h2>
-            <div class="accent-line h-1 w-32 rounded-full mt-4"></div>
+            <div class="accent-line h-1 w-24 rounded-full mt-3"></div>
         </header>
-        <main class="slide--main flex-1 px-16 pb-16">
-            <div class="grid grid-cols-3 gap-8 h-full">
+        <main class="slide--main flex-1 px-12 pb-12">
+            <div class="grid grid-cols-3 gap-6 h-full">
                 <!-- エコシステム図 -->
-                <div class="col-span-2 floating-card rounded-2xl p-8">
+                <div class="col-span-2 floating-card rounded-2xl p-6">
                     <div class="relative h-full">
                         <!-- 中心：TANREN -->
-                        <div class="ecosystem-center">
+                        <div class="ecosystem-center" style="width: 120px; height: 120px; font-size: 16px;">
                             <div>
-                                <div class="font-bold text-lg">TANREN</div>
-                                <div class="text-sm mt-1">コア事業</div>
+                                <div class="font-bold text-base">TANREN</div>
+                                <div class="text-xs mt-1">コア事業</div>
                             </div>
                         </div>
                         
                         <!-- パートナー企業 -->
-                        <div class="ecosystem-node partner-node" style="top: 20%; left: 20%;">
+                        <div class="ecosystem-node partner-node" style="top: 15%; left: 15%; width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">技術<br>パートナー</div>
                                 <div class="text-xs mt-1">開発支援</div>
                             </div>
                         </div>
                         
-                        <div class="ecosystem-node partner-node" style="top: 20%; right: 20%;">
+                        <div class="ecosystem-node partner-node" style="top: 15%; right: 15%; width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">営業<br>パートナー</div>
                                 <div class="text-xs mt-1">販路拡大</div>
@@ -134,14 +135,14 @@
                         </div>
                         
                         <!-- プラットフォーム -->
-                        <div class="ecosystem-node platform-node" style="bottom: 20%; left: 15%;">
+                        <div class="ecosystem-node platform-node" style="bottom: 15%; left: 12%; width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">学習<br>プラットフォーム</div>
                                 <div class="text-xs mt-1">LMS構築</div>
                             </div>
                         </div>
                         
-                        <div class="ecosystem-node platform-node" style="bottom: 20%; right: 15%;">
+                        <div class="ecosystem-node platform-node" style="bottom: 15%; right: 12%; width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">評価<br>システム</div>
                                 <div class="text-xs mt-1">効果測定</div>
@@ -149,7 +150,7 @@
                         </div>
                         
                         <!-- コンテンツ -->
-                        <div class="ecosystem-node content-node" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="ecosystem-node content-node" style="top: 8%; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">コンテンツ<br>制作</div>
                                 <div class="text-xs mt-1">教材開発</div>
@@ -157,7 +158,7 @@
                         </div>
                         
                         <!-- コミュニティ -->
-                        <div class="ecosystem-node community-node" style="bottom: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="ecosystem-node community-node" style="bottom: 8%; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; font-size: 10px;">
                             <div>
                                 <div class="font-bold">学習者<br>コミュニティ</div>
                                 <div class="text-xs mt-1">相互支援</div>
@@ -175,33 +176,33 @@
                 </div>
                 
                 <!-- 戦略詳細 -->
-                <div class="floating-card rounded-2xl p-6">
-                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-puzzle-piece text-white text-2xl"></i>
+                <div class="floating-card rounded-2xl p-4">
+                    <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-puzzle-piece text-white text-lg"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">エコシステム戦略</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="bg-green-50 p-3 rounded-lg">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 text-center">エコシステム戦略</h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="bg-green-50 p-2 rounded-lg">
                             <p class="font-medium text-green-800">🤝 パートナー連携</p>
                             <p class="text-green-700 mt-1">・技術開発の外部委託</p>
                             <p class="text-green-700">・営業チャネルの拡大</p>
                         </div>
-                        <div class="bg-purple-50 p-3 rounded-lg">
+                        <div class="bg-purple-50 p-2 rounded-lg">
                             <p class="font-medium text-purple-800">🏗️ プラットフォーム化</p>
                             <p class="text-purple-700 mt-1">・LMS基盤の構築</p>
                             <p class="text-purple-700">・学習効果の可視化</p>
                         </div>
-                        <div class="bg-amber-50 p-3 rounded-lg">
+                        <div class="bg-amber-50 p-2 rounded-lg">
                             <p class="font-medium text-amber-800">📚 コンテンツ多様化</p>
                             <p class="text-amber-700 mt-1">・動画・書籍・ツール</p>
                             <p class="text-amber-700">・多チャネル展開</p>
                         </div>
-                        <div class="bg-red-50 p-3 rounded-lg">
+                        <div class="bg-red-50 p-2 rounded-lg">
                             <p class="font-medium text-red-800">👥 コミュニティ形成</p>
                             <p class="text-red-700 mt-1">・受講者同士の交流</p>
                             <p class="text-red-700">・継続学習の促進</p>
                         </div>
-                        <div class="bg-blue-50 p-3 rounded-lg">
+                        <div class="bg-blue-50 p-2 rounded-lg">
                             <p class="font-medium text-blue-800">🎯 期待効果</p>
                             <p class="text-blue-700 mt-1">・収益源の多角化</p>
                             <p class="text-blue-700">・競争優位性の確立</p>

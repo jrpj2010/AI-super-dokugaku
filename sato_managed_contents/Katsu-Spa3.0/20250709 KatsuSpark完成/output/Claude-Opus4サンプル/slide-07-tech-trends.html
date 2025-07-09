@@ -9,99 +9,104 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { font-family: 'Noto Sans JP', sans-serif; }
-        body { margin: 0; padding: 0; overflow: hidden; }
+        body { margin: 0; padding: 0; overflow: hidden; height: 720px; }
         .gradient-text {
             background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     </style>
+    <style>html,body{margin:0 !important;padding:0 !important;overflow: hidden !important;} html { height: 720px !important; } body { height: 720px !important; } .slide { height: 720px !important; }</style>
 </head>
 <body>
-    <div class="slide w-[1280px] h-[720px] bg-white flex flex-col px-16 py-12">
-        <h1 class="gradient-text text-5xl font-bold mb-8">市場環境分析：技術トレンド</h1>
+    <div class="slide w-[1280px] h-[720px] bg-white flex flex-col">
+        <header class="slide--header flex-none pt-8 px-12">
+            <h1 class="gradient-text text-4xl font-bold mb-4">市場環境分析：技術トレンド</h1>
+        </header>
+        <main class="slide--main flex-1 px-12 py-4">
         
-        <!-- AI技術の進化 -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <i class="fa-solid fa-brain text-purple-600"></i>
-                AI/機械学習技術の進化
-            </h2>
-            <div class="grid grid-cols-3 gap-6">
-                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
-                    <i class="fa-solid fa-chart-bar text-purple-600 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">データ分析と予測</h3>
-                    <p class="text-slate-700 text-sm">離職予測、スキルギャップ特定、ハイパフォーマー分析</p>
+            <!-- AI技術の進化 -->
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-brain text-purple-600"></i>
+                    AI/機械学習技術の進化
+                </h2>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4">
+                        <i class="fa-solid fa-chart-bar text-purple-600 text-2xl mb-3"></i>
+                        <h3 class="font-bold text-sm text-slate-800 mb-2">データ分析と予測</h3>
+                        <p class="text-slate-700 text-xs">離職予測、スキルギャップ特定、ハイパフォーマー分析</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4">
+                        <i class="fa-solid fa-user-graduate text-blue-600 text-2xl mb-3"></i>
+                        <h3 class="font-bold text-sm text-slate-800 mb-2">パーソナライズ</h3>
+                        <p class="text-slate-700 text-xs">個人の学習履歴に基づく最適なフィードバック自動生成</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
+                        <i class="fa-solid fa-comments text-green-600 text-2xl mb-3"></i>
+                        <h3 class="font-bold text-sm text-slate-800 mb-2">自然言語処理</h3>
+                        <p class="text-slate-700 text-xs">フィードバックの感情分析、要約、キーワード抽出</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- その他の重要トレンド -->
+            <div class="grid grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-3">
+                        <i class="fa-solid fa-cloud text-blue-600"></i>
+                        クラウド連携の高度化
+                    </h2>
+                    <div class="space-y-2">
+                        <div class="bg-slate-50 rounded-lg p-3">
+                            <h3 class="font-bold text-slate-800 mb-1 text-sm">API連携の標準化</h3>
+                            <p class="text-slate-600 text-xs">勤怠、給与、LMS、SFA、CRMとのシームレス連携</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-3">
+                            <h3 class="font-bold text-slate-800 mb-1 text-sm">データ統合プラットフォーム</h3>
+                            <p class="text-slate-600 text-xs">人事データの一元化による戦略的意思決定支援</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-                    <i class="fa-solid fa-user-graduate text-blue-600 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">パーソナライズ</h3>
-                    <p class="text-slate-700 text-sm">個人の学習履歴に基づく最適なフィードバック自動生成</p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
-                    <i class="fa-solid fa-comments text-green-600 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">自然言語処理</h3>
-                    <p class="text-slate-700 text-sm">フィードバックの感情分析、要約、キーワード抽出</p>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-3">
+                        <i class="fa-solid fa-mobile-alt text-green-600"></i>
+                        モバイル・UI/UX向上
+                    </h2>
+                    <div class="space-y-2">
+                        <div class="bg-slate-50 rounded-lg p-3">
+                            <h3 class="font-bold text-slate-800 mb-1 text-sm">現場での利用促進</h3>
+                            <p class="text-slate-600 text-xs">スマートフォンからの動画撮影・共有・フィードバック</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-3">
+                            <h3 class="font-bold text-slate-800 mb-1 text-sm">直感的なインターフェース</h3>
+                            <p class="text-slate-600 text-xs">複雑な設定不要、従業員が抵抗なく利用できるデザイン</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         
-        <!-- その他の重要トレンド -->
-        <div class="grid grid-cols-2 gap-8 flex-1">
+            <!-- セキュリティ・プライバシー -->
             <div>
-                <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                    <i class="fa-solid fa-cloud text-blue-600"></i>
-                    クラウド連携の高度化
+                <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-3">
+                    <i class="fa-solid fa-shield-alt text-red-600"></i>
+                    セキュリティ機能の強化
                 </h2>
-                <div class="space-y-4">
-                    <div class="bg-slate-50 rounded-lg p-4">
-                        <h3 class="font-bold text-slate-800 mb-1">API連携の標準化</h3>
-                        <p class="text-slate-600 text-sm">勤怠、給与、LMS、SFA、CRMとのシームレス連携</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-red-50 rounded-lg p-3 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 mb-1 text-sm">多要素認証・暗号化</h3>
+                        <p class="text-red-700 text-xs">機密性の高い人事データを守る最高レベルのセキュリティ</p>
                     </div>
-                    <div class="bg-slate-50 rounded-lg p-4">
-                        <h3 class="font-bold text-slate-800 mb-1">データ統合プラットフォーム</h3>
-                        <p class="text-slate-600 text-sm">人事データの一元化による戦略的意思決定支援</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div>
-                <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                    <i class="fa-solid fa-mobile-alt text-green-600"></i>
-                    モバイル・UI/UX向上
-                </h2>
-                <div class="space-y-4">
-                    <div class="bg-slate-50 rounded-lg p-4">
-                        <h3 class="font-bold text-slate-800 mb-1">現場での利用促進</h3>
-                        <p class="text-slate-600 text-sm">スマートフォンからの動画撮影・共有・フィードバック</p>
-                    </div>
-                    <div class="bg-slate-50 rounded-lg p-4">
-                        <h3 class="font-bold text-slate-800 mb-1">直感的なインターフェース</h3>
-                        <p class="text-slate-600 text-sm">複雑な設定不要、従業員が抵抗なく利用できるデザイン</p>
+                    <div class="bg-amber-50 rounded-lg p-3 border-l-4 border-amber-500">
+                        <h3 class="font-bold text-amber-800 mb-1 text-sm">法規制対応</h3>
+                        <p class="text-amber-700 text-xs">GDPR、個人情報保護法への対応とデータ管理の透明性確保</p>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- セキュリティ・プライバシー -->
-        <div class="mt-6">
-            <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <i class="fa-solid fa-shield-alt text-red-600"></i>
-                セキュリティ機能の強化
-            </h2>
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
-                    <h3 class="font-bold text-red-800 mb-2">多要素認証・暗号化</h3>
-                    <p class="text-red-700 text-sm">機密性の高い人事データを守る最高レベルのセキュリティ</p>
-                </div>
-                <div class="bg-amber-50 rounded-lg p-4 border-l-4 border-amber-500">
-                    <h3 class="font-bold text-amber-800 mb-2">法規制対応</h3>
-                    <p class="text-amber-700 text-sm">GDPR、個人情報保護法への対応とデータ管理の透明性確保</p>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 </body>
 </html>
