@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANREN戦略分析レポート - スライドビューアー</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans JP', sans-serif; }
+        body { margin: 0; padding: 0; background: #f8fafc; }
+        .slide-viewer {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .slide-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .control-btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .control-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+        .slide-counter {
+            color: white;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+        .slide-list {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .slide-item {
+            padding: 8px 12px;
+            margin: 4px 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+        .slide-item:hover {
+            background: #f0f7ff;
+        }
+        .slide-item.active {
+            background: #007BFF;
+            color: white;
+        }
+        .main-content {
+            margin-left: 290px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- スライド一覧 -->
+    <div class="slide-list">
+        <h3 class="text-lg font-bold text-slate-800 mb-4">TANREN戦略分析レポート</h3>
+        <div id="slideList">
+            <!-- JavaScriptで動的生成 -->
+        </div>
+    </div>
+    
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+        <div class="slide-viewer">
+            <iframe id="slideFrame" class="slide-frame" src="slide-01-title.html"></iframe>
+        </div>
+        
+        <!-- コントロールパネル -->
+        <div class="controls">
+            <button class="control-btn" onclick="previousSlide()">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">20</span>
+            </div>
+            <button class="control-btn" onclick="nextSlide()">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <button class="control-btn" onclick="toggleFullscreen()">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        const slides = [
+            { file: 'slide-01-title.html', title: '1. タイトル' },
+            { file: 'slide-02-agenda.html', title: '2. アジェンダ' },
+            { file: 'slide-03-executive-summary-market.html', title: '3. 市場概況' },
+            { file: 'slide-04-executive-summary-opportunity.html', title: '4. TANRENの機会' },
+            { file: 'slide-05-market-size.html', title: '5. 市場規模' },
+            { file: 'slide-06-key-players.html', title: '6. 主要プレイヤー' },
+            { file: 'slide-07-tech-trends.html', title: '7. 技術トレンド' },
+            { file: 'slide-08-pest-politics-economy.html', title: '8. PEST：政治・経済' },
+            { file: 'slide-09-pest-social-tech.html', title: '9. PEST：社会・技術' },
+            { file: 'slide-10-swot-strengths-weaknesses.html', title: '10. SWOT：強み・弱み' },
+            { file: 'slide-11-swot-opportunities-threats.html', title: '11. SWOT：機会・脅威' },
+            { file: 'slide-12-competitive-comparison.html', title: '12. 競争環境：比較' },
+            { file: 'slide-13-competitive-positioning.html', title: '13. 競争環境：ポジション' },
+            { file: 'slide-14-strategy-short-term.html', title: '14. 戦略①：ターゲット' },
+            { file: 'slide-15-strategy-ecosystem.html', title: '15. 戦略②：エコシステム' },
+            { file: 'slide-16-strategy-ai.html', title: '16. 戦略③：AI活用' },
+            { file: 'slide-17-risks-tech-competition.html', title: '17. リスク①：技術・競争' },
+            { file: 'slide-18-risks-security-talent.html', title: '18. リスク②：セキュリティ' },
+            { file: 'slide-19-summary.html', title: '19. まとめ' },
+            { file: 'slide-20-contact.html', title: '20. お問い合わせ' }
+        ];
+        
+        let currentSlideIndex = 0;
+        
+        // スライド一覧を生成
+        function generateSlideList() {
+            const slideList = document.getElementById('slideList');
+            slides.forEach((slide, index) => {
+                const item = document.createElement('div');
+                item.className = 'slide-item';
+                item.textContent = slide.title;
+                item.onclick = () => goToSlide(index);
+                slideList.appendChild(item);
+            });
+            updateSlideList();
+        }
+        
+        // スライド一覧の表示を更新
+        function updateSlideList() {
+            const items = document.querySelectorAll('.slide-item');
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+        
+        // 指定のスライドに移動
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlideIndex = index;
+                document.getElementById('slideFrame').src = slides[index].file;
+                document.getElementById('currentSlide').textContent = index + 1;
+                updateSlideList();
+            }
+        }
+        
+        // 前のスライド
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                goToSlide(currentSlideIndex - 1);
+            }
+        }
+        
+        // 次のスライド
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                goToSlide(currentSlideIndex + 1);
+            }
+        }
+        
+        // フルスクリーン切り替え
+        function toggleFullscreen() {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // キーボードナビゲーション
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    previousSlide();
+                    break;
+                case 'ArrowRight':
+                case ' ':
+                    nextSlide();
+                    break;
+                case 'Home':
+                    goToSlide(0);
+                    break;
+                case 'End':
+                    goToSlide(slides.length - 1);
+                    break;
+                case 'f':
+                case 'F11':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
+            }
+        });
+        
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            generateSlideList();
+            document.getElementById('totalSlides').textContent = slides.length;
+        });
+    </script>
+</body>
+</html>

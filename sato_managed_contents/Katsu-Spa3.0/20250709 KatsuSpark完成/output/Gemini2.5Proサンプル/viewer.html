@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレゼンテーションビューワー</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .slide-iframe {
+      width: 100%;
+      height: 70vh;
+      border: none;
+      background: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .slide-iframe {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+  <div class="w-full max-w-4xl mx-auto mt-6 mb-4 p-2 bg-white rounded-2xl shadow-xl flex flex-col items-center">
+    <div class="w-full flex justify-between items-center mb-2">
+      <button id="prevBtn" class="text-2xl text-gray-500 hover:text-blue-600 px-4 py-2" title="前のスライド">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <span id="slideCounter" class="text-lg font-bold">1 / 20</span>
+      <button id="nextBtn" class="text-2xl text-gray-500 hover:text-blue-600 px-4 py-2" title="次のスライド">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    <iframe id="slideFrame" class="slide-iframe rounded-xl border border-gray-200" src="slide-01-title.html"
+      loading="lazy"></iframe>
+    <div class="mt-4 flex flex-wrap gap-2 justify-center">
+      <!-- サムネイルジャンプ（オプション）-->
+      <template id="thumb-template">
+        <button
+          class="w-10 h-10 rounded border border-gray-300 bg-gray-50 hover:bg-blue-100 flex items-center justify-center text-xs font-bold text-gray-700"></button>
+      </template>
+    </div>
+  </div>
+  <script>
+    const slideFiles = [
+      'slide-01-title.html',
+      'slide-02-agenda.html',
+      'slide-03-summary-1.html',
+      'slide-04-summary-2.html',
+      'slide-05-pest.html',
+      'slide-06-swot.html',
+      'slide-07-porter.html',
+      'slide-08-market.html',
+      'slide-09-customer.html',
+      'slide-10-competitor.html',
+      'slide-11-solution.html',
+      'slide-12-strategy.html',
+      'slide-13-action.html',
+      'slide-14-risk.html',
+      'slide-15-finance.html',
+      'slide-16-roadmap.html',
+      'slide-17-kpi.html',
+      'slide-18-summary.html',
+      'slide-19-next.html',
+      'slide-20-q-and-a.html',
+    ];
+    let current = 0;
+    const frame = document.getElementById('slideFrame');
+    const counter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    function updateSlide(idx) {
+      current = idx;
+      frame.src = slideFiles[current];
+      counter.textContent = `${current + 1} / ${slideFiles.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slideFiles.length - 1;
+      updateThumbs();
+    }
+    prevBtn.onclick = () => {
+      if (current > 0) updateSlide(current - 1);
+    };
+    nextBtn.onclick = () => {
+      if (current < slideFiles.length - 1) updateSlide(current + 1);
+    };
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') prevBtn.click();
+      if (e.key === 'ArrowRight') nextBtn.click();
+    });
+    // サムネイルジャンプ
+    function updateThumbs() {
+      const container = document.querySelector('div.flex.flex-wrap');
+      container.innerHTML = '';
+      for (let i = 0; i < slideFiles.length; i++) {
+        const btn = document.createElement('button');
+        btn.className = `w-10 h-10 rounded border ${i === current ? 'bg-blue-200 border-blue-400' : 'bg-gray-50 border-gray-300'} hover:bg-blue-100 flex items-center justify-center text-xs font-bold text-gray-700`;
+        btn.textContent = i + 1;
+        btn.onclick = () => updateSlide(i);
+        container.appendChild(btn);
+      }
+    }
+    updateSlide(0);
+  </script>
+</body>
+
+</html>

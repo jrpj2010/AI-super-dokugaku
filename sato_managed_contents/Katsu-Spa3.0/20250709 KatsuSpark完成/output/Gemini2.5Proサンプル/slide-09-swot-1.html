@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWOT分析 (1/2) - スライド9</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8">
+      <h2 class="text-4xl font-bold text-slate-800">内部・外部環境分析：SWOT分析 (1/2)</h2>
+    </header>
+    <main class="flex-1 grid grid-cols-2 gap-8 fade-in">
+      <div class="bg-green-50 border-l-4 border-green-500 p-8 rounded-lg">
+        <h3 class="text-3xl font-bold text-green-800 flex items-center mb-4"><i
+            class="fa-solid fa-thumbs-up mr-3"></i>強み (Strengths)</h3>
+        <ul class="list-disc list-inside space-y-2 text-xl text-slate-700">
+          <li>動画活用の技術的優位性</li>
+          <li>1,000社以上の導入実績</li>
+        </ul>
+      </div>
+      <div class="bg-red-50 border-l-4 border-red-500 p-8 rounded-lg">
+        <h3 class="text-3xl font-bold text-red-800 flex items-center mb-4"><i
+            class="fa-solid fa-thumbs-down mr-3"></i>弱み (Weaknesses)</h3>
+        <ul class="list-disc list-inside space-y-2 text-xl text-slate-700">
+          <li>価格競争力と機能の網羅性</li>
+          <li>競合による模倣リスク</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

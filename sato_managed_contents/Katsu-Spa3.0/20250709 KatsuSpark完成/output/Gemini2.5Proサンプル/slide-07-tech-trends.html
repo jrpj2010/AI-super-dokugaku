@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>市場環境分析：技術トレンド - スライド7</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8">
+      <h2 class="text-4xl font-bold text-slate-800 flex items-center"><i
+          class="fa-solid fa-cogs text-blue-500 mr-4"></i>市場環境分析：技術トレンド</h2>
+      <p class="text-xl text-slate-600 mt-2">AI・クラウド・モバイルがHRテックの進化を加速</p>
+    </header>
+    <main class="flex-1 grid grid-cols-2 grid-rows-2 gap-8 fade-in">
+      <div class="flex items-center bg-slate-50 p-6 rounded-lg">
+        <i class="fa-solid fa-brain text-5xl text-orange-500 w-20 text-center"></i>
+        <div>
+          <h3 class="text-2xl font-bold text-slate-800">AIによるデータ分析・予測</h3>
+          <p class="text-slate-600">フィードバックや学習をパーソナライズ</p>
+        </div>
+      </div>
+      <div class="flex items-center bg-slate-50 p-6 rounded-lg">
+        <i class="fa-solid fa-cloud text-5xl text-blue-500 w-20 text-center"></i>
+        <div>
+          <h3 class="text-2xl font-bold text-slate-800">API連携によるエコシステム化</h3>
+          <p class="text-slate-600">他システムとの連携で価値向上</p>
+        </div>
+      </div>
+      <div class="flex items-center bg-slate-50 p-6 rounded-lg">
+        <i class="fa-solid fa-mobile-alt text-5xl text-green-500 w-20 text-center"></i>
+        <div>
+          <h3 class="text-2xl font-bold text-slate-800">モバイル対応とUI/UX向上</h3>
+          <p class="text-slate-600">いつでもどこでも手軽に利用</p>
+        </div>
+      </div>
+      <div class="flex items-center bg-slate-50 p-6 rounded-lg">
+        <i class="fa-solid fa-film text-5xl text-purple-500 w-20 text-center"></i>
+        <div>
+          <h3 class="text-2xl font-bold text-slate-800">動画・マイクロラーニング活用</h3>
+          <p class="text-slate-600">直感的で効果的なスキル習得 (TANRENの強み)</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

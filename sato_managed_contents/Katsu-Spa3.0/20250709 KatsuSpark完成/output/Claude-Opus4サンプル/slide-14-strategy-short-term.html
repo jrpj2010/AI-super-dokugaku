@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戦略的推奨事項①（ターゲット深掘り） - スライド14</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            height: 720px;
+            overflow: hidden;
+        }
+        html {
+            height: 720px;
+        }
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .floating-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .strategy-bg {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+        .action-bg {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .target-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-bullseye text-blue-500 mr-4"></i>
+                戦略的推奨事項①：ターゲット深掘り戦略
+            </h2>
+            <div class="accent-line h-1 w-32 rounded-full mt-4"></div>
+        </header>
+        <main class="slide--main flex-1 px-16 pb-16">
+            <div class="grid grid-cols-3 gap-8 h-full">
+                <!-- ターゲット分析 -->
+                <div class="floating-card rounded-2xl p-6">
+                    <div class="target-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">ターゲット分析</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <p class="font-medium text-orange-800">🎯 プライマリー</p>
+                            <p class="text-orange-700 mt-1">IT企業の人事・管理職</p>
+                            <p class="text-orange-600 text-xs mt-1">従業員50-500名規模</p>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-lg">
+                            <p class="font-medium text-amber-800">🎯 セカンダリー</p>
+                            <p class="text-amber-700 mt-1">製造業・サービス業のDX推進部門</p>
+                            <p class="text-amber-600 text-xs mt-1">デジタル化初期段階</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg">
+                            <p class="font-medium text-yellow-800">🎯 新興ターゲット</p>
+                            <p class="text-yellow-700 mt-1">スタートアップ・ベンチャー企業</p>
+                            <p class="text-yellow-600 text-xs mt-1">急成長期の人材育成</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-lg">
+                            <p class="font-medium text-orange-900">📊 共通ニーズ</p>
+                            <p class="text-orange-800 mt-1">・実践的スキル習得</p>
+                            <p class="text-orange-800">・短期間での成果</p>
+                            <p class="text-orange-800">・コスト効率重視</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 戦略アプローチ -->
+                <div class="floating-card rounded-2xl p-6">
+                    <div class="strategy-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-chess-knight text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">戦略アプローチ</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="font-medium text-purple-800">🎯 1. セグメント別カスタマイズ</p>
+                            <p class="text-purple-700 mt-1">業界・規模別の研修メニュー</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="font-medium text-purple-800">🎯 2. 段階的アプローチ</p>
+                            <p class="text-purple-700 mt-1">基礎→応用→実践の体系的学習</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="font-medium text-purple-800">🎯 3. 成果可視化</p>
+                            <p class="text-purple-700 mt-1">学習効果の定量的測定</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="font-medium text-purple-800">🎯 4. 継続支援</p>
+                            <p class="text-purple-700 mt-1">研修後のフォローアップ</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="font-medium text-purple-800">🎯 5. コミュニティ形成</p>
+                            <p class="text-purple-700 mt-1">受講者同士の交流促進</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 具体的アクション -->
+                <div class="floating-card rounded-2xl p-6">
+                    <div class="action-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-rocket text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">具体的アクション</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <p class="font-medium text-green-800">📅 短期（3ヶ月）</p>
+                            <p class="text-green-700 mt-1">・顧客インタビュー実施</p>
+                            <p class="text-green-700">・ペルソナ設計</p>
+                            <p class="text-green-700">・競合分析深化</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <p class="font-medium text-green-800">📅 中期（6ヶ月）</p>
+                            <p class="text-green-700 mt-1">・セグメント別メニュー開発</p>
+                            <p class="text-green-700">・価格体系見直し</p>
+                            <p class="text-green-700">・営業資料刷新</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <p class="font-medium text-green-800">📅 長期（12ヶ月）</p>
+                            <p class="text-green-700 mt-1">・専門領域拡大</p>
+                            <p class="text-green-700">・パートナー連携</p>
+                            <p class="text-green-700">・ブランド確立</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <p class="font-medium text-green-900">🎯 期待効果</p>
+                            <p class="text-green-800 mt-1">・受注率30%向上</p>
+                            <p class="text-green-800">・客単価20%増加</p>
+                            <p class="text-green-800">・リピート率40%改善</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

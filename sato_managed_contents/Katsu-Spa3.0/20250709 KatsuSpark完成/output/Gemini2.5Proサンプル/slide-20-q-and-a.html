@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご清聴ありがとうございました - スライド20</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col justify-center items-center text-center p-16">
+    <i class="fa-regular fa-question-circle text-7xl text-blue-500 mb-8 fade-in"></i>
+    <h1 class="text-8xl font-black gradient-text mb-6 fade-in" style="animation-delay: 0.1s;">Q&A</h1>
+    <h2 class="text-4xl text-slate-700 mb-12 fade-in" style="animation-delay: 0.2s;">ご清聴ありがとうございました</h2>
+    <p class="text-2xl text-slate-500 fade-in" style="animation-delay: 0.3s;">TANREN株式会社</p>
+  </div>
+</body>
+
+</html>

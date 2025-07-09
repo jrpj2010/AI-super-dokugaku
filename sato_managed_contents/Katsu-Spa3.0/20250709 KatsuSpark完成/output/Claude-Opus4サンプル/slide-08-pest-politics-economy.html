@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEST分析（政治・経済要因） - スライド08</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            height: 720px;
+            overflow: hidden;
+        }
+        html {
+            height: 720px;
+        }
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .floating-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .positive-bg {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .negative-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-balance-scale text-blue-500 mr-4"></i>
+                PEST分析：政治・経済要因
+            </h2>
+            <div class="accent-line h-1 w-32 rounded-full mt-4"></div>
+        </header>
+        <main class="slide--main flex-1 px-16 pb-16">
+            <div class="grid grid-cols-2 gap-12 h-full">
+                <!-- 政治要因 -->
+                <div class="floating-card rounded-2xl p-8">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-landmark text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center">政治要因 (Political)</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="positive-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-plus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">DX推進法・AI倫理ガイドライン</p>
+                                <p class="text-slate-600 text-sm mt-1">政府のデジタル化推進により業界追い風</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="positive-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-plus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">企業向け教育支援予算拡大</p>
+                                <p class="text-slate-600 text-sm mt-1">リスキリング予算年間3,000億円</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="negative-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-minus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">個人情報保護法改正</p>
+                                <p class="text-slate-600 text-sm mt-1">データ活用により厳格な規制</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="negative-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-minus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">労働法制の複雑化</p>
+                                <p class="text-slate-600 text-sm mt-1">働き方改革関連法の継続的変更</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 経済要因 -->
+                <div class="floating-card rounded-2xl p-8">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center">経済要因 (Economic)</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="positive-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-plus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">企業研修市場拡大</p>
+                                <p class="text-slate-600 text-sm mt-1">年間成長率8.5%、市場規模1.2兆円</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="positive-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-plus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">IT人材不足の深刻化</p>
+                                <p class="text-slate-600 text-sm mt-1">2030年までに約79万人不足見込み</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="negative-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-minus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">人材コスト上昇</p>
+                                <p class="text-slate-600 text-sm mt-1">優秀な講師の確保が困難</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="negative-bg w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa-solid fa-minus text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-700 font-medium">経済不安定要因</p>
+                                <p class="text-slate-600 text-sm mt-1">インフレ・円安による企業予算圧迫</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

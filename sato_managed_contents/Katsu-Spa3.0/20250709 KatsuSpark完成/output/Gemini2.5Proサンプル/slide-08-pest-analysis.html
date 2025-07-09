@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>外部環境分析：PEST分析 - スライド8</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8">
+      <h2 class="text-4xl font-bold text-slate-800 flex items-center"><i
+          class="fa-solid fa-compass text-blue-500 mr-4"></i>外部環境分析：PEST分析</h2>
+      <p class="text-xl text-slate-600 mt-2">政策・経済・社会・技術の4側面から機会と脅威を分析</p>
+    </header>
+    <main class="flex-1 grid grid-cols-2 grid-rows-2 gap-8 fade-in">
+      <div class="bg-slate-50 p-6 rounded-lg">
+        <h3 class="text-2xl font-bold text-slate-800 flex items-center mb-2"><i
+            class="fa-solid fa-landmark text-blue-500 w-8"></i>政治(Political)</h3>
+        <p class="text-slate-600">DX推進政策、人的資本開示義務化が追い風に。</p>
+      </div>
+      <div class="bg-slate-50 p-6 rounded-lg">
+        <h3 class="text-2xl font-bold text-slate-800 flex items-center mb-2"><i
+            class="fa-solid fa-money-bill-wave text-green-500 w-8"></i>経済(Economic)</h3>
+        <p class="text-slate-600">堅調なIT投資と生産性向上ニーズが需要を喚起。</p>
+      </div>
+      <div class="bg-slate-50 p-6 rounded-lg">
+        <h3 class="text-2xl font-bold text-slate-800 flex items-center mb-2"><i
+            class="fa-solid fa-users text-orange-500 w-8"></i>社会(Social)</h3>
+        <p class="text-slate-600">ハイブリッドワーク定着とエンゲージメント重視が適合。</p>
+      </div>
+      <div class="bg-slate-50 p-6 rounded-lg">
+        <h3 class="text-2xl font-bold text-slate-800 flex items-center mb-2"><i
+            class="fa-solid fa-robot text-purple-500 w-8"></i>技術(Technological)</h3>
+        <p class="text-slate-600">生成AIの進化と応用が新たな付加価値創出の機会に。</p>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

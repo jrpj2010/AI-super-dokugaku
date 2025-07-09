@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市場環境分析：市場規模</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans JP', sans-serif; }
+        body { margin: 0; padding: 0; overflow: hidden; }
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide w-[1280px] h-[720px] bg-white flex flex-col px-16 py-12">
+        <h1 class="gradient-text text-5xl font-bold mb-8">市場環境分析：市場規模</h1>
+        
+        <div class="grid grid-cols-3 gap-6 mb-8">
+            <!-- 2022年度実績 -->
+            <div class="bg-slate-50 rounded-xl p-6 text-center">
+                <p class="text-slate-600 text-sm mb-2">2022年度（実績）</p>
+                <p class="text-3xl font-black text-slate-800">1,387<span class="text-lg">億円</span></p>
+                <p class="text-slate-600 text-xs mt-1">前年度比11.6%増</p>
+            </div>
+            
+            <!-- 2023年度予測 -->
+            <div class="bg-blue-50 rounded-xl p-6 text-center">
+                <p class="text-slate-600 text-sm mb-2">2023年度（予測）</p>
+                <p class="text-3xl font-black text-blue-700">1,549<span class="text-lg">億円</span></p>
+                <p class="text-blue-600 text-xs mt-1">前年度比11.7%増</p>
+            </div>
+            
+            <!-- 2027年度予測 -->
+            <div class="bg-green-50 rounded-xl p-6 text-center">
+                <p class="text-slate-600 text-sm mb-2">2027年度（予測）</p>
+                <p class="text-3xl font-black text-green-700">2,185<span class="text-lg">億円</span></p>
+                <p class="text-green-600 text-xs mt-1">年平均10%以上成長</p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-8 flex-1">
+            <!-- グラフ -->
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 mb-4">市場成長トレンド</h2>
+                <div id="marketChart" style="width: 100%; height: 300px;"></div>
+            </div>
+            
+            <!-- 成長要因 -->
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 mb-4">成長ドライバー</h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-laptop text-blue-600 text-xl"></i>
+                            <div>
+                                <h3 class="font-bold text-slate-800">DX推進の加速</h3>
+                                <p class="text-slate-600 text-sm">働き方改革とコロナ禍によるデジタル化需要</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-users text-green-600 text-xl"></i>
+                            <div>
+                                <h3 class="font-bold text-slate-800">人的資本経営</h3>
+                                <p class="text-slate-600 text-sm">従業員エンゲージメント向上への投資増加</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-home text-purple-600 text-xl"></i>
+                            <div>
+                                <h3 class="font-bold text-slate-800">リモートワーク</h3>
+                                <p class="text-slate-600 text-sm">非対面でのパフォーマンス管理ニーズ</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-graduation-cap text-amber-600 text-xl"></i>
+                            <div>
+                                <h3 class="font-bold text-slate-800">スキル開発</h3>
+                                <p class="text-slate-600 text-sm">リスキリング・アップスキリング需要</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ECharts初期化
+        const chart = echarts.init(document.getElementById('marketChart'));
+        
+        const option = {
+            grid: {
+                top: 20,
+                right: 20,
+                bottom: 60,
+                left: 80
+            },
+            xAxis: {
+                type: 'category',
+                data: ['2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
+                axisLabel: {
+                    fontSize: 12
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '市場規模（億円）',
+                nameTextStyle: {
+                    fontSize: 12
+                },
+                axisLabel: {
+                    fontSize: 12
+                }
+            },
+            series: [{
+                data: [950, 1050, 1170, 1387, 1549, 1730, 1930, 2050, 2185],
+                type: 'line',
+                smooth: true,
+                lineStyle: {
+                    width: 4,
+                    color: '#007BFF'
+                },
+                itemStyle: {
+                    color: '#007BFF',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgba(0, 123, 255, 0.3)'
+                        }, {
+                            offset: 1, color: 'rgba(0, 123, 255, 0.05)'
+                        }]
+                    }
+                }
+            }],
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}年度: {c}億円'
+            }
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>

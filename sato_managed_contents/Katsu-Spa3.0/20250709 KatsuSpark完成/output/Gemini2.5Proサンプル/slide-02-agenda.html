@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アジェンダ - スライド2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8">
+      <h2 class="text-5xl font-bold text-slate-800 flex items-center">
+        <i class="fa-solid fa-list-ul text-blue-500 mr-6"></i>
+        アジェンダ
+      </h2>
+      <div class="w-full h-1 bg-blue-200 mt-4 rounded-full"></div>
+    </header>
+    <main class="flex-1 flex items-center">
+      <ul class="space-y-8 text-3xl font-medium text-slate-700 w-full">
+        <li class="flex items-center fade-in" style="animation-delay: 0.1s;">
+          <span class="text-blue-500 font-bold text-4xl w-16 text-center">1.</span>
+          <span>エグゼクティブサマリー</span>
+        </li>
+        <li class="flex items-center fade-in" style="animation-delay: 0.2s;">
+          <span class="text-blue-500 font-bold text-4xl w-16 text-center">2.</span>
+          <span>市場環境分析 (PEST, SWOT, 5 Forces)</span>
+        </li>
+        <li class="flex items-center fade-in" style="animation-delay: 0.3s;">
+          <span class="text-blue-500 font-bold text-4xl w-16 text-center">3.</span>
+          <span>戦略的推奨事項</span>
+        </li>
+        <li class="flex items-center fade-in" style="animation-delay: 0.4s;">
+          <span class="text-blue-500 font-bold text-4xl w-16 text-center">4.</span>
+          <span>リスクと対策</span>
+        </li>
+        <li class="flex items-center fade-in" style="animation-delay: 0.5s;">
+          <span class="text-blue-500 font-bold text-4xl w-16 text-center">5.</span>
+          <span>結論と提言</span>
+        </li>
+      </ul>
+    </main>
+  </div>
+</body>
+
+</html>

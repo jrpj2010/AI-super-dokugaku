@@ -1,13 +1,13 @@
-# Felo風スライド生成システム 実行サンプル
+# KatsuSparkスライド生成システム 実行サンプル
 
-このドキュメントでは、Claude Codeを使用してUser_input.mdから20枚のスライドを生成する方法を説明します。
+このドキュメントでは、[Claude Code][Gemini Code]を使用してUser_input.mdから20枚のスライドを生成する方法を説明します。
 
 ## 🚀 実行手順
 
 ### 1. プロジェクトディレクトリに移動
 
 ```bash
-cd /Users/jrpj2010/vibe-coding/sato_managed_contents/Katsu-Spa3.0/20250709 Felo3.0研究/felo-clone
+cd /Users/jrpj2010/vibe-coding/sato_managed_contents/Katsu-Spa3.0/20250709 KatsuSpark完成
 ```
 
 ### 2. 出力ディレクトリの作成
@@ -16,9 +16,9 @@ cd /Users/jrpj2010/vibe-coding/sato_managed_contents/Katsu-Spa3.0/20250709 Felo3
 mkdir -p output/slides
 ```
 
-### 3. Claude Codeでのスライド生成
+### 3. [Claude Code][Gemini Code]でのスライド生成
 
-以下のコマンドをClaude Codeで順番に実行します：
+以下のコマンドを[Claude Code][Gemini Code]で順番に実行します：
 
 #### Step 1: コンテンツ解析
 
@@ -101,7 +101,8 @@ claude "以下を順番に実行してください：
 
 ### テーマカラーの変更
 
-CLAUDE.mdのカラーパレットセクションを編集：
+- ClaudeCodeの場合は[CLAUDE.md]のカラーパレットセクションを編集：
+- GeminiCodeの場合は[Gemini.md]のカラーパレットセクションを編集：
 
 ```markdown
 - プライマリー: #007BFF → #您的颜色
@@ -172,4 +173,4 @@ templates/layouts/に新しいレイアウトHTMLを追加し、generator.mdに�
 
 ---
 
-このサンプルに従って、Claude Codeで高品質なスライドを自動生成してください。
+このサンプルに従って、[Claude Code][Gemini.md]で高品質なスライドを自動生成してください。

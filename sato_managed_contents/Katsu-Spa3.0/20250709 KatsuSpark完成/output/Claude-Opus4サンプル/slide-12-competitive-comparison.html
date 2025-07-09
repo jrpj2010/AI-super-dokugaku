@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>競争環境分析（比較表） - スライド12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            height: 720px;
+            overflow: hidden;
+        }
+        html {
+            height: 720px;
+        }
+        .slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .floating-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        }
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .tanren-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        .competitor-bg {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        }
+        .excellent {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .good {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .average {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .poor {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide w-[1280px] h-[720px] flex flex-col">
+        <header class="slide--header flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-table text-blue-500 mr-4"></i>
+                競争環境分析：競合比較マトリックス
+            </h2>
+            <div class="accent-line h-1 w-32 rounded-full mt-4"></div>
+        </header>
+        <main class="slide--main flex-1 px-16 pb-16">
+            <div class="floating-card rounded-2xl p-8 h-full">
+                <div class="overflow-hidden">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b-2 border-slate-200">
+                                <th class="text-left py-4 px-3 text-lg font-bold text-slate-700">評価項目</th>
+                                <th class="text-center py-4 px-3">
+                                    <div class="tanren-bg text-white px-4 py-2 rounded-lg font-bold">
+                                        TANREN
+                                    </div>
+                                </th>
+                                <th class="text-center py-4 px-3">
+                                    <div class="competitor-bg text-white px-4 py-2 rounded-lg font-bold">
+                                        リクルート
+                                    </div>
+                                </th>
+                                <th class="text-center py-4 px-3">
+                                    <div class="competitor-bg text-white px-4 py-2 rounded-lg font-bold">
+                                        パーソル
+                                    </div>
+                                </th>
+                                <th class="text-center py-4 px-3">
+                                    <div class="competitor-bg text-white px-4 py-2 rounded-lg font-bold">
+                                        中小研修会社
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-user-tie text-blue-500 mr-2"></i>
+                                    講師の専門性
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-cogs text-blue-500 mr-2"></i>
+                                    カスタマイズ性
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-dollar-sign text-blue-500 mr-2"></i>
+                                    価格競争力
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="poor text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        高価
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="poor text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        高価
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-expand-arrows-alt text-blue-500 mr-2"></i>
+                                    スケーラビリティ
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="poor text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        困難
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-laptop text-blue-500 mr-2"></i>
+                                    技術対応力
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-3 font-medium text-slate-700">
+                                    <i class="fa-solid fa-handshake text-blue-500 mr-2"></i>
+                                    顧客関係性
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="excellent text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        優秀
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="average text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        普通
+                                    </div>
+                                </td>
+                                <td class="py-4 px-3 text-center">
+                                    <div class="good text-white px-3 py-1 rounded-lg font-bold text-sm">
+                                        良好
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

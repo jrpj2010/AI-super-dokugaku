@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パフォーマンス評価アプリ「TANREN」戦略的事業分析 - スライド1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .accent-line {
+      background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+    }
+
+    .icon-bg {
+      background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col">
+    <header class="slide--header flex-none pt-16 px-16">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center">
+            <i class="fa-solid fa-chart-line text-white text-xl"></i>
+          </div>
+          <div class="accent-line h-1 w-24 rounded-full"></div>
+        </div>
+        <div class="text-right">
+          <p class="text-slate-600 text-lg font-medium">TANREN株式会社</p>
+          <p class="text-slate-500 text-sm">2025年7月12日</p>
+        </div>
+      </div>
+    </header>
+    <main class="slide--main flex-1 flex items-center justify-center px-16 fade-in">
+      <div class="text-center">
+        <h1 class="gradient-text text-7xl font-black mb-6 leading-tight">パフォーマンス評価アプリ「TANREN」戦略的事業分析</h1>
+        <div class="accent-line h-2 w-32 mx-auto rounded-full mb-8"></div>
+        <h2 class="text-slate-700 text-3xl font-medium">HRテック市場における持続的成長戦略</h2>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

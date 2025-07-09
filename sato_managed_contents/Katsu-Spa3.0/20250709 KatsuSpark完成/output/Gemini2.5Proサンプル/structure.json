@@ -1,0 +1,742 @@
+{
+  "slide_structure": [
+    {
+      "slide_number": 1,
+      "type": "title",
+      "layout": "fullscreen",
+      "title": "パフォーマンス評価アプリ「TANREN」戦略的事業分析",
+      "content": {
+        "main_message": "HRテック市場における持続的成長戦略",
+        "sub_messages": [
+          "TANREN株式会社",
+          "2025年7月12日"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-chart-line"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#FFFFFF",
+          "text": "#FFFFFF"
+        },
+        "charts": null,
+        "images": [
+          "abstract_background_image"
+        ]
+      },
+      "speaker_notes": "皆様、本日はお集まりいただきありがとうございます。本プレゼンテーションでは、当社の主力製品であるTANRENの今後の成長戦略について、市場分析を交えながらご説明します。",
+      "transition": "next_topic",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 2,
+      "type": "list",
+      "layout": "2column",
+      "title": "アジェンダ",
+      "content": {
+        "main_message": null,
+        "sub_messages": [],
+        "details": [
+          "1. エグゼクティブサマリー",
+          "2. 市場環境分析 (PEST, SWOT, 5 Forces)",
+          "3. 戦略的推奨事項",
+          "4. リスクと対策",
+          "5. 結論と提言"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-list-ul"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#6c757d",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "agenda_icon_graphic"
+        ]
+      },
+      "speaker_notes": "本日はこちらの5つの項目に沿ってご説明を進めてまいります。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 3,
+      "type": "visual",
+      "layout": "2column",
+      "title": "エグゼクティブサマリー (1/2)",
+      "content": {
+        "main_message": "市場機会と事業の強み",
+        "sub_messages": [
+          "HRテック市場は2027年に1,680億円規模へ成長予測",
+          "TANRENの強みは『動画活用による行動変容支援』",
+          "導入実績1,000社以上が信頼の証"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-lightbulb",
+          "fa-video",
+          "fa-building"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#28a745",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "opportunity_growth_arrow_graphic"
+        ]
+      },
+      "speaker_notes": "まず、本分析の要点です。市場は成長しており、我々には明確な強みと実績があります。",
+      "transition": "deep_dive",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 4,
+      "type": "visual",
+      "layout": "2column",
+      "title": "エグゼクティブサマリー (2/2)",
+      "content": {
+        "main_message": "戦略の方向性とリスク",
+        "sub_messages": [
+          "特定市場への特化とエコシステム連携を推奨",
+          "競合激化と技術陳腐化が主要リスク",
+          "AI活用と顧客サクセス強化が成功の鍵"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-bullseye",
+          "fa-exclamation-triangle",
+          "fa-key"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#dc3545",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "strategy_path_graphic"
+        ]
+      },
+      "speaker_notes": "戦略としては、特定分野でのリーダーシップ確立を目指します。ただし、競争や技術革新といったリスクへの対応が不可欠です。",
+      "transition": "next_topic",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 5,
+      "type": "data",
+      "layout": "2column",
+      "title": "市場環境分析：市場規模の成長性",
+      "content": {
+        "main_message": "国内HRテック市場は年率10%以上の成長を継続",
+        "sub_messages": [],
+        "details": [
+          "企業のDX推進と人材戦略投資が成長を牽引。"
+        ],
+        "data": [
+          {
+            "label": "2022年度実績",
+            "value": "1,012億円"
+          },
+          {
+            "label": "2027年度予測",
+            "value": "1,680億円"
+          }
+        ],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-chart-bar"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#28a745",
+          "text": "#333333"
+        },
+        "charts": {
+          "type": "bar",
+          "data": {
+            "labels": [
+              "2022年度",
+              "2027年度"
+            ],
+            "datasets": [
+              {
+                "label": "市場規模(億円)",
+                "data": [
+                  1012,
+                  1680
+                ]
+              }
+            ]
+          }
+        },
+        "images": []
+      },
+      "speaker_notes": "具体的な市場データです。見ての通り、我々が事業を展開する市場は非常に有望です。",
+      "transition": "deep_dive",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 6,
+      "type": "comparison",
+      "layout": "3column",
+      "title": "市場環境分析：主要プレイヤー",
+      "content": {
+        "main_message": "統合型プラットフォームと特化型ソリューションの競合",
+        "sub_messages": [],
+        "details": [
+          "【統合型】SmartHR, カオナビ (機能網羅性)",
+          "【特化型】TANREN (動画活用・行動変容)",
+          "【グローバル】Workday, SAP (大規模企業向け)"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-users-cog",
+          "fa-video-camera",
+          "fa-globe"
+        ],
+        "colors": {
+          "primary": "#6c757d",
+          "accent": "#007BFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "positioning_map_suggestion"
+        ]
+      },
+      "speaker_notes": "競合は多岐にわたりますが、我々のポジションは明確です。動画活用による行動変容支援というユニークな価値を提供しています。",
+      "transition": "deep_dive",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 7,
+      "type": "list",
+      "layout": "2column",
+      "title": "市場環境分析：技術トレンド",
+      "content": {
+        "main_message": "AI・クラウド・モバイルがHRテックの進化を加速",
+        "sub_messages": [],
+        "details": [
+          "AIによるデータ分析・予測",
+          "API連携によるエコシステム化",
+          "モバイル対応とUI/UX向上",
+          "動画・マイクロラーニングの活用"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-brain",
+          "fa-cloud",
+          "fa-mobile-alt",
+          "fa-film"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#fd7e14",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "tech_trend_icons_graphic"
+        ]
+      },
+      "speaker_notes": "技術トレンドは我々にとって追い風です。特にAIや動画活用はTANRENのコアバリューと直結します。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 8,
+      "type": "visual",
+      "layout": "grid",
+      "title": "外部環境分析：PEST分析",
+      "content": {
+        "main_message": "政策・経済・社会・技術の4側面から機会と脅威を分析",
+        "sub_messages": [],
+        "details": [
+          "【政治】DX推進政策、人的資本開示義務化",
+          "【経済】堅調なIT投資、生産性向上ニーズ",
+          "【社会】ハイブリッドワーク定着、エンゲージメント重視",
+          "【技術】生成AIの進化と応用"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-landmark",
+          "fa-money-bill-wave",
+          "fa-users",
+          "fa-robot"
+        ],
+        "colors": {
+          "primary": "#6c757d",
+          "accent": "#007BFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "pest_analysis_diagram"
+        ]
+      },
+      "speaker_notes": "外部環境も概ね良好です。政策的な後押しや社会的なニーズが我々の事業成長を支えています。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 9,
+      "type": "visual",
+      "layout": "grid",
+      "title": "内部・外部環境分析：SWOT分析 (1/2)",
+      "content": {
+        "main_message": "強み (Strengths) & 弱み (Weaknesses)",
+        "sub_messages": [],
+        "details": [
+          "【強み】動画活用の技術的優位性、1,000社以上の導入実績",
+          "【弱み】価格競争力、機能の網羅性、模倣リスク"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-thumbs-up",
+          "fa-thumbs-down"
+        ],
+        "colors": {
+          "primary": "#28a745",
+          "accent": "#dc3545",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "swot_strengths_weaknesses_diagram"
+        ]
+      },
+      "speaker_notes": "我々の強みは明確な技術的優位性ですが、一方で機能の網羅性や価格面での課題も認識しています。",
+      "transition": "deep_dive",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 10,
+      "type": "visual",
+      "layout": "grid",
+      "title": "内部・外部環境分析：SWOT分析 (2/2)",
+      "content": {
+        "main_message": "機会 (Opportunities) & 脅威 (Threats)",
+        "sub_messages": [],
+        "details": [
+          "【機会】HRDX市場の拡大、新技術(AI)の活用可能性",
+          "【脅威】競合他社の動向、技術の陳腐化リスク"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-search-plus",
+          "fa-bolt"
+        ],
+        "colors": {
+          "primary": "#28a745",
+          "accent": "#dc3545",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "swot_opportunities_threats_diagram"
+        ]
+      },
+      "speaker_notes": "市場の拡大は大きなチャンスですが、競合や技術進化という脅威にも常に目を向ける必要があります。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 11,
+      "type": "visual",
+      "layout": "fullscreen",
+      "title": "競争環境分析：ポーターの5つの力",
+      "content": {
+        "main_message": "競争は激しいが、独自のポジションを確立可能",
+        "sub_messages": [
+          "新規参入(中→高)",
+          "代替品(高)",
+          "買い手(中→高)",
+          "売り手(中)",
+          "競合(高)"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#FFFFFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "porter_5_forces_diagram"
+        ]
+      },
+      "speaker_notes": "5つの力で分析すると、競争環境は厳しいことがわかります。しかし、これは裏を返せば、市場が魅力的である証拠でもあります。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 12,
+      "type": "title",
+      "layout": "fullscreen",
+      "title": "戦略的推奨事項",
+      "content": {
+        "main_message": "持続的成長に向けた3つの時間軸でのアクションプラン",
+        "sub_messages": [
+          "短期・中期・長期の具体的な施策"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-chess-king"
+        ],
+        "colors": {
+          "primary": "#28a745",
+          "accent": "#FFFFFF",
+          "text": "#FFFFFF"
+        },
+        "charts": null,
+        "images": [
+          "strategy_road_map_background"
+        ]
+      },
+      "speaker_notes": "これらの分析を踏まえ、具体的な戦略をご提案します。",
+      "transition": "climax_slide",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 13,
+      "type": "list",
+      "layout": "3column",
+      "title": "短期的施策（〜1年）",
+      "content": {
+        "main_message": "足元の事業基盤を強化",
+        "sub_messages": [],
+        "details": [
+          "製品ラインナップ最適化",
+          "マーケティング戦略見直し",
+          "販売チャネル強化",
+          "顧客サポート改善"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-box-open",
+          "fa-bullhorn",
+          "fa-handshake",
+          "fa-headset"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#fd7e14",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": []
+      },
+      "speaker_notes": "短期的には、既存事業の基盤固めに注力します。製品、マーケ、販売、サポートの4つの観点から改善を図ります。",
+      "transition": "deep_dive",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 14,
+      "type": "list",
+      "layout": "3column",
+      "title": "中期的施策（1〜3年）",
+      "content": {
+        "main_message": "事業の飛躍に向けた仕込み",
+        "sub_messages": [],
+        "details": [
+          "新技術(AI)の導入",
+          "新市場への参入",
+          "パートナーシップ構築",
+          "ビジネスモデル変革"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-robot",
+          "fa-map-marked-alt",
+          "fa-cogs",
+          "fa-sync-alt"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#fd7e14",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": []
+      },
+      "speaker_notes": "中期的には、AI導入や新市場開拓など、未来の成長に向けた投資を開始します。",
+      "transition": "deep_dive",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 15,
+      "type": "list",
+      "layout": "3column",
+      "title": "長期的施策（3年〜）",
+      "content": {
+        "main_message": "業界リーダーとしての地位確立",
+        "sub_messages": [],
+        "details": [
+          "次世代製品の開発(XR等)",
+          "グローバル展開の加速",
+          "エコシステムの構築",
+          "新規事業の創出"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-rocket",
+          "fa-globe-asia",
+          "fa-project-diagram",
+          "fa-plus-circle"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#fd7e14",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": []
+      },
+      "speaker_notes": "そして長期的には、次世代製品開発やグローバル展開により、HRテック業界のリーディングカンパニーを目指します。",
+      "transition": "next_topic",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 16,
+      "type": "visual",
+      "layout": "grid",
+      "title": "リスクと対策",
+      "content": {
+        "main_message": "想定されるリスクへのプロアクティブな対応",
+        "sub_messages": [],
+        "details": [
+          "【技術リスク】陳腐化、セキュリティ",
+          "【市場リスク】競合激化、需要減少",
+          "【事業リスク】人材不足、規制変更"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-shield-alt",
+          "fa-chart-pie",
+          "fa-user-tie",
+          "fa-balance-scale"
+        ],
+        "colors": {
+          "primary": "#dc3545",
+          "accent": "#6c757d",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "risk_matrix_diagram"
+        ]
+      },
+      "speaker_notes": "もちろん、これらの戦略にはリスクが伴います。技術、市場、事業の3つの観点からリスクを特定し、対策を講じます。",
+      "transition": "summary",
+      "emphasis_level": "medium"
+    },
+    {
+      "slide_number": 17,
+      "type": "list",
+      "layout": "2column",
+      "title": "最優先で取り組むべきリスク",
+      "content": {
+        "main_message": "事業継続に直結する3大リスク",
+        "sub_messages": [],
+        "details": [
+          "【セキュリティ脆弱性】: ISMS確立と継続的な脆弱性診断で信頼を担保",
+          "【競合の激化】: 独自性の強化とパートナー戦略で対抗",
+          "【人材不足】: 魅力的な組織作りと採用・育成への投資"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-lock",
+          "fa-trophy",
+          "fa-users"
+        ],
+        "colors": {
+          "primary": "#dc3545",
+          "accent": "#007BFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": []
+      },
+      "speaker_notes": "特に、セキュリティ、競合、人材に関するリスクは事業継続に直結するため、最優先で対策を実行します。",
+      "transition": "summary",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 18,
+      "type": "list",
+      "layout": "2column",
+      "title": "結論：成功のための重要要因",
+      "content": {
+        "main_message": "TANRENが持続的成長を遂げるために",
+        "sub_messages": [],
+        "details": [
+          "【プロダクト】AI活用による機能強化と差別化",
+          "【GTM】プロアクティブな顧客サクセス体制",
+          "【組織】市場変化への迅速な学習と適応能力"
+        ],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-cogs",
+          "fa-sitemap",
+          "fa-brain"
+        ],
+        "colors": {
+          "primary": "#28a745",
+          "accent": "#007BFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "success_factors_graphic"
+        ]
+      },
+      "speaker_notes": "結論として、我々の成功は、プロダクト、Go-to-Market戦略、そして組織能力の3つの要素にかかっています。",
+      "transition": "closing_impact",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 19,
+      "type": "list",
+      "layout": "fullscreen",
+      "title": "最終提言：具体的なアクションプラン",
+      "content": {
+        "main_message": "明日から始めるべきこと",
+        "sub_messages": [
+          "1. AI投資の最優先と専門人材の確保",
+          "2. カスタマーサクセス部門の抜本的強化",
+          "3. 戦略的パートナーシップの具体化",
+          "4. KPIとOKRによる進捗管理の徹底"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-check-circle"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#28a745",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": []
+      },
+      "speaker_notes": "最後に、具体的なアクションプランを提言します。これらを迅速に実行することで、TANRENを次のステージへと導くことができると確信しています。",
+      "transition": "end",
+      "emphasis_level": "high"
+    },
+    {
+      "slide_number": 20,
+      "type": "title",
+      "layout": "fullscreen",
+      "title": "ご清聴ありがとうございました",
+      "content": {
+        "main_message": "Q&A",
+        "sub_messages": [
+          "TANREN株式会社"
+        ],
+        "details": [],
+        "data": [],
+        "quotes": []
+      },
+      "visual_elements": {
+        "icons": [
+          "fa-question-circle"
+        ],
+        "colors": {
+          "primary": "#007BFF",
+          "accent": "#FFFFFF",
+          "text": "#333333"
+        },
+        "charts": null,
+        "images": [
+          "company_logo"
+        ]
+      },
+      "speaker_notes": "ご清聴いただき、誠にありがとうございました。皆様からのご質問をお受けいたします。",
+      "transition": "end",
+      "emphasis_level": "medium"
+    }
+  ],
+  "design_theme": {
+    "overall_tone": "professional",
+    "color_scheme": "blue",
+    "font_emphasis": "headers",
+    "animation_level": "subtle"
+  },
+  "narrative_flow": {
+    "opening_hook": "HRテック市場の成長を背景に、TANRENがどのように勝ち抜くか。",
+    "key_transitions": [
+      "市場分析から戦略提言へ",
+      "全体戦略から具体的なアクションプランへ"
+    ],
+    "climax_slide": 12,
+    "closing_impact": "具体的なアクションプランを提示し、次のステップへの期待感を醸成する。"
+  }
+}

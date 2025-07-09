@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>エグゼクティブサマリー (1/2) - スライド3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .floating-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8">
+      <h2 class="text-4xl font-bold text-slate-800">エグゼクティブサマリー (1/2)</h2>
+      <p class="text-2xl text-blue-600 mt-2">市場機会と事業の強み</p>
+    </header>
+    <main class="flex-1 flex items-center fade-in">
+      <div class="w-1/2 pr-8">
+        <ul class="space-y-6 text-2xl">
+          <li class="flex items-start p-4 rounded-lg floating-card fade-in" style="animation-delay: 0.1s;">
+            <i class="fa-solid fa-lightbulb text-green-500 fa-fw text-3xl mr-4 mt-1"></i>
+            <span class="text-slate-700">HRテック市場は2027年に<b>1,680億円</b>規模へ成長予測</span>
+          </li>
+          <li class="flex items-start p-4 rounded-lg floating-card fade-in" style="animation-delay: 0.2s;">
+            <i class="fa-solid fa-video text-green-500 fa-fw text-3xl mr-4 mt-1"></i>
+            <span class="text-slate-700">TANRENの強みは<b>『動画活用による行動変容支援』</b></span>
+          </li>
+          <li class="flex items-start p-4 rounded-lg floating-card fade-in" style="animation-delay: 0.3s;">
+            <i class="fa-solid fa-building text-green-500 fa-fw text-3xl mr-4 mt-1"></i>
+            <span class="text-slate-700">導入実績<b>1,000社以上</b>が信頼の証</span>
+          </li>
+        </ul>
+      </div>
+      <div class="w-1/2 pl-8 flex items-center justify-center text-green-100">
+        <i class="fa-solid fa-arrow-trend-up fa-10x"></i>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

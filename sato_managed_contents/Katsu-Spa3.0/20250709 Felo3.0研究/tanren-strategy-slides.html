@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANREN戦略分析レポート - 動画活用型パフォーマンス評価SaaSの成長戦略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Yu Gothic', 'Hiragino Sans', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .slide:nth-child(odd) {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-8 { margin-top: 2rem; }
+        
+        .text-blue-600 { color: #2563eb; }
+        .text-green-600 { color: #16a34a; }
+        .text-purple-600 { color: #9333ea; }
+        .text-orange-600 { color: #ea580c; }
+        .text-red-600 { color: #dc2626; }
+        
+        .bg-blue-50 { background-color: #eff6ff; }
+        .bg-green-50 { background-color: #f0fdf4; }
+        .bg-purple-50 { background-color: #faf5ff; }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .icon {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 1s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- スライド 1: タイトル -->
+    <div class="slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="text-center" style="color: white;">
+            <h1 style="font-size: 4rem; margin-bottom: 2rem;">TANREN</h1>
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">戦略分析レポート</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 3rem;">動画活用型パフォーマンス評価SaaSの成長戦略</p>
+            <div style="border-top: 2px solid white; padding-top: 2rem; margin-top: 3rem;">
+                <p style="font-size: 1.2rem;">導入企業数1,000社突破</p>
+                <p style="font-size: 1rem; opacity: 0.8;">2025年1月</p>
+            </div>
+        </div>
+        <div class="slide-number">1/20</div>
+    </div>
+
+    <!-- スライド 2: アジェンダ -->
+    <div class="slide">
+        <h2 style="font-size: 3rem; text-align: center; margin-bottom: 3rem;">アジェンダ</h2>
+        <div class="grid grid-cols-2" style="max-width: 1000px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-blue-600">1. エグゼクティブサマリー</h3>
+                <ul>
+                    <li><span class="icon">📊</span>市場概況とTANRENの機会</li>
+                    <li><span class="icon">🎯</span>成長目標と戦略概要</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-green-600">2. 市場環境分析</h3>
+                <ul>
+                    <li><span class="icon">📈</span>HRテック市場規模と成長性</li>
+                    <li><span class="icon">🏢</span>主要プレイヤーと技術トレンド</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-purple-600">3. 環境分析</h3>
+                <ul>
+                    <li><span class="icon">🔍</span>PEST分析 - マクロ環境要因</li>
+                    <li><span class="icon">💪</span>SWOT分析 - 内部環境評価</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-orange-600">4. 戦略的推奨事項</h3>
+                <ul>
+                    <li><span class="icon">🚀</span>成長戦略とアクションプラン</li>
+                    <li><span class="icon">⚠️</span>リスク管理と対策</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">2/20</div>
+    </div>
+
+    <!-- スライド 3: エグゼクティブサマリー（市場概況） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">エグゼクティブサマリー（市場概況）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-blue-600">HRテック市場の急成長</h3>
+                <div class="chart-container">
+                    <h4>市場規模推移</h4>
+                    <div style="display: flex; align-items: flex-end; height: 200px; margin: 2rem 0;">
+                        <div style="flex: 1; margin: 0 10px;">
+                            <div style="background: #3b82f6; height: 60%; position: relative;">
+                                <span style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%);">1,387億円</span>
+                            </div>
+                            <p style="text-align: center; margin-top: 10px;">2024年</p>
+                        </div>
+                        <div style="flex: 1; margin: 0 10px;">
+                            <div style="background: #8b5cf6; height: 100%; position: relative;">
+                                <span style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%);">2,185億円</span>
+                            </div>
+                            <p style="text-align: center; margin-top: 10px;">2028年（予測）</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; font-weight: bold;">年平均成長率: 12.1%</p>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="text-purple-600">市場ドライバー</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">💡</span><strong>DX推進の加速</strong><br>企業のデジタル変革ニーズ拡大</li>
+                    <li><span class="icon">👥</span><strong>人的資本経営への注目</strong><br>人材価値の可視化・最大化</li>
+                    <li><span class="icon">🤖</span><strong>生成AI技術の進化</strong><br>評価・分析の高度化</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: white;">
+            <p style="text-align: center; font-size: 1.3rem;">TANRENは動画活用という独自のアプローチで、急成長するHRテック市場で差別化を実現</p>
+        </div>
+        <div class="slide-number">3/20</div>
+    </div>
+
+    <!-- スライド 4: エグゼクティブサマリー（TANRENの機会） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">エグゼクティブサマリー（TANRENの機会）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb);">
+                <h3 class="text-blue-600">TANRENの実績</h3>
+                <ul style="font-size: 1.2rem; line-height: 2.5;">
+                    <li><span class="icon">🏢</span><strong>導入企業数:</strong> 1,000社以上</li>
+                    <li><span class="icon">🎯</span><strong>動画活用型評価のパイオニア</strong></li>
+                    <li><span class="icon">📹</span><strong>パフォーマンス可視化の実現</strong></li>
+                    <li><span class="icon">📊</span><strong>定量的フィードバックの標準化</strong></li>
+                </ul>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0);">
+                <h3 class="text-green-600">成長機会</h3>
+                <div style="margin: 1rem 0;">
+                    <h4>目標市場シェア</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 30%;"></div>
+                    </div>
+                    <p style="text-align: center; font-weight: bold;">3%（65億円）</p>
+                </div>
+                <div style="margin: 2rem 0;">
+                    <h4>LTV向上目標</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 15%;"></div>
+                    </div>
+                    <p style="text-align: center; font-weight: bold;">15%増</p>
+                </div>
+                <ul style="margin-top: 2rem;">
+                    <li><span class="icon">🌐</span>エンタープライズ市場開拓</li>
+                    <li><span class="icon">🔗</span>HRテックエコシステム連携</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">4/20</div>
+    </div>
+
+    <!-- スライド 5: 市場環境分析（市場規模） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">HRテック市場規模と成長予測</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="card">
+                <canvas id="marketChart" width="800" height="400"></canvas>
+            </div>
+            <div class="grid grid-cols-3 mt-8">
+                <div class="card text-center">
+                    <h3 class="text-blue-600">CAGR</h3>
+                    <p style="font-size: 3rem; font-weight: bold;">12.1%</p>
+                    <p>年平均成長率</p>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-green-600">2028年市場規模</h3>
+                    <p style="font-size: 3rem; font-weight: bold;">2,185億円</p>
+                    <p>57.6%増加</p>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-purple-600">TANRENの機会</h3>
+                    <p style="font-size: 3rem; font-weight: bold;">65億円</p>
+                    <p>市場シェア3%</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">5/20</div>
+    </div>
+
+    <!-- スライド 6: 市場環境分析（主要プレイヤー） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">HRテック市場の主要プレイヤー</h2>
+        <div class="grid grid-cols-3" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-blue-600">労務管理系</h3>
+                <ul>
+                    <li><strong>SmartHR</strong></li>
+                    <li>• 労務管理クラウド最大手</li>
+                    <li>• 導入企業5万社以上</li>
+                    <li>• シリーズD調達（156億円）</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-green-600">タレントマネジメント系</h3>
+                <ul>
+                    <li><strong>カオナビ</strong></li>
+                    <li>• 人材データベース構築</li>
+                    <li>• 導入企業2,500社</li>
+                    <li>• 東証プライム上場</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-purple-600">採用管理系</h3>
+                <ul>
+                    <li><strong>HRMOS</strong></li>
+                    <li>• 採用管理システム</li>
+                    <li>• ビズリーチグループ</li>
+                    <li>• AI面接評価機能</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: #fef3c7;">
+            <h3 class="text-orange-600 text-center">TANRENの差別化ポイント</h3>
+            <p class="text-center" style="font-size: 1.2rem; margin-top: 1rem;">動画を活用したパフォーマンス評価に特化 - 既存プレイヤーがカバーしていない領域</p>
+        </div>
+        <div class="slide-number">6/20</div>
+    </div>
+
+    <!-- スライド 7: 市場環境分析（技術トレンド） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">HRテック技術トレンド</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-blue-600">現在の主要技術</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">☁️</span><strong>クラウド化</strong><br>SaaS型サービスの標準化</li>
+                    <li><span class="icon">📱</span><strong>モバイル対応</strong><br>いつでもどこでもアクセス</li>
+                    <li><span class="icon">🔗</span><strong>API連携</strong><br>他システムとのデータ連携</li>
+                    <li><span class="icon">📊</span><strong>データ分析</strong><br>人事データの可視化</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-purple-600">今後注目の技術</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">🤖</span><strong>生成AI活用</strong><br>評価・フィードバックの自動生成</li>
+                    <li><span class="icon">📹</span><strong>動画解析AI</strong><br>非言語情報の分析</li>
+                    <li><span class="icon">🔮</span><strong>予測分析</strong><br>パフォーマンス予測・離職予測</li>
+                    <li><span class="icon">🎮</span><strong>VR/AR活用</strong><br>没入型トレーニング</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: linear-gradient(90deg, #8b5cf6, #ec4899); color: white;">
+            <p style="text-align: center; font-size: 1.3rem;">TANRENは動画解析技術で先行優位性を確立 - AI技術との融合で更なる差別化が可能</p>
+        </div>
+        <div class="slide-number">7/20</div>
+    </div>
+
+    <!-- スライド 8: PEST分析（政治・経済） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">PEST分析 - マクロ環境要因（政治・経済）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                <h3 class="text-blue-600">政治的要因（Political）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">📋</span><strong>働き方改革関連法</strong><br>労働時間管理・生産性向上の要請</li>
+                    <li><span class="icon">📊</span><strong>人的資本開示義務化</strong><br>2023年より上場企業に義務化</li>
+                    <li><span class="icon">🎯</span><strong>DX推進政策</strong><br>デジタル庁主導の企業DX支援</li>
+                    <li><span class="icon">🛡️</span><strong>個人情報保護法改正</strong><br>データ活用とプライバシー保護</li>
+                </ul>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+                <h3 class="text-green-600">経済的要因（Economic）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">💴</span><strong>人件費上昇圧力</strong><br>最低賃金上昇・人材獲得競争</li>
+                    <li><span class="icon">📈</span><strong>IT投資の増加</strong><br>DX投資は年率10%以上成長</li>
+                    <li><span class="icon">🏢</span><strong>企業収益改善</strong><br>生産性向上への投資余力</li>
+                    <li><span class="icon">💰</span><strong>補助金・助成金</strong><br>IT導入補助金等の活用</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">8/20</div>
+    </div>
+
+    <!-- スライド 9: PEST分析（社会・技術） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">PEST分析 - マクロ環境要因（社会・技術）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8);">
+                <h3 class="text-purple-600">社会的要因（Social）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">👨‍👩‍👧‍👦</span><strong>労働人口減少</strong><br>2030年までに644万人不足予測</li>
+                    <li><span class="icon">🏠</span><strong>リモートワーク定着</strong><br>新しい評価方法の必要性</li>
+                    <li><span class="icon">🎓</span><strong>リスキリング重視</strong><br>継続的な学習・成長支援</li>
+                    <li><span class="icon">⚖️</span><strong>D&I推進</strong><br>公平な評価システムの要求</li>
+                </ul>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #fed7aa, #fdba74);">
+                <h3 class="text-orange-600">技術的要因（Technological）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">🤖</span><strong>生成AI普及</strong><br>ChatGPT等の業務活用拡大</li>
+                    <li><span class="icon">📹</span><strong>動画技術進化</strong><br>5G普及・処理能力向上</li>
+                    <li><span class="icon">☁️</span><strong>クラウド標準化</strong><br>セキュアで柔軟な基盤</li>
+                    <li><span class="icon">🔐</span><strong>セキュリティ技術</strong><br>ゼロトラスト・暗号化強化</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: #f3f4f6;">
+            <p style="text-align: center; font-size: 1.2rem;"><strong>PEST分析結果：</strong>HRテック導入を促進する環境要因が揃っており、TANRENの成長機会は大きい</p>
+        </div>
+        <div class="slide-number">9/20</div>
+    </div>
+
+    <!-- スライド 10: SWOT分析（強み・弱み） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">SWOT分析 - 内部環境（強み・弱み）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+                <h3 class="text-green-600">強み（Strengths）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2.2;">
+                    <li><span class="icon">🏆</span><strong>動画評価のパイオニア</strong><br>独自の評価メソッド確立</li>
+                    <li><span class="icon">🏢</span><strong>1,000社以上の導入実績</strong><br>豊富なノウハウとデータ蓄積</li>
+                    <li><span class="icon">📹</span><strong>動画解析技術</strong><br>特許取得済みの独自技術</li>
+                    <li><span class="icon">📊</span><strong>定量的評価の実現</strong><br>主観を排除した公平な評価</li>
+                    <li><span class="icon">🔄</span><strong>高い顧客継続率</strong><br>解約率5%未満</li>
+                </ul>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #fee2e2, #fecaca);">
+                <h3 class="text-red-600">弱み（Weaknesses）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2.2;">
+                    <li><span class="icon">📱</span><strong>モバイル最適化不足</strong><br>スマホでの使い勝手改善余地</li>
+                    <li><span class="icon">🔗</span><strong>他システム連携限定的</strong><br>API連携の選択肢が少ない</li>
+                    <li><span class="icon">🌏</span><strong>海外展開未着手</strong><br>国内市場に依存</li>
+                    <li><span class="icon">💰</span><strong>価格競争力</strong><br>中小企業には高価格帯</li>
+                    <li><span class="icon">🎯</span><strong>ブランド認知度</strong><br>大手競合と比較して低い</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">10/20</div>
+    </div>
+
+    <!-- スライド 11: SWOT分析（機会・脅威） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">SWOT分析 - 外部環境（機会・脅威）</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                <h3 class="text-blue-600">機会（Opportunities）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2.2;">
+                    <li><span class="icon">📈</span><strong>市場の急成長</strong><br>年率12.1%の市場拡大</li>
+                    <li><span class="icon">🤖</span><strong>AI技術の活用</strong><br>評価精度・効率の向上</li>
+                    <li><span class="icon">🏢</span><strong>大企業市場開拓</strong><br>エンタープライズ需要増</li>
+                    <li><span class="icon">🌐</span><strong>グローバル展開</strong><br>アジア市場への進出機会</li>
+                    <li><span class="icon">🤝</span><strong>パートナーシップ</strong><br>HRテック企業との連携</li>
+                </ul>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                <h3 class="text-orange-600">脅威（Threats）</h3>
+                <ul style="font-size: 1.1rem; line-height: 2.2;">
+                    <li><span class="icon">⚔️</span><strong>競合激化</strong><br>大手の参入・M&A活発化</li>
+                    <li><span class="icon">💡</span><strong>技術の陳腐化</strong><br>AI進化による差別化喪失</li>
+                    <li><span class="icon">🔒</span><strong>規制強化</strong><br>個人情報・AI規制の強化</li>
+                    <li><span class="icon">💸</span><strong>価格競争</strong><br>無料・低価格サービス増加</li>
+                    <li><span class="icon">🎓</span><strong>人材獲得競争</strong><br>エンジニア採用の困難</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: #f3f4f6;">
+            <p style="text-align: center; font-size: 1.2rem;"><strong>SWOT分析結果：</strong>動画評価の先行優位性を活かし、AI活用とパートナーシップで成長加速が可能</p>
+        </div>
+        <div class="slide-number">11/20</div>
+    </div>
+
+    <!-- スライド 12: 競争環境分析（概要） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">競争環境分析 - 主要競合との比較</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                <thead>
+                    <tr style="background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: white;">
+                        <th style="padding: 1rem; text-align: left;">項目</th>
+                        <th style="padding: 1rem; text-align: center;">TANREN</th>
+                        <th style="padding: 1rem; text-align: center;">SmartHR</th>
+                        <th style="padding: 1rem; text-align: center;">カオナビ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f9fafb;">
+                        <td style="padding: 1rem; font-weight: bold;">主要機能</td>
+                        <td style="padding: 1rem; text-align: center;">動画パフォーマンス評価</td>
+                        <td style="padding: 1rem; text-align: center;">労務管理</td>
+                        <td style="padding: 1rem; text-align: center;">タレントマネジメント</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; font-weight: bold;">導入企業数</td>
+                        <td style="padding: 1rem; text-align: center;">1,000社+</td>
+                        <td style="padding: 1rem; text-align: center;">50,000社+</td>
+                        <td style="padding: 1rem; text-align: center;">2,500社+</td>
+                    </tr>
+                    <tr style="background: #f9fafb;">
+                        <td style="padding: 1rem; font-weight: bold;">価格帯</td>
+                        <td style="padding: 1rem; text-align: center;">中〜高</td>
+                        <td style="padding: 1rem; text-align: center;">低〜中</td>
+                        <td style="padding: 1rem; text-align: center;">中〜高</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; font-weight: bold;">差別化要素</td>
+                        <td style="padding: 1rem; text-align: center;">動画活用・定量評価</td>
+                        <td style="padding: 1rem; text-align: center;">網羅的機能・使いやすさ</td>
+                        <td style="padding: 1rem; text-align: center;">顔写真DB・人材可視化</td>
+                    </tr>
+                    <tr style="background: #f9fafb;">
+                        <td style="padding: 1rem; font-weight: bold;">ターゲット</td>
+                        <td style="padding: 1rem; text-align: center;">営業・接客業中心</td>
+                        <td style="padding: 1rem; text-align: center;">全業種・全規模</td>
+                        <td style="padding: 1rem; text-align: center;">中堅〜大企業</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: #fef3c7;">
+            <p style="text-align: center; font-size: 1.2rem;"><strong>競争優位性：</strong>動画を活用したパフォーマンス評価は他社にない独自領域</p>
+        </div>
+        <div class="slide-number">12/20</div>
+    </div>
+
+    <!-- スライド 13: 競争環境分析（ポジショニング） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">競争環境分析 - ポジショニングマップ</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="position: relative; height: 600px;">
+                <svg width="100%" height="100%" viewBox="0 0 800 600">
+                    <!-- 軸 -->
+                    <line x1="50" y1="300" x2="750" y2="300" stroke="#ccc" stroke-width="2"/>
+                    <line x1="400" y1="50" x2="400" y2="550" stroke="#ccc" stroke-width="2"/>
+                    
+                    <!-- 軸ラベル -->
+                    <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">機能特化型</text>
+                    <text x="400" y="580" text-anchor="middle" font-size="16" font-weight="bold">総合型</text>
+                    <text x="30" y="300" text-anchor="middle" font-size="16" font-weight="bold" transform="rotate(-90 30 300)">低価格</text>
+                    <text x="770" y="300" text-anchor="middle" font-size="16" font-weight="bold" transform="rotate(-90 770 300)">高価格</text>
+                    
+                    <!-- プレイヤー配置 -->
+                    <circle cx="600" cy="150" r="60" fill="#8b5cf6" opacity="0.7"/>
+                    <text x="600" y="155" text-anchor="middle" font-size="18" font-weight="bold" fill="white">TANREN</text>
+                    
+                    <circle cx="300" cy="450" r="80" fill="#3b82f6" opacity="0.7"/>
+                    <text x="300" y="455" text-anchor="middle" font-size="18" font-weight="bold" fill="white">SmartHR</text>
+                    
+                    <circle cx="500" cy="350" r="70" fill="#10b981" opacity="0.7"/>
+                    <text x="500" y="355" text-anchor="middle" font-size="18" font-weight="bold" fill="white">カオナビ</text>
+                    
+                    <circle cx="200" cy="200" r="50" fill="#f59e0b" opacity="0.7"/>
+                    <text x="200" y="205" text-anchor="middle" font-size="14" fill="white">freee人事労務</text>
+                    
+                    <circle cx="650" cy="400" r="55" fill="#ef4444" opacity="0.7"/>
+                    <text x="650" y="405" text-anchor="middle" font-size="14" fill="white">HRMOS</text>
+                </svg>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1000px; margin: 2rem auto;">
+            <p style="text-align: center; font-size: 1.2rem;"><strong>ポジショニング：</strong>TANRENは「機能特化型×高価格帯」の独自ポジションを確立</p>
+        </div>
+        <div class="slide-number">13/20</div>
+    </div>
+
+    <!-- スライド 14: 戦略的推奨事項（ターゲット深掘り） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">戦略的推奨事項 ① ターゲット市場の深掘り</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-blue-600">現在のコアターゲット</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">🏪</span><strong>小売・流通業</strong><br>店舗スタッフの接客評価</li>
+                    <li><span class="icon">🏨</span><strong>サービス業</strong><br>ホテル・飲食店スタッフ</li>
+                    <li><span class="icon">💼</span><strong>営業職</strong><br>商談スキルの向上</li>
+                </ul>
+                <div style="margin-top: 2rem; padding: 1rem; background: #e0f2fe; border-radius: 8px;">
+                    <p><strong>成功要因：</strong>対面コミュニケーションが重要な職種で高い効果</p>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="text-green-600">新規開拓ターゲット</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><span class="icon">🏥</span><strong>医療・介護</strong><br>患者対応・ケアスキル評価</li>
+                    <li><span class="icon">🎓</span><strong>教育機関</strong><br>教員の授業スキル向上</li>
+                    <li><span class="icon">🏛️</span><strong>金融機関</strong><br>窓口対応・コンサルティング</li>
+                    <li><span class="icon">✈️</span><strong>運輸・航空</strong><br>接客サービス品質向上</li>
+                </ul>
+                <div style="margin-top: 2rem; padding: 1rem; background: #d1fae5; border-radius: 8px;">
+                    <p><strong>拡大戦略：</strong>業界別カスタマイズ機能の開発</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: linear-gradient(90deg, #3b82f6, #10b981); color: white;">
+            <p style="text-align: center; font-size: 1.3rem;">予想効果：新規4業界開拓で導入企業数を1.5倍（1,500社）に拡大可能</p>
+        </div>
+        <div class="slide-number">14/20</div>
+    </div>
+
+    <!-- スライド 15: 戦略的推奨事項（エコシステム構築） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">戦略的推奨事項 ② HRテックエコシステム構築</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="text-purple-600 text-center mb-8">パートナーシップ戦略</h3>
+                <div class="grid grid-cols-3">
+                    <div style="text-align: center;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1rem; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 3rem;">🤝</span>
+                        </div>
+                        <h4 class="text-blue-600">API連携</h4>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>• SmartHR連携</li>
+                            <li>• Slack通知</li>
+                            <li>• Teams統合</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1rem; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 3rem;">🏢</span>
+                        </div>
+                        <h4 class="text-green-600">販売パートナー</h4>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>• 人事コンサル</li>
+                            <li>• SIer連携</li>
+                            <li>• 代理店網構築</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1rem; background: #fce7f3; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 3rem;">🎯</span>
+                        </div>
+                        <h4 class="text-purple-600">技術パートナー</h4>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>• AI企業連携</li>
+                            <li>• 動画技術提携</li>
+                            <li>• セキュリティ強化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 mt-8">
+                <div class="card">
+                    <h4 class="text-orange-600">期待効果</h4>
+                    <ul>
+                        <li>• 新規顧客獲得コスト30%削減</li>
+                        <li>• クロスセル機会の創出</li>
+                        <li>• 顧客満足度向上</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="text-red-600">実行ステップ</h4>
+                    <ul>
+                        <li>1. API仕様の標準化（3ヶ月）</li>
+                        <li>2. パートナープログラム立ち上げ（6ヶ月）</li>
+                        <li>3. 共同マーケティング実施（9ヶ月〜）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">15/20</div>
+    </div>
+
+    <!-- スライド 16: 戦略的推奨事項（AI活用） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">戦略的推奨事項 ③ AI技術の戦略的活用</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="grid grid-cols-3">
+                <div class="card">
+                    <h3 class="text-blue-600">評価精度向上</h3>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <span style="font-size: 4rem;">🎯</span>
+                    </div>
+                    <ul>
+                        <li>• 表情・声調分析</li>
+                        <li>• ジェスチャー認識</li>
+                        <li>• 感情解析</li>
+                        <li>• マルチモーダルAI</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-green-600">自動フィードバック</h3>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <span style="font-size: 4rem;">💬</span>
+                    </div>
+                    <ul>
+                        <li>• 改善点の自動抽出</li>
+                        <li>• 個別アドバイス生成</li>
+                        <li>• 成長プラン提案</li>
+                        <li>• 多言語対応</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-purple-600">予測分析</h3>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <span style="font-size: 4rem;">📊</span>
+                    </div>
+                    <ul>
+                        <li>• パフォーマンス予測</li>
+                        <li>• 離職リスク分析</li>
+                        <li>• スキルギャップ特定</li>
+                        <li>• ROI予測</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 card" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                <h3 class="text-orange-600 text-center">AI導入ロードマップ</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <strong>Phase 1</strong>
+                        </div>
+                        <p style="margin-top: 0.5rem;">基本AI機能<br>（6ヶ月）</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <strong>Phase 2</strong>
+                        </div>
+                        <p style="margin-top: 0.5rem;">高度な分析<br>（12ヶ月）</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <strong>Phase 3</strong>
+                        </div>
+                        <p style="margin-top: 0.5rem;">予測・最適化<br>（18ヶ月）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">16/20</div>
+    </div>
+
+    <!-- スライド 17: リスクと対策（技術・競争） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">リスクと対策 ① 技術・競争リスク</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="border-left: 5px solid #ef4444;">
+                <h3 class="text-red-600">技術陳腐化リスク</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>リスク内容</h4>
+                    <ul>
+                        <li>• AI技術の急速な進化</li>
+                        <li>• 競合の技術キャッチアップ</li>
+                        <li>• 新技術による破壊的イノベーション</li>
+                    </ul>
+                </div>
+                <div style="background: #fee2e2; padding: 1rem; border-radius: 8px;">
+                    <h4>対策</h4>
+                    <ul>
+                        <li>✓ R&D投資を売上の15%確保</li>
+                        <li>✓ 大学・研究機関との連携</li>
+                        <li>✓ 技術特許の積極取得</li>
+                        <li>✓ オープンイノベーション推進</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card" style="border-left: 5px solid #f59e0b;">
+                <h3 class="text-orange-600">競争激化リスク</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>リスク内容</h4>
+                    <ul>
+                        <li>• 大手IT企業の参入</li>
+                        <li>• 価格競争の激化</li>
+                        <li>• M&Aによる業界再編</li>
+                    </ul>
+                </div>
+                <div style="background: #fef3c7; padding: 1rem; border-radius: 8px;">
+                    <h4>対策</h4>
+                    <ul>
+                        <li>✓ スイッチングコスト向上</li>
+                        <li>✓ 顧客成功体制の強化</li>
+                        <li>✓ 業界特化型機能開発</li>
+                        <li>✓ ネットワーク効果の創出</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">17/20</div>
+    </div>
+
+    <!-- スライド 18: リスクと対策（セキュリティ・人材） -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">リスクと対策 ② セキュリティ・人材リスク</h2>
+        <div class="grid grid-cols-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="border-left: 5px solid #8b5cf6;">
+                <h3 class="text-purple-600">セキュリティリスク</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>リスク内容</h4>
+                    <ul>
+                        <li>• 動画データの漏洩リスク</li>
+                        <li>• 個人情報保護法違反</li>
+                        <li>• サイバー攻撃の増加</li>
+                    </ul>
+                </div>
+                <div style="background: #ede9fe; padding: 1rem; border-radius: 8px;">
+                    <h4>対策</h4>
+                    <ul>
+                        <li>✓ ISO27001認証取得</li>
+                        <li>✓ ゼロトラストセキュリティ</li>
+                        <li>✓ 定期的な脆弱性診断</li>
+                        <li>✓ データ暗号化の徹底</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card" style="border-left: 5px solid #10b981;">
+                <h3 class="text-green-600">人材不足リスク</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>リスク内容</h4>
+                    <ul>
+                        <li>• エンジニア採用競争</li>
+                        <li>• 人件費の高騰</li>
+                        <li>• キーパーソン離職</li>
+                    </ul>
+                </div>
+                <div style="background: #d1fae5; padding: 1rem; border-radius: 8px;">
+                    <h4>対策</h4>
+                    <ul>
+                        <li>✓ 魅力的な報酬制度設計</li>
+                        <li>✓ リモートワーク環境整備</li>
+                        <li>✓ 技術研修・成長機会提供</li>
+                        <li>✓ エンジニア文化の醸成</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 card" style="max-width: 1200px; margin: 2rem auto; background: #f3f4f6;">
+            <p style="text-align: center; font-size: 1.2rem;"><strong>リスク管理方針：</strong>予防的対策と迅速な対応体制で、事業継続性を確保</p>
+        </div>
+        <div class="slide-number">18/20</div>
+    </div>
+
+    <!-- スライド 19: まとめ -->
+    <div class="slide">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">まとめ - TANRENの成長戦略</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="grid grid-cols-3 mb-8">
+                <div class="card text-center">
+                    <span style="font-size: 4rem;">🎯</span>
+                    <h3 class="text-blue-600">市場目標</h3>
+                    <p style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">3%</p>
+                    <p>市場シェア<br>（65億円）</p>
+                </div>
+                <div class="card text-center">
+                    <span style="font-size: 4rem;">📈</span>
+                    <h3 class="text-green-600">成長目標</h3>
+                    <p style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">15%</p>
+                    <p>LTV向上<br>（顧客価値）</p>
+                </div>
+                <div class="card text-center">
+                    <span style="font-size: 4rem;">🏢</span>
+                    <h3 class="text-purple-600">規模目標</h3>
+                    <p style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">1,500社</p>
+                    <p>導入企業数<br>（1.5倍）</p>
+                </div>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                <h3 class="text-center mb-4">3つの成長戦略</h3>
+                <div class="grid grid-cols-3">
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="width: 100px; height: 100px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">1</div>
+                        <h4>ターゲット深掘り</h4>
+                        <p>新規4業界開拓</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="width: 100px; height: 100px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">2</div>
+                        <h4>エコシステム構築</h4>
+                        <p>パートナーシップ拡大</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="width: 100px; height: 100px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">3</div>
+                        <h4>AI技術活用</h4>
+                        <p>評価精度・効率向上</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 card" style="background: linear-gradient(90deg, #8b5cf6, #ec4899); color: white;">
+                <p style="text-align: center; font-size: 1.5rem; font-weight: bold;">動画活用型パフォーマンス評価のリーディングカンパニーとして<br>2028年までに売上65億円達成を目指す</p>
+            </div>
+        </div>
+        <div class="slide-number">19/20</div>
+    </div>
+
+    <!-- スライド 20: お問い合わせ -->
+    <div class="slide" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+        <div class="text-center" style="color: white;">
+            <h2 style="font-size: 3rem; margin-bottom: 3rem;">お問い合わせ</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 3rem; border-radius: 20px; max-width: 800px; margin: 0 auto;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem;">TANREN株式会社</h3>
+                <div style="font-size: 1.3rem; line-height: 2.5;">
+                    <p><span class="icon">🌐</span> Web: www.tanren.jp</p>
+                    <p><span class="icon">📧</span> Email: info@tanren.jp</p>
+                    <p><span class="icon">📞</span> Tel: 03-XXXX-XXXX</p>
+                </div>
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 1.1rem;">導入のご相談・デモのご依頼はお気軽にお問い合わせください</p>
+                    <button style="margin-top: 2rem; padding: 1rem 3rem; background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer;">
+                        無料デモを申し込む
+                    </button>
+                </div>
+            </div>
+            <p style="margin-top: 3rem; opacity: 0.7;">© 2025 TANREN Inc. All rights reserved.</p>
+        </div>
+        <div class="slide-number">20/20</div>
+    </div>
+
+    <script>
+        // スムーズスクロール
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            // キーボードナビゲーション
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    if (currentSlide < slides.length - 1) {
+                        currentSlide++;
+                        slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+
+            // 市場規模チャート（スライド5）
+            const canvas = document.getElementById('marketChart');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // グラフ描画
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(100, 300);
+                ctx.lineTo(200, 280);
+                ctx.lineTo(300, 250);
+                ctx.lineTo(400, 210);
+                ctx.lineTo(500, 160);
+                ctx.lineTo(600, 100);
+                ctx.lineTo(700, 50);
+                ctx.stroke();
+                
+                // 軸
+                ctx.strokeStyle = '#ccc';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(100, 350);
+                ctx.lineTo(700, 350);
+                ctx.moveTo(100, 50);
+                ctx.lineTo(100, 350);
+                ctx.stroke();
+                
+                // ラベル
+                ctx.fillStyle = '#333';
+                ctx.font = '16px sans-serif';
+                ctx.fillText('2024', 180, 380);
+                ctx.fillText('2025', 300, 380);
+                ctx.fillText('2026', 420, 380);
+                ctx.fillText('2027', 540, 380);
+                ctx.fillText('2028', 660, 380);
+                
+                ctx.fillText('1,387億円', 150, 295);
+                ctx.fillText('2,185億円', 650, 45);
+            }
+
+            // プログレスバーアニメーション
+            const progressFills = document.querySelectorAll('.progress-fill');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const fill = entry.target;
+                        setTimeout(() => {
+                            fill.style.width = fill.style.width || '0%';
+                        }, 500);
+                    }
+                });
+            });
+            
+            progressFills.forEach(fill => observer.observe(fill));
+        });
+    </script>
+</body>
+</html>

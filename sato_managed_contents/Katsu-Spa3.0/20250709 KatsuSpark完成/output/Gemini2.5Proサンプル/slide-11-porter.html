@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>競争環境分析：ポーターの5つの力 - スライド11</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 720px;
+      overflow: hidden;
+    }
+
+    html {
+      height: 720px;
+    }
+
+    .slide {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    .force-box {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide w-[1280px] h-[720px] flex flex-col p-16">
+    <header class="flex-none pb-8 text-center">
+      <h2 class="text-4xl font-bold text-slate-800">競争環境分析：ポーターの5つの力</h2>
+      <p class="text-xl text-blue-600 mt-2">競争は激しいが、独自のポジションを確立可能</p>
+    </header>
+    <main class="flex-1 flex justify-center items-center fade-in">
+      <div class="w-full h-full relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 force-box p-3 rounded-lg text-center w-64">
+          <h3 class="font-bold">新規参入の脅威</h3>
+          <p class="text-red-500 font-bold">中→高</p>
+        </div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 force-box p-3 rounded-lg text-center w-64">
+          <h3 class="font-bold">代替品の脅威</h3>
+          <p class="text-red-500 font-bold">高</p>
+        </div>
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 force-box p-3 rounded-lg text-center w-64">
+          <h3 class="font-bold">売り手の交渉力</h3>
+          <p class="text-yellow-500 font-bold">中</p>
+        </div>
+        <div class="absolute top-1/2 right-0 -translate-y-1/2 force-box p-3 rounded-lg text-center w-64">
+          <h3 class="font-bold">買い手の交渉力</h3>
+          <p class="text-red-500 font-bold">中→高</p>
+        </div>
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white rounded-full p-6 w-56 h-56 flex flex-col justify-center items-center text-center">
+          <h3 class="text-2xl font-bold">競合との競争</h3>
+          <p class="text-4xl font-black text-red-300">高</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
