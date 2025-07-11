@@ -1,142 +1,129 @@
-# MD Buddy Web版 v2.0.0
+# MD Buddy v0.018 - AIパワード音声マークダウンエディター
 
-爆速マークダウンビューアー＆知識管理プラットフォームのWeb版です。
+音声入力からAIを活用して高品質なマークダウン文書を生成する、非エンジニアでも使いやすいエディターです。
 
-## v2.0.0 の新機能
+[![Version](https://img.shields.io/badge/version-0.018--stable-blue.svg)](https://github.com/yourusername/md-buddy)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-### 🎯 主要アップデート
-- **常時表示音声入力** - ヘッダーバーに音声入力ボタンを配置
-- **チャンク録音モード** - 1分ごとに自動処理する長時間録音対応
-- **リアルタイムMarkdown変換** - 話しながら変換結果を確認
-- **メタデータパネル** - 文書統計、タグ、エンティティの自動抽出
-- **デバッグウィンドウ** - API接続状態とエラーログの常時監視
-- **ポート固定** - 開発サーバーをポート8081に固定
+## 🎯 v0.018の主要機能
 
-## 特徴
+### 音声録音・文字起こし・字幕生成システム
+- **AIパネル** - 統合された音声入力インターフェース
+- **リアルタイム文字起こし** - Web Speech APIによる即時変換
+- **タイムスタンプ記録** - 発話タイミングの正確な記録
+- **SRT字幕生成** - プロ仕様の字幕ファイル作成
+- **3ファイル同時保存** - Markdown/音声/字幕を一括管理
+- **ダウンロード機能** - 各種フォーマットでエクスポート
 
-- 🚀 **爆速動作** - ファイル選択から表示まで瞬時
-- 📝 **ドラッグ&ドロップ対応** - ファイルをドロップするだけ
-- 🎨 **シンタックスハイライト** - コードが見やすく表示
-- 📱 **レスポンシブデザイン** - どんな画面サイズでも快適
-- 🔒 **プライバシー重視** - すべてローカルで処理
-- 🎤 **音声入力対応** - 話すだけでMarkdownドキュメントを自動生成
-- 🤖 **AI駆動** - Google Gemini APIで高精度な音声認識と構造化
-- 💬 **インタラクティブ** - ハイライト、音声コメント、フィードバック機能
-- 📊 **営業分析** - 商談内容から重要ポイントを自動抽出
-- 📈 **メタデータ分析** - 文書の統計情報とキーワード自動抽出
-- 🔍 **知識管理** - タグ、エンティティ、全文検索（開発中）
+## 🚀 クイックスタート
 
-## 技術スタック
-
-- React + TypeScript
-- Tailwind CSS
-- marked.js（マークダウンパーサー）
-- Prism.js（シンタックスハイライト）
-
-## コードサンプル
-
-```javascript
-function hello() {
-  console.log("Hello, MD Buddy!");
-}
-```
-
-```python
-def greet(name):
-    print(f"Hello, {name}!")
-```
-
-## 表のサンプル
-
-| 機能 | 説明 |
-|------|------|
-| ドラッグ&ドロップ | ファイルをドロップして読み込み |
-| 複数ファイル管理 | 複数のファイルを同時に管理 |
-| リアルタイムプレビュー | 選択したファイルを即座に表示 |
-
-## リスト
-
-- ✅ 高速動作
-- ✅ シンプルUI
-- ✅ オフライン対応
-
-## 音声入力機能
-
-### 基本的な使い方
-
-1. **音声入力ボタン** をクリックまたは `Ctrl/Cmd + R` で録音開始
-2. **話す** - 会議メモ、ブログ記事、技術文書など
-3. **自動変換** - AIが内容を理解し、適切なMarkdown形式に変換
-4. **保存** - 新規ファイルとして保存、または既存ファイルに追加
-
-### 対応シナリオ
-
-- 📋 **会議メモ** - 議事録、アクションアイテム、決定事項を自動整理
-- ✍️ **ブログ記事** - SEO最適化された見出しと構造を自動生成
-- 📚 **技術文書** - コードブロック、技術用語を適切にフォーマット
-- 💼 **営業記録** - 商談ポイント、価格交渉、成約確率を分析
-- 📝 **日記・メモ** - 思いついたアイデアを即座に文書化
-
-### ショートカットキー
-
-| キー | 機能 |
-|------|------|
-| `Ctrl/Cmd + R` | 音声録音の開始/停止 |
-| `Ctrl/Cmd + V` | 音声パネルの表示/非表示 |
-| `Ctrl/Cmd + S` | ファイル保存 |
-| `Ctrl/Cmd + E` | 編集モード切り替え |
-| `Ctrl/Cmd + B` | 目次パネルの表示/非表示 |
-| `Ctrl/Cmd + M` | メタデータパネルの表示/非表示 |
-| `Ctrl/Cmd + K` | 共有ダイアログ表示 |
-
-## セットアップ
-
-### 環境変数の設定
+### 1. 環境設定
 
 ```bash
-# .env.localファイルを作成
-cp .env.example .env.local
+# リポジトリのクローン
+git clone https://github.com/yourusername/md-buddy.git
+cd md-buddy/md-buddy-web
 
-# 必要な環境変数を設定
-VITE_GEMINI_API_KEY=your-gemini-api-key
-VITE_GEMINI_MODEL=gemini-pro
-VITE_SUPABASE_URL=your-supabase-url (オプション)
-VITE_SUPABASE_ANON_KEY=your-anon-key (オプション)
-```
-
-### Google Gemini APIキーの取得
-
-1. [Google AI Studio](https://makersuite.google.com/app/apikey) にアクセス
-2. APIキーを生成
-3. `.env.local` ファイルに設定
-
-詳細は [Geminiセットアップガイド](docs/gemini-setup.md) を参照してください。
-
-## 開発
-
-```bash
 # 依存関係のインストール
 pnpm install
 
-# 開発サーバーの起動（ポート8081）
-pnpm dev
-
-# ビルド
-pnpm build
-
-# テスト実行
-pnpm test
-
-# アプリケーションURL
-# http://localhost:8081/ にアクセス
+# 環境変数の設定
+cp .env.example .env.local
+# .env.localファイルを編集してGemini APIキーを設定
 ```
 
-## ドキュメント
+### 2. 開発サーバーの起動
 
-- [音声入力機能ガイド](docs/voice-input-guide.md) - 詳細な使い方とベストプラクティス
-- [Gemini APIセットアップ](docs/gemini-setup.md) - API設定と技術詳細
-- [アーキテクチャ概要](docs/architecture.md) - システム設計と技術仕様
+```bash
+pnpm dev
+# http://localhost:8081 でアクセス
+```
 
-## ライセンス
+## 📋 使い方
 
-MIT License
+### 音声録音フロー
+
+1. **AIパネルを開く**
+   - ツールバーの「AIパネル」ボタンをクリック
+   - またはショートカット `Ctrl/Cmd + R`
+
+2. **録音開始**
+   - 「録音開始」ボタンをクリック
+   - リアルタイムで文字起こしが表示されます
+
+3. **録音停止**
+   - 「停止」ボタンをクリック
+   - プレビュー画面が表示されます
+
+4. **AI分析**
+   - 「AI分析開始」ボタンでMarkdown変換
+   - 自動的にエディタに挿入されます
+
+5. **ダウンロード**
+   - 音声ファイル（WebM）
+   - 字幕ファイル（SRT）
+   - Markdownドキュメント
+
+## 🛠️ 技術スタック
+
+- **フロントエンド**: React 18.3 + TypeScript 5.6
+- **ビルドツール**: Vite 7.0
+- **スタイリング**: Tailwind CSS + shadcn/ui
+- **状態管理**: Zustand
+- **音声処理**: Web Audio API + MediaRecorder API
+- **AI**: Google Gemini API (2.5 Flash/Pro)
+
+## 📁 プロジェクト構造
+
+```
+md-buddy-web/
+├── src/
+│   ├── components/     # UIコンポーネント
+│   ├── hooks/         # カスタムフック
+│   ├── services/      # APIサービス
+│   ├── store/         # 状態管理
+│   ├── types/         # 型定義
+│   └── utils/         # ユーティリティ
+├── docs/              # ドキュメント
+│   ├── requirements-v0.018.md   # 要件定義
+│   └── technical-spec-v0.018.md # 技術仕様
+└── public/            # 静的ファイル
+```
+
+## ⚡ パフォーマンス
+
+- ページ読み込み: < 3秒
+- 音声認識精度: 90%以上
+- リアルタイム処理: 2倍速以内
+
+## 🔒 セキュリティ
+
+- APIキーは環境変数で管理
+- HTTPS通信を推奨
+- ローカルストレージの暗号化対応
+
+## 📝 ドキュメント
+
+- [要件定義書](docs/requirements-v0.018.md)
+- [技術仕様書](docs/technical-spec-v0.018.md)
+- [音声入力ガイド](docs/voice-input-guide.md)
+- [Gemini APIセットアップ](docs/gemini-setup.md)
+
+## 🤝 コントリビューション
+
+プルリクエストを歓迎します。大きな変更の場合は、まずissueを作成して変更内容を議論してください。
+
+## 📄 ライセンス
+
+[MIT License](LICENSE)
+
+## 🙏 謝辞
+
+- Google Gemini APIチーム
+- shadcn/uiコミュニティ
+- すべてのコントリビューター
+
+---
+
+**v0.018-stable** - 2025年1月11日リリース
+開発: TANREN株式会社

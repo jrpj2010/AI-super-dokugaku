@@ -113,11 +113,17 @@ Your task is to:
 
     return `あなたは文書構造解析の専門家です。提供されたテキストを解析し、その構造、タイプ、重要な要素を特定してください。
 
+重要な指示：
+- 提供されたテキストの実際の内容のみを解析してください
+- 架空の内容や例文を生成しないでください
+- ダミーデータやサンプルデータを作成しないでください
+- 実際のテキストに基づいた分析のみを行ってください
+
 あなたのタスク：
-- 文書タイプと構造の特定
-- 階層情報の抽出  
-- 重要なコンテンツ要素の識別
-- 洞察と改善提案の提供`;
+- 実際の文書タイプと構造の特定
+- 実際の階層情報の抽出  
+- 実際に存在する重要なコンテンツ要素の識別
+- 実際の内容に基づいた洞察と改善提案の提供`;
   }
 
   // タスク指示の生成
@@ -469,7 +475,7 @@ export function createStructureAnalysisPrompt(
 
   const prompt = StructureAnalyzerPrompts.generateAnalysisPrompt(fullConfig);
   
-  return `${prompt}\n\n分析対象テキスト:\n${text}`;
+  return `${prompt}\n\n重要：以下のテキストの実際の内容のみを分析してください。架空の内容を生成しないでください。\n\n分析対象テキスト:\n${text}`;
 }
 
 export function createQuickAnalysisPrompt(text: string, language: 'ja' | 'en' = 'ja'): string {
@@ -518,11 +524,15 @@ ${text}`;
 
   return `以下のテキストを解析し、文書タイプを特定してください。選択肢：meeting_notes, article, blog_post, presentation, report, memo, manual, academic, proposal, unknown
 
+重要な指示：
+- 実際のテキスト内容のみを解析してください
+- 架空の内容やダミーデータを生成しないでください
+
 JSON形式で解析結果を提供してください：
 {
   "documentType": "...",
   "confidence": 0.85,
-  "reasoning": "このタイプを選択した理由の説明"
+  "reasoning": "実際のテキスト内容に基づいてこのタイプを選択した理由の説明"
 }
 
 解析対象テキスト：

@@ -5,6 +5,7 @@ import { Preview } from './components/Preview';
 import { ShareDialog } from './components/ShareDialog';
 import { VoiceInput } from './components/VoiceInput';
 import { TranscriptPreview } from './components/TranscriptPreview';
+import { TabViewer } from './components/TabViewer';
 import { LoadingAnimation, AnimationType } from './components/LoadingAnimation';
 import { DebugWindow } from './components/DebugWindow';
 import { Header } from './components/Header';
@@ -43,7 +44,8 @@ function App() {
     createFileFromVoice,
     appendToCurrentFile,
     resetVoiceSession,
-    updateFile
+    updateFile,
+    addFile
   } = useFileStore();
 
   const [showShareDialog, setShowShareDialog] = useState(false);
@@ -206,36 +208,54 @@ function App() {
         }
       }
 
-      // 現在選択されているファイルに挿入
-      if (selectedFileId && selectedFile) {
-        const currentContent = isEditMode ? editContent : selectedFile.content;
-        const newContent = currentContent + '\n\n' + markdown;
-        
-        if (isEditMode) {
-          setEditContent(newContent);
-        } else {
-          updateFile(selectedFileId, { content: newContent });
-        }
-        
-        (window as any).debugLog?.('Markdownをエディタに挿入しました', 'success');
-        
-        // プレビューモードに切り替え
-        if (isEditMode) {
-          setEditMode(false);
-          (window as any).debugLog?.('プレビューモードに切り替えました', 'info');
-        }
-      } else {
-        // ファイルが選択されていない場合は新規ファイル作成
-        const newFileId = await createFileFromVoice(markdown);
-        selectFile(newFileId);
-        setEditMode(false); // プレビューモードで表示
-        (window as any).debugLog?.('新規ファイルを作成してMarkdownを保存しました', 'success');
+      // 音声ファイルと字幕ファイルも一緒に保存
+      const timestamp = new Date();
+      const folderName = `音声メモ_${timestamp.getFullYear()}-${String(timestamp.getMonth() + 1).padStart(2, '0')}-${String(timestamp.getDate()).padStart(2, '0')}_${String(timestamp.getHours()).padStart(2, '0')}-${String(timestamp.getMinutes()).padStart(2, '0')}-${String(timestamp.getSeconds()).padStart(2, '0')}`;
+      
+      // 新規ファイルセットを作成
+      const newFileId = await createFileFromVoice(markdown, folderName);
+      
+      // 音声ファイルを保存
+      if (currentRecordingBlob) {
+        const audioFile = {
+          id: Date.now().toString() + '_audio',
+          name: `${folderName}/audio.webm`,
+          content: currentRecordingBlob,
+          type: 'audio' as const,
+          updatedAt: timestamp,
+          createdAt: timestamp
+        };
+        files.push(audioFile);
       }
+      
+      // SRTファイルを保存
+      if (generatedSRT) {
+        const srtFile = {
+          id: Date.now().toString() + '_srt',
+          name: `${folderName}/subtitles.srt`,
+          content: generatedSRT,
+          type: 'text' as const,
+          updatedAt: timestamp,
+          createdAt: timestamp
+        };
+        files.push(srtFile);
+      }
+      
+      // 作成したMarkdownファイルを自動的に選択してアクティブ化
+      selectFile(newFileId);
+      setEditMode(false); // プレビューモードで表示
+      
+      (window as any).debugLog?.('3ファイルセットを作成し、Markdownファイルをアクティブ化しました', 'success');
+      
+      // ファイルエクスプローラーを更新
+      setFiles([...files]);
 
       // 状態をリセット
       setVoiceProcessingState('idle');
       setFinalTranscript('');
       resetVoiceSession();
+      setCurrentRecordingBlob(undefined);
+      setGeneratedSRT('');
       
     } catch (error: any) {
       (window as any).debugLog?.(`AI分析エラー: ${error.message}`, 'error');
@@ -511,19 +531,20 @@ function App() {
 
         {/* 中央カラム - エディター/プレビュー */}
         <main className="flex-1 bg-white flex flex-col overflow-hidden">
-          <Preview
-            content={selectedFile?.content || ''}
-            fileName={selectedFile?.name}
-            isEditMode={isEditMode}
-            editContent={editContent}
-            onEditContentChange={setEditContent}
-            onVoiceInput={() => {
-              // パネルの開閉のみ行う（録音は開始しない）
-              setShowVoicePanel(!showVoicePanel);
-            }}
-            isRecording={voiceSession.isRecording || isChunkedRecording}
-            onToggleEditMode={setEditMode}
-          />
+          {selectedFile ? (
+            <TabViewer
+              currentFile={selectedFile}
+              files={files}
+              isEditMode={isEditMode}
+              editContent={editContent}
+              onEditContentChange={setEditContent}
+              onFileChange={selectFile}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-500">
+              ファイルを選択してください
+            </div>
+          )}
         </main>
 
         {/* 右カラム - メタデータ（固定表示） */}

@@ -195,12 +195,18 @@ Your goal is to:
 
     return `あなたはアクションアイテム抽出の専門家です。提供されたテキストを解析し、すべての実行可能なアイテム、タスク、決定事項、フォローアップアクションを特定してください。
 
+重要な指示：
+- 提供されたテキストの実際の内容のみを解析してください
+- 架空のアクションアイテムを生成しないでください
+- ダミーデータやサンプルデータを作成しないでください
+- テキストに実際に記載されている内容のみを抽出してください
+
 あなたの目標：
-- 明示的および暗黙的なアクションアイテムの抽出
-- 担当者と期限の特定
-- 優先度レベルの決定
-- アクションタイプの分類
-- 完了条件の提供`;
+- 実際に記載された明示的および暗黙的なアクションアイテムの抽出
+- 実際に言及された担当者と期限の特定
+- 実際の内容に基づいた優先度レベルの決定
+- 実際のアクションタイプの分類
+- 実際の内容に基づいた完了条件の提供`;
   }
 
   // タスク指示
@@ -327,85 +333,56 @@ Your goal is to:
   // 使用例
   private getExamples(language: 'ja' | 'en'): string {
     if (language === 'en') {
-      return `Examples:
+      return `Note: The following is just an example of the expected output format. 
+Do NOT use this example data in your response. 
+Only extract actual action items from the provided text.
 
-Input: "John should prepare the proposal by Friday. We also need to schedule a follow-up meeting with the client next week."
-
-Output:
+Example format (DO NOT USE THIS DATA):
 {
   "actions": [
     {
       "id": "action_1",
       "type": "assignment",
-      "title": "Prepare proposal",
-      "description": "John should prepare the proposal",
-      "assignee": "John",
-      "dueDate": "2024-01-12",
-      "priority": "high",
+      "title": "[Actual title from the text]",
+      "description": "[Actual description from the text]",
+      "assignee": "[Actual person mentioned]",
+      "dueDate": "[Actual date if mentioned]",
+      "priority": "high|medium|low",
       "status": "not_started",
-      "tags": ["proposal", "deadline"],
-      "context": "John should prepare the proposal by Friday",
-      "confidence": 0.95,
-      "estimatedEffort": 8,
-      "completionCriteria": "Proposal document completed and reviewed"
-    },
-    {
-      "id": "action_2", 
-      "type": "meeting",
-      "title": "Schedule follow-up meeting",
-      "description": "Schedule a follow-up meeting with the client",
-      "dueDate": "2024-01-19",
-      "priority": "medium",
-      "status": "not_started",
-      "tags": ["meeting", "client", "follow-up"],
-      "context": "schedule a follow-up meeting with the client next week",
-      "confidence": 0.90,
-      "estimatedEffort": 1,
-      "completionCriteria": "Meeting scheduled and invitations sent"
+      "tags": ["[relevant tags]"],
+      "context": "[Actual text excerpt]",
+      "confidence": 0.85,
+      "estimatedEffort": [number],
+      "completionCriteria": "[Based on actual content]"
     }
   ]
 }`;
     }
 
-    return `使用例：
+    return `注意：以下は出力形式の例です。
+この例のデータを使用しないでください。
+提供されたテキストから実際のアクションアイテムのみを抽出してください。
 
-入力: "田中さんは金曜日までに提案書を準備してください。また、来週クライアントとのフォローアップ会議をスケジュールする必要があります。"
-
-出力:
+形式の例（このデータを使用しないこと）：
 {
   "actions": [
     {
       "id": "action_1",
       "type": "assignment",
-      "title": "提案書の準備",
-      "description": "田中さんは提案書を準備する",
-      "assignee": "田中",
-      "dueDate": "2024-01-12",
-      "priority": "high",
+      "title": "[テキストからの実際のタイトル]",
+      "description": "[テキストからの実際の説明]",
+      "assignee": "[実際に言及された人物]",
+      "dueDate": "[言及された場合の実際の日付]",
+      "priority": "high|medium|low",
       "status": "not_started",
-      "tags": ["提案書", "期限"],
-      "context": "田中さんは金曜日までに提案書を準備してください",
-      "confidence": 0.95,
-      "estimatedEffort": 8,
-      "completionCriteria": "提案書の作成と確認完了"
-    },
-    {
-      "id": "action_2",
-      "type": "meeting", 
-      "title": "フォローアップ会議のスケジュール",
-      "description": "クライアントとのフォローアップ会議をスケジュールする",
-      "dueDate": "2024-01-19",
-      "priority": "medium",
-      "status": "not_started",
-      "tags": ["会議", "クライアント", "フォローアップ"],
-      "context": "来週クライアントとのフォローアップ会議をスケジュールする必要があります",
-      "confidence": 0.90,
-      "estimatedEffort": 1,
-      "completionCriteria": "会議がスケジュールされ、招待が送信済み"
+      "tags": ["[関連するタグ]"],
+      "context": "[実際のテキストの抜粋]",
+      "confidence": 0.85,
+      "estimatedEffort": [数値],
+      "completionCriteria": "[実際の内容に基づく]"
     }
   ]
 }`;
-  }
 
   // 特定タイプ用プロンプト
   private buildTypeSpecificPrompt(

@@ -264,17 +264,20 @@ export const useFileStore = create<FileStore>((set, get) => ({
     }));
   },
   
-  createFileFromVoice: async (markdown, fileName) => {
-    const timestamp = new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-');
-    const defaultFileName = `音声メモ_${timestamp}.md`;
-    const finalFileName = fileName || defaultFileName;
+  createFileFromVoice: async (markdown, folderName) => {
+    const timestamp = new Date();
+    const defaultFolderName = `音声メモ_${timestamp.getFullYear()}-${String(timestamp.getMonth() + 1).padStart(2, '0')}-${String(timestamp.getDate()).padStart(2, '0')}_${String(timestamp.getHours()).padStart(2, '0')}-${String(timestamp.getMinutes()).padStart(2, '0')}-${String(timestamp.getSeconds()).padStart(2, '0')}`;
+    const finalFolderName = folderName || defaultFolderName;
+    const fileName = `${finalFolderName}/content.md`;
     
     const newFile: MarkdownFile = {
       id: `voice-${Date.now()}`,
-      name: finalFileName,
+      name: fileName,
       content: markdown,
-      lastModified: new Date(),
-      path: finalFileName
+      lastModified: timestamp,
+      updatedAt: timestamp,
+      createdAt: timestamp,
+      path: fileName
     };
     
     set((state) => ({
@@ -288,7 +291,9 @@ export const useFileStore = create<FileStore>((set, get) => ({
     const { directoryHandle } = get();
     if (directoryHandle) {
       try {
-        const fileHandle = await directoryHandle.getFileHandle(finalFileName, { create: true });
+        // フォルダを作成
+        const folderHandle = await directoryHandle.getDirectoryHandle(finalFolderName, { create: true });
+        const fileHandle = await folderHandle.getFileHandle('content.md', { create: true });
         const writable = await fileHandle.createWritable();
         await writable.write(markdown);
         await writable.close();
@@ -296,6 +301,8 @@ export const useFileStore = create<FileStore>((set, get) => ({
         console.error('Failed to save voice file:', error);
       }
     }
+    
+    return newFile.id;
   },
   
   appendToCurrentFile: async (markdown) => {
