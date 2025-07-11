@@ -19,7 +19,9 @@ import {
   Mic,
   Eye,
   FileText,
-  Save
+  Save,
+  Sparkles,
+  Loader2
 } from 'lucide-react';
 
 interface MarkdownToolbarProps {
@@ -29,6 +31,9 @@ interface MarkdownToolbarProps {
   isRecording?: boolean;
   onToggleEditMode?: (editMode: boolean) => void;
   onSave?: () => void;
+  onAIGenerate?: () => void;
+  hasSelectedText?: boolean;
+  isAnalyzing?: boolean;
 }
 
 export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({ 
@@ -37,7 +42,10 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
   onVoiceInput,
   isRecording = false,
   onToggleEditMode,
-  onSave
+  onSave,
+  onAIGenerate,
+  hasSelectedText = false,
+  isAnalyzing = false
 }) => {
   // プレビューモードでも最低限のツールバーを表示
 
@@ -175,16 +183,25 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
           </>
         )}
         
-        {/* 保存ボタン（編集モードのみ） */}
-        {isEditMode && onSave && (
+        {/* AI議事録生成ボタン */}
+        {onAIGenerate && isEditMode && (
           <>
             <button
-              onClick={onSave}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-500 hover:bg-green-600 text-white rounded transition-all"
-              title="保存 (Ctrl+S)"
+              onClick={onAIGenerate}
+              disabled={!hasSelectedText || isAnalyzing}
+              className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded transition-all ${
+                hasSelectedText && !isAnalyzing
+                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              title={isAnalyzing ? '議事録生成中...' : '選択範囲をAIで議事録化'}
             >
-              <Save size={16} />
-              <span>保存</span>
+              {isAnalyzing ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Sparkles size={16} />
+              )}
+              <span>{isAnalyzing ? '生成中...' : 'AI議事録'}</span>
             </button>
             <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
           </>
@@ -193,25 +210,14 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
         {/* プレビュー/編集切り替えボタン */}
         {onToggleEditMode && (
           <>
-            {isEditMode ? (
-              <button
-                onClick={() => onToggleEditMode(false)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded transition-all"
-                title="プレビュー表示 (Ctrl+E)"
-              >
-                <Eye size={16} />
-                <span>プレビュー</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => onToggleEditMode(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded transition-all"
-                title="編集モード (Ctrl+E)"
-              >
-                <FileText size={16} />
-                <span>編集</span>
-              </button>
-            )}
+            <button
+              onClick={() => onToggleEditMode(!isEditMode)}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded transition-all"
+              title={`${isEditMode ? 'プレビュー' : '編集'}モードに切り替え (Ctrl+E)`}
+            >
+              {isEditMode ? <Eye size={16} /> : <FileText size={16} />}
+              <span>{isEditMode ? 'プレビュー' : '編集'}</span>
+            </button>
             <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
           </>
         )}
@@ -226,14 +232,26 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
             );
           }
 
+          const isFormatButton = item.group === 'format';
+          const isDisabled = isFormatButton && !hasSelectedText;
+          
           return (
             <button
               key={`${item.group}-${index}`}
-              onClick={item.action}
-              title={item.title}
-              className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors group"
+              onClick={isDisabled ? undefined : item.action}
+              disabled={isDisabled}
+              title={isDisabled ? 'テキストを選択してください' : item.title}
+              className={`p-2 rounded transition-colors group ${
+                isDisabled 
+                  ? 'cursor-not-allowed opacity-50' 
+                  : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
             >
-              <span className="text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
+              <span className={`${
+                isDisabled 
+                  ? 'text-gray-400 dark:text-gray-500' 
+                  : 'text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
+              }`}>
                 {item.icon}
               </span>
             </button>

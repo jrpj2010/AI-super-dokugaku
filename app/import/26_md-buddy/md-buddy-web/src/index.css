@@ -1,9 +1,96 @@
 /* Prismテーマのインポート - importは最初に */
 @import 'prismjs/themes/prism-tomorrow.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* MD Buddy デザインシステム - 統一カラーパレット */
+:root {
+  /* Primary Colors - 濃紺ベース */
+  --color-primary-900: #1A202C;
+  --color-primary-800: #2D3748;
+  --color-primary-700: #4A5568;
+  --color-primary-600: #718096;
+  --color-primary-500: #A0AEC0;
+  
+  /* Accent Colors - 青グラデーション */
+  --color-accent-600: #007BFF;
+  --color-accent-500: #0056b3;
+  --color-accent-400: #3399FF;
+  --color-accent-300: #66B2FF;
+  
+  /* Background Gradients */
+  --bg-gradient-primary: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
+  --bg-gradient-accent: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+  --bg-gradient-text: linear-gradient(135deg, #007BFF 0%, #8B5CF6 100%);
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-backdrop: blur(10px);
+  
+  /* Shadows */
+  --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Typography */
+  --font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* Base Styles */
+* {
+  font-family: var(--font-family);
+}
+
+body {
+  background: var(--bg-gradient-primary);
+  min-height: 100vh;
+}
+
+/* Utility Classes */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .gradient-text {
+    background: var(--bg-gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .shadow-interactive {
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+  }
+  
+  .shadow-interactive:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+  }
+  
+  .radius-unified {
+    border-radius: var(--radius-md);
+  }
+}
 
 /* マークダウンのスタイル調整 */
 @layer utilities {

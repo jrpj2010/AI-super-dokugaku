@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useFileStore } from './store/fileStore';
 import { FileExplorer } from './components/FileExplorer';
 import { Preview } from './components/Preview';
@@ -16,20 +16,20 @@ import { getTranscriptionService } from './services/gemini/voice-transcription';
 import { StreamingMarkdown } from './components/StreamingMarkdown';
 import { SettingsModal } from './components/Settings/SettingsModal';
 import { VoiceInputPanel } from './components/VoiceInputPanel';
+import { VoiceInsertOptions } from './components/VoiceInsertOptions';
 import { generateSRTFromText, downloadSRT, downloadAudio, downloadMarkdown } from './services/srt-generator';
 import type { FileItem } from './types';
 import { RecordingState } from './types/audio';
+import { debounce } from './utils/debounce';
 import './styles/mobile-voice.css';
 
 function App() {
   const {
     files,
     selectedFileId,
-    isEditMode,
     editContent,
     selectFile,
     removeFile,
-    setEditMode,
     setEditContent,
     saveCurrentFile,
     createNewFile,
@@ -48,6 +48,12 @@ function App() {
     updateFile,
     addFile
   } = useFileStore();
+  
+  // ビューモードの状態管理（ローカルステート）
+  const [viewMode, setViewMode] = useState<'editor' | 'preview'>('editor');
+  
+  // エディタ内容の一元管理（最重要）
+  const [editorContent, setEditorContent] = useState<string>('');
 
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [voiceProcessingState, setVoiceProcessingState] = useState<'idle' | 'recording' | 'processing' | 'converting'>('idle');
@@ -60,8 +66,24 @@ function App() {
   const [finalTranscript, setFinalTranscript] = useState(''); // 最終トランスクリプト保存用
   const [generatedSRT, setGeneratedSRT] = useState(''); // 生成されたSRT字幕
   const [currentRecordingBlob, setCurrentRecordingBlob] = useState<Blob | undefined>(); // 現在の録音データ
+  const [isSaving, setIsSaving] = useState(false); // 保存状態のインジケーター
+  const [selectedText, setSelectedText] = useState(''); // エディタで選択されたテキスト
+  const [showInsertOptions, setShowInsertOptions] = useState(false); // 音声挿入オプション表示
+  const [pendingVoiceText, setPendingVoiceText] = useState(''); // 挿入待ちの音声テキスト
+  const [isAnalyzing, setIsAnalyzing] = useState(false); // AI議事録生成中の状態
+  const [isGeneratingMeetingNotes, setIsGeneratingMeetingNotes] = useState(false); // 音声議事録生成中
+  
+  // Promiseベースの音声認識結果を格納
+  const voiceInputResolveRef = useRef<((text: string | null) => void) | null>(null);
   
   const selectedFile = files.find(f => f.id === selectedFileId);
+  
+  // ファイル選択時にエディタ内容を同期
+  useEffect(() => {
+    if (selectedFile) {
+      setEditorContent(selectedFile.content);
+    }
+  }, [selectedFileId, selectedFile?.content]);
   
   // 音声録音用の新規ファイルID
   const voiceFileIdRef = useRef<string | null>(null);
@@ -180,124 +202,214 @@ function App() {
     }
   };
 
-  // AI分析開始ハンドラー
-  const handleAnalyzeVoiceRecording = async () => {
-    console.log('🔍 AI分析開始時のデータ:', {
-      finalTranscript,
-      currentRecordingBlob: currentRecordingBlob ? 'あり' : 'なし',
-      realtimeTranscript,
-      totalTranscript
+  // Promiseベースの音声入力パネル表示関数
+  const showAIPanel = (): Promise<string | null> => {
+    return new Promise((resolve) => {
+      voiceInputResolveRef.current = resolve;
+      setShowVoicePanel(true);
     });
-    (window as any).debugLog?.(`AI分析開始時のデータ: finalTranscript="${finalTranscript}", currentRecordingBlob=${currentRecordingBlob ? 'あり' : 'なし'}, realtimeTranscript="${realtimeTranscript}", totalTranscript="${totalTranscript}"`, 'info');
+  };
+
+  // 音声入力ハンドラー（新設計）
+  const handleVoiceInput = async () => {
+    try {
+      const transcriptText = await showAIPanel();
+      
+      if (transcriptText) {
+        (window as any).debugLog?.(`音声認識結果を受信: ${transcriptText.length}文字`, 'info');
+        
+        // エディタがアクティブであることを確認
+        if (!selectedFile) {
+          alert('ファイルを選択してから音声入力を開始してください。');
+          return;
+        }
+        
+        // エディタモードに切り替え
+        setViewMode('editor');
+        
+        // 挿入オプションを表示
+        setPendingVoiceText(transcriptText);
+        setShowInsertOptions(true);
+        
+        (window as any).debugLog?.('音声認識結果の挿入オプションを表示しました', 'info');
+      }
+    } catch (error: any) {
+      (window as any).debugLog?.(`音声入力エラー: ${error.message}`, 'error');
+    }
+  };
+
+  // 音声認識完了ハンドラー（AIパネルから呼ばれる）
+  const handleVoiceComplete = () => {
+    if (voiceInputResolveRef.current && finalTranscript) {
+      voiceInputResolveRef.current(finalTranscript);
+      voiceInputResolveRef.current = null;
+    }
     
-    // テキストも音声データもない場合はスキップ
-    if (!finalTranscript && !currentRecordingBlob) {
-      (window as any).debugLog?.('トランスクリプトと音声データが両方とも空のため、AI分析をスキップします', 'warn');
-      console.warn('⚠️ トランスクリプトと音声データが両方とも空のため、AI分析をスキップします');
+    // パネルを閉じる
+    setShowVoicePanel(false);
+    setShowVoicePreview(false);
+    
+    // 状態をリセット
+    setVoiceProcessingState('idle');
+    resetVoiceSession();
+    setGeneratedSRT('');
+  };
+
+  // 音声入力キャンセルハンドラー
+  const handleVoiceCancel = () => {
+    if (voiceInputResolveRef.current) {
+      voiceInputResolveRef.current(null);
+      voiceInputResolveRef.current = null;
+    }
+    
+    setShowVoicePanel(false);
+    setShowVoicePreview(false);
+    setVoiceProcessingState('idle');
+    resetVoiceSession();
+  };
+
+  // AI議事録生成ハンドラー
+  const handleAIGenerate = async () => {
+    if (!selectedText.trim()) {
+      alert('テキストを選択してから議事録生成を実行してください。');
       return;
     }
 
-    (window as any).debugLog?.('AI分析を開始します', 'info');
-    setVoiceProcessingState('converting');
-    setShowVoicePreview(false); // プレビューを閉じる
-
+    setIsAnalyzing(true); // ローディング状態開始
+    
     try {
-      let textToAnalyze = finalTranscript;
+      (window as any).debugLog?.(`AI議事録生成開始: ${selectedText.length}文字`, 'info');
       
-      // テキストがない場合は音声データから変換
-      if (!textToAnalyze && currentRecordingBlob) {
-        console.log('🎤 音声データからテキストを変換します...');
-        (window as any).debugLog?.('音声データからテキストを変換します', 'info');
-        
-        try {
-          const transcriptionService = getTranscriptionService();
-          const transcriptionResult = await transcriptionService.transcribeAudio(currentRecordingBlob);
-          textToAnalyze = transcriptionResult.text;
-          console.log('✅ 音声転写結果:', textToAnalyze);
-          (window as any).debugLog?.(`音声転写結果: ${textToAnalyze}`, 'success');
-        } catch (transcriptionError: any) {
-          console.error('❌ 音声転写エラー:', transcriptionError);
-          (window as any).debugLog?.(`音声転写エラー: ${transcriptionError.message}`, 'error');
-          alert(`音声転写エラー: ${transcriptionError.message}`);
-          setVoiceProcessingState('idle');
-          return;
-        }
-      }
-      
-      // Markdown変換
+      // AI分析APIを呼び出し
       const { convertTextToMarkdown } = await import('./services/gemini/markdown-converter');
-      console.log('📝 Gemini APIにテキストを送信:', textToAnalyze);
-      const response = await convertTextToMarkdown(textToAnalyze, ConversionType.MEETING_NOTES);
-      const markdown = response.markdown;
-      console.log('✅ Markdown変換結果:', markdown);
+      const response = await convertTextToMarkdown(selectedText, ConversionType.MEETING_NOTES);
+      const generatedMarkdown = response.markdown;
       
-      (window as any).debugLog?.('Markdown変換が完了しました', 'success');
+      // 選択範囲を生成されたマークダウンで置き換え
+      const beforeSelection = editorContent.substring(0, editorContent.indexOf(selectedText));
+      const afterSelection = editorContent.substring(editorContent.indexOf(selectedText) + selectedText.length);
+      const newContent = beforeSelection + generatedMarkdown + afterSelection;
       
-      // SRT字幕生成
-      if (chunkedRecordingDuration > 0) {
-        try {
-          const srt = await generateSRTFromText(finalTranscript, chunkedRecordingDuration);
-          setGeneratedSRT(srt);
-          (window as any).debugLog?.('SRT字幕生成が完了しました', 'success');
-        } catch (srtError: any) {
-          (window as any).debugLog?.(`SRT生成エラー: ${srtError.message}`, 'warn');
-        }
-      }
-
-      // 音声ファイルと字幕ファイルも一緒に保存
-      const timestamp = new Date();
-      const folderName = `音声メモ_${timestamp.getFullYear()}-${String(timestamp.getMonth() + 1).padStart(2, '0')}-${String(timestamp.getDate()).padStart(2, '0')}_${String(timestamp.getHours()).padStart(2, '0')}-${String(timestamp.getMinutes()).padStart(2, '0')}-${String(timestamp.getSeconds()).padStart(2, '0')}`;
+      setEditorContent(newContent);
+      setEditContent(newContent);
+      setSelectedText(''); // 選択解除
       
-      // 新規ファイルセットを作成
-      const newFileId = await createFileFromVoice(markdown, folderName);
-      
-      // 音声ファイルを保存
-      if (currentRecordingBlob) {
-        const audioFile: FileItem = {
-          id: Date.now().toString() + '_audio',
-          name: `${folderName}/audio.webm`,
-          content: currentRecordingBlob,
-          type: 'audio',
-          lastModified: timestamp,
-          updatedAt: timestamp,
-          createdAt: timestamp,
-          path: `${folderName}/audio.webm`
-        };
-        addFile(audioFile as any); // 一時的にanyで回避
-      }
-      
-      // SRTファイルを保存
-      if (generatedSRT) {
-        const srtFile: FileItem = {
-          id: Date.now().toString() + '_srt',
-          name: `${folderName}/subtitles.srt`,
-          content: generatedSRT,
-          type: 'text',
-          lastModified: timestamp,
-          updatedAt: timestamp,
-          createdAt: timestamp,
-          path: `${folderName}/subtitles.srt`
-        };
-        addFile(srtFile as any); // 一時的にanyで回避
-      }
-      
-      // 作成したMarkdownファイルを自動的に選択してアクティブ化
-      selectFile(newFileId);
-      setEditMode(false); // プレビューモードで表示
-      
-      (window as any).debugLog?.('3ファイルセットを作成し、Markdownファイルをアクティブ化しました', 'success');
-
-      // 状態をリセット
-      setVoiceProcessingState('idle');
-      setFinalTranscript('');
-      resetVoiceSession();
-      setCurrentRecordingBlob(undefined);
-      setGeneratedSRT('');
+      (window as any).debugLog?.('AI議事録生成完了', 'success');
       
     } catch (error: any) {
-      (window as any).debugLog?.(`AI分析エラー: ${error.message}`, 'error');
-      setVoiceProcessingState('idle');
-      alert('AI分析中にエラーが発生しました。もう一度お試しください。');
+      (window as any).debugLog?.(`AI議事録生成エラー: ${error.message}`, 'error');
+      alert(`AI議事録生成中にエラーが発生しました: ${error.message}`);
+    } finally {
+      setIsAnalyzing(false); // ローディング状態終了（必ず実行）
+    }
+  };
+
+  // エディタの選択テキスト変更ハンドラー
+  const handleSelectionChange = (text: string) => {
+    setSelectedText(text);
+  };
+
+  // 音声挿入オプションハンドラー
+  const handleInsertAtCursor = () => {
+    if (pendingVoiceText && selectedFile) {
+      // Preview.tsxのinsertAtCursor関数を呼び出す
+      if ((window as any)._insertAtCursor) {
+        (window as any)._insertAtCursor(pendingVoiceText);
+        (window as any).debugLog?.('音声認識結果をカーソル位置に挿入しました', 'success');
+      } else {
+        // フォールバック: 末尾に追加
+        const newContent = editorContent + (editorContent ? '\n\n' : '') + pendingVoiceText;
+        setEditorContent(newContent);
+        setEditContent(newContent);
+        (window as any).debugLog?.('音声認識結果を末尾に追加しました（フォールバック）', 'info');
+      }
+    }
+    setShowInsertOptions(false);
+    setPendingVoiceText('');
+  };
+
+  const handleReplaceAll = () => {
+    if (pendingVoiceText && selectedFile) {
+      setEditorContent(pendingVoiceText);
+      setEditContent(pendingVoiceText);
+      
+      (window as any).debugLog?.('エディタ内容を音声認識結果で置き換えました', 'success');
+    }
+    setShowInsertOptions(false);
+    setPendingVoiceText('');
+  };
+
+  const handleInsertCancel = () => {
+    (window as any).debugLog?.('音声認識結果の挿入をキャンセルしました', 'info');
+    setShowInsertOptions(false);
+    setPendingVoiceText('');
+  };
+
+  // 議事録生成ハンドラー（カーソル位置）
+  const handleMeetingNotesAtCursor = async () => {
+    if (!pendingVoiceText || !selectedFile) return;
+    
+    setIsGeneratingMeetingNotes(true);
+    
+    try {
+      (window as any).debugLog?.(`音声議事録生成開始（カーソル位置）: ${pendingVoiceText.length}文字`, 'info');
+      
+      // AI分析APIを呼び出し
+      const { convertTextToMarkdown } = await import('./services/gemini/markdown-converter');
+      const response = await convertTextToMarkdown(pendingVoiceText, ConversionType.MEETING_NOTES);
+      const generatedMarkdown = response.markdown;
+      
+      // カーソル位置に挿入
+      if ((window as any)._insertAtCursor) {
+        (window as any)._insertAtCursor(generatedMarkdown);
+        (window as any).debugLog?.('音声議事録をカーソル位置に挿入しました', 'success');
+      } else {
+        // フォールバック: 末尾に追加
+        const newContent = editorContent + (editorContent ? '\n\n' : '') + generatedMarkdown;
+        setEditorContent(newContent);
+        setEditContent(newContent);
+        (window as any).debugLog?.('音声議事録を末尾に追加しました（フォールバック）', 'info');
+      }
+      
+      setShowInsertOptions(false);
+      setPendingVoiceText('');
+      
+    } catch (error: any) {
+      (window as any).debugLog?.(`音声議事録生成エラー: ${error.message}`, 'error');
+      alert(`議事録生成中にエラーが発生しました: ${error.message}`);
+    } finally {
+      setIsGeneratingMeetingNotes(false);
+    }
+  };
+
+  // 議事録生成ハンドラー（全文置換）
+  const handleMeetingNotesReplaceAll = async () => {
+    if (!pendingVoiceText || !selectedFile) return;
+    
+    setIsGeneratingMeetingNotes(true);
+    
+    try {
+      (window as any).debugLog?.(`音声議事録生成開始（全文置換）: ${pendingVoiceText.length}文字`, 'info');
+      
+      // AI分析APIを呼び出し
+      const { convertTextToMarkdown } = await import('./services/gemini/markdown-converter');
+      const response = await convertTextToMarkdown(pendingVoiceText, ConversionType.MEETING_NOTES);
+      const generatedMarkdown = response.markdown;
+      
+      // 全文を置き換え
+      setEditorContent(generatedMarkdown);
+      setEditContent(generatedMarkdown);
+      
+      setShowInsertOptions(false);
+      setPendingVoiceText('');
+      
+      (window as any).debugLog?.('音声議事録で全文を置き換えました', 'success');
+      
+    } catch (error: any) {
+      (window as any).debugLog?.(`音声議事録生成エラー: ${error.message}`, 'error');
+      alert(`議事録生成中にエラーが発生しました: ${error.message}`);
+    } finally {
+      setIsGeneratingMeetingNotes(false);
     }
   };
 
@@ -320,7 +432,7 @@ function App() {
 
   const handleDownloadMarkdown = () => {
     if (selectedFile) {
-      const content = isEditMode ? editContent : selectedFile.content;
+      const content = viewMode === 'editor' ? editContent : selectedFile.content;
       const fileName = selectedFile.name || 'document.md';
       downloadMarkdown(content, fileName);
       (window as any).debugLog?.('Markdownファイルをダウンロードしました', 'success');
@@ -355,6 +467,7 @@ function App() {
         setFinalTranscript(transcript); // 最終トランスクリプトを保存
         setCurrentRecordingBlob(chunkedAudioBlob); // 音声データを保存
         setShowVoicePreview(true); // プレビュー表示
+        // realtimeTranscriptはクリアしない - データを保持
         
         // 終了時刻を追加
         if (voiceFileIdRef.current) {
@@ -437,11 +550,10 @@ function App() {
           setVoiceProcessingState('idle');
           (window as any).debugLog?.('Markdown変換が完了しました', 'success');
           
-          // 変換完了後、ファイルとして保存するか確認
-          if (confirm('音声入力の結果を新しいファイルとして保存しますか？')) {
-            await createFileFromVoice(markdown);
-            (window as any).debugLog?.('新しいファイルとして保存しました', 'success');
-          }
+          // 変換完了後、ファイルとして保存するかインラインUIで確認
+          setPendingVoiceText(markdown);
+          setShowInsertOptions(true);
+          (window as any).debugLog?.('音声入力結果の保存オプションを表示します', 'info');
         } catch (conversionError: any) {
           (window as any).debugLog?.(`Markdown変換エラー: ${conversionError.message}`, 'error');
           setVoiceProcessingState('idle');
@@ -464,6 +576,37 @@ function App() {
     }
   }, [audioLevel, voiceSession.isRecording]);
 
+  // 自動保存用のcallback
+  const handleSave = useCallback((content: string) => {
+    if (selectedFileId && viewMode === 'editor') {
+      setIsSaving(true);
+      // ZustandストアのeditContentを更新してから保存
+      setEditContent(content);
+      saveCurrentFile();
+      
+      // 保存完了後にインジケーターを消す
+      setTimeout(() => {
+        setIsSaving(false);
+      }, 1000);
+      
+      (window as any).debugLog?.('ファイルを自動保存しました', 'success');
+    }
+  }, [selectedFileId, viewMode, setEditContent, saveCurrentFile]);
+  
+  // 自動保存機能（debounce 2秒）
+  const debouncedSave = useRef(
+    debounce((content: string) => {
+      handleSave(content);
+    }, 2000)
+  ).current;
+
+  // editorContent変更時の自動保存
+  useEffect(() => {
+    if (editorContent && selectedFileId && viewMode === 'editor') {
+      debouncedSave(editorContent);
+    }
+  }, [editorContent, selectedFileId, viewMode]);
+
   // 新規ファイル作成
   const handleNewFile = async () => {
     const now = new Date();
@@ -474,7 +617,7 @@ function App() {
       const newFileId = await createNewFile(''); // 空のフォルダパスを渡す
       if (newFileId) {
         selectFile(newFileId);
-        setEditMode(true); // 編集モードに切り替え
+        setViewMode('editor'); // 編集モードに切り替え
         (window as any).debugAction?.('新規ファイル作成', fileName, 'success');
       }
     } catch (error: any) {
@@ -491,17 +634,10 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl/Cmd + S: 保存
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        if (isEditMode) {
-          saveCurrentFile();
-        }
-      }
       // Ctrl/Cmd + E: 編集モード切り替え
-      else if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
         e.preventDefault();
-        setEditMode(!isEditMode);
+        setViewMode(viewMode === 'editor' ? 'preview' : 'editor');
       }
       // Ctrl/Cmd + K: 共有ダイアログ
       else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -521,53 +657,22 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isEditMode, saveCurrentFile, setEditMode, voiceSession.isRecording]);
+  }, [viewMode, saveCurrentFile, voiceSession.isRecording]);
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col" style={{background: 'var(--bg-gradient-primary)'}}>
       {/* ヘッダー */}
       <Header
         onNewFile={handleNewFile}
         onOpenSettings={handleOpenSettings}
       />
 
-      {/* ツールバー */}
-      <div className="bg-white border-b border-gray-200 px-6 py-2">
-        <div className="flex items-center gap-3">
-          {selectedFile && (
-            <>
-              <button 
-                onClick={() => setShowShareDialog(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
-                title="ファイルを共有 (Ctrl+K)"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 0m9.032-4.026A9.001 9.001 0 0112 3c-2.392 0-4.563.93-6.284 2.658M15.732 14.684A6 6 0 0112 15c-1.268 0-2.44-.394-3.732-1.316" />
-                </svg>
-                共有
-              </button>
-              
-              {isEditMode && (
-                <button
-                  onClick={saveCurrentFile}
-                  className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors"
-                  title="ファイルを保存 (Ctrl+S)"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V2" />
-                  </svg>
-                  保存
-                </button>
-              )}
-            </>
-          )}
-        </div>
-      </div>
+      {/* ツールバーを削除 */}
 
       {/* メインコンテンツ - 4カラムレイアウト */}
       <div className="flex-1 flex overflow-hidden">
         {/* 左カラム - ファイルエクスプローラー */}
-        <aside className="w-64 bg-gray-900 text-gray-100 flex flex-col flex-shrink-0">
+        <aside className="w-64 glass text-white flex flex-col flex-shrink-0 border-r border-white/20">
           <FileExplorer
             files={files}
             selectedFileId={selectedFileId}
@@ -584,15 +689,23 @@ function App() {
         <main className="flex-1 bg-white flex flex-col overflow-hidden">
           {selectedFile ? (
             <Preview
-              content={selectedFile.content}
+              content={editorContent}
               fileName={selectedFile.name}
-              isEditMode={isEditMode}
-              editContent={editContent}
-              onEditContentChange={setEditContent}
-              onVoiceInput={() => setShowVoicePanel(true)}
+              isEditMode={viewMode === 'editor'}
+              editContent={editorContent}
+              onEditContentChange={(newContent) => {
+                setEditorContent(newContent);
+                setEditContent(newContent); // Zustandストアも更新
+              }}
+              onSelectionChange={handleSelectionChange}
+              onVoiceInput={handleVoiceInput}
               isRecording={voiceSession.isRecording || isChunkedRecording}
-              onToggleEditMode={setEditMode}
+              onToggleEditMode={(editMode) => setViewMode(editMode ? 'editor' : 'preview')}
               onSave={saveCurrentFile}
+              isSaving={isSaving}
+              onAIGenerate={handleAIGenerate}
+              hasSelectedText={selectedText.length > 0}
+              isAnalyzing={isAnalyzing}
             />
           ) : (
             <div className="flex items-center justify-center h-full text-gray-500">
@@ -604,7 +717,7 @@ function App() {
         {/* 右カラム - メタデータ（固定表示） */}
         <aside className="w-64 border-l border-gray-200 flex-shrink-0">
           <MetadataPanel
-            content={selectedFile ? (isEditMode ? editContent : selectedFile.content) : ''}
+            content={selectedFile ? editorContent : ''}
             fileName={selectedFile?.name}
             lastModified={selectedFile?.updatedAt}
             isFileSelected={!!selectedFile}
@@ -633,7 +746,7 @@ function App() {
       {/* 音声入力パネル */}
       <VoiceInputPanel
         isOpen={showVoicePanel}
-        onClose={() => setShowVoicePanel(false)}
+        onClose={handleVoiceCancel}
         isRecording={voiceSession.isRecording || isChunkedRecording}
         isPaused={recordingState === RecordingState.PAUSED}
         audioLevel={useChunkedMode ? chunkedAudioLevel : audioLevel}
@@ -646,14 +759,32 @@ function App() {
         onTranscriptChange={setRealtimeTranscript}
         isProcessing={voiceProcessingState === 'processing' || voiceProcessingState === 'converting'}
         showPreview={showVoicePreview}
-        onAnalyze={handleAnalyzeVoiceRecording}
+        onAnalyze={handleVoiceComplete}
         onDownloadAudio={handleDownloadAudio}
         onDownloadSRT={handleDownloadSRT}
         onDownloadMarkdown={handleDownloadMarkdown}
         hasAudioData={!!currentRecordingBlob}
         hasSRTData={!!generatedSRT}
         hasMarkdownData={!!selectedFile}
+        audioBlob={currentRecordingBlob}
       />
+
+      {/* 音声挿入オプション */}
+      {showInsertOptions && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-xl max-w-lg w-full mx-4">
+            <VoiceInsertOptions
+              onInsertAtCursor={handleInsertAtCursor}
+              onReplaceAll={handleReplaceAll}
+              onMeetingNotesAtCursor={handleMeetingNotesAtCursor}
+              onMeetingNotesReplaceAll={handleMeetingNotesReplaceAll}
+              onCancel={handleInsertCancel}
+              transcriptLength={pendingVoiceText.length}
+              isGeneratingMeetingNotes={isGeneratingMeetingNotes}
+            />
+          </div>
+        </div>
+      )}
 
       {/* デバッグウィンドウ */}
       <DebugWindow />

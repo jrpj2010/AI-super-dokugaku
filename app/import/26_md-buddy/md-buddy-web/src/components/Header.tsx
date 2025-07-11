@@ -1,6 +1,7 @@
 // ヘッダーコンポーネント
 import React from 'react';
 import { Plus, Settings } from 'lucide-react';
+import { APP_VERSION } from '../constants/version';
 
 interface HeaderProps {
   onNewFile: () => void;
@@ -12,30 +13,32 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSettings
 }) => {
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-      <div className="flex items-center justify-between px-4 py-2">
+    <header className="glass border-b border-white/20 backdrop-blur-md">
+      <div className="flex items-center justify-between px-6 py-4">
         {/* 左側: ロゴとタイトル */}
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
-            <span className="text-white font-bold text-sm">M</span>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 radius-unified shadow-interactive flex items-center justify-center" 
+               style={{background: 'var(--bg-gradient-accent)'}}>
+            <span className="text-white font-bold text-lg">M</span>
           </div>
-          <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h1 className="text-xl font-semibold text-white gradient-text">
             MD Buddy
           </h1>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-sm text-white/80 font-medium">
             爆速マークダウンエディター
           </span>
-          <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">
-            v0.020
+          <span className="text-xs text-white/60 ml-3 px-2 py-1 glass radius-unified">
+            v{APP_VERSION}
           </span>
         </div>
 
         {/* 右側: アクションボタン */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* 新規作成ボタン */}
           <button
             onClick={onNewFile}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-3 radius-unified font-medium text-white transition-all shadow-interactive"
+            style={{background: 'var(--bg-gradient-accent)'}}
             title="新規作成"
           >
             <Plus size={18} />
@@ -45,10 +48,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* 設定ボタン */}
           <button
             onClick={onOpenSettings}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="p-3 radius-unified glass hover:bg-white/20 transition-all shadow-interactive"
             title="設定"
           >
-            <Settings size={20} className="text-gray-600 dark:text-gray-400" />
+            <Settings size={20} className="text-white/80" />
           </button>
         </div>
       </div>

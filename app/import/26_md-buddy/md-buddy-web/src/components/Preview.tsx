@@ -11,10 +11,16 @@ interface PreviewProps {
   isEditMode?: boolean;
   editContent?: string;
   onEditContentChange?: (content: string) => void;
+  onSelectionChange?: (text: string) => void;
   onVoiceInput?: () => void;
   isRecording?: boolean;
   onToggleEditMode?: (editMode: boolean) => void;
   onSave?: () => void;
+  isSaving?: boolean;
+  onAIGenerate?: () => void;
+  hasSelectedText?: boolean;
+  isAnalyzing?: boolean;
+  onInsertAtCursor?: (text: string) => void;
 }
 
 export const Preview: React.FC<PreviewProps> = ({ 
@@ -23,15 +29,54 @@ export const Preview: React.FC<PreviewProps> = ({
   isEditMode = false,
   editContent = '',
   onEditContentChange,
+  onSelectionChange,
   onVoiceInput,
   isRecording = false,
   onToggleEditMode,
-  onSave
+  onSave,
+  isSaving = false,
+  onAIGenerate,
+  hasSelectedText = false,
+  isAnalyzing = false,
+  onInsertAtCursor
 }) => {
   const displayContent = isEditMode ? editContent : content;
   const html = useMemo(() => parseMarkdown(displayContent), [displayContent]);
   const editorRef = useRef<any>(null);
   const insertMarkdownRef = useRef<(before: string, after?: string, placeholder?: string) => void>();
+
+  // カーソル位置にテキストを挿入する関数
+  const insertTextAtCursor = useCallback((text: string) => {
+    const editor = editorRef.current;
+    if (editor && isEditMode) {
+      const selection = editor.getSelection();
+      if (selection) {
+        const operation = {
+          range: selection,
+          text: text,
+          forceMoveMarkers: true
+        };
+        editor.executeEdits('voice-insert', [operation]);
+        
+        // カーソル位置を挿入したテキストの末尾に移動
+        const model = editor.getModel();
+        if (model) {
+          const newContent = model.getValue();
+          if (onEditContentChange) {
+            onEditContentChange(newContent);
+          }
+        }
+      }
+    }
+  }, [isEditMode, onEditContentChange]);
+
+  // onInsertAtCursorコールバックをeditorのAPIに接続
+  useEffect(() => {
+    if (onInsertAtCursor) {
+      // 外部から呼び出し可能な関数として設定
+      (window as any)._insertAtCursor = insertTextAtCursor;
+    }
+  }, [onInsertAtCursor, insertTextAtCursor]);
 
   // クリップボード画像ペースト処理
   const handleEditorPaste = useCallback(async (event: ClipboardEvent) => {
@@ -116,51 +161,56 @@ export const Preview: React.FC<PreviewProps> = ({
         </div>
       )}
       
+      {/* MarkdownToolbarを常に表示 */}
+      <MarkdownToolbar
+        onInsertMarkdown={(before, after, placeholder) => {
+          if (insertMarkdownRef.current) {
+            insertMarkdownRef.current(before, after, placeholder);
+          } else if (editorRef.current && isEditMode) {
+            // Monaco Editor用のフォールバック
+            const position = editorRef.current.getPosition();
+            const selection = editorRef.current.getSelection();
+            const selectedText = editorRef.current.getModel().getValueInRange(selection);
+            const textToInsert = selectedText || placeholder || '';
+            
+            editorRef.current.executeEdits('', [{
+              range: selection,
+              text: before + textToInsert + (after || ''),
+              forceMoveMarkers: true
+            }]);
+            
+            // カーソル位置を調整
+            if (!selectedText && placeholder) {
+              const newPosition = {
+                lineNumber: position.lineNumber,
+                column: position.column + before.length
+              };
+              editorRef.current.setPosition(newPosition);
+              editorRef.current.setSelection({
+                startLineNumber: newPosition.lineNumber,
+                startColumn: newPosition.column,
+                endLineNumber: newPosition.lineNumber,
+                endColumn: newPosition.column + placeholder.length
+              });
+            }
+          }
+        }}
+        isEditMode={isEditMode}
+        onVoiceInput={onVoiceInput}
+        isRecording={isRecording}
+        onToggleEditMode={onToggleEditMode}
+        onSave={onSave}
+        onAIGenerate={onAIGenerate}
+        hasSelectedText={hasSelectedText}
+        isAnalyzing={isAnalyzing}
+      />
+      
       {isEditMode ? (
         <div className="flex-1 flex flex-col">
           <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 text-sm text-gray-600 flex items-center justify-between">
             <span>コードエディター</span>
             <span className="text-xs text-gray-500">Ctrl+S で保存</span>
           </div>
-          <MarkdownToolbar
-            onInsertMarkdown={(before, after, placeholder) => {
-              if (insertMarkdownRef.current) {
-                insertMarkdownRef.current(before, after, placeholder);
-              } else if (editorRef.current) {
-                // Monaco Editor用のフォールバック
-                const position = editorRef.current.getPosition();
-                const selection = editorRef.current.getSelection();
-                const selectedText = editorRef.current.getModel().getValueInRange(selection);
-                const textToInsert = selectedText || placeholder || '';
-                
-                editorRef.current.executeEdits('', [{
-                  range: selection,
-                  text: before + textToInsert + (after || ''),
-                  forceMoveMarkers: true
-                }]);
-                
-                // カーソル位置を調整
-                if (!selectedText && placeholder) {
-                  const newPosition = {
-                    lineNumber: position.lineNumber,
-                    column: position.column + before.length
-                  };
-                  editorRef.current.setPosition(newPosition);
-                  editorRef.current.setSelection({
-                    startLineNumber: newPosition.lineNumber,
-                    startColumn: newPosition.column,
-                    endLineNumber: newPosition.lineNumber,
-                    endColumn: newPosition.column + placeholder.length
-                  });
-                }
-              }
-            }}
-            isEditMode={isEditMode}
-            onVoiceInput={onVoiceInput}
-            isRecording={isRecording}
-            onToggleEditMode={onToggleEditMode}
-            onSave={onSave}
-          />
           <div className="flex-1">
             <Editor
               defaultLanguage="markdown"
@@ -172,6 +222,17 @@ export const Preview: React.FC<PreviewProps> = ({
               }}
               onMount={(editor) => {
                 editorRef.current = editor;
+                
+                // テキスト選択変更イベントリスナーを追加
+                const selectionDisposable = editor.onDidChangeCursorSelection((event) => {
+                  const selection = editor.getSelection();
+                  if (selection && !selection.isEmpty() && onSelectionChange) {
+                    const selectedText = editor.getModel()?.getValueInRange(selection) || '';
+                    onSelectionChange(selectedText);
+                  } else if (onSelectionChange) {
+                    onSelectionChange('');
+                  }
+                });
                 
                 // クリップボード画像ペーストイベントリスナーを追加
                 const disposable = editor.onDidPaste((event: any) => {
@@ -198,6 +259,9 @@ export const Preview: React.FC<PreviewProps> = ({
                   if (disposable) {
                     disposable.dispose();
                   }
+                  if (selectionDisposable) {
+                    selectionDisposable.dispose();
+                  }
                 };
               }}
               theme="vs-dark"
@@ -214,6 +278,23 @@ export const Preview: React.FC<PreviewProps> = ({
                 }
               }}
             />
+          </div>
+          {/* ステータスバー */}
+          <div className="bg-gray-900 border-t border-gray-700 px-4 py-1 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-4">
+              <span className="text-gray-400">Markdown</span>
+              <span className="text-gray-400">UTF-8</span>
+            </div>
+            <div className="flex items-center gap-2">
+              {isSaving ? (
+                <span className="text-yellow-400 flex items-center gap-1">
+                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-yellow-400"></div>
+                  保存中...
+                </span>
+              ) : (
+                <span className="text-green-400">すべての変更を保存しました</span>
+              )}
+            </div>
           </div>
         </div>
       ) : (

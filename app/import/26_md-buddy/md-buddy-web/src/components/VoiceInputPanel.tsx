@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Mic, MicOff, Square, Pause, Play, X, Download } from 'lucide-react';
+import { Mic, MicOff, Square, Pause, Play, X, Download, PlayCircle, StopCircle, FileText } from 'lucide-react';
 import { TranscriptSegment } from '../types/transcript';
 
 // Web Speech API の型定義
@@ -41,6 +41,7 @@ interface VoiceInputPanelProps {
   hasAudioData?: boolean;
   hasSRTData?: boolean;
   hasMarkdownData?: boolean;
+  audioBlob?: Blob;
 }
 
 export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
@@ -65,15 +66,18 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
   hasAudioData = false,
   hasSRTData = false,
   hasMarkdownData = false,
+  audioBlob,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const [waveformData, setWaveformData] = useState<number[]>(new Array(50).fill(0));
   const [isWebSpeechSupported, setIsWebSpeechSupported] = useState(false);
-  const [localTranscript, setLocalTranscript] = useState('');
   const [transcriptSegments, setTranscriptSegments] = useState<TranscriptSegment[]>([]);
   const recognitionRef = useRef<any>(null);
   const recordingStartTimeRef = useRef<number>(0);
+  const accumulatedFinalTranscriptRef = useRef<string>(''); // 累積された最終トランスクリプト
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Web Speech API のサポートチェック
   useEffect(() => {
@@ -93,16 +97,17 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
     recognition.maxAlternatives = 1;
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      let interimTranscript = '';
-      let finalTranscript = '';
+      let currentInterimTranscript = '';
+      let currentFinalTranscript = '';
       const currentTime = (Date.now() - recordingStartTimeRef.current) / 1000; // 秒単位
 
+      // event.resultIndexから最新の結果まで処理
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         const confidence = event.results[i][0].confidence || 1.0;
         
         if (event.results[i].isFinal) {
-          finalTranscript += transcript;
+          currentFinalTranscript += transcript;
           
           // タイムスタンプ付きセグメントを作成
           const segment: TranscriptSegment = {
@@ -117,14 +122,14 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
           setTranscriptSegments(prev => [...prev, segment]);
           (window as any).debugLog?.(`音声セグメント追加: ${JSON.stringify(segment)}`, 'info');
         } else {
-          interimTranscript += transcript;
+          currentInterimTranscript += transcript;
         }
       }
 
-      // 置換ワードの適用
-      if (finalTranscript) {
+      // 置換ワードの適用（最終結果のみ）
+      if (currentFinalTranscript) {
         const replacementWords = JSON.parse(localStorage.getItem('replacementWords') || '[]');
-        let processedTranscript = finalTranscript;
+        let processedTranscript = currentFinalTranscript;
         
         replacementWords.forEach((replacement: { from: string; to: string }) => {
           if (replacement.from && replacement.to) {
@@ -133,21 +138,26 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
           }
         });
         
-        if (processedTranscript !== finalTranscript) {
-          (window as any).debugLog?.(`置換適用: "${finalTranscript}" → "${processedTranscript}"`, 'info');
+        if (processedTranscript !== currentFinalTranscript) {
+          (window as any).debugLog?.(`置換適用: "${currentFinalTranscript}" → "${processedTranscript}"`, 'info');
         }
-        finalTranscript = processedTranscript;
+        currentFinalTranscript = processedTranscript;
+        
+        // 累積された最終トランスクリプトに追加
+        accumulatedFinalTranscriptRef.current += currentFinalTranscript;
       }
 
       if (onTranscriptChange) {
-        const currentTranscript = localTranscript + finalTranscript;
-        setLocalTranscript(currentTranscript);
-        onTranscriptChange(currentTranscript + interimTranscript);
+        // 親コンポーネントに累積されたトランスクリプト全体を送信
+        const fullTranscript = accumulatedFinalTranscriptRef.current + currentInterimTranscript;
+        onTranscriptChange(fullTranscript);
+        (window as any).debugLog?.(`トランスクリプト更新: 累積=${accumulatedFinalTranscriptRef.current.length}文字, 中間=${currentInterimTranscript.length}文字`, 'info');
       }
       
       // デバッグログ（最終結果のみ記録）
-      if (finalTranscript) {
-        (window as any).debugLog?.(`音声認識完了: ${finalTranscript}`, 'info');
+      if (currentFinalTranscript) {
+        (window as any).debugLog?.(`音声認識完了（今回分）: ${currentFinalTranscript}`, 'info');
+        (window as any).debugLog?.(`累積トランスクリプト: ${accumulatedFinalTranscriptRef.current.length}文字`, 'info');
       }
     };
 
@@ -278,14 +288,30 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
     }
   }, [isRecording, isPaused]);
 
-  // 録音開始時にトランスクリプトをリセット（プレビューモードでない場合のみ）
+  // 録音開始時の初期化
   useEffect(() => {
     if (isRecording && !isPaused && !showPreview) {
-      setLocalTranscript('');
-      setTranscriptSegments([]);
+      // 録音開始時にトランスクリプトをリセットしない
+      // 累積トランスクリプトは録音停止→新規録音開始のタイミングでのみリセット
       recordingStartTimeRef.current = Date.now();
+      (window as any).debugLog?.(`録音セッション継続中: 累積トランスクリプト=${accumulatedFinalTranscriptRef.current.length}文字`, 'info');
     }
-  }, [isRecording, showPreview]);
+  }, [isRecording, isPaused, showPreview]);
+  
+  // 録音停止時の処理
+  useEffect(() => {
+    if (!isRecording && !isPaused) {
+      // 録音が完全に停止した時のみリセットフラグを立てる
+      return () => {
+        // 次回の録音開始時にリセット
+        if (!showPreview) {
+          accumulatedFinalTranscriptRef.current = '';
+          setTranscriptSegments([]);
+          (window as any).debugLog?.('録音セッション終了: 次回開始時にトランスクリプトをリセット', 'info');
+        }
+      };
+    }
+  }, [isRecording, isPaused, showPreview]);
 
   // 録音時間のフォーマット
   const formatDuration = (seconds: number): string => {
@@ -385,38 +411,75 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
     };
   }, [waveformData, isRecording, isPaused]);
 
+  // 音声再生機能
+  const handlePlayAudio = () => {
+    if (!audioBlob) return;
+    
+    if (isPlaying) {
+      // 停止
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setIsPlaying(false);
+    } else {
+      // 再生
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+      
+      audio.onended = () => {
+        setIsPlaying(false);
+        URL.revokeObjectURL(audioUrl);
+      };
+      
+      audio.play();
+      setIsPlaying(true);
+    }
+  };
+
+  // コンポーネントのクリーンアップ
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 left-1/2 -translate-x-1/2 w-full max-w-2xl z-40">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="fixed bottom-20 left-1/2 -translate-x-1/2 w-full max-w-2xl z-40 px-4">
+      <div className="glass radius-unified shadow-strong overflow-hidden">
         {/* ヘッダー */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">AIパネル</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
+          <h3 className="text-xl font-semibold text-white gradient-text">AIパネル</h3>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+            className="p-2 radius-unified glass hover:bg-white/20 transition-all shadow-interactive"
           >
-            <X size={20} className="text-gray-500 dark:text-gray-400" />
+            <X size={20} className="text-white/80" />
           </button>
         </div>
 
         {/* 録音状態表示エリア */}
-        <div className="px-6 py-6 bg-gray-50 dark:bg-gray-900">
+        <div className="px-6 py-6" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
           <div className="relative">
             {/* 録音状態インジケーター */}
             <div className="flex items-center justify-center mb-4">
               {isRecording ? (
                 <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                  <span className="text-gray-900 dark:text-white font-medium text-lg">
+                  <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse shadow-medium"></div>
+                  <span className="text-white font-medium text-lg">
                     {isPaused ? '一時停止中' : '録音中'}
                   </span>
                 </div>
               ) : (
                 <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
-                  <span className="text-gray-600 dark:text-gray-400 text-lg">録音準備完了</span>
+                  <div className="w-4 h-4 bg-white/40 rounded-full"></div>
+                  <span className="text-white/80 text-lg">録音準備完了</span>
                 </div>
               )}
             </div>
@@ -426,11 +489,11 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
               ref={canvasRef}
               width={600}
               height={80}
-              className="w-full h-20 bg-white dark:bg-gray-800 rounded-lg shadow-inner"
+              className="w-full h-20 glass radius-unified shadow-inner"
             />
             
             {/* 録音時間表示 */}
-            <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm font-mono">
+            <div className="absolute top-2 right-2 glass text-white px-3 py-2 radius-unified text-sm font-mono">
               {formatDuration(recordingDuration)}
             </div>
           </div>
@@ -441,34 +504,21 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
           {!isRecording ? (
             <button
               onClick={onStartRecording}
-              className="flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg transform transition-all hover:scale-105"
+              className="flex items-center gap-2 px-6 py-3 radius-unified text-white font-medium shadow-interactive transition-all transform hover:scale-105"
+              style={{background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)'}}
             >
               <Mic size={24} />
               <span className="font-medium">録音開始</span>
             </button>
           ) : (
             <>
-              {isPaused ? (
-                <button
-                  onClick={onResumeRecording}
-                  className="p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transform transition-all hover:scale-105"
-                >
-                  <Play size={24} />
-                </button>
-              ) : (
-                <button
-                  onClick={onPauseRecording}
-                  className="p-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full shadow-lg transform transition-all hover:scale-105"
-                >
-                  <Pause size={24} />
-                </button>
-              )}
               <button
                 onClick={() => {
                   console.log('Stop button clicked in VoiceInputPanel');
                   onStopRecording();
                 }}
-                className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg transform transition-all hover:scale-105"
+                className="flex items-center gap-2 px-6 py-3 radius-unified text-white font-medium shadow-interactive transition-all transform hover:scale-105"
+                style={{background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)'}}
               >
                 <Square size={20} />
                 <span className="font-medium">停止</span>
@@ -479,24 +529,24 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
 
         {/* リアルタイムトランスクリプト */}
         <div className="px-6 pb-6">
-          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 max-h-40 overflow-y-auto">
-            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+          <div className="glass radius-unified p-4 max-h-40 overflow-y-auto">
+            <h4 className="text-sm font-medium text-white/90 mb-2 flex items-center gap-2">
               <span>{showPreview ? '録音結果' : 'リアルタイム文字起こし'}</span>
               {isWebSpeechSupported && isRecording && (
-                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                <span className="text-xs glass text-white px-2 py-0.5 radius-unified">
                   Web Speech API 使用中
                 </span>
               )}
             </h4>
             {isProcessing ? (
-              <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-500"></div>
+              <div className="flex items-center gap-2 text-white/70">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white/70"></div>
                 <span className="text-sm">処理中...</span>
               </div>
             ) : (
-              <div className="text-gray-900 dark:text-gray-100 text-sm leading-relaxed">
+              <div className="text-white text-sm leading-relaxed">
                 {(isWebSpeechSupported ? (onTranscriptChange ? transcript : localTranscript) : transcript) || (
-                  <span className="text-gray-400 dark:text-gray-500 italic">
+                  <span className="text-white/60 italic">
                     {isWebSpeechSupported 
                       ? '録音を開始すると、ここにリアルタイムで文字起こしが表示されます'
                       : 'Web Speech APIが利用できません。Gemini APIによる音声認識を使用します'
@@ -507,79 +557,117 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
             )}
           </div>
           
-          {/* AI分析ボタン */}
-          {showPreview && transcript && onAnalyze && (
-            <div className="mt-4 flex justify-center gap-4">
-              <button
-                onClick={onAnalyze}
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-full shadow-lg transform transition-all hover:scale-105"
-                disabled={isProcessing}
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-                <span className="font-medium">AI分析開始</span>
-              </button>
+          {/* 録音完了時のアクション */}
+          {showPreview && transcript && (
+            <div className="mt-4">
+              {/* 音声再生ボタン */}
+              {audioBlob && (
+                <div className="flex justify-center mb-4">
+                  <button
+                    onClick={handlePlayAudio}
+                    className="flex items-center gap-2 px-4 py-2 glass radius-unified text-white/90 hover:bg-white/20 shadow-interactive transition-all"
+                  >
+                    {isPlaying ? (
+                      <>
+                        <StopCircle size={20} />
+                        <span>停止</span>
+                      </>
+                    ) : (
+                      <>
+                        <PlayCircle size={20} />
+                        <span>録音を再生</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
               
-            </div>
-          )}
-          
-          {/* ダウンロードボタン */}
-          {showPreview && (
-            <div className="mt-4 flex justify-center gap-2">
-              {hasAudioData && onDownloadAudio && (
+              {/* メインアクションボタン */}
+              <div className="flex justify-center gap-4">
+                {/* エディタに挿入ボタン */}
+                {onAnalyze && (
+                  <button
+                    onClick={onAnalyze}
+                    className="flex items-center gap-2 px-6 py-3 radius-unified text-white font-medium shadow-interactive transform transition-all hover:scale-105"
+                    style={{background: 'var(--bg-gradient-accent)'}}
+                    disabled={isProcessing}
+                  >
+                    <FileText size={20} />
+                    <span className="font-medium">エディタに挿入</span>
+                  </button>
+                )}
+              </div>
+              
+              {/* セパレーター */}
+              <div className="my-4 text-center text-sm text-white/60">または</div>
+              
+              {/* 生データダウンロードボタン */}
+              <div className="flex justify-center gap-3 flex-wrap">
+                {/* 文字起こしダウンロード */}
                 <button
-                  onClick={onDownloadAudio}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow transition-all"
+                  onClick={() => {
+                    const blob = new Blob([transcript], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `文字起こし_${new Date().toISOString().slice(0, 10)}.txt`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 glass radius-unified text-white/90 hover:bg-white/20 shadow-interactive transition-all"
                 >
                   <Download size={16} />
-                  <span className="text-sm">音声</span>
+                  <span className="text-sm">文字起こしをダウンロード</span>
                 </button>
-              )}
-              {hasSRTData && onDownloadSRT && (
-                <button
-                  onClick={onDownloadSRT}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow transition-all"
-                >
-                  <Download size={16} />
-                  <span className="text-sm">字幕</span>
-                </button>
-              )}
-              {hasMarkdownData && onDownloadMarkdown && (
-                <button
-                  onClick={onDownloadMarkdown}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full shadow transition-all"
-                >
-                  <Download size={16} />
-                  <span className="text-sm">MD</span>
-                </button>
-              )}
+                
+                {/* 音声ダウンロード */}
+                {hasAudioData && onDownloadAudio && (
+                  <button
+                    onClick={onDownloadAudio}
+                    className="flex items-center gap-2 px-4 py-2 glass radius-unified text-white/90 hover:bg-white/20 shadow-interactive transition-all"
+                  >
+                    <Download size={16} />
+                    <span className="text-sm">音声ファイルをダウンロード</span>
+                  </button>
+                )}
+                
+                {/* SRTダウンロード */}
+                {hasSRTData && onDownloadSRT && (
+                  <button
+                    onClick={onDownloadSRT}
+                    className="flex items-center gap-2 px-4 py-2 glass radius-unified text-white/90 hover:bg-white/20 shadow-interactive transition-all"
+                  >
+                    <Download size={16} />
+                    <span className="text-sm">字幕ファイルをダウンロード</span>
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>
 
         {/* ステータスバー */}
-        <div className="px-6 py-3 bg-gray-100 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
+        <div className="px-6 py-3 border-t border-white/20" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
               {isRecording ? (
                 <>
                   <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  <span className="text-gray-600 dark:text-gray-300">
+                  <span className="text-white/90">
                     {isPaused ? '一時停止中' : '録音中'}
                   </span>
                 </>
               ) : (
                 <>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <span className="text-gray-600 dark:text-gray-300">待機中</span>
+                  <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                  <span className="text-white/90">待機中</span>
                 </>
               )}
             </div>
-            <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-4 text-white/70">
               <span>音声レベル: {Math.round(audioLevel)}%</span>
               {!isWebSpeechSupported && (
-                <span className="text-yellow-600 text-xs">
+                <span className="text-yellow-400 text-xs">
                   Web Speech API未対応
                 </span>
               )}
