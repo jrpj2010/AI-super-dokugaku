@@ -1,10 +1,25 @@
 // アプリケーションのバージョン管理
-export const APP_VERSION = '0.019';
+export const APP_VERSION = '0.020';
 export const BUILD_DATE = new Date().toISOString();
-export const VERSION_NAME = 'MD Buddy - Voice File Manager Pro';
+export const VERSION_NAME = 'MD Buddy - Professional Grade';
 
 // バージョン履歴
 export const VERSION_HISTORY = [
+  {
+    version: '0.020',
+    date: '2025-01-11',
+    changes: [
+      'プロフェッショナルグレードへの完全リファクタリング',
+      '編集⇔プレビューモード切り替えシステムの実装',
+      'リアルタイムプレビューと明示的保存機能の追加',
+      '一時停止ボタンの完全修正',
+      'AI分析データフローの完全修正',
+      'Web Speech API制御ロジックの完全書き換え',
+      'クリップボード画像ペースト機能の実装（Ctrl+V）',
+      '包括的なツールチップシステムの実装',
+      'バージョン管理方針の確立とドキュメント整備'
+    ]
+  },
   {
     version: '0.019',
     date: '2025-01-11',

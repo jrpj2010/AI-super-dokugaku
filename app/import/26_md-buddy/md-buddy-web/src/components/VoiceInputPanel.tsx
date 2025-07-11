@@ -155,20 +155,67 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
       console.error('音声認識エラー:', event.error);
       (window as any).debugLog?.(`音声認識エラー: ${event.error}`, 'error');
       
-      // ネットワークエラーの場合は再接続を試みる
-      if (event.error === 'network') {
-        setTimeout(() => {
-          if (isRecording) {
-            recognition.start();
-          }
-        }, 1000);
+      // 現在の認識状態をリセット
+      if (recognitionRef.current) {
+        recognitionRef.current.started = false;
+      }
+      
+      // エラー種別に応じてリトライ処理
+      switch (event.error) {
+        case 'network':
+          (window as any).debugLog?.('ネットワークエラー - 3秒後にリトライ', 'warn');
+          setTimeout(() => {
+            if (isRecording && !isPaused && recognitionRef.current) {
+              try {
+                recognitionRef.current.start();
+                recognitionRef.current.started = true;
+                (window as any).debugLog?.('音声認識リトライ成功', 'info');
+              } catch (retryError) {
+                (window as any).debugLog?.(`音声認識リトライ失敗: ${retryError}`, 'error');
+              }
+            }
+          }, 3000);
+          break;
+          
+        case 'aborted':
+          (window as any).debugLog?.('音声認識が中止されました', 'warn');
+          break;
+          
+        case 'audio-capture':
+          (window as any).debugLog?.('音声キャプチャエラー - マイクの確認が必要', 'error');
+          break;
+          
+        case 'not-allowed':
+          (window as any).debugLog?.('マイクアクセスが拒否されました', 'error');
+          break;
+          
+        default:
+          (window as any).debugLog?.(`その他の音声認識エラー: ${event.error}`, 'error');
+          break;
       }
     };
 
     recognition.onend = () => {
-      // 録音中の場合は再開
-      if (isRecording && !isPaused) {
-        recognition.start();
+      // 現在の状態をリセット
+      if (recognitionRef.current) {
+        recognitionRef.current.started = false;
+      }
+      
+      // 録音中かつ一時停止していない場合のみ再開
+      if (isRecording && !isPaused && recognitionRef.current) {
+        try {
+          (window as any).debugLog?.('Web Speech API 自動再開', 'info');
+          recognitionRef.current.start();
+          recognitionRef.current.started = true;
+        } catch (error: any) {
+          console.error('音声認識自動再開エラー:', error);
+          (window as any).debugLog?.(`音声認識自動再開エラー: ${error.message}`, 'error');
+          
+          // 'already started' エラーの場合は無視
+          if (error.name === 'InvalidStateError' && error.message.includes('already started')) {
+            recognitionRef.current.started = true;
+          }
+        }
       }
     };
 
@@ -178,8 +225,11 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
       if (recognitionRef.current) {
         try {
           recognitionRef.current.stop();
+          recognitionRef.current.started = false;
+          (window as any).debugLog?.('Web Speech API クリーンアップ', 'info');
         } catch (e) {
           // 既に停止している場合は無視
+          (window as any).debugLog?.('Web Speech API クリーンアップ（既に停止済み）', 'info');
         }
       }
     };
@@ -189,19 +239,41 @@ export const VoiceInputPanel: React.FC<VoiceInputPanelProps> = ({
   useEffect(() => {
     if (!recognitionRef.current) return;
 
+    // 現在の音声認識状態を取得
+    const currentRecognition = recognitionRef.current;
+    
     if (isRecording && !isPaused) {
+      // 録音中かつ一時停止していない場合は開始
       try {
-        recognitionRef.current.start();
+        // 既に開始している場合は何もしない
+        if (currentRecognition.started) {
+          (window as any).debugLog?.('Web Speech API 既に開始済み', 'info');
+          return;
+        }
+        
+        currentRecognition.start();
+        currentRecognition.started = true;
         (window as any).debugLog?.('Web Speech API 開始', 'info');
-      } catch (error) {
+      } catch (error: any) {
         console.error('音声認識開始エラー:', error);
+        (window as any).debugLog?.(`音声認識開始エラー: ${error.message}`, 'error');
+        
+        // 'already started' エラーの場合は無視
+        if (error.name === 'InvalidStateError' && error.message.includes('already started')) {
+          (window as any).debugLog?.('Web Speech API 既に開始済み（エラー処理）', 'info');
+        }
       }
     } else {
+      // 録音停止または一時停止の場合は停止
       try {
-        recognitionRef.current.stop();
-        (window as any).debugLog?.('Web Speech API 停止', 'info');
-      } catch (error) {
+        if (currentRecognition.started) {
+          currentRecognition.stop();
+          currentRecognition.started = false;
+          (window as any).debugLog?.('Web Speech API 停止', 'info');
+        }
+      } catch (error: any) {
         console.error('音声認識停止エラー:', error);
+        (window as any).debugLog?.(`音声認識停止エラー: ${error.message}`, 'error');
       }
     }
   }, [isRecording, isPaused]);

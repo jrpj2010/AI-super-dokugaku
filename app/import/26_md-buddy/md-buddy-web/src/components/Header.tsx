@@ -25,6 +25,9 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-sm text-gray-500 dark:text-gray-400">
             爆速マークダウンエディター
           </span>
+          <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">
+            v0.020
+          </span>
         </div>
 
         {/* 右側: アクションボタン */}

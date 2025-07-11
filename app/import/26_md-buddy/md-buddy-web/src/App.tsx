@@ -18,6 +18,7 @@ import { SettingsModal } from './components/Settings/SettingsModal';
 import { VoiceInputPanel } from './components/VoiceInputPanel';
 import { generateSRTFromText, downloadSRT, downloadAudio, downloadMarkdown } from './services/srt-generator';
 import type { FileItem } from './types';
+import { RecordingState } from './types/audio';
 import './styles/mobile-voice.css';
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
   // 音声録音フック
   const {
     isRecording,
+    recordingState,
     audioLevel,
     recordingDuration,
     startRecording,
@@ -180,8 +182,18 @@ function App() {
 
   // AI分析開始ハンドラー
   const handleAnalyzeVoiceRecording = async () => {
-    if (!finalTranscript) {
-      (window as any).debugLog?.('トランスクリプトが空のため、AI分析をスキップします', 'warn');
+    console.log('🔍 AI分析開始時のデータ:', {
+      finalTranscript,
+      currentRecordingBlob: currentRecordingBlob ? 'あり' : 'なし',
+      realtimeTranscript,
+      totalTranscript
+    });
+    (window as any).debugLog?.(`AI分析開始時のデータ: finalTranscript="${finalTranscript}", currentRecordingBlob=${currentRecordingBlob ? 'あり' : 'なし'}, realtimeTranscript="${realtimeTranscript}", totalTranscript="${totalTranscript}"`, 'info');
+    
+    // テキストも音声データもない場合はスキップ
+    if (!finalTranscript && !currentRecordingBlob) {
+      (window as any).debugLog?.('トランスクリプトと音声データが両方とも空のため、AI分析をスキップします', 'warn');
+      console.warn('⚠️ トランスクリプトと音声データが両方とも空のため、AI分析をスキップします');
       return;
     }
 
@@ -190,10 +202,34 @@ function App() {
     setShowVoicePreview(false); // プレビューを閉じる
 
     try {
+      let textToAnalyze = finalTranscript;
+      
+      // テキストがない場合は音声データから変換
+      if (!textToAnalyze && currentRecordingBlob) {
+        console.log('🎤 音声データからテキストを変換します...');
+        (window as any).debugLog?.('音声データからテキストを変換します', 'info');
+        
+        try {
+          const transcriptionService = getTranscriptionService();
+          const transcriptionResult = await transcriptionService.transcribeAudio(currentRecordingBlob);
+          textToAnalyze = transcriptionResult.text;
+          console.log('✅ 音声転写結果:', textToAnalyze);
+          (window as any).debugLog?.(`音声転写結果: ${textToAnalyze}`, 'success');
+        } catch (transcriptionError: any) {
+          console.error('❌ 音声転写エラー:', transcriptionError);
+          (window as any).debugLog?.(`音声転写エラー: ${transcriptionError.message}`, 'error');
+          alert(`音声転写エラー: ${transcriptionError.message}`);
+          setVoiceProcessingState('idle');
+          return;
+        }
+      }
+      
       // Markdown変換
       const { convertTextToMarkdown } = await import('./services/gemini/markdown-converter');
-      const response = await convertTextToMarkdown(finalTranscript, ConversionType.MEETING_NOTES);
+      console.log('📝 Gemini APIにテキストを送信:', textToAnalyze);
+      const response = await convertTextToMarkdown(textToAnalyze, ConversionType.MEETING_NOTES);
       const markdown = response.markdown;
+      console.log('✅ Markdown変換結果:', markdown);
       
       (window as any).debugLog?.('Markdown変換が完了しました', 'success');
       
@@ -307,7 +343,16 @@ function App() {
         (window as any).debugLog?.('チャンク録音を停止します', 'info');
         stopVoiceRecording();
         stopChunkedRecording();
-        setFinalTranscript(totalTranscript || realtimeTranscript || ''); // 最終トランスクリプトを保存
+        const transcript = totalTranscript || realtimeTranscript || '';
+        console.log('🎙️ 音声録音停止時のデータ:', {
+          totalTranscript,
+          realtimeTranscript,
+          finalTranscript: transcript,
+          chunkedAudioBlob: chunkedAudioBlob ? 'あり' : 'なし'
+        });
+        (window as any).debugLog?.(`音声録音停止時のデータ: totalTranscript=${totalTranscript}, realtimeTranscript=${realtimeTranscript}, finalTranscript=${transcript}, chunkedAudioBlob=${chunkedAudioBlob ? 'あり' : 'なし'}`, 'info');
+        
+        setFinalTranscript(transcript); // 最終トランスクリプトを保存
         setCurrentRecordingBlob(chunkedAudioBlob); // 音声データを保存
         setShowVoicePreview(true); // プレビュー表示
         
@@ -494,6 +539,7 @@ function App() {
               <button 
                 onClick={() => setShowShareDialog(true)}
                 className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                title="ファイルを共有 (Ctrl+K)"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 0m9.032-4.026A9.001 9.001 0 0112 3c-2.392 0-4.563.93-6.284 2.658M15.732 14.684A6 6 0 0112 15c-1.268 0-2.44-.394-3.732-1.316" />
@@ -505,6 +551,7 @@ function App() {
                 <button
                   onClick={saveCurrentFile}
                   className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors"
+                  title="ファイルを保存 (Ctrl+S)"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V2" />
@@ -545,6 +592,7 @@ function App() {
               onVoiceInput={() => setShowVoicePanel(true)}
               isRecording={voiceSession.isRecording || isChunkedRecording}
               onToggleEditMode={setEditMode}
+              onSave={saveCurrentFile}
             />
           ) : (
             <div className="flex items-center justify-center h-full text-gray-500">
@@ -587,7 +635,7 @@ function App() {
         isOpen={showVoicePanel}
         onClose={() => setShowVoicePanel(false)}
         isRecording={voiceSession.isRecording || isChunkedRecording}
-        isPaused={false}
+        isPaused={recordingState === RecordingState.PAUSED}
         audioLevel={useChunkedMode ? chunkedAudioLevel : audioLevel}
         recordingDuration={useChunkedMode ? chunkedRecordingDuration : recordingDuration}
         transcript={realtimeTranscript || voiceSession.transcript || totalTranscript}

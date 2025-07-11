@@ -1,7 +1,7 @@
 // AudioRecorderクラスのテスト
 
-import { AudioRecorder, RecordingState, AudioFormat } from '../services/audio/audio-recorder';
-import { AudioProcessorUtil } from '../utils/audio-processor';
+import { AudioRecorder, RecordingState, AudioFormat } from '../services/audio/recorder';
+import { AudioProcessorUtil } from '../services/audio/processor';
 
 // モックの設定
 const mockMediaRecorder = {

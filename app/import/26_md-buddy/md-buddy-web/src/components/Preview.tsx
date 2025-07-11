@@ -1,8 +1,9 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useCallback, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import { parseMarkdown } from '../utils/markdown';
 import { MarkdownToolbar } from './MarkdownToolbar';
 import { Editor as SimpleEditor } from './Editor';
+import { handlePasteEvent } from '../utils/clipboard';
 
 interface PreviewProps {
   content: string;
@@ -13,6 +14,7 @@ interface PreviewProps {
   onVoiceInput?: () => void;
   isRecording?: boolean;
   onToggleEditMode?: (editMode: boolean) => void;
+  onSave?: () => void;
 }
 
 export const Preview: React.FC<PreviewProps> = ({ 
@@ -23,12 +25,62 @@ export const Preview: React.FC<PreviewProps> = ({
   onEditContentChange,
   onVoiceInput,
   isRecording = false,
-  onToggleEditMode
+  onToggleEditMode,
+  onSave
 }) => {
   const displayContent = isEditMode ? editContent : content;
   const html = useMemo(() => parseMarkdown(displayContent), [displayContent]);
   const editorRef = useRef<any>(null);
   const insertMarkdownRef = useRef<(before: string, after?: string, placeholder?: string) => void>();
+
+  // クリップボード画像ペースト処理
+  const handleEditorPaste = useCallback(async (event: ClipboardEvent) => {
+    const result = await handlePasteEvent(event);
+    
+    if (result.success && result.markdown && onEditContentChange) {
+      // 現在のカーソル位置に画像マークダウンを挿入
+      const editor = editorRef.current;
+      if (editor) {
+        const position = editor.getPosition();
+        const model = editor.getModel();
+        
+        if (model && position) {
+          const range = {
+            startLineNumber: position.lineNumber,
+            startColumn: position.column,
+            endLineNumber: position.lineNumber,
+            endColumn: position.column
+          };
+          
+          // 画像マークダウンを挿入
+          const operation = {
+            range,
+            text: result.markdown,
+            forceMoveMarkers: true
+          };
+          
+          editor.executeEdits('clipboard-image-paste', [operation]);
+          
+          // 通知表示
+          console.log('画像がペーストされました:', result.fileName);
+          (window as any).debugLog?.(`画像がペーストされました: ${result.fileName}`, 'success');
+        }
+      }
+    } else if (!result.success) {
+      console.warn('画像ペーストエラー:', result.error);
+      (window as any).debugLog?.(`画像ペーストエラー: ${result.error}`, 'warn');
+    }
+  }, [onEditContentChange]);
+
+  // コンポーネントアンマウント時のクリーンアップ
+  useEffect(() => {
+    return () => {
+      const editor = editorRef.current;
+      if (editor && (editor as any).cleanupPasteListener) {
+        (editor as any).cleanupPasteListener();
+      }
+    };
+  }, []);
 
   if (!content && !isEditMode) {
     return (
@@ -107,6 +159,7 @@ export const Preview: React.FC<PreviewProps> = ({
             onVoiceInput={onVoiceInput}
             isRecording={isRecording}
             onToggleEditMode={onToggleEditMode}
+            onSave={onSave}
           />
           <div className="flex-1">
             <Editor
@@ -119,6 +172,33 @@ export const Preview: React.FC<PreviewProps> = ({
               }}
               onMount={(editor) => {
                 editorRef.current = editor;
+                
+                // クリップボード画像ペーストイベントリスナーを追加
+                const disposable = editor.onDidPaste((event: any) => {
+                  // イベントから実際のClipboardEventを取得する必要がある
+                  // Monaco Editorのペーストイベントは制限があるため、
+                  // DOM要素に直接イベントリスナーを追加
+                  const domElement = editor.getDomNode();
+                  if (domElement) {
+                    domElement.addEventListener('paste', handleEditorPaste);
+                  }
+                });
+                
+                // DOM要素に直接ペーストイベントリスナーを追加
+                const domElement = editor.getDomNode();
+                if (domElement) {
+                  domElement.addEventListener('paste', handleEditorPaste);
+                }
+                
+                // クリーンアップ関数をeditorに保存
+                (editor as any).cleanupPasteListener = () => {
+                  if (domElement) {
+                    domElement.removeEventListener('paste', handleEditorPaste);
+                  }
+                  if (disposable) {
+                    disposable.dispose();
+                  }
+                };
               }}
               theme="vs-dark"
               options={{

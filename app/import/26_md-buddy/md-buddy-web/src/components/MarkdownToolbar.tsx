@@ -18,7 +18,8 @@ import {
   FileCode,
   Mic,
   Eye,
-  FileText
+  FileText,
+  Save
 } from 'lucide-react';
 
 interface MarkdownToolbarProps {
@@ -27,6 +28,7 @@ interface MarkdownToolbarProps {
   onVoiceInput?: () => void;
   isRecording?: boolean;
   onToggleEditMode?: (editMode: boolean) => void;
+  onSave?: () => void;
 }
 
 export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({ 
@@ -34,9 +36,10 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
   isEditMode,
   onVoiceInput,
   isRecording = false,
-  onToggleEditMode
+  onToggleEditMode,
+  onSave
 }) => {
-  if (!isEditMode) return null;
+  // プレビューモードでも最低限のツールバーを表示
 
   const toolbarItems = [
     {
@@ -116,7 +119,7 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
     },
     {
       icon: <Image size={16} />,
-      title: '画像',
+      title: '画像（クリップボードから画像をCtrl+Vでペースト可能）',
       action: () => onInsertMarkdown('![', '](URL)', '代替テキスト'),
       group: 'insert'
     },
@@ -172,29 +175,48 @@ export const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({
           </>
         )}
         
-        {/* プレビュー/コード切り替えボタン */}
-        {onToggleEditMode && (
+        {/* 保存ボタン（編集モードのみ） */}
+        {isEditMode && onSave && (
           <>
             <button
-              onClick={() => onToggleEditMode(false)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded transition-all"
-              title="プレビュー表示"
+              onClick={onSave}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-green-500 hover:bg-green-600 text-white rounded transition-all"
+              title="保存 (Ctrl+S)"
             >
-              <Eye size={16} />
-              <span>プレビュー</span>
-            </button>
-            <button
-              onClick={() => onToggleEditMode(true)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded transition-all"
-              title="コード表示"
-            >
-              <FileText size={16} />
-              <span>コード</span>
+              <Save size={16} />
+              <span>保存</span>
             </button>
             <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
           </>
         )}
-        {toolbarItems.map((item, index) => {
+        
+        {/* プレビュー/編集切り替えボタン */}
+        {onToggleEditMode && (
+          <>
+            {isEditMode ? (
+              <button
+                onClick={() => onToggleEditMode(false)}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded transition-all"
+                title="プレビュー表示 (Ctrl+E)"
+              >
+                <Eye size={16} />
+                <span>プレビュー</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => onToggleEditMode(true)}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded transition-all"
+                title="編集モード (Ctrl+E)"
+              >
+                <FileText size={16} />
+                <span>編集</span>
+              </button>
+            )}
+            <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
+          </>
+        )}
+        {/* マークダウンツールバー（編集モードのみ） */}
+        {isEditMode && toolbarItems.map((item, index) => {
           if (item.divider) {
             return (
               <div

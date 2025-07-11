@@ -391,10 +391,10 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                         className="flex-1 px-2 py-1 text-sm border rounded"
                         autoFocus
                       />
-                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded">
+                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded" title="保存">
                         <Save size={16} />
                       </button>
-                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded">
+                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded" title="キャンセル">
                         <X size={16} />
                       </button>
                     </div>
@@ -404,6 +404,7 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                       <button
                         onClick={() => startEditing('title', metadata.title)}
                         className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-100 rounded"
+                        title="編集"
                       >
                         <Edit3 size={14} />
                       </button>
@@ -423,10 +424,10 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                         className="flex-1 px-2 py-1 text-sm border rounded"
                         autoFocus
                       />
-                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded">
+                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded" title="保存">
                         <Save size={16} />
                       </button>
-                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded">
+                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded" title="キャンセル">
                         <X size={16} />
                       </button>
                     </div>
@@ -436,6 +437,7 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                       <button
                         onClick={() => startEditing('author', metadata.author)}
                         className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-100 rounded"
+                        title="編集"
                       >
                         <Edit3 size={14} />
                       </button>
@@ -471,10 +473,10 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                         className="flex-1 px-2 py-1 text-sm border rounded"
                         autoFocus
                       />
-                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded">
+                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded" title="保存">
                         <Save size={16} />
                       </button>
-                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded">
+                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded" title="キャンセル">
                         <X size={16} />
                       </button>
                     </div>
@@ -484,6 +486,7 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                       <button
                         onClick={() => startEditing('version', metadata.version)}
                         className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-100 rounded"
+                        title="編集"
                       >
                         <Edit3 size={14} />
                       </button>
@@ -520,10 +523,10 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                         className="flex-1 px-2 py-1 text-sm border rounded"
                         autoFocus
                       />
-                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded">
+                      <button onClick={saveEdit} className="p-1 text-green-600 hover:bg-green-50 rounded" title="保存">
                         <Save size={16} />
                       </button>
-                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded">
+                      <button onClick={cancelEdit} className="p-1 text-red-600 hover:bg-red-50 rounded" title="キャンセル">
                         <X size={16} />
                       </button>
                     </div>
@@ -533,6 +536,7 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
                       <button
                         onClick={() => startEditing('category', metadata.category)}
                         className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-100 rounded"
+                        title="編集"
                       >
                         <Edit3 size={14} />
                       </button>
