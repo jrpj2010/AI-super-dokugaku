@@ -34,14 +34,18 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({
       
       async function readDirectory(dirHandle: any, path = '') {
         for await (const entry of dirHandle.values()) {
-          if (entry.kind === 'file' && entry.name.endsWith('.md')) {
-            const file = await entry.getFile();
-            // ファイルにパス情報を追加
-            Object.defineProperty(file, 'webkitRelativePath', {
-              value: path + entry.name,
-              writable: false
-            });
-            filesArray.push(file);
+          if (entry.kind === 'file') {
+            // Markdown、音声、SRTファイルを読み込む
+            const supportedExtensions = ['.md', '.webm', '.mp3', '.wav', '.srt'];
+            if (supportedExtensions.some(ext => entry.name.endsWith(ext))) {
+              const file = await entry.getFile();
+              // ファイルにパス情報を追加
+              Object.defineProperty(file, 'webkitRelativePath', {
+                value: path + entry.name,
+                writable: false
+              });
+              filesArray.push(file);
+            }
           } else if (entry.kind === 'directory') {
             await readDirectory(entry, path + entry.name + '/');
           }
@@ -54,15 +58,21 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({
       const newFiles: MarkdownFile[] = [];
       for (let i = 0; i < filesArray.length; i++) {
         const file = filesArray[i];
-        const content = await file.text();
         const path = (file as any).webkitRelativePath || '';
-        newFiles.push({
-          id: `${Date.now()}-${i}`,
-          name: file.name,
-          content,
-          lastModified: new Date(file.lastModified),
-          path: path
-        });
+        
+        // テキストファイル（MD, SRT）は読み込む
+        if (file.name.endsWith('.md') || file.name.endsWith('.srt')) {
+          const content = await file.text();
+          newFiles.push({
+            id: `${Date.now()}-${i}`,
+            name: path || file.name,
+            content,
+            lastModified: new Date(file.lastModified),
+            path: path
+          });
+        }
+        // 音声ファイルは現在の型では扱えないため、表示のみ
+        // 将来的にFileItem型を使用するように修正が必要
       }
       
       setFiles(newFiles);
@@ -242,9 +252,19 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({
                         setRenameValue(file.name);
                       }}
                     >
-                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
+                      {file.name.endsWith('.webm') || file.name.endsWith('.mp3') || file.name.endsWith('.wav') ? (
+                        <svg className="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                      ) : file.name.endsWith('.srt') ? (
+                        <svg className="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                      )}
                       {renamingFileId === file.id ? (
                         <input
                           type="text"

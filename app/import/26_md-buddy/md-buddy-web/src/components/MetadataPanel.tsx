@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { 
   Calendar, Tag, Hash, FileText, Brain, Clock, ChevronDown, ChevronRight,
   User, Folder, Globe, Lock, Version, BookOpen, Link, Image, Code,
-  CheckSquare, Star, Edit3, Save, X, Plus, AlertCircle, BarChart2
+  CheckSquare, Star, Edit3, Save, X, Plus, AlertCircle, BarChart2,
+  Music, Subtitles
 } from 'lucide-react';
+import type { MarkdownFile } from '../types';
+import { AudioPlayer } from './AudioPlayer';
 
 interface MetadataPanelProps {
   content?: string;
@@ -12,6 +15,8 @@ interface MetadataPanelProps {
   lastModified?: Date;
   className?: string;
   isFileSelected?: boolean;
+  files?: MarkdownFile[];
+  currentFileId?: string;
 }
 
 // 包括的なメタデータ構造
@@ -127,7 +132,9 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
   fileName,
   lastModified,
   className = '',
-  isFileSelected = false
+  isFileSelected = false,
+  files = [],
+  currentFileId
 }) => {
   const [metadata, setMetadata] = useState<ComprehensiveMetadata>(defaultMetadata);
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -137,12 +144,15 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
     classification: true,
     content: true,
     stats: true,
+    relatedFiles: true,
     publication: false,
     related: false,
     seo: false,
     custom: false,
     entities: false
   });
+  const [relatedAudioFile, setRelatedAudioFile] = useState<MarkdownFile | null>(null);
+  const [relatedSRTFile, setRelatedSRTFile] = useState<MarkdownFile | null>(null);
 
   // コンテンツからメタデータを自動抽出
   useEffect(() => {
@@ -244,6 +254,42 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
 
     setMetadata(newMetadata);
   }, [content, fileName, lastModified, isFileSelected]);
+
+  // 関連ファイルの検出
+  useEffect(() => {
+    if (!fileName || !files.length || !currentFileId) {
+      setRelatedAudioFile(null);
+      setRelatedSRTFile(null);
+      return;
+    }
+
+    // 現在のファイルのフォルダパスを取得
+    const lastSlashIndex = fileName.lastIndexOf('/');
+    const folderPath = lastSlashIndex > -1 ? fileName.substring(0, lastSlashIndex) : '';
+    
+    // 同じフォルダ内のファイルを検索
+    const audioFile = files.find(file => {
+      if (file.id === currentFileId) return false;
+      
+      const fileLastSlashIndex = file.name.lastIndexOf('/');
+      const fileFolderPath = fileLastSlashIndex > -1 ? file.name.substring(0, fileLastSlashIndex) : '';
+      
+      return fileFolderPath === folderPath && 
+        (file.name.endsWith('.webm') || file.name.endsWith('.mp3') || file.name.endsWith('.wav'));
+    });
+    
+    const srtFile = files.find(file => {
+      if (file.id === currentFileId) return false;
+      
+      const fileLastSlashIndex = file.name.lastIndexOf('/');
+      const fileFolderPath = fileLastSlashIndex > -1 ? file.name.substring(0, fileLastSlashIndex) : '';
+      
+      return fileFolderPath === folderPath && file.name.endsWith('.srt');
+    });
+    
+    setRelatedAudioFile(audioFile || null);
+    setRelatedSRTFile(srtFile || null);
+  }, [fileName, files, currentFileId]);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -701,6 +747,61 @@ export const MetadataPanel: React.FC<MetadataPanelProps> = ({
               </div>
             )}
           </div>
+
+          {/* 関連ファイル */}
+          {(relatedAudioFile || relatedSRTFile) && (
+            <div className="bg-white rounded-lg shadow-sm">
+              <button
+                onClick={() => toggleSection('relatedFiles')}
+                className="w-full p-4 flex items-center justify-between hover:bg-gray-50"
+              >
+                <span className="flex items-center gap-2 font-medium text-gray-900">
+                  <Folder size={18} />
+                  関連ファイル
+                </span>
+                {expandedSections.relatedFiles ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              </button>
+              {expandedSections.relatedFiles && (
+                <div className="px-4 pb-4 space-y-4">
+                  {/* 音声ファイル */}
+                  {relatedAudioFile && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Music size={16} className="text-purple-600" />
+                        <span className="text-sm font-medium text-gray-900">音声ファイル</span>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <p className="text-xs text-gray-600 mb-3">{relatedAudioFile.name.split('/').pop()}</p>
+                        <AudioPlayer 
+                          audioFile={relatedAudioFile} 
+                          subtitleFile={relatedSRTFile || undefined}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* SRTファイル */}
+                  {relatedSRTFile && !relatedAudioFile && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Subtitles size={16} className="text-green-600" />
+                        <span className="text-sm font-medium text-gray-900">字幕ファイル</span>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <p className="text-xs text-gray-600 mb-2">{relatedSRTFile.name.split('/').pop()}</p>
+                        <div className="max-h-40 overflow-y-auto">
+                          <pre className="text-xs font-mono text-gray-700 whitespace-pre-wrap">
+                            {relatedSRTFile.content.substring(0, 500)}
+                            {relatedSRTFile.content.length > 500 && '...'}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* 公開情報 */}
           <div className="bg-white rounded-lg shadow-sm">

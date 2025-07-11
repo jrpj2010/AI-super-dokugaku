@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { FileItem } from '@/store/fileStore';
+import type { MarkdownFile } from '../types';
 import { Play, Pause, Volume2, SkipBack, SkipForward } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
-import { Button } from '@/components/ui/button';
-import { parseSRT } from '@/utils/subtitles';
+import { Slider } from './ui/slider';
+import { Button } from './ui/button';
+import { parseSRT } from '../utils/subtitles';
 
 interface AudioPlayerProps {
-  audioFile: FileItem;
-  subtitleFile?: FileItem;
+  audioFile: MarkdownFile;
+  subtitleFile?: MarkdownFile;
 }
 
 export function AudioPlayer({ audioFile, subtitleFile }: AudioPlayerProps) {

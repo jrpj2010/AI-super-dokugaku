@@ -5,7 +5,6 @@ import { Preview } from './components/Preview';
 import { ShareDialog } from './components/ShareDialog';
 import { VoiceInput } from './components/VoiceInput';
 import { TranscriptPreview } from './components/TranscriptPreview';
-import { TabViewer } from './components/TabViewer';
 import { LoadingAnimation, AnimationType } from './components/LoadingAnimation';
 import { DebugWindow } from './components/DebugWindow';
 import { Header } from './components/Header';
@@ -18,6 +17,7 @@ import { StreamingMarkdown } from './components/StreamingMarkdown';
 import { SettingsModal } from './components/Settings/SettingsModal';
 import { VoiceInputPanel } from './components/VoiceInputPanel';
 import { generateSRTFromText, downloadSRT, downloadAudio, downloadMarkdown } from './services/srt-generator';
+import type { FileItem } from './types';
 import './styles/mobile-voice.css';
 
 function App() {
@@ -217,28 +217,32 @@ function App() {
       
       // 音声ファイルを保存
       if (currentRecordingBlob) {
-        const audioFile = {
+        const audioFile: FileItem = {
           id: Date.now().toString() + '_audio',
           name: `${folderName}/audio.webm`,
           content: currentRecordingBlob,
-          type: 'audio' as const,
+          type: 'audio',
+          lastModified: timestamp,
           updatedAt: timestamp,
-          createdAt: timestamp
+          createdAt: timestamp,
+          path: `${folderName}/audio.webm`
         };
-        files.push(audioFile);
+        addFile(audioFile as any); // 一時的にanyで回避
       }
       
       // SRTファイルを保存
       if (generatedSRT) {
-        const srtFile = {
+        const srtFile: FileItem = {
           id: Date.now().toString() + '_srt',
           name: `${folderName}/subtitles.srt`,
           content: generatedSRT,
-          type: 'text' as const,
+          type: 'text',
+          lastModified: timestamp,
           updatedAt: timestamp,
-          createdAt: timestamp
+          createdAt: timestamp,
+          path: `${folderName}/subtitles.srt`
         };
-        files.push(srtFile);
+        addFile(srtFile as any); // 一時的にanyで回避
       }
       
       // 作成したMarkdownファイルを自動的に選択してアクティブ化
@@ -246,9 +250,6 @@ function App() {
       setEditMode(false); // プレビューモードで表示
       
       (window as any).debugLog?.('3ファイルセットを作成し、Markdownファイルをアクティブ化しました', 'success');
-      
-      // ファイルエクスプローラーを更新
-      setFiles([...files]);
 
       // 状態をリセット
       setVoiceProcessingState('idle');
@@ -425,11 +426,14 @@ function App() {
     
     (window as any).debugAction?.('新規ファイル作成', fileName, 'pending');
     try {
-      const newFileId = await createNewFile(fileName);
-      selectFile(newFileId);
-      setEditMode(true); // 編集モードに切り替え
-      (window as any).debugAction?.('新規ファイル作成', fileName, 'success');
+      const newFileId = await createNewFile(''); // 空のフォルダパスを渡す
+      if (newFileId) {
+        selectFile(newFileId);
+        setEditMode(true); // 編集モードに切り替え
+        (window as any).debugAction?.('新規ファイル作成', fileName, 'success');
+      }
     } catch (error: any) {
+      console.error('新規ファイル作成エラー:', error);
       (window as any).debugAction?.('新規ファイル作成', error.message, 'error');
     }
   };
@@ -532,13 +536,15 @@ function App() {
         {/* 中央カラム - エディター/プレビュー */}
         <main className="flex-1 bg-white flex flex-col overflow-hidden">
           {selectedFile ? (
-            <TabViewer
-              currentFile={selectedFile}
-              files={files}
+            <Preview
+              content={selectedFile.content}
+              fileName={selectedFile.name}
               isEditMode={isEditMode}
               editContent={editContent}
               onEditContentChange={setEditContent}
-              onFileChange={selectFile}
+              onVoiceInput={() => setShowVoicePanel(true)}
+              isRecording={voiceSession.isRecording || isChunkedRecording}
+              onToggleEditMode={setEditMode}
             />
           ) : (
             <div className="flex items-center justify-center h-full text-gray-500">
@@ -554,6 +560,8 @@ function App() {
             fileName={selectedFile?.name}
             lastModified={selectedFile?.updatedAt}
             isFileSelected={!!selectedFile}
+            files={files}
+            currentFileId={selectedFileId}
           />
         </aside>
       </div>

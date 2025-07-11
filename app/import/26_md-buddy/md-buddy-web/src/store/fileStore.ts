@@ -127,46 +127,49 @@ export const useFileStore = create<FileStore>((set, get) => ({
   },
   
   createNewFile: async (folderPath: string) => {
-    const { directoryHandle } = get();
-    if (!directoryHandle) return;
+    const now = new Date();
+    const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+    const fileName = `新規ドキュメント_${timestamp}.md`;
+    const content = `# 新規ドキュメント\n\n作成日: ${now.toLocaleString('ja-JP')}\n\n`;
     
-    try {
-      // 新しいファイル名を生成
-      const timestamp = new Date().toISOString().slice(0, 10);
-      const fileName = `新規ドキュメント_${timestamp}.md`;
-      
-      // フォルダパスをたどる
-      const pathParts = folderPath.split('/').filter(Boolean);
-      let currentHandle = directoryHandle;
-      for (const part of pathParts) {
-        currentHandle = await currentHandle.getDirectoryHandle(part, { create: true });
+    const newFile: MarkdownFile = {
+      id: `${Date.now()}`,
+      name: fileName,
+      content,
+      lastModified: now,
+      updatedAt: now,
+      createdAt: now,
+      path: folderPath ? `${folderPath}/${fileName}` : fileName
+    };
+    
+    set((state) => ({
+      files: [...state.files, newFile],
+      selectedFileId: newFile.id,
+      editContent: content,
+      isEditMode: true
+    }));
+    
+    // directoryHandleがある場合のみファイルシステムに保存
+    const { directoryHandle } = get();
+    if (directoryHandle) {
+      try {
+        const pathParts = folderPath.split('/').filter(Boolean);
+        let currentHandle = directoryHandle;
+        for (const part of pathParts) {
+          currentHandle = await currentHandle.getDirectoryHandle(part, { create: true });
+        }
+        
+        const fileHandle = await currentHandle.getFileHandle(fileName, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(content);
+        await writable.close();
+      } catch (error) {
+        console.error('Failed to save file to filesystem:', error);
+        // エラーがあってもメモリ上のファイルは作成されている
       }
-      
-      // ファイルを作成
-      const fileHandle = await currentHandle.getFileHandle(fileName, { create: true });
-      const writable = await fileHandle.createWritable();
-      const content = `# 新規ドキュメント\n\n作成日: ${new Date().toLocaleString('ja-JP')}\n\n`;
-      await writable.write(content);
-      await writable.close();
-      
-      // ストアに追加
-      const newFile: MarkdownFile = {
-        id: `${Date.now()}`,
-        name: fileName,
-        content,
-        lastModified: new Date(),
-        path: folderPath ? `${folderPath}/${fileName}` : fileName
-      };
-      
-      set((state) => ({
-        files: [...state.files, newFile],
-        selectedFileId: newFile.id,
-        editContent: content
-      }));
-    } catch (error) {
-      console.error('Failed to create file:', error);
-      throw error;
     }
+    
+    return newFile.id;
   },
   
   renameFile: async (id: string, newName: string) => {

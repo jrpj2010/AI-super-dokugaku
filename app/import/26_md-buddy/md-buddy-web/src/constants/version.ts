@@ -1,10 +1,23 @@
 // アプリケーションのバージョン管理
-export const APP_VERSION = '0.018';
+export const APP_VERSION = '0.019';
 export const BUILD_DATE = new Date().toISOString();
-export const VERSION_NAME = 'MD Buddy - AI Panel Pro';
+export const VERSION_NAME = 'MD Buddy - Voice File Manager Pro';
 
 // バージョン履歴
 export const VERSION_HISTORY = [
+  {
+    version: '0.019',
+    date: '2025-01-11',
+    changes: [
+      '音声ファイルの自動保存機能を実装',
+      '3ファイル同時保存機能（MD/音声/SRT）をフォルダ構造で管理',
+      'タブUIの実装（同じフォルダ内のファイルを切り替え表示）',
+      '音声プレーヤー機能（再生/一時停止、シークバー、音量調整、再生速度変更）',
+      'SRT字幕の同期表示機能',
+      'Geminiプロンプト改善（ダミーデータ問題を修正）',
+      'AI分析後の自動ファイルアクティブ化'
+    ]
+  },
   {
     version: '0.018',
     date: '2025-01-11',
