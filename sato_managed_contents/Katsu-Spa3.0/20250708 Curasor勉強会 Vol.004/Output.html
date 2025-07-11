@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20250708 Curasor勉強会 Vol.004 プレゼン</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    html {
+      height: 100vh;
+    }
+
+    .slide {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active {
+      display: flex;
+      animation: fadeIn 0.6s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 1000;
+    }
+
+    .nav-button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 32px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: background 0.2s;
+    }
+
+    .nav-button:hover {
+      background: #0056b3;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      background: #007BFF;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 16px;
+      z-index: 1000;
+      opacity: 0.9;
+    }
+
+    .icon-bg {
+      background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .floating-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 123, 255, 0.10);
+      border-radius: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- スライド本体 -->
+  <div id="slides">
+    <!-- 1. タイトルスライド -->
+    <div class="slide active">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <div class="icon-bg w-20 h-20 rounded-full flex items-center justify-center mb-8">
+          <i class="fa-solid fa-brain text-white text-5xl"></i>
+        </div>
+        <h1 class="gradient-text text-6xl font-black mb-6">Curasor勉強会 Vol.004</h1>
+        <h2 class="text-2xl text-slate-700 mb-8">AI活用とスライド自動生成の最前線</h2>
+        <div class="text-lg text-slate-500">2025年7月8日 / TANREN株式会社</div>
+      </div>
+    </div>
+    <!-- 2. アジェンダ -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-4xl font-bold mb-8"><i class="fa-solid fa-list-ul text-blue-500 mr-4"></i>本日のアジェンダ</h2>
+        <ul class="text-2xl text-slate-700 space-y-4">
+          <li>1. Youtube字幕ダウンローダーの検証</li>
+          <li>2. 一撃！勝spark⭐️によるHTMLスライド生成</li>
+          <li>3. Felo/Deep Research連携の活用提案</li>
+          <li>4. 今後の課題と展望</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 3. Youtube字幕ダウンローダーの現状 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-download text-green-500 mr-4"></i>Youtube字幕ダウンローダーの現状
+        </h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・開発者環境では正常動作</li>
+          <li>・一部環境でサーバー接続エラー発生</li>
+          <li>・APIはsupabase.aiを利用</li>
+        </ul>
+        <div class="mt-8 text-slate-500">次週に持ち越し、原因調査を継続</div>
+      </div>
+    </div>
+    <!-- 4. 実演と課題分析 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i
+            class="fa-solid fa-magnifying-glass-chart text-orange-500 mr-4"></i>実演と課題分析</h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・参加者による操作実演で問題を再現</li>
+          <li>・開発者環境と他環境で挙動差</li>
+          <li>・アカウント/環境依存の可能性</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 5. 一撃！勝spark⭐️スライド生成の手順 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-bolt text-yellow-500 mr-4"></i>一撃！勝spark⭐️スライド生成の手順
+        </h2>
+        <ol class="text-xl text-slate-700 space-y-2 list-decimal list-inside">
+          <li>システムプロンプトと操作手順のダウンロード</li>
+          <li>Cursorで新規フォルダ作成・ファイル移動</li>
+          <li>パス設定・出力先指定</li>
+          <li>AIモデル指定（Claude Opus4推奨）</li>
+          <li>Docs機能で情報収集・精度向上</li>
+        </ol>
+      </div>
+    </div>
+    <!-- 6. AIハルシネーション問題と対策 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i
+            class="fa-solid fa-triangle-exclamation text-red-500 mr-4"></i>AIハルシネーション問題と対策</h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・AIによる架空データ混入のリスク</li>
+          <li>・インプット情報の精査が重要</li>
+          <li>・AI生成である旨の明記を推奨</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 7. Felo/Deep Research連携の提案 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-link text-blue-500 mr-4"></i>Felo/Deep Research連携の提案
+        </h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・Feloやperplexityで事前情報収集</li>
+          <li>・Deep Researchで競合分析・課題深掘り</li>
+          <li>・AIスライド化で短時間・高品質な提案</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 8. スライド自動生成の価値 -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-star text-yellow-500 mr-4"></i>スライド自動生成の価値</h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・短時間で高品質な資料作成が可能</li>
+          <li>・人的リソースの大幅削減</li>
+          <li>・反復的な業務の自動化</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 9. 本日のまとめと学び -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-check-circle text-green-500 mr-4"></i>本日のまとめと学び</h2>
+        <ul class="text-xl text-slate-700 space-y-2">
+          <li>・AI活用にはプロンプト設計と検証が不可欠</li>
+          <li>・ツールの習熟が効率化の鍵</li>
+          <li>・目的に応じてプロンプトを柔軟にカスタマイズ</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 10. 次回予告・クロージング -->
+    <div class="slide">
+      <div class="w-full h-full flex flex-col items-center justify-center floating-card p-16">
+        <h2 class="text-3xl font-bold mb-6"><i class="fa-solid fa-forward text-blue-500 mr-4"></i>次回予告・クロージング</h2>
+        <div class="text-2xl text-slate-700 mb-4">次回はGemini CLIのハンズオン解説予定</div>
+        <div class="text-lg text-slate-500">事前にYoutubeやブログ記事で予習を推奨します</div>
+        <div class="mt-8 text-slate-400">ご参加ありがとうございました！</div>
+      </div>
+    </div>
+  </div>
+  <!-- ナビゲーション -->
+  <div class="navigation">
+    <button class="nav-button" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> 前へ</button>
+    <button class="nav-button" onclick="nextSlide()">次へ <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+  <div class="slide-number" id="slideNumber">1 / 10</div>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    function showSlide(idx) {
+      slides[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+      document.getElementById('slideNumber').textContent = (current + 1) + ' / ' + slides.length;
+    }
+    function nextSlide() {
+      if (current < slides.length - 1) showSlide(current + 1);
+    }
+    function prevSlide() {
+      if (current > 0) showSlide(current - 1);
+    }
+    // キーボード操作
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+
+</html>

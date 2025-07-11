@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Buddy スタイルテスト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="h-screen flex flex-col">
+        <!-- ヘッダー -->
+        <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">MD Buddy</h1>
+                        <p class="text-xs text-gray-500">爆速マークダウンビューアー</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- サイドバー -->
+            <aside class="w-80 bg-white border-r border-gray-200 flex flex-col">
+                <div class="p-4 border-b border-gray-200">
+                    <!-- ドロップゾーン -->
+                    <div class="relative w-full border-2 border-dashed rounded-lg border-gray-300 hover:border-gray-400 bg-gray-50">
+                        <div class="flex flex-col items-center justify-center py-8">
+                            <div class="p-4 rounded-full bg-gray-100">
+                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-medium mt-3 text-gray-700">マークダウンファイルをドラッグ&ドロップ</p>
+                            <p class="text-xs text-gray-500 mt-1">または クリックして選択</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- プレビューエリア -->
+            <main class="flex-1 bg-white p-8">
+                <div class="text-center text-gray-500">
+                    <h2 class="text-2xl font-bold mb-4">プレビューエリア</h2>
+                    <p>ファイルを選択すると、ここにプレビューが表示されます</p>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

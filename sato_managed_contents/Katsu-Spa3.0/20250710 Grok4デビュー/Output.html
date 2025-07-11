@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grok 4 デビュー - コンサルタント向けプレゼンテーション</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    .slide {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .slide h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .slide h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .slide ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .slide li {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #4a90e2;
+    }
+
+    .chart-container {
+      width: 80%;
+      height: 400px;
+      margin: 2rem auto;
+    }
+
+    .timeline {
+      width: 80%;
+      height: 200px;
+      margin: 2rem auto;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background-color: #4a90e2;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Slide 1: タイトルスライド -->
+  <div id="slide1" class="slide bg-gradient-to-r from-blue-900 to-indigo-900 text-white">
+    <div class="flex flex-col items-center justify-center h-full">
+      <h1 class="text-6xl font-bold mb-4"><i class="fas fa-robot mr-2"></i>Grok 4 デビュー</h1>
+      <h2 class="text-3xl mb-8">xAIの革新的AIモデル - コンサルタント向け洞察</h2>
+      <p class="text-xl">佐藤勝彦 / TANREN株式会社</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: アジェンダ -->
+  <div id="slide2" class="slide hidden bg-gray-100">
+    <h2 class="text-4xl font-bold mb-8 text-center"><i class="fas fa-list-ul mr-2"></i>アジェンダ</h2>
+    <ul class="list-disc pl-8 text-2xl space-y-4 max-w-4xl mx-auto">
+      <li>Grok 4の概要と進化</li>
+      <li>トレーニングスケールと性能ベンチマーク</li>
+      <li>Grok 4 Heavy: 多剤システム</li>
+      <li>デモと実世界アプリケーション</li>
+      <li>ボイスモードの強化</li>
+      <li>APIリリースとビジネスユースケース</li>
+      <li>将来のロードマップ</li>
+      <li>コンサルタント向け戦略的示唆</li>
+    </ul>
+  </div>
+
+  <!-- Slide 3: Grokシリーズの背景 -->
+  <div id="slide3" class="slide hidden bg-blue-50">
+    <h2 class="text-4xl font-bold mb-8 text-center"><i class="fas fa-history mr-2"></i>Grokシリーズの背景</h2>
+    <div class="grid grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div>
+        <h3 class="text-2xl mb-4">Grok 1からGrok 4へ</h3>
+        <ul class="list-disc pl-4 text-xl space-y-2">
+          <li>Grok 1: 初期モデル、Hitchhiker's Guideインスパイア</li>
+          <li>Grok 2: スケールアップ、ツール統合</li>
+          <li>Grok 3: マルチモーダル機能追加</li>
+          <li>Grok 4: 100倍トレーニング、HLE 40%+</li>
+        </ul>
+      </div>
+      <div id="evolution-chart" class="h-96"></div>
+    </div>
+    <script>
+      // D3.jsで進化タイムラインを作成
+      const data = [
+        { year: 2023, model: 'Grok 1', flops: 1e23 },
+        { year: 2024, model: 'Grok 2', flops: 1e24 },
+        { year: 2025, model: 'Grok 3', flops: 1e25 },
+        { year: 2026, model: 'Grok 4', flops: 1e27 }
+      ];
+      // D3コードでタイムライン描画 (詳細実装省略)
+    </script>
+  </div>
+
+  <!-- Slide 4: トレーニングスケール -->
+  <div id="slide4" class="slide hidden bg-green-50">
+    <h2 class="text-4xl font-bold mb-8 text-center"><i class="fas fa-brain mr-2"></i>トレーニングスケール</h2>
+    <div class="flex justify-center">
+      <canvas id="training-chart" width="800" height="400"></canvas>
+    </div>
+    <script>
+      new Chart(document.getElementById('training-chart'), {
+        type: 'bar',
+        data: {
+          labels: ['Grok 2', 'Grok 3', 'Grok 4'],
+          datasets: [{
+            label: 'トレーニングスケール (相対値)',
+            data: [1, 10, 100],
+            backgroundColor: ['#4CAF50', '#2196F3', '#F44336']
+          }]
+        },
+        options: { scales: { y: { beginAtZero: true } } }
+      });
+    </script>
+    <p class="text-xl mt-4 text-center">Grok 4はGrok 2の100倍のトレーニングを実施</p>
+  </div>
+
+  <!-- Slide 5: 性能ベンチマーク -->
+  <div id="slide5" class="slide hidden bg-gray-100">
+    <i class="fas fa-chart-bar icon"></i>
+    <h2>性能ベンチマーク</h2>
+    <p>さまざまなタスクでのGrok 4のスコア比較。</p>
+    <div class="chart-container">
+      <canvas id="benchmarkChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Slide 6: Human-Level Equivalence (HLE) -->
+  <div id="slide6" class="slide hidden bg-white">
+    <i class="fas fa-weight-hanging icon"></i>
+    <h2>Grok 4 Heavy</h2>
+    <p>マルチエージェントシステムでテキスト問題の50%以上を解決。</p>
+    <p>複雑なクエリに対する深い推論能力。</p>
+    <div class="timeline" id="heavyTimeline"></div>
+  </div>
+
+  <!-- Slide 7: Grok 4 Heavy概要 -->
+  <div id="slide7" class="slide hidden bg-gray-100">
+    <i class="fas fa-calculator icon"></i>
+    <h2>Grok 4 Heavy概要</h2>
+    <p>マルチエージェントシステムでテキスト問題の50%以上を解決。</p>
+    <p>複雑なクエリに対する深い推論能力。</p>
+    <div class="timeline" id="heavyTimeline"></div>
+  </div>
+
+  <!-- Slide 8: 多剤システムの仕組み -->
+  <div id="slide8" class="slide hidden bg-white">
+    <i class="fas fa-dna icon"></i>
+    <h2>多剤システムの仕組み</h2>
+    <p>遺伝子配列分析と薬剤発見加速。</p>
+    <div class="timeline" id="heavyTimeline"></div>
+  </div>
+
+  <!-- Slide 9: デモ - 数学問題解決 -->
+  <div id="slide9" class="slide hidden bg-gray-100">
+    <i class="fas fa-calculator icon"></i>
+    <h2>デモ: 数学問題解決</h2>
+    <p>Grok 4のステップバイステップの推論プロセス。</p>
+    <ul>
+      <li>問題分析</li>
+      <li>方程式設定</li>
+      <li>解決と検証</li>
+    </ul>
+  </div>
+
+  <!-- Slide 10: デモ - 市場予測 -->
+  <div id="slide10" class="slide hidden bg-white">
+    <i class="fas fa-chart-line icon"></i>
+    <h2>デモ: 市場予測</h2>
+    <p>歴史的データに基づく株価予測。</p>
+    <div class="chart-container">
+      <canvas id="marketChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Slide 11: デモ - 物理シミュレーション -->
+  <div id="slide11" class="slide hidden bg-gray-100">
+    <i class="fas fa-atom icon"></i>
+    <h2>デモ: 物理シミュレーション</h2>
+    <p>重力波や量子現象の視覚化。</p>
+    <div id="physicsViz" class="chart-container"></div>
+  </div>
+
+  <!-- Slide 12: デモ - Twitter統合 -->
+  <div id="slide12" class="slide hidden bg-white">
+    <i class="fab fa-twitter icon"></i>
+    <h2>デモ: Twitter統合</h2>
+    <p>リアルタイムトレンド分析と応答生成。</p>
+    <ul>
+      <li>トレンド検知</li>
+      <li>コンテキスト理解</li>
+      <li>ウィットに富んだ応答</li>
+    </ul>
+  </div>
+
+  <!-- Slide 13: ボイスモード強化 -->
+  <div id="slide13" class="slide hidden bg-gray-100">
+    <i class="fas fa-microphone icon"></i>
+    <h2>音声モード強化</h2>
+    <p>低遅延、自然な会話。SやEveなどの新しいボイス。</p>
+    <div class="chart-container">
+      <canvas id="voiceLatencyChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Slide 14: APIリリース -->
+  <div id="slide14" class="slide hidden bg-white">
+    <i class="fas fa-code icon"></i>
+    <h2>APIリリース</h2>
+    <p>開発者向けGrok 4 APIの提供開始。</p>
+    <p>レート制限と価格モデル。</p>
+  </div>
+
+  <!-- Slide 15: ビジネスアプリケーション -->
+  <div id="slide15" class="slide hidden bg-gray-100">
+    <i class="fas fa-business-time icon"></i>
+    <h2>アプリケーション: ビジネスシミュレーション</h2>
+    <p>市場動向予測と戦略立案支援。</p>
+    <div class="chart-container">
+      <canvas id="businessChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Slide 16: バイオメッド研究ユースケース -->
+  <div id="slide16" class="slide hidden bg-white">
+    <i class="fas fa-dna icon"></i>
+    <h2>アプリケーション: バイオメッド研究</h2>
+    <p>遺伝子配列分析と薬剤発見加速。</p>
+  </div>
+
+  <!-- Slide 17: 将来ロードマップ -->
+  <div id="slide17" class="slide hidden bg-gray-100">
+    <i class="fas fa-road icon"></i>
+    <h2>将来のロードマップ</h2>
+    <p>コーディングモデル、マルチモーダル改善、ビデオ生成。</p>
+    <div class="timeline" id="roadmapTimeline"></div>
+  </div>
+
+  <!-- Slide 18: コンサルタント向け示唆 -->
+  <div id="slide18" class="slide hidden bg-white">
+    <i class="fas fa-balance-scale icon"></i>
+    <h2>コンサルタント向け示唆</h2>
+    <p>産業別影響度と機会。</p>
+    <div class="chart-container">
+      <canvas id="impactChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Slide 19: 潜在的課題と解決策 -->
+  <div id="slide19" class="slide hidden bg-gray-100">
+    <i class="fas fa-lightbulb icon"></i>
+    <h2>潜在的課題と解決策</h2>
+    <p>コンサルタントのためのGrok 4活用ガイドライン。</p>
+    <ul>
+      <li>パイロットプロジェクト</li>
+      <li>トレーニングプログラム</li>
+      <li>ROI評価</li>
+    </ul>
+  </div>
+
+  <!-- Slide 20: 結論とQ&A -->
+  <div id="slide20" class="slide hidden bg-gradient-to-r from-indigo-900 to-blue-900 text-white">
+    <div class="flex flex-col items-center justify-center h-full">
+      <h1 class="text-5xl font-bold mb-4"><i class="fas fa-lightbulb mr-2"></i>結論</h1>
+      <p class="text-2xl mb-8 text-center max-w-4xl">Grok 4はAIの新時代を切り開く。コンサルタントとして、この技術を活用し、クライアントのイノベーションを加速させよう。</p>
+      <h2 class="text-4xl font-bold"><i class="fas fa-question-circle mr-2"></i>Q&A</h2>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <div class="nav-btn" onclick="prevSlide()">前へ</div>
+    <div class="nav-btn" onclick="nextSlide()">次へ</div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 20;
+
+    function showSlide(n) {
+      for (let i = 1; i <= totalSlides; i++) {
+        document.getElementById(`slide${i}`).classList.add('hidden');
+      }
+      document.getElementById(`slide${n}`).classList.remove('hidden');
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    showSlide(1);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Chart.js for Overview Chart (Slide 3) - 存在しない要素をスキップ
+    const overviewChart = document.getElementById('overviewChart');
+    if (overviewChart) {
+      const overviewCtx = overviewChart.getContext('2d');
+      new Chart(overviewCtx, {
+        type: 'pie',
+        data: {
+          labels: ['トレーニング規模', '性能向上', '新機能'],
+          datasets: [{
+            data: [100, 40, 20],
+            backgroundColor: ['#4a90e2', '#50e3c2', '#f5a623']
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // Chart.js for Training Evolution (Slide 4) - 存在しない要素をスキップ
+    const trainingChart = document.getElementById('trainingChart');
+    if (trainingChart) {
+      const trainingCtx = trainingChart.getContext('2d');
+      new Chart(trainingCtx, {
+        type: 'line',
+        data: {
+          labels: ['Grok 1', 'Grok 2', 'Grok 3', 'Grok 4'],
+          datasets: [{
+            label: 'トレーニング規模 (相対値)',
+            data: [1, 10, 50, 100],
+            borderColor: '#4a90e2',
+            fill: false
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // Chart.js for Benchmark (Slide 5) - 存在しない要素をスキップ
+    const benchmarkChart = document.getElementById('benchmarkChart');
+    if (benchmarkChart) {
+      const benchmarkCtx = benchmarkChart.getContext('2d');
+      new Chart(benchmarkCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Math', 'Reasoning', 'Coding'],
+          datasets: [{
+            label: 'Grok 4',
+            data: [85, 90, 88],
+            backgroundColor: '#4a90e2'
+          }, {
+            label: 'Competitor',
+            data: [80, 85, 82],
+            backgroundColor: '#d1d5db'
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // D3.js for Heavy Timeline (Slide 6) - 存在しない要素をスキップ
+    const heavyTimeline = document.getElementById('heavyTimeline');
+    if (heavyTimeline) {
+      const heavyData = [
+        { year: '2025', event: 'Grok 4 Heavy リリース' },
+        { year: '2026', event: 'マルチエージェント最適化' }
+      ];
+      const heavySvg = d3.select('#heavyTimeline').append('svg').attr('width', '100%').attr('height', '100%');
+      // Add more D3 code as needed
+    }
+
+    // Chart.js for Market Chart (Slide 10)
+    const marketChart = document.getElementById('marketChart');
+    if (marketChart) {
+      const marketCtx = marketChart.getContext('2d');
+      new Chart(marketCtx, {
+        type: 'line',
+        data: {
+          labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+          datasets: [{
+            label: '予測価格',
+            data: [100, 105, 108, 112, 118, 125],
+            borderColor: '#4a90e2',
+            fill: false
+          }, {
+            label: '実際の価格',
+            data: [100, 103, 107, 110, 115, 120],
+            borderColor: '#50e3c2',
+            fill: false
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // Chart.js for Voice Latency Chart (Slide 13)
+    const voiceLatencyChart = document.getElementById('voiceLatencyChart');
+    if (voiceLatencyChart) {
+      const voiceCtx = voiceLatencyChart.getContext('2d');
+      new Chart(voiceCtx, {
+        type: 'bar',
+        data: {
+          labels: ['従来モデル', 'Grok 4 Voice'],
+          datasets: [{
+            label: '遅延 (ms)',
+            data: [500, 100],
+            backgroundColor: ['#d1d5db', '#4a90e2']
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // Chart.js for Business Chart (Slide 15)
+    const businessChart = document.getElementById('businessChart');
+    if (businessChart) {
+      const businessCtx = businessChart.getContext('2d');
+      new Chart(businessCtx, {
+        type: 'radar',
+        data: {
+          labels: ['効率性', '精度', 'コスト削減', '革新性', 'スケーラビリティ'],
+          datasets: [{
+            label: 'Grok 4導入効果',
+            data: [90, 85, 80, 95, 88],
+            backgroundColor: 'rgba(74, 144, 226, 0.2)',
+            borderColor: '#4a90e2'
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+
+    // Chart.js for Impact Chart (Slide 18)
+    const impactChart = document.getElementById('impactChart');
+    if (impactChart) {
+      const impactCtx = impactChart.getContext('2d');
+      new Chart(impactCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['金融', 'ヘルスケア', '製造業', 'リテール', 'その他'],
+          datasets: [{
+            data: [30, 25, 20, 15, 10],
+            backgroundColor: ['#4a90e2', '#50e3c2', '#f5a623', '#d1d5db', '#9013fe']
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+  </script>
+</body>
+
+</html>

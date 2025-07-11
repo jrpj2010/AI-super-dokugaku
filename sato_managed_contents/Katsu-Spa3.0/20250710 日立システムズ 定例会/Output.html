@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日立システムズ様定例会 - AI活用による次世代営業戦略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans JP', sans-serif; }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+        .slide-container { width: 100vw; height: 100vh; position: relative; background: #f3f4f6; }
+        .slide {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            padding: 48px 64px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            transform: translateX(20px);
+        }
+        .slide.active { display: flex; opacity: 1; z-index: 10; transform: translateX(0); }
+        .gradient-text { background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .accent-line { background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%); }
+        .floating-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15); border-radius: 1rem; }
+        .icon-bg { background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%); }
+        
+        .navigation { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        .nav-button, .play-button { background: rgba(45, 62, 80, 0.9); color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+        .nav-button:hover { background: rgba(52, 152, 219, 0.9); transform: translateY(-2px); }
+        .play-button { background: rgba(46, 204, 113, 0.9); }
+        .play-button.playing { background: rgba(231, 76, 60, 0.9); }
+
+        .slide-number { position: fixed; bottom: 20px; left: 20px; background: rgba(45, 62, 80, 0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; z-index: 1000; }
+        
+        .subtitle-container { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: 80%; max-width: 900px; background: rgba(0, 0, 0, 0.8); color: white; padding: 20px 30px; border-radius: 10px; font-size: 20px; line-height: 1.6; text-align: center; z-index: 999; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); transition: opacity 0.3s ease; }
+        .subtitle-speaker { color: #3498DB; font-weight: bold; margin-bottom: 8px; font-size: 16px; }
+        .subtitle-progress { position: absolute; bottom: 15px; right: 20px; color: #95A5A6; font-size: 14px; font-weight: 500; background: rgba(255, 255, 255, 0.1); padding: 4px 12px; border-radius: 15px; }
+
+        .audio-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(45, 62, 80, 0.9); padding: 10px 20px; border-radius: 30px; z-index: 998; }
+        .volume-slider { width: 100px; }
+        .mute-button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; }
+        .audio-time { color: white; font-size: 14px; min-width: 100px; text-align: center; }
+
+        .title-slide-bg {
+            background-image: url('./image.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .title-slide-bg .gradient-text {
+            -webkit-text-fill-color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
+        }
+        .title-slide-bg h2, .title-slide-bg p {
+            color: white;
+            text-shadow: 0 0 8px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slides are injected by JS -->
+    </div>
+
+    <div class="navigation">
+        <button class="play-button" id="playButton"><i class="fas fa-play"></i> 再生</button>
+        <button class="nav-button" id="prevBtn">← 戻る</button>
+        <button class="nav-button" id="nextBtn">次へ →</button>
+    </div>
+
+    <div class="slide-number" id="slideNumber">
+        <span id="slideInfo">スライド 1 / 20</span> |
+        字幕 <span id="subtitleInfo">1 / 20</span>
+    </div>
+
+    <div class="subtitle-container" id="subtitleContainer" style="opacity: 0;">
+        <div class="subtitle-speaker">AI秘書 桜木美佳</div>
+        <div id="subtitleText"></div>
+        <div class="subtitle-progress" id="subtitleProgress"></div>
+    </div>
+
+    <div class="audio-controls" id="audioControls" style="display: none;">
+        <button class="mute-button" id="muteButton"><i class="fas fa-volume-up"></i></button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8">
+        <div class="audio-time" id="audioTime">00:00 / 00:00</div>
+    </div>
+
+    <script>
+        const slidesData = [
+            { content: `<div class="w-full h-full flex flex-col title-slide-bg"><header class="flex-none flex items-center justify-between p-8"><div class="flex items-center space-x-4"><div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-handshake text-white text-xl"></i></div></div><div class="text-right"><p class="text-lg font-medium">日立システムズ様 定例会</p><p class="text-sm">2025年7月10日</p></div></header><main class="flex-1 flex items-center justify-center text-center"><div><h1 class="gradient-text text-7xl font-black mb-6 leading-tight">AI活用による次世代営業戦略</h1><h2 class="text-3xl font-medium mb-12">Salesforceデータ分析から導く、営業の次の一手</h2><div class="flex items-center justify-center gap-6"><div class="icon-bg w-20 h-20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user-tie text-white text-3xl"></i></div><div class="text-left"><p class="text-lg">TANREN株式会社</p><p class="text-3xl font-bold">佐藤 勝彦</p></div></div></div></main></div>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-list-check text-blue-500 mr-4"></i>本日のアジェンダ</h2></header><main class="flex-1 flex items-center px-16"><ul class="space-y-6 text-2xl w-full"><li class="flex items-start"><span class="text-blue-500 mr-4 mt-1"><i class="fa-solid fa-1-circle"></i></span><div class="flex-1"><span class="font-bold text-slate-800">課題の再定義：</span><span>データ活用の真の目的とは？</span></div></li><li class="flex items-start"><span class="text-blue-500 mr-4 mt-1"><i class="fa-solid fa-2-circle"></i></span><div class="flex-1"><span class="font-bold text-slate-800">最初の一歩：</span><span>AIへの対話的アプローチ</span></div></li><li class="flex items-start"><span class="text-blue-500 mr-4 mt-1"><i class="fa-solid fa-3-circle"></i></span><div class="flex-1"><span class="font-bold text-slate-800">実践への道筋：</span><span>AI活用レベル別戦略と成功の鍵</span></div></li><li class="flex items-start"><span class="text-blue-500 mr-4 mt-1"><i class="fa-solid fa-4-circle"></i></span><div class="flex-1"><span class="font-bold text-slate-800">未来の営業スタイル：</span><span>最新AIトレンドがもたらす業務変革</span></div></li><li class="flex items-start"><span class="text-blue-500 mr-4 mt-1"><i class="fa-solid fa-5-circle"></i></span><div class="flex-1"><span class="font-bold text-slate-800">次のアクション：</span><span>具体的なステップと質疑応答</span></div></li></ul></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-magnifying-glass text-blue-500 mr-4"></i>課題の再定義：真の目的は何か？</h2></header><main class="flex-1 flex items-center justify-center"><div class="w-full flex items-center justify-around"><div class="text-center w-2/5 p-8 floating-card"><i class="fa-solid fa-keyboard text-6xl text-red-400 mb-4"></i><h3 class="text-2xl font-bold text-slate-800 mb-2">表面的な課題</h3><p class="text-lg text-slate-600">データ入力の効率化</p><div class="text-red-500 font-bold text-8xl mt-8">≠</div><p class="text-sm text-slate-500 mt-4">（これは営業統括部門のテーマ）</p></div><div class="text-center w-2/5 p-8 floating-card border-2 border-blue-500"><i class="fa-solid fa-lightbulb text-6xl text-yellow-400 mb-4"></i><h3 class="text-2xl font-bold text-blue-600 mb-2">本質的な目的</h3><p class="text-lg text-slate-700">営業分析による「次の一手」の発見</p><div class="text-green-500 font-bold text-8xl mt-8">=</div><p class="text-sm text-slate-500 mt-4">（現場チームが目指すゴール）</p></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-bullseye-arrow text-blue-500 mr-4"></i>目指すゴール：分析から提案へ</h2></header><main class="flex-1 flex items-center justify-center text-center"><div><div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8"><i class="fa-solid fa-database text-white text-5xl"></i></div><p class="text-2xl text-slate-700 font-medium mb-4">蓄積されたSalesforceデータを活用し</p><i class="fa-solid fa-arrow-down text-4xl text-blue-500 my-4"></i><div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8"><i class="fa-solid fa-road text-white text-5xl"></i></div><p class="text-2xl text-slate-700 font-medium mb-4">顧客への有効な提案ロードマップや<br>トークスクリプトを創出する</p></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-file-csv text-blue-500 mr-4"></i>最初の壁：データ形式の悩み</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8 flex flex-col justify-center"><h3 class="text-3xl font-bold text-slate-800 mb-6">Salesforceから抽出したデータ</h3><ul class="space-y-4 text-lg"><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>形式：CSV（単一シートの羅列）</span></li><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>課題：1社に対し複数契約でデータが膨大</span></li><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>ツール：機密情報のためCopilotを想定</span></li></ul></div><div class="w-1/2 pl-8 flex items-center justify-center"><div class="floating-card rounded-2xl p-12 text-center"><div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-question text-white text-5xl"></i></div><h3 class="text-2xl font-bold text-slate-800 mb-4">CSVを直接？ テキストに整形？</h3><p class="text-lg text-slate-600">どちらがCopilotにとって効果的なのか？</p></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-comments text-blue-500 mr-4"></i>解決策：AIへの対話的アプローチ</h2><p class="text-xl text-slate-600 mt-2">まず「投げてみる」、そして「聞いてみる」</p></header><main class="flex-1 flex items-center px-16"><div class="w-full"><ol class="space-y-6 text-xl" style="counter-reset: item;"><li class="flex items-start" style="counter-increment: item; position: relative; padding-left: 3rem;"><div style="content: counter(item); position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; background: #007BFF; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div><div class="flex-1"><span class="font-bold text-slate-800">直接投入：</span><span>まずCSVデータをCopilotにそのまま与え、能力を試す。</span></div></li><li class="flex items-start" style="counter-increment: item; position: relative; padding-left: 3rem;"><div style="content: counter(item); position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; background: #007BFF; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div><div class="flex-1"><span class="font-bold text-slate-800">エラーから学ぶ：</span><span>エラーが出たら、その内容をヒントにAIが何を求めているか理解する。</span></div></li><li class="flex items-start" style="counter-increment: item; position: relative; padding-left: 3rem;"><div style="content: counter(item); position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; background: #007BFF; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div><div class="flex-1"><span class="font-bold text-slate-800">AIに質問する：</span><span>「このデータを最も有効活用するには？」と直接質問し、最適なフォーマット（JSON等）をAI自身に提案させる。</span></div></li></ol></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-star text-blue-500 mr-4"></i>Pro-Tip：複雑なファイルの扱い方</h2></header><main class="flex-1 flex items-center justify-center"><div class="floating-card p-8 w-3/4 text-center"><h3 class="text-3xl font-bold text-slate-800 mb-6">複雑なExcelファイル（セル結合など）の場合</h3><div class="flex justify-around items-center"><div class="text-center"><i class="fa-solid fa-file-csv text-6xl text-green-500"></i><p class="mt-2 text-xl font-semibold">CSVデータ</p></div><i class="fa-solid fa-plus text-4xl text-slate-500"></i><div class="text-center"><i class="fa-solid fa-image text-6xl text-blue-500"></i><p class="mt-2 text-xl font-semibold">スクリーンショット</p></div></div><p class="mt-8 text-2xl text-slate-700">両方をAIに渡すことで、「見た目」と「実際のデータ構造」の差異をAIに理解させ、より正確な分析が可能になる。</p></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-layer-group text-blue-500 mr-4"></i>AI活用の3つのレベル</h2><p class="text-xl text-slate-600 mt-2">自社の状況に合わせて最適なアプローチを選択する</p></header><main class="flex-1 flex items-center px-16 pb-16"><div class="grid grid-cols-3 gap-8 h-full"><div class="floating-card p-6 flex flex-col text-center hover:shadow-xl transition-shadow"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-terminal text-white text-2xl"></i></div><h3 class="text-slate-800 text-2xl font-bold mb-3">初級編</h3><p class="text-slate-600 text-xl flex-1">プロンプト活用</p></div><div class="floating-card p-6 flex flex-col text-center hover:shadow-xl transition-shadow border-2 border-blue-500"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-cloud-arrow-up text-white text-2xl"></i></div><h3 class="text-slate-800 text-2xl font-bold mb-3">中級編</h3><p class="text-slate-600 text-xl flex-1">外部サービス連携</p></div><div class="floating-card p-6 flex flex-col text-center hover:shadow-xl transition-shadow"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-microchip text-white text-2xl"></i></div><h3 class="text-slate-800 text-2xl font-bold mb-3">上級編</h3><p class="text-slate-600 text-xl flex-1">カスタムアプリ開発</p></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-1-circle text-blue-500 mr-4"></i>初級編：プロンプトエンジニアリング</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">手法</h3><p class="text-xl text-slate-700">商談の音声データやSalesforceのCSVデータを、強力なメガプロンプトと共にCopilotへ投入。要約、分析、特定フォーマットへの変換を指示。</p><h3 class="text-3xl font-bold text-slate-800 mb-6 mt-8">ポイント</h3><ul class="space-y-3 text-xl"><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>既存ツールのみで完結</span></li><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>追加開発・コスト不要</span></li><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>即時開始可能</span></li></ul></div><div class="w-1/2 pl-8 flex items-center justify-center"><div class="floating-card p-8 text-center"><i class="fa-solid fa-scroll text-6xl text-blue-500 mb-4"></i><h4 class="text-2xl font-bold text-slate-800">「秘伝のタレ」となる<br>プロンプトが鍵</h4></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-2-circle text-blue-500 mr-4"></i>中級編：外部サービス利用</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">手法</h3><p class="text-xl text-slate-700">Salesforceと連携する既存のAIサービスを契約。データ入力効率化ツールや、データを分析・可視化するダッシュボードサービスなどを活用。</p><h3 class="text-3xl font-bold text-slate-800 mb-6 mt-8">ポイント</h3><ul class="space-y-3 text-xl"><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>専門的な機能を手軽に導入</span></li><li class="flex items-start"><i class="fa-solid fa-times-circle text-red-500 mr-3 mt-1.5"></i><span>外部リソースの利用可否が論点</span></li><li class="flex items-start"><i class="fa-solid fa-times-circle text-red-500 mr-3 mt-1.5"></i><span>追加予算が必要</span></li></ul></div><div class="w-1/2 pl-8 flex items-center justify-center"><div class="floating-card p-8 text-center"><i class="fa-solid fa-puzzle-piece text-6xl text-blue-500 mb-4"></i><h4 class="text-2xl font-bold text-slate-800">自社の課題に合う<br>サービス選定が重要</h4></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-3-circle text-blue-500 mr-4"></i>上級編：カスタムアプリ開発</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">手法</h3><p class="text-xl text-slate-700">AI駆動開発（Vibe Coding）で自社専用の分析アプリケーションを構築。CSVデータを自動で取り込み、営業担当者が見やすいプレゼン資料等を一撃で生成するエージェントを作成。</p><h3 class="text-3xl font-bold text-slate-800 mb-6 mt-8">ポイント</h3><ul class="space-y-3 text-xl"><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>業務に完全特化したツールを実現</span></li><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>圧倒的な業務効率化が可能</span></li><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-1.5"></i><span>従来より格段に低コストで開発可能</span></li></ul></div><div class="w-1/2 pl-8 flex items-center justify-center"><div class="floating-card p-8 text-center"><i class="fa-solid fa-robot text-6xl text-blue-500 mb-4"></i><h4 class="text-2xl font-bold text-slate-800">事例：東急エージェンシーで<br>同様のプロジェクトが進行中</h4></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-users-gear text-blue-500 mr-4"></i>戦略提案：仕掛ける側の育成</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8 flex flex-col justify-center"><h3 class="text-3xl font-bold text-slate-800 mb-6">ライザップ方式による精鋭チーム育成</h3><ul class="space-y-4 text-xl"><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>5〜10名の適性ある人材を選抜・集中教育。</span></li><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>彼らを現場のためのツールを作る「仕掛ける側」へ。</span></li><li class="flex items-start"><span class="text-blue-500 font-bold mr-3 mt-1">•</span><span>非エンジニアでも高度なAIツール開発は可能。</span></li></ul></div><div class="w-1/2 pl-8 flex items-center justify-center"><div class="floating-card rounded-2xl p-12 text-center"><div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-rocket text-white text-5xl"></i></div><h3 class="text-2xl font-bold text-slate-800 mb-4">事例：東急エージェンシー</h3><p class="text-lg text-slate-600">非エンジニアの営業チームが<br>AI開発を実践し、成果を創出。</p></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-arrows-spin text-blue-500 mr-4"></i>組織を強くする好循環</h2></header><main class="flex-1 flex items-center justify-center text-center"><div class="w-full flex justify-around items-center"><div class="w-1/4"><div class="icon-bg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-user-graduate text-white text-4xl"></i></div><h3 class="text-xl font-bold">1. 精鋭チーム育成</h3></div><i class="fa-solid fa-arrow-right text-4xl text-slate-400"></i><div class="w-1/4"><div class="icon-bg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-screwdriver-wrench text-white text-4xl"></i></div><h3 class="text-xl font-bold">2. 内製ツール開発</h3></div><i class="fa-solid fa-arrow-right text-4xl text-slate-400"></i><div class="w-1/4"><div class="icon-bg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-users text-white text-4xl"></i></div><h3 class="text-xl font-bold">3. 現場メンバー利用</h3></div><i class="fa-solid fa-arrow-right text-4xl text-slate-400"></i><div class="w-1/4"><div class="icon-bg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-chart-line text-white text-4xl"></i></div><h3 class="text-xl font-bold">4. 全体生産性向上</h3></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-file-pen text-blue-500 mr-4"></i>研修の課題と資料作成の代替案</h2></header><main class="flex-1 flex items-center px-16 pb-16"><div class="grid grid-cols-3 gap-6 h-full"><div class="floating-card rounded-2xl p-6 h-full flex flex-col relative border-2 border-blue-500"><div class="absolute -top-3 left-1/2 transform -translate-x-1/2"><span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold px-4 py-1 rounded-full">推奨</span></div><div class="text-center mb-6"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-brands fa-markdown text-white text-2xl"></i></div><h3 class="text-2xl font-bold text-slate-800">Marp</h3></div><ul class="space-y-3 flex-1"><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-0.5"></i><span>Markdownで記述、初学者に優しい</span></li><li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mr-3 mt-0.5"></i><span>AIによる提案書自動生成と好相性</span></li></ul></div><div class="floating-card rounded-2xl p-6 h-full flex flex-col"><div class="text-center mb-6"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-bezier-curve text-white text-2xl"></i></div><h3 class="text-2xl font-bold text-slate-800">SVG</h3></div><ul class="space-y-3 flex-1"><li class="flex items-start"><i class="fa-solid fa-plus text-green-500 mr-2 mt-0.5 text-sm"></i><span>クリエイティブな表現が可能</span></li><li class="flex items-start"><i class="fa-solid fa-minus text-red-500 mr-2 mt-0.5 text-sm"></i><span>高品質にはClaude推奨</span></li></ul></div><div class="floating-card rounded-2xl p-6 h-full flex flex-col"><div class="text-center mb-6"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-brands fa-html5 text-white text-2xl"></i></div><h3 class="text-2xl font-bold text-slate-800">HTML</h3></div><ul class="space-y-3 flex-1"><li class="flex items-start"><i class="fa-solid fa-plus text-green-500 mr-2 mt-0.5 text-sm"></i><span>自由度が非常に高い</span></li><li class="flex items-start"><i class="fa-solid fa-minus text-red-500 mr-2 mt-0.5 text-sm"></i><span>制御が難しく品質定義が課題</span></li></ul></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-satellite-dish text-blue-500 mr-4"></i>未来の営業スタイル：最新AIトレンド</h2></header><main class="flex-1 flex items-center justify-center text-center"><div><div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8"><i class="fa-brands fa-google text-white text-5xl"></i></div><h1 class="gradient-text text-7xl font-black mb-6 leading-tight">Googleの最新動向が<br>ゲームを変える</h1><p class="text-2xl text-slate-700 font-medium mb-4">生成速度の革命と、ローカル環境との融合</p></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-gauge-high text-blue-500 mr-4"></i>トレンド1：生成速度の革命</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">テキスト拡散モデル</h3><p class="text-xl text-slate-700">Gemini 2.5 Flashなどが登場し、従来の5倍以上の速度（927トークン/秒）でテキストやコードを生成。</p><div class="mt-8 quote-block p-6 border-l-4 border-blue-400 bg-blue-50"><p class="text-xl italic text-slate-700">デモ：Claudeが時間をかけてテトリスのコードを書いている間に、新モデルは<span class="font-bold">約5秒で完成</span>させる。</p></div></div><div class="w-1/2 pl-8 flex items-center justify-center"><i class="fa-solid fa-bolt-lightning text-9xl text-yellow-400"></i></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cubes text-blue-500 mr-4"></i>トレンド2：統合開発・実行環境</h2></header><main class="flex-1 flex items-center px-16"><div class="space-y-8 w-full"><div class="floating-card p-6 flex items-center"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><i class="fa-solid fa-window-maximize text-white text-2xl"></i></div><div><h3 class="text-2xl font-bold text-slate-800">Gemini Build</h3><p class="text-lg text-slate-600">Googleが公式に提供するブラウザ上のアプリケーション開発環境。サードパーティーツール不要でGemini内で完結。</p></div></div><div class="floating-card p-6 flex items-center"><div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><i class="fa-solid fa-code text-white text-2xl"></i></div><div><h3 class="text-2xl font-bold text-slate-800">Gemini Code (CLI)</h3><p class="text-lg text-slate-600">VS Code等で利用するローカル環境で動作するAIエージェント。ローカルファイルと連携し、高度な分析・開発を可能に。</p></div></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-wand-magic-sparkles text-blue-500 mr-4"></i>Gemini Code (CLI)がもたらす未来</h2></header><main class="flex-1 flex items-center justify-center text-center"><div><div class="flex justify-around items-center w-full space-x-8"><div class="text-center"><i class="fa-solid fa-file-import text-6xl text-blue-500"></i><p class="mt-2 text-xl font-semibold">ローカルの複数ファイル<br>(議事録, CSV)を読込</p></div><i class="fa-solid fa-arrow-right-arrow-left text-4xl text-slate-400"></i><div class="text-center"><i class="fa-solid fa-chart-pie text-6xl text-green-500"></i><p class="mt-2 text-xl font-semibold">横断的な分析・レポート<br>資料を自動生成</p></div></div><div class="mt-12 bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg"><p class="text-green-800 font-medium text-xl">デモ：過去1年分の議事録から、年間の商談進捗レポートを一瞬で生成。Salesforceデータ分析のプロセスが劇的に変化します。</p></div></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-hands-holding-circle text-blue-500 mr-4"></i>Vibe Coding：すべてを繋ぐ思想</h2></header><main class="flex-1 flex items-center justify-center"><div class="w-full text-center"><p class="text-2xl text-slate-700 mb-8">専門家でなくても、AIとの対話を通じて<br>高度なドキュメントや内製アプリを開発できる時代へ</p><div class="floating-card p-8"><h3 class="text-3xl font-bold text-slate-800 mb-4">GenSparkの例</h3><p class="text-xl text-slate-600">文字起こしからプレゼン資料を自動生成する内製アプリのように、<br>これらのツールを組み合わせ、特定の業務に特化した開発が加速する。</p></div><p class="text-2xl text-slate-700 mt-8 font-bold gradient-text">この世界の潮流を理解し、自社でどう活用するかが重要</p></div></main>`},
+            { content: `<header class="flex-none"><h2 class="text-4xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-question-circle text-blue-500 mr-4"></i>質疑応答 & Next Action</h2></header><main class="flex-1 flex items-center px-16"><div class="w-1/2 pr-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">Vibe Codingの世界へ</h3><div class="mt-8 quote-block p-6 border-l-4 border-blue-400 bg-blue-50"><p class="text-xl italic text-slate-700">"The best way to predict the future is to invent it."</p><p class="text-right mt-2 text-slate-600 font-medium">— Alan Kay</p></div></div><div class="w-1/2 pl-8"><h3 class="text-3xl font-bold text-slate-800 mb-6">次回までの宿題</h3><ul class="space-y-4 text-lg"><li class="flex items-start"><span class="text-blue-500 mr-3 mt-1"><i class="fa-solid fa-check-square"></i></span><span>現場が抱える課題や手作業で行っている分析プロセスをテキストで具体化する。</span></li><li class="flex items-start"><span class="text-blue-500 mr-3 mt-1"><i class="fa-solid fa-check-square"></i></span><span>今後の研修の方向性について検討する。</span></li></ul><h3 class="text-3xl font-bold text-slate-800 mb-6 mt-12">次回定例会</h3><p class="text-lg text-slate-600">日時: 8月4日（月）15:30〜</p></div></main>`}
+        ];
+
+        const slideContainer = document.querySelector('.slide-container');
+        let currentSlideIndex = 0;
+        let currentSubtitleIndex = 0;
+        let srtSubtitles = [];
+        let subtitleToSlide = {};
+        let slideSubtitles = {};
+        let isPlaying = false;
+        let audio;
+        let hasAudio = false;
+
+        function parseSrt(srtText) {
+            const subs = [];
+            const lines = srtText.trim().replace(/\r\n/g, '\n').split(/\n\n/);
+            for (const line of lines) {
+                const parts = line.split('\n');
+                if (parts.length >= 3) {
+                    const id = parseInt(parts[0], 10);
+                    const timeMatch = parts[1].match(/(\d{2}:\d{2}:\d{2},\d{3}) --> (\d{2}:\d{2}:\d{2},\d{3})/);
+                    if (timeMatch) {
+                        const start = srtTimeToSeconds(timeMatch[1]);
+                        const end = srtTimeToSeconds(timeMatch[2]);
+                        const text = parts.slice(2).join('\n');
+                        subs.push({ id, start, end, text });
+                    }
+                }
+            }
+            return subs;
+        }
+
+        function srtTimeToSeconds(time) {
+            const parts = time.split(/[:,]/);
+            return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
+        }
+
+        function setupSlideSubtitleMapping() {
+            subtitleToSlide = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8, 10:9, 11:10, 12:11, 13:12, 14:13, 15:14, 16:15, 17:16, 18:17, 19:18, 20:19};
+            
+            Object.entries(subtitleToSlide).forEach(([subtitleId, slideId]) => {
+                if (!slideSubtitles[slideId]) slideSubtitles[slideId] = [];
+                slideSubtitles[slideId].push(parseInt(subtitleId));
+            });
+        }
+
+        function showSlide(index, fromSubtitle = false) {
+            if (index === currentSlideIndex && !fromSubtitle) return;
+            currentSlideIndex = index;
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            updateSlideNumber();
+        }
+
+        function showSubtitle(index) {
+            if (index < 0 || index >= srtSubtitles.length) return;
+            currentSubtitleIndex = index;
+            const subtitle = srtSubtitles[index];
+            const subtitleContainer = document.getElementById('subtitleContainer');
+            
+            if (subtitle) {
+                document.getElementById('subtitleText').innerHTML = subtitle.text.replace(/\n/g, '<br>');
+                subtitleContainer.style.opacity = '1';
+                
+                const targetSlide = subtitleToSlide[subtitle.id];
+                if (targetSlide !== undefined && targetSlide !== currentSlideIndex) {
+                    showSlide(targetSlide, true);
+                }
+                updateSubtitleProgress();
+            } else {
+                subtitleContainer.style.opacity = '0';
+            }
+            updateSlideNumber();
+        }
+        
+        function updateSlideNumber() {
+            document.getElementById('slideInfo').textContent = `スライド ${currentSlideIndex + 1} / ${slidesData.length}`;
+            document.getElementById('subtitleInfo').textContent = `${currentSubtitleIndex + 1} / ${srtSubtitles.length}`;
+        }
+
+        function updateSubtitleProgress() {
+            const subtitle = srtSubtitles[currentSubtitleIndex];
+            if (!subtitle) return;
+            const slideId = subtitleToSlide[subtitle.id];
+            const subtitlesInSlide = slideSubtitles[slideId] || [];
+            const positionInSlide = subtitlesInSlide.indexOf(subtitle.id) + 1;
+            document.getElementById('subtitleProgress').textContent = `${positionInSlide}/${subtitlesInSlide.length}`;
+        }
+
+        function togglePlay() {
+            const playButton = document.getElementById('playButton');
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playButton.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
+                playButton.classList.add('playing');
+                if (hasAudio) audio.play();
+                else autoPlaySubtitles();
+            } else {
+                playButton.innerHTML = '<i class="fas fa-play"></i> 再生';
+                playButton.classList.remove('playing');
+                if (hasAudio) audio.pause();
+            }
+        }
+        
+        let subtitleTimeout;
+        function autoPlaySubtitles() {
+            if (!isPlaying || hasAudio) return;
+            showSubtitle(currentSubtitleIndex);
+            const duration = (srtSubtitles[currentSubtitleIndex].end - srtSubtitles[currentSubtitleIndex].start) * 1000;
+            subtitleTimeout = setTimeout(() => {
+                if (currentSubtitleIndex < srtSubtitles.length - 1) {
+                    currentSubtitleIndex++;
+                    autoPlaySubtitles();
+                } else {
+                    togglePlay(); // End of presentation
+                }
+            }, duration);
+        }
+
+        function nextSubtitle() {
+            if (currentSubtitleIndex < srtSubtitles.length - 1) {
+                showSubtitle(currentSubtitleIndex + 1);
+                if (hasAudio) audio.currentTime = srtSubtitles[currentSubtitleIndex].start;
+            }
+        }
+
+        function previousSubtitle() {
+            if (currentSubtitleIndex > 0) {
+                showSubtitle(currentSubtitleIndex - 1);
+                if (hasAudio) audio.currentTime = srtSubtitles[currentSubtitleIndex].start;
+            }
+        }
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        }
+
+        function updateAudioTime() {
+            if (!audio || !isFinite(audio.duration)) return;
+            const currentTime = formatTime(audio.currentTime);
+            const duration = formatTime(audio.duration);
+            document.getElementById('audioTime').textContent = `${currentTime} / ${duration}`;
+        }
+
+        async function initialize() {
+            slideContainer.innerHTML = slidesData.map((s, i) => `<div class="slide ${i === 0 ? 'active' : ''}">${s.content}</div>`).join('');
+            
+            try {
+                const response = await fetch('./subtitles.srt');
+                if (!response.ok) throw new Error('字幕ファイルの読み込みに失敗しました。');
+                const srtText = await response.text();
+                srtSubtitles = parseSrt(srtText);
+                setupSlideSubtitleMapping();
+                showSubtitle(0);
+            } catch (error) {
+                console.error(error);
+                document.getElementById('subtitleText').textContent = '字幕ファイルの読み込みに失敗しました。';
+                document.getElementById('subtitleContainer').style.opacity = '1';
+            }
+
+            audio = new Audio();
+            const audioSources = ['./subtitles.mp3', './subtitles.wav'];
+            let sourceFound = false;
+            for (const src of audioSources) {
+                try {
+                    const response = await fetch(src, { method: 'HEAD' });
+                    if (response.ok) {
+                        audio.src = src;
+                        sourceFound = true;
+                        break;
+                    }
+                } catch (e) {}
+            }
+
+            if (sourceFound) {
+                audio.addEventListener('loadedmetadata', () => {
+                    hasAudio = true;
+                    document.getElementById('audioControls').style.display = 'flex';
+                    audio.volume = 0.8;
+                    document.getElementById('volumeSlider').value = audio.volume;
+                    updateAudioTime();
+                });
+                audio.addEventListener('timeupdate', () => {
+                    if (isPlaying) {
+                        const currentTime = audio.currentTime;
+                        const targetIndex = srtSubtitles.findIndex(s => currentTime >= s.start && currentTime < s.end);
+                        if (targetIndex !== -1 && targetIndex !== currentSubtitleIndex) {
+                            showSubtitle(targetIndex);
+                        }
+                    }
+                    updateAudioTime();
+                });
+                audio.addEventListener('ended', () => { if(isPlaying) togglePlay(); });
+            } else {
+                console.log('音声ファイルが見つかりません。');
+            }
+
+            document.getElementById('playButton').addEventListener('click', togglePlay);
+            document.getElementById('nextBtn').addEventListener('click', nextSubtitle);
+            document.getElementById('prevBtn').addEventListener('click', previousSubtitle);
+            document.getElementById('volumeSlider').addEventListener('input', e => audio.volume = e.target.value);
+            document.getElementById('muteButton').addEventListener('click', () => {
+                audio.muted = !audio.muted;
+                document.getElementById('muteButton').innerHTML = `<i class="fas fa-volume-${audio.muted ? 'mute' : 'up'}"></i>`;
+            });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight') nextSubtitle();
+                if (e.key === 'ArrowLeft') previousSubtitle();
+                if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+            });
+        }
+
+        window.addEventListener('load', initialize);
+    </script>
+</body>
+</html>

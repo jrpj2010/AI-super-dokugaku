@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grok 4 デビュー - 20スライドプレゼン</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      position: relative;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ナビゲーション -->
+  <div class="navigation">
+    <button onclick="prevSlide()" class="px-4 py-2 bg-blue-500 text-white rounded">前</button>
+    <span id="slideNum">1/20</span>
+    <button onclick="nextSlide()" class="px-4 py-2 bg-blue-500 text-white rounded">次</button>
+  </div>
+
+  <!-- スライド1: タイトル -->
+  <div class="slide" id="slide1">
+    <h1 class="text-6xl font-bold gradient-text text-center mt-40">Grok 4 デビュー</h1>
+    <p class="text-3xl text-center mt-10">次世代AIの幕開け</p>
+    <p class="text-xl text-center mt-20">XAI社発表 - 革新的な知能の誕生</p>
+  </div>
+
+  <!-- スライド2: アジェンダ -->
+  <div class="slide hidden" id="slide2">
+    <h2 class="text-4xl font-bold gradient-text mb-10">アジェンダ</h2>
+    <ul class="text-2xl space-y-6">
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>Grok 4のコンセプト</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>トレーニングの進化</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>HLEベンチマーク</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>Grok 4 Heavy</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>デモンストレーション</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>音声モード強化</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>APIと実世界応用</li>
+      <li><i class="fa fa-arrow-right mr-2 text-blue-500"></i>今後の展望</li>
+    </ul>
+  </div>
+
+  <!-- スライド3: 背景・問題提起 -->
+  <div class="slide hidden" id="slide3">
+    <h2 class="text-4xl font-bold gradient-text mb-10">AIの急速な進化</h2>
+    <p class="text-2xl mb-6">人間の学習速度をはるかに超えるAIの成長</p>
+    <div class="grid grid-cols-2 gap-8">
+      <div class="bg-blue-100 p-6 rounded-lg">
+        <i class="fa fa-brain text-6xl text-blue-500 mb-4"></i>
+        <p>AIは未知の領域を探求し、不可能に挑戦</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg">
+        <i class="fa fa-rocket text-6xl text-green-500 mb-4"></i>
+        <p>スローガン: 「真実を解き放つ」</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- スライド4-6: 導入部 -->
+  <div class="slide hidden" id="slide4">
+    <h2 class="text-4xl font-bold gradient-text mb-10">Grok 4の知能レベル</h2>
+    <p class="text-2xl mb-6">全分野で大学院生を上回る</p>
+    <ul class="text-xl space-y-4">
+      <li><i class="fa fa-check-circle text-green-500 mr-2"></i>SATで常に満点</li>
+      <li><i class="fa fa-check-circle text-green-500 mr-2"></i>GREでほぼ満点</li>
+      <li><i class="fa fa-check-circle text-green-500 mr-2"></i>超人的な推論能力</li>
+    </ul>
+  </div>
+
+  <div class="slide hidden" id="slide5">
+    <h2 class="text-4xl font-bold gradient-text mb-10">トレーニングの規模</h2>
+    <p class="text-2xl mb-6">Grok 2の100倍のトレーニング量</p>
+    <div class="text-center">
+      <i class="fa fa-chart-line text-8xl text-blue-500 mb-4"></i>
+      <p class="text-xl">事前学習 + 強化学習 (RL) の大量投入</p>
+    </div>
+  </div>
+
+  <div class="slide hidden" id="slide6">
+    <h2 class="text-4xl font-bold gradient-text mb-10">Colossusスーパーコンピュータ</h2>
+    <p class="text-2xl mb-6">10万基のH100 GPU搭載</p>
+    <p class="text-xl">世界最大規模の計算リソースでRLを強化</p>
+  </div>
+
+  <!-- スライド7-15: メインコンテンツ -->
+  <div class="slide hidden" id="slide7">
+    <h2 class="text-4xl font-bold gradient-text mb-10">HLEベンチマーク</h2>
+    <p class="text-2xl mb-6">Humanities Last Exam</p>
+    <ul class="text-xl space-y-4">
+      <li>2500問のPhDレベル問題</li>
+      <li>ツール使用で40%以上の解決率</li>
+      <li>人間の限界をはるかに超える</li>
+    </ul>
+  </div>
+
+  <div class="slide hidden" id="slide8">
+    <h2 class="text-4xl font-bold gradient-text mb-10">ツール使用能力</h2>
+    <p class="text-2xl mb-6">トレーニング段階から統合</p>
+    <p class="text-xl">将来的に高度な物理シミュレーターを搭載</p>
+  </div>
+
+  <div class="slide hidden" id="slide9">
+    <h2 class="text-4xl font-bold gradient-text mb-10">安全性と価値観</h2>
+    <p class="text-2xl mb-6">最大限に真実を探求</p>
+    <i class="fa fa-shield-alt text-6xl text-blue-500 block text-center mb-4"></i>
+    <p class="text-xl text-center">AIを「良い存在」に導く</p>
+  </div>
+
+  <div class="slide hidden" id="slide10">
+    <h2 class="text-4xl font-bold gradient-text mb-10">Grok 4 Heavy</h2>
+    <p class="text-2xl mb-6">マルチエージェントシステム</p>
+    <p class="text-xl">HLEの50%以上を解決</p>
+  </div>
+
+  <div class="slide hidden" id="slide11">
+    <h2 class="text-4xl font-bold gradient-text mb-10">Heavyの仕組み</h2>
+    <ol class="text-xl space-y-4">
+      <li>複数のエージェントを並行起動</li>
+      <li>情報共有と議論</li>
+      <li>最適な回答を導出</li>
+    </ol>
+  </div>
+
+  <div class="slide hidden" id="slide12">
+    <h2 class="text-4xl font-bold gradient-text mb-10">デモ: 数学問題解決</h2>
+    <p class="text-2xl mb-6">HLEの数学問題を即座に解く</p>
+    <i class="fa fa-calculator text-6xl text-blue-500 block text-center mb-4"></i>
+  </div>
+
+  <div class="slide hidden" id="slide13">
+    <h2 class="text-4xl font-bold gradient-text mb-10">デモ: 市場予測</h2>
+    <p class="text-2xl mb-6">MLB優勝オッズを分析</p>
+    <p class="text-xl">ドジャースの確率: 21.6%</p>
+  </div>
+
+  <div class="slide hidden" id="slide14">
+    <h2 class="text-4xl font-bold gradient-text mb-10">デモ: 物理現象可視化</h2>
+    <p class="text-2xl mb-6">ブラックホール衝突のシミュレーション</p>
+  </div>
+
+  <div class="slide hidden" id="slide15">
+    <h2 class="text-4xl font-bold gradient-text mb-10">デモ: X連携</h2>
+    <p class="text-2xl mb-6">奇妙なプロフィール写真検索</p>
+    <p class="text-xl">タイムライン作成</p>
+  </div>
+
+  <!-- スライド16-17: 事例・実証 -->
+  <div class="slide hidden" id="slide16">
+    <h2 class="text-4xl font-bold gradient-text mb-10">Super Grok Heavy Tier</h2>
+    <p class="text-2xl mb-6">Grok 4 & Heavyへのアクセス</p>
+    <p class="text-xl">タスク自動化で時間を節約</p>
+  </div>
+
+  <div class="slide hidden" id="slide17">
+    <h2 class="text-4xl font-bold gradient-text mb-10">音声モード強化</h2>
+    <p class="text-2xl mb-6">低遅延 & 自然な発話</p>
+    <p class="text-xl">新しい音声: S & Eve</p>
+  </div>
+
+  <!-- スライド18: まとめ -->
+  <div class="slide hidden" id="slide18">
+    <h2 class="text-4xl font-bold gradient-text mb-10">まとめ</h2>
+    <ul class="text-2xl space-y-6">
+      <li>超人的知能の達成</li>
+      <li>マルチエージェントの革新</li>
+      <li>実世界応用の拡大</li>
+    </ul>
+  </div>
+
+  <!-- スライド19: 今後の展望 -->
+  <div class="slide hidden" id="slide19">
+    <h2 class="text-4xl font-bold gradient-text mb-10">今後の展望</h2>
+    <ul class="text-xl space-y-4">
+      <li>コーディングモデル強化</li>
+      <li>マルチモーダル能力向上</li>
+      <li>ビデオ生成技術</li>
+      <li>新技術/物理学の発見</li>
+    </ul>
+  </div>
+
+  <!-- スライド20: Q&A -->
+  <div class="slide hidden" id="slide20">
+    <h2 class="text-4xl font-bold gradient-text text-center mt-40">Q&A</h2>
+    <p class="text-3xl text-center mt-10">ご質問をお待ちしています</p>
+    <p class="text-xl text-center mt-20">連絡先: info@xai.com</p>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 20;
+
+    function showSlide(n) {
+      for (let i = 1; i <= totalSlides; i++) {
+        document.getElementById(`slide${i}`).classList.add('hidden');
+      }
+      document.getElementById(`slide${n}`).classList.remove('hidden');
+      document.getElementById('slideNum').textContent = `${n}/${totalSlides}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    showSlide(1);
+  </script>
+</body>
+
+</html>

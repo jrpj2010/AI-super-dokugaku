@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felo Create - 未完成から完成へ、最後の一歩まで仕上げるAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .accent-line {
+            background: linear-gradient(90deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .floating-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .floating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.2);
+        }
+        
+        .icon-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #0056b3;
+        }
+        
+        .nav-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+        }
+        
+        .slide.hidden {
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .quote-block {
+            position: relative;
+            padding: 2rem 3rem;
+            background: rgba(0, 123, 255, 0.05);
+            border-left: 4px solid #007BFF;
+            border-radius: 8px;
+        }
+        
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-size: 4rem;
+            color: #007BFF;
+            opacity: 0.3;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .comparison-table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .comparison-table .felo-column {
+            background: rgba(0, 123, 255, 0.1);
+            font-weight: 500;
+        }
+        
+        .check-icon {
+            color: #10b981;
+            font-size: 18px;
+        }
+        
+        .times-icon {
+            color: #ef4444;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- スライド1: タイトルスライド -->
+    <div class="slide fade-in" id="slide-1">
+        <header class="flex-none pt-16 px-16">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-magic text-white text-xl"></i>
+                    </div>
+                    <div class="accent-line h-1 w-24 rounded-full"></div>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-600 text-lg font-medium">Felo Create</p>
+                    <p class="text-slate-500 text-sm">2025年7月9日</p>
+                </div>
+            </div>
+        </header>
+        
+        <main class="flex-1 flex items-center justify-center px-16">
+            <div class="text-center">
+                <h1 class="gradient-text text-7xl font-black mb-6 leading-tight">Felo Create</h1>
+                <div class="accent-line h-2 w-32 mx-auto rounded-full mb-8"></div>
+                <h2 class="text-slate-700 text-3xl font-medium mb-12">未完成から完成へ、最後の一歩まで仕上げるAI</h2>
+                
+                <div class="flex items-center justify-center gap-6">
+                    <div class="icon-bg w-20 h-20 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-user-tie text-white text-3xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-slate-500 text-lg">プレゼンテーション</p>
+                        <p class="text-slate-800 text-3xl font-bold">AI革命の新時代</p>
+                        <p class="text-slate-600 text-lg">検索から完成品まで</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">1/10</div>
+    </div>
+
+    <!-- スライド2: 課題提起 -->
+    <div class="slide fade-in hidden" id="slide-2">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-exclamation-triangle text-orange-500 mr-4"></i>
+                資料作成、こんな悩みありませんか？
+            </h2>
+        </header>
+        
+        <main class="flex-1 flex px-16 pb-16">
+            <div class="w-1/2 pr-8 flex flex-col justify-center">
+                <ul class="space-y-6 text-xl">
+                    <li class="flex items-start">
+                        <span class="text-red-500 font-bold mr-4 mt-1">😰</span>
+                        <span class="text-slate-700">「急なプレゼンで、パワポを一から作らないと…」</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-red-500 font-bold mr-4 mt-1">😵</span>
+                        <span class="text-slate-700">「Webサイトの情報をまとめてるだけで、一日が終わっちゃった…」</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-red-500 font-bold mr-4 mt-1">😩</span>
+                        <span class="text-slate-700">「論文やレポート、読むのはもちろん、まとめるのが本当に大変…」</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-red-500 font-bold mr-4 mt-1">🤯</span>
+                        <span class="text-slate-700">「AIの出力を修正・整形する作業に時間がかかる…」</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                    <p class="text-red-800 font-medium text-xl">
+                        <i class="fa-solid fa-clock mr-2"></i>
+                        1時間の作業時間がもったいない！
+                    </p>
+                </div>
+            </div>
+            
+            <div class="w-1/2 pl-8 flex items-center justify-center">
+                <div class="floating-card text-center">
+                    <div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-user-clock text-white text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">時間の無駄遣い</h3>
+                    <p class="text-lg text-slate-600">
+                        情報収集・整理・デザイン<br>
+                        すべてを手作業で...
+                    </p>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">2/10</div>
+    </div>
+
+    <!-- スライド3: 解決策提示 -->
+    <div class="slide fade-in hidden" id="slide-3">
+        <main class="flex-1 flex items-center justify-center px-16">
+            <div class="text-center">
+                <div class="mb-8">
+                    <div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-lightbulb text-white text-5xl"></i>
+                    </div>
+                </div>
+                
+                <h1 class="gradient-text text-6xl font-black mb-6">その悩み、AIが解決します！</h1>
+                
+                <div class="accent-line h-2 w-48 mx-auto rounded-full mb-8"></div>
+                
+                <h2 class="text-slate-700 text-3xl font-medium mb-12">
+                    「検索するだけで完成品が出てくる」<br>
+                    まったく新しいAI体験
+                </h2>
+                
+                <div class="flex items-center justify-center gap-8">
+                    <div class="text-center">
+                        <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-search text-white text-2xl"></i>
+                        </div>
+                        <p class="text-slate-600 font-medium">検索</p>
+                    </div>
+                    
+                    <div class="text-slate-400 text-3xl">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-magic text-white text-2xl"></i>
+                        </div>
+                        <p class="text-slate-600 font-medium">AI処理</p>
+                    </div>
+                    
+                    <div class="text-slate-400 text-3xl">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-file-powerpoint text-white text-2xl"></i>
+                        </div>
+                        <p class="text-slate-600 font-medium">完成品</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">3/10</div>
+    </div>
+
+    <!-- スライド4: Felo Createの特徴 -->
+    <div class="slide fade-in hidden" id="slide-4">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-star text-yellow-500 mr-4"></i>
+                Felo Create の3つの特徴
+            </h2>
+        </header>
+        
+        <main class="flex-1 px-16 pb-16">
+            <div class="grid grid-cols-3 gap-8 h-full">
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">思考モデル</h3>
+                    <p class="text-slate-600 text-lg text-center">
+                        AIが最適な構成を自動提案。プロンプト不要でストーリーの骨格を作成
+                    </p>
+                    <div class="mt-4 text-center">
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                            自動構成
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-edit text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">直感的編集</h3>
+                    <p class="text-slate-600 text-lg text-center">
+                        PowerPointのようにマウスで全要素を編集。グラフ・画像・テキストを自由に変更
+                    </p>
+                    <div class="mt-4 text-center">
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                            完全編集
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-download text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">即座にエクスポート</h3>
+                    <p class="text-slate-600 text-lg text-center">
+                        16:9の完璧なPPTX形式で出力。すぐに会議で使える納品レベルの品質
+                    </p>
+                    <div class="mt-4 text-center">
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">
+                            納品品質
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">4/10</div>
+    </div>
+
+    <!-- スライド5: 機能デモ1：自動生成 -->
+    <div class="slide fade-in hidden" id="slide-5">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-magic text-purple-500 mr-4"></i>
+                機能デモ1：自動生成
+            </h2>
+        </header>
+        
+        <main class="flex-1 flex px-16 pb-16">
+            <div class="w-1/2 pr-8 flex flex-col justify-center">
+                <h3 class="text-3xl font-bold text-slate-800 mb-6">URLをペタッと貼り付けるだけ</h3>
+                
+                <div class="space-y-6 text-lg text-slate-600">
+                    <div class="bg-slate-100 p-4 rounded-lg border">
+                        <p class="font-mono text-sm text-blue-600">
+                            https://example.com/article
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <p>AIが内容を読み込み</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <p>思考モデルが構成提案</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <p>「生成」ボタンをクリック</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all">
+                        <i class="fa-solid fa-play mr-2"></i>
+                        生成確認
+                    </button>
+                </div>
+            </div>
+            
+            <div class="w-1/2 pl-8 flex items-center justify-center">
+                <div class="floating-card w-full max-w-md">
+                    <div class="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center">
+                        <div class="icon-bg w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-file-powerpoint text-white text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">完成したスライド</h4>
+                        <p class="text-slate-600 text-sm">
+                            画像・グラフ・テキストが<br>
+                            自動で配置された<br>
+                            16:9の美しいスライド
+                        </p>
+                        <div class="mt-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded">
+                                数秒で完成
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">5/10</div>
+    </div>
+
+    <!-- スライド6: 機能デモ2：思考モデル -->
+    <div class="slide fade-in hidden" id="slide-6">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-brain text-green-500 mr-4"></i>
+                機能デモ2：思考モデル
+            </h2>
+            <p class="text-xl text-slate-600 mt-2">AIが自動で最適な構成を提案</p>
+        </header>
+        
+        <main class="flex-1 px-16 pb-16">
+            <div class="mb-8">
+                <div class="quote-block">
+                    <p class="text-2xl text-slate-700 font-medium italic">
+                        「この情報なら、こういう構成で伝えると分かりやすいですよ」
+                    </p>
+                </div>
+            </div>
+            
+            <ol class="space-y-6 text-xl numbered-list">
+                <li class="flex items-start">
+                    <div class="flex-1">
+                        <span class="font-bold text-slate-800">コンテンツ解析</span>
+                        <span class="text-slate-700">: 入力されたURLや文書を深く理解</span>
+                        <ul class="mt-3 ml-6 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">キーワード抽出</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">論理構造の把握</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">対象読者の推定</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="flex items-start">
+                    <div class="flex-1">
+                        <span class="font-bold text-slate-800">構成提案</span>
+                        <span class="text-slate-700">: 最適なストーリーラインを自動生成</span>
+                        <ul class="mt-3 ml-6 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">論理的な流れ</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">重要度の階層化</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="flex items-start">
+                    <div class="flex-1">
+                        <span class="font-bold text-slate-800">カスタマイズ</span>
+                        <span class="text-slate-700">: 提案された構成を自由に編集可能</span>
+                        <ul class="mt-3 ml-6 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">セクションの追加・削除</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-slate-400 mr-2">-</span>
+                                <span class="text-slate-600 text-lg">順序の入れ替え</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ol>
+            
+            <div class="mt-12 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                <p class="text-blue-800 font-medium text-xl">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                    複雑なプロンプト調整は不要。AIが最適解を提案します
+                </p>
+            </div>
+        </main>
+        
+        <div class="slide-number">6/10</div>
+    </div>
+
+    <!-- スライド7: 機能デモ3：編集機能 -->
+    <div class="slide fade-in hidden" id="slide-7">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-edit text-orange-500 mr-4"></i>
+                機能デモ3：編集機能
+            </h2>
+            <p class="text-xl text-slate-600 mt-2">PowerPointのように直感的に編集</p>
+        </header>
+        
+        <main class="flex-1 flex px-16 pb-16">
+            <div class="w-1/2 pr-8 flex flex-col justify-center">
+                <h3 class="text-3xl font-bold text-slate-800 mb-6">すべての要素を自由に編集</h3>
+                
+                <ul class="space-y-4 text-lg">
+                    <li class="flex items-start">
+                        <span class="text-orange-500 font-bold mr-3 mt-1">
+                            <i class="fa-solid fa-chart-bar"></i>
+                        </span>
+                        <span class="text-slate-700">
+                            <strong>グラフ編集</strong>: 種類・色・データを自由に変更
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-orange-500 font-bold mr-3 mt-1">
+                            <i class="fa-solid fa-image"></i>
+                        </span>
+                        <span class="text-slate-700">
+                            <strong>画像差し替え</strong>: ローカル/Web検索から選択
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-orange-500 font-bold mr-3 mt-1">
+                            <i class="fa-solid fa-text-width"></i>
+                        </span>
+                        <span class="text-slate-700">
+                            <strong>テキスト修正</strong>: フォント・サイズ・色を調整
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-orange-500 font-bold mr-3 mt-1">
+                            <i class="fa-solid fa-redo"></i>
+                        </span>
+                        <span class="text-slate-700">
+                            <strong>再生成</strong>: 同じ内容で異なるデザインに変更
+                        </span>
+                    </li>
+                </ul>
+                
+                <div class="mt-8 bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-lg">
+                    <p class="text-orange-800 font-medium text-lg">
+                        <i class="fa-solid fa-magic mr-2"></i>
+                        まるで専属デザイナーがいるみたい
+                    </p>
+                </div>
+            </div>
+            
+            <div class="w-1/2 pl-8 flex items-center justify-center">
+                <div class="space-y-4 w-full">
+                    <div class="floating-card p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-mouse text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-800">マウス操作</h4>
+                        </div>
+                        <p class="text-slate-600">クリックするだけで要素を選択・編集</p>
+                    </div>
+                    
+                    <div class="floating-card p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-palette text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-800">デザイン変更</h4>
+                        </div>
+                        <p class="text-slate-600">レイアウト・配色を瞬時に変更</p>
+                    </div>
+                    
+                    <div class="floating-card p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="icon-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-download text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-800">即座にエクスポート</h4>
+                        </div>
+                        <p class="text-slate-600">PPTX形式で完璧に出力</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">7/10</div>
+    </div>
+
+    <!-- スライド8: 他社比較 -->
+    <div class="slide fade-in hidden" id="slide-8">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-balance-scale text-purple-500 mr-4"></i>
+                他社AIとの比較
+            </h2>
+        </header>
+        
+        <main class="flex-1 px-16 pb-16">
+            <div class="overflow-x-auto">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">機能</th>
+                            <th class="text-orange-600">一般的なAI</th>
+                            <th class="felo-column text-blue-600">Felo Create</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left font-medium">出力形式</td>
+                            <td>
+                                <i class="fa-solid fa-times times-icon"></i>
+                                <br>テキストのみ
+                            </td>
+                            <td class="felo-column">
+                                <i class="fa-solid fa-check check-icon"></i>
+                                <br>PPTX / Webページ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left font-medium">プロンプト調整</td>
+                            <td>
+                                <i class="fa-solid fa-times times-icon"></i>
+                                <br>何度も修正が必要
+                            </td>
+                            <td class="felo-column">
+                                <i class="fa-solid fa-check check-icon"></i>
+                                <br>思考モデルが自動提案
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left font-medium">編集機能</td>
+                            <td>
+                                <i class="fa-solid fa-times times-icon"></i>
+                                <br>手動で修正・整形
+                            </td>
+                            <td class="felo-column">
+                                <i class="fa-solid fa-check check-icon"></i>
+                                <br>全要素を直感的に編集
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left font-medium">デザイン品質</td>
+                            <td>
+                                <i class="fa-solid fa-times times-icon"></i>
+                                <br>シンプルなテキスト
+                            </td>
+                            <td class="felo-column">
+                                <i class="fa-solid fa-check check-icon"></i>
+                                <br>プロレベルの仕上がり
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left font-medium">完成度</td>
+                            <td>
+                                <i class="fa-solid fa-times times-icon"></i>
+                                <br>未完成（たたき台）
+                            </td>
+                            <td class="felo-column">
+                                <i class="fa-solid fa-check check-icon"></i>
+                                <br>完成品（納品レベル）
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="bg-blue-50 border-2 border-blue-500 p-6 rounded-lg inline-block">
+                    <p class="text-blue-800 font-bold text-2xl">
+                        <i class="fa-solid fa-trophy mr-2"></i>
+                        「見るだけのAI」から「本当に使えるAI」へ
+                    </p>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">8/10</div>
+    </div>
+
+    <!-- スライド9: 導入効果 -->
+    <div class="slide fade-in hidden" id="slide-9">
+        <header class="flex-none pt-12 px-16 pb-8">
+            <h2 class="text-4xl font-bold text-slate-800 flex items-center">
+                <i class="fa-solid fa-rocket text-green-500 mr-4"></i>
+                Felo Create導入効果
+            </h2>
+        </header>
+        
+        <main class="flex-1 px-16 pb-16">
+            <div class="grid grid-cols-3 gap-8 h-full">
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <div class="text-6xl font-black gradient-text text-center mb-4">
+                        1時間
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">ビジネスパーソン</h3>
+                    <p class="text-slate-600 text-lg text-center mb-4">
+                        急な競合分析レポートも、もう怖くない
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">情報収集時間を大幅短縮</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">プレゼン資料を瞬時に作成</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">会議での提案力向上</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <div class="text-6xl font-black gradient-text text-center mb-4">
+                        1日
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">学生・研究者</h3>
+                    <p class="text-slate-600 text-lg text-center mb-4">
+                        卒論発表のパワポ作りが、1日で終わる
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">論文要約を自動生成</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">発表スライドを効率作成</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">研究時間を確保</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="floating-card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="icon-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-palette text-white text-2xl"></i>
+                    </div>
+                    <div class="text-6xl font-black gradient-text text-center mb-4">
+                        数分
+                    </div>
+                    <h3 class="text-slate-800 text-xl font-bold mb-3 text-center">クリエイター</h3>
+                    <p class="text-slate-600 text-lg text-center mb-4">
+                        アイデアの種を、一瞬でSNSコンテンツに
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">コンテンツ制作を加速</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">アイデアを即座に形に</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-slate-600">創造性に集中</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        
+        <div class="slide-number">9/10</div>
+    </div>
+
+    <!-- スライド10: まとめ・CTA -->
+    <div class="slide fade-in hidden" id="slide-10">
+        <main class="flex-1 flex items-center justify-center px-16">
+            <div class="text-center">
+                <div class="mb-8">
+                    <div class="icon-bg w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-flag-checkered text-white text-5xl"></i>
+                    </div>
+                </div>
+                
+                <h1 class="gradient-text text-5xl font-black mb-6">
+                    「未完成から完成への、最後の一歩」
+                </h1>
+                
+                <div class="accent-line h-2 w-48 mx-auto rounded-full mb-8"></div>
+                
+                <h2 class="text-slate-700 text-2xl font-medium mb-8">
+                    1時間の作業を、たった数分で。<br>
+                    資料作成の常識が変わる瞬間を、あなた自身で体験してください。
+                </h2>
+                
+                <div class="bg-blue-50 border-2 border-blue-500 p-8 rounded-lg inline-block mb-8">
+                    <h3 class="text-blue-800 font-bold text-xl mb-4">
+                        <i class="fa-solid fa-gift mr-2"></i>
+                        今すぐ無料体験！
+                    </h3>
+                    <p class="text-blue-700 text-lg mb-6">
+                        皆さんの「表現したい」を加速させるツールです
+                    </p>
+                    
+                    <div class="flex items-center justify-center gap-8">
+                        <div class="text-center">
+                            <div class="bg-blue-600 text-white p-4 rounded-lg mb-2">
+                                <i class="fa-solid fa-qrcode text-4xl"></i>
+                            </div>
+                            <p class="text-blue-600 font-medium">QRコードで<br>アクセス</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                                <i class="fa-solid fa-external-link-alt mr-2"></i>
+                                Felo Create を体験
+                            </button>
+                            <p class="text-blue-600 font-medium mt-2">無料で今すぐ開始</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-slate-600 text-lg">
+                    ご視聴ありがとうございました！
+                </p>
+            </div>
+        </main>
+        
+        <div class="slide-number">10/10</div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">前へ</button>
+        <span class="nav-btn" id="slideInfo">1 / 10</span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">次へ</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.add('hidden'));
+            
+            const targetSlide = document.getElementById(`slide-${currentSlide}`);
+            if (targetSlide) {
+                targetSlide.classList.remove('hidden');
+                targetSlide.classList.add('fade-in');
+            }
+            
+            document.getElementById('slideInfo').textContent = `${currentSlide} / ${totalSlides}`;
+            
+            // ナビゲーションボタンの状態を更新
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+            if (event.key === 'ArrowRight') changeSlide(1);
+            if (event.key === 'Home') {
+                currentSlide = 1;
+                showSlide(currentSlide);
+            }
+            if (event.key === 'End') {
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+            }
+        });
+
+        // 初期化
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
