@@ -130,6 +130,11 @@ async function loadAllTips() {
     }
     
     console.log(`Loaded ${tipsData.length} tips`);
+    
+    // 初期化時にページ情報を更新
+    if (tipsData.length > 0) {
+        document.getElementById('pageInfo').textContent = `1 / ${tipsData.length}`;
+    }
 }
 
 // 指定されたインデックスのTipsを表示
