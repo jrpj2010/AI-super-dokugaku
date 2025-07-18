@@ -159,12 +159,14 @@ header h1 {
 .diagram-box {
     padding: 0;
     border-radius: 16px;
-    min-height: 300px;
+    min-height: 350px;
     border: none;
     position: relative;
     transition: all 0.3s ease;
     overflow: hidden;
-    background: transparent;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
 }
 
 .diagram-box:hover {
@@ -172,28 +174,26 @@ header h1 {
     box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
 }
 
-.diagram-box h3 {
-    font-size: 16px;
-    margin-bottom: 0;
+.diagram-header {
+    padding: 15px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.diagram-header h3 {
+    font-size: 14px;
+    margin: 0;
     font-weight: 600;
-    color: #ffffff;
+    color: #2d3748;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 15px 25px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
 }
 
-.diagram-box h3::before {
+.diagram-header h3::before {
     content: "";
     width: 4px;
-    height: 20px;
+    height: 16px;
     background: linear-gradient(135deg, #007BFF 0%, #40a9ff 100%);
     border-radius: 2px;
 }
@@ -208,15 +208,14 @@ header h1 {
     position: relative;
     margin: 0;
     overflow: hidden;
-    border-radius: 16px;
-    height: 100%;
-    min-height: 300px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .diagram-image {
     width: 100%;
     height: 100%;
-    min-height: 300px;
     display: block;
     object-fit: cover;
     transition: all 0.3s ease;
@@ -226,47 +225,57 @@ header h1 {
     transform: scale(1.02);
 }
 
-.image-caption {
+.image-caption-wrapper {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+    padding: 30px 20px 20px;
+}
+
+.image-caption {
     color: white;
-    padding: 20px 25px;
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
-    backdrop-filter: blur(5px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
 }
 
-.traditional .image-caption {
-    background: linear-gradient(to top, rgba(229, 62, 62, 0.9) 0%, rgba(229, 62, 62, 0.4) 100%);
+.traditional .diagram-header {
+    background: #fef2f2;
 }
 
-.ai-method .image-caption {
-    background: linear-gradient(to top, rgba(49, 130, 206, 0.9) 0%, rgba(49, 130, 206, 0.4) 100%);
+.traditional .diagram-header h3 {
+    color: #dc2626;
 }
 
-.traditional h3 {
-    background: rgba(229, 62, 62, 0.8);
+.traditional .diagram-header h3::before {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
 }
 
-.ai-method h3 {
-    background: rgba(49, 130, 206, 0.8);
+.ai-method .diagram-header {
+    background: #eff6ff;
+}
+
+.ai-method .diagram-header h3 {
+    color: #2563eb;
+}
+
+.ai-method .diagram-header h3::before {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
 }
 
 .footer-text {
-    position: absolute;
-    bottom: 50px;
-    left: 45px;
-    right: 45px;
+    margin-top: 20px;
     font-size: 12px;
     color: #718096;
-    border-top: 2px solid #007BFF;
-    padding-top: 15px;
+    padding: 15px 20px;
     line-height: 1.7;
-    font-style: italic;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
 }
 
 /* 右ページ */
