@@ -100,7 +100,7 @@ header h1 {
 
 /* 左ページ */
 .left-page {
-    padding: 40px 35px;
+    padding: 30px 25px;
     border-right: 3px solid #007BFF;
     position: relative;
     background: 
@@ -162,7 +162,7 @@ header h1 {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    height: 280px;
+    height: 350px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
@@ -227,34 +227,37 @@ header h1 {
     color: white;
 }
 
-.footer-text {
-    margin-top: 15px;
+.solution-text {
+    margin-top: 20px;
     font-size: 11px;
     color: #64748b;
     line-height: 1.6;
 }
 
-.footer-text p {
+.solution-text p {
     margin: 0;
     padding: 12px 16px;
-    background: #f8fafc;
+    background: #f1f5f9;
     border-radius: 8px;
     border-left: 3px solid #3b82f6;
 }
 
 /* 右ページ */
 .right-page {
-    padding: 50px 45px;
+    padding: 30px 35px;
     background: 
         linear-gradient(to left, rgba(0, 123, 255, 0.02) 0%, transparent 20%),
         #ffffff;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .steps-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
+    flex: 1;
 }
 
 .step {
@@ -345,14 +348,6 @@ header h1 {
     color: #cbd5e0;
 }
 
-.note {
-    position: absolute;
-    bottom: 50px;
-    right: 45px;
-    font-size: 10px;
-    color: #a0aec0;
-    font-style: italic;
-}
 
 /* フッター */
 footer {

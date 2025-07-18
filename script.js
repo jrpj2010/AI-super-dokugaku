@@ -129,33 +129,20 @@ function displayTip(index) {
     document.getElementById('traditionalMethod').textContent = tip.traditionalMethodDiagram || '';
     document.getElementById('aiMethod').textContent = tip.aiMethodDiagram || '';
     
-    // 画像の更新
+    // 画像の更新（簡略化されたロジック）
     const tipNumber = (index + 1).toString().padStart(2, '0');
     const fileName = tip.fileName || '';
-    let personaPrefix = '';
     
-    // ファイル名から人物名を抽出（kyoko_ または tatsuya_ を探す）
-    if (fileName.includes('kyoko_')) {
-        personaPrefix = '_kyoko';
-    } else if (fileName.includes('tatsuya_')) {
-        personaPrefix = '_tatsuya';
-    }
-    
-    // レベルに応じたサフィックスを取得
-    let levelSuffix = '_beginner';
-    if (fileName.includes('_intermediate_')) {
-        levelSuffix = '_intermediate';
-    } else if (fileName.includes('_advanced_')) {
-        levelSuffix = '_advanced';
-    }
-    
-    // ファイル名から固有名を抽出
+    // ファイル名からベース名を抽出（JSONファイル名と同じパターンを使用）
     const baseNameMatch = fileName.match(/\d+_(.*?)\.json$/);
-    const baseName = baseNameMatch ? baseNameMatch[1] : '';
+    let baseName = '';
+    if (baseNameMatch) {
+        baseName = baseNameMatch[1];
+    }
     
-    // 画像パスの設定
-    const traditionalImagePath = `イラスト/${tipNumber}${personaPrefix}_${baseName}-01-Before.png`;
-    const aiMethodImagePath = `イラスト/${tipNumber}${personaPrefix}_${baseName}-02-After.png`;
+    // 画像パスの設定（イラストフォルダの実際のファイル名パターンに合わせる）
+    const traditionalImagePath = `イラスト/${tipNumber}_${baseName}-01-Before.png`;
+    const aiMethodImagePath = `イラスト/${tipNumber}_${baseName}-02-After.png`;
     
     document.getElementById('traditionalImage').src = traditionalImagePath;
     document.getElementById('aiMethodImage').src = aiMethodImagePath;
@@ -163,10 +150,10 @@ function displayTip(index) {
     console.log(`Traditional image: ${traditionalImagePath}`);
     console.log(`AI method image: ${aiMethodImagePath}`);
     
-    // 課題の本質とAIソリューションの更新
-    const footerText = document.querySelector('.footer-text p');
-    if (footerText) {
-        footerText.textContent = tip.solutionText || '';
+    // 課題の本質とAIソリューションの更新（右ページ下部に移動）
+    const solutionText = document.getElementById('solutionContent');
+    if (solutionText) {
+        solutionText.textContent = tip.solutionText || '';
     }
     
     // 右ページの更新
