@@ -132,7 +132,7 @@ header {
 .diagram-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     height: 100%;
 }
 
@@ -142,14 +142,18 @@ header {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #f0f0f0;
 }
 
 .diagram-image {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
@@ -158,8 +162,8 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 10px 14px;
+    font-size: 14px;
     font-weight: 700;
     z-index: 2;
 }
@@ -179,12 +183,13 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 10px 12px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+    padding: 12px 14px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 100%);
     color: white;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    z-index: 2;
 }
 
 /* 右ページ */
