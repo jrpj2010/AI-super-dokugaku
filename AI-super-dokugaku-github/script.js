@@ -4,61 +4,61 @@ let currentTipIndex = 0;
 
 // 実際に存在するファイルのリスト（フォルダ別に整理）
 const existingFiles = [
-    // 初級（13個）
-    '初級/01_beginner_organize-thoughts.json',
-    '初級/02_kyoko_beginner_web-summary.json',
-    '初級/03_tatsuya_beginner_personalized-news-report.json',
-    '初級/04_advanced_ai-research-agent.json',
-    '初級/05_tatsuya_beginner_gemini-in-workspace.json',
-    '初級/06_kyoko_intermediate_copilot-coaching.json',
-    '初級/07_kyoko_beginner_simplification.json',
-    '初級/08_tatsuya_beginner_word-to-powerpoint.json',
-    '初級/09_kyoko_advanced_copilot-illustration.json',
-    '初級/10_tatsuya_beginner_voice-memo-structuring.json',
-    '初級/11_kyoko_beginner_gemini-wall-hitting.json',
-    '初級/12_tatsuya_beginner_copilot-notebook.json',
-    '初級/13_beginner_portfolio-site.json',
+    // beginner（13個）
+    'beginner/01_beginner_organize-thoughts.json',
+    'beginner/02_kyoko_beginner_web-summary.json',
+    'beginner/03_tatsuya_beginner_personalized-news-report.json',
+    'beginner/04_advanced_ai-research-agent.json',
+    'beginner/05_tatsuya_beginner_gemini-in-workspace.json',
+    'beginner/06_kyoko_intermediate_copilot-coaching.json',
+    'beginner/07_kyoko_beginner_simplification.json',
+    'beginner/08_tatsuya_beginner_word-to-powerpoint.json',
+    'beginner/09_kyoko_advanced_copilot-illustration.json',
+    'beginner/10_tatsuya_beginner_voice-memo-structuring.json',
+    'beginner/11_kyoko_beginner_gemini-wall-hitting.json',
+    'beginner/12_tatsuya_beginner_copilot-notebook.json',
+    'beginner/13_beginner_portfolio-site.json',
     
-    // 中級（21個）
-    '中級/14_intermediate_custom-learning-roadmap.json',
-    '中級/15_beginner_backward-thinking.json',
-    '中級/16_advanced_stumbling-prediction.json',
-    '中級/17_intermediate_learning-style.json',
-    '中級/18_intermediate_emotion-wave-analysis.json',
-    '中級/19_beginner_time-reminder.json',
-    '中級/20_beginner_listen-to-books.json',
-    '中級/21_beginner_youtube-to-text.json',
-    '中級/22_tatsuya_beginner_academic-paper-summary.json',
-    '中級/23_kyoko_intermediate_notebooklm-self-learning.json',
-    '中級/24_beginner_personalized-quiz.json',
-    '中級/25_intermediate_exam-analysis.json',
-    '中級/26_beginner_daily-reflection.json',
-    '中級/27_intermediate_feynman-technique.json',
-    '中級/28_beginner_ai-english-teacher.json',
-    '中級/29_intermediate_business-english.json',
-    '中級/30_intermediate_motivation-coach.json',
-    '中級/31_beginner_digital-certificate.json',
-    '中級/32_intermediate_gamification-progress.json',
-    '中級/33_intermediate_weekly-report.json',
-    '中級/34_advanced_learning-community.json',
+    // intermediate（21個）
+    'intermediate/14_intermediate_custom-learning-roadmap.json',
+    'intermediate/15_beginner_backward-thinking.json',
+    'intermediate/16_advanced_stumbling-prediction.json',
+    'intermediate/17_intermediate_learning-style.json',
+    'intermediate/18_intermediate_emotion-wave-analysis.json',
+    'intermediate/19_beginner_time-reminder.json',
+    'intermediate/20_beginner_listen-to-books.json',
+    'intermediate/21_beginner_youtube-to-text.json',
+    'intermediate/22_tatsuya_beginner_academic-paper-summary.json',
+    'intermediate/23_kyoko_intermediate_notebooklm-self-learning.json',
+    'intermediate/24_beginner_personalized-quiz.json',
+    'intermediate/25_intermediate_exam-analysis.json',
+    'intermediate/26_beginner_daily-reflection.json',
+    'intermediate/27_intermediate_feynman-technique.json',
+    'intermediate/28_beginner_ai-english-teacher.json',
+    'intermediate/29_intermediate_business-english.json',
+    'intermediate/30_intermediate_motivation-coach.json',
+    'intermediate/31_beginner_digital-certificate.json',
+    'intermediate/32_intermediate_gamification-progress.json',
+    'intermediate/33_intermediate_weekly-report.json',
+    'intermediate/34_advanced_learning-community.json',
     
-    // 中級上（16個）
-    '中級上/35_intermediate_concept-map.json',
-    '中級上/36_tatsuya_intermediate_gemini-deep-research.json',
-    '中級上/37_advanced_fact-opinion-separation.json',
-    '中級上/38_tatsuya_intermediate_chain-of-thought.json',
-    '中級上/39_tatsuya_beginner_devils-advocate.json',
-    '中級上/40_advanced_devil-advocate.json',
-    '中級上/41_intermediate_business-plan-validation.json',
-    '中級上/42_advanced_analyze-thinking-bias.json',
-    '中級上/43_advanced_voice-memo-research.json',
-    '中級上/44_intermediate_metaphor-creation.json',
-    '中級上/45_intermediate_visualize-physics.json',
-    '中級上/46_tatsuya_advanced_notebooklm-knowledge-base.json',
-    '中級上/47_intermediate_market-value-career.json',
-    '中級上/48_tatsuya_advanced_future-career-strategy.json',
-    '中級上/49_beginner_book-recommendation.json',
-    '中級上/50_tatsuya_intermediate_ai-era-output-thinking.json'
+    // advanced（16個）
+    'advanced/35_intermediate_concept-map.json',
+    'advanced/36_tatsuya_intermediate_gemini-deep-research.json',
+    'advanced/37_advanced_fact-opinion-separation.json',
+    'advanced/38_tatsuya_intermediate_chain-of-thought.json',
+    'advanced/39_tatsuya_beginner_devils-advocate.json',
+    'advanced/40_advanced_devil-advocate.json',
+    'advanced/41_intermediate_business-plan-validation.json',
+    'advanced/42_advanced_analyze-thinking-bias.json',
+    'advanced/43_advanced_voice-memo-research.json',
+    'advanced/44_intermediate_metaphor-creation.json',
+    'advanced/45_intermediate_visualize-physics.json',
+    'advanced/46_tatsuya_advanced_notebooklm-knowledge-base.json',
+    'advanced/47_intermediate_market-value-career.json',
+    'advanced/48_tatsuya_advanced_future-career-strategy.json',
+    'advanced/49_beginner_book-recommendation.json',
+    'advanced/50_tatsuya_intermediate_ai-era-output-thinking.json'
 ];
 
 // ページロード時の初期化
@@ -129,31 +129,10 @@ function displayTip(index) {
     document.getElementById('traditionalMethod').textContent = tip.traditionalMethodDiagram || '';
     document.getElementById('aiMethod').textContent = tip.aiMethodDiagram || '';
     
-    // 画像の更新（簡略化されたロジック）
-    const tipNumber = (index + 1).toString().padStart(2, '0');
-    const fileName = tip.fileName || '';
-    
-    // ファイル名からベース名を抽出（JSONファイル名と同じパターンを使用）
-    const baseNameMatch = fileName.match(/\d+_(.*?)\.json$/);
-    let baseName = '';
-    if (baseNameMatch) {
-        baseName = baseNameMatch[1];
-    }
-    
-    // 画像パスの設定（イラストフォルダの実際のファイル名パターンに合わせる）
-    const traditionalImagePath = `イラスト/${tipNumber}_${baseName}-01-Before.png`;
-    const aiMethodImagePath = `イラスト/${tipNumber}_${baseName}-02-After.png`;
-    
-    document.getElementById('traditionalImage').src = traditionalImagePath;
-    document.getElementById('aiMethodImage').src = aiMethodImagePath;
-    
-    console.log(`Traditional image: ${traditionalImagePath}`);
-    console.log(`AI method image: ${aiMethodImagePath}`);
-    
-    // 課題の本質とAIソリューションの更新（右ページ下部に移動）
-    const solutionText = document.getElementById('solutionContent');
-    if (solutionText) {
-        solutionText.textContent = tip.solutionText || '';
+    // 課題の本質とAIソリューションの更新
+    const footerText = document.querySelector('.footer-text p');
+    if (footerText) {
+        footerText.textContent = tip.solutionText || '';
     }
     
     // 右ページの更新

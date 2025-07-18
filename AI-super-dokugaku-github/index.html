@@ -21,20 +21,11 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <div class="book-info">
-                    <h1>AI超独学 第1部 Tips一覧</h1>
-                    <div class="current-tips-info">
-                        <span class="part-label">●第1部</span>
-                        <span class="tips-label" id="tipsLabel">Tips●</span>
-                        <h2 class="tips-title" id="tipsTitle">Tips名称（最大25文字）</h2>
-                    </div>
-                </div>
-                <div class="navigation">
-                    <button id="prevBtn" onclick="prevTip()">← 前のTips</button>
-                    <span id="pageInfo">読み込み中...</span>
-                    <button id="nextBtn" onclick="nextTip()">次のTips →</button>
-                </div>
+            <h1>AI超独学 第1部 Tips一覧</h1>
+            <div class="navigation">
+                <button id="prevBtn" onclick="prevTip()">← 前のTips</button>
+                <span id="pageInfo">読み込み中...</span>
+                <button id="nextBtn" onclick="nextTip()">次のTips →</button>
             </div>
         </header>
 
@@ -43,27 +34,32 @@
             <div class="spread-pages">
                 <!-- 左ページ -->
                 <div class="left-page">
+                    <div class="page-header">
+                        <span class="part-label">●第1部</span>
+                        <div class="tips-header">
+                            <span class="tips-label">Tips●</span>
+                            <h2 class="tips-title" id="tipsTitle">Tips名称（最大25文字）</h2>
+                        </div>
+                    </div>
                     
                     <div class="diagram-section">
                         <div class="diagram-box traditional">
-                            <img id="traditionalImage" class="diagram-image" src="" alt="従来の独学法">
-                            <div class="diagram-overlay">
-                                <h3 class="diagram-title">従来の独学法の図解</h3>
-                                <p id="traditionalMethod" class="diagram-text">
-                                    （そのTipsについて読者がこれまで行っていた非効率的なやり方）
-                                </p>
-                            </div>
+                            <h3>従来の独学法の図解</h3>
+                            <p id="traditionalMethod">
+                                （そのTipsについて読者がこれまで行っていた非効率的なやり方）
+                            </p>
                         </div>
                         
                         <div class="diagram-box ai-method">
-                            <img id="aiMethodImage" class="diagram-image" src="" alt="超AI独学法">
-                            <div class="diagram-overlay">
-                                <h3 class="diagram-title">超AI独学法の図解</h3>
-                                <p id="aiMethod" class="diagram-text">
-                                    （そのTipsについてAIとの対話を通じて行う新しい効率的なやり方）
-                                </p>
-                            </div>
+                            <h3>超AI独学法の図解</h3>
+                            <p id="aiMethod">
+                                （そのTipsについてAIとの対話を通じて行う新しい効率的なやり方）
+                            </p>
                         </div>
+                    </div>
+                    
+                    <div class="footer-text">
+                        <p>「課題の本質」と「AIソリューション」：250字程度</p>
                     </div>
                 </div>
 
@@ -106,8 +102,8 @@
                         </div>
                     </div>
                     
-                    <div class="solution-text">
-                        <p id="solutionContent">「課題の本質」と「AIソリューション」：250字程度</p>
+                    <div class="note">
+                        <p>Step1〜3の「実例」は計で700文字程度</p>
                     </div>
                 </div>
             </div>
