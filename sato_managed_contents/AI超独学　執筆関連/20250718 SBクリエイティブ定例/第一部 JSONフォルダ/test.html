@@ -16,15 +16,30 @@
         <p><a href="index.html">メインアプリケーションに移動</a></p>
         
         <h2>ファイル確認</h2>
+        <div id="testResult"></div>
         <script>
-            fetch('01_kyoko_beginner_few-shot-prompt.json')
-                .then(response => response.json())
-                .then(data => {
-                    document.write('<p>✅ JSONファイル読み込み成功: ' + data.tipsName + '</p>');
-                })
-                .catch(error => {
-                    document.write('<p>❌ JSONファイル読み込み失敗: ' + error + '</p>');
-                });
+            // 各フォルダから1つずつテスト
+            const testFiles = [
+                '初級/01_beginner_organize-thoughts.json',
+                '中級/14_intermediate_custom-learning-roadmap.json',
+                '中級上/35_intermediate_concept-map.json'
+            ];
+            
+            const resultDiv = document.getElementById('testResult');
+            
+            testFiles.forEach(async (fileName) => {
+                try {
+                    const response = await fetch(fileName);
+                    if (response.ok) {
+                        const data = await response.json();
+                        resultDiv.innerHTML += `<p>✅ ${fileName} 読み込み成功: ${data.tipsName}</p>`;
+                    } else {
+                        resultDiv.innerHTML += `<p>❌ ${fileName} 読み込み失敗: ${response.status}</p>`;
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML += `<p>❌ ${fileName} エラー: ${error.message}</p>`;
+                }
+            });
         </script>
     </div>
 </body>

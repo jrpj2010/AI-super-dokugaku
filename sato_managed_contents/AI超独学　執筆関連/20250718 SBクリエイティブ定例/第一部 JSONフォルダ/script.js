@@ -2,108 +2,63 @@
 let tipsData = [];
 let currentTipIndex = 0;
 
-// 実際に存在するファイルのリスト（全100個）
+// 実際に存在するファイルのリスト（フォルダ別に整理）
 const existingFiles = [
-    '01_beginner_organize-thoughts.json',
-    '02_intermediate_idea-100-knock.json',
-    '03_advanced_devil-advocate.json',
-    '04_intermediate_extract-debate-axis.json',
-    '05_intermediate_concept-map.json',
-    '06_advanced_analyze-thinking-bias.json',
-    '07_beginner_backward-thinking.json',
-    '08_intermediate_emotion-wave-analysis.json',
-    '09_advanced_summon-great-minds.json',
-    '10_advanced_find-life-purpose.json',
-    '11_beginner_listen-to-books.json',
-    '12_intermediate_translate-research-papers.json',
-    '13_beginner_youtube-to-text.json',
-    '14_intermediate_exam-analysis.json',
-    '15_beginner_ai-english-teacher.json',
-    '16_advanced_ai-research-agent.json',
-    '17_intermediate_metaphor-creation.json',
-    '18_advanced_fact-opinion-separation.json',
-    '19_intermediate_feynman-technique.json',
-    '20_beginner_personalized-quiz.json',
-    '21_intermediate_custom-learning-roadmap.json',
-    '22_advanced_historical-simulation.json',
-    '23_intermediate_visualize-physics.json',
-    '24_beginner_book-recommendation.json',
-    '25_advanced_voice-memo-research.json',
-    '26_beginner_instant-writing.json',
-    '27_beginner_prep-report.json',
-    '28_intermediate_business-english.json',
-    '29_advanced_presentation-story.json',
-    '30_intermediate_catchcopy-persona.json',
-    '31_beginner_weakness-to-strength.json',
-    '32_intermediate_market-value-career.json',
-    '33_advanced_story-structure.json',
-    '34_intermediate_blog-structure.json',
-    '35_beginner_beginner-manual.json',
-    '36_advanced_code-debug-refactor.json',
-    '37_beginner_vibe-graph.json',
-    '38_intermediate_business-plan-validation.json',
-    '39_advanced_side-business-ideas.json',
-    '40_beginner_portfolio-site.json',
-    '41_beginner_baby-step-plan.json',
-    '42_intermediate_motivation-coach.json',
-    '43_beginner_daily-reflection.json',
-    '44_intermediate_gamification-progress.json',
-    '45_advanced_learning-community.json',
-    '46_beginner_time-reminder.json',
-    '47_intermediate_learning-style.json',
-    '48_advanced_stumbling-prediction.json',
-    '49_beginner_digital-certificate.json',
-    '50_intermediate_weekly-report.json',
-    '51_kyoko_beginner_few-shot-prompt.json',
-    '52_kyoko_beginner_persona-setting.json',
-    '53_kyoko_beginner_copilot-email-draft.json',
-    '54_kyoko_beginner_teams-summary.json',
-    '55_kyoko_beginner_gemini-wall-hitting.json',
-    '56_kyoko_beginner_ai-english-conversation.json',
-    '57_kyoko_beginner_100-ideas.json',
-    '58_kyoko_beginner_simplification.json',
-    '59_kyoko_beginner_web-summary.json',
-    '60_kyoko_beginner_transcription.json',
-    '61_kyoko_intermediate_prompt-design-4-steps.json',
-    '62_kyoko_intermediate_copilot-for-excel.json',
-    '63_kyoko_intermediate_gemini-in-sheets.json',
-    '64_kyoko_intermediate_notion-ai-task-extraction.json',
-    '65_kyoko_intermediate_excel-macro-automation.json',
-    '66_kyoko_intermediate_copilot-coaching.json',
-    '67_kyoko_intermediate_ai-brainstorming.json',
-    '68_kyoko_intermediate_linkedin-profile.json',
-    '69_kyoko_intermediate_gemini-trip-planning.json',
-    '70_kyoko_intermediate_notebooklm-self-learning.json',
-    '71_kyoko_advanced_competitor-analysis.json',
-    '72_kyoko_advanced_niche-market-analysis.json',
-    '73_kyoko_advanced_linkedin-career-path.json',
-    '74_kyoko_advanced_copilot-illustration.json',
-    '75_kyoko_advanced_dify-app-builder.json',
-    '76_tatsuya_beginner_devils-advocate.json',
-    '77_tatsuya_beginner_word-to-powerpoint.json',
-    '78_tatsuya_beginner_copilot-notebook.json',
-    '79_tatsuya_beginner_gemini-in-workspace.json',
-    '80_tatsuya_beginner_1on1-analysis.json',
-    '81_tatsuya_beginner_personalized-news-report.json',
-    '82_tatsuya_beginner_voice-memo-structuring.json',
-    '83_tatsuya_beginner_analogy-generation.json',
-    '84_tatsuya_beginner_academic-paper-summary.json',
-    '85_tatsuya_beginner_chatgpt-for-management.json',
-    '86_tatsuya_intermediate_chain-of-thought.json',
-    '87_tatsuya_intermediate_self-consistency.json',
-    '88_tatsuya_intermediate_copilot-for-excel-insights.json',
-    '89_tatsuya_intermediate_gemini-deep-research.json',
-    '90_tatsuya_intermediate_notion-ai-project-summary.json',
-    '91_tatsuya_intermediate_work-process-redesign.json',
-    '92_tatsuya_intermediate_content-creation.json',
-    '93_tatsuya_intermediate_gemini-multimodal-analysis.json',
-    '94_tatsuya_intermediate_ai-era-output-thinking.json',
-    '95_tatsuya_intermediate_customer-feedback-analysis.json',
-    '96_tatsuya_advanced_react-prompting.json',
-    '97_tatsuya_advanced_notebooklm-knowledge-base.json',
-    '98_tatsuya_advanced_n8n-ai-agent.json',
-    '99_tatsuya_advanced_future-career-strategy.json',
-    '100_tatsuya_advanced_dify-for-teams.json'
+    // 初級（13個）
+    '初級/01_beginner_organize-thoughts.json',
+    '初級/02_kyoko_beginner_web-summary.json',
+    '初級/03_tatsuya_beginner_personalized-news-report.json',
+    '初級/04_advanced_ai-research-agent.json',
+    '初級/05_tatsuya_beginner_gemini-in-workspace.json',
+    '初級/06_kyoko_intermediate_copilot-coaching.json',
+    '初級/07_kyoko_beginner_simplification.json',
+    '初級/08_tatsuya_beginner_word-to-powerpoint.json',
+    '初級/09_kyoko_advanced_copilot-illustration.json',
+    '初級/10_tatsuya_beginner_voice-memo-structuring.json',
+    '初級/11_kyoko_beginner_gemini-wall-hitting.json',
+    '初級/12_tatsuya_beginner_copilot-notebook.json',
+    '初級/13_beginner_portfolio-site.json',
+    
+    // 中級（21個）
+    '中級/14_intermediate_custom-learning-roadmap.json',
+    '中級/15_beginner_backward-thinking.json',
+    '中級/16_advanced_stumbling-prediction.json',
+    '中級/17_intermediate_learning-style.json',
+    '中級/18_intermediate_emotion-wave-analysis.json',
+    '中級/19_beginner_time-reminder.json',
+    '中級/20_beginner_listen-to-books.json',
+    '中級/21_beginner_youtube-to-text.json',
+    '中級/22_tatsuya_beginner_academic-paper-summary.json',
+    '中級/23_kyoko_intermediate_notebooklm-self-learning.json',
+    '中級/24_beginner_personalized-quiz.json',
+    '中級/25_intermediate_exam-analysis.json',
+    '中級/26_beginner_daily-reflection.json',
+    '中級/27_intermediate_feynman-technique.json',
+    '中級/28_beginner_ai-english-teacher.json',
+    '中級/29_intermediate_business-english.json',
+    '中級/30_intermediate_motivation-coach.json',
+    '中級/31_beginner_digital-certificate.json',
+    '中級/32_intermediate_gamification-progress.json',
+    '中級/33_intermediate_weekly-report.json',
+    '中級/34_advanced_learning-community.json',
+    
+    // 中級上（16個）
+    '中級上/35_intermediate_concept-map.json',
+    '中級上/36_tatsuya_intermediate_gemini-deep-research.json',
+    '中級上/37_advanced_fact-opinion-separation.json',
+    '中級上/38_tatsuya_intermediate_chain-of-thought.json',
+    '中級上/39_tatsuya_beginner_devils-advocate.json',
+    '中級上/40_advanced_devil-advocate.json',
+    '中級上/41_intermediate_business-plan-validation.json',
+    '中級上/42_advanced_analyze-thinking-bias.json',
+    '中級上/43_advanced_voice-memo-research.json',
+    '中級上/44_intermediate_metaphor-creation.json',
+    '中級上/45_intermediate_visualize-physics.json',
+    '中級上/46_tatsuya_advanced_notebooklm-knowledge-base.json',
+    '中級上/47_intermediate_market-value-career.json',
+    '中級上/48_tatsuya_advanced_future-career-strategy.json',
+    '中級上/49_beginner_book-recommendation.json',
+    '中級上/50_tatsuya_intermediate_ai-era-output-thinking.json'
 ];
 
 // ページロード時の初期化
@@ -117,32 +72,57 @@ window.addEventListener('DOMContentLoaded', async () => {
 async function loadAllTips() {
     tipsData = [];
     
+    console.log('Starting to load tips...');
+    
     for (const fileName of existingFiles) {
         try {
+            // 相対パスでファイルを読み込む
             const response = await fetch(fileName);
+            console.log(`Loading ${fileName}: ${response.status}`);
+            
             if (response.ok) {
                 const data = await response.json();
-                tipsData.push(data);
+                tipsData.push({
+                    ...data,
+                    fileName: fileName // デバッグ用にファイル名も保存
+                });
+                console.log(`Successfully loaded: ${fileName}`);
+            } else {
+                console.warn(`Failed to load ${fileName}: ${response.status} ${response.statusText}`);
             }
         } catch (error) {
             console.error(`Error loading ${fileName}:`, error);
         }
     }
     
-    console.log(`Loaded ${tipsData.length} tips`);
+    console.log(`Successfully loaded ${tipsData.length} / ${existingFiles.length} tips`);
     
     // 初期化時にページ情報を更新
     if (tipsData.length > 0) {
         document.getElementById('pageInfo').textContent = `1 / ${tipsData.length}`;
+    } else {
+        document.getElementById('pageInfo').textContent = 'データが見つかりません';
+        console.error('No tips data loaded. Please check file paths and server configuration.');
     }
 }
 
 // 指定されたインデックスのTipsを表示
 function displayTip(index) {
-    if (index < 0 || index >= tipsData.length) return;
+    if (index < 0 || index >= tipsData.length) {
+        console.error(`Invalid index: ${index}. Available range: 0-${tipsData.length - 1}`);
+        return;
+    }
     
     currentTipIndex = index;
     const tip = tipsData[index];
+    
+    // データの存在を確認
+    if (!tip) {
+        console.error(`No tip data at index ${index}`);
+        return;
+    }
+    
+    console.log(`Displaying tip ${index + 1}: ${tip.tipsName || 'Unknown'}`);
     
     // 左ページの更新
     document.getElementById('tipsTitle').textContent = tip.tipsName || '';
@@ -151,7 +131,9 @@ function displayTip(index) {
     
     // 課題の本質とAIソリューションの更新
     const footerText = document.querySelector('.footer-text p');
-    footerText.textContent = tip.solutionText || '';
+    if (footerText) {
+        footerText.textContent = tip.solutionText || '';
+    }
     
     // 右ページの更新
     document.getElementById('step1Title').textContent = tip.step1Headline || '';
@@ -174,10 +156,15 @@ function displayTip(index) {
     
     // Tips番号の更新
     const tipsLabel = document.querySelector('.tips-label');
-    tipsLabel.textContent = `Tips${(index + 1).toString().padStart(2, '0')}`;
+    if (tipsLabel) {
+        tipsLabel.textContent = `Tips${(index + 1).toString().padStart(2, '0')}`;
+    }
     
     // セレクターの選択状態を更新
-    document.getElementById('tipsSelector').value = index.toString();
+    const selector = document.getElementById('tipsSelector');
+    if (selector) {
+        selector.value = index.toString();
+    }
 }
 
 // 前のTipsへ
