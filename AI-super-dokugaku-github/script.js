@@ -124,10 +124,22 @@ function displayTip(index) {
     
     console.log(`Displaying tip ${index + 1}: ${tip.tipsName || 'Unknown'}`);
     
+    // ヘッダーのタイトル更新
+    const headerTitle = document.getElementById('tipsTitle');
+    if (headerTitle) {
+        headerTitle.textContent = tip.tipsName || '';
+    }
+    
     // 左ページの更新
-    document.getElementById('tipsTitle').textContent = tip.tipsName || '';
-    document.getElementById('traditionalMethod').textContent = tip.traditionalMethodDiagram || '';
-    document.getElementById('aiMethod').textContent = tip.aiMethodDiagram || '';
+    const traditionalMethod = document.getElementById('traditionalMethod');
+    if (traditionalMethod) {
+        traditionalMethod.textContent = tip.traditionalMethodDiagram || '';
+    }
+    
+    const aiMethod = document.getElementById('aiMethod');
+    if (aiMethod) {
+        aiMethod.textContent = tip.aiMethodDiagram || '';
+    }
     
     // 画像の更新（簡略化されたロジック）
     const tipNumber = (index + 1).toString().padStart(2, '0');
@@ -175,10 +187,10 @@ function displayTip(index) {
     document.getElementById('prevBtn').disabled = index === 0;
     document.getElementById('nextBtn').disabled = index === tipsData.length - 1;
     
-    // Tips番号の更新
-    const tipsLabel = document.querySelector('.tips-label');
-    if (tipsLabel) {
-        tipsLabel.textContent = `Tips${(index + 1).toString().padStart(2, '0')}`;
+    // Tips番号の更新（ヘッダー内）
+    const tipsNumber = document.getElementById('tipsNumber');
+    if (tipsNumber) {
+        tipsNumber.textContent = `Tips${(index + 1).toString().padStart(2, '0')}`;
     }
     
     // セレクターの選択状態を更新
