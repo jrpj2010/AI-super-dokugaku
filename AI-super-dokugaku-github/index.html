@@ -21,6 +21,9 @@
                 <h1 class="tips-name" id="tipsTitle">ごちゃごちゃな頭の中を、AIに話すだけでスッキリ整理する「最初の感動」体験術</h1>
             </div>
             <div class="header-right">
+                <select id="tipsSelector" onchange="selectTip(this.value)" class="tips-selector">
+                    <option value="">Tipsを選択...</option>
+                </select>
                 <button id="prevBtn" onclick="prevTip()" class="nav-btn">← 前のTips</button>
                 <span class="page-counter" id="pageInfo">1 / 50</span>
                 <button id="nextBtn" onclick="nextTip()" class="nav-btn">次のTips →</button>
