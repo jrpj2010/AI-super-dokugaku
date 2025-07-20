@@ -7,6 +7,7 @@ import { SettingsButton } from "@/components/settings-button"
 import { ImageEditor } from "@/components/image-editor"
 import { APILogViewer } from "@/components/api-log-viewer"
 import { HistoryViewer } from "@/components/history-viewer"
+import { DebugConsole } from "@/components/debug-console"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { clearCorruptedStorage } from "@/lib/clear-storage"
 
@@ -47,6 +48,7 @@ export default function Home() {
 
           <TabsContent value="generate" className="space-y-6">
             <MasterPromptInput />
+            <DebugConsole />
             <UserInputList />
           </TabsContent>
 

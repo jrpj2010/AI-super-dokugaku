@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI超独学 第1部 - Tips一覧</title>
     
     <!-- Tailwind CSS -->
@@ -22,18 +22,18 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <div class="book-info">
-                    <h1>AI超独学 第1部 Tips一覧</h1>
-                    <div class="current-tips-info">
-                        <span class="part-label">●第1部</span>
-                        <span class="tips-label" id="tipsLabel">Tips●</span>
-                        <h2 class="tips-title" id="tipsTitle">Tips名称（最大25文字）</h2>
-                    </div>
+                <div class="left-group">
+                    <h1>第1部</h1>
+                    <span class="tips-label" id="tipsLabel">Tips01</span>
+                    <h2 class="tips-title" id="tipsTitle">Tips名称</h2>
                 </div>
-                <div class="navigation">
-                    <button id="prevBtn" onclick="prevTip()">← 前のTips</button>
+                <div class="right-group">
+                    <button id="prevBtn" onclick="prevTip()">◀</button>
                     <span id="pageInfo">読み込み中...</span>
-                    <button id="nextBtn" onclick="nextTip()">次のTips →</button>
+                    <button id="nextBtn" onclick="nextTip()">▶</button>
+                    <select id="tipsSelector" class="header-selector" onchange="selectTip(this.value)">
+                        <option value="">Tipsを選択...</option>
+                    </select>
                 </div>
             </div>
         </header>
@@ -65,12 +65,14 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- ソリューションテキストはフッターに移動 -->
                 </div>
 
                 <!-- 右ページ -->
                 <div class="right-page">
                     <div class="steps-container">
-                        <div class="step">
+                        <div class="step step-1">
                             <div class="step-header">
                                 <span class="step-label">Step 1</span>
                                 <h3 class="step-title" id="step1Title">Stepの概要見出し（最大32文字）</h3>
@@ -80,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div class="step">
+                        <div class="step step-2">
                             <div class="step-header">
                                 <span class="step-label">Step 2</span>
                                 <h3 class="step-title" id="step2Title">Stepの概要見出し（最大32文字）</h3>
@@ -90,7 +92,7 @@
                             </div>
                         </div>
 
-                        <div class="step">
+                        <div class="step step-3">
                             <div class="step-header">
                                 <span class="step-label">Step 3</span>
                                 <h3 class="step-title" id="step3Title">Stepの概要見出し（最大32文字）</h3>
@@ -99,25 +101,22 @@
                                 <p id="step3Content">プロンプト、入力例の実例</p>
                             </div>
                         </div>
-
-                        <div class="effect-section">
-                            <h3>効果</h3>
-                            <p id="effectContent">効果を記述</p>
-                        </div>
                     </div>
-                    
-                    <div class="solution-text">
-                        <p id="solutionContent">「課題の本質」と「AIソリューション」：250字程度</p>
-                    </div>
+                    <!-- エフェクトセクションはフッターに移動 -->
                 </div>
             </div>
         </main>
 
-        <footer>
-            <div class="tips-list">
-                <select id="tipsSelector" onchange="selectTip(this.value)">
-                    <option value="">Tipsを選択...</option>
-                </select>
+        <footer class="enhanced-footer">
+            <div class="footer-content">
+                <div class="solution-column">
+                    <h3>💡 課題の本質とAIソリューション</h3>
+                    <p id="solutionContent">「課題の本質」と「AIソリューション」：250字程度</p>
+                </div>
+                <div class="effect-column">
+                    <h3>✨ 効果</h3>
+                    <p id="effectContent">効果を記述</p>
+                </div>
             </div>
         </footer>
     </div>

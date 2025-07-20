@@ -14,6 +14,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // APIルートのタイムアウトを延長
+  api: {
+    responseLimit: false,
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
 }
 
 export default nextConfig

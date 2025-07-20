@@ -48,7 +48,11 @@ export function generateFilename(prefix: string = 'generated'): string {
 }
 
 // 複数画像をZIPファイルとしてダウンロード
-export async function downloadImagesAsZip(images: Array<{id: string, imageUrl: string, prompt: string}>, masterPrompt: string): Promise<void> {
+export async function downloadImagesAsZip(
+  images: Array<{id: string, imageUrl: string, prompt: string}>, 
+  masterPrompt: string,
+  onProgress?: (current: number, total: number) => void
+): Promise<{ successCount: number, errorCount: number }> {
   try {
     // JSZipライブラリを動的インポート
     const JSZip = (await import('jszip')).default;
@@ -56,38 +60,67 @@ export async function downloadImagesAsZip(images: Array<{id: string, imageUrl: s
     
     // 画像フォルダを作成
     const imagesFolder = zip.folder('images');
-    if (!imagesFolder) return;
+    if (!imagesFolder) return { successCount: 0, errorCount: 0 };
+    
+    // 統計情報
+    let successCount = 0;
+    const errors: string[] = [];
     
     // 各画像を追加
     for (let i = 0; i < images.length; i++) {
       const image = images[i];
-      let imageData: string;
       
-      // URLかBase64かを判別
-      if (image.imageUrl.startsWith('/api/') || image.imageUrl.startsWith('http')) {
-        // URLの場合は画像をフェッチ
-        const response = await fetch(image.imageUrl);
-        if (!response.ok) {
-          console.error(`Failed to fetch image ${image.id}`);
-          continue;
-        }
-        const blob = await response.blob();
-        const buffer = await blob.arrayBuffer();
-        const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-        imageData = base64;
-      } else {
-        // Base64データURLの場合
-        imageData = image.imageUrl.split(',')[1] || image.imageUrl;
+      // 進捗を通知
+      if (onProgress) {
+        onProgress(i + 1, images.length);
       }
       
-      const fileName = `image_${i + 1}_${image.id}.png`;
-      imagesFolder.file(fileName, imageData, { base64: true });
+      try {
+        let imageData: string;
+        
+        // URLかBase64かを判別
+        if (image.imageUrl.startsWith('/api/') || image.imageUrl.startsWith('http')) {
+          // URLの場合は画像をフェッチ
+          const response = await fetch(image.imageUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const blob = await response.blob();
+          const buffer = await blob.arrayBuffer();
+          const bytes = new Uint8Array(buffer);
+          
+          // 大きなバッファを安全に処理するため、チャンクごとに変換
+          let base64 = '';
+          const chunkSize = 8192; // 8KB chunks
+          
+          for (let i = 0; i < bytes.length; i += chunkSize) {
+            const chunk = bytes.slice(i, i + chunkSize);
+            base64 += btoa(String.fromCharCode(...chunk));
+          }
+          
+          imageData = base64;
+        } else {
+          // Base64データURLの場合
+          imageData = image.imageUrl.split(',')[1] || image.imageUrl;
+        }
+        
+        const fileName = `image_${i + 1}_${image.id}.png`;
+        imagesFolder.file(fileName, imageData, { base64: true });
+        successCount++;
+      } catch (error) {
+        const errorMsg = `画像${i + 1}のダウンロードに失敗: ${error instanceof Error ? error.message : 'Unknown error'}`;
+        errors.push(errorMsg);
+        console.error(errorMsg, error);
+      }
     }
     
     // メタデータファイルを作成
     const metadata = {
       generatedAt: new Date().toISOString(),
       masterPrompt: masterPrompt,
+      totalImages: images.length,
+      successCount: successCount,
+      errorCount: errors.length,
       images: images.map((img, index) => ({
         id: img.id,
         fileName: `image_${index + 1}_${img.id}.png`,
@@ -96,6 +129,11 @@ export async function downloadImagesAsZip(images: Array<{id: string, imageUrl: s
     };
     
     zip.file('metadata.json', JSON.stringify(metadata, null, 2));
+    
+    // エラーログを追加（エラーがある場合）
+    if (errors.length > 0) {
+      zip.file('download-errors.txt', errors.join('\n'));
+    }
     
     // ZIPファイルを生成
     const content = await zip.generateAsync({ type: 'blob' });
@@ -109,6 +147,8 @@ export async function downloadImagesAsZip(images: Array<{id: string, imageUrl: s
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    
+    return { successCount, errorCount: errors.length };
   } catch (error) {
     console.error('Error creating ZIP file:', error);
     throw error;

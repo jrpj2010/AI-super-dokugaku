@@ -15,9 +15,9 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 80px 20px 20px 20px; /* 左右パディングを減らす */
 }
 
 /* ヘッダー */
@@ -30,101 +30,148 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    height: 70px;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 0 30px;
     max-width: 1400px;
     margin: 0 auto;
+    height: 100%;
 }
 
-.book-info {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-header h1 {
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.current-tips-info {
+/* 左グループ */
+.left-group {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.current-tips-info .part-label {
+/* 右グループ */
+.right-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ヘッダー内のセレクター */
+.header-selector {
+    padding: 8px 16px;
     background: rgba(255, 255, 255, 0.2);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    min-width: 150px; /* 幅を縮小 */
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header-selector:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.header-selector:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.header-selector option {
+    background: #2563eb;
     color: white;
 }
 
+header h1 {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+/* 削除: current-tips-infoは不要 */
+
+/* part-labelを削除 */
+
 .current-tips-info .tips-label {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
+    padding: 6px 16px;
+    border-radius: 16px;
     font-weight: 600;
     font-size: 13px;
+    white-space: nowrap;
 }
 
 .current-tips-info .tips-title {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     margin: 0;
     color: white;
+    line-height: 1.3;
+    max-width: 400px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .navigation {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    height: 40px;
 }
 
 .navigation button {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    border: none;
-    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    backdrop-filter: blur(10px);
+    height: 36px;
+    display: flex;
+    align-items: center;
 }
 
 .navigation button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .navigation button:disabled {
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    background: rgba(255, 255, 255, 0.1);
     cursor: not-allowed;
     transform: none;
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    opacity: 0.5;
 }
 
 #pageInfo {
-    font-weight: 600;
-    font-size: 18px;
-    color: #007BFF;
-    padding: 8px 16px;
-    background: rgba(0, 123, 255, 0.1);
-    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    min-width: 120px;
+    text-align: center;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 見開きページレイアウト */
@@ -138,8 +185,7 @@ header h1 {
         0 0 0 1px rgba(0, 123, 255, 0.05);
     border-radius: 20px;
     overflow: hidden;
-    height: 85vh; /* ビューポートの85%の高さ */
-    min-height: 600px;
+    height: 900px; /* 高さを拡大 */
     position: relative;
 }
 
@@ -153,7 +199,6 @@ header h1 {
         #ffffff;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .page-header {
@@ -165,7 +210,7 @@ header h1 {
     font-size: 18px;
     font-weight: 600;
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 0;
     color: #007BFF;
     background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
     padding: 8px 16px;
@@ -193,7 +238,7 @@ header h1 {
     font-size: 20px;
     font-weight: 600;
     flex: 1;
-    color: #1a202c;
+    color: white; /* 白色に修正 */
     line-height: 1.4;
 }
 
@@ -203,24 +248,21 @@ header h1 {
     flex-direction: column;
     gap: 12px;
     flex: 1;
-    height: calc(100% - 120px); /* ヘッダー分を除いた高さ */
 }
 
 .diagram-box {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    flex: 1; /* 自動的に高さを調整 */
-    min-height: 280px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-height: 350px;
+    max-height: 450px;
     transition: all 0.3s ease;
 }
 
 .diagram-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
 }
-
 
 .diagram-image {
     position: absolute;
@@ -229,6 +271,7 @@ header h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
 .diagram-overlay {
@@ -239,23 +282,29 @@ header h1 {
     bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0;
     background: linear-gradient(to bottom, 
-        rgba(0, 0, 0, 0.7) 0%, 
-        transparent 30%, 
-        transparent 60%, 
+        transparent 0%, 
+        transparent 80%, 
+        rgba(0, 0, 0, 0.4) 90%, 
         rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+}
+
+.diagram-overlay .diagram-title,
+.diagram-overlay .diagram-text {
+    pointer-events: auto;
 }
 
 .diagram-title {
-    background: rgba(255, 255, 255, 0.95);
-    color: #1a202c;
+    background: transparent;
+    color: white;
     font-size: 14px;
     font-weight: 600;
-    margin: 0;
-    padding: 12px 16px;
-    border-radius: 12px 12px 0 0;
+    margin: 0 20px 8px 20px;
+    padding: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .diagram-text {
@@ -263,52 +312,63 @@ header h1 {
     font-size: 13px;
     line-height: 1.6;
     margin: 0;
-    padding: 16px;
+    padding: 16px 20px 20px 20px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
 }
 
 .traditional .diagram-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     background: rgba(239, 68, 68, 0.95);
     color: white;
+    padding: 12px 20px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: none;
 }
 
 .ai-method .diagram-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     background: rgba(59, 130, 246, 0.95);
     color: white;
-}
-
-.solution-text {
-    margin-top: 20px;
-    font-size: 11px;
-    color: #64748b;
-    line-height: 1.6;
-}
-
-.solution-text p {
+    padding: 12px 20px;
     margin: 0;
-    padding: 12px 16px;
-    background: #f1f5f9;
-    border-radius: 8px;
-    border-left: 3px solid #3b82f6;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: none;
 }
+
+/* 削除: ソリューションテキストはフッターに移動 */
 
 /* 右ページ */
 .right-page {
-    padding: 30px 35px;
+    padding: 30px;
     background: 
         linear-gradient(to left, rgba(0, 123, 255, 0.02) 0%, transparent 20%),
         #ffffff;
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
 }
 
 .steps-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between; /* 上下に配置して間を空ける */
+    gap: 0;
     flex: 1;
+    padding: 0;
+    position: relative;
+    height: 100%;
 }
 
 .step {
@@ -318,32 +378,90 @@ header h1 {
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+    position: relative;
+    margin-bottom: 0;
+    flex-shrink: 0;
 }
+
+/* プログレスバー */
+.step::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #007BFF 0%, #0056b3 100%);
+    z-index: 10;
+    transition: width 0.3s ease;
+}
+
+.step-1::before {
+    width: 33.33%;
+}
+
+.step-2::before {
+    width: 66.66%;
+}
+
+.step-3::before {
+    width: 100%;
+}
+
+/* ステップ間の矢印 - 削除（space-betweenレイアウトでは不要） */
 
 .step:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.2);
     border-color: rgba(0, 123, 255, 0.3);
 }
 
 .step-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 16px 24px;
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-    border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+    gap: 12px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-bottom: 2px solid rgba(0, 123, 255, 0.15);
+    position: relative;
+}
+
+.step-header::after {
+    content: "✔";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #10b981;
+    font-size: 20px;
+    opacity: 0.2;
 }
 
 .step-label {
     background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
     color: white;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    position: relative;
+}
+
+/* ステップごとのアイコン */
+.step-1 .step-label::before {
+    content: "💡";
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.step-2 .step-label::before {
+    content: "🚀";
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.step-3 .step-label::before {
+    content: "🎆";
+    margin-right: 6px;
+    font-size: 18px;
 }
 
 .step-title {
@@ -354,7 +472,7 @@ header h1 {
 }
 
 .step-content {
-    padding: 24px;
+    padding: 16px 20px;
     background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
     border-left: 4px solid #007BFF;
 }
@@ -366,115 +484,320 @@ header h1 {
     color: #4a5568;
 }
 
-.effect-section {
-    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-    color: white;
-    padding: 24px;
-    border-radius: 16px;
-    margin-top: 20px;
-    box-shadow: 0 8px 25px rgba(45, 55, 72, 0.3);
-    border: 2px solid rgba(0, 123, 255, 0.2);
+/* 削除: エフェクトセクションはフッターに移動 */
+
+/* 構造化されたコンテンツのスタイル */
+.step-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
 }
 
-.effect-section h3 {
-    font-size: 16px;
-    margin-bottom: 12px;
+.step-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.step-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.keyword {
+    color: #007BFF;
     font-weight: 600;
-    color: #63b3ed;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.effect-section h3::before {
-    content: "\f0eb";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    color: #63b3ed;
-}
-
-.effect-section p {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #cbd5e0;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 
 /* フッター */
-footer {
-    margin-top: 30px;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+.enhanced-footer {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 30px 20px;
+    margin-top: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.solution-column,
+.effect-column {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0, 123, 255, 0.1);
-}
-
-.tips-list {
-    text-align: center;
-}
-
-#tipsSelector {
-    padding: 12px 20px;
-    font-size: 16px;
-    border: 2px solid rgba(0, 123, 255, 0.2);
-    border-radius: 25px;
-    width: 400px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 500;
-    color: #2d3748;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
 }
 
-#tipsSelector:focus {
-    outline: none;
-    border-color: #007BFF;
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+.solution-column:hover,
+.effect-column:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
 }
 
-/* レスポンシブ対応 */
+.solution-column h3,
+.effect-column h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #1a365d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.solution-column p,
+.effect-column p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+/* レスポンシブ対応 - 完全版 */
 @media (max-width: 1024px) {
     .spread-pages {
         grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
     }
     
     .left-page {
         border-right: none;
         border-bottom: 3px solid #007BFF;
+        padding: 20px;
     }
     
-    .footer-text, .note {
-        position: static;
-        margin-top: 20px;
+    .right-page {
+        padding: 20px;
+    }
+    
+    .diagram-section {
+        height: auto;
+    }
+    
+    .diagram-box {
+        min-height: 250px;
     }
 }
 
 @media (max-width: 768px) {
+    body {
+        margin-top: 120px; /* ヘッダー分の余白 */
+    }
+    
     .container {
         padding: 10px;
+        margin-top: 0;
+    }
+    
+    /* ヘッダーのレスポンシブ対応 */
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 15px;
+    }
+    
+    .book-info {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    header h1 {
+        font-size: 12px;
+    }
+    
+    .current-tips-info {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .current-tips-info .tips-title {
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .navigation {
+        width: 100%;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .navigation button {
+        padding: 8px 16px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    #pageInfo {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    /* メインコンテンツ */
+    main {
+        margin-top: 20px;
+    }
+    
+    .spread-pages {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        gap: 0;
     }
     
     .left-page, .right-page {
-        padding: 20px;
+        padding: 15px;
     }
     
-    .tips-header {
-        flex-direction: column;
-        align-items: flex-start;
+    /* 図解セクション */
+    .diagram-box {
+        min-height: 200px;
+        margin-bottom: 15px;
+    }
+    
+    .diagram-title {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+    
+    .diagram-text {
+        font-size: 12px;
+        padding: 12px;
+    }
+    
+    /* ステップセクション */
+    .steps-container {
+        gap: 15px;
+    }
+    
+    .step {
+        margin-bottom: 10px;
     }
     
     .step-header {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        padding: 12px 16px;
+        gap: 10px;
+    }
+    
+    .step-label {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+    
+    .step-title {
+        font-size: 14px;
+    }
+    
+    .step-content {
+        padding: 16px;
+    }
+    
+    .step-content p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+    
+    /* 効果セクション */
+    .effect-section {
+        padding: 16px;
+        margin-top: 15px;
+    }
+    
+    .effect-section h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .effect-section p {
+        font-size: 13px;
+    }
+    
+    /* ソリューションテキスト */
+    .solution-text {
+        margin-top: 15px;
+    }
+    
+    .solution-text p {
+        font-size: 11px;
+        padding: 10px 12px;
+    }
+    
+    /* フッター */
+    footer {
+        margin-top: 20px;
+        padding: 16px;
     }
     
     #tipsSelector {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin-top: 140px; /* より多くの余白 */
+    }
+    
+    /* 超小型デバイス向け */
+    .current-tips-info .part-label,
+    .current-tips-info .tips-label {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+    
+    .current-tips-info .tips-title {
+        font-size: 12px;
+    }
+    
+    .navigation button {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+    
+    .diagram-box {
+        min-height: 150px;
+    }
+    
+    .step-content p,
+    .effect-section p {
+        font-size: 12px;
+    }
+}
+
+/* タッチデバイス向けの調整 */
+@media (hover: none) and (pointer: coarse) {
+    .navigation button,
+    #tipsSelector {
+        min-height: 44px; /* タッチしやすいサイズ */
+    }
+    
+    .step:hover,
+    .diagram-box:hover {
+        transform: none; /* ホバー効果を無効化 */
     }
 }
 

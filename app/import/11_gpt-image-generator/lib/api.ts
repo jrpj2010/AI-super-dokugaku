@@ -13,7 +13,7 @@ export async function generateImages(payload?: { sessionId?: string }) {
   console.log(`[API CLIENT] sessionId: ${payload?.sessionId}`)
   
   // デバッグメッセージ
-  addMessage("APIに接続しています...")
+  addMessage("🔌 APIサーバーへの接続を開始...")
 
   // リクエストURL
   const requestUrl = "/api/generate-stream"
@@ -45,75 +45,11 @@ export async function generateImages(payload?: { sessionId?: string }) {
     throw new Error("OpenAI APIキーを設定してください")
   }
 
-  addMessage("準備完了: 画像生成を開始します")
-
-  // Create EventSource for SSE
-  const eventSourceUrl = `${requestUrl}?concurrentLimit=${concurrentLimit}`
-  console.log(`[API CLIENT] Creating EventSource with URL: ${eventSourceUrl}`)
-  const eventSource = new EventSource(eventSourceUrl)
-  console.log(`[API CLIENT] EventSource created`)
+  addMessage(`📤 APIリクエスト準備完了: ${validInputs.length}件の画像を生成します`)
   
-  // タイムアウト管理
-  let connectionTimeout: NodeJS.Timeout | null = null
-  const CONNECTION_TIMEOUT = 120000 // 120秒 (2分) に延長
-  
-  const clearConnectionTimeout = () => {
-    if (connectionTimeout) {
-      clearTimeout(connectionTimeout)
-      connectionTimeout = null
-    }
-  }
-  
-  const resetConnectionTimeout = () => {
-    clearConnectionTimeout()
-    connectionTimeout = setTimeout(() => {
-      addMessage("⚠️ エラー: API通信がタイムアウトしました（120秒）")
-      addLog({
-        type: "error",
-        method: "EventSource",
-        url: requestUrl,
-        error: "Connection timeout after 120s - APIサーバーから応答がありません",
-      })
-      eventSource.close()
-    }, CONNECTION_TIMEOUT)
-  }
-
-  // 接続イベント
-  eventSource.onopen = () => {
-    addMessage("✅ APIサーバーに接続しました")
-    addLog({
-      type: "info",
-      method: "EventSource",
-      url: requestUrl,
-      body: { message: "EventSource connection opened" },
-    })
-    resetConnectionTimeout()
-  }
-
-  // エラーイベント
-  eventSource.onerror = (error) => {
-    clearConnectionTimeout()
-    addMessage("❌ APIエラー: 接続が切断されました")
-    addLog({
-      type: "error",
-      method: "EventSource",
-      url: requestUrl,
-      error: "EventSource connection error/closed",
-    })
-    eventSource.close()
-  }
-  
-  // メッセージイベント
-  eventSource.onmessage = (event) => {
-    resetConnectionTimeout() // メッセージ受信時にタイムアウトをリセット
-    console.log("EventSource onmessage:", event.type, event.data)
-    addLog({
-      type: "info",
-      method: "EventSource",
-      url: requestUrl,
-      body: { event: event.type, data: event.data },
-    })
-  }
+  // SSEレスポンスを処理するためのEventSourceを作成
+  const eventSource = new EventSource('data:text/plain,') // ダミーのEventSource
+  let sseConnected = false
 
   // Send the data to the server
   const requestBody = {
@@ -154,17 +90,18 @@ export async function generateImages(payload?: { sessionId?: string }) {
   }, 60000) // 60 seconds timeout for the initial request
   
   console.log(`[API CLIENT] Sending POST request to ${requestUrl} with body:`, requestBody)
+  addMessage(`📡 POST リクエスト送信中... (並列数: ${concurrentLimit}, 画質: ${imageQuality}, サイズ: ${imageSize})`)
   
+  // SSEストリームを受信するfetchリクエスト
   fetch(requestUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "text/event-stream",
     },
     body: JSON.stringify(requestBody),
-    signal: controller.signal,
   })
-    .then((response) => {
-      clearTimeout(timeoutId)
+    .then(async (response) => {
       const duration = Date.now() - startTime
       
       // レスポンスログを記録
@@ -176,12 +113,8 @@ export async function generateImages(payload?: { sessionId?: string }) {
         duration,
       })
       
-      if (response.ok) {
-        addMessage("✅ APIリクエストを送信しました - 生成開始を待っています...")
-        resetConnectionTimeout()
-      } else {
+      if (!response.ok) {
         addMessage(`❌ APIエラー: ${response.status} ${response.statusText}`)
-        clearConnectionTimeout()
         
         if (response.status === 401) {
           addMessage("🔒 認証エラー: APIキーが無効か、権限がありません")
@@ -191,11 +124,81 @@ export async function generateImages(payload?: { sessionId?: string }) {
           addMessage("⚠️ サーバーエラー: OpenAIサービスに問題が発生しています")
         }
         
-        eventSource.close()
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
+      
+      addMessage(`✅ APIレスポンス受信 (ステータス: ${response.status}) - SSEストリーム開始`)
+      
+      // SSEストリームを読み取る
+      const reader = response.body?.getReader()
+      if (!reader) {
+        throw new Error("レスポンスボディの読み取りに失敗しました")
+      }
+      
+      const decoder = new TextDecoder()
+      let buffer = ''
+      
+      let currentEventType = 'message'
+      
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+        
+        for (const line of lines) {
+          if (line.startsWith('event:')) {
+            currentEventType = line.slice(6).trim()
+            console.log(`[API CLIENT] SSE Event Type: ${currentEventType}`)
+          } else if (line.startsWith('data:')) {
+            const data = line.slice(5).trim()
+            if (data) {
+              console.log(`[API CLIENT] SSE Data for event '${currentEventType}': ${data}`)
+              
+              // EventSourceのカスタムイベントをエミュレート
+              try {
+                if (currentEventType === 'connect' && !sseConnected) {
+                  sseConnected = true
+                  eventSource.dispatchEvent(new Event('open'))
+                }
+                
+                const messageEvent = new MessageEvent(currentEventType, {
+                  data: data,
+                  origin: window.location.origin,
+                  lastEventId: '',
+                  source: null,
+                  ports: [],
+                })
+                eventSource.dispatchEvent(messageEvent)
+                
+                // デバッグメッセージの追加
+                if (currentEventType === 'info' || currentEventType === 'update' || currentEventType === 'progress') {
+                  try {
+                    const parsedData = JSON.parse(data)
+                    if (parsedData.message) {
+                      addMessage(`📊 [${currentEventType}] ${parsedData.message}`)
+                    }
+                  } catch (e) {
+                    // JSONパースエラーは無視
+                  }
+                }
+              } catch (e) {
+                console.error('[API CLIENT] Error dispatching event:', e)
+              }
+            }
+          } else if (line === '') {
+            // イベントの区切り
+            currentEventType = 'message'
+          }
+        }
+      }
+      
+      console.log('[API CLIENT] SSE stream ended')
+      addMessage('✅ すべての処理が完了しました')
     })
     .catch((error) => {
-      clearTimeout(timeoutId)
       const duration = Date.now() - startTime
       
       // エラーログを記録
@@ -203,16 +206,12 @@ export async function generateImages(payload?: { sessionId?: string }) {
         type: "error",
         method: "POST",
         url: requestUrl,
-        error: error.name === 'AbortError' ? 'Request timeout' : error.message,
+        error: error.message,
         duration,
       })
       
       console.error("Error sending generation request:", error)
-      if (error.name === 'AbortError') {
-        addMessage("エラー: リクエストがタイムアウトしました")
-      } else {
-        addMessage(`エラー: ${error.message || "リクエスト送信に失敗しました"}`)
-      }
+      addMessage(`エラー: ${error.message || "リクエスト送信に失敗しました"}`)
       eventSource.close()
       throw error
     })

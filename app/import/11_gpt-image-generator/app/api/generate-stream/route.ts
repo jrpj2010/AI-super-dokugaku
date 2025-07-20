@@ -16,14 +16,18 @@ if (!(global as any)._sessionResultsCache) {
 const sessionResultsCache: { [sessionId: string]: Array<{ id: string; status: string; imageUrl?: string; message?: string }> } = (global as any)._sessionResultsCache
 
 // OpenAI APIクライアントの初期化関数
-const createOpenAIClient = (apiKey?: string) => {
-  const finalApiKey = apiKey || process.env.OPENAI_API_KEY
-  if (!finalApiKey) {
-    throw new Error("OPENAI_API_KEY is not set")
+const createOpenAIClient = (apiKey: string) => {
+  if (!apiKey) {
+    throw new Error("API key is required")
   }
-  return new OpenAI({
-    apiKey: finalApiKey,
-  })
+  try {
+    return new OpenAI({
+      apiKey: apiKey,
+    })
+  } catch (error) {
+    console.error("[SERVER] Error creating OpenAI client:", error)
+    throw new Error("Failed to initialize OpenAI client")
+  }
 }
 
 // SSEのヘッダー（最適化版 - Cloud Run対応）
@@ -38,24 +42,6 @@ const sseHeaders = {
 }
 
 export const dynamic = 'force-dynamic' // route設定: 動的レンダリングを強制
-
-export async function GET(req: NextRequest) {
-  const encoder = new TextEncoder()
-  const concurrentLimit = Number(req.nextUrl.searchParams.get("concurrentLimit") || "4")
-  console.log(`[SERVER SSE] GET request received with concurrentLimit: ${concurrentLimit}`)
-
-  // ストリームの作成
-  const stream = new ReadableStream({
-    start(controller) {
-      // クライアントに接続確認メッセージを送信
-      const connectMsg = `event: connect\ndata: {"message": "Connected to SSE"}\n\n`
-      console.log(`[SERVER SSE] Sending initial connect message in GET`)
-      controller.enqueue(encoder.encode(connectMsg))
-    },
-  })
-
-  return new NextResponse(stream, { headers: sseHeaders })
-}
 
 export async function POST(req: NextRequest) {
   const encoder = new TextEncoder()
@@ -76,6 +62,16 @@ export async function POST(req: NextRequest) {
       sessionId,
     } = body
 
+    // 最初にAPIキーの検証
+    const finalApiKey = apiKey || process.env.OPENAI_API_KEY
+    if (!finalApiKey) {
+      console.error('[SERVER] No API key provided')
+      return NextResponse.json(
+        { error: "APIキーが設定されていません。.envファイルにOPENAI_API_KEYを設定するか、設定画面でAPIキーを入力してください。" },
+        { status: 400 }
+      )
+    }
+
     if (!sessionId) {
       console.error('[SERVER] Session ID is missing in POST request')
       return NextResponse.json({ error: "sessionId is required" }, { status: 400 })
@@ -84,19 +80,21 @@ export async function POST(req: NextRequest) {
     sessionResultsCache[sessionId] = []
     console.log(`[SERVER CACHE] Initialized cache for session ID: ${sessionId}`)
 
-    // APIキーの検証
-    if (!apiKey && !process.env.OPENAI_API_KEY) {
+    // OpenAIクライアントの作成（エラーハンドリング付き）
+    let openai
+    try {
+      openai = createOpenAIClient(finalApiKey)
+      console.log(`[SERVER] OpenAI client created successfully`)
+    } catch (error) {
+      console.error('[SERVER] Failed to create OpenAI client:', error)
       return NextResponse.json(
-        { error: "APIキーが設定されていません。.envファイルにOPENAI_API_KEYを設定するか、設定画面でAPIキーを入力してください。" },
-        { status: 400 }
+        { error: "OpenAIクライアントの初期化に失敗しました。APIキーを確認してください。" },
+        { status: 500 }
       )
     }
 
-    // OpenAIクライアントの作成
-    const openai = createOpenAIClient(apiKey)
-
-    // 並列処理の制限
-    const limit = pLimit(Math.min(Math.max(concurrentLimit, 1), 10))
+    // 並列処理の制限（Tier 5の実際の制限に基づき最大20まで）
+    const limit = pLimit(Math.min(Math.max(concurrentLimit, 1), 20))
 
     // ストリームの作成
     console.log(`[SERVER SSE] Creating ReadableStream for session: ${sessionId}`)
@@ -119,7 +117,7 @@ export async function POST(req: NextRequest) {
         console.log(`[SERVER SSE] Sending info message: ${infoMsg.replace(/\n/g, "\\n")}`)
         controller.enqueue(encoder.encode(infoMsg))
         
-        // キープアライブインターバルを設定（15秒ごとにピンポンメッセージを送信）
+        // キープアライブインターバルを設定（5秒ごとにピンポンメッセージを送信）
         const keepAliveInterval = setInterval(() => {
           try {
             const pingMsg = `event: ping\ndata: ${JSON.stringify({ timestamp: new Date().toISOString() })}\n\n`
@@ -129,12 +127,17 @@ export async function POST(req: NextRequest) {
             console.error(`[SERVER SSE] Keepalive failed for session ${sessionId}:`, e)
             clearInterval(keepAliveInterval)
           }
-        }, 15000) // 15秒ごと
+        }, 1000) // 1秒ごと（接続維持のため頻繁にping）
 
-        // 各ユーザーインプットに対して画像生成を並列実行
-        const promises = userInputs.map((input: any, index: number) => {
-          return limit(async () => {
-            try {
+        // 全体のエラーハンドリング
+        let totalProcessed = 0
+        let totalErrors = 0
+        
+        try {
+          // 各ユーザーインプットに対して画像生成を並列実行
+          const promises = userInputs.map((input: any, index: number) => {
+            return limit(async () => {
+              try {
               // 処理中ステータスの送信
               const processingPayload = {
                 id: input.id,
@@ -150,7 +153,7 @@ export async function POST(req: NextRequest) {
               controller.enqueue(
                 encoder.encode(
                   `event: info\ndata: ${JSON.stringify({
-                    message: `OpenAI APIにリクエスト送信中 (プロンプト ${index + 1}/${userInputs.length})`,
+                    message: `🎨 OpenAI APIにリクエスト送信中 (${index + 1}/${userInputs.length}): ${input.prompt.substring(0, 30)}...`,
                   })}\n\n`,
                 ),
               )
@@ -167,9 +170,10 @@ export async function POST(req: NextRequest) {
                 ),
               )
 
-              console.log(`Generating image ${index + 1}...`)
-              console.log(`Master prompt: ${masterPrompt.substring(0, 50)}...`)
-              console.log(`User prompt: ${input.prompt.substring(0, 50)}...`)
+              console.log(`[SERVER] Generating image ${index + 1}/${userInputs.length}...`)
+              console.log(`[SERVER] Master prompt: ${masterPrompt.substring(0, 50)}...`)
+              console.log(`[SERVER] User prompt: ${input.prompt.substring(0, 50)}...`)
+              console.log(`[SERVER] API Key exists: ${!!openai}`)
 
               // API呼び出し直前の進捗表示
               controller.enqueue(
@@ -183,14 +187,49 @@ export async function POST(req: NextRequest) {
                 ),
               )
 
-              const response = await openai.images.generate({
-                model: "gpt-image-1", // GPT-Image-1モデルを使用
-                prompt: `${masterPrompt}\n\n${input.prompt}`,
-                n: Math.min(Math.max(n, 1), 10), // 1～10の範囲に制限
-                size: size === "auto" ? undefined : size, // "auto"の場合はundefinedに
-                quality: quality === "auto" ? undefined : quality, // "auto"の場合はundefinedに
-                // output_formatは使用しない（パラメータを確認）
-              })
+              // リトライロジックを追加
+              let retries = 0
+              const maxRetries = 3
+              let response
+              
+              while (retries < maxRetries) {
+                try {
+                  console.log(`[SERVER] Calling OpenAI API for input ${index + 1}...`)
+                  const apiStartTime = Date.now()
+                  
+                  response = await openai.images.generate({
+                    model: "gpt-image-1", // GPT-Image-1モデルを使用
+                    prompt: `${masterPrompt}\n\n${input.prompt}`,
+                    n: Math.min(Math.max(n, 1), 10), // 1～10の範囲に制限
+                    size: size === "auto" ? undefined : size, // "auto"の場合はundefinedに
+                    quality: quality === "auto" ? undefined : quality, // "auto"の場合はundefinedに
+                    // output_formatは使用しない（パラメータを確認）
+                  })
+                  
+                  const apiDuration = Date.now() - apiStartTime
+                  console.log(`[SERVER] OpenAI API response received for input ${index + 1} in ${apiDuration}ms`)
+                  break // 成功したらループを抜ける
+                } catch (retryError: any) {
+                  retries++
+                  if (retries >= maxRetries) {
+                    throw retryError // 最大リトライ回数に達したらエラーを投げる
+                  }
+                  console.log(`[SERVER] Retry ${retries}/${maxRetries} for input ID ${input.id} after error:`, retryError.message)
+                  
+                  // リトライ前の待機時間（エクスポネンシャルバックオフ）
+                  const waitTime = Math.min(1000 * Math.pow(2, retries - 1), 10000) // 最大10秒
+                  await new Promise(resolve => setTimeout(resolve, waitTime))
+                  
+                  // リトライ状況を送信
+                  controller.enqueue(
+                    encoder.encode(
+                      `event: info\ndata: ${JSON.stringify({
+                        message: `リトライ ${retries}/${maxRetries} (${input.id.substring(0, 8)}...)`,
+                      })}\n\n`,
+                    ),
+                  )
+                }
+              }
 
               // API呼び出し成功直後の進捗表示
               controller.enqueue(
@@ -333,10 +372,21 @@ export async function POST(req: NextRequest) {
           })
         })
 
-        // 全ての処理が完了するのを待つ
-        console.log(`[SERVER SSE] All promises started, waiting for completion...`)
-        await Promise.all(promises)
-        console.log(`[SERVER SSE] All promises completed for session ${sessionId}`)
+          // 全ての処理が完了するのを待つ
+          console.log(`[SERVER SSE] All promises started, waiting for completion...`)
+          await Promise.all(promises)
+          console.log(`[SERVER SSE] All promises completed for session ${sessionId}`)
+        } catch (unexpectedError: any) {
+          console.error(`[SERVER SSE] Unexpected error during processing:`, unexpectedError)
+          
+          // エラー情報をクライアントに送信
+          const errorPayload = {
+            message: `予期しないエラーが発生しました: ${unexpectedError.message || '不明なエラー'}`,
+            type: 'critical_error',
+            timestamp: new Date().toISOString()
+          }
+          controller.enqueue(encoder.encode(`event: error\ndata: ${JSON.stringify(errorPayload)}\n\n`))
+        }
 
         // 全ての処理が完了したことを通知
         const donePayload = {

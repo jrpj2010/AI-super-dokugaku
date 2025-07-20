@@ -9,6 +9,8 @@ interface ImageStore {
   masterPrompt: string
   userInputs: UserInputItemType[]
   concurrentLimit: number
+  dynamicConcurrency: boolean
+  performanceMode: "stable" | "balanced" | "turbo" | "extreme"
   imageQuality: "auto" | "low" | "medium" | "high"
   imageSize: "auto" | "1024x1024" | "1536x1024" | "1024x1536"
   imagesPerPrompt: number
@@ -17,9 +19,14 @@ interface ImageStore {
 
   setMasterPrompt: (prompt: string) => void
   addUserInput: () => void
+  bulkAddUserInputs: (prompts: string[]) => void
+  clearUserInputs: () => void
+  removeUserInput: (id: string) => void
   updateUserInput: (id: string, update: string | Partial<UserInputItemType>) => void
   setUserInputStatus: (id: string, status: UserInputStatus, imageUrl?: string, errorMessage?: string) => void
   setConcurrentLimit: (limit: number) => void
+  setDynamicConcurrency: (enabled: boolean) => void
+  setPerformanceMode: (mode: "stable" | "balanced" | "turbo" | "extreme") => void
   setImageQuality: (quality: "auto" | "low" | "medium" | "high") => void
   setImageSize: (size: "auto" | "1024x1024" | "1536x1024" | "1024x1536") => void
   setImagesPerPrompt: (count: number) => void
@@ -27,6 +34,8 @@ interface ImageStore {
   loadPrompt: (id: string) => void
   deletePrompt: (id: string) => void
   setOpenaiApiKey: (apiKey: string) => void
+  exportSettings: () => string
+  importSettings: (settingsJson: string) => void
 }
 
 // 安全なJSON.parseラッパー
@@ -46,19 +55,8 @@ const safeJSONParse = (value: any, fallback: any) => {
 
 // 初期ユーザーインプットの作成関数
 const createInitialUserInputs = () => {
-  if (typeof window !== 'undefined') {
-    return Array.from({ length: 10 }, () => ({
-      id: uuidv4(),
-      prompt: "",
-      status: "idle" as const,
-    }))
-  }
-  // SSR時は一時的に固定値を使用
-  return Array.from({ length: 10 }, (_, index) => ({
-    id: `temp-${index}`,
-    prompt: "",
-    status: "idle" as const,
-  }))
+  // 初期状態では空の配列を返す（空の枠を表示しない）
+  return []
 }
 
 export const useImageStore = create<ImageStore>()(
@@ -66,7 +64,9 @@ export const useImageStore = create<ImageStore>()(
     (set, get) => ({
       masterPrompt: "",
       userInputs: createInitialUserInputs(),
-      concurrentLimit: 4,
+      concurrentLimit: 8, // Tier 5の安全な並列数をデフォルトに
+      dynamicConcurrency: true, // 動的並列数調整を有効化
+      performanceMode: "balanced", // デフォルトはバランスモード（Tier 5推奨）
       imageQuality: "auto", // デフォルトを"auto"に変更
       imageSize: "auto", // デフォルトを"auto"に変更
       imagesPerPrompt: 1,
@@ -75,10 +75,41 @@ export const useImageStore = create<ImageStore>()(
 
       setMasterPrompt: (prompt) => set({ masterPrompt: prompt }),
       setOpenaiApiKey: (apiKey) => set({ openaiApiKey: apiKey }),
+      setDynamicConcurrency: (enabled) => set({ dynamicConcurrency: enabled }),
+      setPerformanceMode: (mode) => {
+        // パフォーマンスモードに応じて並列数を自動調整
+        // Tier 5の実際の制限に基づいて最適化
+        const concurrencyMap = {
+          stable: 5,     // 安定動作優先（推奨）
+          balanced: 8,   // バランス型（Tier 5で安全な範囲）
+          turbo: 12,     // 高速モード（リスクあり）
+          extreme: 15    // 最大速度（レート制限ギリギリ）
+        }
+        set({ performanceMode: mode, concurrentLimit: concurrencyMap[mode] })
+      },
 
       addUserInput: () =>
         set((state) => ({
           userInputs: [...state.userInputs, { id: uuidv4(), prompt: "", status: "idle" }],
+        })),
+
+      bulkAddUserInputs: (prompts) =>
+        set((state) => ({
+          userInputs: [
+            ...state.userInputs,
+            ...prompts.map(prompt => ({
+              id: uuidv4(),
+              prompt,
+              status: "idle" as const
+            }))
+          ],
+        })),
+        
+      clearUserInputs: () => set({ userInputs: [] }),
+      
+      removeUserInput: (id) =>
+        set((state) => ({
+          userInputs: state.userInputs.filter((input) => input.id !== id)
         })),
 
       updateUserInput: (id, update) =>
@@ -175,6 +206,53 @@ export const useImageStore = create<ImageStore>()(
           })
         } catch (error) {
           console.error("Error deleting prompt:", error)
+        }
+      },
+
+      // 設定のエクスポート
+      exportSettings: () => {
+        const state = get()
+        const settings = {
+          concurrentLimit: state.concurrentLimit,
+          dynamicConcurrency: state.dynamicConcurrency,
+          performanceMode: state.performanceMode,
+          imageQuality: state.imageQuality,
+          imageSize: state.imageSize,
+          imagesPerPrompt: state.imagesPerPrompt,
+          openaiApiKey: state.openaiApiKey,
+          masterPrompt: state.masterPrompt,
+          savedPrompts: state.savedPrompts,
+          exportedAt: new Date().toISOString(),
+          version: "1.0"
+        }
+        return JSON.stringify(settings, null, 2)
+      },
+
+      // 設定のインポート
+      importSettings: (settingsJson: string) => {
+        try {
+          const settings = JSON.parse(settingsJson)
+          
+          // バージョンチェック
+          if (settings.version !== "1.0") {
+            throw new Error("サポートされていない設定ファイルバージョンです")
+          }
+          
+          // 設定を適用
+          set({
+            concurrentLimit: settings.concurrentLimit || 20,
+            dynamicConcurrency: settings.dynamicConcurrency ?? true,
+            performanceMode: settings.performanceMode || "turbo",
+            imageQuality: settings.imageQuality || "auto",
+            imageSize: settings.imageSize || "auto",
+            imagesPerPrompt: settings.imagesPerPrompt || 1,
+            openaiApiKey: settings.openaiApiKey || "",
+            masterPrompt: settings.masterPrompt || "",
+            savedPrompts: settings.savedPrompts || []
+          })
+        } catch (error) {
+          console.error("Error importing settings:", error)
+          throw new Error("設定ファイルの読み込みに失敗しました")
         }
       },
     }),
