@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI超独学 第1部 - Tips一覧</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="left-group">
+                    <h1>第1部</h1>
+                    <span class="tips-label" id="tipsLabel">Tips01</span>
+                    <h2 class="tips-title" id="tipsTitle">Tips名称</h2>
+                </div>
+                <div class="right-group">
+                    <button id="prevBtn" onclick="prevTip()">◀</button>
+                    <span id="pageInfo">読み込み中...</span>
+                    <button id="nextBtn" onclick="nextTip()">▶</button>
+                    <select id="tipsSelector" class="header-selector" onchange="selectTip(this.value)">
+                        <option value="">Tipsを選択...</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main id="tipsContainer">
+            <!-- 見開きページ -->
+            <div class="spread-pages">
+                <!-- 左ページ -->
+                <div class="left-page">
+                    
+                    <div class="diagram-section">
+                        <div class="diagram-box traditional">
+                            <img id="traditionalImage" class="diagram-image" src="" alt="従来の独学法">
+                            <div class="diagram-overlay">
+                                <h3 class="diagram-title">従来の独学法の図解</h3>
+                                <p id="traditionalMethod" class="diagram-text">
+                                    （そのTipsについて読者がこれまで行っていた非効率的なやり方）
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="diagram-box ai-method">
+                            <img id="aiMethodImage" class="diagram-image" src="" alt="超AI独学法">
+                            <div class="diagram-overlay">
+                                <h3 class="diagram-title">超AI独学法の図解</h3>
+                                <p id="aiMethod" class="diagram-text">
+                                    （そのTipsについてAIとの対話を通じて行う新しい効率的なやり方）
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ソリューションテキストはフッターに移動 -->
+                </div>
+
+                <!-- 右ページ -->
+                <div class="right-page">
+                    <div class="steps-container">
+                        <div class="step step-1">
+                            <div class="step-header">
+                                <span class="step-label">Step 1</span>
+                                <h3 class="step-title" id="step1Title">Stepの概要見出し（最大32文字）</h3>
+                            </div>
+                            <div class="step-content">
+                                <p id="step1Content">プロンプト、入力例の実例</p>
+                            </div>
+                        </div>
+
+                        <div class="step step-2">
+                            <div class="step-header">
+                                <span class="step-label">Step 2</span>
+                                <h3 class="step-title" id="step2Title">Stepの概要見出し（最大32文字）</h3>
+                            </div>
+                            <div class="step-content">
+                                <p id="step2Content">プロンプト、入力例の実例</p>
+                            </div>
+                        </div>
+
+                        <div class="step step-3">
+                            <div class="step-header">
+                                <span class="step-label">Step 3</span>
+                                <h3 class="step-title" id="step3Title">Stepの概要見出し（最大32文字）</h3>
+                            </div>
+                            <div class="step-content">
+                                <p id="step3Content">プロンプト、入力例の実例</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- エフェクトセクションはフッターに移動 -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="enhanced-footer">
+            <div class="footer-content">
+                <div class="solution-column">
+                    <h3>💡 課題の本質とAIソリューション</h3>
+                    <p id="solutionContent">「課題の本質」と「AIソリューション」：250字程度</p>
+                </div>
+                <div class="effect-column">
+                    <h3>✨ 効果</h3>
+                    <p id="effectContent">効果を記述</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
