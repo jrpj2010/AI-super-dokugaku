@@ -19,7 +19,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <!-- ローディング画面 -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-title">AI超独学 Tips50</h1>
+            <div class="loading-animation">
+                <div class="spinner"></div>
+            </div>
+            <div class="loading-progress">
+                <p class="loading-text">ファイルを読み込んでいます...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="loading-details" id="loadingDetails">0 / 150 ファイル</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="display: none;">
         <header>
             <div class="header-content">
                 <div class="left-group">

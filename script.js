@@ -271,11 +271,52 @@ const imageMapping = {
     }
 };
 
+// ローディング関連の変数
+let totalFiles = 0;
+let loadedFiles = 0;
+
+// ローディング画面の更新
+function updateLoadingProgress() {
+    const progressFill = document.getElementById('progressFill');
+    const loadingDetails = document.getElementById('loadingDetails');
+    
+    if (progressFill && loadingDetails) {
+        const percentage = totalFiles > 0 ? (loadedFiles / totalFiles) * 100 : 0;
+        progressFill.style.width = `${percentage}%`;
+        loadingDetails.textContent = `${loadedFiles} / ${totalFiles} ファイル`;
+    }
+}
+
+// ローディング画面を非表示にする
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const container = document.querySelector('.container');
+    
+    if (loadingScreen && container) {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            container.style.display = 'block';
+        }, 500);
+    }
+}
+
 // ページロード時の初期化
 window.addEventListener('DOMContentLoaded', async () => {
+    // 総ファイル数を設定（JSONファイル50個 + 画像ファイル100個）
+    totalFiles = 150;
+    loadedFiles = 0;
+    
+    updateLoadingProgress();
+    
     await loadAllTips();
     displayTip(0);
     populateTipsSelector();
+    
+    // ローディング完了後、少し待ってから画面遷移
+    setTimeout(() => {
+        hideLoadingScreen();
+    }, 300);
 });
 
 // すべてのTipsデータを読み込む
@@ -283,6 +324,10 @@ async function loadAllTips() {
     tipsData = [];
     
     console.log('Starting to load tips...');
+    
+    // JSONファイルの数に基づいて総ファイル数を再計算
+    totalFiles = existingFiles.length * 3; // 各Tipsに1つのJSON + 2つの画像
+    loadedFiles = 0;
     
     for (const fileName of existingFiles) {
         try {
@@ -297,12 +342,56 @@ async function loadAllTips() {
                     fileName: fileName // デバッグ用にファイル名も保存
                 });
                 console.log(`Successfully loaded: ${fileName}`);
+                
+                // JSONファイル読み込み完了
+                loadedFiles++;
+                updateLoadingProgress();
+                
+                // 対応する画像ファイルをプリロード
+                if (imageMapping[fileName]) {
+                    // Before画像をプリロード
+                    const beforeImg = new Image();
+                    beforeImg.onload = () => {
+                        loadedFiles++;
+                        updateLoadingProgress();
+                    };
+                    beforeImg.onerror = () => {
+                        loadedFiles++;
+                        updateLoadingProgress();
+                    };
+                    beforeImg.src = imageMapping[fileName].before;
+                    
+                    // After画像をプリロード
+                    const afterImg = new Image();
+                    afterImg.onload = () => {
+                        loadedFiles++;
+                        updateLoadingProgress();
+                    };
+                    afterImg.onerror = () => {
+                        loadedFiles++;
+                        updateLoadingProgress();
+                    };
+                    afterImg.src = imageMapping[fileName].after;
+                } else {
+                    // 画像がない場合も進捗を更新
+                    loadedFiles += 2;
+                    updateLoadingProgress();
+                }
             } else {
                 console.warn(`Failed to load ${fileName}: ${response.status} ${response.statusText}`);
+                // 失敗した場合も進捗を更新
+                loadedFiles += 3;
+                updateLoadingProgress();
             }
         } catch (error) {
             console.error(`Error loading ${fileName}:`, error);
+            // エラーの場合も進捗を更新
+            loadedFiles += 3;
+            updateLoadingProgress();
         }
+        
+        // 読み込み中のアニメーションを少し見せるため、わずかに遅延
+        await new Promise(resolve => setTimeout(resolve, 10));
     }
     
     console.log(`Successfully loaded ${tipsData.length} / ${existingFiles.length} tips`);
