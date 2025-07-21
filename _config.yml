@@ -1,0 +1,7 @@
+# GitHub Pages configuration
+encoding: UTF-8
+include:
+  - 01_beginner
+  - 02_intermediate
+  - 03_advanced
+  - ボツ
