@@ -66,208 +66,208 @@ const existingFiles = [
 const imageMapping = {
     // 初級
     '01_beginner/01_beginner_organize-thoughts.json': {
-        before: '01_beginner/01_beginner_organize-thoughts-01-Before.png',
-        after: '01_beginner/01_beginner_organize-thoughts-02-After.png'
+        before: '01_beginner/01_beginner_organize-thoughts-01-Before.jpeg',
+        after: '01_beginner/01_beginner_organize-thoughts-02-After.jpeg'
     },
     '01_beginner/02_kyoko_beginner_web-summary.json': {
-        before: '01_beginner/02_kyoko_beginner_web-summary-01-Before.png',
-        after: '01_beginner/02_kyoko_beginner_web-summary-02-After.png'
+        before: '01_beginner/02_kyoko_beginner_web-summary-01-Before.jpeg',
+        after: '01_beginner/02_kyoko_beginner_web-summary-02-After.jpeg'
     },
     '01_beginner/03_tatsuya_beginner_personalized-news-report.json': {
-        before: '01_beginner/03_tatsuya_beginner_personalized-news-report-01-Before.png',
-        after: '01_beginner/03_tatsuya_beginner_personalized-news-report-02-After.png'
+        before: '01_beginner/03_tatsuya_beginner_personalized-news-report-01-Before.jpeg',
+        after: '01_beginner/03_tatsuya_beginner_personalized-news-report-02-After.jpeg'
     },
     '01_beginner/04_advanced_ai-research-agent.json': {
-        before: '01_beginner/04_advanced_ai-research-agent-01-Before.png',
-        after: '01_beginner/04_advanced_ai-research-agent-02-After.png'
+        before: '01_beginner/04_advanced_ai-research-agent-01-Before.jpeg',
+        after: '01_beginner/04_advanced_ai-research-agent-02-After.jpeg'
     },
     '01_beginner/05_tatsuya_beginner_gemini-in-workspace.json': {
-        before: '01_beginner/05_tatsuya_beginner_gemini-in-workspace-01-Before.png',
-        after: '01_beginner/05_tatsuya_beginner_gemini-in-workspace-02-After.png'
+        before: '01_beginner/05_tatsuya_beginner_gemini-in-workspace-01-Before.jpeg',
+        after: '01_beginner/05_tatsuya_beginner_gemini-in-workspace-02-After.jpeg'
     },
     '01_beginner/06_kyoko_intermediate_copilot-coaching.json': {
-        before: '01_beginner/06_kyoko_intermediate_copilot-coaching-01-Before.png',
-        after: '01_beginner/06_kyoko_intermediate_copilot-coaching-02-After.png'
+        before: '01_beginner/06_kyoko_intermediate_copilot-coaching-01-Before.jpeg',
+        after: '01_beginner/06_kyoko_intermediate_copilot-coaching-02-After.jpeg'
     },
     '01_beginner/07_kyoko_beginner_simplification.json': {
-        before: '01_beginner/07_kyoko_beginner_simplification-01-Before.png',
-        after: '01_beginner/07_kyoko_beginner_simplification-02-After.png'
+        before: '01_beginner/07_kyoko_beginner_simplification-01-Before.jpeg',
+        after: '01_beginner/07_kyoko_beginner_simplification-02-After.jpeg'
     },
     '01_beginner/08_tatsuya_beginner_word-to-powerpoint.json': {
-        before: '01_beginner/08_tatsuya_beginner_word-to-powerpoint-01-Before.png',
-        after: '01_beginner/08_tatsuya_beginner_word-to-powerpoint-02-After.png'
+        before: '01_beginner/08_tatsuya_beginner_word-to-powerpoint-01-Before.jpeg',
+        after: '01_beginner/08_tatsuya_beginner_word-to-powerpoint-02-After.jpeg'
     },
     '01_beginner/09_kyoko_advanced_copilot-illustration.json': {
-        before: '01_beginner/09_kyoko_advanced_copilot-illustration-01-Before.png',
-        after: '01_beginner/09_kyoko_advanced_copilot-illustration-02-After.png'
+        before: '01_beginner/09_kyoko_advanced_copilot-illustration-01-Before.jpeg',
+        after: '01_beginner/09_kyoko_advanced_copilot-illustration-02-After.jpeg'
     },
     '01_beginner/10_tatsuya_beginner_voice-memo-structuring.json': {
-        before: '01_beginner/10_tatsuya_beginner_voice-memo-structuring-01-Before.png',
-        after: '01_beginner/10_tatsuya_beginner_voice-memo-structuring-02-After.png'
+        before: '01_beginner/10_tatsuya_beginner_voice-memo-structuring-01-Before.jpeg',
+        after: '01_beginner/10_tatsuya_beginner_voice-memo-structuring-02-After.jpeg'
     },
     '01_beginner/11_kyoko_beginner_gemini-wall-hitting.json': {
-        before: '01_beginner/11_kyoko_beginner_gemini-wall-hitting-01-Before.png',
-        after: '01_beginner/11_kyoko_beginner_gemini-wall-hitting-02-After.png'
+        before: '01_beginner/11_kyoko_beginner_gemini-wall-hitting-01-Before.jpeg',
+        after: '01_beginner/11_kyoko_beginner_gemini-wall-hitting-02-After.jpeg'
     },
     '01_beginner/12_tatsuya_beginner_copilot-notebook.json': {
-        before: '01_beginner/12_tatsuya_beginner_copilot-notebook-01-Before.png',
-        after: '01_beginner/12_tatsuya_beginner_copilot-notebook-02-After.png'
+        before: '01_beginner/12_tatsuya_beginner_copilot-notebook-01-Before.jpeg',
+        after: '01_beginner/12_tatsuya_beginner_copilot-notebook-02-After.jpeg'
     },
     '01_beginner/13_beginner_portfolio-site.json': {
-        before: '01_beginner/13_beginner_portfolio-site-01-Before.png',
-        after: '01_beginner/13_beginner_portfolio-site-02-After.png'
+        before: '01_beginner/13_beginner_portfolio-site-01-Before.jpeg',
+        after: '01_beginner/13_beginner_portfolio-site-02-After.jpeg'
     },
     
     // 中級
     '02_intermediate/14_intermediate_custom-learning-roadmap.json': {
-        before: '02_intermediate/14_intermediate_custom-learning-roadmap-01-Before.png',
-        after: '02_intermediate/14_intermediate_custom-learning-roadmap-02-After.png'
+        before: '02_intermediate/14_intermediate_custom-learning-roadmap-01-Before.jpeg',
+        after: '02_intermediate/14_intermediate_custom-learning-roadmap-02-After.jpeg'
     },
     '02_intermediate/15_beginner_backward-thinking.json': {
-        before: '02_intermediate/15_beginner_backward-thinking-01-Before.png',
-        after: '02_intermediate/15_beginner_backward-thinking-02-After.png'
+        before: '02_intermediate/15_beginner_backward-thinking-01-Before.jpeg',
+        after: '02_intermediate/15_beginner_backward-thinking-02-After.jpeg'
     },
     '02_intermediate/16_advanced_stumbling-prediction.json': {
-        before: '02_intermediate/16_advanced_stumbling-prediction-01-Before.png',
-        after: '02_intermediate/16_advanced_stumbling-prediction-02-After.png'
+        before: '02_intermediate/16_advanced_stumbling-prediction-01-Before.jpeg',
+        after: '02_intermediate/16_advanced_stumbling-prediction-02-After.jpeg'
     },
     '02_intermediate/17_intermediate_learning-style.json': {
-        before: '02_intermediate/17_intermediate_learning-style-01-Before.png',
-        after: '02_intermediate/17_intermediate_learning-style-02-After.png'
+        before: '02_intermediate/17_intermediate_learning-style-01-Before.jpeg',
+        after: '02_intermediate/17_intermediate_learning-style-02-After.jpeg'
     },
     '02_intermediate/18_intermediate_emotion-wave-analysis.json': {
-        before: '02_intermediate/18_intermediate_emotion-wave-analysis-01-Before.png',
-        after: '02_intermediate/18_intermediate_emotion-wave-analysis-02-After.png'
+        before: '02_intermediate/18_intermediate_emotion-wave-analysis-01-Before.jpeg',
+        after: '02_intermediate/18_intermediate_emotion-wave-analysis-02-After.jpeg'
     },
     '02_intermediate/19_beginner_time-reminder.json': {
-        before: '02_intermediate/19_beginner_time-reminder-01-Before.png',
-        after: '02_intermediate/19_beginner_time-reminder-02-After.png'
+        before: '02_intermediate/19_beginner_time-reminder-01-Before.jpeg',
+        after: '02_intermediate/19_beginner_time-reminder-02-After.jpeg'
     },
     '02_intermediate/20_beginner_listen-to-books.json': {
-        before: '02_intermediate/20_beginner_listen-to-books-01-Before.png',
-        after: '02_intermediate/20_beginner_listen-to-books-02-After.png'
+        before: '02_intermediate/20_beginner_listen-to-books-01-Before.jpeg',
+        after: '02_intermediate/20_beginner_listen-to-books-02-After.jpeg'
     },
     '02_intermediate/21_beginner_youtube-to-text.json': {
-        before: '02_intermediate/21_beginner_youtube-to-text-01-Before.png',
-        after: '02_intermediate/21_beginner_youtube-to-text-02-After.png'
+        before: '02_intermediate/21_beginner_youtube-to-text-01-Before.jpeg',
+        after: '02_intermediate/21_beginner_youtube-to-text-02-After.jpeg'
     },
     '02_intermediate/22_tatsuya_beginner_academic-paper-summary.json': {
-        before: '02_intermediate/22_tatsuya_beginner_academic-paper-summary-01-Before.png',
-        after: '02_intermediate/22_tatsuya_beginner_academic-paper-summary-02-After.png'
+        before: '02_intermediate/22_tatsuya_beginner_academic-paper-summary-01-Before.jpeg',
+        after: '02_intermediate/22_tatsuya_beginner_academic-paper-summary-02-After.jpeg'
     },
     '02_intermediate/23_kyoko_intermediate_notebooklm-self-learning.json': {
-        before: '02_intermediate/23_kyoko_intermediate_notebooklm-self-learning-01-Before.png',
-        after: '02_intermediate/23_kyoko_intermediate_notebooklm-self-learning-02-After.png'
+        before: '02_intermediate/23_kyoko_intermediate_notebooklm-self-learning-01-Before.jpeg',
+        after: '02_intermediate/23_kyoko_intermediate_notebooklm-self-learning-02-After.jpeg'
     },
     '02_intermediate/24_beginner_personalized-quiz.json': {
-        before: '02_intermediate/24_beginner_personalized-quiz-01-Before.png',
-        after: '02_intermediate/24_beginner_personalized-quiz-02-After.png'
+        before: '02_intermediate/24_beginner_personalized-quiz-01-Before.jpeg',
+        after: '02_intermediate/24_beginner_personalized-quiz-02-After.jpeg'
     },
     '02_intermediate/25_intermediate_exam-analysis.json': {
-        before: '02_intermediate/25_intermediate_exam-analysis-01-Before.png',
-        after: '02_intermediate/25_intermediate_exam-analysis-02-After.png'
+        before: '02_intermediate/25_intermediate_exam-analysis-01-Before.jpeg',
+        after: '02_intermediate/25_intermediate_exam-analysis-02-After.jpeg'
     },
     '02_intermediate/26_beginner_daily-reflection.json': {
-        before: '02_intermediate/26_beginner_daily-reflection-01-Before.png',
-        after: '02_intermediate/26_beginner_daily-reflection-02-After.png'
+        before: '02_intermediate/26_beginner_daily-reflection-01-Before.jpeg',
+        after: '02_intermediate/26_beginner_daily-reflection-02-After.jpeg'
     },
     '02_intermediate/27_intermediate_feynman-technique.json': {
-        before: '02_intermediate/27_intermediate_feynman-technique-01-Before.png',
-        after: '02_intermediate/27_intermediate_feynman-technique-02-After.png'
+        before: '02_intermediate/27_intermediate_feynman-technique-01-Before.jpeg',
+        after: '02_intermediate/27_intermediate_feynman-technique-02-After.jpeg'
     },
     '02_intermediate/28_beginner_ai-english-teacher.json': {
-        before: '02_intermediate/28_beginner_ai-english-teacher-01-Before.png',
-        after: '02_intermediate/28_beginner_ai-english-teacher-02-After.png'
+        before: '02_intermediate/28_beginner_ai-english-teacher-01-Before.jpeg',
+        after: '02_intermediate/28_beginner_ai-english-teacher-02-After.jpeg'
     },
     '02_intermediate/29_intermediate_business-english.json': {
-        before: '02_intermediate/29_intermediate_business-english-01-Before.png',
-        after: '02_intermediate/29_intermediate_business-english-02-After.png'
+        before: '02_intermediate/29_intermediate_business-english-01-Before.jpeg',
+        after: '02_intermediate/29_intermediate_business-english-02-After.jpeg'
     },
     '02_intermediate/30_intermediate_motivation-coach.json': {
-        before: '02_intermediate/30_intermediate_motivation-coach-01-Before.png',
-        after: '02_intermediate/30_intermediate_motivation-coach-02-After.png'
+        before: '02_intermediate/30_intermediate_motivation-coach-01-Before.jpeg',
+        after: '02_intermediate/30_intermediate_motivation-coach-02-After.jpeg'
     },
     '02_intermediate/31_beginner_digital-certificate.json': {
-        before: '02_intermediate/31_beginner_digital-certificate-01-Before.png',
-        after: '02_intermediate/31_beginner_digital-certificate-02-After.png'
+        before: '02_intermediate/31_beginner_digital-certificate-01-Before.jpeg',
+        after: '02_intermediate/31_beginner_digital-certificate-02-After.jpeg'
     },
     '02_intermediate/32_intermediate_gamification-progress.json': {
-        before: '02_intermediate/32_intermediate_gamification-progress-01-Before.png',
-        after: '02_intermediate/32_intermediate_gamification-progress-02-After.png'
+        before: '02_intermediate/32_intermediate_gamification-progress-01-Before.jpeg',
+        after: '02_intermediate/32_intermediate_gamification-progress-02-After.jpeg'
     },
     '02_intermediate/33_intermediate_weekly-report.json': {
-        before: '02_intermediate/33_intermediate_weekly-report-01-Before.png',
-        after: '02_intermediate/33_intermediate_weekly-report-02-After.png'
+        before: '02_intermediate/33_intermediate_weekly-report-01-Before.jpeg',
+        after: '02_intermediate/33_intermediate_weekly-report-02-After.jpeg'
     },
     '02_intermediate/34_advanced_learning-community.json': {
-        before: '02_intermediate/34_advanced_learning-community-01-Before.png',
-        after: '02_intermediate/34_advanced_learning-community-02-After.png'
+        before: '02_intermediate/34_advanced_learning-community-01-Before.jpeg',
+        after: '02_intermediate/34_advanced_learning-community-02-After.jpeg'
     },
     
     // 上級
     '03_advanced/35_intermediate_concept-map.json': {
-        before: '03_advanced/35_intermediate_concept-map-01-Before.png',
-        after: '03_advanced/35_intermediate_concept-map-02-After.png'
+        before: '03_advanced/35_intermediate_concept-map-01-Before.jpeg',
+        after: '03_advanced/35_intermediate_concept-map-02-After.jpeg'
     },
     '03_advanced/36_tatsuya_intermediate_gemini-deep-research.json': {
-        before: '03_advanced/36_tatsuya_intermediate_gemini-deep-research-01-Before.png',
-        after: '03_advanced/36_tatsuya_intermediate_gemini-deep-research-02-After.png'
+        before: '03_advanced/36_tatsuya_intermediate_gemini-deep-research-01-Before.jpeg',
+        after: '03_advanced/36_tatsuya_intermediate_gemini-deep-research-02-After.jpeg'
     },
     '03_advanced/37_advanced_fact-opinion-separation.json': {
-        before: '03_advanced/37_advanced_fact-opinion-separation-01-Before.png',
-        after: '03_advanced/37_advanced_fact-opinion-separation-02-After.png'
+        before: '03_advanced/37_advanced_fact-opinion-separation-01-Before.jpeg',
+        after: '03_advanced/37_advanced_fact-opinion-separation-02-After.jpeg'
     },
     '03_advanced/38_tatsuya_intermediate_chain-of-thought.json': {
-        before: '03_advanced/38_tatsuya_intermediate_chain-of-thought-01-Before.png',
-        after: '03_advanced/38_tatsuya_intermediate_chain-of-thought-02-After.png'
+        before: '03_advanced/38_tatsuya_intermediate_chain-of-thought-01-Before.jpeg',
+        after: '03_advanced/38_tatsuya_intermediate_chain-of-thought-02-After.jpeg'
     },
     '03_advanced/39_tatsuya_beginner_devils-advocate.json': {
-        before: '03_advanced/39_tatsuya_beginner_devils-advocate-01-Before.png',
-        after: '03_advanced/39_tatsuya_beginner_devils-advocate-02-After.png'
+        before: '03_advanced/39_tatsuya_beginner_devils-advocate-01-Before.jpeg',
+        after: '03_advanced/39_tatsuya_beginner_devils-advocate-02-After.jpeg'
     },
     '03_advanced/40_advanced_devil-advocate.json': {
-        before: '03_advanced/40_advanced_devil-advocate-01-Before.png',
-        after: '03_advanced/40_advanced_devil-advocate-02-After.png'
+        before: '03_advanced/40_advanced_devil-advocate-01-Before.jpeg',
+        after: '03_advanced/40_advanced_devil-advocate-02-After.jpeg'
     },
     '03_advanced/41_intermediate_business-plan-validation.json': {
-        before: '03_advanced/41_intermediate_business-plan-validation-01-Before.png',
-        after: '03_advanced/41_intermediate_business-plan-validation-02-After.png'
+        before: '03_advanced/41_intermediate_business-plan-validation-01-Before.jpeg',
+        after: '03_advanced/41_intermediate_business-plan-validation-02-After.jpeg'
     },
     '03_advanced/42_advanced_analyze-thinking-bias.json': {
-        before: '03_advanced/42_advanced_analyze-thinking-bias-01-Before.png',
-        after: '03_advanced/42_advanced_analyze-thinking-bias-02-After.png'
+        before: '03_advanced/42_advanced_analyze-thinking-bias-01-Before.jpeg',
+        after: '03_advanced/42_advanced_analyze-thinking-bias-02-After.jpeg'
     },
     '03_advanced/43_advanced_voice-memo-research.json': {
-        before: '03_advanced/43_advanced_voice-memo-research-01-Before.png',
-        after: '03_advanced/43_advanced_voice-memo-research-02-After.png'
+        before: '03_advanced/43_advanced_voice-memo-research-01-Before.jpeg',
+        after: '03_advanced/43_advanced_voice-memo-research-02-After.jpeg'
     },
     '03_advanced/44_intermediate_metaphor-creation.json': {
-        before: '03_advanced/44_intermediate_metaphor-creation-01-Before.png',
-        after: '03_advanced/44_intermediate_metaphor-creation-02-After.png'
+        before: '03_advanced/44_intermediate_metaphor-creation-01-Before.jpeg',
+        after: '03_advanced/44_intermediate_metaphor-creation-02-After.jpeg'
     },
     '03_advanced/45_intermediate_visualize-physics.json': {
-        before: '03_advanced/45_intermediate_visualize-physics-01-Before.png',
-        after: '03_advanced/45_intermediate_visualize-physics-02-After.png'
+        before: '03_advanced/45_intermediate_visualize-physics-01-Before.jpeg',
+        after: '03_advanced/45_intermediate_visualize-physics-02-After.jpeg'
     },
     '03_advanced/46_tatsuya_advanced_notebooklm-knowledge-base.json': {
-        before: '03_advanced/46_tatsuya_advanced_notebooklm-knowledge-base-01-Before.png',
-        after: '03_advanced/46_tatsuya_advanced_notebooklm-knowledge-base-02-After.png'
+        before: '03_advanced/46_tatsuya_advanced_notebooklm-knowledge-base-01-Before.jpeg',
+        after: '03_advanced/46_tatsuya_advanced_notebooklm-knowledge-base-02-After.jpeg'
     },
     '03_advanced/47_intermediate_market-value-career.json': {
-        before: '03_advanced/47_intermediate_market-value-career-01-Before.png',
-        after: '03_advanced/47_intermediate_market-value-career-02-After.png'
+        before: '03_advanced/47_intermediate_market-value-career-01-Before.jpeg',
+        after: '03_advanced/47_intermediate_market-value-career-02-After.jpeg'
     },
     '03_advanced/48_tatsuya_advanced_future-career-strategy.json': {
-        before: '03_advanced/48_tatsuya_advanced_future-career-strategy-01-Before.png',
-        after: '03_advanced/48_tatsuya_advanced_future-career-strategy-02-After.png'
+        before: '03_advanced/48_tatsuya_advanced_future-career-strategy-01-Before.jpeg',
+        after: '03_advanced/48_tatsuya_advanced_future-career-strategy-02-After.jpeg'
     },
     '03_advanced/49_beginner_book-recommendation.json': {
-        before: '03_advanced/49_beginner_book-recommendation-01-Before.png',
-        after: '03_advanced/49_beginner_book-recommendation-02-After.png'
+        before: '03_advanced/49_beginner_book-recommendation-01-Before.jpeg',
+        after: '03_advanced/49_beginner_book-recommendation-02-After.jpeg'
     },
     '03_advanced/50_tatsuya_intermediate_ai-era-output-thinking.json': {
-        before: '03_advanced/50_tatsuya_intermediate_ai-era-output-thinking-01-Before.png',
-        after: '03_advanced/50_tatsuya_intermediate_ai-era-output-thinking-02-After.png'
+        before: '03_advanced/50_tatsuya_intermediate_ai-era-output-thinking-01-Before.jpeg',
+        after: '03_advanced/50_tatsuya_intermediate_ai-era-output-thinking-02-After.jpeg'
     }
 };
 
