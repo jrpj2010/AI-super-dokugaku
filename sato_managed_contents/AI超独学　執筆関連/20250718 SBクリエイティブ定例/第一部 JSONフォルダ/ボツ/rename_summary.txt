@@ -1,0 +1,503 @@
+画像ファイルのリネーム結果
+================================================================================
+
+番号: 001
+CSV ID: 01_beginner_organize-thoughts-01-Before
+旧ファイル名: image_25_f976a4c9-e29d-478e-a138-7389be66bd4e.png
+新ファイル名: 01_beginner_organize-thoughts-01-Before_Before.png
+----------------------------------------
+番号: 002
+CSV ID: 01_beginner_organize-thoughts-02-After
+旧ファイル名: image_26_dfe9ed0e-4eb0-4e28-a99d-731d894b84c4.png
+新ファイル名: 01_beginner_organize-thoughts-02-After_After.png
+----------------------------------------
+番号: 003
+CSV ID: 02_kyoko_beginner_web-summary-01-Before
+旧ファイル名: image_23_c37ec0cb-5bba-4c48-a379-9fc887a67d31.png
+新ファイル名: 02_kyoko_beginner_Before.png
+----------------------------------------
+番号: 004
+CSV ID: 02_kyoko_beginner_web-summary-02-After
+旧ファイル名: image_24_63794334-f17a-4633-8257-38f60e26c7b0.png
+新ファイル名: 02_kyoko_beginner_After.png
+----------------------------------------
+番号: 005
+CSV ID: 03_tatsuya_beginner_personalized-news-report-01-Before
+旧ファイル名: image_21_39be1f12-9c1c-4bce-8554-af448810d3ae.png
+新ファイル名: 03_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 006
+CSV ID: 03_tatsuya_beginner_personalized-news-report-02-After
+旧ファイル名: image_22_3c45f7e1-7774-47d9-b776-6212fd74cdd6.png
+新ファイル名: 03_tatsuya_beginner_After.png
+----------------------------------------
+番号: 007
+CSV ID: 04_advanced_ai-research-agent-01-Before
+旧ファイル名: image_19_83ea8e14-7d34-4b81-aa6e-22b345b93a5f.png
+新ファイル名: 04_advanced_ai-research-agent-01-Before_Before.png
+----------------------------------------
+番号: 008
+CSV ID: 04_advanced_ai-research-agent-02-After
+旧ファイル名: image_20_205068a3-4dd5-4844-a972-c594d8b83328.png
+新ファイル名: 04_advanced_ai-research-agent-02-After_After.png
+----------------------------------------
+番号: 009
+CSV ID: 05_tatsuya_beginner_gemini-in-workspace-01-Before
+旧ファイル名: image_17_2ae7c653-b743-4e88-97e7-4c2ea10387ab.png
+新ファイル名: 05_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 010
+CSV ID: 05_tatsuya_beginner_gemini-in-workspace-02-After
+旧ファイル名: image_18_21e3a4ce-f2fa-4881-aa38-662ec7cb1d94.png
+新ファイル名: 05_tatsuya_beginner_After.png
+----------------------------------------
+番号: 011
+CSV ID: 06_kyoko_intermediate_copilot-coaching-01-Before
+旧ファイル名: image_15_731f77fb-5601-4122-b7f2-4eb9c638d17f.png
+新ファイル名: 06_kyoko_intermediate_Before.png
+----------------------------------------
+番号: 012
+CSV ID: 06_kyoko_intermediate_copilot-coaching-02-After
+旧ファイル名: image_16_93b40806-e931-4be6-9a7b-2a81353200e9.png
+新ファイル名: 06_kyoko_intermediate_After.png
+----------------------------------------
+番号: 013
+CSV ID: 07_kyoko_beginner_simplification-01-Before
+旧ファイル名: image_13_d845f012-f02d-4a58-8949-758bf4211eb7.png
+新ファイル名: 07_kyoko_beginner_Before.png
+----------------------------------------
+番号: 014
+CSV ID: 07_kyoko_beginner_simplification-02-After
+旧ファイル名: image_14_7de37049-3446-4b10-8f6d-3576546fe08c.png
+新ファイル名: 07_kyoko_beginner_After.png
+----------------------------------------
+番号: 015
+CSV ID: 08_tatsuya_beginner_word-to-powerpoint-01-Before
+旧ファイル名: image_11_ae523dbc-ef84-4fb5-ac86-995d7fe4f6b4.png
+新ファイル名: 08_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 016
+CSV ID: 08_tatsuya_beginner_word-to-powerpoint-02-After
+旧ファイル名: image_12_627b7ded-61cb-4cd6-a828-002cac7c0b8d.png
+新ファイル名: 08_tatsuya_beginner_After.png
+----------------------------------------
+番号: 017
+CSV ID: 09_kyoko_advanced_copilot-illustration-01-Before
+旧ファイル名: image_9_5caf1a83-3ac5-4754-bb55-ccb5103b3d46.png
+新ファイル名: 09_kyoko_advanced_Before.png
+----------------------------------------
+番号: 018
+CSV ID: 09_kyoko_advanced_copilot-illustration-02-After
+旧ファイル名: image_10_90a8409a-3533-43aa-a7cb-73f087367f44.png
+新ファイル名: 09_kyoko_advanced_After.png
+----------------------------------------
+番号: 019
+CSV ID: 10_tatsuya_beginner_voice-memo-structuring-01-Before
+旧ファイル名: image_7_8d2d2ee3-6cc3-4832-b594-d589e29713fe.png
+新ファイル名: 10_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 020
+CSV ID: 10_tatsuya_beginner_voice-memo-structuring-02-After
+旧ファイル名: image_8_97de9b9a-fd0b-4e91-b6d1-52353659ba82.png
+新ファイル名: 10_tatsuya_beginner_After.png
+----------------------------------------
+番号: 021
+CSV ID: 11_kyoko_beginner_gemini-wall-hitting-01-Before
+旧ファイル名: image_5_085385bc-2fbf-41a2-b364-54f2a7b33db5.png
+新ファイル名: 11_kyoko_beginner_Before.png
+----------------------------------------
+番号: 022
+CSV ID: 11_kyoko_beginner_gemini-wall-hitting-02-After
+旧ファイル名: image_6_fd417d23-b38e-44ef-b7a1-9de7e59e1725.png
+新ファイル名: 11_kyoko_beginner_After.png
+----------------------------------------
+番号: 023
+CSV ID: 12_tatsuya_beginner_copilot-notebook-01-Before
+旧ファイル名: image_3_60251fcf-beed-429d-a97e-fb2d42a2a291.png
+新ファイル名: 12_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 024
+CSV ID: 12_tatsuya_beginner_copilot-notebook-02-After
+旧ファイル名: image_4_8dfcafd0-695b-466a-b7fe-32d0447d9a5d.png
+新ファイル名: 12_tatsuya_beginner_After.png
+----------------------------------------
+番号: 025
+CSV ID: 13_beginner_portfolio-site-01-Before
+旧ファイル名: image_1_89dabae9-6506-42a5-9515-e5f7de1ec62d.png
+新ファイル名: 13_beginner_portfolio-site-01-Before_Before.png
+----------------------------------------
+番号: 026
+CSV ID: 13_beginner_portfolio-site-02-After
+旧ファイル名: image_2_722ea936-a5a0-4e7d-86c0-36dc304183d3.png
+新ファイル名: 13_beginner_portfolio-site-02-After_After.png
+----------------------------------------
+番号: 027
+CSV ID: 14_intermediate_custom-learning-roadmap-01-Before
+旧ファイル名: image_67_eb75039c-2bc3-4ef5-9773-3c2c2df41190.png
+新ファイル名: 14_intermediate_custom-learning-roadmap-01-Before_Before.png
+----------------------------------------
+番号: 028
+CSV ID: 14_intermediate_custom-learning-roadmap-02-After
+旧ファイル名: image_68_519b8fb1-ba54-4d7a-9673-ccc5791d8ac8.png
+新ファイル名: 14_intermediate_custom-learning-roadmap-02-After_After.png
+----------------------------------------
+番号: 029
+CSV ID: 15_beginner_backward-thinking-01-Before
+旧ファイル名: image_65_305f1f23-64f9-4ddd-85ab-64154cf75fe9.png
+新ファイル名: 15_beginner_backward-thinking-01-Before_Before.png
+----------------------------------------
+番号: 030
+CSV ID: 15_beginner_backward-thinking-02-After
+旧ファイル名: image_66_8188d054-a021-4d46-a551-96b07e1b319e.png
+新ファイル名: 15_beginner_backward-thinking-02-After_After.png
+----------------------------------------
+番号: 031
+CSV ID: 16_advanced_stumbling-prediction-01-Before
+旧ファイル名: image_63_e8d8a497-f2fd-4bfb-aea3-e7d3b3badc1c.png
+新ファイル名: 16_advanced_stumbling-prediction-01-Before_Before.png
+----------------------------------------
+番号: 032
+CSV ID: 16_advanced_stumbling-prediction-02-After
+旧ファイル名: image_64_b49768a1-4f02-4fdc-a74d-f2f71378799f.png
+新ファイル名: 16_advanced_stumbling-prediction-02-After_After.png
+----------------------------------------
+番号: 033
+CSV ID: 17_intermediate_learning-style-01-Before
+旧ファイル名: image_61_ef913de8-1194-4b52-8c88-64122fe8a264.png
+新ファイル名: 17_intermediate_learning-style-01-Before_Before.png
+----------------------------------------
+番号: 034
+CSV ID: 17_intermediate_learning-style-02-After
+旧ファイル名: image_62_ee4db827-07c5-4a6c-beb7-459d27346442.png
+新ファイル名: 17_intermediate_learning-style-02-After_After.png
+----------------------------------------
+番号: 035
+CSV ID: 18_intermediate_emotion-wave-analysis-01-Before
+旧ファイル名: image_59_b29f09b2-b13a-4ebc-a8a9-97253d33f3a4.png
+新ファイル名: 18_intermediate_emotion-wave-analysis-01-Before_Before.png
+----------------------------------------
+番号: 036
+CSV ID: 18_intermediate_emotion-wave-analysis-02-After
+旧ファイル名: image_60_fc8968e4-1c05-4708-aa4a-a8f7a96da281.png
+新ファイル名: 18_intermediate_emotion-wave-analysis-02-After_After.png
+----------------------------------------
+番号: 037
+CSV ID: 19_beginner_time-reminder-01-Before
+旧ファイル名: image_57_2871fe6d-35f3-4ac7-a628-013c6ee95ef2.png
+新ファイル名: 19_beginner_time-reminder-01-Before_Before.png
+----------------------------------------
+番号: 038
+CSV ID: 19_beginner_time-reminder-02-After
+旧ファイル名: image_58_24a21497-2d40-4c40-a706-cf2553ca6178.png
+新ファイル名: 19_beginner_time-reminder-02-After_After.png
+----------------------------------------
+番号: 039
+CSV ID: 20_beginner_listen-to-books-01-Before
+旧ファイル名: image_55_037fb98d-47fe-4f9b-82d8-437cb9a1cb1c.png
+新ファイル名: 20_beginner_listen-to-books-01-Before_Before.png
+----------------------------------------
+番号: 040
+CSV ID: 20_beginner_listen-to-books-02-After
+旧ファイル名: image_56_c22701f0-9fd1-44af-add3-cc0d55251c24.png
+新ファイル名: 20_beginner_listen-to-books-02-After_After.png
+----------------------------------------
+番号: 041
+CSV ID: 21_beginner_youtube-to-text-01-Before
+旧ファイル名: image_53_35c16457-58d5-44a3-916a-8abfa4bb6c4a.png
+新ファイル名: 21_beginner_youtube-to-text-01-Before_Before.png
+----------------------------------------
+番号: 042
+CSV ID: 21_beginner_youtube-to-text-02-After
+旧ファイル名: image_54_8b25b70b-f7b9-4ad4-ae22-71ca7661e986.png
+新ファイル名: 21_beginner_youtube-to-text-02-After_After.png
+----------------------------------------
+番号: 043
+CSV ID: 22_tatsuya_beginner_academic-paper-summary-01-Before
+旧ファイル名: image_51_1c3ef15d-7a18-4fe5-add1-9d18d0f17ecb.png
+新ファイル名: 22_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 044
+CSV ID: 22_tatsuya_beginner_academic-paper-summary-02-After
+旧ファイル名: image_52_da910320-008c-4614-beb1-28fb78635a01.png
+新ファイル名: 22_tatsuya_beginner_After.png
+----------------------------------------
+番号: 045
+CSV ID: 23_kyoko_intermediate_notebooklm-self-learning-01-Before
+旧ファイル名: image_49_c1033284-cd5d-4f60-a089-5271c121045c.png
+新ファイル名: 23_kyoko_intermediate_Before.png
+----------------------------------------
+番号: 046
+CSV ID: 23_kyoko_intermediate_notebooklm-self-learning-02-After
+旧ファイル名: image_50_048292f4-0482-42eb-98ea-5f4f916fd940.png
+新ファイル名: 23_kyoko_intermediate_After.png
+----------------------------------------
+番号: 047
+CSV ID: 24_beginner_personalized-quiz-01-Before
+旧ファイル名: image_47_a781ad00-33b7-41dc-ad98-4d6832cd01b9.png
+新ファイル名: 24_beginner_personalized-quiz-01-Before_Before.png
+----------------------------------------
+番号: 048
+CSV ID: 24_beginner_personalized-quiz-02-After
+旧ファイル名: image_48_a7ccb441-d819-4016-88ea-5b4d34a04e88.png
+新ファイル名: 24_beginner_personalized-quiz-02-After_After.png
+----------------------------------------
+番号: 049
+CSV ID: 25_intermediate_exam-analysis-01-Before
+旧ファイル名: image_45_4cf50707-b059-4284-8723-db1f394e81ee.png
+新ファイル名: 25_intermediate_exam-analysis-01-Before_Before.png
+----------------------------------------
+番号: 050
+CSV ID: 25_intermediate_exam-analysis-02-After
+旧ファイル名: image_46_9b8dd135-3399-404e-b73e-4bccd381c628.png
+新ファイル名: 25_intermediate_exam-analysis-02-After_After.png
+----------------------------------------
+番号: 051
+CSV ID: 26_beginner_daily-reflection-01-Before
+旧ファイル名: image_43_ba82c29e-745f-4c06-a443-5b28ab611935.png
+新ファイル名: 26_beginner_daily-reflection-01-Before_Before.png
+----------------------------------------
+番号: 052
+CSV ID: 26_beginner_daily-reflection-02-After
+旧ファイル名: image_44_7de722c0-49c9-49d3-9b74-96afd936695f.png
+新ファイル名: 26_beginner_daily-reflection-02-After_After.png
+----------------------------------------
+番号: 053
+CSV ID: 27_intermediate_feynman-technique-01-Before
+旧ファイル名: image_41_6e49c55e-cd44-440a-88ff-95c63ea287e5.png
+新ファイル名: 27_intermediate_feynman-technique-01-Before_Before.png
+----------------------------------------
+番号: 054
+CSV ID: 27_intermediate_feynman-technique-02-After
+旧ファイル名: image_42_a337ba63-2722-447f-8bef-f6f511935507.png
+新ファイル名: 27_intermediate_feynman-technique-02-After_After.png
+----------------------------------------
+番号: 055
+CSV ID: 28_beginner_ai-english-teacher-01-Before
+旧ファイル名: image_39_3312df8b-14e7-4b89-9420-6efa9b3b6e82.png
+新ファイル名: 28_beginner_ai-english-teacher-01-Before_Before.png
+----------------------------------------
+番号: 056
+CSV ID: 28_beginner_ai-english-teacher-02-After
+旧ファイル名: image_40_830cf00c-d0bb-4f45-b9f8-b5783a1f2c39.png
+新ファイル名: 28_beginner_ai-english-teacher-02-After_After.png
+----------------------------------------
+番号: 057
+CSV ID: 29_intermediate_business-english-01-Before
+旧ファイル名: image_37_c6ec6a34-a72e-4663-9a1d-7a5baed8e2ce.png
+新ファイル名: 29_intermediate_business-english-01-Before_Before.png
+----------------------------------------
+番号: 058
+CSV ID: 29_intermediate_business-english-02-After
+旧ファイル名: image_38_cd3f8091-9dc8-4c4c-a2a7-b8db5a95107d.png
+新ファイル名: 29_intermediate_business-english-02-After_After.png
+----------------------------------------
+番号: 059
+CSV ID: 30_intermediate_motivation-coach-01-Before
+旧ファイル名: image_35_8657e711-3939-494e-88ae-93dc34f71f87.png
+新ファイル名: 30_intermediate_motivation-coach-01-Before_Before.png
+----------------------------------------
+番号: 060
+CSV ID: 30_intermediate_motivation-coach-02-After
+旧ファイル名: image_36_a8755877-cd2e-49b6-9204-6e11cdd45b93.png
+新ファイル名: 30_intermediate_motivation-coach-02-After_After.png
+----------------------------------------
+番号: 061
+CSV ID: 31_beginner_digital-certificate-01-Before
+旧ファイル名: image_33_c074f686-0198-44ce-a3de-abb9b5db9a8f.png
+新ファイル名: 31_beginner_digital-certificate-01-Before_Before.png
+----------------------------------------
+番号: 062
+CSV ID: 31_beginner_digital-certificate-02-After
+旧ファイル名: image_34_6a8752f5-be45-4238-9b3c-c65ad07bd91d.png
+新ファイル名: 31_beginner_digital-certificate-02-After_After.png
+----------------------------------------
+番号: 063
+CSV ID: 32_intermediate_gamification-progress-01-Before
+旧ファイル名: image_31_f53edcc6-84f2-4e76-b9f5-b71c30aa60e9.png
+新ファイル名: 32_intermediate_gamification-progress-01-Before_Before.png
+----------------------------------------
+番号: 064
+CSV ID: 32_intermediate_gamification-progress-02-After
+旧ファイル名: image_32_71233bf4-acd5-4648-9bfa-e6941c8dfc60.png
+新ファイル名: 32_intermediate_gamification-progress-02-After_After.png
+----------------------------------------
+番号: 065
+CSV ID: 33_intermediate_weekly-report-01-Before
+旧ファイル名: image_29_3a86fb49-81c6-4591-9552-6059c70ec2c7.png
+新ファイル名: 33_intermediate_weekly-report-01-Before_Before.png
+----------------------------------------
+番号: 066
+CSV ID: 33_intermediate_weekly-report-02-After
+旧ファイル名: image_30_de57bc62-812c-4f65-bb2a-14ba71d4e8d5.png
+新ファイル名: 33_intermediate_weekly-report-02-After_After.png
+----------------------------------------
+番号: 067
+CSV ID: 34_advanced_learning-community-01-Before
+旧ファイル名: image_27_9e2ebc16-51d7-4bf1-b8c9-d95cf3233e54.png
+新ファイル名: 34_advanced_learning-community-01-Before_Before.png
+----------------------------------------
+番号: 068
+CSV ID: 34_advanced_learning-community-02-After
+旧ファイル名: image_28_84b93c88-ef52-4c30-832a-67694eb4f52e.png
+新ファイル名: 34_advanced_learning-community-02-After_After.png
+----------------------------------------
+番号: 069
+CSV ID: 35_intermediate_concept-map-01-Before
+旧ファイル名: image_93_14e8ddbb-7f01-4532-b706-6f90e0143153.png
+新ファイル名: 35_intermediate_concept-map-01-Before_Before.png
+----------------------------------------
+番号: 070
+CSV ID: 35_intermediate_concept-map-02-After
+旧ファイル名: image_94_e22ef8c7-f18b-4f64-b159-378ef7077002.png
+新ファイル名: 35_intermediate_concept-map-02-After_After.png
+----------------------------------------
+番号: 071
+CSV ID: 36_tatsuya_intermediate_gemini-deep-research-01-Before
+旧ファイル名: image_91_69474b02-4c5a-48d8-87db-dc3efaec66a7.png
+新ファイル名: 36_tatsuya_intermediate_Before.png
+----------------------------------------
+番号: 072
+CSV ID: 36_tatsuya_intermediate_gemini-deep-research-02-After
+旧ファイル名: image_92_efec7450-fee1-46c5-bb96-7f6d8c1c2c76.png
+新ファイル名: 36_tatsuya_intermediate_After.png
+----------------------------------------
+番号: 073
+CSV ID: 37_advanced_fact-opinion-separation-01-Before
+旧ファイル名: image_89_619480dc-09ff-4ed3-b169-eaa11a3c746e.png
+新ファイル名: 37_advanced_fact-opinion-separation-01-Before_Before.png
+----------------------------------------
+番号: 074
+CSV ID: 37_advanced_fact-opinion-separation-02-After
+旧ファイル名: image_90_450ab23f-828d-4297-9512-6f2a2928eb0c.png
+新ファイル名: 37_advanced_fact-opinion-separation-02-After_After.png
+----------------------------------------
+番号: 075
+CSV ID: 38_tatsuya_intermediate_chain-of-thought-01-Before
+旧ファイル名: image_87_1967ea4d-272d-43c5-96a0-ae89b2edc14f.png
+新ファイル名: 38_tatsuya_intermediate_Before.png
+----------------------------------------
+番号: 076
+CSV ID: 38_tatsuya_intermediate_chain-of-thought-02-After
+旧ファイル名: image_88_872d565e-f36f-4d46-a21e-3beb21d25889.png
+新ファイル名: 38_tatsuya_intermediate_After.png
+----------------------------------------
+番号: 077
+CSV ID: 39_tatsuya_beginner_devils-advocate-01-Before
+旧ファイル名: image_85_dbfba7a5-cc7e-4034-a154-35468a557162.png
+新ファイル名: 39_tatsuya_beginner_Before.png
+----------------------------------------
+番号: 078
+CSV ID: 39_tatsuya_beginner_devils-advocate-02-After
+旧ファイル名: image_86_aa226a03-8fda-4808-8b64-d751b6967027.png
+新ファイル名: 39_tatsuya_beginner_After.png
+----------------------------------------
+番号: 079
+CSV ID: 40_advanced_devil-advocate-01-Before
+旧ファイル名: image_83_b3b1cfa0-7359-4368-ae5a-b617c9421200.png
+新ファイル名: 40_advanced_devil-advocate-01-Before_Before.png
+----------------------------------------
+番号: 080
+CSV ID: 40_advanced_devil-advocate-02-After
+旧ファイル名: image_84_8e22481e-ee4a-48f8-8cc8-1eb04635e789.png
+新ファイル名: 40_advanced_devil-advocate-02-After_After.png
+----------------------------------------
+番号: 081
+CSV ID: 41_intermediate_business-plan-validation-01-Before
+旧ファイル名: image_81_fca7a493-35e0-4d1d-9cba-f16786dfdfce.png
+新ファイル名: 41_intermediate_business-plan-validation-01-Before_Before.png
+----------------------------------------
+番号: 082
+CSV ID: 41_intermediate_business-plan-validation-02-After
+旧ファイル名: image_82_876a27d6-fed2-4eb3-b516-61d00bfbc772.png
+新ファイル名: 41_intermediate_business-plan-validation-02-After_After.png
+----------------------------------------
+番号: 083
+CSV ID: 42_advanced_analyze-thinking-bias-01-Before
+旧ファイル名: image_79_f7195355-47ab-43d7-9d0d-3ecd45ecf4f3.png
+新ファイル名: 42_advanced_analyze-thinking-bias-01-Before_Before.png
+----------------------------------------
+番号: 084
+CSV ID: 42_advanced_analyze-thinking-bias-02-After
+旧ファイル名: image_80_36eb2b50-06d9-4833-b9ac-760c6882997d.png
+新ファイル名: 42_advanced_analyze-thinking-bias-02-After_After.png
+----------------------------------------
+番号: 085
+CSV ID: 43_advanced_voice-memo-research-01-Before
+旧ファイル名: image_77_c0ec7ab8-cc01-487e-bdcf-c6bdd300a09f.png
+新ファイル名: 43_advanced_voice-memo-research-01-Before_Before.png
+----------------------------------------
+番号: 086
+CSV ID: 43_advanced_voice-memo-research-02-After
+旧ファイル名: image_78_49e1d8a0-cc94-4ab3-90ac-1fee2fb71a5c.png
+新ファイル名: 43_advanced_voice-memo-research-02-After_After.png
+----------------------------------------
+番号: 087
+CSV ID: 44_intermediate_metaphor-creation-01-Before
+旧ファイル名: image_75_5bb604b5-2c86-4b8e-a94e-99b9ed99da6f.png
+新ファイル名: 44_intermediate_metaphor-creation-01-Before_Before.png
+----------------------------------------
+番号: 088
+CSV ID: 44_intermediate_metaphor-creation-02-After
+旧ファイル名: image_76_e652d680-682c-4b05-a946-fad1ade3dbe0.png
+新ファイル名: 44_intermediate_metaphor-creation-02-After_After.png
+----------------------------------------
+番号: 089
+CSV ID: 45_intermediate_visualize-physics-01-Before
+旧ファイル名: image_73_7847e521-729f-4783-a1ca-1f76dde0362b.png
+新ファイル名: 45_intermediate_visualize-physics-01-Before_Before.png
+----------------------------------------
+番号: 090
+CSV ID: 45_intermediate_visualize-physics-02-After
+旧ファイル名: image_74_f320ac06-5221-4908-bc7b-4ee5aeb703b9.png
+新ファイル名: 45_intermediate_visualize-physics-02-After_After.png
+----------------------------------------
+番号: 091
+CSV ID: 46_tatsuya_advanced_notebooklm-knowledge-base-01-Before
+旧ファイル名: image_97_94f41817-2efd-4a8b-9230-d306c1dfc103.png
+新ファイル名: 46_tatsuya_advanced_Before.png
+----------------------------------------
+番号: 092
+CSV ID: 46_tatsuya_advanced_notebooklm-knowledge-base-02-After
+旧ファイル名: image_98_06ed0591-78c3-4b0e-b6ee-07f649420cfc.png
+新ファイル名: 46_tatsuya_advanced_After.png
+----------------------------------------
+番号: 093
+CSV ID: 47_intermediate_market-value-career-01-Before
+旧ファイル名: image_71_aa519b63-f8be-4f4b-97ea-ad83d1d69926.png
+新ファイル名: 47_intermediate_market-value-career-01-Before_Before.png
+----------------------------------------
+番号: 094
+CSV ID: 47_intermediate_market-value-career-02-After
+旧ファイル名: image_72_d3a7d0c2-ed9a-41fa-bba9-9c6fe401e26b.png
+新ファイル名: 47_intermediate_market-value-career-02-After_After.png
+----------------------------------------
+番号: 095
+CSV ID: 48_tatsuya_advanced_future-career-strategy-01-Before
+旧ファイル名: image_99_f9811a77-ac14-474d-a918-90c7b615e86f.png
+新ファイル名: 48_tatsuya_advanced_Before.png
+----------------------------------------
+番号: 096
+CSV ID: 48_tatsuya_advanced_future-career-strategy-02-After
+旧ファイル名: image_100_9379c340-ba3e-43c5-964c-c798b2405dab.png
+新ファイル名: 48_tatsuya_advanced_After.png
+----------------------------------------
+番号: 097
+CSV ID: 49_beginner_book-recommendation-01-Before
+旧ファイル名: image_69_fcff7ad2-b519-4a35-a373-8d840fd3a415.png
+新ファイル名: 49_beginner_book-recommendation-01-Before_Before.png
+----------------------------------------
+番号: 098
+CSV ID: 49_beginner_book-recommendation-02-After
+旧ファイル名: image_70_82e4d808-5c0e-4af0-843c-989f89ad7b13.png
+新ファイル名: 49_beginner_book-recommendation-02-After_After.png
+----------------------------------------
+番号: 099
+CSV ID: 50_tatsuya_intermediate_ai-era-output-thinking-01-Before
+旧ファイル名: image_95_8c57a3bb-3297-40a4-bbad-dbd80780ec6b.png
+新ファイル名: 50_tatsuya_intermediate_Before.png
+----------------------------------------
+番号: 100
+CSV ID: 50_tatsuya_intermediate_ai-era-output-thinking-02-After
+旧ファイル名: image_96_c0d65cd0-f934-44c9-90e7-40b30fdfe203.png
+新ファイル名: 50_tatsuya_intermediate_After.png
+----------------------------------------
