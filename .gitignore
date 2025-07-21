@@ -41,6 +41,16 @@ out
 ._*
 .Spotlight-V100
 .Trashes
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 ehthumbs.db
 Thumbs.db
 
@@ -54,6 +64,9 @@ Thumbs.db
 
 # Temporary files
 tmp/
+*.tmp
+*.temp
+*.cache
 
 # IDE specific
 .idea/
@@ -114,6 +127,7 @@ _trash/
 
 # Backup directory
 backup/
+ボツ/
 
 # Docker ignore files
 .dockerignore
@@ -129,3 +143,8 @@ markitdown/
 **/coverage/
 **/.nyc_output/
 github-youtube-transcript/
+
+# 大きなファイル
+*.psd
+*.ai
+*.sketch
