@@ -34,7 +34,7 @@ export default function Home() {
     <main className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         <header className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">GPT Image 1 大量ジェネレーター</h1>
+          <h1 className="text-2xl font-bold">GPT Image 1 大量ジェネレーター Ver0.2.0</h1>
           <SettingsButton />
         </header>
 

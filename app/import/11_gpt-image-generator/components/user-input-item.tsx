@@ -69,7 +69,28 @@ export function UserInputItem({ input }: UserInputItemProps) {
   }, [input.status])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-[auto_auto_1fr_1fr] gap-4 items-start">
+      {/* 管理ナンバー入力欄 */}
+      <div className="w-24">
+        <Input
+          value={input.managementNo || ''}
+          onChange={(e) => updateUserInput(input.id, { ...input, managementNo: e.target.value })}
+          placeholder="No."
+          className="text-center font-mono"
+        />
+      </div>
+      
+      {/* ファイル名入力欄 */}
+      <div className="w-48">
+        <Input
+          value={input.fileName || ''}
+          onChange={(e) => updateUserInput(input.id, { ...input, fileName: e.target.value })}
+          placeholder="ファイル名"
+          className="font-mono"
+        />
+      </div>
+      
+      {/* プロンプト入力欄 */}
       <div className="relative">
         <Textarea
           ref={textareaRef}
@@ -129,7 +150,13 @@ export function UserInputItem({ input }: UserInputItemProps) {
               size="icon"
               variant="secondary"
               className="absolute top-2 right-2 z-10"
-              onClick={() => downloadImage(input.imageUrl!, generateFilename(`image_${input.id}`))}
+              onClick={() => {
+                // 管理ナンバーとファイル名がある場合はそれを使用
+                const filename = input.managementNo && input.fileName 
+                  ? `${input.managementNo}_${input.fileName}.png`
+                  : generateFilename(`image_${input.id}`)
+                downloadImage(input.imageUrl!, filename)
+              }}
             >
               <Download className="h-4 w-4" />
             </Button>

@@ -8,6 +8,8 @@ export interface UserInputItemType {
   allImageUrls?: string[]
   errorMessage?: string
   progressMessage?: string
+  managementNo?: string  // 管理ナンバー（CSVの第1列）
+  fileName?: string      // ファイル名（CSVの第2列）
 }
 
 export interface SavedPrompt {

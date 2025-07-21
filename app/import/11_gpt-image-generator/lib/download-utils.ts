@@ -49,7 +49,7 @@ export function generateFilename(prefix: string = 'generated'): string {
 
 // 複数画像をZIPファイルとしてダウンロード
 export async function downloadImagesAsZip(
-  images: Array<{id: string, imageUrl: string, prompt: string}>, 
+  images: Array<{id: string, imageUrl: string, prompt: string, managementNo?: string, fileName?: string}>, 
   masterPrompt: string,
   onProgress?: (current: number, total: number) => void
 ): Promise<{ successCount: number, errorCount: number }> {
@@ -104,7 +104,10 @@ export async function downloadImagesAsZip(
           imageData = image.imageUrl.split(',')[1] || image.imageUrl;
         }
         
-        const fileName = `image_${i + 1}_${image.id}.png`;
+        // 管理ナンバーとファイル名がある場合はそれを使用
+        const fileName = image.managementNo && image.fileName 
+          ? `${image.managementNo}_${image.fileName}.png`
+          : `image_${i + 1}_${image.id}.png`;
         imagesFolder.file(fileName, imageData, { base64: true });
         successCount++;
       } catch (error) {
@@ -123,7 +126,11 @@ export async function downloadImagesAsZip(
       errorCount: errors.length,
       images: images.map((img, index) => ({
         id: img.id,
-        fileName: `image_${index + 1}_${img.id}.png`,
+        fileName: img.managementNo && img.fileName 
+          ? `${img.managementNo}_${img.fileName}.png`
+          : `image_${index + 1}_${img.id}.png`,
+        managementNo: img.managementNo || null,
+        originalFileName: img.fileName || null,
         prompt: img.prompt,
       })),
     };

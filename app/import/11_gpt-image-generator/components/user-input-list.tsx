@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { CSVImporter } from "@/components/csv-importer"
+import type { ExtractedData } from "@/lib/csv-utils"
 
 // Custom EventSource types
 interface CustomEventSource extends EventSource {
@@ -191,7 +192,7 @@ export function UserInputList() {
     addMessage(`${batchCount}個のプロンプトを追加しました`)
   }
 
-  const handleCSVImport = (prompts: string[]) => {
+  const handleCSVImport = (data: ExtractedData[]) => {
     // 既存の空のプロンプトをフィルタリング
     const nonEmptyInputs = userInputs.filter(input => input.prompt.trim() !== '')
     
@@ -202,11 +203,11 @@ export function UserInputList() {
       }
     }
     
-    // すべてクリアしてから新しいプロンプトを追加
+    // すべてクリアしてから新しいデータを追加
     const { clearUserInputs } = useImageStore.getState()
     clearUserInputs()
-    bulkAddUserInputs(prompts)
-    addMessage(`📊 CSVから${prompts.length}個のプロンプトをインポートしました`)
+    bulkAddUserInputs(data)
+    addMessage(`📊 CSVから${data.length}個のデータをインポートしました（管理ナンバー・ファイル名付き）`)
     setShowCSVImporter(false)
   }
   
@@ -688,6 +689,8 @@ export function UserInputList() {
       id: input.id,
       imageUrl: input.imageUrl!,
       prompt: input.prompt,
+      managementNo: input.managementNo,
+      fileName: input.fileName,
     }))
 
     if (completedImages.length === 0) {

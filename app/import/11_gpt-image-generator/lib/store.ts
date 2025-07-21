@@ -3,6 +3,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { UserInputItemType, UserInputStatus, SavedPrompt } from "@/lib/types"
+import type { ExtractedData } from "@/lib/csv-utils"
 import { v4 as uuidv4 } from "uuid"
 
 interface ImageStore {
@@ -19,7 +20,7 @@ interface ImageStore {
 
   setMasterPrompt: (prompt: string) => void
   addUserInput: () => void
-  bulkAddUserInputs: (prompts: string[]) => void
+  bulkAddUserInputs: (data: string[] | ExtractedData[]) => void
   clearUserInputs: () => void
   removeUserInput: (id: string) => void
   updateUserInput: (id: string, update: string | Partial<UserInputItemType>) => void
@@ -93,17 +94,35 @@ export const useImageStore = create<ImageStore>()(
           userInputs: [...state.userInputs, { id: uuidv4(), prompt: "", status: "idle" }],
         })),
 
-      bulkAddUserInputs: (prompts) =>
-        set((state) => ({
-          userInputs: [
-            ...state.userInputs,
-            ...prompts.map(prompt => ({
-              id: uuidv4(),
-              prompt,
-              status: "idle" as const
-            }))
-          ],
-        })),
+      bulkAddUserInputs: (data) =>
+        set((state) => {
+          // string[]の場合（後方互換性）
+          if (typeof data[0] === 'string') {
+            return {
+              userInputs: [
+                ...state.userInputs,
+                ...(data as string[]).map(prompt => ({
+                  id: uuidv4(),
+                  prompt,
+                  status: "idle" as const
+                }))
+              ],
+            }
+          }
+          // ExtractedData[]の場合（新形式）
+          return {
+            userInputs: [
+              ...state.userInputs,
+              ...(data as ExtractedData[]).map(item => ({
+                id: uuidv4(),
+                prompt: item.prompt,
+                status: "idle" as const,
+                managementNo: item.managementNo,
+                fileName: item.fileName
+              }))
+            ],
+          }
+        }),
         
       clearUserInputs: () => set({ userInputs: [] }),
       
