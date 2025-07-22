@@ -148,3 +148,15 @@ github-youtube-transcript/
 *.psd
 *.ai
 *.sketch
+
+# Atom-v4 関連の大きなファイル
+app/atom-v4/venv/
+app/atom-v4/data/
+*.transaction.db.*
+*.wal
+*.dat
+
+# その他の大きなバイナリファイル
+*.so
+*.dylib
+*.dll
