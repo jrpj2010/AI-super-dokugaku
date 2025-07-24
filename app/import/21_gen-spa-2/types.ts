@@ -39,7 +39,34 @@ export interface PromptTemplate {
   id: string;
   name: string;
   description: string;
-  systemPromptPath: string; // Path to the Markdown file containing the system prompt
-  isEditable?: boolean; // For future template editing
-  isCustom?: boolean;   // For future custom templates
+  systemPromptPath?: string; // Path to the Markdown file containing the system prompt (for default templates)
+  content?: string;          // Direct content (for custom templates)
+  isEditable?: boolean;      // Whether the template can be edited
+  isCustom?: boolean;        // Whether this is a custom template
+  templateType?: 'gen-spa' | 'marp' | 'generic'; // Template format type
+}
+
+// バリデーション結果の型定義
+export interface ValidationResult {
+  level: 'error' | 'warning' | 'info';
+  errors: string[];
+  warnings: string[];
+  isValid: boolean; // エラーがない場合true
+  canProceed: boolean; // 警告があっても続行可能な場合true
+}
+
+// デバッグログの型定義
+export interface DebugLog {
+  timestamp: string;
+  level: 'info' | 'warning' | 'error' | 'success';
+  message: string;
+  details?: any;
+}
+
+// アプリ設定の型定義
+export interface AppSettings {
+  apiKey?: string;
+  debugMode: boolean;
+  selectedModel: string;
+  customPromptTemplates?: PromptTemplate[]; // カスタムプロンプトテンプレートの配列
 }

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>投資対効果と想定インパクト（ROI）</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .title-accent {
+            width: 80px;
+            height: 6px;
+            background-color: #0050a0;
+            margin-bottom: 20px;
+        }
+        .subtle-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 450px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #0050a0;
+        }
+        .content-bullet {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .bullet-icon {
+            color: #0050a0;
+            margin-right: 16px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .metric-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #0050a0;
+        }
+        .kpi-box {
+            background-color: rgba(0, 80, 160, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .roi-highlight {
+            color: #0050a0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-white relative">
+<!-- Subtle background pattern -->
+<div class="subtle-pattern">
+<svg fill="#003366" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h200v200H0z" fill="none"></path>
+<path d="M54 20h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4z"></path>
+</svg>
+</div>
+<!-- Logo placeholder -->
+<div class="absolute top-8 left-8">
+<div class="w-48 h-16 flex items-center justify-center bg-gray-100 border border-gray-200 text-gray-400">
+                御社ロゴ
+            </div>
+</div>
+<!-- Main content -->
+<div class="flex h-full z-10 relative px-16 pt-24 pb-16">
+<!-- Left column - Main content -->
+<div class="w-3/5 pr-8">
+<div class="title-accent"></div>
+<h1 class="text-3xl font-bold text-gray-800 mb-8">投資対効果と想定インパクト（ROI）</h1>
+<div class="mt-4">
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-coins text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">人件費削減と経営効率向上</span>
+<p class="text-gray-700 mt-1">AI/BPR導入により、定型業務の自動化で年間人件費の<span class="roi-highlight">最大25%削減</span>が可能。3年間で<span class="roi-highlight">1.8億円</span>の削減効果を想定。</p>
+</div>
+</div>
+<div class="content-bullet mt-4">
+<div class="bullet-icon">
+<i class="fas fa-user-tie text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">残存社員バリュー最大化</span>
+<p class="text-gray-700 mt-1">創造的業務に集中することで、一人当たり生産性が<span class="roi-highlight">平均40%向上</span>。高付加価値業務への時間シフトにより<span class="roi-highlight">売上貢献度が向上</span>。</p>
+</div>
+</div>
+<div class="content-bullet mt-4">
+<div class="bullet-icon">
+<i class="fas fa-bolt text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">経営意思決定のスピード・精度向上</span>
+<p class="text-gray-700 mt-1">データドリブン経営の実現により、市場変化への対応力が<span class="roi-highlight">2.5倍</span>に向上。意思決定プロセスが<span class="roi-highlight">平均60%短縮</span>。</p>
+</div>
+</div>
+<div class="border-t border-gray-200 mt-6 pt-4">
+<p class="font-bold text-gray-700">定量的なROI分析</p>
+<div class="flex mt-2">
+<div class="mr-8">
+<p class="text-sm text-gray-600">導入コスト</p>
+<p class="text-xl font-bold text-gray-800">5,000万円</p>
+<p class="text-xs text-gray-500">（初期＋3年運用）</p>
+</div>
+<div class="mr-8">
+<p class="text-sm text-gray-600">3年間総リターン</p>
+<p class="text-xl font-bold text-blue-600">2.5億円</p>
+<p class="text-xs text-gray-500">（コスト削減＋収益向上）</p>
+</div>
+<div>
+<p class="text-sm text-gray-600">ROI</p>
+<p class="text-xl font-bold text-green-600">400%</p>
+<p class="text-xs text-gray-500">（3年間合計）</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column - Visual elements -->
+<div class="w-2/5 pl-4">
+<div class="bg-white rounded-lg p-4 h-96">
+<p class="text-center font-semibold text-gray-700 mb-2">AI/BPR導入の費用対効果推移</p>
+<canvas height="250" id="roiChart"></canvas>
+</div>
+<div class="mt-4">
+<p class="text-center font-semibold text-gray-700 mb-3">主要KPI改善見込み</p>
+<div class="kpi-box">
+<div>
+<span class="font-semibold">処理業務量</span>
+<p class="text-sm text-gray-600">同一人員で対応可能な業務量</p>
+</div>
+<div class="text-right">
+<span class="text-green-600 font-bold">+65%</span>
+</div>
+</div>
+<div class="kpi-box">
+<div>
+<span class="font-semibold">コア業務時間比率</span>
+<p class="text-sm text-gray-600">価値創造業務に費やせる時間割合</p>
+</div>
+<div class="text-right">
+<span class="text-green-600 font-bold">+120%</span>
+</div>
+</div>
+<div class="kpi-box">
+<div>
+<span class="font-semibold">リスク発見時間</span>
+<p class="text-sm text-gray-600">異常値・問題の検知までの時間</p>
+</div>
+<div class="text-right">
+<span class="text-green-600 font-bold">-85%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom accent bar -->
+<div class="bottom-bar"></div>
+<!-- Small page number -->
+<div class="absolute bottom-2 right-4 text-xs text-white z-20">
+            11
+        </div>
+</div>
+<script>
+    window.onload = function() {
+        const ctx = document.getElementById('roiChart').getContext('2d');
+        const roiChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['導入時', '6ヶ月', '1年', '1.5年', '2年', '2.5年', '3年'],
+                datasets: [
+                    {
+                        label: '累積コスト',
+                        data: [30, 35, 40, 43, 46, 48, 50],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: '累積リターン',
+                        data: [0, 15, 45, 90, 150, 200, 250],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + '百万円';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '金額 (百万円)'
+                        }
+                    }
+                }
+            }
+        });
+    };
+</script>
+</body>
+</html>

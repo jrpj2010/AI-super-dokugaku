@@ -4,13 +4,13 @@ import { AVAILABLE_PROMPT_TEMPLATES as templates } from './promptTemplates'; // 
 
 export const APP_TITLE = 'Gen-Spa 2.0';
 
-// 利用可能なモデルの定義
-export const GEMINI_FLASH_MODEL_ID = 'gemini-2.5-flash-preview-05-20';
-export const GEMINI_PRO_MODEL_ID = 'gemini-2.5-pro-preview-06-05';
+// 利用可能なモデルの定義 (GA版 - 2025年1月24日現在最新)
+export const GEMINI_FLASH_MODEL_ID = 'gemini-2.5-flash';
+export const GEMINI_PRO_MODEL_ID = 'gemini-2.5-pro';
 
 export const AVAILABLE_MODELS = [
-  { id: GEMINI_FLASH_MODEL_ID, name: '標準 (2.5 Flash)' },
-  { id: GEMINI_PRO_MODEL_ID, name: '高性能 (2.5 Pro)' },
+  { id: GEMINI_FLASH_MODEL_ID, name: 'デフォルト (2.5 Flash)' },
+  { id: GEMINI_PRO_MODEL_ID, name: '高品質 (2.5 Pro)' },
 ];
 
 export const DEFAULT_MODEL_ID = GEMINI_FLASH_MODEL_ID;

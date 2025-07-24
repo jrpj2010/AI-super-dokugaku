@@ -1,10 +1,15 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { GeminiService } from './services/geminiService';
-import { PresentationData, GeneratedFiles, PromptTemplate } from './types';
+import { PresentationData, GeneratedFiles, PromptTemplate, AppSettings } from './types';
 import { HtmlGenerator } from './utils/htmlGenerators';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { GeneratedFilesPreview } from './components/GeneratedFilesPreview';
+import { DebugConsole } from './components/DebugConsole';
+import { SettingsModal } from './components/SettingsModal';
+import { PromptTemplateModal } from './components/PromptTemplateModal';
+import { useDebugLogger } from './hooks/useDebugLogger';
+import { PromptTemplateService } from './services/promptTemplateService';
 import {
   AVAILABLE_MODELS,
   DEFAULT_MODEL_ID,
@@ -17,7 +22,7 @@ import {
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-const APP_TITLE_JP = "Gen-Spa 2.0";
+const APP_TITLE_JP = "Katsu-Spa 3.0";
 
 const App: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
@@ -29,17 +34,108 @@ const App: React.FC = () => {
   const [selectedPromptTemplateId, setSelectedPromptTemplateId] = useState<string>(DEFAULT_PROMPT_TEMPLATE_ID);
   const [desiredSlideCount, setDesiredSlideCount] = useState<number>(DEFAULT_SLIDE_COUNT);
   const [showPromptModal, setShowPromptModal] = useState<boolean>(false);
+  const [showPromptTemplateModal, setShowPromptTemplateModal] = useState<boolean>(false);
+  const [availableTemplates, setAvailableTemplates] = useState<PromptTemplate[]>([]);
 
   const [fetchedSystemPromptContent, setFetchedSystemPromptContent] = useState<string | null>(null);
   const [isFetchingPrompt, setIsFetchingPrompt] = useState<boolean>(false);
   const [promptFetchError, setPromptFetchError] = useState<string | null>(null);
+  
+  // 設定関連の状態
+  const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
+  const [appSettings, setAppSettings] = useState<AppSettings>(() => {
+    const savedSettings = localStorage.getItem('genSpaSettings');
+    if (savedSettings) {
+      return JSON.parse(savedSettings);
+    }
+    return {
+      debugMode: true, // デフォルトでデバッグモードON
+      selectedModel: DEFAULT_MODEL_ID,
+      apiKey: undefined
+    };
+  });
 
-  const geminiService = useMemo(() => new GeminiService(), []);
+  // デバッグログ
+  const { logs, logInfo, logWarning, logError, logSuccess, clearLogs } = useDebugLogger();
+
+  const geminiService = useMemo(() => {
+    const service = new GeminiService();
+    service.setDebugCallback((level, message, details) => {
+      switch (level) {
+        case 'info':
+          logInfo(message, details);
+          break;
+        case 'warning':
+          logWarning(message, details);
+          break;
+        case 'error':
+          logError(message, details);
+          break;
+        case 'success':
+          logSuccess(message, details);
+          break;
+      }
+    });
+    return service;
+  }, [logInfo, logWarning, logError, logSuccess]);
+  
   const htmlGenerator = useMemo(() => new HtmlGenerator(), []);
 
+  // 設定が変更されたときの処理
+  useEffect(() => {
+    localStorage.setItem('genSpaSettings', JSON.stringify(appSettings));
+    geminiService.setUserApiKey(appSettings.apiKey);
+    setSelectedModel(appSettings.selectedModel);
+  }, [appSettings, geminiService]);
+
+  // プロンプトテンプレートの読み込み
+  useEffect(() => {
+    // デバッグコールバックを設定
+    PromptTemplateService.setDebugCallback((level, message, details) => {
+      switch (level) {
+        case 'info':
+          logInfo(message, details);
+          break;
+        case 'warning':
+          logWarning(message, details);
+          break;
+        case 'error':
+          logError(message, details);
+          break;
+        case 'success':
+          logSuccess(message, details);
+          break;
+      }
+    });
+    
+    // 既存テンプレートの移行チェック
+    logInfo('カスタムテンプレートの移行チェックを開始します');
+    const hasMigrated = PromptTemplateService.migrateOldTemplates();
+    
+    if (hasMigrated) {
+      logSuccess('カスタムテンプレートの移行が完了しました。3秒後に自動的にページを再読み込みします...');
+      // 3秒後に自動リロード
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
+    
+    loadTemplates();
+  }, [logInfo, logWarning, logError, logSuccess]);
+
+  const loadTemplates = () => {
+    const templates = PromptTemplateService.getAllTemplates();
+    setAvailableTemplates(templates);
+    
+    // 選択中のテンプレートがまだ存在するか確認
+    if (!templates.find(t => t.id === selectedPromptTemplateId) && templates.length > 0) {
+      setSelectedPromptTemplateId(templates[0].id);
+    }
+  };
+
   const currentSelectedTemplate = useMemo(() => {
-    return AVAILABLE_PROMPT_TEMPLATES.find(t => t.id === selectedPromptTemplateId);
-  }, [selectedPromptTemplateId]);
+    return availableTemplates.find(t => t.id === selectedPromptTemplateId);
+  }, [selectedPromptTemplateId, availableTemplates]);
 
   useEffect(() => {
     const fetchPromptContent = async () => {
@@ -52,25 +148,8 @@ const App: React.FC = () => {
       setPromptFetchError(null);
       setFetchedSystemPromptContent(null); // Reset content while fetching new one
       try {
-        // More robust path construction
-        let path = currentSelectedTemplate.systemPromptPath;
-        // If systemPromptPath is already absolute (starts with /), use it.
-        // Otherwise, prepend a / or process.env.PUBLIC_URL if available.
-        if (!path.startsWith('/')) {
-            path = `/${path}`;
-        }
-        // For environments where PUBLIC_URL is set (e.g., Create React App deployment)
-        // Ensure not to double slash if PUBLIC_URL is '/' or empty.
-        const publicUrl = process.env.PUBLIC_URL || '';
-        path = `${publicUrl}${path}`.replace(/\/\//g, '/'); // Avoid double slashes
-
-
-        const response = await fetch(path);
-        if (!response.ok) {
-          throw new Error(`プロンプトファイルの読み込みに失敗しました: ${response.status} ${response.statusText} (Path: ${path})`);
-        }
-        const text = await response.text();
-        setFetchedSystemPromptContent(text);
+        const content = await PromptTemplateService.getTemplateContent(currentSelectedTemplate);
+        setFetchedSystemPromptContent(content);
       } catch (e: any) {
         console.error('プロンプトファイル取得エラー:', e);
         setPromptFetchError(`${e.message}`);
@@ -87,6 +166,7 @@ const App: React.FC = () => {
   const handleGeneratePresentation = useCallback(async () => {
     if (!userInput.trim()) {
       setError('プレゼンテーション用の入力テキストを入力してください。');
+      logError('入力エラー', 'プレゼンテーション用の入力テキストが空です');
       return;
     }
     if (!geminiService.isApiKeySet()) {
@@ -105,13 +185,21 @@ const App: React.FC = () => {
     setIsLoading(true);
     setError(null);
     setGeneratedFiles(null);
+    clearLogs(); // 新しい生成開始時にログをクリア
 
     try {
+      logInfo('生成パラメータ設定', {
+        モデル: selectedModel,
+        スタイル: currentSelectedTemplate?.name,
+        スライド数: desiredSlideCount
+      });
+
       const presentationData: PresentationData = await geminiService.generatePresentationContent(
         userInput,
         selectedModel,
         fetchedSystemPromptContent,
-        desiredSlideCount
+        desiredSlideCount,
+        currentSelectedTemplate?.templateType
       );
       setPresentationTitle(presentationData.presentationTitle);
 
@@ -130,9 +218,16 @@ const App: React.FC = () => {
         dashboardIndex: { name: 'dashboard_index.html', content: dashboardIndexHtml },
       });
 
+      logSuccess('プレゼンテーション生成完了！', {
+        タイトル: presentationData.presentationTitle,
+        ファイル数: 3 + individualSlidesHtml.length
+      });
+
     } catch (e: any) {
       console.error('プレゼンテーション生成エラー:', e);
-      setError(`プレゼンテーションの生成に失敗しました: ${e.message}`);
+      const errorMessage = `プレゼンテーションの生成に失敗しました: ${e.message}`;
+      setError(errorMessage);
+      logError('プレゼンテーション生成エラー', errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -154,12 +249,22 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 p-4 sm:p-8 flex flex-col items-center">
-      <header className="w-full max-w-4xl mb-8 text-center">
+      <header className="w-full max-w-4xl mb-8 text-center relative">
+        <button
+          onClick={() => setShowSettingsModal(true)}
+          className="absolute right-0 top-0 p-2 text-gray-600 hover:text-gray-800 transition-colors"
+          title="設定"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
         <h1 className="text-4xl sm:text-5xl font-bold text-rose-700">{APP_TITLE_JP}</h1>
         <p className="mt-2 text-lg text-gray-600">Powered by Gemini ({currentModelDisplayName})</p>
-         {!geminiService.isApiKeySet() && (
+         {!geminiService.isApiKeySet() && !appSettings.apiKey && (
           <div className="mt-4 p-3 bg-yellow-100 border border-yellow-500 rounded-md text-yellow-700">
-            <strong>警告:</strong> Gemini APIキーが設定されていません。このアプリケーションの動作にはAPIキーが必要です。<code>API_KEY</code> 環境変数を設定してください。
+            <strong>警告:</strong> Gemini APIキーが設定されていません。設定ボタン（⚙️）からAPIキーを設定するか、<code>API_KEY</code> 環境変数を設定してください。
           </div>
         )}
       </header>
@@ -170,16 +275,25 @@ const App: React.FC = () => {
             <label htmlFor="promptTemplateSelect" className="block text-md font-medium text-gray-700">
               プレゼンテーションスタイルを選択:
             </label>
-            {currentSelectedTemplate && (
+            <div className="flex items-center space-x-2">
               <button
-                onClick={() => setShowPromptModal(true)}
-                className="text-xs text-rose-600 hover:text-rose-800 underline disabled:opacity-50"
-                disabled={isLoading || isFetchingPrompt}
-                title="選択中のスタイルの詳細な指示内容を表示します"
+                onClick={() => setShowPromptTemplateModal(true)}
+                className="text-xs text-rose-600 hover:text-rose-800 underline"
+                title="プロンプトテンプレートを管理"
               >
-                {isFetchingPrompt ? '読込中...' : (promptFetchError ? '内容表示(エラー)' : 'スタイル内容を表示')}
+                テンプレート管理
               </button>
-            )}
+              {currentSelectedTemplate && (
+                <button
+                  onClick={() => setShowPromptModal(true)}
+                  className="text-xs text-rose-600 hover:text-rose-800 underline disabled:opacity-50"
+                  disabled={isLoading || isFetchingPrompt}
+                  title="選択中のスタイルの詳細な指示内容を表示します"
+                >
+                  {isFetchingPrompt ? '読込中...' : (promptFetchError ? '内容表示(エラー)' : 'スタイル内容を表示')}
+                </button>
+              )}
+            </div>
           </div>
           <select
             id="promptTemplateSelect"
@@ -188,9 +302,9 @@ const App: React.FC = () => {
             className="w-full p-3 bg-gray-50 text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-600 focus:border-rose-600 transition-shadow duration-150 mb-1"
             disabled={isLoading || isFetchingPrompt}
           >
-            {AVAILABLE_PROMPT_TEMPLATES.map(template => (
+            {availableTemplates.map(template => (
               <option key={template.id} value={template.id}>
-                {template.name}
+                {template.name} {template.isCustom && '(カスタム)'}
               </option>
             ))}
           </select>
@@ -313,6 +427,27 @@ const App: React.FC = () => {
         <p>&copy; {new Date().getFullYear()} {APP_TITLE_JP}. All rights reserved (conceptually).</p>
         <p>入力内容に関する必要な権利を保有し、Gemini APIの利用規約を遵守していることを確認してください。</p>
       </footer>
+
+      {/* 設定モーダル */}
+      <SettingsModal
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+        settings={appSettings}
+        onSave={setAppSettings}
+      />
+
+      {/* デバッグコンソール */}
+      <DebugConsole
+        logs={logs}
+        isVisible={appSettings.debugMode}
+      />
+
+      {/* プロンプトテンプレート管理モーダル */}
+      <PromptTemplateModal
+        isOpen={showPromptTemplateModal}
+        onClose={() => setShowPromptTemplateModal(false)}
+        onTemplateUpdate={loadTemplates}
+      />
     </div>
   );
 };

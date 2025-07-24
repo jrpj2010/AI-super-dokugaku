@@ -14,6 +14,10 @@
 - Docker環境をベースとしたコンテナ駆動開発
 - 非エンジニアでも簡単にCloud Runへデプロイ可能な仕組み
 
+**必要な共有情報**：
+- デプロイ先は Google CloudRun
+- プロジェクトID "gemini-20241115"
+
 ---
 
 ## 📁 プロジェクト構造とフォルダ管理
@@ -275,7 +279,7 @@ apps/[アプリ名]/              # 各アプリケーションルート
 - **スタイル**: Prettier + ESLint（自動整形）
 - **UI**: Tailwind CSS + shadcn/ui（必須）
 - **アイコン**: lucide-react（統一）
-- **状態管理**: 
+- **状態管理**:
   - URL状態： nuqs
   - ローカル状態： React標準フック（useState, useReducer）
   - グローバル状態： 原則使用しない（必要時はContext）
@@ -337,19 +341,19 @@ const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export function UserList() {
   const { data: users, mutate } = useSWR('/api/users', fetcher)
-  
+
   const handleCreate = async (formData: FormData) => {
     // 楽観的更新
     const newUser = { name: formData.get('name') as string }
     mutate([...(users || []), newUser], false)
-    
+
     // Server Action実行
     await createUser(formData)
-    
+
     // 再検証
     mutate()
   }
-  
+
   return (
     <div>
       <form action={handleCreate} className="mb-4 flex gap-2">
@@ -360,8 +364,8 @@ export function UserList() {
         {users?.map((user: any) => (
           <li key={user.id} className="flex justify-between items-center p-2 border rounded">
             <span>{user.name}</span>
-            <Button 
-              variant="destructive" 
+            <Button
+              variant="destructive"
               size="sm"
               onClick={() => handleDelete(user.id)}
             >
@@ -384,32 +388,32 @@ import { createClient } from '@/lib/supabase/server'
 export async function createUser(formData: FormData) {
   const supabase = createClient()
   const name = formData.get('name') as string
-  
+
   // バリデーション
   if (!name || name.length < 2) {
     throw new Error('名前は2文字以上必要です')
   }
-  
+
   // DB操作（RLSで権限制御）
   const { error } = await supabase
     .from('users')
     .insert({ name })
-  
+
   if (error) throw error
-  
+
   revalidatePath('/users')
 }
 
 export async function deleteUser(id: string) {
   const supabase = createClient()
-  
+
   const { error } = await supabase
     .from('users')
     .delete()
     .eq('id', id)
-  
+
   if (error) throw error
-  
+
   revalidatePath('/users')
 }
 ```
@@ -428,14 +432,14 @@ graph LR
         C --> D[詳細設計]
         D --> E[実装]
     end
-    
+
     subgraph "右側（テスト）"
         E --> F[単体テスト]
         F --> G[結合テスト]
         G --> H[総合テスト]
         H --> I[受入テスト]
     end
-    
+
     A -.->|対応| I
     B -.->|対応| H
     C -.->|対応| G
@@ -532,15 +536,15 @@ claude "ImageUploadコンポーネントをリファクタリングし、
    # Step 1: 現在の状態を保存
    git add .
    git commit -m "WIP: エラー発生前の状態を保存"
-   
+
    # Step 2: Docker環境をリセット
    docker compose down
    docker system prune -f
-   
+
    # Step 3: 依存関係をクリーンインストール
    rm -rf node_modules pnpm-lock.yaml
    pnpm install
-   
+
    # Step 4: 再起動
    docker compose up -d --build
    ```
@@ -596,10 +600,10 @@ claude "テストが失敗しています。
    ```bash
    # 現在の変更を一時的に退避
    git stash
-   
+
    # main/masterブランチに戻る
    git checkout main
-   
+
    # クリーンな状態から再開
    docker compose down -v
    docker compose up -d --build
@@ -609,7 +613,7 @@ claude "テストが失敗しています。
    ```bash
    # ToDoを細分化
    claude "この機能を最小限の10ステップに分割してください"
-   
+
    # 1ステップずつ実行・確認
    claude "ステップ1だけを実装してください"
    ```

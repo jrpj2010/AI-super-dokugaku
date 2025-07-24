@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>導入ロードマップとプロセス案</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .title-accent {
+            width: 80px;
+            height: 6px;
+            background-color: #0050a0;
+            margin-bottom: 20px;
+        }
+        .subtle-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 450px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #0050a0;
+        }
+        .content-bullet {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .bullet-icon {
+            color: #0050a0;
+            margin-right: 16px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .highlight-box {
+            background-color: rgba(0, 80, 160, 0.05);
+            border-left: 4px solid #0050a0;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .timeline {
+            position: relative;
+            margin-top: 30px;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #0050a0;
+            z-index: 1;
+        }
+        .phase-box {
+            position: relative;
+            background-color: white;
+            border: 2px solid #0050a0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            z-index: 2;
+        }
+        .phase-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #0050a0;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .milestone-tag {
+            display: inline-block;
+            background-color: rgba(0, 80, 160, 0.1);
+            border: 1px solid #0050a0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-white relative">
+<!-- Subtle background pattern -->
+<div class="subtle-pattern">
+<svg fill="#003366" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h200v200H0z" fill="none"></path>
+<path d="M54 20h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4z"></path>
+</svg>
+</div>
+<!-- Logo placeholder -->
+<div class="absolute top-8 left-8">
+<div class="w-48 h-16 flex items-center justify-center bg-gray-100 border border-gray-200 text-gray-400">
+                御社ロゴ
+            </div>
+</div>
+<!-- Main content -->
+<div class="flex h-full z-10 relative px-16 pt-24 pb-16">
+<!-- Left column - Main content -->
+<div class="w-1/2 pr-8">
+<div class="title-accent"></div>
+<h1 class="text-3xl font-bold text-gray-800 mb-8">導入ロードマップとプロセス案</h1>
+<div class="mt-6">
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-rocket text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">段階的かつ確実な導入を推進</span>
+<p class="text-gray-700 mt-1">「小さく始めて、成功体験を作り、全社に展開する」アプローチで確実な成果を創出します。</p>
+</div>
+</div>
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-check-circle text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">各フェーズで明確な成果指標</span>
+<p class="text-gray-700 mt-1">コスト削減、生産性向上、意思決定スピード等、フェーズごとに具体的KPIを設定し、経営貢献を可視化します。</p>
+</div>
+</div>
+</div>
+<div class="highlight-box mt-8">
+<div class="flex items-center">
+<i class="fas fa-lightbulb text-2xl text-blue-800 mr-3"></i>
+<p class="text-xl font-bold text-blue-800">3つのキーファクター</p>
+</div>
+<div class="mt-3">
+<p class="flex items-center mb-2"><i class="fas fa-angle-right text-blue-700 mr-2"></i> <strong>外部専門家の知見</strong>：客観的視点で"ぬるさ"を排除</p>
+<p class="flex items-center mb-2"><i class="fas fa-angle-right text-blue-700 mr-2"></i> <strong>トップのコミットメント</strong>：経営層の関与と決断力</p>
+<p class="flex items-center"><i class="fas fa-angle-right text-blue-700 mr-2"></i> <strong>早期の成功事例創出</strong>：組織全体の変革マインドを醸成</p>
+</div>
+</div>
+</div>
+<!-- Right column - Visual elements -->
+<div class="w-1/2 pl-4">
+<div class="mb-2 p-4 bg-gray-50 rounded-lg">
+<p class="text-lg font-semibold text-gray-700 mb-3">導入タイムライン</p>
+<div class="timeline">
+<div class="timeline-line"></div>
+<div class="flex justify-between">
+<!-- Phase 1 -->
+<div class="w-1/3 px-2 relative">
+<div class="phase-box">
+<div class="phase-icon">
+<i class="fas fa-flask text-2xl"></i>
+</div>
+<div class="pt-8">
+<h3 class="text-center font-bold text-blue-800">短期：PoC</h3>
+<p class="text-center text-sm text-gray-600">3ヶ月</p>
+<hr class="my-2 border-gray-200"/>
+<div class="text-sm">
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>現状分析</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>要件定義</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>優先領域特定</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>小規模実証</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 2 -->
+<div class="w-1/3 px-2 relative">
+<div class="phase-box">
+<div class="phase-icon">
+<i class="fas fa-expand-arrows-alt text-2xl"></i>
+</div>
+<div class="pt-8">
+<h3 class="text-center font-bold text-blue-800">中期：全社展開</h3>
+<p class="text-center text-sm text-gray-600">6〜12ヶ月</p>
+<hr class="my-2 border-gray-200"/>
+<div class="text-sm">
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>インフラ整備</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>部門横断展開</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>内製化体制</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>成果測定</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="w-1/3 px-2 relative">
+<div class="phase-box">
+<div class="phase-icon">
+<i class="fas fa-robot text-2xl"></i>
+</div>
+<div class="pt-8">
+<h3 class="text-center font-bold text-blue-800">長期：AI統合</h3>
+<p class="text-center text-sm text-gray-600">1〜3年</p>
+<hr class="my-2 border-gray-200"/>
+<div class="text-sm">
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>全社AI基盤</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>自律型業務</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>組織再編</div>
+<div class="milestone-tag"><i class="fas fa-flag-checkered mr-1"></i>新規事業創出</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 p-4 border border-blue-100 bg-blue-50 rounded-lg">
+<p class="text-center font-bold text-blue-800 mb-2">次回ご提案：初期アセスメント＆ロードマップ詳細設計</p>
+<p class="text-sm text-center text-gray-700">御社の実情に合わせたカスタマイズされた導入計画を策定します</p>
+</div>
+</div>
+</div>
+<!-- Bottom accent bar -->
+<div class="bottom-bar"></div>
+<!-- Small page number -->
+<div class="absolute bottom-2 right-4 text-xs text-white z-20">
+            10
+        </div>
+</div>
+</body>
+</html>

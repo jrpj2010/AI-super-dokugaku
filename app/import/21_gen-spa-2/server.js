@@ -28,7 +28,13 @@ app.use(express.urlencoded({
 // API プロキシエンドポイント
 app.use('/api-proxy', async (req, res) => {
   try {
-    const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
+    // クライアントから送信されたAPIキーを優先、なければ環境変数を使用
+    const apiKey = req.body?.apiKey || process.env.GEMINI_API_KEY || process.env.API_KEY;
+    
+    // リクエストボディからapiKeyを除去（Gemini APIに送信しないため）
+    if (req.body && req.body.apiKey) {
+      delete req.body.apiKey;
+    }
     
     if (!apiKey) {
       return res.status(500).json({ 

@@ -3,9 +3,9 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and install all dependencies (including dev)
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Copy source code
 COPY . .
@@ -27,12 +27,8 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server.js ./
 COPY --from=builder /app/public ./public
 
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S node -u 1001
-
-# Change ownership to node user
-RUN chown -R node:nodejs /app
+# Use existing node user
+RUN chown -R node:node /app
 USER node
 
 # Set environment variables for Cloud Run optimization

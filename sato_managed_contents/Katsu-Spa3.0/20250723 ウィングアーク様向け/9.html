@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>重点テーマ4：品質管理とサプライチェーン最適化</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .title-accent {
+            width: 80px;
+            height: 6px;
+            background-color: #0050a0;
+            margin-bottom: 20px;
+        }
+        .subtle-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 450px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #0050a0;
+        }
+        .content-bullet {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .bullet-icon {
+            color: #0050a0;
+            margin-right: 16px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .highlight-box {
+            background-color: rgba(0, 80, 160, 0.05);
+            border-left: 4px solid #0050a0;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .process-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .process-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .cost-benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .cost-benefit-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .integration-diagram {
+            position: relative;
+            height: 220px;
+            margin-top: 20px;
+        }
+        .integration-box {
+            position: absolute;
+            width: 110px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .integration-arrow {
+            position: absolute;
+            color: #0050a0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-white relative">
+<!-- Subtle background pattern -->
+<div class="subtle-pattern">
+<svg fill="#003366" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h200v200H0z" fill="none"></path>
+<path d="M54 20h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4z"></path>
+</svg>
+</div>
+<!-- Logo placeholder -->
+<div class="absolute top-8 left-8">
+<div class="w-48 h-16 flex items-center justify-center bg-gray-100 border border-gray-200 text-gray-400">
+                御社ロゴ
+            </div>
+</div>
+<!-- Main content -->
+<div class="flex h-full z-10 relative px-16 pt-24 pb-16">
+<!-- Left column - Main content -->
+<div class="w-2/3 pr-8">
+<div class="title-accent"></div>
+<h1 class="text-3xl font-bold text-gray-800 mb-8">重点テーマ4：品質管理とサプライチェーン最適化</h1>
+<div class="mt-6">
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-camera text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">AI画像認識による検品工程の自動化</span>
+<p class="text-gray-700 mt-1">熟練検査員に依存していた目視検査をAI化。24時間365日、一定基準での高精度な検品が可能に。</p>
+</div>
+</div>
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-chart-line text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">需要予測の高度化でコスト削減と機会損失防止</span>
+<p class="text-gray-700 mt-1">天候、イベント、SNS分析など複合的要因を考慮した高精度予測により、在庫最適化を実現。</p>
+</div>
+</div>
+<div class="highlight-box mt-8">
+<div class="flex items-center">
+<i class="fas fa-lightbulb text-2xl text-blue-800 mr-3"></i>
+<p class="text-xl font-bold text-blue-800">現場定着を重視した設計で成功率を高める</p>
+</div>
+<p class="mt-2 text-gray-700">シンプルなUI/UXと現場の作業動線に沿った設計により、定着率を高め、持続的な品質・効率改善を実現します。</p>
+</div>
+</div>
+</div>
+<!-- Right column - Visual elements -->
+<div class="w-1/3 pl-4">
+<!-- Image recognition visualization -->
+<div class="mb-8 p-4 border border-gray-200 rounded-lg">
+<p class="text-center font-semibold mb-3">AI画像検査システムの概要</p>
+<div class="flex justify-center items-center">
+<div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="fas fa-box-open text-2xl text-blue-600"></i>
+</div>
+<div class="mx-2">
+<i class="fas fa-arrow-right text-blue-800"></i>
+</div>
+<div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="fas fa-camera text-2xl text-blue-600"></i>
+</div>
+<div class="mx-2">
+<i class="fas fa-arrow-right text-blue-800"></i>
+</div>
+<div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="fas fa-microchip text-2xl text-blue-600"></i>
+</div>
+</div>
+<div class="flex justify-between text-xs text-center mt-2">
+<div class="w-16">製品</div>
+<div class="w-16">画像撮影</div>
+<div class="w-16">AI分析</div>
+</div>
+<div class="process-arrow">
+<i class="fas fa-arrow-down text-blue-800"></i>
+</div>
+<div class="flex justify-center">
+<div class="process-box w-full text-center">
+<div class="flex justify-center space-x-6">
+<div>
+<i class="fas fa-check-circle text-green-500 text-2xl"></i>
+<div class="text-sm">合格</div>
+</div>
+<div>
+<i class="fas fa-times-circle text-red-500 text-2xl"></i>
+<div class="text-sm">不良検出</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cost benefit visualization -->
+<div class="p-4 border border-gray-200 rounded-lg">
+<p class="text-center font-semibold mb-3">期待される効果</p>
+<div class="cost-benefit-item">
+<div class="cost-benefit-icon bg-green-100">
+<i class="fas fa-minus text-green-600"></i>
+</div>
+<div>
+<p class="font-medium">検品コスト <span class="text-green-600 font-bold">40%削減</span></p>
+<p class="text-xs text-gray-600">人件費・時間の大幅削減</p>
+</div>
+</div>
+<div class="cost-benefit-item">
+<div class="cost-benefit-icon bg-green-100">
+<i class="fas fa-plus text-green-600"></i>
+</div>
+<div>
+<p class="font-medium">品質精度 <span class="text-green-600 font-bold">95%以上</span></p>
+<p class="text-xs text-gray-600">人為的ミスの排除</p>
+</div>
+</div>
+<div class="cost-benefit-item">
+<div class="cost-benefit-icon bg-green-100">
+<i class="fas fa-minus text-green-600"></i>
+</div>
+<div>
+<p class="font-medium">在庫水準 <span class="text-green-600 font-bold">20%低減</span></p>
+<p class="text-xs text-gray-600">過剰在庫・欠品の同時削減</p>
+</div>
+</div>
+<!-- Integration diagram -->
+<div class="integration-diagram mt-2">
+<p class="text-center font-semibold mb-2">AI×RPAによる自動化</p>
+<div class="integration-box bg-blue-100 text-blue-800" style="top: 0; left: 0;">AI画像解析</div>
+<div class="integration-box bg-purple-100 text-purple-800" style="top: 0; right: 0;">需要予測AI</div>
+<div class="integration-box bg-gray-100 text-gray-800" style="top: 80px; left: 90px;">RPA連携</div>
+<div class="integration-box bg-green-100 text-green-800" style="top: 160px; left: 0;">生産管理</div>
+<div class="integration-box bg-green-100 text-green-800" style="top: 160px; right: 0;">在庫最適化</div>
+<!-- Arrows -->
+<i class="fas fa-arrow-down integration-arrow" style="top: 65px; left: 45px;"></i>
+<i class="fas fa-arrow-down integration-arrow" style="top: 65px; right: 45px;"></i>
+<i class="fas fa-arrow-down integration-arrow" style="top: 145px; left: 45px;"></i>
+<i class="fas fa-arrow-down integration-arrow" style="top: 145px; right: 45px;"></i>
+<i class="fas fa-arrows-alt-h integration-arrow" style="top: 90px; left: 80px;"></i>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom accent bar -->
+<div class="bottom-bar"></div>
+<!-- Small page number -->
+<div class="absolute bottom-2 right-4 text-xs text-white z-20">
+            9
+        </div>
+</div>
+</body>
+</html>

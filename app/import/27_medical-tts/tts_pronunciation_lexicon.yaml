@@ -1,0 +1,40 @@
+medical_terms:
+  - term: "右葉"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="ujoː">右葉</phoneme>'
+      description: "右葉を「うよう」と正確に読ませる"
+  
+  - term: "左葉"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="sajoː">左葉</phoneme>'
+      description: "左葉を「さよう」と正確に読ませる"
+  
+  - term: "肺葉"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="haijoː">肺葉</phoneme>'
+      description: "肺葉を「はいよう」と正確に読ませる"
+  
+  - term: "気管支"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="kikanʃi">気管支</phoneme>'
+      description: "気管支を正確に読ませる"
+  
+  - term: "肺炎"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="haien">肺炎</phoneme>'
+      description: "肺炎を正確に読ませる"
+  
+  - term: "胸部"
+    solution:
+      ssml_precise_ipa: '<phoneme alphabet="ipa" ph="kjoːbu">胸部</phoneme>'
+      description: "胸部を正確に読ませる"
+  
+  - term: "CT"
+    solution:
+      ssml_precise_ipa: '<say-as interpret-as="characters">CT</say-as>'
+      description: "CTをシーティーと読ませる"
+  
+  - term: "MRI"
+    solution:
+      ssml_precise_ipa: '<say-as interpret-as="characters">MRI</say-as>'
+      description: "MRIをエムアールアイと読ませる"

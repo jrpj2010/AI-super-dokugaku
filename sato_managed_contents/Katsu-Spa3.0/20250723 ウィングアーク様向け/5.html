@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>改善テーマ優先度マッピング</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .title-accent {
+            width: 80px;
+            height: 6px;
+            background-color: #0050a0;
+            margin-bottom: 20px;
+        }
+        .subtle-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 450px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #0050a0;
+        }
+        .content-bullet {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .bullet-icon {
+            color: #0050a0;
+            margin-right: 16px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 50px 1fr 1fr;
+            grid-template-rows: auto 1fr 1fr;
+            grid-gap: 2px;
+            width: 100%;
+            height: 360px;
+            margin: 20px 0;
+        }
+        .matrix-cell {
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: relative;
+        }
+        .matrix-header {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            text-align: center;
+        }
+        .matrix-axis {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-align: center;
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+        .priority-high {
+            background-color: rgba(0, 128, 0, 0.1);
+            border: 2px solid green;
+        }
+        .priority-item {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #0050a0;
+            font-weight: bold;
+            font-size: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            line-height: 1.2;
+            color: #0050a0;
+        }
+        .theme-card {
+            background-color: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #0050a0;
+            display: flex;
+            align-items: center;
+        }
+        .theme-icon {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(0, 80, 160, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-white relative">
+<!-- Subtle background pattern -->
+<div class="subtle-pattern">
+<svg fill="#003366" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h200v200H0z" fill="none"></path>
+<path d="M54 20h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4z"></path>
+</svg>
+</div>
+<!-- Logo placeholder -->
+<div class="absolute top-8 left-8">
+<div class="w-48 h-16 flex items-center justify-center bg-gray-100 border border-gray-200 text-gray-400">
+                御社ロゴ
+            </div>
+</div>
+<!-- Main content -->
+<div class="flex h-full z-10 relative px-16 pt-24 pb-16">
+<!-- Left column - Main content -->
+<div class="w-3/5 pr-8">
+<div class="title-accent"></div>
+<h1 class="text-3xl font-bold text-gray-800 mb-6">改善テーマ優先度マッピング</h1>
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-filter text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-lg">30項目の改善テーマから厳選した7つの重点領域</span>
+<p class="text-gray-700 mt-1">経営インパクトと実現性の両面から評価し、最も効果的な領域に集中投資します。</p>
+</div>
+</div>
+<!-- Matrix visualization -->
+<div class="matrix-grid mt-6">
+<!-- Headers -->
+<div class="matrix-cell"></div>
+<div class="matrix-cell matrix-header">実現性：低</div>
+<div class="matrix-cell matrix-header">実現性：高</div>
+<!-- Row 1 -->
+<div class="matrix-cell matrix-axis">経営インパクト：高</div>
+<div class="matrix-cell relative">
+<!-- Items in this quadrant -->
+<div class="priority-item" style="top: 30px; left: 20px;">No.8<br/>新規事業創出</div>
+<div class="priority-item" style="top: 80px; left: 90px;">No.26<br/>内部不正<br/>検知</div>
+</div>
+<div class="matrix-cell priority-high relative">
+<!-- Priority items -->
+<div class="priority-item" style="top: 20px; left: 30px;">No.2<br/>データ<br/>活用</div>
+<div class="priority-item" style="top: 20px; left: 150px;">No.1<br/>定型業務<br/>効率化</div>
+<div class="priority-item" style="top: 90px; left: 90px;">No.3<br/>顧客体験<br/>向上</div>
+<div class="priority-item" style="bottom: 20px; left: 40px;">No.5<br/>品質<br/>管理</div>
+<div class="priority-item" style="bottom: 30px; left: 150px;">No.4<br/>ナレッジ<br/>共有</div>
+<div class="priority-item" style="bottom: 80px; right: 20px;">No.10<br/>人材<br/>育成</div>
+<div class="priority-item" style="top: 80px; right: 20px;">No.30<br/>ESG<br/>報告</div>
+</div>
+<!-- Row 2 -->
+<div class="matrix-cell matrix-axis">経営インパクト：低</div>
+<div class="matrix-cell relative">
+<!-- Items in this quadrant -->
+<div class="priority-item" style="top: 50%; left: 50%;">その他<br/>項目</div>
+</div>
+<div class="matrix-cell relative">
+<!-- Items in this quadrant -->
+<div class="priority-item" style="top: 70px; left: 70px;">No.12<br/>社内<br/>問合せ</div>
+</div>
+</div>
+<div class="bg-blue-50 p-3 rounded-lg border border-blue-200 mt-4">
+<p class="font-bold text-blue-800"><i class="fas fa-lightbulb mr-2"></i>優先領域の選定基準</p>
+<p class="text-sm text-gray-700">「実現性が高く、経営インパクトも大きい」領域に集中し、短期間で成果を出すことで、全社変革の推進力を生み出します。</p>
+</div>
+</div>
+<!-- Right column - Visual elements -->
+<div class="w-2/5 pl-8 pt-2">
+<div class="p-4 bg-gray-50 rounded-lg">
+<p class="text-lg font-semibold text-blue-800 mb-3 border-b border-gray-300 pb-2">重点投資テーマ</p>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-chart-bar text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.2：データドリブン経営</p>
+<p class="text-sm text-gray-600">意思決定の高度化とKPI可視化</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-tasks text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.1：定型業務の効率化</p>
+<p class="text-sm text-gray-600">議事録作成・レポート自動化</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-users text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.3：顧客体験のパーソナライズ</p>
+<p class="text-sm text-gray-600">営業提案・離反兆候分析</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-book text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.4：ナレッジ共有と属人化解消</p>
+<p class="text-sm text-gray-600">社内知識のAI活用基盤構築</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-certificate text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.5：品質管理の高度化</p>
+<p class="text-sm text-gray-600">AI画像認識・予知保全</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-graduation-cap text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.10：人材育成の最適化</p>
+<p class="text-sm text-gray-600">個別最適化された研修プラン</p>
+</div>
+</div>
+<div class="theme-card">
+<div class="theme-icon">
+<i class="fas fa-leaf text-blue-700"></i>
+</div>
+<div>
+<p class="font-bold">No.30：ESG/サステナビリティ</p>
+<p class="text-sm text-gray-600">報告書作成支援・データ分析</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom accent bar -->
+<div class="bottom-bar"></div>
+<!-- Small page number -->
+<div class="absolute bottom-2 right-4 text-xs text-white z-20">
+            5
+        </div>
+</div>
+</body>
+</html>

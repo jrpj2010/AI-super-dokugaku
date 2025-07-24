@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>重点テーマ2：定型業務効率化とナレッジ共有</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .title-accent {
+            width: 80px;
+            height: 6px;
+            background-color: #0050a0;
+            margin-bottom: 20px;
+        }
+        .subtle-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 450px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #0050a0;
+        }
+        .content-bullet {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .bullet-icon {
+            color: #0050a0;
+            margin-right: 16px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .highlight-box {
+            background-color: rgba(0, 80, 160, 0.05);
+            border-left: 4px solid #0050a0;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .step-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #0050a0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .ai-benefit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 80, 160, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .architecture-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            background-color: #f9fafb;
+        }
+        .architecture-layer {
+            padding: 10px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-white relative">
+<!-- Subtle background pattern -->
+<div class="subtle-pattern">
+<svg fill="#003366" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h200v200H0z" fill="none"></path>
+<path d="M54 20h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm-136 16h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4zm24 0h4v4h-4z"></path>
+</svg>
+</div>
+<!-- Logo placeholder -->
+<div class="absolute top-8 left-8">
+<div class="w-48 h-16 flex items-center justify-center bg-gray-100 border border-gray-200 text-gray-400">
+                御社ロゴ
+            </div>
+</div>
+<!-- Main content -->
+<div class="flex h-full z-10 relative px-16 pt-24 pb-16">
+<!-- Left column - Main content -->
+<div class="w-2/3 pr-8">
+<div class="title-accent"></div>
+<h1 class="text-3xl font-bold text-gray-800 mb-8">重点テーマ2：定型業務効率化とナレッジ共有</h1>
+<div class="mt-6">
+<div class="content-bullet">
+<div class="bullet-icon">
+<i class="fas fa-robot text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">定型業務の自動化による価値創出</span>
+<p class="text-gray-700 mt-1">議事録作成、レポート作成、社内問い合わせ対応など、定型的な業務をAIが代行し、人的リソースを高付加価値業務へシフト。</p>
+</div>
+</div>
+<div class="content-bullet mt-4">
+<div class="bullet-icon">
+<i class="fas fa-brain text-xl"></i>
+</div>
+<div>
+<span class="font-semibold text-xl">組織知の蓄積・活用基盤の構築</span>
+<p class="text-gray-700 mt-1">個人に依存していた暗黙知を、AI活用で「形式知化」し、組織全体の知的資産として活用可能に。</p>
+</div>
+</div>
+<div class="highlight-box mt-8">
+<p class="text-lg font-bold text-blue-800">代表的な自動化対象プロセス</p>
+<div class="mt-3">
+<div class="process-step">
+<div class="step-icon">
+<i class="fas fa-file-alt"></i>
+</div>
+<div>
+<p class="font-semibold">会議録の自動作成とタスク抽出</p>
+<p class="text-sm text-gray-600">会議の音声データから議事録を自動生成し、決定事項とタスクを自動抽出・担当者へ通知</p>
+</div>
+</div>
+<div class="process-step">
+<div class="step-icon">
+<i class="fas fa-headset"></i>
+</div>
+<div>
+<p class="font-semibold">社内問い合わせチャットボット</p>
+<p class="text-sm text-gray-600">社内規定や業務マニュアルを学習し、従業員からの質問に24時間自動回答</p>
+</div>
+</div>
+<div class="process-step">
+<div class="step-icon">
+<i class="fas fa-chart-line"></i>
+</div>
+<div>
+<p class="font-semibold">レポート作成の半自動化</p>
+<p class="text-sm text-gray-600">データを分析し、インサイトを抽出した定例レポートを自動生成</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column - Visual elements -->
+<div class="w-1/3 pl-4">
+<div class="architecture-box mb-6">
+<p class="text-center text-lg font-semibold text-gray-800 mb-4">セキュアなAI運用基盤</p>
+<div class="architecture-layer bg-blue-50 border border-blue-100">
+<p class="text-sm font-semibold">ユーザーインターフェース</p>
+<p class="text-xs text-gray-600">Teams/Slack連携、社内ポータル</p>
+</div>
+<div class="flex justify-center my-1">
+<i class="fas fa-arrow-down text-gray-400"></i>
+</div>
+<div class="architecture-layer bg-blue-100 border border-blue-200">
+<p class="text-sm font-semibold">AIエージェント層</p>
+<p class="text-xs text-gray-600">業務特化型LLMモデル</p>
+</div>
+<div class="flex justify-center my-1">
+<i class="fas fa-arrow-down text-gray-400"></i>
+</div>
+<div class="architecture-layer bg-blue-200 border border-blue-300">
+<p class="text-sm font-semibold">知識ベース層</p>
+<p class="text-xs text-gray-600">社内文書、ナレッジグラフ</p>
+</div>
+<div class="flex justify-center my-1">
+<i class="fas fa-arrow-down text-gray-400"></i>
+</div>
+<div class="architecture-layer bg-blue-300 border border-blue-400">
+<p class="text-sm font-semibold">セキュリティ基盤</p>
+<p class="text-xs text-gray-600">データ暗号化、アクセス制御</p>
+</div>
+</div>
+<div class="mt-6">
+<p class="text-center text-lg font-semibold text-gray-800 mb-3">削減可能な業務時間</p>
+<div class="relative h-12 bg-gray-200 rounded-lg overflow-hidden mb-1">
+<div class="absolute top-0 left-0 h-full bg-blue-600" style="width: 35%"></div>
+<div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+<span class="font-semibold text-gray-800">議事録作成: 35%</span>
+</div>
+</div>
+<div class="relative h-12 bg-gray-200 rounded-lg overflow-hidden mb-1">
+<div class="absolute top-0 left-0 h-full bg-blue-600" style="width: 60%"></div>
+<div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+<span class="font-semibold text-gray-800">問い合わせ対応: 60%</span>
+</div>
+</div>
+<div class="relative h-12 bg-gray-200 rounded-lg overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-blue-600" style="width: 45%"></div>
+<div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+<span class="font-semibold text-gray-800">レポート作成: 45%</span>
+</div>
+</div>
+</div>
+<div class="mt-6 p-3 bg-green-50 rounded-lg border border-green-100">
+<p class="text-center font-semibold text-gray-800 mb-2">創出リソースの再投資先</p>
+<div class="ai-benefit-card bg-white">
+<div class="benefit-icon">
+<i class="fas fa-lightbulb text-yellow-500"></i>
+</div>
+<div>
+<p class="font-medium text-sm">イノベーション創出</p>
+</div>
+</div>
+<div class="ai-benefit-card bg-white">
+<div class="benefit-icon">
+<i class="fas fa-users text-blue-500"></i>
+</div>
+<div>
+<p class="font-medium text-sm">顧客接点の強化</p>
+</div>
+</div>
+<div class="ai-benefit-card bg-white">
+<div class="benefit-icon">
+<i class="fas fa-rocket text-purple-500"></i>
+</div>
+<div>
+<p class="font-medium text-sm">新規事業開発</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom accent bar -->
+<div class="bottom-bar"></div>
+<!-- Small page number -->
+<div class="absolute bottom-2 right-4 text-xs text-white z-20">
+            7
+        </div>
+</div>
+</body>
+</html>
